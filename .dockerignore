@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+
+.git
+**/node_modules
+**/dist
+**/.cache
+**/.rpt2_cache
+client/web/Dockerfile.source
+client/web/README.source-docker.md
+server/vendor
+server/build
+server/var
+client/web/corteza-webapp-*.tar.gz
+extra/server-discovery/server-discovery
+extra/server-discovery/discovery.log
