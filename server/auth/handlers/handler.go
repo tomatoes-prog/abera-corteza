@@ -106,7 +106,6 @@ type (
 		GetTokenData(ti oauth2.TokenInfo) map[string]interface{}
 		HandleTokenRequest(w http.ResponseWriter, r *http.Request) error
 		GetErrorData(err error) (map[string]interface{}, int, http.Header)
-		BearerAuth(r *http.Request) (string, bool)
 		ValidationBearerToken(r *http.Request) (oauth2.TokenInfo, error)
 	}
 

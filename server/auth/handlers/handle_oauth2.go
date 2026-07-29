@@ -14,7 +14,6 @@ import (
 	"github.com/cortezaproject/corteza/server/pkg/locale"
 	"golang.org/x/text/language"
 
-	"github.com/go-chi/jwtauth"
 	oauth2errors "github.com/go-oauth2/oauth2/v4/errors"
 	"github.com/lestrrat-go/jwx/jwa"
 	"github.com/lestrrat-go/jwx/jwk"
@@ -23,6 +22,7 @@ import (
 
 	"github.com/cortezaproject/corteza/server/auth/request"
 	"github.com/cortezaproject/corteza/server/pkg/auth"
+	"github.com/cortezaproject/corteza/server/pkg/auth/jwtauth"
 	"github.com/cortezaproject/corteza/server/pkg/errors"
 	"github.com/cortezaproject/corteza/server/pkg/logger"
 	"github.com/cortezaproject/corteza/server/pkg/payload"

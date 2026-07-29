@@ -10,3 +10,9 @@
 .run
 node_modules
 ignore
+
+# Local runtime artifacts
+*.log
+
+# Locally built binaries
+extra/server-discovery/server-discovery

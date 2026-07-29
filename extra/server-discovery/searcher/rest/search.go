@@ -281,8 +281,7 @@ func (s search) SearchResources(ctx context.Context, r *request.SearchResources)
 			return nil, fmt.Errorf("failed to send namespace request: %w", err)
 		}
 		if nsRes.StatusCode != http.StatusOK {
-			fmt.Println("err: ", err)
-			return nil, fmt.Errorf("request resulted in an unexpected status: %s: %w", err)
+			return nil, fmt.Errorf("request resulted in an unexpected status: %s", nsRes.Status)
 		}
 		if err = json.NewDecoder(nsRes.Body).Decode(&nsResponse); err != nil {
 			return nil, fmt.Errorf("failed to decode namespace response: %w", err)
@@ -305,7 +304,7 @@ func (s search) SearchResources(ctx context.Context, r *request.SearchResources)
 				return nil, fmt.Errorf("failed to send module request: %w", err)
 			}
 			if mRes.StatusCode != http.StatusOK {
-				return nil, fmt.Errorf("request resulted in an unexpected status: %s: %w", err)
+				return nil, fmt.Errorf("request resulted in an unexpected status: %s", mRes.Status)
 			}
 			if err = json.NewDecoder(mRes.Body).Decode(&mResponse); err != nil {
 				return nil, fmt.Errorf("failed to decode response: %w", err)
