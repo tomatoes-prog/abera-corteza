@@ -29,7 +29,7 @@ RUN cp -a client/web/workflow/dist/. /out/webapp/workflow/
 
 # Server build stage. Locale files are copied into the embedded filesystem so
 # the image remains self-contained and does not depend on a mounted locale dir.
-FROM golang:1.24-bookworm AS server-build
+FROM golang:1.25-bookworm AS server-build
 
 ARG SASS_VERSION=1.69.5
 
