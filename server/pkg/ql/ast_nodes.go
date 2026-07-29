@@ -337,7 +337,7 @@ func (nn parserNodes) ToAST() (out *ASTNode) {
 		if !isUnary(arg.Ref) {
 			skip := 2
 			arg.Args = append(arg.Args, auxArgs[bestOpIx-1], auxArgs[bestOpIx+1])
-			if bestOpIx > -1 && len(auxArgs) > bestOpIx+2 {
+			if (bestOp.name == "between" || bestOp.name == "nbetween") && len(auxArgs) > bestOpIx+2 {
 				if !isOperator(auxArgs[bestOpIx+2].Ref) {
 					skip = 3
 					arg.Args = append(arg.Args, auxArgs[bestOpIx+2])

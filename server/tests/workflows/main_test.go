@@ -72,7 +72,7 @@ func cleanup(t *testing.T) {
 	)
 
 	if err := defStore.TruncateAutomationWorkflows(ctx); err != nil {
-		t.Fatalf("failed to decode scenario data: %v", err)
+		t.Fatalf("failed to truncate automation workflows: %v", err)
 	}
 }
 

@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -125,7 +126,7 @@ func TestSPA(t *testing.T) {
 			req.NoError(err)
 			handler.ServeHTTP(w, r)
 
-			req.Equal(c.rsp, w.Body.String())
+			req.Equal(c.rsp, strings.ReplaceAll(w.Body.String(), "\r\n", "\n"))
 			req.Equal(http.StatusOK, w.Result().StatusCode)
 		})
 	}

@@ -71,7 +71,7 @@ func TestConverter(t *testing.T) {
 			},
 			{
 				qry:  `date('2022-07-21')`,
-				sql:  `DAY(?)`,
+				sql:  `DATE(?)`,
 				args: []any{"2022-07-21"},
 			},
 		}

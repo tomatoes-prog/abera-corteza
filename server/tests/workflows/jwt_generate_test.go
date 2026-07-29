@@ -30,5 +30,5 @@ func Test_jwt_generate(t *testing.T) {
 	vars, _ := mustExecWorkflow(ctx, t, "jwt_generate", types.WorkflowExecParams{})
 
 	req.NoError(vars.Decode(&aux))
-	req.Equal(strings.TrimSuffix(tkn, "\n"), aux.Token)
+	req.Equal(strings.TrimRight(tkn, "\r\n"), aux.Token)
 }

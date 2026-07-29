@@ -9,6 +9,8 @@ import (
 	"github.com/cortezaproject/corteza/server/auth/settings"
 	"github.com/cortezaproject/corteza/server/system/service"
 	"github.com/cortezaproject/corteza/server/system/types"
+	"github.com/gorilla/sessions"
+	"github.com/markbates/goth/gothic"
 	"github.com/stretchr/testify/require"
 )
 
@@ -33,6 +35,16 @@ func Test_logoutProc(t *testing.T) {
 	authService = &authServiceMocked{}
 	authHandlers = prepareClientAuthHandlers(authService, authSettings)
 	authReq = prepareClientAuthReq(authHandlers, req, user)
+
+	oldGothicStore := gothic.Store
+	gothic.Store = &mockSession{
+		get: func(r *http.Request, name string) (*sessions.Session, error) {
+			return authReq.Session, nil
+		},
+	}
+	defer func() {
+		gothic.Store = oldGothicStore
+	}()
 
 	req.PostForm = url.Values{}
 	req.PostForm.Add("back", "\"><script>alert(origin)</script><\"")
