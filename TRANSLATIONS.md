@@ -71,6 +71,13 @@ predeterminado en memoria de Corteza, que no es persistente y puede provocar
 errores OAuth `500` cuando desaparecen tablas como `auth_sessions`,
 `auth_oa2tokens` o `reminders`.
 
+En despliegues locales publicados por HTTP, la protección CSRF permanece
+activa y valida el token del formulario. El servidor marca estas solicitudes
+como HTTP plano cuando la cookie de sesión no usa el atributo `Secure`, para
+que el origen local (`http://localhost`) no sea tratado erróneamente como un
+origen distinto de HTTPS. En despliegues TLS se conserva la validación estricta
+de origen.
+
 SQLite es apropiado para esta ejecución local y de evaluación. Para producción
 se recomienda sobrescribir `DB_DSN` con una base de datos persistente soportada
 por Corteza y mantener una estrategia externa de copias de seguridad.

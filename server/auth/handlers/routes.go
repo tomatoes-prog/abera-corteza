@@ -13,6 +13,15 @@ import (
 	"github.com/gorilla/csrf"
 )
 
+// markPlaintextHTTP tells the CSRF middleware when authentication is served
+// over plain HTTP (for example, a local Docker deployment). CSRF token
+// validation remains enabled; only the HTTPS-only origin check is adjusted.
+func markPlaintextHTTP(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		next.ServeHTTP(w, csrf.PlaintextHTTPRequest(r))
+	})
+}
+
 func (h *AuthHandlers) MountHttpRoutes(r chi.Router) {
 	var (
 		l = GetLinks()
@@ -58,6 +67,10 @@ func (h *AuthHandlers) MountHttpRoutes(r chi.Router) {
 		r.Group(func(r chi.Router) {
 			// all routes protected with CSRF:
 			if h.Opt.CsrfEnabled {
+				if !h.Opt.SessionCookieSecure {
+					r.Use(markPlaintextHTTP)
+				}
+
 				r.Use(csrf.Protect(
 					[]byte(h.Opt.CsrfSecret),
 					csrf.SameSite(csrf.SameSiteStrictMode),

@@ -65,6 +65,18 @@ func TestDataPrivacyRequestList(t *testing.T) {
 		End()
 }
 
+func TestDataPrivacyConnectionListForbidden(t *testing.T) {
+	h := newHelper(t)
+
+	h.apiInitAnonymous().
+		Get("/data-privacy/connection/").
+		Header("Accept", "application/json").
+		Expect(t).
+		Status(http.StatusOK).
+		Assert(helpers.AssertError("data-privacy.errors.notAllowedToSearch")).
+		End()
+}
+
 func TestDataPrivacyRequestListWithPaging(t *testing.T) {
 	h := newHelper(t)
 	h.clearDataPrivacyRequests()

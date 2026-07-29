@@ -284,6 +284,10 @@ func (ctrl User) SetPassword(ctx context.Context, r *request.UserSetPassword) (i
 }
 
 func (ctrl User) MembershipList(ctx context.Context, r *request.UserMembershipList) (interface{}, error) {
+	if _, err := ctrl.user.FindByID(ctx, r.UserID); err != nil {
+		return nil, err
+	}
+
 	if mm, err := ctrl.role.Membership(ctx, r.UserID); err != nil {
 		return nil, err
 	} else {
