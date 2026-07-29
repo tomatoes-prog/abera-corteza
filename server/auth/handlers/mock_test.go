@@ -57,7 +57,6 @@ type (
 		getTokenData               func(ti oauth2.TokenInfo) map[string]interface{}
 		handleTokenRequest         func(w http.ResponseWriter, r *http.Request) error
 		getErrorData               func(err error) (map[string]interface{}, int, http.Header)
-		bearerAuth                 func(r *http.Request) (string, bool)
 		validationBearerToken      func(r *http.Request) (oauth2.TokenInfo, error)
 	}
 
@@ -264,10 +263,6 @@ func (s *oauth2ServiceMocked) HandleTokenRequest(w http.ResponseWriter, r *http.
 
 func (s *oauth2ServiceMocked) GetErrorData(err error) (map[string]interface{}, int, http.Header) {
 	return s.getErrorData(err)
-}
-
-func (s *oauth2ServiceMocked) BearerAuth(r *http.Request) (string, bool) {
-	return s.bearerAuth(r)
 }
 
 func (s *oauth2ServiceMocked) ValidationBearerToken(r *http.Request) (oauth2.TokenInfo, error) {

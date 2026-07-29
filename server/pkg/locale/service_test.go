@@ -16,6 +16,7 @@ func TestServiceReloadAndTranslate(t *testing.T) {
 		req      = require.New(t)
 		svc, err = Service(zap.NewNop(), options.LocaleOpt{
 			Languages: "en",
+			Path:      "../../../locale",
 		})
 
 		tag = language.English

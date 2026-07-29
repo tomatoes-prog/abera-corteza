@@ -68,6 +68,10 @@ func main() {
 	srv.SetAllowGetAccessRequest(true)
 	srv.SetClientInfoHandler(server.ClientFormHandler)
 
+	srv.UserAuthorizationHandler = func(w http.ResponseWriter, r *http.Request) (userID string, err error) {
+		return "000000", nil
+	}
+
 	srv.SetInternalErrorHandler(func(err error) (re *errors.Response) {
 		log.Println("Internal Error:", err.Error())
 		return
@@ -175,6 +179,7 @@ if !ok || !token.Valid {
 - [XORM (MySQL, client and token store)](https://github.com/rainlay/go-oauth2-xorm)
 - [GORM](https://github.com/techknowlogick/go-oauth2-gorm)
 - [Firestore](https://github.com/tslamic/go-oauth2-firestore)
+- [Hazelcast](https://github.com/clowre/go-oauth2-hazelcast) (token only)
 
 ## Handy Utilities
 
