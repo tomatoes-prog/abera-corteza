@@ -43,6 +43,10 @@ de Compose, el concepto técnico `namespace` se presenta al usuario como
 Este repositorio configura `es` como idioma predeterminado del contenedor y
 mantiene `en` como fallback. La variable `CORTEZA_DEFAULT_LOCALE` permite
 modificar el idioma inicial en tiempo de ejecución sin recompilar la imagen.
+También se aplica a las páginas anónimas de autenticación, que se renderizan
+en el servidor antes de que la configuración del cliente web esté disponible.
+Una vez autenticado, el idioma preferido del perfil del usuario continúa
+teniendo prioridad.
 
 El código original de Corteza y las traducciones incorporadas conservan sus
 avisos de atribución y se distribuyen bajo Apache License 2.0. La licencia
