@@ -1,0 +1,29 @@
+errors:
+  failedToExtractMimeType: no se pudo extraer el tipo MIME
+  failedToProcessImage: no se pudo procesar la imagen
+  failedToStoreFile: no se pudo almacenar el archivo
+  invalidID: ID no válido
+  invalidModuleID: ID de módulo no válido
+  invalidNamespaceID: ID de espacio de nombres no válido
+  invalidPageID: ID de página no válido
+  invalidRecordID: ID de registro no válido
+  moduleNotFound: módulo no encontrado
+  namespaceNotFound: espacio de nombres no encontrado
+  notAllowedToCreate: no tienes permiso para crear adjuntos
+  notAllowedToCreateEmptyAttachment: no tienes permiso para crear adjuntos vacíos
+  notAllowedToCreateRecords: no tienes permiso para crear registros
+  notAllowedToListAttachments: no tienes permiso para listar adjuntos
+  notAllowedToRead: no tienes permiso para leer este módulo
+  notAllowedToReadNamespace: no tienes permiso para leer este espacio de nombres
+  notAllowedToReadPage: no tienes permiso para leer esta página
+  notAllowedToReadRecord: no tienes permiso para leer este registro
+  notAllowedToSearch: no tienes permiso para buscar o listar módulos
+  notAllowedToUpdateNamespace: no tienes permiso para actualizar este espacio de nombres
+  notAllowedToUpdatePage: no tienes permiso para actualizar esta página
+  notAllowedToUpdateRecord: no tienes permiso para actualizar este registro
+  notFound: adjunto no encontrado
+  pageNotFound: página no encontrada
+  recordNotFound: registro no encontrado
+  invalidModuleField: campo de módulo no válido
+  tooLarge: el archivo cargado es demasiado grande
+  notAllowedToUploadThisType: no tienes permiso para cargar este tipo de archivo

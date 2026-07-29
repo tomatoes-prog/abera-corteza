@@ -1,0 +1,18 @@
+template:
+  title: Tu sesión
+  delete-all: Eliminar todas las sesiones
+  list:
+    current: Sesión actual
+    authorized-on: Autorizado en
+    same-machine: Esta máquina
+    ip-address: Dirección IP
+    same-browser: Este navegador
+    browser: Navegador
+    expires: Caduca
+    expired: Expirada
+    today: Hoy
+    tomorrow: En 1 día
+    soon: En {{days}} días
+alerts:
+  session-deleted: Sesión eliminada
+  delete-sessions-but-current: Se eliminaron todas las sesiones excepto la actual

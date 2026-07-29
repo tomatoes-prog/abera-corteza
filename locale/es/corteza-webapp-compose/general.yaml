@@ -1,0 +1,225 @@
+label:
+  app-name:
+    namespace:
+      list: Espacios de trabajo
+      create: Crear espacio de trabajo
+      edit: "Editar espacio de trabajo - {{label}}"
+      view: Espacio de trabajo
+    module:
+      list: "Módulos - {{label}}"
+      create: Crear módulo
+      edit: "Editar módulo - {{label}}"
+    page:
+      list: "Páginas - {{label}}"
+      builder: "Constructor de páginas - {{label}}"
+      edit: "Editar página - {{label}}"
+      record: "Registro - {{label}}"
+    chart:
+      list: "Gráficos - {{label}}"
+      edit: "Editar gráfico - {{label}}"
+      create: Crear gráfico
+  actions: Acciones
+  active: Activo
+  add: Añadir
+  add-with-plus: + Añadir
+  addNew: Añadir nuevo
+  addValue: Añadir nuevo valor
+  ascending: Ascendente
+  attachmentFileInfo: "(Tamaño del archivo: {{0}}, cargado {{1}})"
+  attributes: Atributos
+  back: Atrás
+  backWithoutSave: Atrás (sin guardar cambios)
+  block: Bloque
+  browse: Examinar
+  buttons: Botones
+  cancel: Cancelar
+  clear: Limpiar
+  clone: Clonar
+  close: Cerrar
+  create: Crear
+  createRecordFromDraft: Crear registro desde borrador
+  delete: Eliminar
+  default: Predeterminado
+  restore: Restaurar
+  discard: Descartar
+  descending: Descendente
+  description: Descripción
+  download: Descargar
+  dropFiles: Haz clic o suelta archivos aquí para cargarlos
+  edit: Editar
+  enabled: Activado
+  export: Exportar
+  fileTypeNotAllowed: Tipo de archivo no permitido
+  general: General
+  handle: Identificador
+  here: aquí
+  home: Inicio
+  import: Importar
+  all: Todos
+  importPlaceholder: Carga archivos para importar
+  loading: Cargando
+  makeDefault: Establecer como predeterminado
+  moduleName: Nombre del módulo
+  multi: Múltiple
+  name: Nombre
+  newRecord: Nuevo registro
+  next: Siguiente
+  no: No
+  noHandle: Sin identificador
+  none: Ninguno
+  now: Ahora
+  ok: Aceptar
+  page: Página
+  pageLayout: Diseño de página
+  pageBuilder: Constructor de páginas
+  permissions: Permisos
+  private: Privado
+  privacy: Privacidad
+  processing: Procesando...
+  record: Registro
+  recordPage: Página del registro
+  field: Campo
+  remove: Eliminar
+  removeDefault: Quitar predeterminado
+  required: Obligatorio
+  reset: Restablecer
+  examples: Ejemplos
+  sensitive: Sensible
+  save: Guardar
+  saveAndClose: Guardar y cerrar
+  saveAs: Guardar como
+  saveAsCopy: Guardar como copia
+  search: Buscar
+  status: Estado
+  timeHour: "{{t}} h"
+  timeMinute: "{{t}} min"
+  today: Hoy
+  title: Título
+  type: Tipo
+  updatedAt: Actualizado el
+  uploading: Cargando
+  unsavedChanges: Cambios sin guardar
+  urlPlaceholder: https://ejemplo.tld
+  validation: Validación
+  view: Ver
+  yes: Sí
+  chart:
+    single: Gráfico
+    plural: Gráficos
+  namespace:
+    single: Espacio de trabajo
+    plural: Espacios de trabajo
+  module:
+    single: Módulo
+    plural: Módulos
+navigation:
+  chart: Gráficos
+  namespace: Espacios de trabajo
+  module: Módulos
+  page: Páginas
+  pageLayout: Diseños de página
+placeholder:
+  handle: identificador (a-z, 0-9, guion bajo, guion)
+  sample: Ejemplo
+reminder:
+  add: Añadir un recordatorio
+  dismiss: Descartar
+  dismissed: Descartado
+  dismissedAt: Descartado el
+  undismiss: Revertir descarte
+  delete: Eliminar recordatorio
+  recordPageLink: Ver registro
+  edit:
+    label: Editar recordatorio
+    assigneeLabel: Responsable
+    assigneePlaceholder: Yo (predeterminado)
+    notesLabel: Notas
+    notesPlaceholder: Notas
+    remindAtLabel: Recordarme el
+    remindAtNone: Nunca
+    titleLabel: Título
+    titlePlaceholder: Título
+  listLabel: Recordatorios
+  routesTo: Etiqueta para el enlace de la página
+  snooze:
+    label: Posponer
+    count: Veces pospuesto
+tooltip:
+  dragAndDrop: Arrastra y suelta para cambiar el orden
+fieldKinds:
+  Bool:
+    label: Casilla de verificación (Sí/No)
+  DateTime:
+    label: Fecha y hora
+  Email:
+    label: Entrada de correo electrónico
+  File:
+    label: Carga de archivos
+  Number:
+    label: Entrada numérica
+  Record:
+    label: Selector de registros
+  Select:
+    label: Selección / lista desplegable
+  String:
+    label: Entrada de texto (cadena)
+  Url:
+    label: Entrada de URL
+  User:
+    label: Selector de usuarios
+  Geometry:
+    label: Ubicación
+field:
+  selectAll: Seleccionar todo
+  tooltip:
+    permissions: Permisos del campo
+  unselectAll: Deseleccionar todo
+  kind:
+    user:
+      suggestionPlaceholder: Comienza a escribir para buscar usuarios por correo o nombre
+resourceList:
+  notFound: No encontrado
+  noItems: No hay elementos para mostrar
+  pagination:
+    next: Siguiente
+    prev: Anterior
+    showing: "{{from}} - {{to}} de {{count}} {{data}}"
+    single_one: "Un {{data}}"
+    single_other: "{{count}} {{data}}"
+    recordsPerPage: Por página
+recordNavigation:
+  next: Registro siguiente
+  prev: Registro anterior
+variants:
+  primary: Principal
+  secondary: Secundario
+  light: Claro
+  dark: Oscuro
+  info: Información
+  success: Éxito
+  danger: Peligro
+  warning: Advertencia
+editor:
+  unsavedChanges: Los cambios sin guardar se perderán. ¿Deseas salir de la página?
+webcam:
+  title: Cámara web
+  tooltip: Abrir la cámara web para tomar una foto
+  buttons:
+    cancel: Cancelar
+    capture: Tomar foto
+    confirm: Cargar foto
+  errors:
+    camera: No se puede acceder a la cámara. Asegúrate de haber concedido los permisos de cámara.
+record:
+  unsavedChanges: Los cambios sin guardar se perderán. ¿Deseas salir?
+  unsavedChangesDraft: Los cambios sin guardar se descartarán, pero aún estarán disponibles en Borradores. ¿Deseas salir?
+themes:
+  labels:
+    light: Claro
+    dark: Oscuro
+extendSession:
+  labels:
+    extend: Extender sesión
+    warning: Tu sesión se cerrará en {{ countdownTime }} segundos
+changes_one: "{{count}} cambio"
+changes_other: "{{count}} cambios"

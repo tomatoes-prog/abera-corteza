@@ -1,0 +1,11 @@
+errors:
+  invalidID: ID inválido
+  notFound: el módulo no existe
+  composeModuleNotFound: no se encontró el módulo de Compose
+  composeNamespaceNotFound: no se encontró el espacio de nombres de Compose
+  nodeNotFound: el nodo no existe
+  notAllowedToCreate: no se permite crear módulos
+  notAllowedToManage: no se permite administrar este módulo
+  notUnique: el nodo no es único
+  requestParametersInvalid: los parámetros de la solicitud no son válidos
+  staleData: el módulo fue modificado por otro usuario o flujo de trabajo; actualiza la página

@@ -1,0 +1,13 @@
+discovery: Discovery
+help:
+  documentation: Documentación
+  feedback: Enviar comentarios
+  forum: Ayuda
+  version: 'Versión:'
+appMenu: Menú
+userSettings:
+  changePassword: Cambiar contraseña
+  loggedInAs: Sesión iniciada como {{user}}
+  logout: Cerrar sesión
+  profile: Perfil
+  theme: Tema

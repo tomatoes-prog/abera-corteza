@@ -1,0 +1,12 @@
+errors:
+  invalidConfiguration: Configuración de informe no válida
+  invalidID: ID no válido
+  notAllowedToCreate: no tienes permiso para crear informes
+  notAllowedToDelete: no tienes permiso para eliminar este informe
+  notAllowedToListReports: no tienes permiso para listar informes
+  notAllowedToRead: no tienes permiso para leer este informe
+  notAllowedToRun: no tienes permiso para ejecutar este informe
+  notAllowedToSearch: no tienes permiso para listar o buscar informes
+  notAllowedToUndelete: no tienes permiso para restaurar este informe
+  notAllowedToUpdate: no tienes permiso para actualizar este informe
+  notFound: informe no encontrado

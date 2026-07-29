@@ -1,0 +1,58 @@
+ui:
+  save: Guardar cambios
+  cancel: Cancelar
+  set-for: Configurar permisos para {{target}}
+  loading: Cargando permisos
+  label: Permisos
+  tooltip:
+    unknown-context:
+      user: No se pueden evaluar los permisos de un usuario con un rol contextual sobre un recurso no específico
+      role: No se pueden evaluar los permisos de un rol contextual sobre un recurso no específico
+  notification:
+    save:
+      success: Permisos guardados
+      failed: No se pudieron guardar los permisos
+  edit:
+    title: Editar permisos
+    label: Roles de usuario
+    description: Selecciona el rol cuyos permisos quieres configurar
+  evaluate:
+    title: Evaluar permisos
+    description: Evaluar los permisos aplicados
+  add:
+    label: Añadir
+    title: Evaluar permisos
+    save: Guardar y cerrar
+    role:
+      label: Roles
+      placeholder: Selecciona uno o varios roles
+    user:
+      label: Usuarios
+      placeholder: Busca o selecciona un usuario
+  access:
+    allow: Permitir
+    inherit: Heredar
+    deny: Denegar
+resources:
+  system:
+    report:
+      all: todos los informes
+      specific: informe "{{target}}"
+      tooltip: Permisos del informe
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar el informe "{{target}}"
+          title: Eliminar cualquier informe
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer el informe "{{target}}"
+          title: Leer cualquier informe
+        run:
+          description: 'Predeterminado: denegar'
+          specific: Ejecutar el informe "{{target}}"
+          title: Ejecutar cualquier informe
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar el informe "{{target}}"
+          title: Actualizar cualquier informe

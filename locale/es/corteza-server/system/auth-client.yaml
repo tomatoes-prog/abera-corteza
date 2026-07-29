@@ -1,0 +1,14 @@
+errors:
+  invalidID: ID no válido
+  notAllowedToCreate: no tienes permiso para crear clientes de autenticación
+  notAllowedToDelete: no tienes permiso para eliminar este cliente de autenticación
+  notAllowedToRead: no tienes permiso para leer este cliente de autenticación
+  notAllowedToSearch: no tienes permiso para buscar o listar clientes de autenticación
+  notAllowedToUndelete: no tienes permiso para restaurar este cliente de autenticación
+  notAllowedToUpdate: no tienes permiso para actualizar este cliente de autenticación
+  notFound: cliente de autenticación no encontrado
+  unableToChangeDefaultClientHandle: no se puede cambiar el identificador del cliente de autenticación predeterminado
+  unableToDeleteDefaultClient: no se puede eliminar el cliente predeterminado
+  unableToDisableDefaultClient: no se puede desactivar el cliente predeterminado
+  unknownGrantType: tipo de concesión desconocido
+  unknownScope: ámbito desconocido

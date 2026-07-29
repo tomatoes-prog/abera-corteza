@@ -1,0 +1,9 @@
+template:
+  title: Clientes autorizados
+  list:
+    authorized-on: Autorizado en
+    buttons:
+      revoke: Revocar acceso
+    empty: No se han encontrado clientes autorizados
+alerts:
+  removed: Autorización de cliente eliminada

@@ -1,0 +1,62 @@
+editor:
+  info:
+    delete: Eliminar
+    enabled: Activado
+    id: ID
+    name: Nombre *
+    title: Información básica
+    undelete: Restaurar
+  new: Nueva aplicación
+  permissions: Permisos
+  title:
+    create: Crear aplicación
+    edit: Editar aplicación
+  unify:
+    config:
+      description: Configuración de la aplicación (JSON)
+      label: Configuración
+    listed: En la lista
+    logo:
+      label: Logotipo
+      description: Logotipo utilizado en el selector de aplicaciones
+      placeholder: Elige un logotipo o arrástralo aquí...
+      reset: Restablecer
+    name:
+      description: Nombre utilizado en el selector de aplicaciones
+      label: Nombre
+    pinned: Fijada
+    title: Selector de aplicaciones
+    url:
+      description: URL de la aplicación
+      label: URL
+list:
+  columns:
+    actions: ''
+    createdAt: Creada
+    enabled: Activada
+    name: Nombre
+    appListName: Nombre en el selector
+    state: Estado
+  export: Exportar
+  rows:
+    filters:
+      deleted: Eliminadas
+  filterForm:
+    deleted:
+      label: aplicaciones eliminadas
+    excluded:
+      label: Sin
+    exclusive:
+      label: Solo
+    inclusive:
+      label: Incluyendo
+    query:
+      label: Filtrar lista de aplicaciones
+      placeholder: Filtrar aplicaciones por nombre
+  loading: Cargando aplicaciones
+  new: Nueva aplicación
+  permissions: Permisos
+  title: Aplicaciones
+  yaml: YAML
+  delete: Eliminar
+  undelete: Restaurar

@@ -1,0 +1,122 @@
+break:
+  label: Interrumpir
+  short: Interrumpir
+  tooltip: Detener la ejecución del iterador y continuar con el flujo de trabajo
+content:
+  label: Contenido
+  short: Contenido
+  tooltip: Bloque de contenido utilizado para anotaciones de texto
+  configurator:
+    ok: Aceptar
+    urlPlaceholder: https://ejemplo.tld
+continue:
+  label: Continuar
+  short: Continuar
+  tooltip: Detener la iteración actual y continuar con la siguiente
+debug:
+  label: Depurar
+  short: Depurar
+  tooltip: Registra el ámbito actual del flujo de trabajo en los registros del servidor. Si la depuración del flujo está activada
+delay:
+  label: Retraso
+  short: Retraso
+  tooltip: Retrasa la ejecución del flujo de trabajo
+error:
+  label: Error
+  short: Error
+  tooltip: Lanza un error y detiene la ejecución del flujo de trabajo; también impide guardar los registros activados con un disparador previo
+error-handler:
+  label: Gestor de errores
+  short: Gestor de errores
+  tooltip: Continúa el flujo de trabajo desde este paso si se produce un error
+expressions:
+  configurator:
+    add-expression: + Añadir expresión
+    expression: Expresión
+    expression-placeholder: Expresión...
+    target: Destino
+  label: Expresiones
+  short: Expresiones
+  tooltip: Define y modifica variables del ámbito
+function:
+  configurator:
+    arguments: Argumentos
+    constant: Constante
+    expression: Expresión
+    name: Nombre
+    option-select: Selecciona una opción
+    result: Resultado
+    results: Resultados
+    target: Destino
+    add-result: + Añadir resultado
+    search-workflow: Buscar un flujo de trabajo
+    select-function: Seleccionar función
+    type: Tipo
+    type*: Tipo*
+  label: Función
+  short: Función
+  tooltip: Ejecuta la función predefinida seleccionada
+exec-workflow:
+  label: Ejecutar flujo de trabajo
+  short: Flujo de trabajo
+  tooltip: Ejecuta un flujo de trabajo y asigna variables de su ámbito al actual
+gatewayExclusive:
+  label: Pasarela (exclusiva)
+  short: Pasarela
+  tooltip: La ejecución del flujo puede continuar por el primer camino que cumpla la condición
+gatewayInclusive:
+  label: Pasarela (inclusiva)
+  short: Pasarela
+  tooltip: La ejecución del flujo puede continuar por todos los caminos que cumplan la condición
+gatewayParallel:
+  label: Pasarela (paralela)
+  short: Pasarela
+  tooltip: Divide la ejecución en dos caminos paralelos o combina varios caminos en uno
+gateway:
+  configurator:
+    condition: Condición
+    two-paths: La pasarela debe ser el origen de al menos dos caminos
+iterator:
+  label: Iterador
+  short: Iterador
+  tooltip: Itera sobre los elementos
+prompt:
+  label: Solicitud
+  short: Solicitud
+  tooltip: Solicita información al usuario y espera su entrada
+swimlane:
+  label: Carril
+  short: Carril
+  tooltip: Agrupa visualmente los pasos
+termination:
+  label: Terminación (fin)
+  short: Terminación
+  tooltip: Termina la ejecución del flujo de trabajo
+trigger:
+  configurator:
+    add: + Añadir
+    add-constraints: + Añadir restricciones
+    constraints: Restricciones
+    no-constraints: Sin restricciones
+    event*: Evento*
+    failed-fetch-event-types: Error al obtener los tipos de evento
+    initial-scope: Ámbito inicial
+    equal: Igual
+    not-equal: Distinto
+    like: Similar a
+    not-like: No similar a
+    operator: Operador
+    resource: Recurso
+    resource*: Recurso*
+    select-constraint-type: Seleccionar tipo de restricción
+    select-operator: Seleccionar operador
+    select-event-type: Seleccionar tipo de evento
+    select-resource-type: Seleccionar tipo de recurso
+  label: Disparador (inicio)
+  short: Disparador
+  tooltip: Activa la ejecución del flujo según la configuración
+tooltip:
+  configure-step: Configurar paso
+path:
+  label: Camino
+  short: Camino

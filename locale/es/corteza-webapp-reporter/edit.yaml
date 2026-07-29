@@ -1,0 +1,17 @@
+description: Descripción
+handle-with-star: Identificador
+invalid-handle-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+name: Nombre
+name-with-star: 'Nombre*'
+new-report: Nuevo informe
+permissions: Permisos
+unsavedChanges: Los cambios no guardados se perderán. ¿Quieres salir de la página?
+report:
+  create: Crear informe
+  builder: Editor de informes
+  description: Descripción del informe...
+  edit: Editar informe
+placeholder-handle: identificador (a-z, 0-9, guion bajo o guion)
+title: Editar informe
+tooltip:
+  view-report: Ver informe

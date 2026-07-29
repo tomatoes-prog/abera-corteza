@@ -1,0 +1,16 @@
+permissions: Permisos
+report:
+  builder: Editor de informes
+  edit: Editar
+  list: Lista de informes
+  new: Nuevo informe
+  delete: Eliminar
+searchPlaceholder: Buscar informes
+title: Informes
+tooltip:
+  permissions: Permisos del informe
+untitledTitle: Informe sin título
+columns:
+  name: Nombre
+  handle: Identificador
+  changedAt: Último cambio

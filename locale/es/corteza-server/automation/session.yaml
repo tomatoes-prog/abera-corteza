@@ -1,0 +1,8 @@
+errors:
+  staleData: Los datos fueron modificados por otro usuario o flujo de trabajo; actualiza la página
+  invalidID: ID inválido
+  notAllowedToDelete: no tiene permitido eliminar esta sesión
+  notAllowedToManage: no tiene permitido gestionar el flujo de trabajo de la sesión
+  notAllowedToRead: no tiene permitido leer esta sesión
+  notAllowedToSearch: no tiene permitido buscar o listar sesiones
+  notFound: sesión no encontrada

@@ -1,0 +1,14 @@
+template:
+  title: Autorizar
+  form:
+    greeting-paragraph: Hola
+    question-for-client: quiere realizar acciones en tu nombre en este servidor de Corteza.
+    buttons:
+      allow: Permitir
+      deny: Denegar
+  errors:
+    invalid-user: No se puede continuar con una dirección de correo no autorizada, visita <a data-test-id="link-redirect-to-profile" href="{{link}}">tu perfil</a> y resuelve el problema.
+  links:
+    mistake: ¿No esperabas ver esta página?
+alerts:
+  denied: Autorización denegada

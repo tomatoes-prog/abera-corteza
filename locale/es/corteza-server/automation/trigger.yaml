@@ -1,0 +1,10 @@
+errors:
+  staleData: Los datos fueron modificados por otro usuario o flujo de trabajo; actualiza la página
+  invalidID: ID inválido
+  notAllowedToCreate: no tiene permitido crear triggers
+  notAllowedToDelete: no tiene permitido eliminar este trigger
+  notAllowedToRead: no tiene permitido leer este trigger
+  notAllowedToSearch: no tiene permitido buscar o listar triggers
+  notAllowedToUndelete: no tiene permitido deshacer la eliminación de este trigger
+  notAllowedToUpdate: no tiene permitido actualizar este trigger
+  notFound: trigger no encontrado

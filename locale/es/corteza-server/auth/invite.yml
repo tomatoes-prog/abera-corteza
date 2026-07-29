@@ -1,0 +1,7 @@
+template:
+  form:
+    email:
+      label: Correo electrónico
+    new-password:
+      label: Contraseña
+      placeholder: contraseña

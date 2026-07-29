@@ -1,0 +1,11 @@
+errors:
+  invalidID: ID inválido
+  notAllowedToCreate: no tiene permitido crear aplicaciones
+  notAllowedToDelete: no tiene permitido eliminar esta aplicación
+  notAllowedToManageFlag: no tiene permitido gestionar indicadores para aplicaciones
+  notAllowedToManageFlagGlobal: no tiene permitido gestionar indicadores globales para aplicaciones
+  notAllowedToRead: no tiene permitido leer esta aplicación
+  notAllowedToSearch: no tiene permitido buscar o listar aplicaciones
+  notAllowedToUndelete: no tiene permitido deshacer la eliminación de esta aplicación
+  notAllowedToUpdate: no tiene permitido actualizar esta aplicación
+  notFound: aplicación no encontrada

@@ -1,0 +1,58 @@
+editor:
+  info:
+    archive: Archivar
+    delete: Eliminar
+    handle: Identificador
+    placeholder-handle: identificador (a-z, 0-9, guion bajo o guion)
+    invalid-handle-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+    name: Nombre del rol *
+    title: Información básica
+    unarchive: Desarchivar
+    undelete: Restaurar
+    description: Descripción
+    context:
+      label: Rol contextual
+      expression-label: Expresión
+      resource-types-label: Tipo de recurso
+  members:
+    title: Miembros del rol
+  new: Nuevo rol
+  permissions: Permisos
+  title:
+    create: Crear rol
+    edit: Editar rol
+list:
+  columns:
+    actions: ''
+    createdAt: Creado
+    enabled: Activado
+    handle: Identificador
+    name: Nombre
+    state: Estado
+  delete: Eliminar
+  undelete: Restaurar
+  archive: Archivar
+  unarchive: Desarchivar
+  rows:
+    filters:
+      archived: Archivados
+      deleted: Eliminados
+  filterForm:
+    archived:
+      label: roles archivados
+    deleted:
+      label: roles eliminados
+    excluded:
+      label: Sin
+    exclusive:
+      label: Solo
+    inclusive:
+      label: Incluyendo
+    query:
+      label: Filtrar lista de roles
+      placeholder: Filtrar roles por nombre
+  loading: Cargando roles
+  new: Nuevo rol
+  permissions: Permisos
+  title: Roles
+  yaml: YAML

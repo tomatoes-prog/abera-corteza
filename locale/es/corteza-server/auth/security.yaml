@@ -1,0 +1,23 @@
+template:
+  title: Seguridad
+  password:
+    title: Contraseña
+    change-link: Cambiar contraseña
+  mfa:
+    title: Autenticación multifactor
+    totp:
+      title: TOTP (contraseña de un solo uso basada en tiempo mediante una aplicación móvil)
+      enforced: Activado
+      configure: Configurar
+      enable: Activar
+      disable: Desactivar
+      enabled: Contraseña de un solo uso basada en tiempo activada
+      disabled: Desactivado
+    email:
+      title: OTP por correo (contraseña de un solo uso enviada por correo)
+      enforced: Activado
+      enable: Activar
+      disable: Desactivar
+      enabled: Autenticación de dos factores por correo activada
+      disabled: Autenticación de dos factores por correo desactivada
+    all-disabled: Todos los métodos MFA están desactivados. Pide al administrador que active alguno.

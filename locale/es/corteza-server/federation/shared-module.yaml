@@ -1,0 +1,10 @@
+errors:
+  notFound: el módulo compartido no existe
+  invalidID: ID inválido
+  federationSyncStructureChanged: la estructura de sincronización de la federación cambió
+  nodeNotFound: el nodo no existe
+  notAllowedToCreate: no se permite crear módulos
+  notAllowedToManage: no se permite administrar este módulo
+  notAllowedToMap: no se permite mapear este módulo
+  notUnique: el nodo no es único
+  staleData: el módulo fue modificado por otro usuario o flujo de trabajo; actualiza la página

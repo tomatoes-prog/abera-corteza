@@ -67,10 +67,19 @@ export default (Vue: VueConstructor, app: string | Partial<Options>, ...namespac
   const {
     // keeping lng without a value
     // lang-auto-detect plugin
-    lng,
+    lng: optionLng,
     fallbackLng = 'en',
     fallbackNS = false,
   } = opt
+
+  // The Docker entrypoint can provide a deployment-wide default language via
+  // window.CortezaLocale. An explicit option always takes precedence, while
+  // leaving both unset preserves the browser language detector behaviour.
+  let lng = optionLng
+  if (!lng && typeof window !== 'undefined') {
+    // @ts-ignore runtime configuration is injected into config.js
+    lng = window.CortezaLocale
+  }
 
   let ns: Array<string> = []
   if (!Array.isArray(opt.ns)) {
@@ -148,7 +157,9 @@ export default (Vue: VueConstructor, app: string | Partial<Options>, ...namespac
 
   // Set locales for other libs we use
   // @todo this needs to be set after language is detected
-  moment.locale(lng)
+  if (lng) {
+    moment.locale(lng)
+  }
 
   return new VueI18Next(i18next)
 }

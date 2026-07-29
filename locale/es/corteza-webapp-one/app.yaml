@@ -1,0 +1,6 @@
+jitsi:
+  create: Crear
+  defaultLocalDisplayName: Anónimo
+  defaultRemoteDisplayName: Usuario de Corteza
+  roomName: Nombre de la sala
+  toStart: Para iniciar una videollamada, crea una sala nueva
