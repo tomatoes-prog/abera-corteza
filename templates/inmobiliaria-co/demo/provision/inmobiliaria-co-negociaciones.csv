@@ -1,0 +1,36 @@
+ID,lead,inmueble,asesor,tipoOperacion,etapa,valorPublicado,valorOfrecido,probabilidad,fechaEstimadaCierre,estado,observaciones,motivoPerdida
+negociacion-001,lead-001,inmueble-002,asesor-demo,Arriendo,Oferta,262000000,246500000,45,2026-08-08,Abierta,Negociación sintética.,
+negociacion-002,lead-002,inmueble-003,asesora-demo,Venta,Documentación,274000000,258000000,70,2026-08-09,Ganada,Negociación sintética.,
+negociacion-003,lead-003,inmueble-004,asesor-demo,Arriendo,Cierre,286000000,269500000,90,2026-08-10,Perdida,Negociación sintética.,Condiciones económicas
+negociacion-004,lead-004,inmueble-005,asesora-demo,Venta,Calificación,298000000,281000000,25,2026-08-11,Abierta,Negociación sintética.,
+negociacion-005,lead-005,inmueble-006,asesor-demo,Arriendo,Oferta,310000000,292500000,45,2026-08-12,Abierta,Negociación sintética.,
+negociacion-006,lead-006,inmueble-007,asesora-demo,Venta,Documentación,322000000,304000000,70,2026-08-13,Ganada,Negociación sintética.,
+negociacion-007,lead-007,inmueble-008,asesor-demo,Arriendo,Cierre,334000000,315500000,90,2026-08-14,Perdida,Negociación sintética.,Condiciones económicas
+negociacion-008,lead-008,inmueble-009,asesora-demo,Venta,Calificación,346000000,327000000,25,2026-08-15,Abierta,Negociación sintética.,
+negociacion-009,lead-009,inmueble-010,asesor-demo,Arriendo,Oferta,358000000,338500000,45,2026-08-16,Abierta,Negociación sintética.,
+negociacion-010,lead-010,inmueble-011,asesora-demo,Venta,Documentación,370000000,350000000,70,2026-08-17,Ganada,Negociación sintética.,
+negociacion-011,lead-011,inmueble-012,asesor-demo,Arriendo,Cierre,382000000,361500000,90,2026-08-18,Perdida,Negociación sintética.,Condiciones económicas
+negociacion-012,lead-012,inmueble-013,asesora-demo,Venta,Calificación,394000000,373000000,25,2026-08-19,Abierta,Negociación sintética.,
+negociacion-013,lead-013,inmueble-014,asesor-demo,Arriendo,Oferta,406000000,384500000,45,2026-08-20,Abierta,Negociación sintética.,
+negociacion-014,lead-014,inmueble-015,asesora-demo,Venta,Documentación,418000000,396000000,70,2026-08-21,Ganada,Negociación sintética.,
+negociacion-015,lead-015,inmueble-016,asesor-demo,Arriendo,Cierre,430000000,407500000,90,2026-08-22,Perdida,Negociación sintética.,Condiciones económicas
+negociacion-016,lead-016,inmueble-017,asesora-demo,Venta,Calificación,442000000,419000000,25,2026-08-23,Abierta,Negociación sintética.,
+negociacion-017,lead-017,inmueble-018,asesor-demo,Arriendo,Oferta,454000000,430500000,45,2026-08-24,Abierta,Negociación sintética.,
+negociacion-018,lead-018,inmueble-019,asesora-demo,Venta,Documentación,466000000,442000000,70,2026-08-25,Ganada,Negociación sintética.,
+negociacion-019,lead-019,inmueble-020,asesor-demo,Arriendo,Cierre,478000000,453500000,90,2026-08-26,Perdida,Negociación sintética.,Condiciones económicas
+negociacion-020,lead-020,inmueble-021,asesora-demo,Venta,Calificación,490000000,465000000,25,2026-08-27,Abierta,Negociación sintética.,
+negociacion-021,lead-021,inmueble-022,asesor-demo,Arriendo,Oferta,502000000,476500000,45,2026-08-28,Abierta,Negociación sintética.,
+negociacion-022,lead-022,inmueble-023,asesora-demo,Venta,Documentación,514000000,488000000,70,2026-08-29,Ganada,Negociación sintética.,
+negociacion-023,lead-023,inmueble-024,asesor-demo,Arriendo,Cierre,526000000,499500000,90,2026-08-30,Perdida,Negociación sintética.,Condiciones económicas
+negociacion-024,lead-024,inmueble-025,asesora-demo,Venta,Calificación,538000000,511000000,25,2026-08-31,Abierta,Negociación sintética.,
+negociacion-025,lead-025,inmueble-026,asesor-demo,Arriendo,Oferta,550000000,522500000,45,2026-09-01,Abierta,Negociación sintética.,
+negociacion-026,lead-026,inmueble-027,asesora-demo,Venta,Documentación,562000000,534000000,70,2026-09-02,Ganada,Negociación sintética.,
+negociacion-027,lead-027,inmueble-028,asesor-demo,Arriendo,Cierre,574000000,545500000,90,2026-09-03,Perdida,Negociación sintética.,Condiciones económicas
+negociacion-028,lead-028,inmueble-029,asesora-demo,Venta,Calificación,586000000,557000000,25,2026-09-04,Abierta,Negociación sintética.,
+negociacion-029,lead-029,inmueble-030,asesor-demo,Arriendo,Oferta,598000000,568500000,45,2026-09-05,Abierta,Negociación sintética.,
+negociacion-030,lead-030,inmueble-031,asesora-demo,Venta,Documentación,610000000,580000000,70,2026-09-06,Ganada,Negociación sintética.,
+negociacion-031,lead-031,inmueble-032,asesor-demo,Arriendo,Cierre,622000000,591500000,90,2026-09-07,Perdida,Negociación sintética.,Condiciones económicas
+negociacion-032,lead-032,inmueble-033,asesora-demo,Venta,Calificación,634000000,603000000,25,2026-09-08,Abierta,Negociación sintética.,
+negociacion-033,lead-033,inmueble-034,asesor-demo,Arriendo,Oferta,646000000,614500000,45,2026-09-09,Abierta,Negociación sintética.,
+negociacion-034,lead-034,inmueble-035,asesora-demo,Venta,Documentación,658000000,626000000,70,2026-09-10,Ganada,Negociación sintética.,
+negociacion-035,lead-035,inmueble-036,asesor-demo,Arriendo,Cierre,670000000,637500000,90,2026-09-11,Perdida,Negociación sintética.,Condiciones económicas

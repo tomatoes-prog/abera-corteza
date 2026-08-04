@@ -2,8 +2,12 @@ package oauth2
 
 import (
 	"context"
+	"crypto/sha256"
+	"crypto/subtle"
+	"encoding/base64"
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/cortezaproject/corteza/server/pkg/handle"
 	"github.com/cortezaproject/corteza/server/store"
@@ -20,6 +24,11 @@ type (
 		store store.AuthClients
 		def   *types.AuthClient
 	}
+
+	storedClient struct {
+		*models.Client
+		storedSecret string
+	}
 )
 
 var (
@@ -28,6 +37,24 @@ var (
 
 func NewClientStore(s store.AuthClients, def *types.AuthClient) *clientStore {
 	return &clientStore{s, def}
+}
+
+// VerifyPassword allows the OAuth manager to validate one-way hashed client
+// secrets while preserving compatibility with existing plaintext clients.
+func (c *storedClient) VerifyPassword(candidate string) bool {
+	const prefix = "sha256:"
+	if c.storedSecret == "" {
+		return true
+	}
+	if strings.HasPrefix(c.storedSecret, prefix) {
+		sum := sha256.Sum256([]byte(candidate))
+		expected, err := base64.RawURLEncoding.DecodeString(strings.TrimPrefix(c.storedSecret, prefix))
+		if err != nil || len(expected) != len(sum) {
+			return false
+		}
+		return subtle.ConstantTimeCompare(expected, sum[:]) == 1
+	}
+	return subtle.ConstantTimeCompare([]byte(candidate), []byte(c.storedSecret)) == 1
 }
 
 // GetByID pulls client directly from context
@@ -46,10 +73,13 @@ func (cs clientStore) GetByID(ctx context.Context, id string) (_ oauth2.ClientIn
 		return nil, fmt.Errorf("failed to do auth client lookup (%q): %w", id, err)
 	}
 
-	m := &models.Client{
-		ID:     strconv.FormatUint(c.ID, 10),
-		Secret: c.Secret,
-		Domain: c.RedirectURI,
+	m := &storedClient{
+		Client: &models.Client{
+			ID:     strconv.FormatUint(c.ID, 10),
+			Secret: c.Secret,
+			Domain: c.RedirectURI,
+		},
+		storedSecret: c.Secret,
 	}
 
 	return m, nil

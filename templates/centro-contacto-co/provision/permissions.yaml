@@ -1,0 +1,27 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  agente-contacto: &operacion-contacto
+    corteza::compose:namespace/centro-contacto-co: [read, pages.search, modules.search, charts.search]
+    corteza::compose:module/centro-contacto-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/centro-contacto-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/centro-contacto-co/*/*: [read, update, revisions.search]
+    corteza::compose:page/centro-contacto-co/*: [read]
+    corteza::compose:chart/centro-contacto-co/*: [read]
+  closer-comercial: *operacion-contacto
+  supervisor-contacto:
+    corteza::compose:namespace/centro-contacto-co: [read, pages.search, modules.search, charts.search]
+    corteza::compose:module/centro-contacto-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/centro-contacto-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/centro-contacto-co/*/*: [read, update, delete, revisions.search]
+    corteza::compose:page/centro-contacto-co/*: [read]
+    corteza::compose:chart/centro-contacto-co/*: [read]
+  automatizacion-contacto:
+    corteza::system/: [users.search, roles.search]
+    corteza::system:user/*: [read]
+    corteza::system:role/*: [read]
+    corteza::compose:namespace/centro-contacto-co: [read, modules.search]
+    corteza::compose:module/centro-contacto-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/centro-contacto-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/centro-contacto-co/*/*: [read, update]

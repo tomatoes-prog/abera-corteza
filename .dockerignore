@@ -1,0 +1,30 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+# Source-control and Codex metadata
+.git
+.github
+.agents
+.codex
+
+# Local build and test artifacts
+.cache
+.cache-go-build
+**/.cache
+**/node_modules
+**/dist
+**/coverage
+*.log
+.tmp*
+
+# The Go server embeds the checked-in web console bundle at compile time.
+!server/webconsole/dist
+!server/webconsole/dist/**
+
+# Editor and operating-system metadata
+.DS_Store
+.idea
+.vscode
+*.iml
+*.suo
+*.swp

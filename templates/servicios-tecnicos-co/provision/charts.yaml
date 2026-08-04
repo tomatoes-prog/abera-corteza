@@ -1,0 +1,61 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: servicios-tecnicos-co
+charts:
+  funnel-servicios:
+    name: Funnel de servicios
+    config:
+      reports:
+        - module: solicitudes
+          filter: ""
+          dimensions: [{ field: estado, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: funnel, fixTooltips: true }]
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  solicitudes-por-prioridad:
+    name: Solicitudes por prioridad
+    config:
+      reports:
+        - module: solicitudes
+          filter: estado != 'Cerrada' AND estado != 'Perdida'
+          dimensions: [{ field: prioridad, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: pie, fixTooltips: true }]
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  ordenes-por-estado:
+    name: Órdenes por estado
+    config:
+      reports:
+        - module: ordenes-trabajo
+          filter: ""
+          dimensions: [{ field: estado, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10
+  ordenes-por-tecnico:
+    name: Carga por técnico
+    config:
+      reports:
+        - module: ordenes-trabajo
+          filter: estado != 'Completada' AND estado != 'Cancelada'
+          dimensions: [{ field: tecnico, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10
+  valor-por-servicio:
+    name: Valor vendido por tipo de servicio
+    config:
+      reports:
+        - module: solicitudes
+          filter: estado = 'Cerrada'
+          dimensions: [{ field: tipoServicio, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10

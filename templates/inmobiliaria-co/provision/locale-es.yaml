@@ -1,0 +1,33 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    corteza::compose:namespace/inmobiliaria-co:
+      name: CRM Inmobiliario
+      meta.subtitle: Gestión comercial inmobiliaria
+      meta.description: Leads, inmuebles, agenda, actividades y negociaciones.
+
+    corteza::compose:module/inmobiliaria-co/leads:
+      name: Leads
+    corteza::compose:module/inmobiliaria-co/inmuebles:
+      name: Inmuebles
+    corteza::compose:module/inmobiliaria-co/citas:
+      name: Citas
+    corteza::compose:module/inmobiliaria-co/actividades:
+      name: Actividades
+    corteza::compose:module/inmobiliaria-co/negociaciones:
+      name: Negociaciones
+
+    corteza::compose:page/inmobiliaria-co/inicio:
+      title: Inicio
+    corteza::compose:page/inmobiliaria-co/leads:
+      title: Leads
+    corteza::compose:page/inmobiliaria-co/inmuebles:
+      title: Inmuebles
+    corteza::compose:page/inmobiliaria-co/agenda:
+      title: Agenda
+    corteza::compose:page/inmobiliaria-co/actividades:
+      title: Actividades
+    corteza::compose:page/inmobiliaria-co/negociaciones:
+      title: Negociaciones

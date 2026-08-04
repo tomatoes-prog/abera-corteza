@@ -16,6 +16,7 @@
 
     <c-chart
       v-else-if="renderer"
+      ref="chart"
       :chart="renderer"
       class="flex-fill p-1"
       @click="drillDown"
@@ -60,6 +61,8 @@ export default {
       error: undefined,
       processing: false,
 
+      resizeTimers: [],
+
       valueMap: new Map(),
 
       renderer: undefined,
@@ -83,6 +86,7 @@ export default {
   },
 
   beforeDestroy () {
+    this.clearResizeTimers()
     this.setDefaultValues()
   },
 
@@ -209,6 +213,8 @@ export default {
         data.themeVariables = this.getThemeVariables()
 
         this.renderer = chart.makeOptions(data)
+        this.optimizeCategoricalBars()
+        this.scheduleResize()
       } catch (e) {
         this.error = this.toastErrorHandler(this.$t('chart.optionsBuildFailed'))(e)
         this.processing = false
@@ -250,6 +256,64 @@ export default {
       if (handle && this.chart && this.chart.handle === handle) {
         this.updateChart()
       }
+    },
+
+    clearResizeTimers () {
+      this.resizeTimers.forEach(timer => clearTimeout(timer))
+      this.resizeTimers = []
+    },
+
+    resizeChart () {
+      window.dispatchEvent(new Event('resize'))
+
+      const chartComponent = this.$refs.chart
+      const chart = chartComponent && chartComponent.$refs && chartComponent.$refs.chart
+
+      if (chart && typeof chart.resize === 'function') {
+        chart.resize()
+      }
+    },
+
+    scheduleResize () {
+      this.clearResizeTimers()
+
+      this.$nextTick(() => {
+        this.resizeChart()
+        this.resizeTimers = [250, 750].map(delay => setTimeout(() => this.resizeChart(), delay))
+      })
+    },
+
+    optimizeCategoricalBars () {
+      const reports = (this.chart && this.chart.config && this.chart.config.reports) || []
+      const hasBars = reports.some(({ metrics = [] }) => metrics.some(({ type }) => type === 'bar'))
+
+      if (!hasBars || !this.renderer) return
+
+      const normalizeAxes = (axis, position) => {
+        return (Array.isArray(axis) ? axis : [axis])
+          .filter(Boolean)
+          .map(definition => ({ definition, position }))
+      }
+      const axes = [
+        ...normalizeAxes(this.renderer.xAxis, 'x'),
+        ...normalizeAxes(this.renderer.yAxis, 'y'),
+      ]
+
+      axes.forEach(({ definition: axis, position }) => {
+        if (axis.type !== 'category' && !Array.isArray(axis.data)) return
+
+        const axisLabel = axis.axisLabel || {}
+
+        this.$set(axis, 'axisLabel', {
+          ...axisLabel,
+          interval: 0,
+          rotate: position === 'x' ? -35 : 0,
+          formatter: value => {
+            const label = String(value)
+            return label.length > 22 ? `${label.slice(0, 20)}…` : label
+          },
+        })
+      })
     },
 
     setDefaultValues () {

@@ -1,0 +1,24 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+users:
+  automatizacion-admisiones:
+    name: Automatización de admisiones
+    email: automatizacion.admisiones@abera.local
+    emailConfirmed: true
+    kind: sys
+    roles: [automatizacion-admisiones]
+
+roles:
+  asesor-admisiones:
+    name: Asesor de admisiones
+    meta: { description: Capta y acompaña prospectos hasta su solicitud. }
+  revisor-admisiones:
+    name: Revisor de admisiones
+    meta: { description: Verifica requisitos y emite decisiones de admisión. }
+  director-admisiones:
+    name: Director de admisiones
+    meta: { description: Supervisa metas, equipos, programas y matrículas. }
+  automatizacion-admisiones:
+    name: Automatización de admisiones
+    meta: { description: Identidad técnica interna para ejecutar workflows de la plantilla. }

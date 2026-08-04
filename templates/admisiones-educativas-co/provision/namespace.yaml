@@ -1,0 +1,10 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespaces:
+  admisiones-educativas-co:
+    name: Admisiones Educativas
+    enabled: true
+    meta:
+      subtitle: Captación, admisión y matrícula
+      description: Prospectos, programas, solicitudes, citas y matrículas.

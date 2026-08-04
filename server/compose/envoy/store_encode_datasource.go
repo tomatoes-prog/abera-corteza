@@ -2,6 +2,7 @@ package envoy
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -186,7 +187,12 @@ func (e StoreEncoder) encodeRecordDatasource(ctx context.Context, p envoyx.Encod
 		err = func() (err error) {
 			rec, err = maykr(ctx, auxRec)
 			if err != nil {
-				return
+				return fmt.Errorf(
+					"no se pudo preparar el registro demo del módulo %q con clave %q: %w",
+					mod.Handle,
+					strings.Join(ident, ","),
+					err,
+				)
 			}
 
 			// Do these at the end so they can't be overwritten
@@ -205,12 +211,12 @@ func (e StoreEncoder) encodeRecordDatasource(ctx context.Context, p envoyx.Encod
 			//
 			rve = service.RecordValueUpdateOpCheck(ctx, nil, mod, rec.Values)
 			if !rve.IsValid() {
-				return rve
+				return recordDatasourceValidationError(mod, ident, "operación", rve)
 			}
 			//
 			rve = service.RecordPreparer(ctx, s, rvSanitizer, rvValidator, rvFormatter, mod, &rec)
 			if !rve.IsValid() {
-				return rve
+				return recordDatasourceValidationError(mod, ident, "valores", rve)
 			}
 
 			ax := rec
@@ -264,6 +270,26 @@ func (e StoreEncoder) encodeRecordDatasource(ctx context.Context, p envoyx.Encod
 		err = dalutils.ComposeRecordUpdate(ctx, dl, mod, updates...)
 	}
 	return
+}
+
+func recordDatasourceValidationError(
+	mod *types.Module,
+	ident []string,
+	stage string,
+	rve *types.RecordValueErrorSet,
+) error {
+	details, err := json.Marshal(rve.Set)
+	if err != nil {
+		details = []byte(rve.Error())
+	}
+
+	return fmt.Errorf(
+		"registro demo inválido en módulo %q, clave %q, etapa %s: %s",
+		mod.Handle,
+		strings.Join(ident, ","),
+		stage,
+		details,
+	)
 }
 
 func (e StoreEncoder) getCreatedBy(ctx context.Context, rec types.Record) uint64 {
@@ -342,13 +368,18 @@ func (e StoreEncoder) recordMaker(ns *types.Namespace, mod *types.Module, record
 		var auxv *types.RecordValue
 		for k, vv := range auxRec {
 			if recordGetters[k] != nil {
-				auxv, err = e.resolveRecordRef(ctx, recordGetters, k, vv)
-				if err != nil {
-					return
-				}
-				err = rec.SetValue(k, auxv.Place, auxv.Ref)
-				if err != nil {
-					return
+				for place, value := range vv.Values {
+					auxv, err = e.resolveRecordRef(ctx, recordGetters, k, datasource.RawRecordValue{
+						Name:   vv.Name,
+						Values: []string{value},
+					})
+					if err != nil {
+						return
+					}
+					err = rec.SetValue(k, uint(place), auxv.Ref)
+					if err != nil {
+						return
+					}
 				}
 				continue
 			}
@@ -402,7 +433,12 @@ func (e StoreEncoder) resolveUserRef(ctx context.Context, getters map[string]*sy
 	out = &types.RecordValue{Name: k}
 	out.Ref, err = getters[out.Name].Resolve(ctx, vv.Values[0])
 	if err != nil {
-		return
+		return nil, fmt.Errorf(
+			"no se pudo resolver el usuario %q para el campo %q: %w",
+			vv.Values[0],
+			k,
+			err,
+		)
 	}
 	out.Value = cast.ToString(out.Ref)
 

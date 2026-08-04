@@ -1,0 +1,29 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+users:
+  automatizacion-automotriz:
+    name: Automatización automotriz
+    email: automatizacion.automotriz@abera.local
+    emailConfirmed: true
+    kind: sys
+    roles: [automatizacion-automotriz]
+
+roles:
+  asesor-automotriz:
+    name: Asesor automotriz
+    meta:
+      description: Atiende prospectos, pruebas de manejo y oportunidades.
+  jefe-comercial-automotriz:
+    name: Jefe comercial automotriz
+    meta:
+      description: Supervisa el funnel, el inventario y el equipo de ventas.
+  coordinador-taller:
+    name: Coordinador de taller
+    meta:
+      description: Programa y controla órdenes de servicio y mantenimiento.
+
+  automatizacion-automotriz:
+    name: Automatización automotriz
+    meta:
+      description: Identidad técnica interna para ejecutar workflows de la plantilla.

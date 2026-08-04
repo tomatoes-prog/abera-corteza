@@ -1,0 +1,20 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    corteza::compose:namespace/servicios-tecnicos-co:
+      name: Servicios Técnicos
+      meta.subtitle: Instalación, mantenimiento y reparación
+      meta.description: Clientes, activos, solicitudes, cotizaciones y órdenes.
+    corteza::compose:module/servicios-tecnicos-co/clientes-prospectos: { name: Clientes y prospectos }
+    corteza::compose:module/servicios-tecnicos-co/activos: { name: Activos }
+    corteza::compose:module/servicios-tecnicos-co/solicitudes: { name: Solicitudes }
+    corteza::compose:module/servicios-tecnicos-co/cotizaciones: { name: Cotizaciones }
+    corteza::compose:module/servicios-tecnicos-co/ordenes-trabajo: { name: Órdenes de trabajo }
+    corteza::compose:page/servicios-tecnicos-co/inicio: { title: Inicio }
+    corteza::compose:page/servicios-tecnicos-co/clientes-prospectos: { title: Clientes }
+    corteza::compose:page/servicios-tecnicos-co/activos: { title: Activos }
+    corteza::compose:page/servicios-tecnicos-co/solicitudes: { title: Solicitudes }
+    corteza::compose:page/servicios-tecnicos-co/cotizaciones: { title: Cotizaciones }
+    corteza::compose:page/servicios-tecnicos-co/ordenes-trabajo: { title: Agenda de servicio }

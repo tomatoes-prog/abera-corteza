@@ -1,0 +1,67 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  asesor-comercial:
+    corteza::compose:namespace/inmobiliaria-co:
+      - read
+      - pages.search
+      - modules.search
+      - charts.search
+
+    corteza::compose:module/inmobiliaria-co/*:
+      - read
+      - record.create
+      - records.search
+
+    corteza::compose:module-field/inmobiliaria-co/*/*:
+      - record.value.read
+      - record.value.update
+
+    corteza::compose:record/inmobiliaria-co/*/*:
+      - read
+      - update
+      - revisions.search
+
+    corteza::compose:page/inmobiliaria-co/*:
+      - read
+
+    corteza::compose:chart/inmobiliaria-co/*:
+      - read
+
+  coordinador-comercial:
+    corteza::compose:namespace/inmobiliaria-co:
+      - read
+      - pages.search
+      - modules.search
+      - charts.search
+
+    corteza::compose:module/inmobiliaria-co/*:
+      - read
+      - record.create
+      - records.search
+
+    corteza::compose:module-field/inmobiliaria-co/*/*:
+      - record.value.read
+      - record.value.update
+
+    corteza::compose:record/inmobiliaria-co/*/*:
+      - read
+      - update
+      - delete
+      - revisions.search
+
+    corteza::compose:page/inmobiliaria-co/*:
+      - read
+
+    corteza::compose:chart/inmobiliaria-co/*:
+      - read
+
+  automatizacion-inmobiliaria:
+    corteza::system/: [users.search, roles.search]
+    corteza::system:user/*: [read]
+    corteza::system:role/*: [read]
+    corteza::compose:namespace/inmobiliaria-co: [read, modules.search]
+    corteza::compose:module/inmobiliaria-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/inmobiliaria-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/inmobiliaria-co/*/*: [read, update]

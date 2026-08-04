@@ -1,0 +1,20 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    corteza::compose:namespace/admisiones-educativas-co:
+      name: Admisiones Educativas
+      meta.subtitle: Captación, admisión y matrícula
+      meta.description: Prospectos, programas, solicitudes, citas y matrículas.
+    corteza::compose:module/admisiones-educativas-co/prospectos: { name: Prospectos }
+    corteza::compose:module/admisiones-educativas-co/programas: { name: Programas }
+    corteza::compose:module/admisiones-educativas-co/solicitudes: { name: Solicitudes de admisión }
+    corteza::compose:module/admisiones-educativas-co/citas-admision: { name: Citas de admisión }
+    corteza::compose:module/admisiones-educativas-co/matriculas: { name: Matrículas }
+    corteza::compose:page/admisiones-educativas-co/inicio: { title: Inicio }
+    corteza::compose:page/admisiones-educativas-co/prospectos: { title: Prospectos }
+    corteza::compose:page/admisiones-educativas-co/programas: { title: Programas }
+    corteza::compose:page/admisiones-educativas-co/solicitudes: { title: Solicitudes }
+    corteza::compose:page/admisiones-educativas-co/citas-admision: { title: Agenda }
+    corteza::compose:page/admisiones-educativas-co/matriculas: { title: Matrículas }

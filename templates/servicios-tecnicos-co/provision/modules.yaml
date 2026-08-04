@@ -1,0 +1,348 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: servicios-tecnicos-co
+modules:
+  clientes-prospectos:
+    name: Clientes y prospectos
+    fields:
+      tipo:
+        label: Tipo
+        kind: Select
+        required: true
+        default: Prospecto
+        options:
+          options:
+            - { text: Prospecto, value: Prospecto }
+            - { text: Cliente, value: Cliente }
+          selectType: default
+      tipoPersona:
+        label: Tipo de persona
+        kind: Select
+        options:
+          options:
+            - { text: Persona, value: Persona }
+            - { text: Empresa, value: Empresa }
+          selectType: default
+      nombre: { label: Nombre o razón social, kind: String, required: true }
+      identificacion: { label: Identificación o NIT, kind: String }
+      contacto: { label: Persona de contacto, kind: String }
+      telefono: { label: Teléfono, kind: String, required: true }
+      correo: { label: Correo electrónico, kind: String }
+      autorizaTratamientoDatos:
+        label: Autoriza el tratamiento de datos
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      departamento: { label: Departamento, kind: String }
+      ciudad: { label: Ciudad, kind: String }
+      direccion: { label: Dirección de servicio, kind: String }
+      latitud:
+        label: Latitud
+        kind: Number
+        options: { format: "0.000000", precision: 6 }
+      longitud:
+        label: Longitud
+        kind: Number
+        options: { format: "0.000000", precision: 6 }
+      segmento:
+        label: Segmento
+        kind: Select
+        options:
+          options:
+            - { text: Hogar, value: Hogar }
+            - { text: Pyme, value: Pyme }
+            - { text: Corporativo, value: Corporativo }
+          selectType: default
+      estadoComercial:
+        label: Estado comercial
+        kind: Select
+        default: Nuevo
+        options:
+          options:
+            - { text: Nuevo, value: Nuevo }
+            - { text: Diagnóstico, value: Diagnóstico }
+            - { text: Cotización, value: Cotización }
+            - { text: Cliente, value: Cliente }
+            - { text: Perdido, value: Perdido }
+          selectType: default
+      responsable: { label: Responsable comercial, kind: User }
+      proximoContacto: { label: Próximo contacto, kind: DateTime }
+      notas:
+        label: Notas
+        kind: String
+        options: { multiLine: true }
+      externalID: { label: Identificador externo, kind: String }
+      proveedorExterno: { label: Proveedor externo, kind: String }
+
+  activos:
+    name: Activos
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      cliente:
+        label: Cliente
+        kind: Record
+        required: true
+        options: { module: clientes-prospectos, labelField: nombre }
+      tipoEquipo: { label: Tipo de equipo, kind: String, required: true }
+      marca: { label: Marca, kind: String }
+      modelo: { label: Modelo, kind: String }
+      serial: { label: Serial, kind: String }
+      fechaInstalacion:
+        label: Fecha de instalación
+        kind: DateTime
+        options: { onlyDate: true }
+      garantiaHasta:
+        label: Garantía hasta
+        kind: DateTime
+        options: { onlyDate: true }
+      estado:
+        label: Estado
+        kind: Select
+        default: Operativo
+        options:
+          options:
+            - { text: Operativo, value: Operativo }
+            - { text: Requiere mantenimiento, value: Requiere mantenimiento }
+            - { text: Fuera de servicio, value: Fuera de servicio }
+            - { text: Retirado, value: Retirado }
+          selectType: default
+      proximoMantenimiento:
+        label: Próximo mantenimiento
+        kind: DateTime
+        options: { onlyDate: true }
+      ubicacion: { label: Ubicación, kind: String }
+      fotografias:
+        label: Fotografías
+        kind: File
+        multi: true
+        options: { allowDocuments: false, allowImages: true, maxSize: 0, mode: list }
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }
+      externalID: { label: Identificador externo, kind: String }
+
+  solicitudes:
+    name: Solicitudes de servicio
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      cliente:
+        label: Cliente o prospecto
+        kind: Record
+        required: true
+        options: { module: clientes-prospectos, labelField: nombre }
+      activo:
+        label: Activo
+        kind: Record
+        options: { module: activos, labelField: codigo }
+      canal:
+        label: Canal
+        kind: Select
+        options:
+          options:
+            - { text: Teléfono, value: Teléfono }
+            - { text: WhatsApp, value: WhatsApp }
+            - { text: Correo, value: Correo }
+            - { text: Web, value: Web }
+            - { text: Presencial, value: Presencial }
+          selectType: default
+      tipoServicio:
+        label: Tipo de servicio
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Instalación, value: Instalación }
+            - { text: Reparación, value: Reparación }
+            - { text: Mantenimiento, value: Mantenimiento }
+            - { text: Inspección, value: Inspección }
+            - { text: Diagnóstico remoto, value: Diagnóstico remoto }
+          selectType: default
+      prioridad:
+        label: Prioridad
+        kind: Select
+        required: true
+        default: Media
+        options:
+          options:
+            - { text: Baja, value: Baja }
+            - { text: Media, value: Media }
+            - { text: Alta, value: Alta }
+            - { text: Crítica, value: Crítica }
+          selectType: default
+      descripcion:
+        label: Descripción
+        kind: String
+        required: true
+        options: { multiLine: true }
+      fotografias:
+        label: Fotografías
+        kind: File
+        multi: true
+        options: { allowDocuments: false, allowImages: true, maxSize: 0, mode: list }
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Recibida
+        options:
+          options:
+            - { text: Recibida, value: Recibida }
+            - { text: En diagnóstico, value: En diagnóstico }
+            - { text: Cotizada, value: Cotizada }
+            - { text: Aceptada, value: Aceptada }
+            - { text: Programada, value: Programada }
+            - { text: Ejecutada, value: Ejecutada }
+            - { text: Cerrada, value: Cerrada }
+            - { text: Perdida, value: Perdida }
+          selectType: default
+      responsable: { label: Coordinador responsable, kind: User }
+      vencimientoSLA: { label: Vencimiento de SLA, kind: DateTime }
+      slaIncumplido:
+        label: SLA incumplido
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      externalID: { label: Identificador externo, kind: String }
+      proveedorExterno: { label: Proveedor externo, kind: String }
+      estadoIntegracion:
+        label: Estado de integración
+        kind: Select
+        default: Local
+        options:
+          options:
+            - { text: Local, value: Local }
+            - { text: Pendiente, value: Pendiente }
+            - { text: Sincronizado, value: Sincronizado }
+            - { text: Error, value: Error }
+          selectType: default
+      ultimoErrorIntegracion:
+        label: Último error de integración
+        kind: String
+        options: { multiLine: true }
+
+  cotizaciones:
+    name: Cotizaciones
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      solicitud:
+        label: Solicitud
+        kind: Record
+        required: true
+        options: { module: solicitudes, labelField: codigo }
+      cliente:
+        label: Cliente
+        kind: Record
+        required: true
+        options: { module: clientes-prospectos, labelField: nombre }
+      alcance:
+        label: Alcance
+        kind: String
+        required: true
+        options: { multiLine: true, useRichTextEditor: true }
+      valorAntesImpuestos:
+        label: Valor antes de impuestos
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      impuestos:
+        label: Impuestos
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      total:
+        label: Total
+        kind: Number
+        required: true
+        options: { format: "0", precision: 0, prefix: "$ " }
+      fechaVencimiento:
+        label: Válida hasta
+        kind: DateTime
+        options: { onlyDate: true }
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Borrador
+        options:
+          options:
+            - { text: Borrador, value: Borrador }
+            - { text: Enviada, value: Enviada }
+            - { text: Aceptada, value: Aceptada }
+            - { text: Rechazada, value: Rechazada }
+            - { text: Vencida, value: Vencida }
+          selectType: default
+      fechaAceptacion: { label: Fecha de aceptación, kind: DateTime }
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }
+      externalID: { label: Identificador externo, kind: String }
+
+  ordenes-trabajo:
+    name: Órdenes de trabajo
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      solicitud:
+        label: Solicitud
+        kind: Record
+        required: true
+        options: { module: solicitudes, labelField: codigo }
+      cotizacion:
+        label: Cotización
+        kind: Record
+        options: { module: cotizaciones, labelField: codigo }
+      cliente:
+        label: Cliente
+        kind: Record
+        required: true
+        options: { module: clientes-prospectos, labelField: nombre }
+      activo:
+        label: Activo
+        kind: Record
+        options: { module: activos, labelField: codigo }
+      tecnico: { label: Técnico, kind: User }
+      direccion: { label: Dirección del servicio, kind: String, required: true }
+      inicio: { label: Inicio programado, kind: DateTime, required: true }
+      fin: { label: Fin programado, kind: DateTime, required: true }
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Programada
+        options:
+          options:
+            - { text: Programada, value: Programada }
+            - { text: En camino, value: En camino }
+            - { text: En ejecución, value: En ejecución }
+            - { text: Pausada, value: Pausada }
+            - { text: Completada, value: Completada }
+            - { text: Cancelada, value: Cancelada }
+          selectType: default
+      diagnostico:
+        label: Diagnóstico
+        kind: String
+        options: { multiLine: true }
+      solucion:
+        label: Solución
+        kind: String
+        options: { multiLine: true }
+      resolucionPrimeraVisita:
+        label: Resuelto en primera visita
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      evidencias:
+        label: Evidencias
+        kind: File
+        multi: true
+        options: { allowDocuments: true, allowImages: true, maxSize: 0, mode: list }
+      firma:
+        label: Firma o acta
+        kind: File
+        options: { allowDocuments: true, allowImages: true, maxSize: 0, mode: list }
+      valorFinal:
+        label: Valor final
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      proximoMantenimiento:
+        label: Próximo mantenimiento
+        kind: DateTime
+        options: { onlyDate: true }
+      externalID: { label: Identificador externo, kind: String }

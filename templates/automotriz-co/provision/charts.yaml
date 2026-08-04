@@ -1,0 +1,69 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: automotriz-co
+charts:
+  funnel-ventas:
+    name: Funnel de ventas
+    config:
+      reports:
+        - module: prospectos
+          filter: ""
+          dimensions:
+            - { field: estado, modifier: (no grouping / buckets) }
+          metrics:
+            - { field: count, type: funnel, fixTooltips: true }
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  oportunidades-por-etapa:
+    name: Valor de oportunidades por etapa
+    config:
+      reports:
+        - module: oportunidades
+          filter: etapa != 'Perdido'
+          dimensions:
+            - { field: etapa, modifier: (no grouping / buckets) }
+          metrics:
+            - { field: valorOfertado, aggregate: SUM, type: bar, fixTooltips: true }
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10
+  pruebas-por-resultado:
+    name: Pruebas de manejo por resultado
+    config:
+      reports:
+        - module: pruebas-manejo
+          filter: estado = 'Completada'
+          dimensions:
+            - { field: resultado, modifier: (no grouping / buckets) }
+          metrics:
+            - { field: count, type: pie, fixTooltips: true }
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  inventario-por-estado:
+    name: Inventario por estado
+    config:
+      reports:
+        - module: vehiculos
+          filter: ""
+          dimensions:
+            - { field: estado, modifier: (no grouping / buckets) }
+          metrics:
+            - { field: count, type: pie, fixTooltips: true }
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  servicio-por-estado:
+    name: Órdenes de servicio por estado
+    config:
+      reports:
+        - module: ordenes-servicio
+          filter: ""
+          dimensions:
+            - { field: estado, modifier: (no grouping / buckets) }
+          metrics:
+            - { field: count, type: bar, fixTooltips: true }
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10

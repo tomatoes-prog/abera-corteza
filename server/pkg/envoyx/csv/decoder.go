@@ -191,6 +191,10 @@ func (d *decoder) parseComplexCSVCell(cell string) []string {
 	if d.multiValueBrackets {
 		if strings.HasPrefix(cell, "[") && strings.HasSuffix(cell, "]") {
 			cell = cell[1 : len(cell)-1]
+		} else {
+			// Bracket mode is explicit: regular text may legitimately contain
+			// the configured separator and must remain a single value.
+			return []string{cell}
 		}
 	}
 

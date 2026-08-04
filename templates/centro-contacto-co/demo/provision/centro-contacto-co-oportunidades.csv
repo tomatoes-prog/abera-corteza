@@ -1,0 +1,41 @@
+ID,codigo,contacto,campana,closer,producto,etapa,valor,probabilidad,fechaEstimadaCierre,observaciones
+contacto-oportunidad-001,CALL-OPP-001,contacto-001,campana-002,supervisora-demo,Servicio Empresarial,Contacto comercial,1180000,40,2026-08-06,Oportunidad sintética originada en llamada.
+contacto-oportunidad-002,CALL-OPP-002,contacto-002,campana-003,supervisora-demo,Plan Regreso,Propuesta,1460000,60,2026-08-07,Oportunidad sintética originada en llamada.
+contacto-oportunidad-003,CALL-OPP-003,contacto-003,campana-004,supervisora-demo,Renovación Anual,Negociación,1740000,80,2026-08-08,Oportunidad sintética originada en llamada.
+contacto-oportunidad-004,CALL-OPP-004,contacto-004,campana-001,supervisora-demo,Plan Premium,Venta,2020000,100,2026-08-09,Oportunidad sintética originada en llamada.
+contacto-oportunidad-005,CALL-OPP-005,contacto-005,campana-002,supervisora-demo,Servicio Empresarial,Calificada,2300000,25,2026-08-10,Oportunidad sintética originada en llamada.
+contacto-oportunidad-006,CALL-OPP-006,contacto-006,campana-003,supervisora-demo,Plan Regreso,Contacto comercial,2580000,40,2026-08-11,Oportunidad sintética originada en llamada.
+contacto-oportunidad-007,CALL-OPP-007,contacto-007,campana-004,supervisora-demo,Renovación Anual,Propuesta,2860000,60,2026-08-12,Oportunidad sintética originada en llamada.
+contacto-oportunidad-008,CALL-OPP-008,contacto-008,campana-001,supervisora-demo,Plan Premium,Negociación,3140000,80,2026-08-13,Oportunidad sintética originada en llamada.
+contacto-oportunidad-009,CALL-OPP-009,contacto-009,campana-002,supervisora-demo,Servicio Empresarial,Venta,3420000,100,2026-08-14,Oportunidad sintética originada en llamada.
+contacto-oportunidad-010,CALL-OPP-010,contacto-010,campana-003,supervisora-demo,Plan Regreso,Calificada,3700000,25,2026-08-15,Oportunidad sintética originada en llamada.
+contacto-oportunidad-011,CALL-OPP-011,contacto-011,campana-004,supervisora-demo,Renovación Anual,Contacto comercial,3980000,40,2026-08-16,Oportunidad sintética originada en llamada.
+contacto-oportunidad-012,CALL-OPP-012,contacto-012,campana-001,supervisora-demo,Plan Premium,Propuesta,4260000,60,2026-08-17,Oportunidad sintética originada en llamada.
+contacto-oportunidad-013,CALL-OPP-013,contacto-013,campana-002,supervisora-demo,Servicio Empresarial,Negociación,4540000,80,2026-08-18,Oportunidad sintética originada en llamada.
+contacto-oportunidad-014,CALL-OPP-014,contacto-014,campana-003,supervisora-demo,Plan Regreso,Venta,4820000,100,2026-08-19,Oportunidad sintética originada en llamada.
+contacto-oportunidad-015,CALL-OPP-015,contacto-015,campana-004,supervisora-demo,Renovación Anual,Calificada,5100000,25,2026-08-20,Oportunidad sintética originada en llamada.
+contacto-oportunidad-016,CALL-OPP-016,contacto-016,campana-001,supervisora-demo,Plan Premium,Contacto comercial,5380000,40,2026-08-21,Oportunidad sintética originada en llamada.
+contacto-oportunidad-017,CALL-OPP-017,contacto-017,campana-002,supervisora-demo,Servicio Empresarial,Propuesta,5660000,60,2026-08-22,Oportunidad sintética originada en llamada.
+contacto-oportunidad-018,CALL-OPP-018,contacto-018,campana-003,supervisora-demo,Plan Regreso,Negociación,5940000,80,2026-08-23,Oportunidad sintética originada en llamada.
+contacto-oportunidad-019,CALL-OPP-019,contacto-019,campana-004,supervisora-demo,Renovación Anual,Venta,6220000,100,2026-08-24,Oportunidad sintética originada en llamada.
+contacto-oportunidad-020,CALL-OPP-020,contacto-020,campana-001,supervisora-demo,Plan Premium,Calificada,6500000,25,2026-08-25,Oportunidad sintética originada en llamada.
+contacto-oportunidad-021,CALL-OPP-021,contacto-021,campana-002,supervisora-demo,Servicio Empresarial,Contacto comercial,6780000,40,2026-08-26,Oportunidad sintética originada en llamada.
+contacto-oportunidad-022,CALL-OPP-022,contacto-022,campana-003,supervisora-demo,Plan Regreso,Propuesta,7060000,60,2026-08-27,Oportunidad sintética originada en llamada.
+contacto-oportunidad-023,CALL-OPP-023,contacto-023,campana-004,supervisora-demo,Renovación Anual,Negociación,7340000,80,2026-08-28,Oportunidad sintética originada en llamada.
+contacto-oportunidad-024,CALL-OPP-024,contacto-024,campana-001,supervisora-demo,Plan Premium,Venta,7620000,100,2026-08-29,Oportunidad sintética originada en llamada.
+contacto-oportunidad-025,CALL-OPP-025,contacto-025,campana-002,supervisora-demo,Servicio Empresarial,Calificada,7900000,25,2026-08-30,Oportunidad sintética originada en llamada.
+contacto-oportunidad-026,CALL-OPP-026,contacto-026,campana-003,supervisora-demo,Plan Regreso,Contacto comercial,8180000,40,2026-08-31,Oportunidad sintética originada en llamada.
+contacto-oportunidad-027,CALL-OPP-027,contacto-027,campana-004,supervisora-demo,Renovación Anual,Propuesta,8460000,60,2026-09-01,Oportunidad sintética originada en llamada.
+contacto-oportunidad-028,CALL-OPP-028,contacto-028,campana-001,supervisora-demo,Plan Premium,Negociación,8740000,80,2026-09-02,Oportunidad sintética originada en llamada.
+contacto-oportunidad-029,CALL-OPP-029,contacto-029,campana-002,supervisora-demo,Servicio Empresarial,Venta,9020000,100,2026-09-03,Oportunidad sintética originada en llamada.
+contacto-oportunidad-030,CALL-OPP-030,contacto-030,campana-003,supervisora-demo,Plan Regreso,Calificada,9300000,25,2026-09-04,Oportunidad sintética originada en llamada.
+contacto-oportunidad-031,CALL-OPP-031,contacto-031,campana-004,supervisora-demo,Renovación Anual,Contacto comercial,9580000,40,2026-09-05,Oportunidad sintética originada en llamada.
+contacto-oportunidad-032,CALL-OPP-032,contacto-032,campana-001,supervisora-demo,Plan Premium,Propuesta,9860000,60,2026-09-06,Oportunidad sintética originada en llamada.
+contacto-oportunidad-033,CALL-OPP-033,contacto-033,campana-002,supervisora-demo,Servicio Empresarial,Negociación,10140000,80,2026-09-07,Oportunidad sintética originada en llamada.
+contacto-oportunidad-034,CALL-OPP-034,contacto-034,campana-003,supervisora-demo,Plan Regreso,Venta,10420000,100,2026-09-08,Oportunidad sintética originada en llamada.
+contacto-oportunidad-035,CALL-OPP-035,contacto-035,campana-004,supervisora-demo,Renovación Anual,Calificada,10700000,25,2026-09-09,Oportunidad sintética originada en llamada.
+contacto-oportunidad-036,CALL-OPP-036,contacto-036,campana-001,supervisora-demo,Plan Premium,Contacto comercial,10980000,40,2026-09-10,Oportunidad sintética originada en llamada.
+contacto-oportunidad-037,CALL-OPP-037,contacto-037,campana-002,supervisora-demo,Servicio Empresarial,Propuesta,11260000,60,2026-09-11,Oportunidad sintética originada en llamada.
+contacto-oportunidad-038,CALL-OPP-038,contacto-038,campana-003,supervisora-demo,Plan Regreso,Negociación,11540000,80,2026-09-12,Oportunidad sintética originada en llamada.
+contacto-oportunidad-039,CALL-OPP-039,contacto-039,campana-004,supervisora-demo,Renovación Anual,Venta,11820000,100,2026-09-13,Oportunidad sintética originada en llamada.
+contacto-oportunidad-040,CALL-OPP-040,contacto-040,campana-001,supervisora-demo,Plan Premium,Calificada,12100000,25,2026-09-14,Oportunidad sintética originada en llamada.

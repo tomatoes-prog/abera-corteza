@@ -1,0 +1,54 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: inmobiliaria-co
+charts:
+  leads-por-estado:
+    name: Leads por estado
+    config:
+      reports:
+        - module: leads
+          filter: ""
+          dimensions:
+            - field: estado
+              modifier: (no grouping / buckets)
+          metrics:
+            - field: count
+              type: pie
+              fixTooltips: true
+          renderer: {}
+      colorScheme: tableau.Tableau10
+
+  inmuebles-por-estado:
+    name: Inmuebles por estado
+    config:
+      reports:
+        - module: inmuebles
+          filter: ""
+          dimensions:
+            - field: estado
+              modifier: (no grouping / buckets)
+          metrics:
+            - field: count
+              type: pie
+              fixTooltips: true
+          renderer: {}
+      colorScheme: tableau.Tableau10
+
+  negociaciones-por-etapa:
+    name: Negociaciones por etapa
+    config:
+      reports:
+        - module: negociaciones
+          filter: estado = 'Abierta'
+          dimensions:
+            - field: etapa
+              modifier: (no grouping / buckets)
+          metrics:
+            - field: count
+              type: bar
+              fixTooltips: true
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10

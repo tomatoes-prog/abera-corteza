@@ -1,0 +1,10 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace:
+  inmobiliaria-co:
+    name: CRM Inmobiliario
+    enabled: true
+    meta:
+      subtitle: Gestión comercial inmobiliaria
+      description: Leads, inmuebles, agenda, actividades y negociaciones.

@@ -1,0 +1,27 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  asesor-admisiones: &operacion-admisiones
+    corteza::compose:namespace/admisiones-educativas-co: [read, pages.search, modules.search, charts.search]
+    corteza::compose:module/admisiones-educativas-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/admisiones-educativas-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/admisiones-educativas-co/*/*: [read, update, revisions.search]
+    corteza::compose:page/admisiones-educativas-co/*: [read]
+    corteza::compose:chart/admisiones-educativas-co/*: [read]
+  revisor-admisiones: *operacion-admisiones
+  director-admisiones:
+    corteza::compose:namespace/admisiones-educativas-co: [read, pages.search, modules.search, charts.search]
+    corteza::compose:module/admisiones-educativas-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/admisiones-educativas-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/admisiones-educativas-co/*/*: [read, update, delete, revisions.search]
+    corteza::compose:page/admisiones-educativas-co/*: [read]
+    corteza::compose:chart/admisiones-educativas-co/*: [read]
+  automatizacion-admisiones:
+    corteza::system/: [users.search, roles.search]
+    corteza::system:user/*: [read]
+    corteza::system:role/*: [read]
+    corteza::compose:namespace/admisiones-educativas-co: [read, modules.search]
+    corteza::compose:module/admisiones-educativas-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/admisiones-educativas-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/admisiones-educativas-co/*/*: [read, update]

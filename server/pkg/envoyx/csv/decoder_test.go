@@ -90,6 +90,16 @@ func TestParseComplexCSVCell(t *testing.T) {
 		require.Equal(t, []string{"v1", "v2"}, out)
 	})
 
+	t.Run("plain text with delimiter in bracket mode", func(t *testing.T) {
+		d := &decoder{
+			multiValueDelimiter: ",",
+			multiValueBrackets:  true,
+		}
+
+		out := d.parseComplexCSVCell("saludo, diagnóstico y cierre")
+		require.Equal(t, []string{"saludo, diagnóstico y cierre"}, out)
+	})
+
 	t.Run("multi value wrong delimiter", func(t *testing.T) {
 		d := &decoder{
 			multiValueDelimiter: ",",

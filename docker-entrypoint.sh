@@ -10,6 +10,9 @@
 
 set -eu
 
+. /template-select.sh
+configure_abera_deployment
+
 WEBAPP_DIR=${HTTP_WEBAPP_BASE_DIR:-/corteza/webapp}
 DEFAULT_LOCALE=${CORTEZA_DEFAULT_LOCALE:-es}
 

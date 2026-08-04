@@ -1,0 +1,5 @@
+ID,codigo,nombre,objetivo,producto,guion,prioridad,fechaInicio,fechaFin,horaInicio,horaFin,metaContactos,metaVentas,maximoIntentos,estado,externalID
+campana-001,CALL-CAMP-01,Venta cruzada,Venta,Plan Premium,"Saludo, descubrimiento de necesidad, presentación de valor y cierre.",Alta,2026-07-21,2026-08-30,08:00,18:00,120,35,5,Activa,DIALER-CAMP-01
+campana-002,CALL-CAMP-02,Prospectos digitales,Venta,Servicio Empresarial,"Saludo, descubrimiento de necesidad, presentación de valor y cierre.",Media,2026-07-21,2026-08-30,08:00,18:00,120,35,5,Activa,DIALER-CAMP-02
+campana-003,CALL-CAMP-03,Recuperación,Recuperación,Plan Regreso,"Saludo, descubrimiento de necesidad, presentación de valor y cierre.",Alta,2026-07-21,2026-08-30,08:00,18:00,120,35,5,Activa,DIALER-CAMP-03
+campana-004,CALL-CAMP-04,Renovación,Venta adicional,Renovación Anual,"Saludo, descubrimiento de necesidad, presentación de valor y cierre.",Media,2026-07-21,2026-08-30,08:00,18:00,120,35,5,Activa,DIALER-CAMP-04

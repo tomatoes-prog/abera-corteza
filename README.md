@@ -56,6 +56,29 @@ Quick references:
 * [offline](https://docs.cortezaproject.org/corteza-docs/2024.9/devops-guide/examples/deploy-offline/index.html) and [online](https://docs.cortezaproject.org/corteza-docs/2024.9/devops-guide/examples/deploy-online/index.html) configuration examples
 * [online demo instance](https://latest.cortezaproject.org/) for a hands-on feature exploration
 
+### Plantillas de solución
+
+Esta distribución puede aprovisionar aplicaciones low-code predefinidas desde
+la imagen Docker. Para una instalación de cliente defina
+`ABERA_MODE=template` y `ABERA_TEMPLATE` al crear un volumen nuevo. Se
+incluyen soluciones para inmobiliarias, automoción, admisiones educativas,
+servicios técnicos, centros de contacto y soporte con renovaciones. Consulte
+[`TEMPLATES.md`](TEMPLATES.md) para conocer la estructura, selección,
+datos de demostración, versionado y condiciones de actualización.
+
+`ABERA_MODE=demo` instala las seis soluciones con usuarios y registros
+sintéticos relacionados para todos sus módulos durante el primer arranque.
+
+### Bootstrap OAuth cifrado
+
+Para instalaciones nuevas, Corteza puede generar un administrador y un cliente
+OAuth de privilegio limitado, y entregar sus credenciales exclusivamente en un
+sobre cifrado para que lo consuma un orquestador externo. La integración es
+agnóstica de infraestructura, admite los modos `basic`, `pro` y `admin`, y no
+requiere iniciar sesión manualmente. Consulte
+[`BOOTSTRAP_OAUTH.md`](BOOTSTRAP_OAUTH.md) para conocer las variables, el
+contrato criptográfico, la matriz RBAC y el procedimiento de recuperación.
+
 ## Creating With Corteza
 
 Refer to the [Integrator Guide](https://docs.cortezaproject.org/corteza-docs/2024.9/integrator-guide/index.html) to learn how you can build on the core features to create virtually anything.

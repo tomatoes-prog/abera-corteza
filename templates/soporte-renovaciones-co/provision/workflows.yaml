@@ -1,0 +1,323 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+workflows:
+  preparar-caso-soporte:
+    enabled: true
+    trace: false
+    runAs: automatizacion-soporte
+    meta: { name: Calcular SLA y asignar caso }
+    triggers:
+      - enabled: true
+        stepID: 10
+        resourceType: compose:record
+        eventType: beforeCreate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [soporte-renovaciones-co] }
+          - { name: module.handle, op: "=", values: [casos] }
+    steps:
+      - id: 10
+        kind: function
+        ref: composeRecordsLookup
+        arguments:
+          - { target: namespace, type: Handle, value: soporte-renovaciones-co }
+          - { target: module, type: Handle, value: contratos }
+          - { target: record, type: ID, expr: record.values.contrato }
+        results: [{ target: supportContract, expr: record }]
+      - id: 11
+        kind: expressions
+        arguments:
+          - { target: record.values.vencimientoRespuesta, type: String, expr: 'strftime(now() + duration(format("PT%dH", supportContract.values.slaRespuestaHoras)), "%Y-%m-%dT%H:%M:%S")' }
+          - { target: record.values.vencimientoResolucion, type: String, expr: 'strftime(now() + duration(format("PT%dH", supportContract.values.slaResolucionHoras)), "%Y-%m-%dT%H:%M:%S")' }
+          - { target: record.values.umbralRespuestaSLA, type: String, expr: 'strftime(now() + duration(format("PT%dM", supportContract.values.slaRespuestaHoras * 45)), "%Y-%m-%dT%H:%M:%S")' }
+          - { target: record.values.umbralResolucionSLA, type: String, expr: 'strftime(now() + duration(format("PT%dM", supportContract.values.slaResolucionHoras * 45)), "%Y-%m-%dT%H:%M:%S")' }
+          - { target: bestUserID, type: ID, value: "0" }
+          - { target: bestCount, type: UnsignedInteger, value: "0" }
+      - id: 12
+        kind: iterator
+        ref: rolesEachMember
+        arguments: [{ target: lookup, type: Handle, value: agente-soporte }]
+        results: [{ target: candidate, expr: user }]
+      - id: 13
+        kind: function
+        ref: composeRecordsSearch
+        arguments:
+          - { target: namespace, type: Handle, value: soporte-renovaciones-co }
+          - { target: module, type: Handle, value: casos }
+          - { target: query, type: String, expr: 'format("agente = %d AND estado != ''Cerrado'' AND estado != ''Cancelado''", candidate.ID)' }
+          - { target: limit, type: UnsignedInteger, value: "1" }
+          - { target: incTotal, type: Boolean, value: true }
+        results: [{ target: candidateCount, expr: total }]
+      - { id: 14, kind: gateway, ref: excl }
+      - id: 15
+        kind: expressions
+        arguments:
+          - { target: bestUserID, type: ID, expr: candidate.ID }
+          - { target: bestCount, type: UnsignedInteger, expr: candidateCount }
+      - { id: 16, kind: continue }
+      - { id: 17, kind: continue }
+      - { id: 18, kind: gateway, ref: excl }
+      - id: 19
+        kind: expressions
+        arguments:
+          - { target: record.values.agente, type: String, expr: 'format("%d", bestUserID)' }
+          - { target: record.values.estado, type: String, value: Asignado }
+      - { id: 20, kind: termination }
+    paths:
+      - { parentid: 10, childid: 11 }
+      - { parentid: 11, childid: 12, expr: isEmpty(record.values.agente) }
+      - { parentid: 11, childid: 20, expr: "" }
+      - { parentid: 12, childid: 13 }
+      - { parentid: 12, childid: 18 }
+      - { parentid: 13, childid: 14 }
+      - { parentid: 14, childid: 15, expr: bestUserID == 0 || candidateCount < bestCount || (candidateCount == bestCount && candidate.ID < bestUserID) }
+      - { parentid: 14, childid: 17, expr: "" }
+      - { parentid: 15, childid: 16 }
+      - { parentid: 18, childid: 19, expr: bestUserID > 0 }
+      - { parentid: 18, childid: 20, expr: "" }
+      - { parentid: 19, childid: 20 }
+
+  registrar-primera-respuesta:
+    enabled: true
+    trace: false
+    meta: { name: Registrar primera respuesta del agente }
+    triggers:
+      - enabled: true
+        stepID: 100
+        resourceType: compose:record
+        eventType: afterCreate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [soporte-renovaciones-co] }
+          - { name: module.handle, op: "=", values: [interacciones] }
+    steps:
+      - { id: 100, kind: gateway, ref: excl }
+      - id: 101
+        kind: function
+        ref: composeRecordsLookup
+        arguments:
+          - { target: namespace, type: Handle, value: soporte-renovaciones-co }
+          - { target: module, type: Handle, value: casos }
+          - { target: record, type: ID, expr: record.values.caso }
+        results: [{ target: answeredCase, expr: record }]
+      - { id: 102, kind: gateway, ref: excl }
+      - id: 103
+        kind: expressions
+        arguments:
+          - { target: answeredCase.values.primeraRespuesta, type: String, expr: record.values.fecha }
+          - { target: answeredCase.values.estado, type: String, value: En progreso }
+      - id: 104
+        kind: function
+        ref: composeRecordsUpdate
+        arguments: [{ target: record, type: ComposeRecord, expr: answeredCase }]
+      - { id: 105, kind: termination }
+    paths:
+      - { parentid: 100, childid: 101, expr: 'record.values.tipo == "Respuesta al cliente"' }
+      - { parentid: 100, childid: 105, expr: "" }
+      - { parentid: 101, childid: 102 }
+      - { parentid: 102, childid: 103, expr: isEmpty(answeredCase.values.primeraRespuesta) }
+      - { parentid: 102, childid: 105, expr: "" }
+      - { parentid: 103, childid: 104 }
+      - { parentid: 104, childid: 105 }
+
+  preparar-renovacion-contrato:
+    enabled: true
+    trace: false
+    runAs: automatizacion-soporte
+    meta: { name: Preparar renovaciones próximas a vencer }
+    triggers:
+      - enabled: true
+        stepID: 200
+        resourceType: compose
+        eventType: onInterval
+        constraints:
+          - { name: "", op: "=", values: ["0 6 * * *"] }
+    steps:
+      - id: 200
+        kind: iterator
+        ref: composeRecordsEach
+        arguments:
+          - { target: namespace, type: Handle, value: soporte-renovaciones-co }
+          - { target: module, type: Handle, value: contratos }
+          - { target: query, type: String, expr: 'format("estado = ''Activo'' AND fechaFin >= ''%s'' AND fechaFin <= ''%s''", strftime(now(), "%Y-%m-%d"), strftime(now() + duration("P60D"), "%Y-%m-%d"))' }
+        results: [{ target: contractToRenew, expr: record }]
+      - id: 201
+        kind: function
+        ref: composeRecordsSearch
+        arguments:
+          - { target: namespace, type: Handle, value: soporte-renovaciones-co }
+          - { target: module, type: Handle, value: renovaciones }
+          - { target: query, type: String, expr: 'format("contrato = %d", contractToRenew.ID)' }
+          - { target: limit, type: UnsignedInteger, value: "1" }
+          - { target: incTotal, type: Boolean, value: true }
+        results: [{ target: renewalCount, expr: total }]
+      - { id: 202, kind: gateway, ref: excl }
+      - id: 203
+        kind: function
+        ref: composeRecordsNew
+        arguments:
+          - { target: namespace, type: Handle, value: soporte-renovaciones-co }
+          - { target: module, type: Handle, value: renovaciones }
+        results: [{ target: renewal, expr: record }]
+      - id: 204
+        kind: expressions
+        arguments:
+          - { target: renewal.values.codigo, type: String, expr: 'format("REN-%s", contractToRenew.ID)' }
+          - { target: renewal.values.cliente, type: String, expr: contractToRenew.values.cliente }
+          - { target: renewal.values.contrato, type: String, expr: 'format("%d", contractToRenew.ID)' }
+          - { target: renewal.values.fechaGestion, type: String, expr: 'strftime(now(), "%Y-%m-%d")' }
+          - { target: renewal.values.fechaVencimiento, type: String, expr: contractToRenew.values.fechaFin }
+          - { target: renewal.values.etapa, type: String, value: Próxima a vencer }
+          - { target: renewal.values.valorActual, type: Integer, expr: contractToRenew.values.valor }
+          - { target: renewal.values.nuevoValor, type: Integer, expr: contractToRenew.values.valor }
+          - { target: renewal.values.probabilidad, type: Integer, value: "70" }
+          - { target: renewal.values.riesgo, type: String, value: Bajo }
+      - id: 205
+        kind: function
+        ref: composeRecordsCreate
+        arguments: [{ target: record, type: ComposeRecord, expr: renewal }]
+      - { id: 206, kind: continue }
+      - { id: 207, kind: termination }
+    paths:
+      - { parentid: 200, childid: 201 }
+      - { parentid: 200, childid: 207 }
+      - { parentid: 201, childid: 202 }
+      - { parentid: 202, childid: 203, expr: renewalCount == 0 }
+      - { parentid: 202, childid: 206, expr: "" }
+      - { parentid: 203, childid: 204 }
+      - { parentid: 204, childid: 205 }
+      - { parentid: 205, childid: 206 }
+
+  actualizar-estado-sla:
+    enabled: true
+    trace: false
+    runAs: automatizacion-soporte
+    meta: { name: Actualizar riesgo e incumplimiento de SLA }
+    triggers:
+      - enabled: true
+        stepID: 500
+        resourceType: compose
+        eventType: onInterval
+        constraints:
+          - { name: "", op: "=", values: ["*/15 * * * *"] }
+    steps:
+      - id: 500
+        kind: iterator
+        ref: composeRecordsEach
+        arguments:
+          - { target: namespace, type: Handle, value: soporte-renovaciones-co }
+          - { target: module, type: Handle, value: casos }
+          - { target: query, type: String, value: "estado != 'Resuelto' AND estado != 'Cerrado' AND estado != 'Cancelado'" }
+        results: [{ target: monitoredCase, expr: record }]
+      - { id: 501, kind: gateway, ref: excl }
+      - id: 502
+        kind: expressions
+        arguments:
+          - { target: monitoredCase.values.estadoSLA, type: String, value: Incumplido }
+          - { target: monitoredCase.values.slaIncumplido, type: String, value: "1" }
+      - id: 503
+        kind: function
+        ref: composeRecordsUpdate
+        arguments: [{ target: record, type: ComposeRecord, expr: monitoredCase }]
+      - id: 504
+        kind: expressions
+        arguments:
+          - { target: monitoredCase.values.estadoSLA, type: String, value: En riesgo }
+      - id: 505
+        kind: function
+        ref: composeRecordsUpdate
+        arguments: [{ target: record, type: ComposeRecord, expr: monitoredCase }]
+      - { id: 506, kind: continue }
+      - { id: 507, kind: termination }
+    paths:
+      - { parentid: 500, childid: 501 }
+      - { parentid: 500, childid: 507 }
+      - { parentid: 501, childid: 502, expr: 'monitoredCase.values.estadoSLA != "Incumplido" && ((!isEmpty(monitoredCase.values.vencimientoResolucion) && strftime(now(), "%Y-%m-%dT%H:%M:%S") >= monitoredCase.values.vencimientoResolucion) || (isEmpty(monitoredCase.values.primeraRespuesta) && !isEmpty(monitoredCase.values.vencimientoRespuesta) && strftime(now(), "%Y-%m-%dT%H:%M:%S") >= monitoredCase.values.vencimientoRespuesta))' }
+      - { parentid: 501, childid: 504, expr: 'monitoredCase.values.estadoSLA == "En tiempo" && ((!isEmpty(monitoredCase.values.umbralResolucionSLA) && strftime(now(), "%Y-%m-%dT%H:%M:%S") >= monitoredCase.values.umbralResolucionSLA) || (isEmpty(monitoredCase.values.primeraRespuesta) && !isEmpty(monitoredCase.values.umbralRespuestaSLA) && strftime(now(), "%Y-%m-%dT%H:%M:%S") >= monitoredCase.values.umbralRespuestaSLA))' }
+      - { parentid: 501, childid: 506, expr: "" }
+      - { parentid: 502, childid: 503 }
+      - { parentid: 503, childid: 506 }
+      - { parentid: 504, childid: 505 }
+      - { parentid: 505, childid: 506 }
+
+  marcar-renovacion-riesgo:
+    enabled: true
+    trace: false
+    meta: { name: Marcar renovación en riesgo desde soporte }
+    triggers:
+      - enabled: true
+        stepID: 300
+        resourceType: compose:record
+        eventType: afterUpdate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [soporte-renovaciones-co] }
+          - { name: module.handle, op: "=", values: [casos] }
+    steps:
+      - { id: 300, kind: gateway, ref: excl }
+      - id: 301
+        kind: iterator
+        ref: composeRecordsEach
+        arguments:
+          - { target: namespace, type: Handle, value: soporte-renovaciones-co }
+          - { target: module, type: Handle, value: renovaciones }
+          - { target: query, type: String, expr: 'format("contrato = %s AND etapa != ''Renovada'' AND etapa != ''Perdida''", record.values.contrato)' }
+          - { target: limit, type: UnsignedInteger, value: "10" }
+        results: [{ target: renewalAtRisk, expr: record }]
+      - id: 303
+        kind: expressions
+        arguments:
+          - { target: renewalAtRisk.values.riesgo, type: String, value: Alto }
+          - { target: renewalAtRisk.values.probabilidad, type: Integer, value: "35" }
+      - id: 304
+        kind: function
+        ref: composeRecordsUpdate
+        arguments: [{ target: record, type: ComposeRecord, expr: renewalAtRisk }]
+      - { id: 305, kind: continue }
+      - { id: 306, kind: termination }
+    paths:
+      - { parentid: 300, childid: 301, expr: 'record.values.prioridad == "Crítica" || record.values.slaIncumplido == true || (record.values.csat > 0 && record.values.csat < 3)' }
+      - { parentid: 300, childid: 306, expr: "" }
+      - { parentid: 301, childid: 303 }
+      - { parentid: 301, childid: 306 }
+      - { parentid: 303, childid: 304 }
+      - { parentid: 304, childid: 305 }
+
+  confirmar-renovacion:
+    enabled: true
+    trace: false
+    meta: { name: Actualizar contrato al renovar }
+    triggers:
+      - enabled: true
+        stepID: 400
+        resourceType: compose:record
+        eventType: afterUpdate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [soporte-renovaciones-co] }
+          - { name: module.handle, op: "=", values: [renovaciones] }
+    steps:
+      - { id: 400, kind: gateway, ref: excl }
+      - id: 401
+        kind: function
+        ref: composeRecordsLookup
+        arguments:
+          - { target: namespace, type: Handle, value: soporte-renovaciones-co }
+          - { target: module, type: Handle, value: contratos }
+          - { target: record, type: ID, expr: record.values.contrato }
+        results: [{ target: renewedContract, expr: record }]
+      - id: 402
+        kind: expressions
+        arguments:
+          - { target: renewedContract.values.fechaInicio, type: String, expr: record.values.fechaVencimiento }
+          - { target: renewedContract.values.fechaFin, type: String, expr: 'strftime(record.values.fechaVencimiento + duration("P365D"), "%Y-%m-%d")' }
+          - { target: renewedContract.values.valor, type: Integer, expr: record.values.nuevoValor }
+          - { target: renewedContract.values.estado, type: String, value: Activo }
+      - id: 403
+        kind: function
+        ref: composeRecordsUpdate
+        arguments: [{ target: record, type: ComposeRecord, expr: renewedContract }]
+      - { id: 404, kind: termination }
+    paths:
+      - { parentid: 400, childid: 401, expr: 'record.values.etapa == "Renovada" && oldRecord.values.etapa != "Renovada"' }
+      - { parentid: 400, childid: 404, expr: "" }
+      - { parentid: 401, childid: 402 }
+      - { parentid: 402, childid: 403 }
+      - { parentid: 403, childid: 404 }

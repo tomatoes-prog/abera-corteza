@@ -1,0 +1,328 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: admisiones-educativas-co
+modules:
+  programas:
+    name: Programas
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      nombre: { label: Nombre del programa, kind: String, required: true }
+      nivel:
+        label: Nivel educativo
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Educación continua, value: Educación continua }
+            - { text: Técnico, value: Técnico }
+            - { text: Tecnólogo, value: Tecnólogo }
+            - { text: Pregrado, value: Pregrado }
+            - { text: Especialización, value: Especialización }
+            - { text: Maestría, value: Maestría }
+          selectType: default
+      modalidad:
+        label: Modalidad
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Presencial, value: Presencial }
+            - { text: Virtual, value: Virtual }
+            - { text: Híbrida, value: Híbrida }
+          selectType: default
+      sede: { label: Sede, kind: String }
+      duracion: { label: Duración, kind: String }
+      valor:
+        label: Valor
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      periodo: { label: Periodo académico, kind: String, required: true }
+      cupos:
+        label: Cupos
+        kind: Number
+        options: { format: "0", precision: 0 }
+      metaMatriculas:
+        label: Meta de matrículas
+        kind: Number
+        options: { format: "0", precision: 0 }
+      estado:
+        label: Estado
+        kind: Select
+        default: Activo
+        options:
+          options:
+            - { text: Activo, value: Activo }
+            - { text: Cerrado, value: Cerrado }
+            - { text: Inactivo, value: Inactivo }
+          selectType: default
+      descripcion:
+        label: Descripción
+        kind: String
+        options: { multiLine: true, useRichTextEditor: true }
+      externalID: { label: Identificador externo, kind: String }
+
+  prospectos:
+    name: Prospectos
+    fields:
+      nombres: { label: Nombres, kind: String, required: true }
+      apellidos: { label: Apellidos, kind: String }
+      documento: { label: Documento, kind: String }
+      telefono: { label: Teléfono, kind: String, required: true }
+      correo: { label: Correo electrónico, kind: String }
+      autorizaTratamientoDatos:
+        label: Autoriza el tratamiento de datos
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      acudienteNombre: { label: Nombre del acudiente, kind: String }
+      acudienteTelefono: { label: Teléfono del acudiente, kind: String }
+      ciudad: { label: Ciudad, kind: String }
+      nivelInteres:
+        label: Nivel de interés
+        kind: Select
+        options:
+          options:
+            - { text: Educación continua, value: Educación continua }
+            - { text: Técnico, value: Técnico }
+            - { text: Tecnólogo, value: Tecnólogo }
+            - { text: Pregrado, value: Pregrado }
+            - { text: Posgrado, value: Posgrado }
+          selectType: default
+      modalidadPreferida:
+        label: Modalidad preferida
+        kind: Select
+        options:
+          options:
+            - { text: Presencial, value: Presencial }
+            - { text: Virtual, value: Virtual }
+            - { text: Híbrida, value: Híbrida }
+          selectType: default
+      programasInteres:
+        label: Programas de interés
+        kind: Record
+        multi: true
+        options: { module: programas, labelField: nombre }
+      origen:
+        label: Origen
+        kind: Select
+        options:
+          options:
+            - { text: Sitio web, value: Sitio web }
+            - { text: Feria educativa, value: Feria educativa }
+            - { text: Referido, value: Referido }
+            - { text: Redes sociales, value: Redes sociales }
+            - { text: Llamada, value: Llamada }
+            - { text: Visita, value: Visita }
+          selectType: default
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Interesado
+        options:
+          options:
+            - { text: Interesado, value: Interesado }
+            - { text: Contactado, value: Contactado }
+            - { text: Calificado, value: Calificado }
+            - { text: Solicitud iniciada, value: Solicitud iniciada }
+            - { text: Solicitud completa, value: Solicitud completa }
+            - { text: Admitido, value: Admitido }
+            - { text: Matriculado, value: Matriculado }
+            - { text: No matriculado, value: No matriculado }
+          selectType: default
+      asesor: { label: Asesor responsable, kind: User }
+      fechaAsignacion: { label: Fecha de asignación, kind: DateTime }
+      proximoContacto: { label: Próximo contacto, kind: DateTime }
+      notas:
+        label: Notas
+        kind: String
+        options: { multiLine: true }
+      externalID: { label: Identificador externo, kind: String }
+      proveedorExterno: { label: Proveedor externo, kind: String }
+      estadoIntegracion:
+        label: Estado de integración
+        kind: Select
+        default: Local
+        options:
+          options:
+            - { text: Local, value: Local }
+            - { text: Pendiente, value: Pendiente }
+            - { text: Sincronizado, value: Sincronizado }
+            - { text: Error, value: Error }
+          selectType: default
+      ultimoErrorIntegracion:
+        label: Último error de integración
+        kind: String
+        options: { multiLine: true }
+
+  solicitudes:
+    name: Solicitudes de admisión
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      prospecto:
+        label: Prospecto
+        kind: Record
+        required: true
+        options: { module: prospectos, labelField: nombres }
+      programa:
+        label: Programa
+        kind: Record
+        required: true
+        options: { module: programas, labelField: nombre }
+      periodo: { label: Periodo académico, kind: String, required: true }
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Borrador
+        options:
+          options:
+            - { text: Borrador, value: Borrador }
+            - { text: Enviada, value: Enviada }
+            - { text: En revisión, value: En revisión }
+            - { text: Incompleta, value: Incompleta }
+            - { text: Lista para decisión, value: Lista para decisión }
+            - { text: Admitida, value: Admitida }
+            - { text: No admitida, value: No admitida }
+            - { text: Retirada, value: Retirada }
+          selectType: default
+      completitud:
+        label: Completitud
+        kind: Number
+        options: { format: "0", precision: 0, suffix: "%" }
+      documentos:
+        label: Documentos
+        kind: File
+        multi: true
+        options: { allowDocuments: true, allowImages: true, maxSize: 0, mode: list }
+      documentosVerificados:
+        label: Documentos verificados
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      revisor: { label: Revisor, kind: User }
+      puntaje:
+        label: Puntaje
+        kind: Number
+        options: { format: "0.00", precision: 2 }
+      decision:
+        label: Decisión
+        kind: Select
+        options:
+          options:
+            - { text: Admitir, value: Admitir }
+            - { text: Lista de espera, value: Lista de espera }
+            - { text: No admitir, value: No admitir }
+          selectType: default
+      fechaEnvio: { label: Fecha de envío, kind: DateTime }
+      fechaDecision: { label: Fecha de decisión, kind: DateTime }
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }
+      externalID: { label: Identificador externo, kind: String }
+
+  citas-admision:
+    name: Citas de admisión
+    fields:
+      asunto: { label: Asunto, kind: String, required: true }
+      prospecto:
+        label: Prospecto
+        kind: Record
+        required: true
+        options: { module: prospectos, labelField: nombres }
+      asesor: { label: Asesor, kind: User, required: true }
+      programa:
+        label: Programa
+        kind: Record
+        options: { module: programas, labelField: nombre }
+      tipo:
+        label: Tipo
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Llamada, value: Llamada }
+            - { text: Entrevista, value: Entrevista }
+            - { text: Visita a sede, value: Visita a sede }
+            - { text: Sesión virtual, value: Sesión virtual }
+          selectType: default
+      inicio: { label: Inicio, kind: DateTime, required: true }
+      fin: { label: Fin, kind: DateTime, required: true }
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Pendiente
+        options:
+          options:
+            - { text: Pendiente, value: Pendiente }
+            - { text: Confirmada, value: Confirmada }
+            - { text: Completada, value: Completada }
+            - { text: Cancelada, value: Cancelada }
+            - { text: No asistió, value: No asistió }
+          selectType: default
+      resultado: { label: Resultado, kind: String }
+      siguienteAccion: { label: Siguiente acción, kind: String }
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }
+
+  matriculas:
+    name: Matrículas
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      solicitud:
+        label: Solicitud
+        kind: Record
+        required: true
+        options: { module: solicitudes, labelField: codigo }
+      estudiante:
+        label: Estudiante
+        kind: Record
+        required: true
+        options: { module: prospectos, labelField: nombres }
+      programa:
+        label: Programa
+        kind: Record
+        required: true
+        options: { module: programas, labelField: nombre }
+      periodo: { label: Periodo académico, kind: String, required: true }
+      valor:
+        label: Valor de matrícula
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      descuentoBeca:
+        label: Descuento o beca
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      estadoPago:
+        label: Estado de pago
+        kind: Select
+        options:
+          options:
+            - { text: Pendiente, value: Pendiente }
+            - { text: Parcial, value: Parcial }
+            - { text: Pagado, value: Pagado }
+            - { text: Financiado, value: Financiado }
+          selectType: default
+      estado:
+        label: Estado de matrícula
+        kind: Select
+        required: true
+        default: Preparada
+        options:
+          options:
+            - { text: Preparada, value: Preparada }
+            - { text: Documentos pendientes, value: Documentos pendientes }
+            - { text: Confirmada, value: Confirmada }
+            - { text: Cancelada, value: Cancelada }
+          selectType: default
+      fechaMatricula:
+        label: Fecha de matrícula
+        kind: DateTime
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }
+      externalID: { label: Identificador externo, kind: String }

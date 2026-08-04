@@ -1,0 +1,71 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: soporte-renovaciones-co
+charts:
+  casos-por-prioridad:
+    name: Casos abiertos por prioridad
+    config:
+      reports:
+        - module: casos
+          filter: estado != 'Cerrado' AND estado != 'Cancelado'
+          dimensions: [{ field: prioridad, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: pie, fixTooltips: true }]
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  casos-por-estado:
+    name: Casos por estado
+    config:
+      reports:
+        - module: casos
+          filter: ""
+          dimensions: [{ field: estado, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10
+  casos-por-categoria:
+    name: Casos por categoría
+    config:
+      reports:
+        - module: casos
+          filter: ""
+          dimensions: [{ field: categoria, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10
+  cumplimiento-sla:
+    name: Cumplimiento de SLA
+    config:
+      reports:
+        - module: casos
+          filter: ""
+          dimensions: [{ field: estadoSLA, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: pie, fixTooltips: true }]
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  funnel-renovaciones:
+    name: Funnel de renovaciones
+    config:
+      reports:
+        - module: renovaciones
+          filter: ""
+          dimensions: [{ field: etapa, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: funnel, fixTooltips: true }]
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  valor-renovaciones:
+    name: Valor de renovaciones por etapa
+    config:
+      reports:
+        - module: renovaciones
+          filter: ""
+          dimensions: [{ field: etapa, modifier: (no grouping / buckets) }]
+          metrics: [{ field: nuevoValor, aggregate: SUM, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10

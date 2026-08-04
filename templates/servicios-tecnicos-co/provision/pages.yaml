@@ -1,0 +1,769 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: servicios-tecnicos-co
+pages:
+  inicio:
+    title: Centro de operaciones
+    visible: true
+    blocks:
+    - title: Funnel de servicios
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 16
+      - 30
+      options:
+        chart: funnel-servicios
+      blockID: 1
+    - title: Prioridades abiertas
+      kind: Chart
+      xywh:
+      - 16
+      - 0
+      - 16
+      - 30
+      options:
+        chart: solicitudes-por-prioridad
+      blockID: 2
+    - title: Órdenes por estado
+      kind: Chart
+      xywh:
+      - 32
+      - 0
+      - 16
+      - 30
+      options:
+        chart: ordenes-por-estado
+      blockID: 3
+    - title: Solicitudes próximas al SLA
+      kind: RecordList
+      xywh:
+      - 0
+      - 30
+      - 24
+      - 10
+      options:
+        module: solicitudes
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: prioridad
+        - name: estado
+        - name: responsable
+        - name: vencimientoSLA
+        prefilter: estado != 'Cerrada' AND estado != 'Perdida'
+        presort: vencimientoSLA ASC
+        perPage: 15
+        hideRecordCloneButton: true
+      blockID: 4
+    - title: Mantenimientos próximos
+      kind: RecordList
+      xywh:
+      - 24
+      - 30
+      - 24
+      - 10
+      options:
+        module: activos
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: tipoEquipo
+        - name: estado
+        - name: proximoMantenimiento
+        prefilter: estado != 'Retirado' AND proximoMantenimiento IS NOT NULL
+        presort: proximoMantenimiento ASC
+        perPage: 15
+        hideRecordCloneButton: true
+      blockID: 5
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Centro de operaciones
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 16
+          - 30
+        - blockID: 2
+          xywh:
+          - 16
+          - 0
+          - 16
+          - 30
+        - blockID: 3
+          xywh:
+          - 32
+          - 0
+          - 16
+          - 30
+        - blockID: 4
+          xywh:
+          - 0
+          - 30
+          - 24
+          - 10
+        - blockID: 5
+          xywh:
+          - 24
+          - 30
+          - 24
+          - 10
+  clientes-prospectos:
+    title: Clientes
+    visible: true
+    blocks:
+    - title: Clientes y prospectos
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: clientes-prospectos
+        fields:
+        - name: tipo
+        - name: nombre
+        - name: contacto
+        - name: telefono
+        - name: ciudad
+        - name: segmento
+        - name: estadoComercial
+        - name: responsable
+        - name: proximoContacto
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      cliente-registro:
+        title: Detalle del cliente
+        module: clientes-prospectos
+        visible: false
+        blocks:
+        - title: Cliente o prospecto
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 14
+          options:
+            fields:
+            - name: tipo
+            - name: tipoPersona
+            - name: nombre
+            - name: identificacion
+            - name: contacto
+            - name: telefono
+            - name: correo
+            - name: autorizaTratamientoDatos
+            - name: departamento
+            - name: ciudad
+            - name: direccion
+            - name: segmento
+            - name: estadoComercial
+            - name: responsable
+            - name: proximoContacto
+            - name: notas
+          blockID: 1
+        - title: Activos
+          kind: RecordList
+          xywh:
+          - 0
+          - 14
+          - 6
+          - 9
+          options:
+            module: activos
+            fields:
+            - name: codigo
+            - name: tipoEquipo
+            - name: marca
+            - name: modelo
+            - name: estado
+            - name: proximoMantenimiento
+            prefilter: cliente = ${recordID}
+            presort: createdAt DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 2
+        - title: Solicitudes
+          kind: RecordList
+          xywh:
+          - 6
+          - 14
+          - 6
+          - 9
+          options:
+            module: solicitudes
+            fields:
+            - name: codigo
+            - name: tipoServicio
+            - name: prioridad
+            - name: estado
+            - name: vencimientoSLA
+            prefilter: cliente = ${recordID}
+            presort: createdAt DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 3
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del cliente
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 14
+            - blockID: 2
+              xywh:
+              - 0
+              - 14
+              - 6
+              - 9
+            - blockID: 3
+              xywh:
+              - 6
+              - 14
+              - 6
+              - 9
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Clientes
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  activos:
+    title: Activos
+    visible: true
+    blocks:
+    - title: Equipos instalados
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: activos
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: tipoEquipo
+        - name: marca
+        - name: modelo
+        - name: serial
+        - name: estado
+        - name: proximoMantenimiento
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      activo-registro:
+        title: Detalle del activo
+        module: activos
+        visible: false
+        blocks:
+        - title: Activo
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: codigo
+            - name: cliente
+            - name: tipoEquipo
+            - name: marca
+            - name: modelo
+            - name: serial
+            - name: fechaInstalacion
+            - name: garantiaHasta
+            - name: estado
+            - name: proximoMantenimiento
+            - name: ubicacion
+            - name: fotografias
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del activo
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Activos
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  solicitudes:
+    title: Solicitudes
+    visible: true
+    blocks:
+    - title: Solicitudes de servicio
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: solicitudes
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: activo
+        - name: canal
+        - name: tipoServicio
+        - name: prioridad
+        - name: estado
+        - name: responsable
+        - name: vencimientoSLA
+        - name: slaIncumplido
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      solicitud-registro:
+        title: Detalle de la solicitud
+        module: solicitudes
+        visible: false
+        blocks:
+        - title: Solicitud
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 14
+          options:
+            fields:
+            - name: codigo
+            - name: cliente
+            - name: activo
+            - name: canal
+            - name: tipoServicio
+            - name: prioridad
+            - name: descripcion
+            - name: fotografias
+            - name: estado
+            - name: responsable
+            - name: vencimientoSLA
+            - name: slaIncumplido
+          blockID: 1
+        - title: Cotizaciones
+          kind: RecordList
+          xywh:
+          - 0
+          - 14
+          - 6
+          - 9
+          options:
+            module: cotizaciones
+            fields:
+            - name: codigo
+            - name: total
+            - name: fechaVencimiento
+            - name: estado
+            - name: fechaAceptacion
+            prefilter: solicitud = ${recordID}
+            presort: createdAt DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 2
+        - title: Órdenes de trabajo
+          kind: RecordList
+          xywh:
+          - 6
+          - 14
+          - 6
+          - 9
+          options:
+            module: ordenes-trabajo
+            fields:
+            - name: codigo
+            - name: tecnico
+            - name: inicio
+            - name: estado
+            - name: valorFinal
+            prefilter: solicitud = ${recordID}
+            presort: inicio DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 3
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la solicitud
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 14
+            - blockID: 2
+              xywh:
+              - 0
+              - 14
+              - 6
+              - 9
+            - blockID: 3
+              xywh:
+              - 6
+              - 14
+              - 6
+              - 9
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Solicitudes
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  cotizaciones:
+    title: Cotizaciones
+    visible: true
+    blocks:
+    - title: Valor por servicio
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 4
+      - 30
+      options:
+        chart: valor-por-servicio
+      blockID: 1
+    - title: Cotizaciones comerciales
+      kind: RecordList
+      xywh:
+      - 4
+      - 0
+      - 8
+      - 18
+      options:
+        module: cotizaciones
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: solicitud
+        - name: total
+        - name: fechaVencimiento
+        - name: estado
+        - name: fechaAceptacion
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 2
+    children:
+      cotizacion-registro:
+        title: Detalle de la cotización
+        module: cotizaciones
+        visible: false
+        blocks:
+        - title: Cotización
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: codigo
+            - name: solicitud
+            - name: cliente
+            - name: alcance
+            - name: valorAntesImpuestos
+            - name: impuestos
+            - name: total
+            - name: fechaVencimiento
+            - name: estado
+            - name: fechaAceptacion
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la cotización
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Cotizaciones
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 4
+          - 30
+        - blockID: 2
+          xywh:
+          - 4
+          - 0
+          - 8
+          - 18
+  ordenes-trabajo:
+    title: Agenda de servicio
+    visible: true
+    blocks:
+    - title: Agenda de técnicos
+      kind: Calendar
+      xywh:
+      - 0
+      - 0
+      - 8
+      - 18
+      options:
+        defaultView: timeGridWeek
+        locale: es
+        feeds:
+        - resource: compose:record
+          startField: inicio
+          endField: fin
+          titleField: codigo
+          allDay: false
+          options:
+            module: ordenes-trabajo
+            color: '#0d9488'
+            prefilter: ''
+      blockID: 1
+    - title: Carga por técnico
+      kind: Chart
+      xywh:
+      - 8
+      - 0
+      - 4
+      - 30
+      options:
+        chart: ordenes-por-tecnico
+      blockID: 2
+    - title: Órdenes
+      kind: RecordList
+      xywh:
+      - 8
+      - 30
+      - 4
+      - 10
+      options:
+        module: ordenes-trabajo
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: tecnico
+        - name: inicio
+        - name: estado
+        presort: inicio ASC
+        perPage: 20
+        hideRecordCloneButton: true
+      blockID: 3
+    children:
+      orden-registro:
+        title: Detalle de la orden
+        module: ordenes-trabajo
+        visible: false
+        blocks:
+        - title: Orden de trabajo
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+          options:
+            fields:
+            - name: codigo
+            - name: solicitud
+            - name: cotizacion
+            - name: cliente
+            - name: activo
+            - name: tecnico
+            - name: direccion
+            - name: inicio
+            - name: fin
+            - name: estado
+            - name: diagnostico
+            - name: solucion
+            - name: resolucionPrimeraVisita
+            - name: evidencias
+            - name: firma
+            - name: valorFinal
+            - name: proximoMantenimiento
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la orden
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 18
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Agenda de servicio
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 8
+          - 18
+        - blockID: 2
+          xywh:
+          - 8
+          - 0
+          - 4
+          - 30
+        - blockID: 3
+          xywh:
+          - 8
+          - 30
+          - 4
+          - 10

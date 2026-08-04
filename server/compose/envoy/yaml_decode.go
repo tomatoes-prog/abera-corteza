@@ -16,7 +16,29 @@ const (
 	ComposeRecordDatasourceAuxType = "corteza::compose:record-datasource"
 )
 
-func (d *auxYamlDoc) unmarshalYAML(k string, n *yaml.Node) (out envoyx.NodeSet, err error) { return }
+func (d *auxYamlDoc) unmarshalYAML(k string, n *yaml.Node) (out envoyx.NodeSet, err error) {
+	switch k {
+	case "record_sources", "recordsources":
+		if !y7s.IsSeq(n) {
+			return nil, fmt.Errorf("%s must be a sequence", k)
+		}
+
+		out, err = d.unmarshalExtendedSourceSeq(documentContext{}, n)
+		if err != nil {
+			return nil, err
+		}
+
+		for _, source := range out {
+			moduleRef, ok := source.References["ModuleID"]
+			if !ok || len(moduleRef.Identifiers.Slice) == 0 {
+				return nil, fmt.Errorf("%s entry is missing references.module", k)
+			}
+			source.Identifiers = moduleRef.Identifiers
+		}
+	}
+
+	return
+}
 
 func (d *auxYamlDoc) unmarshalChartConfigNode(r *types.Chart, n *yaml.Node) (refs map[string]envoyx.Ref, idents envoyx.Identifiers, err error) {
 	err = y7s.EachMap(n, func(k, v *yaml.Node) error {
@@ -485,6 +507,27 @@ func (d *auxYamlDoc) procMappingRefs(in map[string]string) (out map[string]envoy
 			ResourceType: types.ModuleResourceType,
 			Identifiers:  envoyx.MakeIdentifiers(in["module"]),
 			Scope:        scope,
+		}
+	}
+
+	for key, value := range in {
+		if value == "" || key == "namespace" || key == "module" {
+			continue
+		}
+
+		switch {
+		case strings.HasSuffix(key, ".module"):
+			out[key] = envoyx.Ref{
+				ResourceType: types.ModuleResourceType,
+				Identifiers:  envoyx.MakeIdentifiers(value),
+				Scope:        scope,
+			}
+		case strings.HasSuffix(key, ".datasource"):
+			out[key] = envoyx.Ref{
+				ResourceType: ComposeRecordDatasourceAuxType,
+				Identifiers:  envoyx.MakeIdentifiers(value),
+				Scope:        scope,
+			}
 		}
 	}
 

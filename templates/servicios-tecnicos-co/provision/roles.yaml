@@ -1,0 +1,24 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+users:
+  automatizacion-servicios:
+    name: Automatización de servicios técnicos
+    email: automatizacion.servicios@abera.local
+    emailConfirmed: true
+    kind: sys
+    roles: [automatizacion-servicios]
+
+roles:
+  coordinador-servicio:
+    name: Coordinador de servicio
+    meta: { description: Recibe solicitudes, cotiza y programa trabajos. }
+  tecnico-servicio:
+    name: Técnico de servicio
+    meta: { description: Ejecuta y documenta órdenes de trabajo asignadas. }
+  gerente-servicio:
+    name: Gerente de servicio
+    meta: { description: Supervisa ventas, capacidad, SLA y calidad. }
+  automatizacion-servicios:
+    name: Automatización de servicios técnicos
+    meta: { description: Identidad técnica interna para ejecutar workflows de la plantilla. }

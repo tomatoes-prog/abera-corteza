@@ -1,0 +1,17 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+id: showroom-co
+name: Showroom comercial Abera
+version: 1.0.0
+defaultLocale: es
+license: Apache-2.0
+description: Demo autoinicializada con todas las soluciones comerciales y datos sintéticos colombianos.
+templates:
+  - inmobiliaria-co
+  - automotriz-co
+  - admisiones-educativas-co
+  - servicios-tecnicos-co
+  - centro-contacto-co
+  - soporte-renovaciones-co
+syntheticData: true

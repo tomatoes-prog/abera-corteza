@@ -1,0 +1,28 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+id: admisiones-educativas-co
+name: CRM de Admisiones Educativas Colombia
+version: 1.0.1
+minimumCortezaVersion: 2024.9.9
+defaultLocale: es
+license: Apache-2.0
+description: Captación, admisión y matrícula para instituciones educativas.
+resources:
+  namespace: admisiones-educativas-co
+  roles: [asesor-admisiones, revisor-admisiones, director-admisiones, automatizacion-admisiones]
+  users: [automatizacion-admisiones]
+  modules: [prospectos, programas, solicitudes, citas-admision, matriculas]
+  pages: [inicio, prospectos, programas, solicitudes, citas-admision, matriculas]
+  charts:
+    - funnel-admisiones
+    - solicitudes-por-programa
+    - solicitudes-por-estado
+    - matriculas-por-programa
+    - prospectos-por-origen
+  workflows:
+    - asignar-prospecto-admisiones
+    - validar-solicitud-admision
+    - crear-matricula-desde-admision
+    - confirmar-matricula
+  scripts: [scripts/seed-demo.ps1]

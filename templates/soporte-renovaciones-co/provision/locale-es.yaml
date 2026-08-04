@@ -1,0 +1,20 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    corteza::compose:namespace/soporte-renovaciones-co:
+      name: Soporte y Renovaciones
+      meta.subtitle: Atención, retención y expansión
+      meta.description: Clientes, contratos, casos, interacciones y renovaciones.
+    corteza::compose:module/soporte-renovaciones-co/clientes: { name: Clientes }
+    corteza::compose:module/soporte-renovaciones-co/contratos: { name: Contratos }
+    corteza::compose:module/soporte-renovaciones-co/casos: { name: Casos de soporte }
+    corteza::compose:module/soporte-renovaciones-co/interacciones: { name: Interacciones }
+    corteza::compose:module/soporte-renovaciones-co/renovaciones: { name: Renovaciones }
+    corteza::compose:page/soporte-renovaciones-co/inicio: { title: Inicio }
+    corteza::compose:page/soporte-renovaciones-co/clientes: { title: Clientes }
+    corteza::compose:page/soporte-renovaciones-co/contratos: { title: Contratos }
+    corteza::compose:page/soporte-renovaciones-co/casos: { title: Casos }
+    corteza::compose:page/soporte-renovaciones-co/interacciones: { title: Interacciones }
+    corteza::compose:page/soporte-renovaciones-co/renovaciones: { title: Renovaciones }

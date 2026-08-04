@@ -1,0 +1,26 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+users:
+  automatizacion-inmobiliaria:
+    name: Automatización inmobiliaria
+    email: automatizacion.inmobiliaria@abera.local
+    emailConfirmed: true
+    kind: sys
+    roles: [automatizacion-inmobiliaria]
+
+roles:
+  asesor-comercial:
+    name: Asesor comercial
+    meta:
+      description: Gestiona leads, inmuebles, citas, actividades y negociaciones.
+
+  coordinador-comercial:
+    name: Coordinador comercial
+    meta:
+      description: Supervisa el equipo comercial y administra sus registros.
+
+  automatizacion-inmobiliaria:
+    name: Automatización inmobiliaria
+    meta:
+      description: Identidad técnica interna para ejecutar workflows de la plantilla.

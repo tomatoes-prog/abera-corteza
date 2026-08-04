@@ -1,0 +1,27 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  coordinador-servicio: &operacion-servicios
+    corteza::compose:namespace/servicios-tecnicos-co: [read, pages.search, modules.search, charts.search]
+    corteza::compose:module/servicios-tecnicos-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/servicios-tecnicos-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/servicios-tecnicos-co/*/*: [read, update, revisions.search]
+    corteza::compose:page/servicios-tecnicos-co/*: [read]
+    corteza::compose:chart/servicios-tecnicos-co/*: [read]
+  tecnico-servicio: *operacion-servicios
+  gerente-servicio:
+    corteza::compose:namespace/servicios-tecnicos-co: [read, pages.search, modules.search, charts.search]
+    corteza::compose:module/servicios-tecnicos-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/servicios-tecnicos-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/servicios-tecnicos-co/*/*: [read, update, delete, revisions.search]
+    corteza::compose:page/servicios-tecnicos-co/*: [read]
+    corteza::compose:chart/servicios-tecnicos-co/*: [read]
+  automatizacion-servicios:
+    corteza::system/: [users.search, roles.search]
+    corteza::system:user/*: [read]
+    corteza::system:role/*: [read]
+    corteza::compose:namespace/servicios-tecnicos-co: [read, modules.search]
+    corteza::compose:module/servicios-tecnicos-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/servicios-tecnicos-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/servicios-tecnicos-co/*/*: [read, update]

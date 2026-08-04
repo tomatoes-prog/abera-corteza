@@ -1,0 +1,715 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: admisiones-educativas-co
+pages:
+  inicio:
+    title: Inicio
+    visible: true
+    blocks:
+    - title: Funnel de admisiones
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 16
+      - 30
+      options:
+        chart: funnel-admisiones
+      blockID: 1
+    - title: Solicitudes por estado
+      kind: Chart
+      xywh:
+      - 16
+      - 0
+      - 16
+      - 30
+      options:
+        chart: solicitudes-por-estado
+      blockID: 2
+    - title: Matrículas por programa
+      kind: Chart
+      xywh:
+      - 32
+      - 0
+      - 16
+      - 30
+      options:
+        chart: matriculas-por-programa
+      blockID: 3
+    - title: Prospectos sin asignar
+      kind: RecordList
+      xywh:
+      - 0
+      - 30
+      - 24
+      - 10
+      options:
+        module: prospectos
+        fields:
+        - name: nombres
+        - name: telefono
+        - name: programasInteres
+        - name: estado
+        - name: createdAt
+        prefilter: asesor IS NULL
+        presort: createdAt ASC
+        perPage: 15
+        hideRecordCloneButton: true
+      blockID: 4
+    - title: Solicitudes que requieren atención
+      kind: RecordList
+      xywh:
+      - 24
+      - 30
+      - 24
+      - 10
+      options:
+        module: solicitudes
+        fields:
+        - name: codigo
+        - name: prospecto
+        - name: programa
+        - name: estado
+        - name: completitud
+        prefilter: estado = 'Incompleta' OR estado = 'En revisión'
+        presort: createdAt ASC
+        perPage: 15
+        hideRecordCloneButton: true
+      blockID: 5
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Inicio
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 16
+          - 30
+        - blockID: 2
+          xywh:
+          - 16
+          - 0
+          - 16
+          - 30
+        - blockID: 3
+          xywh:
+          - 32
+          - 0
+          - 16
+          - 30
+        - blockID: 4
+          xywh:
+          - 0
+          - 30
+          - 24
+          - 10
+        - blockID: 5
+          xywh:
+          - 24
+          - 30
+          - 24
+          - 10
+  prospectos:
+    title: Prospectos
+    visible: true
+    blocks:
+    - title: Prospectos
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: prospectos
+        fields:
+        - name: nombres
+        - name: apellidos
+        - name: telefono
+        - name: ciudad
+        - name: programasInteres
+        - name: origen
+        - name: estado
+        - name: asesor
+        - name: proximoContacto
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      prospecto-registro:
+        title: Detalle del prospecto
+        module: prospectos
+        visible: false
+        blocks:
+        - title: Perfil del prospecto
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 14
+          options:
+            fields:
+            - name: nombres
+            - name: apellidos
+            - name: documento
+            - name: telefono
+            - name: correo
+            - name: autorizaTratamientoDatos
+            - name: acudienteNombre
+            - name: acudienteTelefono
+            - name: ciudad
+            - name: nivelInteres
+            - name: modalidadPreferida
+            - name: programasInteres
+            - name: origen
+            - name: estado
+            - name: asesor
+            - name: fechaAsignacion
+            - name: proximoContacto
+            - name: notas
+          blockID: 1
+        - title: Solicitudes
+          kind: RecordList
+          xywh:
+          - 0
+          - 14
+          - 6
+          - 9
+          options:
+            module: solicitudes
+            fields:
+            - name: codigo
+            - name: programa
+            - name: periodo
+            - name: estado
+            - name: completitud
+            prefilter: prospecto = ${recordID}
+            presort: createdAt DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 2
+        - title: Citas
+          kind: RecordList
+          xywh:
+          - 6
+          - 14
+          - 6
+          - 9
+          options:
+            module: citas-admision
+            fields:
+            - name: asunto
+            - name: programa
+            - name: tipo
+            - name: inicio
+            - name: estado
+            prefilter: prospecto = ${recordID}
+            presort: inicio DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 3
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del prospecto
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 14
+            - blockID: 2
+              xywh:
+              - 0
+              - 14
+              - 6
+              - 9
+            - blockID: 3
+              xywh:
+              - 6
+              - 14
+              - 6
+              - 9
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Prospectos
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  programas:
+    title: Programas
+    visible: true
+    blocks:
+    - title: Oferta académica
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: programas
+        fields:
+        - name: codigo
+        - name: nombre
+        - name: nivel
+        - name: modalidad
+        - name: sede
+        - name: periodo
+        - name: valor
+        - name: cupos
+        - name: metaMatriculas
+        - name: estado
+        presort: nombre ASC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      programa-registro:
+        title: Detalle del programa
+        module: programas
+        visible: false
+        blocks:
+        - title: Programa
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 14
+          options:
+            fields:
+            - name: codigo
+            - name: nombre
+            - name: nivel
+            - name: modalidad
+            - name: sede
+            - name: duracion
+            - name: valor
+            - name: periodo
+            - name: cupos
+            - name: metaMatriculas
+            - name: estado
+            - name: descripcion
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del programa
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 14
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Programas
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  solicitudes:
+    title: Solicitudes
+    visible: true
+    blocks:
+    - title: Solicitudes por programa
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 6
+      - 30
+      options:
+        chart: solicitudes-por-programa
+      blockID: 1
+    - title: Prospectos por origen
+      kind: Chart
+      xywh:
+      - 6
+      - 0
+      - 6
+      - 30
+      options:
+        chart: prospectos-por-origen
+      blockID: 2
+    - title: Solicitudes de admisión
+      kind: RecordList
+      xywh:
+      - 0
+      - 30
+      - 12
+      - 14
+      options:
+        module: solicitudes
+        fields:
+        - name: codigo
+        - name: prospecto
+        - name: programa
+        - name: periodo
+        - name: estado
+        - name: completitud
+        - name: revisor
+        - name: puntaje
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 3
+    children:
+      solicitud-registro:
+        title: Detalle de la solicitud
+        module: solicitudes
+        visible: false
+        blocks:
+        - title: Solicitud de admisión
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: codigo
+            - name: prospecto
+            - name: programa
+            - name: periodo
+            - name: estado
+            - name: completitud
+            - name: documentos
+            - name: documentosVerificados
+            - name: revisor
+            - name: puntaje
+            - name: decision
+            - name: fechaEnvio
+            - name: fechaDecision
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la solicitud
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Solicitudes
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 6
+          - 30
+        - blockID: 2
+          xywh:
+          - 6
+          - 0
+          - 6
+          - 30
+        - blockID: 3
+          xywh:
+          - 0
+          - 30
+          - 12
+          - 14
+  citas-admision:
+    title: Agenda
+    visible: true
+    blocks:
+    - title: Calendario de admisiones
+      kind: Calendar
+      xywh:
+      - 0
+      - 0
+      - 8
+      - 18
+      options:
+        defaultView: dayGridMonth
+        locale: es
+        feeds:
+        - resource: compose:record
+          startField: inicio
+          endField: fin
+          titleField: asunto
+          allDay: false
+          options:
+            module: citas-admision
+            color: '#7c3aed'
+            prefilter: ''
+      blockID: 1
+    - title: Próximas citas
+      kind: RecordList
+      xywh:
+      - 8
+      - 0
+      - 4
+      - 18
+      options:
+        module: citas-admision
+        fields:
+        - name: inicio
+        - name: prospecto
+        - name: programa
+        - name: tipo
+        - name: asesor
+        - name: estado
+        presort: inicio ASC
+        perPage: 20
+        hideRecordCloneButton: true
+      blockID: 2
+    children:
+      cita-registro:
+        title: Detalle de la cita
+        module: citas-admision
+        visible: false
+        blocks:
+        - title: Cita de admisión
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: asunto
+            - name: prospecto
+            - name: asesor
+            - name: programa
+            - name: tipo
+            - name: inicio
+            - name: fin
+            - name: estado
+            - name: resultado
+            - name: siguienteAccion
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la cita
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Agenda
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 8
+          - 18
+        - blockID: 2
+          xywh:
+          - 8
+          - 0
+          - 4
+          - 18
+  matriculas:
+    title: Matrículas
+    visible: true
+    blocks:
+    - title: Matrículas
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: matriculas
+        fields:
+        - name: codigo
+        - name: estudiante
+        - name: programa
+        - name: periodo
+        - name: valor
+        - name: descuentoBeca
+        - name: estadoPago
+        - name: estado
+        - name: fechaMatricula
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      matricula-registro:
+        title: Detalle de la matrícula
+        module: matriculas
+        visible: false
+        blocks:
+        - title: Matrícula
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: codigo
+            - name: solicitud
+            - name: estudiante
+            - name: programa
+            - name: periodo
+            - name: valor
+            - name: descuentoBeca
+            - name: estadoPago
+            - name: estado
+            - name: fechaMatricula
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la matrícula
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Matrículas
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18

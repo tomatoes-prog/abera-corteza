@@ -1,0 +1,376 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: soporte-renovaciones-co
+modules:
+  clientes:
+    name: Clientes
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      tipo:
+        label: Tipo
+        kind: Select
+        options:
+          options:
+            - { text: Persona, value: Persona }
+            - { text: Empresa, value: Empresa }
+          selectType: default
+      nombre: { label: Nombre o razón social, kind: String, required: true }
+      identificacion: { label: Identificación o NIT, kind: String }
+      contactoPrincipal: { label: Contacto principal, kind: String }
+      telefono: { label: Teléfono, kind: String }
+      correo: { label: Correo electrónico, kind: String, required: true }
+      autorizaTratamientoDatos:
+        label: Autoriza el tratamiento de datos
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      segmento:
+        label: Segmento
+        kind: Select
+        options:
+          options:
+            - { text: Emprendimiento, value: Emprendimiento }
+            - { text: Pyme, value: Pyme }
+            - { text: Corporativo, value: Corporativo }
+          selectType: default
+      planActual: { label: Plan actual, kind: String }
+      responsable: { label: Responsable de cuenta, kind: User }
+      valorRecurrente:
+        label: Valor recurrente
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      salud:
+        label: Salud del cliente
+        kind: Select
+        default: Saludable
+        options:
+          options:
+            - { text: Saludable, value: Saludable }
+            - { text: Atención, value: Atención }
+            - { text: En riesgo, value: En riesgo }
+            - { text: Perdido, value: Perdido }
+          selectType: default
+      satisfaccion:
+        label: Satisfacción
+        kind: Number
+        options: { format: "0", precision: 0, suffix: "/5" }
+      riesgo:
+        label: Riesgo
+        kind: Select
+        default: Bajo
+        options:
+          options:
+            - { text: Bajo, value: Bajo }
+            - { text: Medio, value: Medio }
+            - { text: Alto, value: Alto }
+          selectType: default
+      notas:
+        label: Notas
+        kind: String
+        options: { multiLine: true }
+      externalID: { label: Identificador externo, kind: String }
+      proveedorExterno: { label: Proveedor externo, kind: String }
+
+  contratos:
+    name: Contratos
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      cliente:
+        label: Cliente
+        kind: Record
+        required: true
+        options: { module: clientes, labelField: nombre }
+      producto: { label: Producto o servicio, kind: String, required: true }
+      nivelSoporte:
+        label: Nivel de soporte
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Básico, value: Básico }
+            - { text: Estándar, value: Estándar }
+            - { text: Premium, value: Premium }
+          selectType: default
+      fechaInicio:
+        label: Fecha de inicio
+        kind: DateTime
+        required: true
+        options: { onlyDate: true }
+      fechaFin:
+        label: Fecha de vencimiento
+        kind: DateTime
+        required: true
+        options: { onlyDate: true }
+      renovacionAutomatica:
+        label: Renovación automática
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      valor:
+        label: Valor recurrente
+        kind: Number
+        required: true
+        options: { format: "0", precision: 0, prefix: "$ " }
+      slaRespuestaHoras:
+        label: SLA primera respuesta
+        kind: Number
+        required: true
+        options: { format: "0", precision: 0, suffix: " h" }
+      slaResolucionHoras:
+        label: SLA resolución
+        kind: Number
+        required: true
+        options: { format: "0", precision: 0, suffix: " h" }
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Activo
+        options:
+          options:
+            - { text: Pendiente, value: Pendiente }
+            - { text: Activo, value: Activo }
+            - { text: Suspendido, value: Suspendido }
+            - { text: Vencido, value: Vencido }
+            - { text: Cancelado, value: Cancelado }
+          selectType: default
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }
+      externalID: { label: Identificador externo, kind: String }
+
+  casos:
+    name: Casos de soporte
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      cliente:
+        label: Cliente
+        kind: Record
+        required: true
+        options: { module: clientes, labelField: nombre }
+      contrato:
+        label: Contrato
+        kind: Record
+        required: true
+        options: { module: contratos, labelField: codigo }
+      contacto: { label: Contacto solicitante, kind: String }
+      producto: { label: Producto o servicio, kind: String }
+      canal:
+        label: Canal
+        kind: Select
+        options:
+          options:
+            - { text: Correo, value: Correo }
+            - { text: Teléfono, value: Teléfono }
+            - { text: Chat, value: Chat }
+            - { text: WhatsApp, value: WhatsApp }
+            - { text: Portal, value: Portal }
+          selectType: default
+      categoria: { label: Categoría, kind: String, required: true }
+      asunto: { label: Asunto, kind: String, required: true }
+      descripcion:
+        label: Descripción
+        kind: String
+        required: true
+        options: { multiLine: true }
+      prioridad:
+        label: Prioridad
+        kind: Select
+        required: true
+        default: Media
+        options:
+          options:
+            - { text: Baja, value: Baja }
+            - { text: Media, value: Media }
+            - { text: Alta, value: Alta }
+            - { text: Crítica, value: Crítica }
+          selectType: default
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Nuevo
+        options:
+          options:
+            - { text: Nuevo, value: Nuevo }
+            - { text: Asignado, value: Asignado }
+            - { text: En progreso, value: En progreso }
+            - { text: Esperando cliente, value: Esperando cliente }
+            - { text: Resuelto, value: Resuelto }
+            - { text: Cerrado, value: Cerrado }
+            - { text: Cancelado, value: Cancelado }
+          selectType: default
+      agente: { label: Agente responsable, kind: User }
+      primeraRespuesta: { label: Primera respuesta, kind: DateTime }
+      fechaResolucion: { label: Fecha de resolución, kind: DateTime }
+      vencimientoRespuesta: { label: Vencimiento primera respuesta, kind: DateTime }
+      vencimientoResolucion: { label: Vencimiento resolución, kind: DateTime }
+      umbralRespuestaSLA: { label: Umbral 75% primera respuesta, kind: DateTime }
+      umbralResolucionSLA: { label: Umbral 75% resolución, kind: DateTime }
+      estadoSLA:
+        label: Estado de SLA
+        kind: Select
+        default: En tiempo
+        options:
+          options:
+            - { text: En tiempo, value: En tiempo }
+            - { text: En riesgo, value: En riesgo }
+            - { text: Incumplido, value: Incumplido }
+          selectType: default
+      slaIncumplido:
+        label: SLA incumplido
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      resolucion:
+        label: Resolución
+        kind: String
+        options: { multiLine: true }
+      resolucionPrimerContacto:
+        label: Resuelto en primer contacto
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      csat:
+        label: Satisfacción
+        kind: Number
+        options: { format: "0", precision: 0, suffix: "/5" }
+      externalID: { label: Identificador externo, kind: String }
+      proveedorExterno: { label: Proveedor externo, kind: String }
+      estadoIntegracion:
+        label: Estado de integración
+        kind: Select
+        default: Local
+        options:
+          options:
+            - { text: Local, value: Local }
+            - { text: Pendiente, value: Pendiente }
+            - { text: Sincronizado, value: Sincronizado }
+            - { text: Error, value: Error }
+          selectType: default
+      ultimoErrorIntegracion:
+        label: Último error de integración
+        kind: String
+        options: { multiLine: true }
+
+  interacciones:
+    name: Interacciones
+    fields:
+      caso:
+        label: Caso
+        kind: Record
+        required: true
+        options: { module: casos, labelField: codigo }
+      cliente:
+        label: Cliente
+        kind: Record
+        required: true
+        options: { module: clientes, labelField: nombre }
+      canal:
+        label: Canal
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Correo, value: Correo }
+            - { text: Teléfono, value: Teléfono }
+            - { text: Chat, value: Chat }
+            - { text: WhatsApp, value: WhatsApp }
+            - { text: Nota interna, value: Nota interna }
+          selectType: default
+      agente: { label: Agente, kind: User, required: true }
+      fecha: { label: Fecha, kind: DateTime, required: true }
+      tipo:
+        label: Tipo
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Respuesta al cliente, value: Respuesta al cliente }
+            - { text: Mensaje del cliente, value: Mensaje del cliente }
+            - { text: Nota interna, value: Nota interna }
+          selectType: default
+      resumen:
+        label: Resumen
+        kind: String
+        required: true
+        options: { multiLine: true }
+      archivos:
+        label: Archivos
+        kind: File
+        multi: true
+        options: { allowDocuments: true, allowImages: true, maxSize: 0, mode: list }
+      externalID: { label: Identificador externo, kind: String }
+      proveedorExterno: { label: Proveedor externo, kind: String }
+
+  renovaciones:
+    name: Renovaciones
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      cliente:
+        label: Cliente
+        kind: Record
+        required: true
+        options: { module: clientes, labelField: nombre }
+      contrato:
+        label: Contrato
+        kind: Record
+        required: true
+        options: { module: contratos, labelField: codigo }
+      responsable: { label: Gestor responsable, kind: User }
+      fechaGestion:
+        label: Fecha de inicio de gestión
+        kind: DateTime
+        options: { onlyDate: true }
+      fechaVencimiento:
+        label: Fecha de vencimiento
+        kind: DateTime
+        required: true
+        options: { onlyDate: true }
+      etapa:
+        label: Etapa
+        kind: Select
+        required: true
+        default: Próxima a vencer
+        options:
+          options:
+            - { text: Próxima a vencer, value: Próxima a vencer }
+            - { text: Contactada, value: Contactada }
+            - { text: Propuesta, value: Propuesta }
+            - { text: Comprometida, value: Comprometida }
+            - { text: Renovada, value: Renovada }
+            - { text: Perdida, value: Perdida }
+          selectType: default
+      valorActual:
+        label: Valor actual
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      nuevoValor:
+        label: Nuevo valor
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      probabilidad:
+        label: Probabilidad
+        kind: Number
+        options: { format: "0", precision: 0, suffix: "%" }
+      riesgo:
+        label: Riesgo
+        kind: Select
+        default: Bajo
+        options:
+          options:
+            - { text: Bajo, value: Bajo }
+            - { text: Medio, value: Medio }
+            - { text: Alto, value: Alto }
+          selectType: default
+      ventaAdicional:
+        label: Venta adicional
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      valorExpansion:
+        label: Valor de expansión
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      motivoPerdida: { label: Motivo de pérdida, kind: String }
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }

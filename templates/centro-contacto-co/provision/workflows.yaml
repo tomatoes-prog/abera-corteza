@@ -1,0 +1,214 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+workflows:
+  asignar-registro-campana:
+    enabled: true
+    trace: false
+    runAs: automatizacion-contacto
+    meta: { name: Asignar registro de campaña por menor carga }
+    triggers:
+      - enabled: true
+        stepID: 10
+        resourceType: compose:record
+        eventType: beforeCreate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [centro-contacto-co] }
+          - { name: module.handle, op: "=", values: [registros-campana] }
+    steps:
+      - { id: 10, kind: gateway, ref: excl }
+      - id: 11
+        kind: expressions
+        arguments:
+          - { target: bestUserID, type: ID, value: "0" }
+          - { target: bestCount, type: UnsignedInteger, value: "0" }
+      - id: 12
+        kind: iterator
+        ref: rolesEachMember
+        arguments: [{ target: lookup, type: Handle, value: agente-contacto }]
+        results: [{ target: candidate, expr: user }]
+      - id: 13
+        kind: function
+        ref: composeRecordsSearch
+        arguments:
+          - { target: namespace, type: Handle, value: centro-contacto-co }
+          - { target: module, type: Handle, value: registros-campana }
+          - { target: query, type: String, expr: 'format("agente = %d AND estado != ''Cerrado'' AND estado != ''Agotado''", candidate.ID)' }
+          - { target: limit, type: UnsignedInteger, value: "1" }
+          - { target: incTotal, type: Boolean, value: true }
+        results: [{ target: candidateCount, expr: total }]
+      - { id: 14, kind: gateway, ref: excl }
+      - id: 15
+        kind: expressions
+        arguments:
+          - { target: bestUserID, type: ID, expr: candidate.ID }
+          - { target: bestCount, type: UnsignedInteger, expr: candidateCount }
+      - { id: 16, kind: continue }
+      - { id: 17, kind: continue }
+      - { id: 18, kind: gateway, ref: excl }
+      - id: 19
+        kind: expressions
+        arguments:
+          - { target: record.values.agente, type: String, expr: 'format("%d", bestUserID)' }
+          - { target: record.values.fechaAsignacion, type: String, expr: 'strftime(now(), "%Y-%m-%dT%H:%M:%S")' }
+      - { id: 20, kind: termination }
+    paths:
+      - { parentid: 10, childid: 11, expr: isEmpty(record.values.agente) }
+      - { parentid: 10, childid: 20, expr: "" }
+      - { parentid: 11, childid: 12 }
+      - { parentid: 12, childid: 13 }
+      - { parentid: 12, childid: 18 }
+      - { parentid: 13, childid: 14 }
+      - { parentid: 14, childid: 15, expr: bestUserID == 0 || candidateCount < bestCount || (candidateCount == bestCount && candidate.ID < bestUserID) }
+      - { parentid: 14, childid: 17, expr: "" }
+      - { parentid: 15, childid: 16 }
+      - { parentid: 18, childid: 19, expr: bestUserID > 0 }
+      - { parentid: 18, childid: 20, expr: "" }
+      - { parentid: 19, childid: 20 }
+
+  respetar-no-llamar:
+    enabled: true
+    trace: false
+    meta: { name: Respetar preferencia de no llamar }
+    triggers:
+      - enabled: true
+        stepID: 100
+        resourceType: compose:record
+        eventType: beforeCreate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [centro-contacto-co] }
+          - { name: module.handle, op: "=", values: [llamadas] }
+    steps:
+      - id: 100
+        kind: function
+        ref: composeRecordsLookup
+        arguments:
+          - { target: namespace, type: Handle, value: centro-contacto-co }
+          - { target: module, type: Handle, value: contactos-leads }
+          - { target: record, type: ID, expr: record.values.contacto }
+        results: [{ target: targetContact, expr: record }]
+      - { id: 101, kind: gateway, ref: excl }
+      - id: 102
+        kind: error
+        arguments: [{ target: message, type: String, value: El contacto está marcado como No llamar o no tiene autorización comercial. }]
+      - { id: 103, kind: termination }
+    paths:
+      - { parentid: 100, childid: 101 }
+      - { parentid: 101, childid: 102, expr: targetContact.values.noLlamar == true || targetContact.values.autorizaContacto != true }
+      - { parentid: 101, childid: 103, expr: "" }
+
+  procesar-resultado-llamada:
+    enabled: true
+    trace: false
+    meta: { name: Actualizar cola desde resultado de llamada }
+    triggers:
+      - enabled: true
+        stepID: 200
+        resourceType: compose:record
+        eventType: afterCreate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [centro-contacto-co] }
+          - { name: module.handle, op: "=", values: [llamadas] }
+    steps:
+      - id: 200
+        kind: function
+        ref: composeRecordsLookup
+        arguments:
+          - { target: namespace, type: Handle, value: centro-contacto-co }
+          - { target: module, type: Handle, value: registros-campana }
+          - { target: record, type: ID, expr: record.values.registroCampana }
+        results: [{ target: dialRecord, expr: record }]
+      - { id: 201, kind: gateway, ref: excl }
+      - id: 202
+        kind: expressions
+        arguments:
+          - { target: dialRecord.values.intentos, type: Integer, expr: dialRecord.values.intentos + 1 }
+          - { target: dialRecord.values.ultimoResultado, type: String, expr: record.values.disposicion }
+          - { target: dialRecord.values.estado, type: String, value: Callback }
+          - { target: dialRecord.values.proximoIntento, type: String, expr: record.values.callback }
+      - id: 203
+        kind: expressions
+        arguments:
+          - { target: dialRecord.values.intentos, type: Integer, expr: dialRecord.values.intentos + 1 }
+          - { target: dialRecord.values.ultimoResultado, type: String, expr: record.values.disposicion }
+          - { target: dialRecord.values.estado, type: String, value: Calificado }
+      - id: 204
+        kind: expressions
+        arguments:
+          - { target: dialRecord.values.intentos, type: Integer, expr: dialRecord.values.intentos + 1 }
+          - { target: dialRecord.values.ultimoResultado, type: String, expr: record.values.disposicion }
+          - { target: dialRecord.values.estado, type: String, value: Cerrado }
+      - id: 205
+        kind: expressions
+        arguments:
+          - { target: dialRecord.values.intentos, type: Integer, expr: dialRecord.values.intentos + 1 }
+          - { target: dialRecord.values.ultimoResultado, type: String, expr: record.values.disposicion }
+          - { target: dialRecord.values.estado, type: String, value: Contactado }
+      - id: 206
+        kind: function
+        ref: composeRecordsUpdate
+        arguments: [{ target: record, type: ComposeRecord, expr: dialRecord }]
+      - { id: 207, kind: termination }
+    paths:
+      - { parentid: 200, childid: 201 }
+      - { parentid: 201, childid: 202, expr: 'record.values.disposicion == "No contesta" || record.values.disposicion == "Ocupado" || record.values.disposicion == "Callback"' }
+      - { parentid: 201, childid: 203, expr: 'record.values.disposicion == "Calificado" || record.values.disposicion == "Venta"' }
+      - { parentid: 201, childid: 204, expr: 'record.values.disposicion == "No interesado" || record.values.disposicion == "No llamar" || record.values.disposicion == "Número incorrecto"' }
+      - { parentid: 201, childid: 205, expr: "" }
+      - { parentid: 202, childid: 206 }
+      - { parentid: 203, childid: 206 }
+      - { parentid: 204, childid: 206 }
+      - { parentid: 205, childid: 206 }
+      - { parentid: 206, childid: 207 }
+
+  crear-oportunidad-llamada:
+    enabled: true
+    trace: false
+    meta: { name: Crear oportunidad desde llamada calificada }
+    triggers:
+      - enabled: true
+        stepID: 300
+        resourceType: compose:record
+        eventType: afterCreate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [centro-contacto-co] }
+          - { name: module.handle, op: "=", values: [llamadas] }
+    steps:
+      - { id: 300, kind: gateway, ref: excl }
+      - id: 301
+        kind: function
+        ref: composeRecordsLookup
+        arguments:
+          - { target: namespace, type: Handle, value: centro-contacto-co }
+          - { target: module, type: Handle, value: campanas }
+          - { target: record, type: ID, expr: record.values.campana }
+        results: [{ target: sourceCampaign, expr: record }]
+      - id: 302
+        kind: function
+        ref: composeRecordsNew
+        arguments:
+          - { target: namespace, type: Handle, value: centro-contacto-co }
+          - { target: module, type: Handle, value: oportunidades }
+        results: [{ target: opportunity, expr: record }]
+      - id: 303
+        kind: expressions
+        arguments:
+          - { target: opportunity.values.codigo, type: String, expr: 'format("CALL-OPP-%s", record.ID)' }
+          - { target: opportunity.values.contacto, type: String, expr: record.values.contacto }
+          - { target: opportunity.values.campana, type: String, expr: record.values.campana }
+          - { target: opportunity.values.producto, type: String, expr: sourceCampaign.values.producto }
+          - { target: opportunity.values.etapa, type: String, value: Calificada }
+          - { target: opportunity.values.probabilidad, type: Integer, value: "30" }
+          - { target: opportunity.values.fechaEstimadaCierre, type: String, expr: 'strftime(now() + duration("P15D"), "%Y-%m-%d")' }
+      - id: 304
+        kind: function
+        ref: composeRecordsCreate
+        arguments: [{ target: record, type: ComposeRecord, expr: opportunity }]
+      - { id: 305, kind: termination }
+    paths:
+      - { parentid: 300, childid: 301, expr: 'record.values.disposicion == "Calificado"' }
+      - { parentid: 300, childid: 305, expr: "" }
+      - { parentid: 301, childid: 302 }
+      - { parentid: 302, childid: 303 }
+      - { parentid: 303, childid: 304 }
+      - { parentid: 304, childid: 305 }

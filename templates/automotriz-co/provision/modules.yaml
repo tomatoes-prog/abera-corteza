@@ -1,0 +1,428 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: automotriz-co
+modules:
+  vehiculos:
+    name: Vehículos
+    fields:
+      codigo:
+        label: Código de inventario
+        kind: String
+        required: true
+      vin:
+        label: VIN
+        kind: String
+      placa:
+        label: Placa
+        kind: String
+      marca:
+        label: Marca
+        kind: String
+        required: true
+      modelo:
+        label: Modelo
+        kind: String
+        required: true
+      version:
+        label: Versión
+        kind: String
+      anio:
+        label: Año
+        kind: Number
+        required: true
+        options: { format: "0", precision: 0 }
+      condicion:
+        label: Condición
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Nuevo, value: Nuevo }
+            - { text: Usado, value: Usado }
+          selectType: default
+      kilometraje:
+        label: Kilometraje
+        kind: Number
+        options: { format: "0", precision: 0, suffix: " km" }
+      color:
+        label: Color
+        kind: String
+      precio:
+        label: Precio
+        kind: Number
+        required: true
+        options: { format: "0", precision: 0, prefix: "$ " }
+      sede:
+        label: Sede
+        kind: String
+      fechaIngreso:
+        label: Fecha de ingreso
+        kind: DateTime
+        options: { onlyDate: true }
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Disponible
+        options:
+          options:
+            - { text: Disponible, value: Disponible }
+            - { text: Reservado, value: Reservado }
+            - { text: Vendido, value: Vendido }
+            - { text: En demostración, value: En demostración }
+            - { text: En taller, value: En taller }
+            - { text: Inactivo, value: Inactivo }
+          selectType: default
+      clienteFinal:
+        label: Cliente final
+        kind: Record
+        options: { module: prospectos, labelField: nombres }
+      proximoMantenimiento:
+        label: Próximo mantenimiento
+        kind: DateTime
+        options: { onlyDate: true }
+      fotografias:
+        label: Fotografías
+        kind: File
+        multi: true
+        options: { allowDocuments: false, allowImages: true, maxSize: 0, mode: list }
+      externalID:
+        label: Identificador externo
+        kind: String
+      proveedorExterno:
+        label: Proveedor externo
+        kind: String
+      estadoIntegracion:
+        label: Estado de integración
+        kind: Select
+        default: Local
+        options:
+          options:
+            - { text: Local, value: Local }
+            - { text: Pendiente, value: Pendiente }
+            - { text: Sincronizado, value: Sincronizado }
+            - { text: Error, value: Error }
+          selectType: default
+      ultimoErrorIntegracion:
+        label: Último error de integración
+        kind: String
+        options: { multiLine: true }
+
+  prospectos:
+    name: Prospectos
+    fields:
+      nombres:
+        label: Nombres
+        kind: String
+        required: true
+      apellidos:
+        label: Apellidos
+        kind: String
+      telefono:
+        label: Teléfono
+        kind: String
+        required: true
+      correo:
+        label: Correo electrónico
+        kind: String
+      autorizaTratamientoDatos:
+        label: Autoriza el tratamiento de datos
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      ciudad:
+        label: Ciudad
+        kind: String
+      presupuestoMinimo:
+        label: Presupuesto mínimo
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      presupuestoMaximo:
+        label: Presupuesto máximo
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      plazoCompra:
+        label: Plazo estimado de compra
+        kind: Select
+        options:
+          options:
+            - { text: Inmediato, value: Inmediato }
+            - { text: Menos de 30 días, value: Menos de 30 días }
+            - { text: Entre 1 y 3 meses, value: Entre 1 y 3 meses }
+            - { text: Más de 3 meses, value: Más de 3 meses }
+          selectType: default
+      vehiculoActual:
+        label: Vehículo actual
+        kind: String
+      requiereFinanciacion:
+        label: Requiere financiación
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      vehiculosInteres:
+        label: Vehículos de interés
+        kind: Record
+        multi: true
+        options: { module: vehiculos, labelField: codigo }
+      origen:
+        label: Origen
+        kind: Select
+        options:
+          options:
+            - { text: Sitio web, value: Sitio web }
+            - { text: Sala de ventas, value: Sala de ventas }
+            - { text: Referido, value: Referido }
+            - { text: Redes sociales, value: Redes sociales }
+            - { text: Llamada, value: Llamada }
+            - { text: Otro, value: Otro }
+          selectType: default
+      estado:
+        label: Estado comercial
+        kind: Select
+        required: true
+        default: Nuevo
+        options:
+          options:
+            - { text: Nuevo, value: Nuevo }
+            - { text: Contactado, value: Contactado }
+            - { text: Calificado, value: Calificado }
+            - { text: Prueba de manejo, value: Prueba de manejo }
+            - { text: Cotización, value: Cotización }
+            - { text: Negociación, value: Negociación }
+            - { text: Vendido, value: Vendido }
+            - { text: Perdido, value: Perdido }
+          selectType: default
+      asesor:
+        label: Asesor responsable
+        kind: User
+      fechaAsignacion:
+        label: Fecha de asignación
+        kind: DateTime
+      proximoContacto:
+        label: Próximo contacto
+        kind: DateTime
+      notas:
+        label: Notas
+        kind: String
+        options: { multiLine: true, useRichTextEditor: true }
+      externalID:
+        label: Identificador externo
+        kind: String
+      proveedorExterno:
+        label: Proveedor externo
+        kind: String
+
+  pruebas-manejo:
+    name: Pruebas de manejo
+    fields:
+      asunto:
+        label: Asunto
+        kind: String
+        required: true
+      prospecto:
+        label: Prospecto
+        kind: Record
+        required: true
+        options: { module: prospectos, labelField: nombres }
+      vehiculo:
+        label: Vehículo
+        kind: Record
+        required: true
+        options: { module: vehiculos, labelField: codigo }
+      asesor:
+        label: Asesor
+        kind: User
+        required: true
+      inicio:
+        label: Inicio
+        kind: DateTime
+        required: true
+      fin:
+        label: Fin
+        kind: DateTime
+        required: true
+      sede:
+        label: Sede
+        kind: String
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Pendiente
+        options:
+          options:
+            - { text: Pendiente, value: Pendiente }
+            - { text: Confirmada, value: Confirmada }
+            - { text: Completada, value: Completada }
+            - { text: Cancelada, value: Cancelada }
+            - { text: No asistió, value: No asistió }
+          selectType: default
+      resultado:
+        label: Resultado
+        kind: Select
+        options:
+          options:
+            - { text: Interesado, value: Interesado }
+            - { text: Requiere otra opción, value: Requiere otra opción }
+            - { text: Sin interés, value: Sin interés }
+          selectType: default
+      siguienteAccion:
+        label: Siguiente acción
+        kind: String
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }
+
+  oportunidades:
+    name: Oportunidades
+    fields:
+      prospecto:
+        label: Prospecto
+        kind: Record
+        required: true
+        options: { module: prospectos, labelField: nombres }
+      vehiculo:
+        label: Vehículo
+        kind: Record
+        required: true
+        options: { module: vehiculos, labelField: codigo }
+      asesor:
+        label: Asesor
+        kind: User
+      etapa:
+        label: Etapa
+        kind: Select
+        required: true
+        default: Cotización
+        options:
+          options:
+            - { text: Cotización, value: Cotización }
+            - { text: Financiación, value: Financiación }
+            - { text: Negociación, value: Negociación }
+            - { text: Documentación, value: Documentación }
+            - { text: Vendido, value: Vendido }
+            - { text: Perdido, value: Perdido }
+          selectType: default
+      valorPublicado:
+        label: Valor publicado
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      valorOfertado:
+        label: Valor ofertado
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      requiereFinanciacion:
+        label: Requiere financiación
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      valorFinanciado:
+        label: Valor financiado
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      recibeRetoma:
+        label: Incluye retoma
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      descripcionRetoma:
+        label: Descripción de retoma
+        kind: String
+      probabilidad:
+        label: Probabilidad
+        kind: Number
+        options: { format: "0", precision: 0, suffix: "%" }
+      fechaEstimadaCierre:
+        label: Fecha estimada de cierre
+        kind: DateTime
+        options: { onlyDate: true }
+      motivoPerdida:
+        label: Motivo de pérdida
+        kind: String
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }
+
+  ordenes-servicio:
+    name: Órdenes de servicio
+    fields:
+      codigo:
+        label: Código
+        kind: String
+        required: true
+      cliente:
+        label: Cliente
+        kind: Record
+        required: true
+        options: { module: prospectos, labelField: nombres }
+      vehiculo:
+        label: Vehículo
+        kind: Record
+        required: true
+        options: { module: vehiculos, labelField: codigo }
+      coordinador:
+        label: Coordinador
+        kind: User
+      tecnico:
+        label: Técnico
+        kind: User
+      inicio:
+        label: Inicio
+        kind: DateTime
+        required: true
+      fin:
+        label: Fin
+        kind: DateTime
+      tipoServicio:
+        label: Tipo de servicio
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Mantenimiento preventivo, value: Mantenimiento preventivo }
+            - { text: Reparación, value: Reparación }
+            - { text: Garantía, value: Garantía }
+            - { text: Inspección, value: Inspección }
+            - { text: Alistamiento, value: Alistamiento }
+          selectType: default
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Programada
+        options:
+          options:
+            - { text: Programada, value: Programada }
+            - { text: Recibida, value: Recibida }
+            - { text: En diagnóstico, value: En diagnóstico }
+            - { text: En ejecución, value: En ejecución }
+            - { text: Completada, value: Completada }
+            - { text: Entregada, value: Entregada }
+            - { text: Cancelada, value: Cancelada }
+          selectType: default
+      solicitud:
+        label: Solicitud del cliente
+        kind: String
+        options: { multiLine: true }
+      diagnostico:
+        label: Diagnóstico
+        kind: String
+        options: { multiLine: true }
+      valorEstimado:
+        label: Valor estimado
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      valorFinal:
+        label: Valor final
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      proximoMantenimiento:
+        label: Próximo mantenimiento
+        kind: DateTime
+        options: { onlyDate: true }
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }
+      externalID:
+        label: Identificador externo
+        kind: String

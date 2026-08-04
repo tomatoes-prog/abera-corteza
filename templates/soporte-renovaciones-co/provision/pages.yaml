@@ -1,0 +1,782 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: soporte-renovaciones-co
+pages:
+  inicio:
+    title: Centro de soporte y retención
+    visible: true
+    blocks:
+    - title: Casos por prioridad
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 16
+      - 30
+      options:
+        chart: casos-por-prioridad
+      blockID: 1
+    - title: Cumplimiento de SLA
+      kind: Chart
+      xywh:
+      - 16
+      - 0
+      - 16
+      - 30
+      options:
+        chart: cumplimiento-sla
+      blockID: 2
+    - title: Funnel de renovaciones
+      kind: Chart
+      xywh:
+      - 32
+      - 0
+      - 16
+      - 30
+      options:
+        chart: funnel-renovaciones
+      blockID: 3
+    - title: Casos próximos a incumplir
+      kind: RecordList
+      xywh:
+      - 0
+      - 30
+      - 24
+      - 10
+      options:
+        module: casos
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: asunto
+        - name: prioridad
+        - name: estado
+        - name: agente
+        - name: vencimientoResolucion
+        - name: estadoSLA
+        prefilter: estado != 'Cerrado' AND estado != 'Cancelado'
+        presort: vencimientoResolucion ASC
+        perPage: 15
+        hideRecordCloneButton: true
+      blockID: 4
+    - title: Renovaciones en riesgo
+      kind: RecordList
+      xywh:
+      - 24
+      - 30
+      - 24
+      - 10
+      options:
+        module: renovaciones
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: fechaVencimiento
+        - name: etapa
+        - name: nuevoValor
+        - name: probabilidad
+        - name: riesgo
+        prefilter: riesgo = 'Alto' OR riesgo = 'Medio'
+        presort: fechaVencimiento ASC
+        perPage: 15
+        hideRecordCloneButton: true
+      blockID: 5
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Centro de soporte y retención
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 16
+          - 30
+        - blockID: 2
+          xywh:
+          - 16
+          - 0
+          - 16
+          - 30
+        - blockID: 3
+          xywh:
+          - 32
+          - 0
+          - 16
+          - 30
+        - blockID: 4
+          xywh:
+          - 0
+          - 30
+          - 24
+          - 10
+        - blockID: 5
+          xywh:
+          - 24
+          - 30
+          - 24
+          - 10
+  clientes:
+    title: Clientes
+    visible: true
+    blocks:
+    - title: Clientes
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: clientes
+        fields:
+        - name: codigo
+        - name: nombre
+        - name: contactoPrincipal
+        - name: correo
+        - name: segmento
+        - name: planActual
+        - name: responsable
+        - name: valorRecurrente
+        - name: salud
+        - name: satisfaccion
+        - name: riesgo
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      cliente-registro:
+        title: Detalle del cliente
+        module: clientes
+        visible: false
+        blocks:
+        - title: Perfil del cliente
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 14
+          options:
+            fields:
+            - name: codigo
+            - name: tipo
+            - name: nombre
+            - name: identificacion
+            - name: contactoPrincipal
+            - name: telefono
+            - name: correo
+            - name: autorizaTratamientoDatos
+            - name: segmento
+            - name: planActual
+            - name: responsable
+            - name: valorRecurrente
+            - name: salud
+            - name: satisfaccion
+            - name: riesgo
+            - name: notas
+          blockID: 1
+        - title: Casos
+          kind: RecordList
+          xywh:
+          - 0
+          - 14
+          - 6
+          - 9
+          options:
+            module: casos
+            fields:
+            - name: codigo
+            - name: asunto
+            - name: prioridad
+            - name: estado
+            - name: agente
+            - name: estadoSLA
+            prefilter: cliente = ${recordID}
+            presort: createdAt DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 2
+        - title: Renovaciones
+          kind: RecordList
+          xywh:
+          - 6
+          - 14
+          - 6
+          - 9
+          options:
+            module: renovaciones
+            fields:
+            - name: codigo
+            - name: contrato
+            - name: fechaVencimiento
+            - name: etapa
+            - name: nuevoValor
+            - name: riesgo
+            prefilter: cliente = ${recordID}
+            presort: fechaVencimiento ASC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 3
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del cliente
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 14
+            - blockID: 2
+              xywh:
+              - 0
+              - 14
+              - 6
+              - 9
+            - blockID: 3
+              xywh:
+              - 6
+              - 14
+              - 6
+              - 9
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Clientes
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  contratos:
+    title: Contratos
+    visible: true
+    blocks:
+    - title: Contratos de soporte
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: contratos
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: producto
+        - name: nivelSoporte
+        - name: fechaInicio
+        - name: fechaFin
+        - name: renovacionAutomatica
+        - name: valor
+        - name: slaRespuestaHoras
+        - name: slaResolucionHoras
+        - name: estado
+        presort: fechaFin ASC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      contrato-registro:
+        title: Detalle del contrato
+        module: contratos
+        visible: false
+        blocks:
+        - title: Contrato
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 14
+          options:
+            fields:
+            - name: codigo
+            - name: cliente
+            - name: producto
+            - name: nivelSoporte
+            - name: fechaInicio
+            - name: fechaFin
+            - name: renovacionAutomatica
+            - name: valor
+            - name: slaRespuestaHoras
+            - name: slaResolucionHoras
+            - name: estado
+            - name: observaciones
+          blockID: 1
+        - title: Casos del contrato
+          kind: RecordList
+          xywh:
+          - 0
+          - 14
+          - 12
+          - 9
+          options:
+            module: casos
+            fields:
+            - name: codigo
+            - name: asunto
+            - name: prioridad
+            - name: estado
+            - name: agente
+            - name: vencimientoRespuesta
+            - name: vencimientoResolucion
+            - name: estadoSLA
+            prefilter: contrato = ${recordID}
+            presort: createdAt DESC
+            perPage: 20
+            hideRecordCloneButton: true
+          blockID: 2
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del contrato
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 14
+            - blockID: 2
+              xywh:
+              - 0
+              - 14
+              - 12
+              - 9
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Contratos
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  casos:
+    title: Casos
+    visible: true
+    blocks:
+    - title: Casos por estado
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 4
+      - 30
+      options:
+        chart: casos-por-estado
+      blockID: 1
+    - title: Casos por categoría
+      kind: Chart
+      xywh:
+      - 4
+      - 0
+      - 4
+      - 30
+      options:
+        chart: casos-por-categoria
+      blockID: 2
+    - title: Cola de casos
+      kind: RecordList
+      xywh:
+      - 8
+      - 0
+      - 4
+      - 18
+      options:
+        module: casos
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: asunto
+        - name: prioridad
+        - name: estado
+        - name: agente
+        - name: estadoSLA
+        presort: createdAt DESC
+        perPage: 25
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 3
+    children:
+      caso-registro:
+        title: Detalle del caso
+        module: casos
+        visible: false
+        blocks:
+        - title: Caso de soporte
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 15
+          options:
+            fields:
+            - name: codigo
+            - name: cliente
+            - name: contrato
+            - name: contacto
+            - name: producto
+            - name: canal
+            - name: categoria
+            - name: asunto
+            - name: descripcion
+            - name: prioridad
+            - name: estado
+            - name: agente
+            - name: primeraRespuesta
+            - name: fechaResolucion
+            - name: vencimientoRespuesta
+            - name: vencimientoResolucion
+            - name: estadoSLA
+            - name: slaIncumplido
+            - name: resolucion
+            - name: resolucionPrimerContacto
+            - name: csat
+          blockID: 1
+        - title: Interacciones
+          kind: RecordList
+          xywh:
+          - 0
+          - 15
+          - 12
+          - 10
+          options:
+            module: interacciones
+            fields:
+            - name: fecha
+            - name: canal
+            - name: agente
+            - name: tipo
+            - name: resumen
+            prefilter: caso = ${recordID}
+            presort: fecha DESC
+            perPage: 20
+            hideRecordCloneButton: true
+          blockID: 2
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del caso
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 15
+            - blockID: 2
+              xywh:
+              - 0
+              - 15
+              - 12
+              - 10
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Casos
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 4
+          - 30
+        - blockID: 2
+          xywh:
+          - 4
+          - 0
+          - 4
+          - 30
+        - blockID: 3
+          xywh:
+          - 8
+          - 0
+          - 4
+          - 18
+  interacciones:
+    title: Interacciones
+    visible: true
+    blocks:
+    - title: Historial de atención
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: interacciones
+        fields:
+        - name: fecha
+        - name: caso
+        - name: cliente
+        - name: canal
+        - name: agente
+        - name: tipo
+        - name: resumen
+        - name: proveedorExterno
+        presort: fecha DESC
+        perPage: 30
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      interaccion-registro:
+        title: Detalle de la interacción
+        module: interacciones
+        visible: false
+        blocks:
+        - title: Interacción
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: caso
+            - name: cliente
+            - name: canal
+            - name: agente
+            - name: fecha
+            - name: tipo
+            - name: resumen
+            - name: archivos
+            - name: externalID
+            - name: proveedorExterno
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la interacción
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Interacciones
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  renovaciones:
+    title: Renovaciones
+    visible: true
+    blocks:
+    - title: Valor por etapa
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 4
+      - 30
+      options:
+        chart: valor-renovaciones
+      blockID: 1
+    - title: Pipeline de renovaciones
+      kind: RecordList
+      xywh:
+      - 4
+      - 0
+      - 8
+      - 18
+      options:
+        module: renovaciones
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: contrato
+        - name: responsable
+        - name: fechaGestion
+        - name: fechaVencimiento
+        - name: etapa
+        - name: valorActual
+        - name: nuevoValor
+        - name: probabilidad
+        - name: riesgo
+        - name: ventaAdicional
+        presort: fechaVencimiento ASC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 2
+    children:
+      renovacion-registro:
+        title: Detalle de la renovación
+        module: renovaciones
+        visible: false
+        blocks:
+        - title: Renovación
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: codigo
+            - name: cliente
+            - name: contrato
+            - name: responsable
+            - name: fechaGestion
+            - name: fechaVencimiento
+            - name: etapa
+            - name: valorActual
+            - name: nuevoValor
+            - name: probabilidad
+            - name: riesgo
+            - name: ventaAdicional
+            - name: valorExpansion
+            - name: motivoPerdida
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la renovación
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Renovaciones
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 4
+          - 30
+        - blockID: 2
+          xywh:
+          - 4
+          - 0
+          - 8
+          - 18
