@@ -1,0 +1,95 @@
+# syntax=docker/dockerfile:1
+# SPDX-License-Identifier: Apache-2.0
+
+ARG NODE_VERSION=22-bookworm-slim
+ARG NGINX_VERSION=stable-alpine
+ARG YARN_VERSION=1.22.22
+
+FROM node:${NODE_VERSION} AS build-stage
+
+ARG YARN_VERSION
+ENV YARN_FLAGS="--non-interactive --no-progress --emoji false"
+
+WORKDIR /src
+
+RUN corepack enable \
+ && corepack prepare "yarn@${YARN_VERSION}" --activate
+
+COPY lib/js/package.json lib/js/yarn.lock ./lib/js/
+COPY lib/vue/package.json lib/vue/yarn.lock ./lib/vue/
+COPY lib/eslint-client ./lib/eslint-client
+COPY client/web/one/package.json client/web/one/yarn.lock ./client/web/one/
+COPY client/web/admin/package.json client/web/admin/yarn.lock ./client/web/admin/
+COPY client/web/compose/package.json client/web/compose/yarn.lock ./client/web/compose/
+COPY client/web/workflow/package.json client/web/workflow/yarn.lock ./client/web/workflow/
+COPY client/web/reporter/package.json client/web/reporter/yarn.lock ./client/web/reporter/
+COPY client/web/discovery/package.json client/web/discovery/yarn.lock ./client/web/discovery/
+COPY client/web/privacy/package.json client/web/privacy/yarn.lock ./client/web/privacy/
+
+RUN set -eux; \
+    cd /src/lib/js; \
+    yarn install ${YARN_FLAGS} --frozen-lockfile; \
+    cd /src/lib/vue; \
+    yarn install ${YARN_FLAGS} --frozen-lockfile; \
+    for app in one admin compose workflow reporter discovery privacy; do \
+      cd "/src/client/web/${app}"; \
+      yarn install ${YARN_FLAGS} --frozen-lockfile; \
+    done
+
+COPY lib/js ./lib/js
+COPY lib/vue ./lib/vue
+COPY client/web ./client/web
+COPY CONTRIBUTING.md DCO LICENSE README.md ./
+
+ARG WEBAPP_VERSION=source
+ENV BUILD_VERSION="${WEBAPP_VERSION}"
+
+RUN set -eux; \
+    install_local_package() { \
+      package_name="$1"; \
+      package_tarball="$2"; \
+      package_dir="/src/${3}/node_modules/@cortezaproject/${package_name}"; \
+      rm -rf "${package_dir}"; \
+      mkdir -p "${package_dir}"; \
+      tar -xzf "${package_tarball}" --strip-components=1 -C "${package_dir}"; \
+    }; \
+    cd /src/lib/js; \
+    yarn build; \
+    yarn pack --filename /tmp/corteza-js.tgz; \
+    cd /src/lib/vue; \
+    install_local_package corteza-js /tmp/corteza-js.tgz lib/vue; \
+    yarn build; \
+    yarn pack --filename /tmp/corteza-vue.tgz; \
+    for app in one admin compose workflow reporter discovery privacy; do \
+      cd "/src/client/web/${app}"; \
+      install_local_package corteza-js /tmp/corteza-js.tgz "client/web/${app}"; \
+      install_local_package corteza-vue /tmp/corteza-vue.tgz "client/web/${app}"; \
+      yarn build --production; \
+    done; \
+    mkdir -p /webapp/admin /webapp/compose /webapp/workflow /webapp/reporter /webapp/discovery /webapp/privacy; \
+    cp -a /src/client/web/one/dist/. /webapp/; \
+    cp -a /src/client/web/admin/dist/. /webapp/admin/; \
+    cp -a /src/client/web/compose/dist/. /webapp/compose/; \
+    cp -a /src/client/web/workflow/dist/. /webapp/workflow/; \
+    cp -a /src/client/web/reporter/dist/. /webapp/reporter/; \
+    cp -a /src/client/web/discovery/dist/. /webapp/discovery/; \
+    cp -a /src/client/web/privacy/dist/. /webapp/privacy/; \
+    cp /src/CONTRIBUTING.md /src/DCO /src/LICENSE /src/README.md /webapp/
+
+FROM nginx:${NGINX_VERSION}
+
+WORKDIR /usr/share/nginx/html
+
+COPY --from=build-stage /webapp /usr/share/nginx/html
+COPY client/web/nginx.conf /etc/nginx/nginx.conf
+COPY client/web/entrypoint.sh /entrypoint.sh
+
+RUN sed -i 's/\r$//' /entrypoint.sh \
+ && chmod +x /entrypoint.sh
+
+EXPOSE 80
+
+HEALTHCHECK --interval=30s --start-period=10s --timeout=30s \
+  CMD wget --quiet --tries=1 --spider "http://127.0.0.1:80/config.js" || exit 1
+
+ENTRYPOINT ["/entrypoint.sh"]
