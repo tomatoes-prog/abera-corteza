@@ -1,0 +1,74 @@
+editor:
+  content:
+    editor:
+      unsupported: Editor no compatible
+    partial: Plantilla parcial
+    preview:
+      html: Vista previa HTML
+      pdf: Vista previa PDF
+      title: Vista previa de salida
+    title: Contenido de la plantilla
+    toolbox:
+      partials: Parciales
+      samples:
+        defaultHTML: HTML predeterminado
+        label: Ejemplos
+      snippets:
+        funcCall: Llamar a una función
+        interpolate: Interpolar valor
+        iterator: Iterar sobre un conjunto
+        label: Fragmentos
+      title: Caja de herramientas
+  info:
+    contentType:
+      text_html: HTML
+      text_plain: Texto plano
+    delete: Eliminar
+    handle: Identificador
+    placeholder-handle: identificador (a-z, 0-9, guion bajo o guion)
+    invalid-handle-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+    meta:
+      description: Descripción
+      short: Nombre corto *
+    partial: Plantilla parcial
+    partialDescription: Las plantillas parciales se pueden usar dentro de otras plantillas, como encabezados y pies de página. No se pueden usar por sí solas.
+    title: Información básica
+    type: Tipo de plantilla
+    undelete: Restaurar
+  new: Nueva plantilla
+  permissions: Permisos
+  title:
+    create: Crear plantilla
+    edit: Editar plantilla
+list:
+  columns:
+    actions: ''
+    createdAt: Creada
+    handle: Identificador
+    language: Idioma
+    meta:
+      short: Nombre corto
+    state: Estado
+  delete: Eliminar
+  undelete: Restaurar
+  export: Exportar
+  rows:
+    filters:
+      deleted: Eliminadas
+  filterForm:
+    deleted:
+      label: plantillas eliminadas
+    excluded:
+      label: Sin
+    exclusive:
+      label: Solo
+    handle:
+      label: Filtrar lista de plantillas
+      placeholder: Filtrar plantillas por identificador
+    inclusive:
+      label: Incluyendo
+  loading: Cargando plantillas
+  new: Nueva plantilla
+  permissions: Permisos
+  title: Plantillas
+  yaml: YAML

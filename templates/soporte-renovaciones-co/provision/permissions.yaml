@@ -1,0 +1,27 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  agente-soporte: &operacion-soporte
+    corteza::compose:namespace/soporte-renovaciones-co: [read, pages.search, modules.search, charts.search]
+    corteza::compose:module/soporte-renovaciones-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/soporte-renovaciones-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/soporte-renovaciones-co/*/*: [read, update, revisions.search]
+    corteza::compose:page/soporte-renovaciones-co/*: [read]
+    corteza::compose:chart/soporte-renovaciones-co/*: [read]
+  gestor-renovaciones: *operacion-soporte
+  supervisor-soporte:
+    corteza::compose:namespace/soporte-renovaciones-co: [read, pages.search, modules.search, charts.search]
+    corteza::compose:module/soporte-renovaciones-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/soporte-renovaciones-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/soporte-renovaciones-co/*/*: [read, update, delete, revisions.search]
+    corteza::compose:page/soporte-renovaciones-co/*: [read]
+    corteza::compose:chart/soporte-renovaciones-co/*: [read]
+  automatizacion-soporte:
+    corteza::system/: [users.search, roles.search]
+    corteza::system:user/*: [read]
+    corteza::system:role/*: [read]
+    corteza::compose:namespace/soporte-renovaciones-co: [read, modules.search]
+    corteza::compose:module/soporte-renovaciones-co/*: [read, record.create, records.search]
+    corteza::compose:module-field/soporte-renovaciones-co/*/*: [record.value.read, record.value.update]
+    corteza::compose:record/soporte-renovaciones-co/*/*: [read, update]

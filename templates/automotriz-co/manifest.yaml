@@ -1,0 +1,45 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+id: automotriz-co
+name: CRM Automotriz Colombia
+version: 1.0.1
+minimumCortezaVersion: 2024.9.9
+defaultLocale: es
+license: Apache-2.0
+description: Gestión comercial de vehículos, pruebas de manejo y posventa.
+resources:
+  namespace: automotriz-co
+  roles:
+    - asesor-automotriz
+    - jefe-comercial-automotriz
+    - coordinador-taller
+    - automatizacion-automotriz
+  users:
+    - automatizacion-automotriz
+  modules:
+    - prospectos
+    - vehiculos
+    - pruebas-manejo
+    - oportunidades
+    - ordenes-servicio
+  pages:
+    - inicio
+    - prospectos
+    - vehiculos
+    - pruebas-manejo
+    - oportunidades
+    - ordenes-servicio
+  charts:
+    - funnel-ventas
+    - oportunidades-por-etapa
+    - pruebas-por-resultado
+    - inventario-por-estado
+    - servicio-por-estado
+  workflows:
+    - asignar-prospecto-automotriz
+    - validar-disponibilidad-prueba
+    - crear-oportunidad-desde-prueba
+    - cerrar-venta-automotriz
+  scripts:
+    - scripts/seed-demo.ps1

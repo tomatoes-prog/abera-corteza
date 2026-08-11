@@ -1,0 +1,11 @@
+ID,codigo,nombre,nivel,modalidad,sede,duracion,valor,periodo,cupos,metaMatriculas,estado,descripcion,externalID
+programa-001,EDU-PROG-01,Ingeniería de Sistemas 1,Tecnólogo,Virtual,Medellín,5 semestres,3260000,2026-2,39,28,Activo,Programa académico sintético.,LMS-PROG-01
+programa-002,EDU-PROG-02,Mercadeo 2,Pregrado,Híbrida,Cali,6 semestres,3720000,2026-2,43,31,Activo,Programa académico sintético.,LMS-PROG-02
+programa-003,EDU-PROG-03,Diseño 3,Especialización,Presencial,Barranquilla,7 semestres,4180000,2026-2,47,34,Activo,Programa académico sintético.,LMS-PROG-03
+programa-004,EDU-PROG-04,Contaduría 4,Maestría,Virtual,Cartagena,8 semestres,4640000,2026-2,51,37,Activo,Programa académico sintético.,LMS-PROG-04
+programa-005,EDU-PROG-05,Administración 5,Educación continua,Híbrida,Bucaramanga,9 semestres,5100000,2026-2,55,40,Activo,Programa académico sintético.,LMS-PROG-05
+programa-006,EDU-PROG-06,Ingeniería de Sistemas 6,Técnico,Presencial,Bogotá,10 semestres,5560000,2026-2,59,43,Activo,Programa académico sintético.,LMS-PROG-06
+programa-007,EDU-PROG-07,Mercadeo 7,Tecnólogo,Virtual,Medellín,4 semestres,6020000,2026-2,63,46,Activo,Programa académico sintético.,LMS-PROG-07
+programa-008,EDU-PROG-08,Diseño 8,Pregrado,Híbrida,Cali,5 semestres,6480000,2026-2,67,49,Activo,Programa académico sintético.,LMS-PROG-08
+programa-009,EDU-PROG-09,Contaduría 9,Especialización,Presencial,Barranquilla,6 semestres,6940000,2026-2,71,52,Activo,Programa académico sintético.,LMS-PROG-09
+programa-010,EDU-PROG-10,Administración 10,Maestría,Virtual,Cartagena,7 semestres,7400000,2026-2,75,55,Activo,Programa académico sintético.,LMS-PROG-10

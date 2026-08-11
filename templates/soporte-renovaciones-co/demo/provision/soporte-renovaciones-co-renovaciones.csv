@@ -1,0 +1,41 @@
+ID,codigo,cliente,contrato,responsable,fechaGestion,fechaVencimiento,etapa,valorActual,nuevoValor,probabilidad,riesgo,ventaAdicional,valorExpansion,observaciones,motivoPerdida
+renovacion-001,REN-DEMO-001,cliente-soporte-001,contrato-001,supervisora-demo,2026-07-17,2026-08-31,Contactada,5120000,5550000,65,Medio,1,650000,Renovación sintética.,
+renovacion-002,REN-DEMO-002,cliente-soporte-002,contrato-002,supervisora-demo,2026-07-18,2026-09-01,Propuesta,5440000,5900000,75,Alto,0,0,Renovación sintética.,
+renovacion-003,REN-DEMO-003,cliente-soporte-003,contrato-003,supervisora-demo,2026-07-19,2026-09-02,Comprometida,5760000,6250000,90,Bajo,1,750000,Renovación sintética.,
+renovacion-004,REN-DEMO-004,cliente-soporte-004,contrato-004,supervisora-demo,2026-07-20,2026-09-03,Renovada,6080000,6600000,100,Medio,0,0,Renovación sintética.,
+renovacion-005,REN-DEMO-005,cliente-soporte-005,contrato-005,supervisora-demo,2026-07-21,2026-09-04,Perdida,6400000,6950000,0,Alto,1,850000,Renovación sintética.,El cliente eligió otra solución.
+renovacion-006,REN-DEMO-006,cliente-soporte-006,contrato-006,supervisora-demo,2026-07-22,2026-09-05,Próxima a vencer,6720000,7300000,60,Bajo,0,0,Renovación sintética.,
+renovacion-007,REN-DEMO-007,cliente-soporte-007,contrato-007,supervisora-demo,2026-07-23,2026-09-06,Contactada,7040000,7650000,65,Medio,1,950000,Renovación sintética.,
+renovacion-008,REN-DEMO-008,cliente-soporte-008,contrato-008,supervisora-demo,2026-07-24,2026-09-07,Propuesta,7360000,8000000,75,Alto,0,0,Renovación sintética.,
+renovacion-009,REN-DEMO-009,cliente-soporte-009,contrato-009,supervisora-demo,2026-07-25,2026-09-08,Comprometida,7680000,8350000,90,Bajo,1,1050000,Renovación sintética.,
+renovacion-010,REN-DEMO-010,cliente-soporte-010,contrato-010,supervisora-demo,2026-07-26,2026-09-09,Renovada,8000000,8700000,100,Medio,0,0,Renovación sintética.,
+renovacion-011,REN-DEMO-011,cliente-soporte-011,contrato-011,supervisora-demo,2026-07-27,2026-09-10,Perdida,8320000,9050000,0,Alto,1,1150000,Renovación sintética.,El cliente eligió otra solución.
+renovacion-012,REN-DEMO-012,cliente-soporte-012,contrato-012,supervisora-demo,2026-07-28,2026-09-11,Próxima a vencer,8640000,9400000,60,Bajo,0,0,Renovación sintética.,
+renovacion-013,REN-DEMO-013,cliente-soporte-013,contrato-013,supervisora-demo,2026-07-29,2026-09-12,Contactada,8960000,9750000,65,Medio,1,1250000,Renovación sintética.,
+renovacion-014,REN-DEMO-014,cliente-soporte-014,contrato-014,supervisora-demo,2026-07-30,2026-09-13,Propuesta,9280000,10100000,75,Alto,0,0,Renovación sintética.,
+renovacion-015,REN-DEMO-015,cliente-soporte-015,contrato-015,supervisora-demo,2026-07-31,2026-09-14,Comprometida,9600000,10450000,90,Bajo,1,1350000,Renovación sintética.,
+renovacion-016,REN-DEMO-016,cliente-soporte-016,contrato-016,supervisora-demo,2026-08-01,2026-09-15,Renovada,9920000,10800000,100,Medio,0,0,Renovación sintética.,
+renovacion-017,REN-DEMO-017,cliente-soporte-017,contrato-017,supervisora-demo,2026-08-02,2026-09-16,Perdida,10240000,11150000,0,Alto,1,1450000,Renovación sintética.,El cliente eligió otra solución.
+renovacion-018,REN-DEMO-018,cliente-soporte-018,contrato-018,supervisora-demo,2026-08-03,2026-09-17,Próxima a vencer,10560000,11500000,60,Bajo,0,0,Renovación sintética.,
+renovacion-019,REN-DEMO-019,cliente-soporte-019,contrato-019,supervisora-demo,2026-08-04,2026-09-18,Contactada,10880000,11850000,65,Medio,1,1550000,Renovación sintética.,
+renovacion-020,REN-DEMO-020,cliente-soporte-020,contrato-020,supervisora-demo,2026-08-05,2026-09-19,Propuesta,11200000,12200000,75,Alto,0,0,Renovación sintética.,
+renovacion-021,REN-DEMO-021,cliente-soporte-021,contrato-021,supervisora-demo,2026-08-06,2026-09-20,Comprometida,11520000,12550000,90,Bajo,1,1650000,Renovación sintética.,
+renovacion-022,REN-DEMO-022,cliente-soporte-022,contrato-022,supervisora-demo,2026-08-07,2026-09-21,Renovada,11840000,12900000,100,Medio,0,0,Renovación sintética.,
+renovacion-023,REN-DEMO-023,cliente-soporte-023,contrato-023,supervisora-demo,2026-08-08,2026-09-22,Perdida,12160000,13250000,0,Alto,1,1750000,Renovación sintética.,El cliente eligió otra solución.
+renovacion-024,REN-DEMO-024,cliente-soporte-024,contrato-024,supervisora-demo,2026-08-09,2026-09-23,Próxima a vencer,12480000,13600000,60,Bajo,0,0,Renovación sintética.,
+renovacion-025,REN-DEMO-025,cliente-soporte-025,contrato-025,supervisora-demo,2026-08-10,2026-09-24,Contactada,12800000,13950000,65,Medio,1,1850000,Renovación sintética.,
+renovacion-026,REN-DEMO-026,cliente-soporte-026,contrato-026,supervisora-demo,2026-08-11,2026-09-25,Propuesta,13120000,14300000,75,Alto,0,0,Renovación sintética.,
+renovacion-027,REN-DEMO-027,cliente-soporte-027,contrato-027,supervisora-demo,2026-08-12,2026-09-26,Comprometida,13440000,14650000,90,Bajo,1,1950000,Renovación sintética.,
+renovacion-028,REN-DEMO-028,cliente-soporte-028,contrato-028,supervisora-demo,2026-08-13,2026-09-27,Renovada,13760000,15000000,100,Medio,0,0,Renovación sintética.,
+renovacion-029,REN-DEMO-029,cliente-soporte-029,contrato-029,supervisora-demo,2026-08-14,2026-09-28,Perdida,14080000,15350000,0,Alto,1,2050000,Renovación sintética.,El cliente eligió otra solución.
+renovacion-030,REN-DEMO-030,cliente-soporte-030,contrato-030,supervisora-demo,2026-07-16,2026-09-29,Próxima a vencer,14400000,15700000,60,Bajo,0,0,Renovación sintética.,
+renovacion-031,REN-DEMO-031,cliente-soporte-031,contrato-031,supervisora-demo,2026-07-17,2026-09-30,Contactada,14720000,16050000,65,Medio,1,2150000,Renovación sintética.,
+renovacion-032,REN-DEMO-032,cliente-soporte-032,contrato-032,supervisora-demo,2026-07-18,2026-10-01,Propuesta,15040000,16400000,75,Alto,0,0,Renovación sintética.,
+renovacion-033,REN-DEMO-033,cliente-soporte-033,contrato-033,supervisora-demo,2026-07-19,2026-10-02,Comprometida,15360000,16750000,90,Bajo,1,2250000,Renovación sintética.,
+renovacion-034,REN-DEMO-034,cliente-soporte-034,contrato-034,supervisora-demo,2026-07-20,2026-10-03,Renovada,15680000,17100000,100,Medio,0,0,Renovación sintética.,
+renovacion-035,REN-DEMO-035,cliente-soporte-035,contrato-035,supervisora-demo,2026-07-21,2026-10-04,Perdida,16000000,17450000,0,Alto,1,2350000,Renovación sintética.,El cliente eligió otra solución.
+renovacion-036,REN-DEMO-036,cliente-soporte-036,contrato-036,supervisora-demo,2026-07-22,2026-10-05,Próxima a vencer,16320000,17800000,60,Bajo,0,0,Renovación sintética.,
+renovacion-037,REN-DEMO-037,cliente-soporte-037,contrato-037,supervisora-demo,2026-07-23,2026-10-06,Contactada,16640000,18150000,65,Medio,1,2450000,Renovación sintética.,
+renovacion-038,REN-DEMO-038,cliente-soporte-038,contrato-038,supervisora-demo,2026-07-24,2026-10-07,Propuesta,16960000,18500000,75,Alto,0,0,Renovación sintética.,
+renovacion-039,REN-DEMO-039,cliente-soporte-039,contrato-039,supervisora-demo,2026-07-25,2026-10-08,Comprometida,17280000,18850000,90,Bajo,1,2550000,Renovación sintética.,
+renovacion-040,REN-DEMO-040,cliente-soporte-040,contrato-040,supervisora-demo,2026-07-26,2026-10-09,Renovada,17600000,19200000,100,Medio,0,0,Renovación sintética.,

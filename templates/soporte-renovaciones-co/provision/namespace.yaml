@@ -1,0 +1,10 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespaces:
+  soporte-renovaciones-co:
+    name: Soporte y Renovaciones
+    enabled: true
+    meta:
+      subtitle: Atención, retención y expansión
+      description: Clientes, contratos, casos, interacciones y renovaciones.

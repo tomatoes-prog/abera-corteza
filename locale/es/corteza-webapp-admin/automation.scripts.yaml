@@ -1,0 +1,21 @@
+columns:
+  name: Nombre
+  handle: Identificador
+  changedAt: Último cambio
+list:
+  columns:
+    name: Nombre
+    updatedAt: Última actualización
+  filter:
+    absoluteTime: Mostrar hora absoluta
+    incScriptsWithErrors: Errores ({{ count }})
+    incScriptsWithIterator: Iterador ({{ count }})
+    incScriptsWithSecurity: Seguridad ({{ count }})
+    incScriptsWithTriggers: Activadores ({{ count }})
+    searchQuery: Consulta de búsqueda
+  flags:
+    iterator: Iterador
+    security: Seguridad
+    triggers: Activadores
+  labelMissing: <etiqueta no disponible>
+  title: Scripts del corredor

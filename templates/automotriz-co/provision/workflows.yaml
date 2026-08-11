@@ -1,0 +1,228 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+workflows:
+  asignar-prospecto-automotriz:
+    enabled: true
+    trace: false
+    runAs: automatizacion-automotriz
+    keepSessions: 20
+    meta:
+      name: Asignar prospecto automotriz por menor carga
+      description: Asigna prospectos nuevos al asesor activo con menos oportunidades abiertas.
+    triggers:
+      - enabled: true
+        stepID: 10
+        resourceType: compose:record
+        eventType: beforeCreate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [automotriz-co] }
+          - { name: module.handle, op: "=", values: [prospectos] }
+    steps:
+      - { id: 10, kind: gateway, ref: excl, meta: { name: "¿Requiere asignación?" } }
+      - id: 11
+        kind: expressions
+        arguments:
+          - { target: record.values.fechaAsignacion, type: String, expr: 'strftime(now(), "%Y-%m-%dT%H:%M:%S")' }
+        meta: { name: Conservar asignación manual }
+      - id: 12
+        kind: expressions
+        arguments:
+          - { target: bestUserID, type: ID, value: "0" }
+          - { target: bestCount, type: UnsignedInteger, value: "0" }
+      - id: 20
+        kind: iterator
+        ref: rolesEachMember
+        arguments:
+          - { target: lookup, type: Handle, value: asesor-automotriz }
+        results:
+          - { target: candidate, expr: user }
+      - id: 21
+        kind: function
+        ref: composeRecordsSearch
+        arguments:
+          - { target: namespace, type: Handle, value: automotriz-co }
+          - { target: module, type: Handle, value: prospectos }
+          - { target: query, type: String, expr: 'format("asesor = %d AND estado != ''Vendido'' AND estado != ''Perdido''", candidate.ID)' }
+          - { target: limit, type: UnsignedInteger, value: "1" }
+          - { target: incTotal, type: Boolean, value: true }
+        results:
+          - { target: candidateCount, expr: total }
+      - { id: 22, kind: gateway, ref: excl }
+      - id: 23
+        kind: expressions
+        arguments:
+          - { target: bestUserID, type: ID, expr: candidate.ID }
+          - { target: bestCount, type: UnsignedInteger, expr: candidateCount }
+      - { id: 24, kind: continue }
+      - { id: 25, kind: continue }
+      - { id: 30, kind: gateway, ref: excl }
+      - id: 31
+        kind: expressions
+        arguments:
+          - { target: record.values.asesor, type: String, expr: 'format("%d", bestUserID)' }
+          - { target: record.values.fechaAsignacion, type: String, expr: 'strftime(now(), "%Y-%m-%dT%H:%M:%S")' }
+      - { id: 32, kind: termination }
+      - { id: 33, kind: termination, meta: { name: Guardar sin asesor } }
+    paths:
+      - { parentid: 10, childid: 12, expr: isEmpty(record.values.asesor) }
+      - { parentid: 10, childid: 11, expr: "" }
+      - { parentid: 11, childid: 32 }
+      - { parentid: 12, childid: 20 }
+      - { parentid: 20, childid: 21 }
+      - { parentid: 20, childid: 30 }
+      - { parentid: 21, childid: 22 }
+      - { parentid: 22, childid: 23, expr: bestUserID == 0 || candidateCount < bestCount || (candidateCount == bestCount && candidate.ID < bestUserID) }
+      - { parentid: 22, childid: 25, expr: "" }
+      - { parentid: 23, childid: 24 }
+      - { parentid: 30, childid: 31, expr: bestUserID > 0 }
+      - { parentid: 30, childid: 33, expr: "" }
+      - { parentid: 31, childid: 32 }
+
+  validar-disponibilidad-prueba:
+    enabled: true
+    trace: false
+    meta:
+      name: Validar disponibilidad para prueba de manejo
+      description: Evita reservar el mismo vehículo en horarios superpuestos.
+    triggers:
+      - enabled: true
+        stepID: 100
+        resourceType: compose:record
+        eventType: beforeCreate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [automotriz-co] }
+          - { name: module.handle, op: "=", values: [pruebas-manejo] }
+    steps:
+      - id: 100
+        kind: function
+        ref: composeRecordsSearch
+        arguments:
+          - { target: namespace, type: Handle, value: automotriz-co }
+          - { target: module, type: Handle, value: pruebas-manejo }
+          - target: query
+            type: String
+            expr: 'format("vehiculo = %s AND inicio < ''%s'' AND fin > ''%s'' AND estado != ''Cancelada''", record.values.vehiculo, record.values.fin, record.values.inicio)'
+          - { target: limit, type: UnsignedInteger, value: "1" }
+          - { target: incTotal, type: Boolean, value: true }
+        results:
+          - { target: overlaps, expr: total }
+      - { id: 101, kind: gateway, ref: excl }
+      - id: 102
+        kind: error
+        arguments:
+          - { target: message, type: String, value: El vehículo ya tiene una prueba programada en ese horario. }
+      - { id: 103, kind: termination }
+    paths:
+      - { parentid: 100, childid: 101 }
+      - { parentid: 101, childid: 102, expr: overlaps > 0 }
+      - { parentid: 101, childid: 103, expr: "" }
+
+  crear-oportunidad-desde-prueba:
+    enabled: true
+    trace: false
+    meta:
+      name: Crear oportunidad desde prueba positiva
+    triggers:
+      - enabled: true
+        stepID: 200
+        resourceType: compose:record
+        eventType: afterUpdate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [automotriz-co] }
+          - { name: module.handle, op: "=", values: [pruebas-manejo] }
+    steps:
+      - { id: 200, kind: gateway, ref: excl }
+      - id: 201
+        kind: function
+        ref: composeRecordsNew
+        arguments:
+          - { target: namespace, type: Handle, value: automotriz-co }
+          - { target: module, type: Handle, value: oportunidades }
+        results:
+          - { target: opportunity, expr: record }
+      - id: 202
+        kind: expressions
+        arguments:
+          - { target: opportunity.values.prospecto, type: String, expr: record.values.prospecto }
+          - { target: opportunity.values.vehiculo, type: String, expr: record.values.vehiculo }
+          - { target: opportunity.values.asesor, type: String, expr: record.values.asesor }
+          - { target: opportunity.values.etapa, type: String, value: Cotización }
+          - { target: opportunity.values.probabilidad, type: Integer, value: "35" }
+      - id: 203
+        kind: function
+        ref: composeRecordsCreate
+        arguments:
+          - { target: record, type: ComposeRecord, expr: opportunity }
+      - { id: 204, kind: termination }
+    paths:
+      - { parentid: 200, childid: 201, expr: 'record.values.estado == "Completada" && record.values.resultado == "Interesado" && oldRecord.values.estado != "Completada"' }
+      - { parentid: 200, childid: 204, expr: "" }
+      - { parentid: 201, childid: 202 }
+      - { parentid: 202, childid: 203 }
+      - { parentid: 203, childid: 204 }
+
+  cerrar-venta-automotriz:
+    enabled: true
+    trace: false
+    meta:
+      name: Cerrar venta automotriz
+      description: Sincroniza vehículo y prospecto al marcar una oportunidad como vendida.
+    triggers:
+      - enabled: true
+        stepID: 300
+        resourceType: compose:record
+        eventType: afterUpdate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [automotriz-co] }
+          - { name: module.handle, op: "=", values: [oportunidades] }
+    steps:
+      - { id: 300, kind: gateway, ref: excl }
+      - id: 301
+        kind: function
+        ref: composeRecordsLookup
+        arguments:
+          - { target: namespace, type: Handle, value: automotriz-co }
+          - { target: module, type: Handle, value: vehiculos }
+          - { target: record, type: ID, expr: record.values.vehiculo }
+        results:
+          - { target: soldVehicle, expr: record }
+      - id: 302
+        kind: expressions
+        arguments:
+          - { target: soldVehicle.values.estado, type: String, value: Vendido }
+          - { target: soldVehicle.values.clienteFinal, type: String, expr: record.values.prospecto }
+          - { target: soldVehicle.values.proximoMantenimiento, type: String, expr: 'strftime(now() + duration("P180D"), "%Y-%m-%d")' }
+      - id: 303
+        kind: function
+        ref: composeRecordsUpdate
+        arguments:
+          - { target: record, type: ComposeRecord, expr: soldVehicle }
+      - id: 304
+        kind: function
+        ref: composeRecordsLookup
+        arguments:
+          - { target: namespace, type: Handle, value: automotriz-co }
+          - { target: module, type: Handle, value: prospectos }
+          - { target: record, type: ID, expr: record.values.prospecto }
+        results:
+          - { target: wonProspect, expr: record }
+      - id: 305
+        kind: expressions
+        arguments:
+          - { target: wonProspect.values.estado, type: String, value: Vendido }
+      - id: 306
+        kind: function
+        ref: composeRecordsUpdate
+        arguments:
+          - { target: record, type: ComposeRecord, expr: wonProspect }
+      - { id: 307, kind: termination }
+    paths:
+      - { parentid: 300, childid: 301, expr: 'record.values.etapa == "Vendido" && oldRecord.values.etapa != "Vendido"' }
+      - { parentid: 300, childid: 307, expr: "" }
+      - { parentid: 301, childid: 302 }
+      - { parentid: 302, childid: 303 }
+      - { parentid: 303, childid: 304 }
+      - { parentid: 304, childid: 305 }
+      - { parentid: 305, childid: 306 }
+      - { parentid: 306, childid: 307 }

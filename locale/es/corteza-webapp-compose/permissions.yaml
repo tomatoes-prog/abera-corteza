@@ -1,0 +1,243 @@
+ui:
+  save: Guardar cambios
+  cancel: Cancelar
+  set-for: Configurar permisos para {{target}}
+  loading: Cargando permisos
+  label: Permisos
+  tooltip:
+    unknown-context:
+      user: No se pueden evaluar los permisos de un usuario con un rol contextual sobre un recurso no específico
+      role: No se pueden evaluar los permisos de un rol contextual sobre un recurso no específico
+  notification:
+    save:
+      success: Permisos guardados
+      failed: No se pudieron guardar los permisos
+  edit:
+    title: Editar permisos
+    label: Roles de usuario
+    description: Selecciona el rol cuyos permisos quieres configurar
+  evaluate:
+    title: Evaluar permisos
+    description: Evaluar los permisos aplicados
+  add:
+    label: Añadir
+    title: Evaluar permisos
+    save: Guardar y cerrar
+    role:
+      label: Roles
+      placeholder: Selecciona uno o varios roles
+    user:
+      label: Usuarios
+      placeholder: Busca o selecciona un usuario
+  access:
+    allow: Permitir
+    inherit: Heredar
+    deny: Denegar
+resources:
+  compose:
+    namespace:
+      all: todos los espacios de trabajo
+      specific: espacio de trabajo "{{target}}"
+      tooltip: Permisos del espacio de trabajo
+      operations:
+        read:
+          description: ''
+          specific: Leer el espacio de trabajo "{{target}}"
+          title: Leer cualquier espacio de trabajo
+        update:
+          description: ''
+          specific: Actualizar el espacio de trabajo "{{target}}"
+          title: Actualizar cualquier espacio de trabajo
+        delete:
+          description: ''
+          specific: Eliminar el espacio de trabajo "{{target}}"
+          title: Eliminar cualquier espacio de trabajo
+        manage:
+          description: Permitir acceso a las páginas de administración del espacio de trabajo
+          specific: Gestionar el espacio de trabajo "{{target}}"
+          title: Gestionar cualquier espacio de trabajo
+        export:
+          description: ''
+          specific: Exportar el espacio de trabajo "{{target}}"
+          title: Exportar cualquier espacio de trabajo
+        module.create:
+          description: ''
+          specific: Crear módulos en el espacio de trabajo "{{target}}"
+          title: Crear módulos en cualquier espacio de trabajo
+        modules.export:
+          description: ''
+          specific: Exportar módulos del espacio de trabajo "{{target}}"
+          title: Exportar módulos de cualquier espacio de trabajo
+        modules.search:
+          description: ''
+          specific: Listar y buscar módulos del espacio de trabajo "{{target}}"
+          title: Listar y buscar módulos de cualquier espacio de trabajo
+        page.create:
+          description: ''
+          specific: Crear páginas en el espacio de trabajo "{{target}}"
+          title: Crear páginas en cualquier espacio de trabajo
+        pages.search:
+          description: ''
+          specific: Listar y buscar páginas del espacio de trabajo "{{target}}"
+          title: Listar y buscar páginas de cualquier espacio de trabajo
+        pages.export:
+          description: ''
+          specific: Exportar páginas del espacio de trabajo "{{target}}"
+          title: Exportar páginas de cualquier espacio de trabajo
+        chart.create:
+          description: ''
+          specific: Crear gráficos en el espacio de trabajo "{{target}}"
+          title: Crear gráficos en cualquier espacio de trabajo
+        charts.search:
+          description: ''
+          specific: Listar y buscar gráficos del espacio de trabajo "{{target}}"
+          title: Listar y buscar gráficos de cualquier espacio de trabajo
+        charts.export:
+          description: ''
+          specific: Exportar gráficos del espacio de trabajo "{{target}}"
+          title: Exportar gráficos de cualquier espacio de trabajo
+    chart:
+      all: todos los gráficos
+      specific: gráfico "{{target}}"
+      tooltip: Permisos del gráfico
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar el gráfico "{{target}}"
+          title: Eliminar cualquier gráfico
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer el gráfico "{{target}}"
+          title: Leer cualquier gráfico
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar el gráfico "{{target}}"
+          title: Actualizar cualquier gráfico
+    module:
+      all: todos los módulos
+      specific: módulo "{{target}}"
+      tooltip: Permisos del módulo
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar el módulo "{{target}}"
+          title: Eliminar cualquier módulo
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer el módulo "{{target}}"
+          title: Leer cualquier módulo
+        record.create:
+          description: 'Predeterminado: denegar'
+          specific: Crear un registro del módulo "{{target}}"
+          title: Crear un registro de cualquier módulo
+        records.search:
+          description: 'Predeterminado: denegar'
+          specific: Listar y buscar registros del módulo "{{target}}"
+          title: Listar y buscar registros de cualquier módulo
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar el módulo "{{target}}"
+          title: Actualizar cualquier módulo
+        owned-record.create:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar el propietario al crear un registro del módulo "{{target}}"
+          title: Gestionar el propietario al crear un registro de cualquier módulo
+          all-specific: Gestionar el propietario al crear un registro del módulo "{{ target }}"
+    module-field:
+      all: todos los campos de módulo
+      specific: campo "{{target}}"
+      all-specific: todos los campos del módulo "{{ target }}"
+      tooltip: Permisos de campos de módulo
+      operations:
+        record.value.read:
+          description: 'Predeterminado: denegar'
+          specific: Leer los campos de registro de "{{target}}"
+          title: Leer los campos de registro de cualquier módulo
+          all-specific: Leer los campos de registro del módulo "{{ target }}"
+        record.value.update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar los valores de campos de registro de "{{target}}"
+          title: Actualizar los valores de campos de registro de cualquier módulo
+          all-specific: Actualizar los valores de campos de registro del módulo "{{ target }}"
+    page:
+      all: todas las páginas
+      specific: página "{{target}}"
+      tooltip: Permisos de páginas
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar la página "{{target}}"
+          title: Eliminar cualquier página
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer la página "{{target}}"
+          title: Leer cualquier página
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar la página "{{target}}"
+          title: Actualizar cualquier página
+        page-layout.create:
+          description: 'Predeterminado: denegar'
+          specific: Crear diseños para la página "{{target}}"
+          title: Crear diseño de página
+        page-layouts.search:
+          description: 'Predeterminado: denegar'
+          specific: Listar diseños de la página "{{target}}"
+          title: Listar diseño de página
+    page-layout:
+      all: todos los diseños de página
+      specific: diseño de página "{{target}}"
+      tooltip: Permisos de diseños de página
+      all-specific: todos los diseños de página de la página "{{ target }}"
+      operations:
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer el diseño de página "{{target}}"
+          title: Leer cualquier diseño de página
+          all-specific: Leer los diseños de página de la página "{{ target }}"
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar el diseño de página "{{target}}"
+          title: Actualizar cualquier diseño de página
+          all-specific: Actualizar los diseños de página de la página "{{ target }}"
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar el diseño de página "{{target}}"
+          title: Eliminar cualquier diseño de página
+          all-specific: Eliminar los diseños de página de la página "{{ target }}"
+    record:
+      all: todos los registros
+      specific: registro "{{target}}"
+      all-specific: todos los registros del módulo "{{ target }}"
+      tooltip: Permisos de registros
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar el registro "{{target}}"
+          title: Eliminar registros de cualquier módulo
+          all-specific: Eliminar registros del módulo "{{ target }}"
+        undelete:
+          description: 'Predeterminado: denegar'
+          specific: Restaurar el registro "{{target}}"
+          title: Restaurar registros de cualquier módulo
+          all-specific: Restaurar registros del módulo "{{ target }}"
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer el registro "{{target}}"
+          title: Leer registros de cualquier módulo
+          all-specific: Leer registros del módulo "{{ target }}"
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar el registro "{{target}}"
+          title: Actualizar registros de cualquier módulo
+          all-specific: Actualizar registros del módulo "{{ target }}"
+        owner.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar el propietario del registro "{{target}}"
+          title: Gestionar propietarios de registros de cualquier módulo
+          all-specific: Gestionar propietarios de registros del módulo "{{ target }}"
+        revisions.search:
+          description: 'Predeterminado: denegar'
+          specific: Acceder a las revisiones del registro "{{target}}"
+          title: Acceder a las revisiones de registros
+          all-specific: Acceder a las revisiones de registros

@@ -1,0 +1,46 @@
+label:
+  add: Añadir
+  and: Y
+  all: Todos
+  ascending: Ascendente
+  back: Atrás
+  clear: Limpiar
+  cancel: Cancelar
+  delete: Eliminar
+  descending: Descendente
+  loading: Cargando
+  name: Nombre
+  none: Ninguno
+  now: Ahora
+  ok: Aceptar
+  or: O
+  openLinkInNewTab: Abrir enlace en una pestaña nueva
+  save: Guardar
+  saveAndClose: Guardar y cerrar
+  clone: Guardar como copia
+  today: Hoy
+  urlPlaceholder: https://example.tld
+  default: Predeterminado
+  report:
+    single: Informe
+    plural: Informes
+resourceList:
+  notFound: No encontrado
+  noItems: No hay elementos para mostrar
+  pagination:
+    next: Siguiente
+    prev: Anterior
+    showing: '{{from}} - {{to}} de {{count}} {{data}}'
+    single_one: 'Un {{data}}'
+    single_other: '{{count}} {{data}}'
+    recordsPerPage: Por página
+  clone: Clonar
+themes:
+  labels:
+    light: Claro
+    dark: Oscuro
+cloneSuffix: copia
+extendSession:
+  labels:
+    extend: Extender sesión
+    warning: Se cerrará tu sesión en {{ countdownTime }} segundos

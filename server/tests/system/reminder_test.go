@@ -67,6 +67,36 @@ func TestReminderCreate(t *testing.T) {
 		End()
 }
 
+func TestReminderCreateAnonymousForbidden(t *testing.T) {
+	h := newHelper(t)
+	h.clearReminders()
+
+	h.apiInitAnonymous().
+		Post("/reminder/").
+		Header("Accept", "application/json").
+		FormData("resource", "some:resource").
+		FormData("assignedTo", "0").
+		Expect(t).
+		Status(http.StatusOK).
+		Assert(helpers.AssertError("reminder.errors.notAllowedToAssign")).
+		End()
+}
+
+func TestReminderReadAnonymousForbidden(t *testing.T) {
+	h := newHelper(t)
+	h.clearReminders()
+
+	rm := h.makeReminderByUserID(0)
+
+	h.apiInitAnonymous().
+		Get(fmt.Sprintf("/reminder/%d", rm.ID)).
+		Header("Accept", "application/json").
+		Expect(t).
+		Status(http.StatusOK).
+		Assert(helpers.AssertError("reminder.errors.notAllowedToRead")).
+		End()
+}
+
 func TestReminderAssign_forbidden(t *testing.T) {
 	h := newHelper(t)
 	h.clearReminders()

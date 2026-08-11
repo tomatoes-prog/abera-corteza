@@ -1,0 +1,31 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    corteza::compose:namespace/automotriz-co:
+      name: CRM Automotriz
+      meta.subtitle: Ventas de vehículos y posventa
+      meta.description: Prospectos, inventario, pruebas de manejo, oportunidades y taller.
+    corteza::compose:module/automotriz-co/prospectos:
+      name: Prospectos
+    corteza::compose:module/automotriz-co/vehiculos:
+      name: Vehículos
+    corteza::compose:module/automotriz-co/pruebas-manejo:
+      name: Pruebas de manejo
+    corteza::compose:module/automotriz-co/oportunidades:
+      name: Oportunidades
+    corteza::compose:module/automotriz-co/ordenes-servicio:
+      name: Órdenes de servicio
+    corteza::compose:page/automotriz-co/inicio:
+      title: Inicio
+    corteza::compose:page/automotriz-co/prospectos:
+      title: Prospectos
+    corteza::compose:page/automotriz-co/vehiculos:
+      title: Inventario
+    corteza::compose:page/automotriz-co/pruebas-manejo:
+      title: Pruebas de manejo
+    corteza::compose:page/automotriz-co/oportunidades:
+      title: Pipeline
+    corteza::compose:page/automotriz-co/ordenes-servicio:
+      title: Taller

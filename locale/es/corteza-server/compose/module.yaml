@@ -1,0 +1,25 @@
+errors:
+  composeModuleNotFound: módulo de Compose no encontrado
+  composeNamespaceNotFound: espacio de nombres de Compose no encontrado
+  invalidID: ID no válido
+  nodeNotFound: el nodo no existe
+  notAllowedToCreate: no tienes permiso para crear módulos
+  notAllowedToManage: no tienes permiso para gestionar este módulo
+  notFound: el módulo no existe
+  notUnique: el nodo no es único
+  requestParametersInvalid: parámetros de solicitud no válidos
+  staleData: el módulo fue modificado por otra persona o workflow; actualiza la página para ver la última versión
+  handleNotUnique: el identificador no es único
+  invalidHandle: identificador inválido
+  invalidNamespaceID: ID de espacio de nombres ausente o inválido
+  nameNotUnique: el nombre no es único
+  fieldNameReserved: el nombre del campo está reservado
+  namespaceNotFound: el espacio de nombres no existe
+  notAllowedToDelete: no tienes permiso para eliminar este módulo
+  notAllowedToListModules: no tienes permiso para listar módulos
+  notAllowedToRead: no tienes permiso para leer este módulo
+  notAllowedToReadNamespace: no tienes permiso para leer este espacio de nombres
+  notAllowedToSearch: no tienes permiso para buscar módulos
+  notAllowedToUndelete: no tienes permiso para restaurar este módulo
+  notAllowedToUpdate: no tienes permiso para actualizar este módulo
+  dedupConfigurationInvalidMissingConstraint: la configuración de duplicados no contiene una restricción válida

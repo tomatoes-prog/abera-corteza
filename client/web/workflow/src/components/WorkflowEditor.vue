@@ -1620,7 +1620,7 @@ export default {
           node,
           config: {
             parentID: node.source.id,
-            childID: node.source.id,
+            childID: node.target.id,
           },
         }
 

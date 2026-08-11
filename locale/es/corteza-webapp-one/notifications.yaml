@@ -1,0 +1,27 @@
+title: Notificaciones
+empty: No hay notificaciones
+emptyDescription: Aquí verás las notificaciones cuando lleguen
+markAllAsRead: Marcar todo como leído
+markAllAsUnread: Marcar todo como no leído
+markAsRead: Marcar como leído
+markAsUnread: Marcar como no leído
+delete: Eliminar
+all: Todas
+unread: No leídas
+read: Leídas
+success: Éxito
+allMarkedAsRead: Todas las notificaciones se marcaron como leídas
+allMarkedAsUnread: Todas las notificaciones se marcaron como no leídas
+notificationDeleted: Se eliminó la notificación
+loadMore: Cargar más
+recordRedirectError: Error al navegar al registro
+mute: Silenciar notificaciones
+unmute: Activar notificaciones
+muted: Notificaciones silenciadas
+unmuted: Notificaciones activadas
+markAllAsReadError: Error al marcar todas las notificaciones como leídas
+markAllAsUnreadError: Error al marcar todas las notificaciones como no leídas
+notificationDeletedError: Error al eliminar la notificación
+namespaceNotFound: No se encontró el espacio de nombres
+pageNotFound: No se encontró la página
+recordNotFound: No se encontró el registro

@@ -1,0 +1,1010 @@
+ui:
+  save: Guardar cambios
+  cancel: Cancelar
+  set-for: Configurar permisos para {{target}}
+  loading: Cargando permisos
+  notification:
+    save:
+      success: Permisos guardados
+      failed: No se pudieron guardar los permisos
+  edit:
+    title: Editar permisos
+    label: Roles de usuario
+    description: Selecciona el rol cuyos permisos quieres configurar
+  evaluate:
+    title: Evaluar permisos
+    description: Evaluar los permisos aplicados
+  add:
+    label: Añadir
+    title: Evaluar permisos
+    save: Guardar y cerrar
+    edit:
+      description: Selecciona el rol cuyos permisos quieres editar
+    evaluate:
+      description: Selecciona una combinación de roles o un usuario para evaluar
+    role:
+      label: Roles
+      placeholder: Selecciona uno o varios roles
+    user:
+      label: Usuarios
+      placeholder: Busca o selecciona un usuario
+  tooltip:
+    unknown-context:
+      user: No se pueden evaluar los permisos de un usuario con un rol contextual sobre un recurso no específico
+      role: No se pueden evaluar los permisos de un rol contextual sobre un recurso no específico
+  access:
+    allow: Permitir
+    inherit: Heredar
+    deny: Denegar
+  click-on-cell-to-allow: Haz clic en la celda de permiso o rol para permitir una operación específica
+  edit-or-eval: Editar o evaluar permisos
+  title:
+    automation: Permisos de automatización
+    system: Permisos del sistema
+    compose: Permisos de Compose
+    federation: Permisos de federación
+  clone:
+    clone: Clonar
+    label: Clonar permisos
+    pick-role: Empieza a escribir para buscar roles
+    title: Aplicar permisos a
+    description: Se clonarán todos los permisos del rol actual y se aplicarán al elemento seleccionado
+resources:
+  federation:
+    component:
+      label: Componente de federación
+      operations:
+        grant:
+          title: Conceder permisos sobre el componente de federación
+        node.create:
+          title: Crear nodos
+        nodes.search:
+          title: Listar y buscar nodos
+        pair:
+          title: Emparejar nodos
+        settings.manage:
+          title: Gestionar todos los ajustes
+        settings.read:
+          title: Acceder a todos los ajustes
+    node:
+      label: Nodos
+      operations:
+        manage:
+          title: Gestionar cualquier nodo
+        module.create:
+          title: Crear módulos
+    exposed-module:
+      label: Módulos
+      operations:
+        manage:
+          title: Gestionar cualquier módulo
+    shared-module:
+      label: Módulos
+      operations:
+        map:
+          title: Mapear cualquier módulo
+  compose:
+    component:
+      label: Componente de Compose
+      operations:
+        grant:
+          title: Conceder permisos sobre el componente de Compose
+        namespace.create:
+          title: Crear espacios de nombres
+        namespaces.search:
+          title: Listar y buscar espacios de nombres
+        settings.manage:
+          title: Gestionar todos los ajustes
+        settings.read:
+          title: Acceder a todos los ajustes
+        resource-translations.manage:
+          title: Gestionar traducciones de recursos
+    chart:
+      label: Gráficos
+      operations:
+        delete:
+          title: Eliminar cualquier gráfico
+        read:
+          title: Leer cualquier gráfico
+        update:
+          title: Actualizar cualquier gráfico
+    module:
+      label: Módulos
+      operations:
+        delete:
+          title: Eliminar cualquier módulo
+        owned-record.create:
+          title: Gestionar el propietario al crear registros de cualquier módulo
+        read:
+          title: Leer cualquier módulo
+        record.create:
+          title: Crear registros en cualquier módulo
+        records.search:
+          title: Listar y buscar registros de cualquier módulo
+        update:
+          title: Actualizar cualquier módulo
+    module-field:
+      label: Campos de módulo
+      operations:
+        record.value.read:
+          title: Leer cualquier campo de módulo
+        record.value.update:
+          title: Actualizar cualquier campo de módulo
+    namespace:
+      label: Espacios de nombres
+      operations:
+        chart.create:
+          title: Crear gráficos en cualquier espacio de nombres
+        charts.search:
+          title: Listar y buscar gráficos en cualquier espacio de nombres
+        charts.export:
+          title: Exportar gráficos de cualquier espacio de nombres
+        delete:
+          title: Eliminar cualquier espacio de nombres
+        manage:
+          title: Gestionar cualquier espacio de nombres
+        module.create:
+          title: Crear módulos en cualquier espacio de nombres
+        modules.search:
+          title: Listar y buscar módulos en cualquier espacio de nombres
+        modules.export:
+          title: Exportar módulos de cualquier espacio de nombres
+        page.create:
+          title: Crear páginas en cualquier espacio de nombres
+        pages.search:
+          title: Listar y buscar páginas en cualquier espacio de nombres
+        read:
+          title: Acceder a cualquier espacio de nombres
+        update:
+          title: Actualizar cualquier espacio de nombres
+        export:
+          title: Exportar cualquier espacio de nombres
+    page:
+      label: Páginas
+      operations:
+        delete:
+          title: Eliminar cualquier página
+        read:
+          title: Leer cualquier página
+        update:
+          title: Actualizar cualquier página
+        page-layout.create:
+          title: Crear diseños de página en cualquier página
+        page-layouts.search:
+          title: Listar y buscar diseños de página de cualquier página
+    page-layout:
+      label: Diseños de página
+      operations:
+        delete:
+          title: Eliminar cualquier diseño de página
+        read:
+          title: Leer cualquier diseño de página
+        update:
+          title: Actualizar cualquier diseño de página
+    record:
+      label: Registros
+      operations:
+        delete:
+          title: Eliminar cualquier registro
+        undelete:
+          title: Restaurar cualquier registro
+        read:
+          title: Leer cualquier registro
+        update:
+          title: Actualizar cualquier registro
+        owner.manage:
+          title: Gestionar la propiedad de cualquier registro
+        revisions.search:
+          title: Acceder a las revisiones de cualquier registro
+  automation:
+    component:
+      label: Componente de automatización
+      operations:
+        grant:
+          title: Conceder permisos sobre la automatización
+        sessions.search:
+          title: Buscar sesiones
+        triggers.search:
+          title: Buscar activadores
+        workflow.create:
+          title: Crear workflow nuevo
+        workflows.search:
+          title: Buscar workflows
+        resource-translations.manage:
+          title: Gestionar traducciones de recursos
+    auth-client-extra-1:
+      label: Clientes de autenticación
+      all: todos los clientes de autenticación
+      specific: cliente de autenticación "{{target}}"
+      operations:
+        authorize:
+          description: 'El usuario puede autorizar este cliente. Predeterminado: denegar'
+          specific: Autorizar cliente "{{target}}"
+          title: Autorizar cualquier cliente
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar cliente "{{target}}"
+          title: Eliminar cualquier cliente
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer cliente "{{target}}"
+          title: Leer cualquier cliente
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar cliente "{{target}}"
+          title: Actualizar cualquier cliente
+    dal-connection-extra-1:
+      label: Conexiones
+      all: todas las conexiones
+      specific: conexión "{{target}}"
+      operations:
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer conexión "{{target}}"
+          title: Leer cualquier conexión
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar conexión "{{target}}"
+          title: Actualizar cualquier conexión
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar conexión "{{target}}"
+          title: Eliminar cualquier conexión
+        dal-config.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar la configuración de la conexión "{{target}}"
+          title: Gestionar cualquier conexión
+    role-extra-1:
+      label: Roles
+      all: todos los roles
+      specific: rol "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar rol "{{target}}"
+          title: Eliminar cualquier rol
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar miembros del rol "{{target}}"
+          title: Gestionar miembros de cualquier rol
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer rol "{{target}}"
+          title: Leer cualquier rol
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar rol "{{target}}"
+          title: Actualizar cualquier rol
+    queue-extra-1:
+      label: Colas
+      all: todas las colas
+      specific: cola "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar cola "{{target}}"
+          title: Eliminar cualquier cola
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar miembros de la cola "{{target}}"
+          title: Gestionar miembros de cualquier cola
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer cola "{{target}}"
+          title: Leer cualquier cola
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar cola "{{target}}"
+          title: Actualizar cualquier cola
+        queue.read:
+          description: 'Predeterminado: denegar'
+          specific: Leer mensajes de la cola "{{target}}"
+          title: Leer mensajes de cualquier cola
+        queue.write:
+          description: 'Predeterminado: denegar'
+          specific: Escribir mensajes en la cola "{{target}}"
+          title: Escribir mensajes en cualquier cola
+    application:
+      label: Aplicaciones
+      all: todas las aplicaciones
+      specific: aplicación "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar {{target}}
+          title: Eliminar cualquier aplicación
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer {{target}}
+          title: Leer cualquier aplicación
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar {{target}}
+          title: Actualizar cualquier aplicación
+    auth-client-extra-2:
+      label: Clientes de autenticación
+      all: todos los clientes de autenticación
+      specific: cliente de autenticación "{{target}}"
+      operations:
+        authorize:
+          description: 'El usuario puede autorizar (usar) este cliente. Predeterminado: denegar'
+          specific: Autorizar cliente "{{target}}"
+          title: Autorizar cualquier cliente
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar cliente "{{target}}"
+          title: Eliminar cualquier cliente
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer cliente "{{target}}"
+          title: Leer cualquier cliente
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar cliente "{{target}}"
+          title: Actualizar cualquier cliente
+    dal-connection-extra-2:
+      label: Conexiones
+      all: todas las conexiones
+      specific: conexión "{{target}}"
+      operations:
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer conexión "{{target}}"
+          title: Leer cualquier conexión
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar conexión "{{target}}"
+          title: Actualizar cualquier conexión
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar conexión "{{target}}"
+          title: Eliminar cualquier conexión
+        dal-config.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar la configuración de la conexión "{{target}}"
+          title: Gestionar cualquier conexión
+    role-extra-2:
+      label: Roles
+      all: todos los roles
+      specific: rol "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar rol "{{target}}"
+          title: Eliminar cualquier rol
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar miembros del rol "{{target}}"
+          title: Gestionar miembros de cualquier rol
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer rol "{{target}}"
+          title: Leer cualquier rol
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar rol "{{target}}"
+          title: Actualizar cualquier rol
+    queue-extra-2:
+      label: Colas
+      all: todas las colas
+      specific: cola "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar cola "{{target}}"
+          title: Eliminar cualquier cola
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar miembros de la cola "{{target}}"
+          title: Gestionar miembros de cualquier cola
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer cola "{{target}}"
+          title: Leer cualquier cola
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar cola "{{target}}"
+          title: Actualizar cualquier cola
+        queue.read:
+          description: 'Predeterminado: denegar'
+          specific: Leer mensajes de la cola "{{target}}"
+          title: Leer mensajes de cualquier cola
+        queue.write:
+          description: 'Predeterminado: denegar'
+          specific: Escribir mensajes en la cola "{{target}}"
+          title: Escribir mensajes en cualquier cola
+    apigw-route:
+      label: Rutas del gateway
+      all: todas las rutas
+      specific: ruta "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar {{target}}
+          title: Eliminar cualquier ruta
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer {{target}}
+          title: Leer cualquier ruta
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar {{target}}
+          title: Actualizar cualquier ruta
+    auth-client-extra-3:
+      label: Clientes de autenticación
+      all: todos los clientes de autenticación
+      specific: cliente de autenticación "{{target}}"
+      operations:
+        authorize:
+          description: 'El usuario puede autorizar este cliente. Predeterminado: denegar'
+          specific: Autorizar cliente "{{target}}"
+          title: Autorizar cualquier cliente
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar cliente "{{target}}"
+          title: Eliminar cualquier cliente
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer cliente "{{target}}"
+          title: Leer cualquier cliente
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar cliente "{{target}}"
+          title: Actualizar cualquier cliente
+    dal-connection-extra-3:
+      label: Conexiones
+      all: todas las conexiones
+      specific: conexión "{{target}}"
+      operations:
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer conexión "{{target}}"
+          title: Leer cualquier conexión
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar conexión "{{target}}"
+          title: Actualizar cualquier conexión
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar conexión "{{target}}"
+          title: Eliminar cualquier conexión
+        dal-config.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar la configuración de la conexión "{{target}}"
+          title: Gestionar cualquier conexión
+    role-extra-3:
+      label: Roles
+      all: todos los roles
+      specific: rol "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar rol "{{target}}"
+          title: Eliminar cualquier rol
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar miembros del rol "{{target}}"
+          title: Gestionar miembros de cualquier rol
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer rol "{{target}}"
+          title: Leer cualquier rol
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar rol "{{target}}"
+          title: Actualizar cualquier rol
+    queue-extra-3:
+      label: Colas
+      all: todas las colas
+      specific: cola "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar cola "{{target}}"
+          title: Eliminar cualquier cola
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar miembros de la cola "{{target}}"
+          title: Gestionar miembros de cualquier cola
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer cola "{{target}}"
+          title: Leer cualquier cola
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar cola "{{target}}"
+          title: Actualizar cualquier cola
+        queue.read:
+          description: 'Predeterminado: denegar'
+          specific: Leer mensajes de la cola "{{target}}"
+          title: Leer mensajes de cualquier cola
+        queue.write:
+          description: 'Predeterminado: denegar'
+          specific: Escribir mensajes en la cola "{{target}}"
+          title: Escribir mensajes en cualquier cola
+    auth-client-extra-4:
+      label: Clientes de autenticación
+      all: todos los clientes de autenticación
+      specific: cliente de autenticación "{{target}}"
+      operations:
+        authorize:
+          description: 'El usuario puede autorizar y usar este cliente. Predeterminado: denegar'
+          specific: Autorizar el cliente "{{target}}"
+          title: Autorizar cualquier cliente
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar el cliente "{{target}}"
+          title: Eliminar cualquier cliente
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer el cliente "{{target}}"
+          title: Leer cualquier cliente
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar el cliente "{{target}}"
+          title: Actualizar cualquier cliente
+    dal-connection-extra-4:
+      label: Conexiones
+      all: todas las conexiones
+      specific: conexión "{{target}}"
+      operations:
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer la conexión "{{target}}"
+          title: Leer cualquier conexión
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar la conexión "{{target}}"
+          title: Actualizar cualquier conexión
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar la conexión "{{target}}"
+          title: Eliminar cualquier conexión
+        dal-config.manage:
+          title: Gestionar cualquier conexión
+    role-extra-4:
+      label: Roles
+      all: todos los roles
+      specific: rol "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar {{target}}
+          title: Eliminar cualquier rol
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar los miembros de {{target}}
+          title: Gestionar los miembros de cualquier rol
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer {{target}}
+          title: Leer cualquier rol
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar {{target}}
+          title: Actualizar cualquier rol
+    queue-extra-4:
+      label: Colas
+      all: todas las colas
+      specific: cola "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar {{target}}
+          title: Eliminar cualquier cola
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar los miembros de {{target}}
+          title: Gestionar los miembros de cualquier cola
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer {{target}}
+          title: Leer cualquier cola
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar {{target}}
+          title: Actualizar cualquier cola
+        queue.read:
+          description: 'Predeterminado: denegar'
+          specific: Leer mensajes de {{target}}
+          title: Leer mensajes de cualquier cola
+        queue.write:
+          description: 'Predeterminado: denegar'
+          specific: Escribir mensajes en {{target}}
+          title: Escribir mensajes en cualquier cola
+    template:
+      label: Plantillas
+      all: todas las plantillas
+      specific: plantilla "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar {{target}}
+          title: Eliminar cualquier plantilla
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer {{target}}
+          title: Leer cualquier plantilla
+        render:
+          description: 'Predeterminado: denegar'
+          specific: Renderizar {{target}}
+          title: Renderizar cualquier plantilla
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar {{target}}
+          title: Actualizar cualquier plantilla
+    report:
+      label: Informes
+      all: todos los informes
+      specific: informe "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar {{target}}
+          title: Eliminar cualquier informe
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer {{target}}
+          title: Leer cualquier informe
+        run:
+          description: 'Predeterminado: denegar'
+          specific: Ejecutar {{target}}
+          title: Ejecutar cualquier informe
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar {{target}}
+          title: Actualizar cualquier informe
+    workflow:
+      label: Workflows
+      all: todos los workflows
+      specific: workflow "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar este workflow
+          title: Eliminar cualquier workflow
+        execute:
+          description: 'Predeterminado: denegar'
+          specific: Ejecutar este workflow
+          title: Ejecutar cualquier workflow
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer este workflow
+          title: Leer cualquier workflow
+        sessions.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar las sesiones de este workflow
+          title: Gestionar todas las sesiones
+        triggers.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar los activadores de este workflow
+          title: Gestionar todos los activadores
+        undelete:
+          description: 'Predeterminado: denegar'
+          specific: Restaurar este workflow
+          title: Restaurar cualquier workflow
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar este workflow
+          title: Actualizar cualquier workflow
+  system:
+    user:
+      label: Usuarios
+      all: todos los usuarios
+      specific: usuario "{{target}}"
+      operations:
+        credentials.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar credenciales de "{{target}}"
+          title: Gestionar credenciales de cualquier usuario
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar usuario "{{target}}"
+          title: Eliminar cualquier usuario
+        email.unmask:
+          description: 'Predeterminado: denegar'
+          specific: Mostrar correo electrónico de "{{target}}"
+          title: Mostrar correos electrónicos de cualquier usuario
+        name.unmask:
+          description: 'Predeterminado: denegar'
+          specific: Mostrar nombre de "{{target}}"
+          title: Mostrar nombres de cualquier usuario
+        impersonate:
+          description: 'Predeterminado: denegar'
+          specific: Suplantar usuario "{{target}}"
+          title: Suplantar cualquier usuario
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer usuario "{{target}}"
+          title: Leer cualquier usuario
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar usuario "{{target}}"
+          title: Actualizar cualquier usuario
+        suspend:
+          description: 'Predeterminado: denegar'
+          specific: Suspender {{target}}
+          title: Suspender cualquier usuario
+        unsuspend:
+          description: 'Predeterminado: denegar'
+          specific: Reactivar {{target}}
+          title: Reactivar cualquier usuario
+    template:
+      label: Plantillas
+      all: todas las plantillas
+      specific: plantilla "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar plantilla "{{target}}"
+          title: Eliminar cualquier plantilla
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer plantilla "{{target}}"
+          title: Leer cualquier plantilla
+        render:
+          description: 'Predeterminado: denegar'
+          specific: Renderizar plantilla "{{target}}"
+          title: Renderizar cualquier plantilla
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar plantilla "{{target}}"
+          title: Actualizar cualquier plantilla
+    report:
+      label: Informes
+      all: todos los informes
+      specific: informe "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar informe "{{target}}"
+          title: Eliminar cualquier informe
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer informe "{{target}}"
+          title: Leer cualquier informe
+        run:
+          description: 'Predeterminado: denegar'
+          specific: Ejecutar informe "{{target}}"
+          title: Ejecutar cualquier informe
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar informe "{{target}}"
+          title: Actualizar cualquier informe
+    user-group:
+      label: Grupos de usuarios
+      all: todos los grupos de usuarios
+      specific: grupo de usuarios "{{target}}"
+      operations:
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar miembros de {{target}}
+          title: Gestionar miembros de cualquier grupo de usuarios
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar grupo de usuarios "{{target}}"
+          title: Eliminar cualquier grupo de usuarios
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer grupo de usuarios "{{target}}"
+          title: Leer cualquier grupo de usuarios
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar grupo de usuarios "{{target}}"
+          title: Actualizar cualquier grupo de usuarios
+    data-privacy-request:
+      label: Solicitudes de privacidad
+      all: todas las solicitudes de privacidad
+      specific: solicitud de privacidad "{{target}}"
+      operations:
+        approve:
+          description: 'Predeterminado: denegar'
+          specific: Aprobar {{target}}
+          title: Aprobar cualquier solicitud
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer solicitud de privacidad "{{target}}"
+          title: Leer cualquier solicitud de privacidad
+        create:
+          description: 'Predeterminado: denegar'
+          specific: Crear solicitud de privacidad
+          title: Crear solicitudes de privacidad
+    auth-client:
+      label: Clientes de autenticación
+      all: todos los clientes de autenticación
+      specific: cliente de autenticación "{{target}}"
+      operations:
+        authorize:
+          description: 'El usuario puede autorizar este cliente. Predeterminado: denegar'
+          specific: Autorizar cliente "{{target}}"
+          title: Autorizar cualquier cliente
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar cliente "{{target}}"
+          title: Eliminar cualquier cliente
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer cliente "{{target}}"
+          title: Leer cualquier cliente
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar cliente "{{target}}"
+          title: Actualizar cualquier cliente
+    dal-connection:
+      label: Conexiones
+      all: todas las conexiones
+      specific: conexión "{{target}}"
+      operations:
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer conexión "{{target}}"
+          title: Leer cualquier conexión
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar conexión "{{target}}"
+          title: Actualizar cualquier conexión
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar conexión "{{target}}"
+          title: Eliminar cualquier conexión
+        dal-config.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar la configuración de la conexión "{{target}}"
+          title: Gestionar cualquier conexión
+    role:
+      label: Roles
+      all: todos los roles
+      specific: rol "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar rol "{{target}}"
+          title: Eliminar cualquier rol
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar miembros del rol "{{target}}"
+          title: Gestionar miembros de cualquier rol
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer rol "{{target}}"
+          title: Leer cualquier rol
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar rol "{{target}}"
+          title: Actualizar cualquier rol
+    queue:
+      label: Colas
+      all: todas las colas
+      specific: cola "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar cola "{{target}}"
+          title: Eliminar cualquier cola
+        members.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar miembros de la cola "{{target}}"
+          title: Gestionar miembros de cualquier cola
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer cola "{{target}}"
+          title: Leer cualquier cola
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar cola "{{target}}"
+          title: Actualizar cualquier cola
+        queue.read:
+          description: 'Predeterminado: denegar'
+          specific: Leer mensajes de la cola "{{target}}"
+          title: Leer mensajes de cualquier cola
+        queue.write:
+          description: 'Predeterminado: denegar'
+          specific: Escribir mensajes en la cola "{{target}}"
+          title: Escribir mensajes en cualquier cola
+    component:
+      label: Componente del sistema
+      operations:
+        action-log.read:
+          title: Acceder al registro de acciones
+        application.create:
+          title: Crear una aplicación
+        application.flag.global:
+          title: Fijar una aplicación para todos
+        application.flag.self:
+          title: Fijar una aplicación para sí mismo
+        user-groups.search:
+          title: Listar y buscar grupos de usuarios
+        user-group.create:
+          title: Crear un grupo de usuarios
+        applications.search:
+          title: Listar y buscar aplicaciones
+        auth-client.create:
+          title: Crear un cliente de autenticación
+        auth-clients.search:
+          title: Listar y buscar clientes de autenticación
+        apigw-route.create:
+          title: Crear una ruta
+        apigw-routes.search:
+          title: Listar y buscar rutas
+        apigw-filter.create:
+          title: Crear un filtro
+        apigw-filters.search:
+          title: Listar y buscar filtros
+        dal-schema-alterations.manage:
+          title: Gestionar modificaciones del esquema
+        report.create:
+          title: Crear un informe nuevo
+        reports.search:
+          title: Listar y buscar informes
+        dal-connections.search:
+          title: Buscar conexiones
+        dal-connection.create:
+          title: Crear conexiones
+        dal-sensitivity-level.manage:
+          title: Gestionar el nivel de sensibilidad de la conexión
+        data-privacy-requests.search:
+          title: Buscar solicitudes de privacidad
+        data-privacy-request.create:
+          title: Crear solicitudes de privacidad
+        grant:
+          title: Conceder permisos sobre el componente del sistema
+        queue.create:
+          title: Crear una cola de mensajes
+        queues.search:
+          title: Listar y buscar colas de mensajes
+        reminder.assign:
+          title: Permitir asignar recordatorios
+        notification.assign:
+          title: Permitir asignar notificaciones
+        role.create:
+          title: Crear un rol
+        roles.search:
+          title: Listar y buscar roles
+        settings.manage:
+          title: Gestionar todos los ajustes
+        settings.read:
+          title: Acceder a todos los ajustes
+        template.create:
+          title: Crear una plantilla
+        templates.search:
+          title: Listar y buscar plantillas
+        user.create:
+          title: Crear un usuario
+        users.search:
+          title: Listar y buscar usuarios
+        resource-translations.manage:
+          title: Gestionar traducciones de recursos
+    application:
+      label: Aplicaciones
+      all: todas las aplicaciones
+      specific: aplicación "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar {{target}}
+          title: Eliminar cualquier aplicación
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer {{target}}
+          title: Leer cualquier aplicación
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar {{target}}
+          title: Actualizar cualquier aplicación
+    apigw-route:
+      label: Rutas del gateway
+      all: todas las rutas
+      specific: ruta "{{target}}"
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar {{target}}
+          title: Eliminar cualquier ruta
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer {{target}}
+          title: Leer cualquier ruta
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar {{target}}
+          title: Actualizar cualquier ruta

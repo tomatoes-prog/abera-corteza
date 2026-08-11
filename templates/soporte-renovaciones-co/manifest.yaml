@@ -1,0 +1,31 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+id: soporte-renovaciones-co
+name: CRM Soporte y Renovaciones Colombia
+version: 1.0.1
+minimumCortezaVersion: 2024.9.9
+defaultLocale: es
+license: Apache-2.0
+description: Atención al cliente, SLA, retención, renovaciones y expansión.
+resources:
+  namespace: soporte-renovaciones-co
+  roles: [agente-soporte, supervisor-soporte, gestor-renovaciones, automatizacion-soporte]
+  users: [automatizacion-soporte]
+  modules: [clientes, contratos, casos, interacciones, renovaciones]
+  pages: [inicio, clientes, contratos, casos, interacciones, renovaciones]
+  charts:
+    - casos-por-prioridad
+    - casos-por-estado
+    - casos-por-categoria
+    - cumplimiento-sla
+    - funnel-renovaciones
+    - valor-renovaciones
+  workflows:
+    - preparar-caso-soporte
+    - registrar-primera-respuesta
+    - preparar-renovacion-contrato
+    - actualizar-estado-sla
+    - marcar-renovacion-riesgo
+    - confirmar-renovacion
+  scripts: [scripts/seed-demo.ps1]

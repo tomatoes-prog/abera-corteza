@@ -2,8 +2,11 @@ package provision
 
 import (
 	"context"
+	"fmt"
+	"os"
 	"time"
 
+	automationEnvoy "github.com/cortezaproject/corteza/server/automation/envoy"
 	"github.com/cortezaproject/corteza/server/pkg/options"
 	"github.com/cortezaproject/corteza/server/store"
 	"go.uber.org/zap"
@@ -20,6 +23,14 @@ var (
 func Run(ctx context.Context, log *zap.Logger, s store.Storer, provisionOpt options.ProvisionOpt, authOpt options.AuthOpt) error {
 	log = log.Named("provision")
 
+	aberaCfg, err := loadAberaBootstrapConfig(os.Getenv)
+	if err != nil {
+		return fmt.Errorf("configuración del bootstrap OAuth de Abera inválida: %w", err)
+	}
+	if aberaCfg.Enabled && authOpt.ProvisionSuperUser != "" {
+		return fmt.Errorf("AUTH_PROVISION_SUPER_USER y el bootstrap OAuth de Abera son mutuamente excluyentes")
+	}
+
 	// Note,
 	ffn := []func() error{
 		// Migrations:
@@ -30,6 +41,7 @@ func Run(ctx context.Context, log *zap.Logger, s store.Storer, provisionOpt opti
 
 		// Config (full & partial)
 		func() error { return importConfig(ctx, log.Named("config"), s, provisionOpt.Path) },
+		func() error { return automationEnvoy.RepairWorkflowVisuals(ctx, log.Named("workflow.visuals"), s) },
 
 		// *************************************************************************************************************
 
@@ -40,6 +52,7 @@ func Run(ctx context.Context, log *zap.Logger, s store.Storer, provisionOpt opti
 		func() error { return oidcAutoDiscovery(ctx, log.Named("auth.oidc-auto-discovery"), s, authOpt) },
 		func() error { return defaultUserGroup(ctx, log.Named("user-groups"), s, authOpt) },
 		func() error { return defaultAuthClient(ctx, log.Named("auth.clients"), s, authOpt) },
+		func() error { return provisionAberaBootstrap(ctx, log.Named("abera.bootstrap"), s, aberaCfg) },
 		func() error { return addAuthSuperUsers(ctx, log.Named("auth.super-users"), s, authOpt) },
 		func() error { return invalidateDedupRules(ctx, log.Named("compose.deduplication"), s) },
 		func() error { return setUsersTheme(ctx, log.Named("users.theme"), s) },

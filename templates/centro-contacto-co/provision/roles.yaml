@@ -1,0 +1,24 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+users:
+  automatizacion-contacto:
+    name: Automatización del centro de contacto
+    email: automatizacion.contacto@abera.local
+    emailConfirmed: true
+    kind: sys
+    roles: [automatizacion-contacto]
+
+roles:
+  agente-contacto:
+    name: Agente de contacto
+    meta: { description: Gestiona registros de campaña y llamadas asignadas. }
+  supervisor-contacto:
+    name: Supervisor de contacto
+    meta: { description: Supervisa campañas, cumplimiento y productividad. }
+  closer-comercial:
+    name: Closer comercial
+    meta: { description: Convierte contactos calificados en ventas. }
+  automatizacion-contacto:
+    name: Automatización del centro de contacto
+    meta: { description: Identidad técnica interna para ejecutar workflows de la plantilla. }

@@ -1,0 +1,47 @@
+list:
+  columns:
+    action: Acción
+    actor: Usuario
+    description: Descripción
+    requestOrigin: Origen
+    resource: Recurso
+    severity: Severidad
+    timestamp: Marca de tiempo
+  loading: Cargando acciones
+  details:
+    id: ID
+    header: Detalles
+    timestamp: Marca de tiempo
+    requestOrigin: Origen de la solicitud
+    requestID: ID de solicitud
+    actorIPAddr: Actor/usuario
+    actor: Usuario
+    actorID: ID de usuario
+    severity: Severidad
+    resource: Recurso
+    action: Acción
+    headerAdditional: Información adicional
+    description: Descripción
+    error: Error
+    meta: Metadatos
+  severity:
+    emergency: Emergencia
+    alert: Alerta
+    critical: Crítico
+    error: Error
+    warning: Advertencia
+    notice: Aviso
+    info: Información
+    debug: Depuración
+  filter:
+    action: Acción
+    actor: ID de usuario
+    choose-date: Elegir una fecha
+    from: Desde
+    no-time: No se ha seleccionado una hora
+    resource: Recurso
+    search: Buscar
+    to: Hasta
+    today: Hoy
+  loadOlder: Cargar acciones anteriores
+  title: Registro de acciones

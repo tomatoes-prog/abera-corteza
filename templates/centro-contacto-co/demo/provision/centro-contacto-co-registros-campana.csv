@@ -1,0 +1,101 @@
+ID,codigo,campana,contacto,agente,prioridad,intentos,proximoIntento,estado,ultimoResultado,fechaAsignacion,externalID
+registro-campana-001,CALL-REG-001,campana-002,contacto-001,agente-demo,Media,1,2026-07-31T13:00:00Z,En gestión,No contesta,2026-07-30T12:00:00Z,DIALER-REG-001
+registro-campana-002,CALL-REG-002,campana-003,contacto-002,agente-demo,Alta,2,2026-07-31T14:00:00Z,Callback,Callback,2026-07-29T12:00:00Z,DIALER-REG-002
+registro-campana-003,CALL-REG-003,campana-004,contacto-003,agente-demo,Baja,3,2026-07-31T15:00:00Z,Contactado,Contactado,2026-07-28T12:00:00Z,DIALER-REG-003
+registro-campana-004,CALL-REG-004,campana-001,contacto-004,agente-demo,Media,4,2026-07-31T16:00:00Z,Calificado,Calificado,2026-07-27T12:00:00Z,DIALER-REG-004
+registro-campana-005,CALL-REG-005,campana-002,contacto-005,agente-demo,Alta,0,2026-07-31T17:00:00Z,Cerrado,No interesado,2026-07-26T12:00:00Z,DIALER-REG-005
+registro-campana-006,CALL-REG-006,campana-003,contacto-006,agente-demo,Baja,1,2026-07-31T18:00:00Z,Pendiente,Pendiente,2026-07-25T12:00:00Z,DIALER-REG-006
+registro-campana-007,CALL-REG-007,campana-004,contacto-007,agente-demo,Media,2,2026-07-31T19:00:00Z,En gestión,No contesta,2026-07-24T12:00:00Z,DIALER-REG-007
+registro-campana-008,CALL-REG-008,campana-001,contacto-008,agente-demo,Alta,3,2026-07-31T20:00:00Z,Callback,Callback,2026-07-23T12:00:00Z,DIALER-REG-008
+registro-campana-009,CALL-REG-009,campana-002,contacto-009,agente-demo,Baja,4,2026-07-31T21:00:00Z,Contactado,Contactado,2026-07-22T12:00:00Z,DIALER-REG-009
+registro-campana-010,CALL-REG-010,campana-003,contacto-010,agente-demo,Media,0,2026-07-31T22:00:00Z,Calificado,Calificado,2026-07-21T12:00:00Z,DIALER-REG-010
+registro-campana-011,CALL-REG-011,campana-004,contacto-011,agente-demo,Alta,1,2026-07-31T23:00:00Z,Cerrado,No interesado,2026-07-20T12:00:00Z,DIALER-REG-011
+registro-campana-012,CALL-REG-012,campana-001,contacto-012,agente-demo,Baja,2,2026-08-01T00:00:00Z,Pendiente,Pendiente,2026-07-19T12:00:00Z,DIALER-REG-012
+registro-campana-013,CALL-REG-013,campana-002,contacto-013,agente-demo,Media,3,2026-08-01T01:00:00Z,En gestión,No contesta,2026-07-18T12:00:00Z,DIALER-REG-013
+registro-campana-014,CALL-REG-014,campana-003,contacto-014,agente-demo,Alta,4,2026-08-01T02:00:00Z,Callback,Callback,2026-07-17T12:00:00Z,DIALER-REG-014
+registro-campana-015,CALL-REG-015,campana-004,contacto-015,agente-demo,Baja,0,2026-08-01T03:00:00Z,Contactado,Contactado,2026-07-16T12:00:00Z,DIALER-REG-015
+registro-campana-016,CALL-REG-016,campana-001,contacto-016,agente-demo,Media,1,2026-08-01T04:00:00Z,Calificado,Calificado,2026-07-15T12:00:00Z,DIALER-REG-016
+registro-campana-017,CALL-REG-017,campana-002,contacto-017,agente-demo,Alta,2,2026-08-01T05:00:00Z,Cerrado,No interesado,2026-07-14T12:00:00Z,DIALER-REG-017
+registro-campana-018,CALL-REG-018,campana-003,contacto-018,agente-demo,Baja,3,2026-08-01T06:00:00Z,Pendiente,Pendiente,2026-07-13T12:00:00Z,DIALER-REG-018
+registro-campana-019,CALL-REG-019,campana-004,contacto-019,agente-demo,Media,4,2026-08-01T07:00:00Z,En gestión,No contesta,2026-07-12T12:00:00Z,DIALER-REG-019
+registro-campana-020,CALL-REG-020,campana-001,contacto-020,agente-demo,Alta,0,2026-08-01T08:00:00Z,Callback,Callback,2026-07-31T12:00:00Z,DIALER-REG-020
+registro-campana-021,CALL-REG-021,campana-002,contacto-021,agente-demo,Baja,1,2026-08-01T09:00:00Z,Contactado,Contactado,2026-07-30T12:00:00Z,DIALER-REG-021
+registro-campana-022,CALL-REG-022,campana-003,contacto-022,agente-demo,Media,2,2026-08-01T10:00:00Z,Calificado,Calificado,2026-07-29T12:00:00Z,DIALER-REG-022
+registro-campana-023,CALL-REG-023,campana-004,contacto-023,agente-demo,Alta,3,2026-08-01T11:00:00Z,Cerrado,No interesado,2026-07-28T12:00:00Z,DIALER-REG-023
+registro-campana-024,CALL-REG-024,campana-001,contacto-024,agente-demo,Baja,4,2026-08-01T12:00:00Z,Pendiente,Pendiente,2026-07-27T12:00:00Z,DIALER-REG-024
+registro-campana-025,CALL-REG-025,campana-002,contacto-025,agente-demo,Media,0,2026-08-01T13:00:00Z,En gestión,No contesta,2026-07-26T12:00:00Z,DIALER-REG-025
+registro-campana-026,CALL-REG-026,campana-003,contacto-026,agente-demo,Alta,1,2026-08-01T14:00:00Z,Callback,Callback,2026-07-25T12:00:00Z,DIALER-REG-026
+registro-campana-027,CALL-REG-027,campana-004,contacto-027,agente-demo,Baja,2,2026-08-01T15:00:00Z,Contactado,Contactado,2026-07-24T12:00:00Z,DIALER-REG-027
+registro-campana-028,CALL-REG-028,campana-001,contacto-028,agente-demo,Media,3,2026-08-01T16:00:00Z,Calificado,Calificado,2026-07-23T12:00:00Z,DIALER-REG-028
+registro-campana-029,CALL-REG-029,campana-002,contacto-029,agente-demo,Alta,4,2026-08-01T17:00:00Z,Cerrado,No interesado,2026-07-22T12:00:00Z,DIALER-REG-029
+registro-campana-030,CALL-REG-030,campana-003,contacto-030,agente-demo,Baja,0,2026-08-01T18:00:00Z,Pendiente,Pendiente,2026-07-21T12:00:00Z,DIALER-REG-030
+registro-campana-031,CALL-REG-031,campana-004,contacto-031,agente-demo,Media,1,2026-08-01T19:00:00Z,En gestión,No contesta,2026-07-20T12:00:00Z,DIALER-REG-031
+registro-campana-032,CALL-REG-032,campana-001,contacto-032,agente-demo,Alta,2,2026-08-01T20:00:00Z,Callback,Callback,2026-07-19T12:00:00Z,DIALER-REG-032
+registro-campana-033,CALL-REG-033,campana-002,contacto-033,agente-demo,Baja,3,2026-08-01T21:00:00Z,Contactado,Contactado,2026-07-18T12:00:00Z,DIALER-REG-033
+registro-campana-034,CALL-REG-034,campana-003,contacto-034,agente-demo,Media,4,2026-08-01T22:00:00Z,Calificado,Calificado,2026-07-17T12:00:00Z,DIALER-REG-034
+registro-campana-035,CALL-REG-035,campana-004,contacto-035,agente-demo,Alta,0,2026-08-01T23:00:00Z,Cerrado,No interesado,2026-07-16T12:00:00Z,DIALER-REG-035
+registro-campana-036,CALL-REG-036,campana-001,contacto-036,agente-demo,Baja,1,2026-08-02T00:00:00Z,Pendiente,Pendiente,2026-07-15T12:00:00Z,DIALER-REG-036
+registro-campana-037,CALL-REG-037,campana-002,contacto-037,agente-demo,Media,2,2026-08-02T01:00:00Z,En gestión,No contesta,2026-07-14T12:00:00Z,DIALER-REG-037
+registro-campana-038,CALL-REG-038,campana-003,contacto-038,agente-demo,Alta,3,2026-08-02T02:00:00Z,Callback,Callback,2026-07-13T12:00:00Z,DIALER-REG-038
+registro-campana-039,CALL-REG-039,campana-004,contacto-039,agente-demo,Baja,4,2026-08-02T03:00:00Z,Contactado,Contactado,2026-07-12T12:00:00Z,DIALER-REG-039
+registro-campana-040,CALL-REG-040,campana-001,contacto-040,agente-demo,Media,0,2026-08-02T04:00:00Z,Calificado,Calificado,2026-07-31T12:00:00Z,DIALER-REG-040
+registro-campana-041,CALL-REG-041,campana-002,contacto-041,agente-demo,Alta,1,2026-08-02T05:00:00Z,Cerrado,No interesado,2026-07-30T12:00:00Z,DIALER-REG-041
+registro-campana-042,CALL-REG-042,campana-003,contacto-042,agente-demo,Baja,2,2026-08-02T06:00:00Z,Pendiente,Pendiente,2026-07-29T12:00:00Z,DIALER-REG-042
+registro-campana-043,CALL-REG-043,campana-004,contacto-043,agente-demo,Media,3,2026-08-02T07:00:00Z,En gestión,No contesta,2026-07-28T12:00:00Z,DIALER-REG-043
+registro-campana-044,CALL-REG-044,campana-001,contacto-044,agente-demo,Alta,4,2026-08-02T08:00:00Z,Callback,Callback,2026-07-27T12:00:00Z,DIALER-REG-044
+registro-campana-045,CALL-REG-045,campana-002,contacto-045,agente-demo,Baja,0,2026-08-02T09:00:00Z,Contactado,Contactado,2026-07-26T12:00:00Z,DIALER-REG-045
+registro-campana-046,CALL-REG-046,campana-003,contacto-046,agente-demo,Media,1,2026-08-02T10:00:00Z,Calificado,Calificado,2026-07-25T12:00:00Z,DIALER-REG-046
+registro-campana-047,CALL-REG-047,campana-004,contacto-047,agente-demo,Alta,2,2026-08-02T11:00:00Z,Cerrado,No interesado,2026-07-24T12:00:00Z,DIALER-REG-047
+registro-campana-048,CALL-REG-048,campana-001,contacto-048,agente-demo,Baja,3,2026-08-02T12:00:00Z,Pendiente,Pendiente,2026-07-23T12:00:00Z,DIALER-REG-048
+registro-campana-049,CALL-REG-049,campana-002,contacto-049,agente-demo,Media,4,2026-08-02T13:00:00Z,En gestión,No contesta,2026-07-22T12:00:00Z,DIALER-REG-049
+registro-campana-050,CALL-REG-050,campana-003,contacto-050,agente-demo,Alta,0,2026-08-02T14:00:00Z,Callback,Callback,2026-07-21T12:00:00Z,DIALER-REG-050
+registro-campana-051,CALL-REG-051,campana-004,contacto-051,agente-demo,Baja,1,2026-08-02T15:00:00Z,Contactado,Contactado,2026-07-20T12:00:00Z,DIALER-REG-051
+registro-campana-052,CALL-REG-052,campana-001,contacto-052,agente-demo,Media,2,2026-08-02T16:00:00Z,Calificado,Calificado,2026-07-19T12:00:00Z,DIALER-REG-052
+registro-campana-053,CALL-REG-053,campana-002,contacto-053,agente-demo,Alta,3,2026-08-02T17:00:00Z,Cerrado,No interesado,2026-07-18T12:00:00Z,DIALER-REG-053
+registro-campana-054,CALL-REG-054,campana-003,contacto-054,agente-demo,Baja,4,2026-08-02T18:00:00Z,Pendiente,Pendiente,2026-07-17T12:00:00Z,DIALER-REG-054
+registro-campana-055,CALL-REG-055,campana-004,contacto-055,agente-demo,Media,0,2026-08-02T19:00:00Z,En gestión,No contesta,2026-07-16T12:00:00Z,DIALER-REG-055
+registro-campana-056,CALL-REG-056,campana-001,contacto-056,agente-demo,Alta,1,2026-08-02T20:00:00Z,Callback,Callback,2026-07-15T12:00:00Z,DIALER-REG-056
+registro-campana-057,CALL-REG-057,campana-002,contacto-057,agente-demo,Baja,2,2026-08-02T21:00:00Z,Contactado,Contactado,2026-07-14T12:00:00Z,DIALER-REG-057
+registro-campana-058,CALL-REG-058,campana-003,contacto-058,agente-demo,Media,3,2026-08-02T22:00:00Z,Calificado,Calificado,2026-07-13T12:00:00Z,DIALER-REG-058
+registro-campana-059,CALL-REG-059,campana-004,contacto-059,agente-demo,Alta,4,2026-08-02T23:00:00Z,Cerrado,No interesado,2026-07-12T12:00:00Z,DIALER-REG-059
+registro-campana-060,CALL-REG-060,campana-001,contacto-060,agente-demo,Baja,0,2026-08-03T00:00:00Z,Pendiente,Pendiente,2026-07-31T12:00:00Z,DIALER-REG-060
+registro-campana-061,CALL-REG-061,campana-002,contacto-061,agente-demo,Media,1,2026-08-03T01:00:00Z,En gestión,No contesta,2026-07-30T12:00:00Z,DIALER-REG-061
+registro-campana-062,CALL-REG-062,campana-003,contacto-062,agente-demo,Alta,2,2026-08-03T02:00:00Z,Callback,Callback,2026-07-29T12:00:00Z,DIALER-REG-062
+registro-campana-063,CALL-REG-063,campana-004,contacto-063,agente-demo,Baja,3,2026-08-03T03:00:00Z,Contactado,Contactado,2026-07-28T12:00:00Z,DIALER-REG-063
+registro-campana-064,CALL-REG-064,campana-001,contacto-064,agente-demo,Media,4,2026-08-03T04:00:00Z,Calificado,Calificado,2026-07-27T12:00:00Z,DIALER-REG-064
+registro-campana-065,CALL-REG-065,campana-002,contacto-065,agente-demo,Alta,0,2026-08-03T05:00:00Z,Cerrado,No interesado,2026-07-26T12:00:00Z,DIALER-REG-065
+registro-campana-066,CALL-REG-066,campana-003,contacto-066,agente-demo,Baja,1,2026-08-03T06:00:00Z,Pendiente,Pendiente,2026-07-25T12:00:00Z,DIALER-REG-066
+registro-campana-067,CALL-REG-067,campana-004,contacto-067,agente-demo,Media,2,2026-08-03T07:00:00Z,En gestión,No contesta,2026-07-24T12:00:00Z,DIALER-REG-067
+registro-campana-068,CALL-REG-068,campana-001,contacto-068,agente-demo,Alta,3,2026-08-03T08:00:00Z,Callback,Callback,2026-07-23T12:00:00Z,DIALER-REG-068
+registro-campana-069,CALL-REG-069,campana-002,contacto-069,agente-demo,Baja,4,2026-08-03T09:00:00Z,Contactado,Contactado,2026-07-22T12:00:00Z,DIALER-REG-069
+registro-campana-070,CALL-REG-070,campana-003,contacto-070,agente-demo,Media,0,2026-08-03T10:00:00Z,Calificado,Calificado,2026-07-21T12:00:00Z,DIALER-REG-070
+registro-campana-071,CALL-REG-071,campana-004,contacto-071,agente-demo,Alta,1,2026-08-03T11:00:00Z,Cerrado,No interesado,2026-07-20T12:00:00Z,DIALER-REG-071
+registro-campana-072,CALL-REG-072,campana-001,contacto-072,agente-demo,Baja,2,2026-07-31T12:00:00Z,Pendiente,Pendiente,2026-07-19T12:00:00Z,DIALER-REG-072
+registro-campana-073,CALL-REG-073,campana-002,contacto-073,agente-demo,Media,3,2026-07-31T13:00:00Z,En gestión,No contesta,2026-07-18T12:00:00Z,DIALER-REG-073
+registro-campana-074,CALL-REG-074,campana-003,contacto-074,agente-demo,Alta,4,2026-07-31T14:00:00Z,Callback,Callback,2026-07-17T12:00:00Z,DIALER-REG-074
+registro-campana-075,CALL-REG-075,campana-004,contacto-075,agente-demo,Baja,0,2026-07-31T15:00:00Z,Contactado,Contactado,2026-07-16T12:00:00Z,DIALER-REG-075
+registro-campana-076,CALL-REG-076,campana-001,contacto-076,agente-demo,Media,1,2026-07-31T16:00:00Z,Calificado,Calificado,2026-07-15T12:00:00Z,DIALER-REG-076
+registro-campana-077,CALL-REG-077,campana-002,contacto-077,agente-demo,Alta,2,2026-07-31T17:00:00Z,Cerrado,No interesado,2026-07-14T12:00:00Z,DIALER-REG-077
+registro-campana-078,CALL-REG-078,campana-003,contacto-078,agente-demo,Baja,3,2026-07-31T18:00:00Z,Pendiente,Pendiente,2026-07-13T12:00:00Z,DIALER-REG-078
+registro-campana-079,CALL-REG-079,campana-004,contacto-079,agente-demo,Media,4,2026-07-31T19:00:00Z,En gestión,No contesta,2026-07-12T12:00:00Z,DIALER-REG-079
+registro-campana-080,CALL-REG-080,campana-001,contacto-080,agente-demo,Alta,0,2026-07-31T20:00:00Z,Callback,Callback,2026-07-31T12:00:00Z,DIALER-REG-080
+registro-campana-081,CALL-REG-081,campana-002,contacto-081,agente-demo,Baja,1,2026-07-31T21:00:00Z,Contactado,Contactado,2026-07-30T12:00:00Z,DIALER-REG-081
+registro-campana-082,CALL-REG-082,campana-003,contacto-082,agente-demo,Media,2,2026-07-31T22:00:00Z,Calificado,Calificado,2026-07-29T12:00:00Z,DIALER-REG-082
+registro-campana-083,CALL-REG-083,campana-004,contacto-083,agente-demo,Alta,3,2026-07-31T23:00:00Z,Cerrado,No interesado,2026-07-28T12:00:00Z,DIALER-REG-083
+registro-campana-084,CALL-REG-084,campana-001,contacto-084,agente-demo,Baja,4,2026-08-01T00:00:00Z,Pendiente,Pendiente,2026-07-27T12:00:00Z,DIALER-REG-084
+registro-campana-085,CALL-REG-085,campana-002,contacto-085,agente-demo,Media,0,2026-08-01T01:00:00Z,En gestión,No contesta,2026-07-26T12:00:00Z,DIALER-REG-085
+registro-campana-086,CALL-REG-086,campana-003,contacto-086,agente-demo,Alta,1,2026-08-01T02:00:00Z,Callback,Callback,2026-07-25T12:00:00Z,DIALER-REG-086
+registro-campana-087,CALL-REG-087,campana-004,contacto-087,agente-demo,Baja,2,2026-08-01T03:00:00Z,Contactado,Contactado,2026-07-24T12:00:00Z,DIALER-REG-087
+registro-campana-088,CALL-REG-088,campana-001,contacto-088,agente-demo,Media,3,2026-08-01T04:00:00Z,Calificado,Calificado,2026-07-23T12:00:00Z,DIALER-REG-088
+registro-campana-089,CALL-REG-089,campana-002,contacto-089,agente-demo,Alta,4,2026-08-01T05:00:00Z,Cerrado,No interesado,2026-07-22T12:00:00Z,DIALER-REG-089
+registro-campana-090,CALL-REG-090,campana-003,contacto-090,agente-demo,Baja,0,2026-08-01T06:00:00Z,Pendiente,Pendiente,2026-07-21T12:00:00Z,DIALER-REG-090
+registro-campana-091,CALL-REG-091,campana-004,contacto-091,agente-demo,Media,1,2026-08-01T07:00:00Z,En gestión,No contesta,2026-07-20T12:00:00Z,DIALER-REG-091
+registro-campana-092,CALL-REG-092,campana-001,contacto-092,agente-demo,Alta,2,2026-08-01T08:00:00Z,Callback,Callback,2026-07-19T12:00:00Z,DIALER-REG-092
+registro-campana-093,CALL-REG-093,campana-002,contacto-093,agente-demo,Baja,3,2026-08-01T09:00:00Z,Contactado,Contactado,2026-07-18T12:00:00Z,DIALER-REG-093
+registro-campana-094,CALL-REG-094,campana-003,contacto-094,agente-demo,Media,4,2026-08-01T10:00:00Z,Calificado,Calificado,2026-07-17T12:00:00Z,DIALER-REG-094
+registro-campana-095,CALL-REG-095,campana-004,contacto-095,agente-demo,Alta,0,2026-08-01T11:00:00Z,Cerrado,No interesado,2026-07-16T12:00:00Z,DIALER-REG-095
+registro-campana-096,CALL-REG-096,campana-001,contacto-096,agente-demo,Baja,1,2026-08-01T12:00:00Z,Pendiente,Pendiente,2026-07-15T12:00:00Z,DIALER-REG-096
+registro-campana-097,CALL-REG-097,campana-002,contacto-097,agente-demo,Media,2,2026-08-01T13:00:00Z,En gestión,No contesta,2026-07-14T12:00:00Z,DIALER-REG-097
+registro-campana-098,CALL-REG-098,campana-003,contacto-098,agente-demo,Alta,3,2026-08-01T14:00:00Z,Callback,Callback,2026-07-13T12:00:00Z,DIALER-REG-098
+registro-campana-099,CALL-REG-099,campana-004,contacto-099,agente-demo,Baja,4,2026-08-01T15:00:00Z,Contactado,Contactado,2026-07-12T12:00:00Z,DIALER-REG-099
+registro-campana-100,CALL-REG-100,campana-001,contacto-100,agente-demo,Media,0,2026-08-01T16:00:00Z,Calificado,Calificado,2026-07-31T12:00:00Z,DIALER-REG-100

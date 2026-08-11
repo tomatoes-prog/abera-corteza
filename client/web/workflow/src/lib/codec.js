@@ -8,10 +8,11 @@ export function encodeGraph (model, vertices, edges) {
       return !!cell.vertex
     }).forEach(cell => {
       const triggerEdges = []
+      const cellEdges = cell.edges || []
 
       const defaultName = vertices[cell.id].config.defaultName || false
 
-      cell = {
+      const visual = {
         id: cell.id,
         value: cell.value,
         defaultName,
@@ -22,34 +23,35 @@ export function encodeGraph (model, vertices, edges) {
           cell.geometry.height || 0,
         ],
         parent: cell.parent.id,
-        edges: (cell.edges || []).forEach(({ id, value, parent, source, target, geometry, style }) => {
-          const edge = {
-            ...((edges[id] || {}).config || {}),
-            parentID: source.id,
-            childID: target.id,
-            meta: {
-              label: value || '',
-              description: '',
-              visual: {
-                id,
-                value,
-                parent: parent.id,
-                points: geometry.points,
-                style,
-              },
-            },
-          }
-
-          if (vertices[source.id].triggers || vertices[target.id].triggers) {
-            triggerEdges.push(edge)
-          } else if (!paths[id]) {
-            paths[id] = edge
-          }
-        }),
       }
 
+      cellEdges.forEach(({ id, value, parent, source, target, geometry, style }) => {
+        const edge = {
+          ...((edges[id] || {}).config || {}),
+          parentID: source.id,
+          childID: target.id,
+          meta: {
+            label: value || '',
+            description: '',
+            visual: {
+              id,
+              value,
+              parent: parent.id,
+              points: geometry.points,
+              style,
+            },
+          },
+        }
+
+        if (vertices[source.id].triggers || vertices[target.id].triggers) {
+          triggerEdges.push(edge)
+        } else if (!paths[id]) {
+          paths[id] = edge
+        }
+      })
+
       if (vertices[cell.id].triggers) {
-        cell.edges = triggerEdges
+        visual.edges = triggerEdges
         triggers.push({
           ...vertices[cell.id].triggers,
           stepID: (triggerEdges[0] || { childID: '0' }).childID,
@@ -58,7 +60,7 @@ export function encodeGraph (model, vertices, edges) {
           meta: {
             name: cell.value || '',
             description: '',
-            visual: cell,
+            visual,
           },
         })
       } else {
@@ -67,7 +69,9 @@ export function encodeGraph (model, vertices, edges) {
           meta: {
             label: cell.value || '',
             description: '',
-            visual: cell,
+            visual: {
+              ...visual,
+            },
           },
         })
       }

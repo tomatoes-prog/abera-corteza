@@ -1,0 +1,8 @@
+errors:
+  invalidID: ID no válido
+  notAllowedToRead: no tienes permiso para leer notificaciones de otros usuarios
+  notAllowedToCreate: no tienes permiso para crear notificaciones
+  notAllowedToUpdate: no tienes permiso para actualizar notificaciones
+  notAllowedToDelete: no tienes permiso para eliminar notificaciones
+  notAllowedToAssign: no tienes permiso para asignar notificaciones a otros usuarios
+  notFound: notificación no encontrada

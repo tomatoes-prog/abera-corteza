@@ -1,0 +1,36 @@
+ID,prospecto,vehiculo,asesor,etapa,valorPublicado,valorOfertado,requiereFinanciacion,valorFinanciado,recibeRetoma,descripcionRetoma,probabilidad,fechaEstimadaCierre,observaciones,motivoPerdida
+auto-oportunidad-001,auto-prospecto-001,vehiculo-002,asesor-demo,Financiación,72400000,70250000,1,35500000,0,Retoma sintética #1,40,2026-08-06,Oportunidad automotriz sintética.,
+auto-oportunidad-002,auto-prospecto-002,vehiculo-003,asesora-demo,Negociación,74800000,72500000,0,36000000,1,Retoma sintética #2,60,2026-08-07,Oportunidad automotriz sintética.,
+auto-oportunidad-003,auto-prospecto-003,vehiculo-004,asesor-demo,Documentación,77200000,74750000,1,36500000,0,Retoma sintética #3,80,2026-08-08,Oportunidad automotriz sintética.,
+auto-oportunidad-004,auto-prospecto-004,vehiculo-005,asesora-demo,Vendido,79600000,77000000,0,37000000,1,Retoma sintética #4,100,2026-08-09,Oportunidad automotriz sintética.,
+auto-oportunidad-005,auto-prospecto-005,vehiculo-006,asesor-demo,Perdido,82000000,79250000,1,37500000,0,Retoma sintética #5,0,2026-08-10,Oportunidad automotriz sintética.,Precio o financiación
+auto-oportunidad-006,auto-prospecto-006,vehiculo-007,asesora-demo,Cotización,84400000,81500000,0,38000000,1,Retoma sintética #6,20,2026-08-11,Oportunidad automotriz sintética.,
+auto-oportunidad-007,auto-prospecto-007,vehiculo-008,asesor-demo,Financiación,86800000,83750000,1,38500000,0,Retoma sintética #7,40,2026-08-12,Oportunidad automotriz sintética.,
+auto-oportunidad-008,auto-prospecto-008,vehiculo-009,asesora-demo,Negociación,89200000,86000000,0,39000000,1,Retoma sintética #8,60,2026-08-13,Oportunidad automotriz sintética.,
+auto-oportunidad-009,auto-prospecto-009,vehiculo-010,asesor-demo,Documentación,91600000,88250000,1,39500000,0,Retoma sintética #9,80,2026-08-14,Oportunidad automotriz sintética.,
+auto-oportunidad-010,auto-prospecto-010,vehiculo-011,asesora-demo,Vendido,94000000,90500000,0,40000000,1,Retoma sintética #10,100,2026-08-15,Oportunidad automotriz sintética.,
+auto-oportunidad-011,auto-prospecto-011,vehiculo-012,asesor-demo,Perdido,96400000,92750000,1,40500000,0,Retoma sintética #11,0,2026-08-16,Oportunidad automotriz sintética.,Precio o financiación
+auto-oportunidad-012,auto-prospecto-012,vehiculo-013,asesora-demo,Cotización,98800000,95000000,0,41000000,1,Retoma sintética #12,20,2026-08-17,Oportunidad automotriz sintética.,
+auto-oportunidad-013,auto-prospecto-013,vehiculo-014,asesor-demo,Financiación,101200000,97250000,1,41500000,0,Retoma sintética #13,40,2026-08-18,Oportunidad automotriz sintética.,
+auto-oportunidad-014,auto-prospecto-014,vehiculo-015,asesora-demo,Negociación,103600000,99500000,0,42000000,1,Retoma sintética #14,60,2026-08-19,Oportunidad automotriz sintética.,
+auto-oportunidad-015,auto-prospecto-015,vehiculo-016,asesor-demo,Documentación,106000000,101750000,1,42500000,0,Retoma sintética #15,80,2026-08-20,Oportunidad automotriz sintética.,
+auto-oportunidad-016,auto-prospecto-016,vehiculo-017,asesora-demo,Vendido,108400000,104000000,0,43000000,1,Retoma sintética #16,100,2026-08-21,Oportunidad automotriz sintética.,
+auto-oportunidad-017,auto-prospecto-017,vehiculo-018,asesor-demo,Perdido,110800000,106250000,1,43500000,0,Retoma sintética #17,0,2026-08-22,Oportunidad automotriz sintética.,Precio o financiación
+auto-oportunidad-018,auto-prospecto-018,vehiculo-019,asesora-demo,Cotización,113200000,108500000,0,44000000,1,Retoma sintética #18,20,2026-08-23,Oportunidad automotriz sintética.,
+auto-oportunidad-019,auto-prospecto-019,vehiculo-020,asesor-demo,Financiación,115600000,110750000,1,44500000,0,Retoma sintética #19,40,2026-08-24,Oportunidad automotriz sintética.,
+auto-oportunidad-020,auto-prospecto-020,vehiculo-021,asesora-demo,Negociación,118000000,113000000,0,45000000,1,Retoma sintética #20,60,2026-08-25,Oportunidad automotriz sintética.,
+auto-oportunidad-021,auto-prospecto-021,vehiculo-022,asesor-demo,Documentación,120400000,115250000,1,45500000,0,Retoma sintética #21,80,2026-08-26,Oportunidad automotriz sintética.,
+auto-oportunidad-022,auto-prospecto-022,vehiculo-023,asesora-demo,Vendido,122800000,117500000,0,46000000,1,Retoma sintética #22,100,2026-08-27,Oportunidad automotriz sintética.,
+auto-oportunidad-023,auto-prospecto-023,vehiculo-024,asesor-demo,Perdido,125200000,119750000,1,46500000,0,Retoma sintética #23,0,2026-08-28,Oportunidad automotriz sintética.,Precio o financiación
+auto-oportunidad-024,auto-prospecto-024,vehiculo-025,asesora-demo,Cotización,127600000,122000000,0,47000000,1,Retoma sintética #24,20,2026-08-29,Oportunidad automotriz sintética.,
+auto-oportunidad-025,auto-prospecto-025,vehiculo-026,asesor-demo,Financiación,130000000,124250000,1,47500000,0,Retoma sintética #25,40,2026-08-30,Oportunidad automotriz sintética.,
+auto-oportunidad-026,auto-prospecto-026,vehiculo-027,asesora-demo,Negociación,132400000,126500000,0,48000000,1,Retoma sintética #26,60,2026-08-31,Oportunidad automotriz sintética.,
+auto-oportunidad-027,auto-prospecto-027,vehiculo-028,asesor-demo,Documentación,134800000,128750000,1,48500000,0,Retoma sintética #27,80,2026-09-01,Oportunidad automotriz sintética.,
+auto-oportunidad-028,auto-prospecto-028,vehiculo-029,asesora-demo,Vendido,137200000,131000000,0,49000000,1,Retoma sintética #28,100,2026-09-02,Oportunidad automotriz sintética.,
+auto-oportunidad-029,auto-prospecto-029,vehiculo-030,asesor-demo,Perdido,139600000,133250000,1,49500000,0,Retoma sintética #29,0,2026-09-03,Oportunidad automotriz sintética.,Precio o financiación
+auto-oportunidad-030,auto-prospecto-030,vehiculo-031,asesora-demo,Cotización,142000000,135500000,0,50000000,1,Retoma sintética #30,20,2026-09-04,Oportunidad automotriz sintética.,
+auto-oportunidad-031,auto-prospecto-031,vehiculo-032,asesor-demo,Financiación,144400000,137750000,1,50500000,0,Retoma sintética #31,40,2026-09-05,Oportunidad automotriz sintética.,
+auto-oportunidad-032,auto-prospecto-032,vehiculo-033,asesora-demo,Negociación,146800000,140000000,0,51000000,1,Retoma sintética #32,60,2026-09-06,Oportunidad automotriz sintética.,
+auto-oportunidad-033,auto-prospecto-033,vehiculo-034,asesor-demo,Documentación,149200000,142250000,1,51500000,0,Retoma sintética #33,80,2026-09-07,Oportunidad automotriz sintética.,
+auto-oportunidad-034,auto-prospecto-034,vehiculo-035,asesora-demo,Vendido,151600000,144500000,0,52000000,1,Retoma sintética #34,100,2026-09-08,Oportunidad automotriz sintética.,
+auto-oportunidad-035,auto-prospecto-035,vehiculo-036,asesor-demo,Perdido,154000000,146750000,1,52500000,0,Retoma sintética #35,0,2026-09-09,Oportunidad automotriz sintética.,Precio o financiación

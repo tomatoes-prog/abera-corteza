@@ -1,0 +1,761 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: centro-contacto-co
+pages:
+  inicio:
+    title: Panel del supervisor
+    visible: true
+    blocks:
+    - title: Funnel comercial
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 16
+      - 30
+      options:
+        chart: funnel-contacto
+      blockID: 1
+    - title: Resultados de llamadas
+      kind: Chart
+      xywh:
+      - 16
+      - 0
+      - 16
+      - 30
+      options:
+        chart: resultados-llamadas
+      blockID: 2
+    - title: Productividad por agente
+      kind: Chart
+      xywh:
+      - 32
+      - 0
+      - 16
+      - 30
+      options:
+        chart: llamadas-por-agente
+      blockID: 3
+    - title: Callbacks vencidos y pendientes
+      kind: RecordList
+      xywh:
+      - 0
+      - 30
+      - 24
+      - 18
+      options:
+        module: registros-campana
+        fields:
+        - name: codigo
+        - name: campana
+        - name: contacto
+        - name: agente
+        - name: intentos
+        - name: proximoIntento
+        - name: estado
+        prefilter: estado = 'Callback' OR estado = 'Pendiente'
+        presort: proximoIntento ASC
+        perPage: 20
+        hideRecordCloneButton: true
+      blockID: 4
+    - title: Oportunidades recientes
+      kind: RecordList
+      xywh:
+      - 24
+      - 30
+      - 24
+      - 18
+      options:
+        module: oportunidades
+        fields:
+        - name: contacto
+        - name: campana
+        - name: closer
+        - name: producto
+        - name: etapa
+        - name: valor
+        - name: probabilidad
+        prefilter: etapa != 'Venta' AND etapa != 'Perdida'
+        presort: createdAt DESC
+        perPage: 15
+        hideRecordCloneButton: true
+      blockID: 5
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Panel del supervisor
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 16
+          - 30
+        - blockID: 2
+          xywh:
+          - 16
+          - 0
+          - 16
+          - 30
+        - blockID: 3
+          xywh:
+          - 32
+          - 0
+          - 16
+          - 30
+        - blockID: 4
+          xywh:
+          - 0
+          - 30
+          - 24
+          - 18
+        - blockID: 5
+          xywh:
+          - 24
+          - 30
+          - 24
+          - 18
+  contactos-leads:
+    title: Contactos
+    visible: true
+    blocks:
+    - title: Contactos y leads
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: contactos-leads
+        fields:
+        - name: nombres
+        - name: apellidos
+        - name: telefonoPrincipal
+        - name: ciudad
+        - name: productoInteres
+        - name: presupuesto
+        - name: estadoComercial
+        - name: responsable
+        - name: totalIntentos
+        - name: proximaLlamada
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      contacto-registro:
+        title: Detalle del contacto
+        module: contactos-leads
+        visible: false
+        blocks:
+        - title: Contacto
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 14
+          options:
+            fields:
+            - name: nombres
+            - name: apellidos
+            - name: identificacion
+            - name: telefonoPrincipal
+            - name: telefonoAlterno
+            - name: correo
+            - name: ciudad
+            - name: autorizaTratamientoDatos
+            - name: autorizaContacto
+            - name: noLlamar
+            - name: productoInteres
+            - name: presupuesto
+            - name: estadoComercial
+            - name: responsable
+            - name: totalIntentos
+            - name: proximaLlamada
+            - name: notas
+          blockID: 1
+        - title: Llamadas
+          kind: RecordList
+          xywh:
+          - 0
+          - 14
+          - 6
+          - 9
+          options:
+            module: llamadas
+            fields:
+            - name: inicio
+            - name: campana
+            - name: agente
+            - name: duracionSegundos
+            - name: disposicion
+            - name: callback
+            prefilter: contacto = ${recordID}
+            presort: inicio DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 2
+        - title: Oportunidades
+          kind: RecordList
+          xywh:
+          - 6
+          - 14
+          - 6
+          - 9
+          options:
+            module: oportunidades
+            fields:
+            - name: campana
+            - name: producto
+            - name: closer
+            - name: etapa
+            - name: valor
+            - name: probabilidad
+            prefilter: contacto = ${recordID}
+            presort: createdAt DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 3
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del contacto
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 14
+            - blockID: 2
+              xywh:
+              - 0
+              - 14
+              - 6
+              - 9
+            - blockID: 3
+              xywh:
+              - 6
+              - 14
+              - 6
+              - 9
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Contactos
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  campanas:
+    title: Campañas
+    visible: true
+    blocks:
+    - title: Conversión por campaña
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 4
+      - 30
+      options:
+        chart: conversion-por-campana
+      blockID: 1
+    - title: Campañas
+      kind: RecordList
+      xywh:
+      - 4
+      - 0
+      - 8
+      - 18
+      options:
+        module: campanas
+        fields:
+        - name: codigo
+        - name: nombre
+        - name: objetivo
+        - name: producto
+        - name: prioridad
+        - name: fechaInicio
+        - name: fechaFin
+        - name: metaContactos
+        - name: metaVentas
+        - name: estado
+        presort: fechaInicio DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 2
+    children:
+      campana-registro:
+        title: Detalle de la campaña
+        module: campanas
+        visible: false
+        blocks:
+        - title: Campaña
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 14
+          options:
+            fields:
+            - name: codigo
+            - name: nombre
+            - name: objetivo
+            - name: producto
+            - name: guion
+            - name: prioridad
+            - name: fechaInicio
+            - name: fechaFin
+            - name: horaInicio
+            - name: horaFin
+            - name: metaContactos
+            - name: metaVentas
+            - name: maximoIntentos
+            - name: estado
+          blockID: 1
+        - title: Registros de campaña
+          kind: RecordList
+          xywh:
+          - 0
+          - 14
+          - 12
+          - 9
+          options:
+            module: registros-campana
+            fields:
+            - name: codigo
+            - name: contacto
+            - name: agente
+            - name: prioridad
+            - name: intentos
+            - name: proximoIntento
+            - name: estado
+            - name: ultimoResultado
+            prefilter: campana = ${recordID}
+            presort: createdAt DESC
+            perPage: 20
+            hideRecordCloneButton: true
+          blockID: 2
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la campaña
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 14
+            - blockID: 2
+              xywh:
+              - 0
+              - 14
+              - 12
+              - 9
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Campañas
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 4
+          - 30
+        - blockID: 2
+          xywh:
+          - 4
+          - 0
+          - 8
+          - 18
+  registros-campana:
+    title: Cola de marcación
+    visible: true
+    blocks:
+    - title: Trabajo pendiente
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: registros-campana
+        fields:
+        - name: codigo
+        - name: campana
+        - name: contacto
+        - name: agente
+        - name: prioridad
+        - name: intentos
+        - name: proximoIntento
+        - name: estado
+        - name: ultimoResultado
+        prefilter: estado != 'Cerrado' AND estado != 'Agotado'
+        presort: proximoIntento ASC
+        perPage: 30
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      registro-campana-registro:
+        title: Detalle del registro
+        module: registros-campana
+        visible: false
+        blocks:
+        - title: Registro de campaña
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 48
+          - 12
+          options:
+            fields:
+            - name: codigo
+            - name: campana
+            - name: contacto
+            - name: agente
+            - name: prioridad
+            - name: intentos
+            - name: proximoIntento
+            - name: estado
+            - name: ultimoResultado
+            - name: fechaAsignacion
+          blockID: 1
+        - title: Historial de llamadas
+          kind: RecordList
+          xywh:
+          - 0
+          - 12
+          - 48
+          - 18
+          options:
+            module: llamadas
+            fields:
+            - name: inicio
+            - name: agente
+            - name: direccion
+            - name: duracionSegundos
+            - name: disposicion
+            - name: callback
+            - name: resumen
+            prefilter: registroCampana = ${recordID}
+            presort: inicio DESC
+            perPage: 20
+            hideRecordCloneButton: true
+          blockID: 2
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del registro
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 48
+              - 12
+            - blockID: 2
+              xywh:
+              - 0
+              - 12
+              - 48
+              - 18
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Cola de marcación
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  llamadas:
+    title: Llamadas
+    visible: true
+    blocks:
+    - title: Historial de llamadas
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: llamadas
+        fields:
+        - name: inicio
+        - name: contacto
+        - name: campana
+        - name: agente
+        - name: direccion
+        - name: duracionSegundos
+        - name: disposicion
+        - name: callback
+        - name: proveedorExterno
+        presort: inicio DESC
+        perPage: 30
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      llamada-registro:
+        title: Detalle de la llamada
+        module: llamadas
+        visible: false
+        blocks:
+        - title: Llamada
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: registroCampana
+            - name: contacto
+            - name: campana
+            - name: agente
+            - name: direccion
+            - name: inicio
+            - name: fin
+            - name: duracionSegundos
+            - name: disposicion
+            - name: resumen
+            - name: callback
+            - name: externalID
+            - name: proveedorExterno
+            - name: grabacionURL
+            - name: transcripcionURL
+            - name: estadoIntegracion
+            - name: ultimoErrorIntegracion
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la llamada
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Llamadas
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  oportunidades:
+    title: Oportunidades
+    visible: true
+    blocks:
+    - title: Valor por etapa
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 4
+      - 30
+      options:
+        chart: oportunidades-por-etapa
+      blockID: 1
+    - title: Pipeline de oportunidades
+      kind: RecordList
+      xywh:
+      - 4
+      - 0
+      - 8
+      - 18
+      options:
+        module: oportunidades
+        fields:
+        - name: codigo
+        - name: contacto
+        - name: campana
+        - name: closer
+        - name: producto
+        - name: etapa
+        - name: valor
+        - name: probabilidad
+        - name: fechaEstimadaCierre
+        presort: fechaEstimadaCierre ASC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 2
+    children:
+      oportunidad-registro:
+        title: Detalle de la oportunidad
+        module: oportunidades
+        visible: false
+        blocks:
+        - title: Oportunidad
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: codigo
+            - name: contacto
+            - name: campana
+            - name: closer
+            - name: producto
+            - name: etapa
+            - name: valor
+            - name: probabilidad
+            - name: fechaEstimadaCierre
+            - name: motivoPerdida
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la oportunidad
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Oportunidades
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 4
+          - 30
+        - blockID: 2
+          xywh:
+          - 4
+          - 0
+          - 8
+          - 18

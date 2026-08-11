@@ -29,9 +29,11 @@ func importConfig(ctx context.Context, log *zap.Logger, s store.Storer, paths st
 	}
 
 	var (
-		nn   envoyx.NodeSet
-		auxN envoyx.NodeSet
-		evy  = envoyx.Global()
+		nn        envoyx.NodeSet
+		auxN      envoyx.NodeSet
+		providers []envoyx.Provider
+		auxP      []envoyx.Provider
+		evy       = envoyx.Global()
 
 		sources = make([]string, 0, 16)
 	)
@@ -49,16 +51,20 @@ func importConfig(ctx context.Context, log *zap.Logger, s store.Storer, paths st
 		log.Info("importing all configs", zap.String("paths", paths))
 		for _, path := range sources {
 			log.Info("provisioning from path", zap.String("path", path))
-			auxN, _, err = evy.Decode(ctx, envoyx.DecodeParams{
+			auxN, auxP, err = evy.Decode(ctx, envoyx.DecodeParams{
 				Type: envoyx.DecodeTypeURI,
 				Params: map[string]any{
 					"uri": "file://" + path,
+				},
+				Config: map[string]any{
+					"multiValueDelimiter": "[,]",
 				},
 			})
 			if err != nil {
 				return err
 			}
 			nn = append(nn, auxN...)
+			providers = append(providers, auxP...)
 		}
 	} else {
 		nn, err = collectUnimportedConfigs(ctx, log, s, sources, evy)
@@ -98,7 +104,7 @@ func importConfig(ctx context.Context, log *zap.Logger, s store.Storer, paths st
 		}
 
 		gg, err := evy.Bake(ctx, ep,
-			nil,
+			providers,
 			nn...,
 		)
 		if err != nil {

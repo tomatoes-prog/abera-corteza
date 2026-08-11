@@ -1,0 +1,17 @@
+editor:
+  title: Fragmentos de código
+  code-snippets:
+    add: Añadir fragmento de código
+    empty: Aún no hay fragmentos
+    enabled: Activado
+    table-headers:
+      name: Nombre
+      enabled: Activado
+      script: Código
+    form:
+      title: Añadir fragmento de código
+      name:
+        label: Nombre
+      code:
+        label: Código
+        description: Añade un script externo o fragmento de código. Debe incluir una etiqueta <script> válida para funcionar.

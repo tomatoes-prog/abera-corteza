@@ -1,0 +1,16 @@
+errors:
+  handleNotUnique: el identificador no es único
+  invalidHandle: identificador inválido
+  invalidNamespaceID: ID de espacio de nombres inválido
+  moduleNotFound: el módulo no existe
+  namespaceNotFound: el espacio de nombres no existe
+  notAllowedToReadNamespace: no se permite leer este espacio de nombres
+  invalidID: ID inválido
+  notFound: el gráfico no existe
+  notAllowedToCreate: no tienes permiso para crear gráficos
+  notAllowedToDelete: no tienes permiso para eliminar este gráfico
+  notAllowedToRead: no tienes permiso para leer este gráfico
+  notAllowedToSearch: no tienes permiso para buscar o listar gráficos
+  notAllowedToUndelete: no tienes permiso para restaurar este gráfico
+  notAllowedToUpdate: no tienes permiso para actualizar este gráfico
+  staleData: el gráfico fue modificado por otra persona o workflow; actualiza la página

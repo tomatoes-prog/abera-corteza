@@ -1,0 +1,271 @@
+colorLabel: '{{count}} colores'
+colorScheme:
+  label: Esquema de colores
+  placeholder: Selecciona un esquema de colores
+  pickAColor: Selecciona un color
+  custom:
+    add: Añadir esquema de colores
+    edit: Editar esquema de colores
+    modal:
+      name:
+        label: Nombre
+      colors:
+        label: Colores
+configure:
+  reportsLabel: Informes
+general:
+  label:
+    title: Etiqueta
+    add: Añadir
+    count: Cantidad
+    permissions: Permisos
+  value: Valor
+  placeholder:
+    name: Nombre (por ejemplo, "Ventas por mes")
+    handle: Identificador único (a-z, 0-9, guion bajo o guion)
+    invalid-handle-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+import: 'Importar gráfico(s):'
+newLabel: 'Crear un gráfico nuevo:'
+name: 'Nombre del gráfico'
+handle: Identificador
+generalSettings: Configuración general
+notification:
+  loadFailed: No se pudo cargar el gráfico
+  saveFailed: No se pudo guardar este gráfico
+  saved: Gráfico guardado
+  deleteFailed: No se pudo eliminar el gráfico
+  deleted: Gráfico eliminado
+searchPlaceholder: Buscar gráficos en este espacio de trabajo
+title: Lista de gráficos
+undefined: indefinido
+edit:
+  yAxis:
+    axisOnRight: Colocar el eje a la derecha
+    axisScaleFromZero: Comenzar siempre la escala del eje desde cero
+    label: Eje Y
+    options:
+      label: Opciones
+    rotate:
+      label: Girar etiquetas
+      description: Las etiquetas se pueden girar de -90 a 90 grados
+    labelLabel: Etiqueta del eje
+    labelPosition:
+      label: Posición de la etiqueta
+      top: Inicio
+      center: Centro
+      bottom: Fin
+    horizontal:
+      label: Horizontal
+    logarithmicScale: Escala logarítmica
+    maxLabel: Valor máximo
+    maxPlaceholder: Valor máximo
+    minLabel: Valor mínimo
+    minPlaceholder: Valor mínimo
+  additionalConfig:
+    legend:
+      label: Leyenda
+      show: Mostrar leyenda
+      orientation:
+        label: Orientación
+        horizontal: Horizontal
+        vertical: Vertical
+      align:
+        label: Alineación
+        left: Izquierda
+        right: Derecha
+        center: Centro
+      scrollable: Desplazable
+      position:
+        customize: Posición predeterminada
+        top: Arriba
+        right: Derecha
+        bottom: Abajo
+        left: Izquierda
+      valueRange: Los valores pueden definirse en píxeles, como 20, o porcentajes, como 20%
+      options:
+        label: Opciones
+    tooltip:
+      label: Información emergente
+      labelNextToChart: Mostrar etiquetas junto al gráfico
+      formatting:
+        label: Formato personalizado
+        description: '{a}: etiqueta de la métrica, {b}: valor de dimensión, {c}: valor de métrica, {d}: porcentaje del valor de métrica'
+        placeholder: '{a}<br />{b} : {c} ({d}%)'
+        disclaimer: Añadir un valor al campo de formato desactiva el formato numérico, el prefijo y el sufijo, y viceversa
+    offset:
+      label: Desplazamiento
+      default: Desplazamiento predeterminado
+      position:
+        top: Arriba
+        right: Derecha
+        bottom: Abajo
+        left: Izquierda
+      valueRange: Los valores pueden definirse en píxeles, como 20, o porcentajes, como 20%
+  toolbox:
+    label: Herramientas
+    saveAsImage:
+      label: Mostrar botón «Guardar como imagen»
+    timeline:
+      label: Línea de tiempo
+      options:
+        none: Ninguno
+        x: Eje X
+        y: Eje Y
+        xy: Ambos
+  formatting:
+    format:
+      label: Formato
+      placeholder: '0.00'
+    prefix:
+      label: Prefijo
+      placeholder: '#'
+    suffix:
+      label: Sufijo
+      placeholder: '$'
+    presetFormats:
+      label: Formato
+      options:
+        custom: Personalizado
+        accounting: Número contable
+      description:
+        custom: ''
+        accounting: Los números negativos se convierten en positivos y se añaden entre paréntesis; el valor 0 se sustituye por un guion
+  animation:
+    label: Animación
+    enabled: Animación activada
+  dimension:
+    calculateLabelCount: Calcular cuántas etiquetas se pueden mostrar
+    defaultValueFootnote: Usa este valor cuando falten valores de dimensión
+    defaultValueLabel: Valor predeterminado
+    fieldLabel: Campo *
+    fieldPlaceholder: Selecciona un campo de dimensión
+    function:
+      placeholder: Selecciona el modificador de dimensión (tamaño del grupo)
+      none: Sin agrupación
+      auto: Automático
+      date: Fecha
+      label: Función
+      month: Mes
+      quarter: Trimestre
+      week: Semana
+      year: Año
+    gaugeSteps: Pasos
+    label: Dimensiones
+    skipMissingValues: Omitir valores faltantes
+    timeLabels: Etiquetas de tiempo
+    options:
+      label: Opciones
+    optionsPicker:
+      searchPlaceholder: Escribe aquí para buscar entre las opciones
+      availableItems: Opciones disponibles
+      selectAllItems: Seleccionar todas
+      selectedItems: Opciones seleccionadas
+      unselectAllItems: Deseleccionar todas
+      noItemsFound: No se encontraron opciones
+    rotate:
+      label: Girar etiquetas
+      description: Las etiquetas se pueden girar de -90 a 90 grados.
+  filter:
+    add: Añadir filtro
+    label: Filtros
+    field: Campo
+    operator: Operador
+    value: Valor
+    customize: Personalizar filtro
+    preset: Filtros predeterminados
+    footnote: 'Se admite la sintaxis de condición SQL simplificada (WHERE ...). Se evalúan variables como {{0}}, {{1}}, {{2}} y {{3}} cuando están disponibles'
+    placeholder: field1 = 1 AND field2 = 232
+    noFilter: Selecciona un filtro
+    recordsCreatedLastMonth: Registros creados el mes pasado
+    recordsCreatedLastQuarter: Registros creados el último trimestre
+    recordsCreatedLastYear: Registros creados el año pasado
+    recordsCreatedThisMonth: Registros creados este mes
+    recordsCreatedThisQuarter: Registros creados este trimestre
+    recordsCreatedThisYear: Registros creados este año
+  loadData: Cargar datos
+  metric:
+    add: Añadir métrica
+    label: Métricas
+    fieldLabel: Campo *
+    fieldPlaceholder: Selecciona un campo
+    title: Métricas
+    fillArea: Rellenar el área bajo la línea
+    fixTooltips: Mostrar siempre las etiquetas
+    options:
+      label: Opciones
+    function:
+      avg: AVG
+      label: Función
+      max: MAX
+      min: MIN
+      placeholder: Selecciona la función de agregación de la métrica
+      std: STD
+      sum: SUM
+    fx:
+      description: n - valor del conjunto de datos actual, m - valor del conjunto de datos anterior
+      label: Función de posprocesamiento
+    stack:
+      label: Apilado
+      description: Las métricas con el mismo valor se apilarán
+    lineStyle:
+      label: Estilo de línea
+      default: Predeterminado
+      smooth: Suave
+      step: Escalonado
+    angle:
+      start: Ángulo inicial
+      end: Ángulo final
+    rose: Rosa
+    radar:
+      shape:
+        label: Forma del radar
+        polygon: Polígono
+        circle: Círculo
+    gaugeColor: Color
+    labelColor: Color de etiqueta
+    labelLabel: Etiqueta
+    labelPlaceholder: Total
+    symbol:
+      label: Símbolo
+      circle: Círculo
+      triangle: Triángulo
+      diamond: Rombo
+      pin: Pin
+      arrow: Flecha
+      rect: Rectángulo
+      roundRect: Rectángulo redondeado
+    legend:
+      bottom: Abajo
+      left: Izquierda
+      positionPlaceholder: Posición de la leyenda
+      right: Derecha
+      top: Arriba
+    lineTension:
+      curvy: Curvaturas grandes
+      label: Tensión de línea
+      medium: Curvaturas medias
+      placeholder: Tensión de línea
+      slight: Curvaturas pequeñas
+      straight: Líneas rectas
+    output:
+      bar: Barras
+      doughnut: Anillo
+      label: Tipo de gráfico *
+      line: Línea
+      pie: Circular
+      scatter: Dispersión
+      placeholder: Selecciona la salida de la métrica
+    relative: Mostrar valor relativo
+    relativePrecision: 'Precisión:'
+    cumulative: Acumulada
+  module:
+    label: Módulo *
+    placeholder: Selecciona un módulo
+    title: Fuente de datos
+  title: Editor de gráficos
+  unconfiguredReport: Informe sin configurar
+  tooltip:
+    label: Información emergente
+    enabled: Mostrar información emergente
+  save: Guardar gráfico
+  cancel: Cancelar

@@ -1,0 +1,40 @@
+editor:
+  new: Nuevo nivel de sensibilidad
+  title:
+    create: Crear nivel de sensibilidad
+    edit: Editar nivel de sensibilidad
+  info:
+    title: Información básica
+    handle:
+      label: Identificador
+      placeholder: identificador (a-z, 0-9, guion bajo o guion)
+      invalid-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+    name: Nombre *
+    description: Descripción
+    level: Nivel {{level}}
+    delete: Eliminar
+    undelete: Restaurar
+list:
+  title: Niveles de sensibilidad
+  loading: Cargando niveles de sensibilidad
+  new: Nuevo nivel de sensibilidad
+  columns:
+    actions: ''
+    'meta.name': Nombre
+    level: Nivel
+    createdAt: Creado
+    state: Estado
+  delete: Eliminar
+  undelete: Restaurar
+  rows:
+    filters:
+      deleted: Eliminados
+  filterForm:
+    deleted:
+      label: niveles de sensibilidad eliminados
+    excluded:
+      label: Sin
+    exclusive:
+      label: Solo
+    inclusive:
+      label: Incluyendo

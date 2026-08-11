@@ -1,0 +1,28 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+id: centro-contacto-co
+name: CRM Centro de Contacto Colombia
+version: 1.0.1
+minimumCortezaVersion: 2024.9.9
+defaultLocale: es
+license: Apache-2.0
+description: Televentas, campañas, callbacks y oportunidades comerciales.
+resources:
+  namespace: centro-contacto-co
+  roles: [agente-contacto, supervisor-contacto, closer-comercial, automatizacion-contacto]
+  users: [automatizacion-contacto]
+  modules: [contactos-leads, campanas, registros-campana, llamadas, oportunidades]
+  pages: [inicio, contactos-leads, campanas, registros-campana, llamadas, oportunidades]
+  charts:
+    - funnel-contacto
+    - resultados-llamadas
+    - conversion-por-campana
+    - llamadas-por-agente
+    - oportunidades-por-etapa
+  workflows:
+    - asignar-registro-campana
+    - respetar-no-llamar
+    - procesar-resultado-llamada
+    - crear-oportunidad-llamada
+  scripts: [scripts/seed-demo.ps1]

@@ -1,0 +1,79 @@
+clear: Limpiar
+description: Descripción
+enabled: Activado
+enable: Activar
+disable: Desactivar
+error: Error
+error-expression: Mensaje de error (expresión)
+export: Exportar
+general: General
+handle: Identificador
+import:
+  json: Importar JSON
+  label: Importar
+  reassign-run-as: "NOTA: la propiedad Ejecutar como del flujo de trabajo no se importará y deberá reasignarse"
+  upload-files: Examina o suelta archivos para cargarlos...
+label:
+  all: Todos
+  any: Cualquiera
+  label: Etiqueta
+  or: O
+loading: Cargando
+name: Nombre
+new-workflow: Nuevo flujo de trabajo
+none: Ninguno
+now: Ahora
+offset: Desplazamiento
+permissions: Permisos
+reset: Restablecer
+searchPlaceholder: Buscar flujos de trabajo
+subworkflow: Subflujo de trabajo
+subworkflows: Subflujos de trabajo
+deleted: Eliminado
+disabled: Desactivado
+without: Sin
+only: Solo
+including: Incluyendo
+filter:
+  label: Filtrar
+  title: Filtrar flujos de trabajo
+  apply: Aplicar filtro
+  namespace:
+    label: Espacio de nombres
+    placeholder: Seleccionar espacio(s) de nombres
+  module:
+    label: Módulo
+    placeholder: Seleccionar módulo(s)
+    template: "{{namespace}} - Módulos"
+workflow-list: Lista de flujos de trabajo
+workflow:
+  single: Flujo de trabajo
+  plural: Flujos de trabajo
+save: Guardar
+today: Hoy
+cancel: Cancelar
+resourceList:
+  notFound: No encontrado
+  noItems: No hay elementos para mostrar
+  pagination:
+    next: Siguiente
+    prev: Anterior
+    showing: '{{from}} - {{to}} de {{count}} {{data}}'
+    single_one: 'Un {{data}}'
+    single_other: '{{count}} {{data}}'
+    recordsPerPage: Por página
+tooltip:
+  permissions: Permisos del flujo de trabajo
+columns:
+  name: Nombre
+  enabled: Activado
+  steps: Pasos
+  changedAt: Último cambio
+themes:
+  labels:
+    light: Claro
+    dark: Oscuro
+extendSession:
+  labels:
+    extend: Extender sesión
+    warning: Tu sesión se cerrará en {{ countdownTime }} segundos

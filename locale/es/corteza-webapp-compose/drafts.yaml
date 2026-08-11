@@ -1,0 +1,19 @@
+title: Borradores
+single: Borrador
+plural: Borradores
+empty: No se encontraron borradores
+saved: El borrador se ha guardado
+deleted: El borrador se ha eliminado
+allDeleted: Se han eliminado todos los borradores
+deleteError: Error al eliminar el borrador
+activeDraft: Este es un borrador; el registro todavía no se ha guardado
+openRecord: Abrir registro
+deleteDraft: Eliminar borrador
+saveAsNewDraft: Duplicar borrador
+applyDraft: Aplicar borrador al registro
+viewRecord: Ver registro
+deleteAllDrafts: Eliminar todos los borradores
+newestFirst: Más recientes primero
+oldestFirst: Más antiguos primero
+count_one: '{{count}} borrador'
+count_other: '{{count}} borradores'

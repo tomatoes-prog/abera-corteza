@@ -1,0 +1,38 @@
+automation: Automatización
+chart: Gráficos
+configuration: Configuración
+editPage: Editar página
+help:
+  documentation: Documentación
+  feedback: Enviar comentarios
+  forum: Ayuda
+  version: "Versión:"
+module: Módulos
+more: Más
+namespace: Espacios de trabajo
+noPageTitle: Página sin título
+page: Páginas
+appMenu: Menú
+userSettings:
+  changePassword: Cambiar contraseña
+  loggedInAs: Sesión iniciada como {{user}}
+  logout: Cerrar sesión
+  profile: Perfil
+  theme: Tema
+viewPage: Ver página
+search:
+  label: Buscar
+  placeholder: Buscar registros
+  noResults: No se encontraron resultados
+  navigate: navegar
+  select: seleccionar
+  close: cerrar
+  notFoundNamespace: No se encontró el espacio de trabajo
+  notFoundPage: No se encontró la página
+  recordRedirectError: Error al navegar al registro
+  untitledRecord: Registro sin título
+  recentSearches: Búsquedas recientes
+  clearHistory: Limpiar
+  openInNewTab: Abrir en una pestaña nueva
+  numberOfResults_one: "{{count}} registro"
+  numberOfResults_other: "{{count}} registros"

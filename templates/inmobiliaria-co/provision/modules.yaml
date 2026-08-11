@@ -1,0 +1,558 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: inmobiliaria-co
+modules:
+  inmuebles:
+    name: Inmuebles
+    fields:
+      codigo:
+        label: Código
+        kind: String
+        required: true
+      nombre:
+        label: Nombre
+        kind: String
+        required: true
+      descripcion:
+        label: Descripción
+        kind: String
+        options:
+          multiLine: true
+          useRichTextEditor: true
+      tipoOperacion:
+        label: Tipo de operación
+        kind: Select
+        required: true
+        options:
+          options: &tipos-operacion
+            - { text: Venta, value: Venta }
+            - { text: Arriendo, value: Arriendo }
+            - { text: Venta o arriendo, value: Venta o arriendo }
+          selectType: default
+      tipoInmueble:
+        label: Tipo de inmueble
+        kind: Select
+        required: true
+        options:
+          options: &tipos-inmueble
+            - { text: Apartamento, value: Apartamento }
+            - { text: Casa, value: Casa }
+            - { text: Oficina, value: Oficina }
+            - { text: Local, value: Local }
+            - { text: Lote, value: Lote }
+            - { text: Finca, value: Finca }
+            - { text: Bodega, value: Bodega }
+            - { text: Consultorio, value: Consultorio }
+            - { text: Habitación, value: Habitación }
+            - { text: Otro, value: Otro }
+          selectType: default
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Disponible
+        options:
+          options:
+            - { text: Disponible, value: Disponible }
+            - { text: Reservado, value: Reservado }
+            - { text: Arrendado, value: Arrendado }
+            - { text: Vendido, value: Vendido }
+            - { text: Inactivo, value: Inactivo }
+          selectType: default
+      departamento:
+        label: Departamento
+        kind: Select
+        required: true
+        options:
+          options: &departamentos-colombia
+            - { text: Amazonas, value: Amazonas }
+            - { text: Antioquia, value: Antioquia }
+            - { text: Arauca, value: Arauca }
+            - { text: Atlántico, value: Atlántico }
+            - { text: Bogotá D.C., value: Bogotá D.C. }
+            - { text: Bolívar, value: Bolívar }
+            - { text: Boyacá, value: Boyacá }
+            - { text: Caldas, value: Caldas }
+            - { text: Caquetá, value: Caquetá }
+            - { text: Casanare, value: Casanare }
+            - { text: Cauca, value: Cauca }
+            - { text: Cesar, value: Cesar }
+            - { text: Chocó, value: Chocó }
+            - { text: Córdoba, value: Córdoba }
+            - { text: Cundinamarca, value: Cundinamarca }
+            - { text: Guainía, value: Guainía }
+            - { text: Guaviare, value: Guaviare }
+            - { text: Huila, value: Huila }
+            - { text: La Guajira, value: La Guajira }
+            - { text: Magdalena, value: Magdalena }
+            - { text: Meta, value: Meta }
+            - { text: Nariño, value: Nariño }
+            - { text: Norte de Santander, value: Norte de Santander }
+            - { text: Putumayo, value: Putumayo }
+            - { text: Quindío, value: Quindío }
+            - { text: Risaralda, value: Risaralda }
+            - { text: San Andrés y Providencia, value: San Andrés y Providencia }
+            - { text: Santander, value: Santander }
+            - { text: Sucre, value: Sucre }
+            - { text: Tolima, value: Tolima }
+            - { text: Valle del Cauca, value: Valle del Cauca }
+            - { text: Vaupés, value: Vaupés }
+            - { text: Vichada, value: Vichada }
+          selectType: default
+      ciudad:
+        label: Ciudad
+        kind: String
+        required: true
+      direccion:
+        label: Dirección
+        kind: String
+      precioVenta:
+        label: Precio de venta
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+          prefix: "$ "
+      canonArrendamiento:
+        label: Canon de arrendamiento
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+          prefix: "$ "
+      administracion:
+        label: Administración
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+          prefix: "$ "
+      area:
+        label: Área en m²
+        kind: Number
+        options:
+          format: "0.00"
+          precision: 2
+          suffix: " m²"
+      habitaciones:
+        label: Habitaciones
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+      banos:
+        label: Baños
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+      parqueaderos:
+        label: Parqueaderos
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+      estrato:
+        label: Estrato
+        kind: Select
+        options:
+          options:
+            - { text: "1", value: "1" }
+            - { text: "2", value: "2" }
+            - { text: "3", value: "3" }
+            - { text: "4", value: "4" }
+            - { text: "5", value: "5" }
+            - { text: "6", value: "6" }
+            - { text: Rural o no aplica, value: Rural o no aplica }
+          selectType: default
+      fotografias:
+        label: Fotografías
+        kind: File
+        multi: true
+        options:
+          allowDocuments: false
+          allowImages: true
+          maxSize: 0
+          mode: list
+      documentos:
+        label: Documentos
+        kind: File
+        multi: true
+        options:
+          allowDocuments: true
+          allowImages: false
+          maxSize: 0
+          mode: list
+      propietarioNombre:
+        label: Nombre del propietario
+        kind: String
+      propietarioTelefono:
+        label: Teléfono del propietario
+        kind: String
+
+  leads:
+    name: Leads
+    fields:
+      nombres:
+        label: Nombres
+        kind: String
+        required: true
+      apellidos:
+        label: Apellidos
+        kind: String
+      telefono:
+        label: Teléfono
+        kind: String
+        required: true
+      correo:
+        label: Correo electrónico
+        kind: String
+      autorizaTratamientoDatos:
+        label: Autoriza el tratamiento de datos
+        kind: Bool
+        options:
+          falseLabel: "No"
+          trueLabel: "Sí"
+      tipoOperacion:
+        label: Tipo de operación
+        kind: Select
+        required: true
+        options:
+          options: *tipos-operacion
+          selectType: default
+      tiposInmueble:
+        label: Tipos de inmueble buscados
+        kind: Select
+        multi: true
+        options:
+          options: *tipos-inmueble
+          selectType: multiple
+      departamentoBusqueda:
+        label: Departamento de búsqueda
+        kind: Select
+        required: true
+        options:
+          options: *departamentos-colombia
+          selectType: default
+      ciudadBusqueda:
+        label: Ciudad de búsqueda
+        kind: String
+        required: true
+      presupuestoMinimo:
+        label: Presupuesto mínimo
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+          prefix: "$ "
+      presupuestoMaximo:
+        label: Presupuesto máximo
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+          prefix: "$ "
+      habitacionesMinimas:
+        label: Habitaciones mínimas
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+      banosMinimos:
+        label: Baños mínimos
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+      inmueblesInteres:
+        label: Inmuebles de interés
+        kind: Record
+        multi: true
+        options:
+          labelField: nombre
+          module: inmuebles
+          queryFields:
+            - codigo
+            - nombre
+            - ciudad
+          selectType: multiple
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Nuevo
+        options:
+          options:
+            - { text: Nuevo, value: Nuevo }
+            - { text: En contacto, value: En contacto }
+            - { text: Calificado, value: Calificado }
+            - { text: Cita agendada, value: Cita agendada }
+            - { text: Negociación, value: Negociación }
+            - { text: Ganado, value: Ganado }
+            - { text: Perdido, value: Perdido }
+            - { text: Descartado, value: Descartado }
+          selectType: default
+      responsable:
+        label: Asesor responsable
+        kind: User
+        options:
+          selectType: default
+      fechaAsignacion:
+        label: Fecha de asignación
+        kind: DateTime
+      proximoContacto:
+        label: Próximo contacto
+        kind: DateTime
+      notas:
+        label: Notas
+        kind: String
+        options:
+          multiLine: true
+          useRichTextEditor: true
+
+  citas:
+    name: Citas
+    fields:
+      asunto:
+        label: Asunto
+        kind: String
+        required: true
+      lead:
+        label: Lead
+        kind: Record
+        required: true
+        options:
+          labelField: nombres
+          module: leads
+          queryFields:
+            - nombres
+            - apellidos
+            - telefono
+          selectType: default
+      asesor:
+        label: Asesor
+        kind: User
+        required: true
+        options:
+          selectType: default
+      inmuebles:
+        label: Inmuebles
+        kind: Record
+        multi: true
+        options:
+          labelField: nombre
+          module: inmuebles
+          queryFields:
+            - codigo
+            - nombre
+            - ciudad
+          selectType: multiple
+      inicio:
+        label: Inicio
+        kind: DateTime
+        required: true
+      fin:
+        label: Finalización
+        kind: DateTime
+      tipo:
+        label: Tipo
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Visita, value: Visita }
+            - { text: Llamada, value: Llamada }
+            - { text: Virtual, value: Virtual }
+            - { text: Oficina, value: Oficina }
+          selectType: default
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Pendiente
+        options:
+          options:
+            - { text: Pendiente, value: Pendiente }
+            - { text: Confirmada, value: Confirmada }
+            - { text: Completada, value: Completada }
+            - { text: Cancelada, value: Cancelada }
+            - { text: Reprogramada, value: Reprogramada }
+            - { text: No asistió, value: No asistió }
+          selectType: default
+      puntoEncuentro:
+        label: Punto de encuentro
+        kind: String
+      resultado:
+        label: Resultado
+        kind: String
+        options:
+          multiLine: true
+      observaciones:
+        label: Observaciones
+        kind: String
+        options:
+          multiLine: true
+          useRichTextEditor: true
+
+  actividades:
+    name: Actividades
+    fields:
+      lead:
+        label: Lead
+        kind: Record
+        required: true
+        options:
+          labelField: nombres
+          module: leads
+          queryFields:
+            - nombres
+            - apellidos
+            - telefono
+          selectType: default
+      inmueble:
+        label: Inmueble
+        kind: Record
+        options:
+          labelField: nombre
+          module: inmuebles
+          queryFields:
+            - codigo
+            - nombre
+            - ciudad
+          selectType: default
+      asesor:
+        label: Asesor
+        kind: User
+        required: true
+        options:
+          selectType: default
+      tipo:
+        label: Tipo
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Llamada, value: Llamada }
+            - { text: WhatsApp, value: WhatsApp }
+            - { text: Correo, value: Correo }
+            - { text: Nota, value: Nota }
+            - { text: Seguimiento, value: Seguimiento }
+          selectType: default
+      fecha:
+        label: Fecha
+        kind: DateTime
+        required: true
+      resultado:
+        label: Resultado
+        kind: String
+      proximaAccion:
+        label: Próxima acción
+        kind: DateTime
+      observaciones:
+        label: Observaciones
+        kind: String
+        options:
+          multiLine: true
+          useRichTextEditor: true
+
+  negociaciones:
+    name: Negociaciones
+    fields:
+      lead:
+        label: Lead
+        kind: Record
+        required: true
+        options:
+          labelField: nombres
+          module: leads
+          queryFields:
+            - nombres
+            - apellidos
+            - telefono
+          selectType: default
+      inmueble:
+        label: Inmueble
+        kind: Record
+        required: true
+        options:
+          labelField: nombre
+          module: inmuebles
+          queryFields:
+            - codigo
+            - nombre
+            - ciudad
+          selectType: default
+      asesor:
+        label: Asesor
+        kind: User
+        required: true
+        options:
+          selectType: default
+      tipoOperacion:
+        label: Tipo de operación
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Venta, value: Venta }
+            - { text: Arriendo, value: Arriendo }
+          selectType: default
+      etapa:
+        label: Etapa
+        kind: Select
+        required: true
+        default: Calificación
+        options:
+          options:
+            - { text: Calificación, value: Calificación }
+            - { text: Oferta, value: Oferta }
+            - { text: Documentación, value: Documentación }
+            - { text: Cierre, value: Cierre }
+          selectType: default
+      valorPublicado:
+        label: Valor publicado
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+          prefix: "$ "
+      valorOfrecido:
+        label: Valor ofrecido
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+          prefix: "$ "
+      probabilidad:
+        label: Probabilidad
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+          suffix: "%"
+      fechaEstimadaCierre:
+        label: Fecha estimada de cierre
+        kind: DateTime
+        options:
+          onlyDate: true
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Abierta
+        options:
+          options:
+            - { text: Abierta, value: Abierta }
+            - { text: Ganada, value: Ganada }
+            - { text: Perdida, value: Perdida }
+          selectType: default
+      motivoPerdida:
+        label: Motivo de pérdida
+        kind: String
+      observaciones:
+        label: Observaciones
+        kind: String
+        options:
+          multiLine: true
+          useRichTextEditor: true

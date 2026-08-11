@@ -1,0 +1,24 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+users:
+  automatizacion-soporte:
+    name: Automatización de soporte
+    email: automatizacion.soporte@abera.local
+    emailConfirmed: true
+    kind: sys
+    roles: [automatizacion-soporte]
+
+roles:
+  agente-soporte:
+    name: Agente de soporte
+    meta: { description: Atiende casos e interacciones asignadas. }
+  supervisor-soporte:
+    name: Supervisor de soporte
+    meta: { description: Supervisa SLA, calidad, capacidad y escalaciones. }
+  gestor-renovaciones:
+    name: Gestor de renovaciones
+    meta: { description: Gestiona retención, renovaciones y expansión. }
+  automatizacion-soporte:
+    name: Automatización de soporte
+    meta: { description: Identidad técnica interna para ejecutar workflows y controles de SLA. }

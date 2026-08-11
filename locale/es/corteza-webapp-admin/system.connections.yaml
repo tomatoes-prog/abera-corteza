@@ -1,0 +1,102 @@
+primary:
+  title: Base de datos principal
+  name: Nombre
+  handle: Identificador
+  location: Ubicación
+  ownership: Propiedad
+  sensitivity-level: Nivel de sensibilidad
+list:
+  title: Lista de conexiones de base de datos
+  add-button: Nueva conexión
+  loading: Cargando conexiones
+  filterForm:
+    deleted:
+      label: conexiones eliminadas
+    excluded:
+      label: Sin
+    exclusive:
+      label: Solo
+    inclusive:
+      label: Incluyendo
+  columns:
+    name: Nombre
+    location: Ubicación
+    ownership: Propiedad
+    createdAt: Creada
+    actions: ''
+  delete: Eliminar
+  undelete: Restaurar
+editor:
+  title:
+    edit: Editar conexión
+    create: Nueva conexión
+  basic:
+    title: Ajustes básicos
+    form:
+      name:
+        label: Nombre *
+        placeholder: Lago de datos
+        description: ''
+      handle:
+        label: Identificador
+        placeholder: nombre_de_conexion_simplificado
+        invalid-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+      location-name:
+        label: Nombre de la ubicación
+        placeholder: Nombre del lugar donde se almacenan los datos
+        description: Nombre de la ciudad, país, continente, etc.
+      location-geometry:
+        label: Coordenadas de la ubicación
+        description: Coordenadas del lugar donde se almacenan los datos
+      ownership:
+        label: Propiedad
+        placeholder: ACME ltd.
+        description: Nombre de la empresa o persona propietaria de los datos
+      sensitivity-level:
+        label: Nivel de sensibilidad máximo permitido
+        placeholder: Selecciona un nivel de sensibilidad
+        description: Nivel máximo de sensibilidad permitido para los datos almacenados
+  properties:
+    title: Propiedades de conexión y base de datos
+    form:
+      data-at-rest-encryption:
+        checkbox:
+          label: Cifrado de datos en reposo activado
+        notes:
+          label: Notas sobre el cifrado
+          description: Notas internas sobre el cifrado de datos en reposo
+      data-at-rest-protection:
+        checkbox:
+          label: Protección de datos en reposo proporcionada
+        notes:
+          label: Notas sobre la protección de datos en reposo
+          description: Notas internas sobre la protección física de datos
+      data-at-transit-encryption:
+        checkbox:
+          label: Cifrado de datos en tránsito activado
+        notes:
+          label: Notas sobre el cifrado en tránsito
+          description: Notas internas sobre el cifrado de red
+      data-restoration:
+        checkbox:
+          label: Copia de seguridad y restauración implementadas
+        notes:
+          label: Notas sobre la restauración de datos
+          description: Notas internas sobre la restauración de datos
+  dal:
+    title: Configuración de la capa de acceso a datos y parámetros de conexión
+    form:
+      model-ident:
+        label: Nombre predeterminado de tabla o contenedor
+        placeholder: compose_record
+        description: 'El identificador puede contener marcadores como {{module}} y {{namespace}}.'
+      type:
+        label: Tipo de conexión y parámetros
+        placeholder: corteza::dal:connection:dsn
+        description: 'Tipo de conexión y parámetros, por ejemplo: corteza::dal:connection:dsn'
+      params:
+        label: Parámetros de conexión
+        placeholder: postgres://user:pass@host:port/dbname
+        description: 'Parámetros de conexión, por ejemplo: {"dsn": "postgres://user:pass@host:port/dbname"}'
+    connectivity-issues: Problemas de conexión
+    no-access-warning: No tienes permisos para gestionar la configuración de acceso a datos y los parámetros de conexión de esta conexión

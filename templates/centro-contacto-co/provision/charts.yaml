@@ -1,0 +1,61 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: centro-contacto-co
+charts:
+  funnel-contacto:
+    name: Funnel de contacto
+    config:
+      reports:
+        - module: contactos-leads
+          filter: ""
+          dimensions: [{ field: estadoComercial, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: funnel, fixTooltips: true }]
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  resultados-llamadas:
+    name: Resultados de llamadas
+    config:
+      reports:
+        - module: llamadas
+          filter: ""
+          dimensions: [{ field: disposicion, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: pie, fixTooltips: true }]
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  conversion-por-campana:
+    name: Contactos calificados por campaña
+    config:
+      reports:
+        - module: registros-campana
+          filter: estado = 'Calificado' OR estado = 'Cerrado'
+          dimensions: [{ field: campana, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10
+  llamadas-por-agente:
+    name: Llamadas por agente
+    config:
+      reports:
+        - module: llamadas
+          filter: ""
+          dimensions: [{ field: agente, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10
+  oportunidades-por-etapa:
+    name: Oportunidades por etapa
+    config:
+      reports:
+        - module: oportunidades
+          filter: ""
+          dimensions: [{ field: etapa, modifier: (no grouping / buckets) }]
+          metrics: [{ field: valor, aggregate: SUM, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10

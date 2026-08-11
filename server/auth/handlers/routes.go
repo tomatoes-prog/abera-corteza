@@ -2,6 +2,8 @@ package handlers
 
 import (
 	"net/http"
+	"os"
+	"strings"
 
 	"github.com/cortezaproject/corteza/server/pkg/actionlog"
 	"github.com/cortezaproject/corteza/server/pkg/auth"
@@ -10,6 +12,15 @@ import (
 	"github.com/go-chi/httprate"
 	"github.com/gorilla/csrf"
 )
+
+// markPlaintextHTTP tells the CSRF middleware when authentication is served
+// over plain HTTP (for example, a local Docker deployment). CSRF token
+// validation remains enabled; only the HTTPS-only origin check is adjusted.
+func markPlaintextHTTP(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		next.ServeHTTP(w, csrf.PlaintextHTTPRequest(r))
+	})
+}
 
 func (h *AuthHandlers) MountHttpRoutes(r chi.Router) {
 	var (
@@ -23,6 +34,21 @@ func (h *AuthHandlers) MountHttpRoutes(r chi.Router) {
 
 	r.Handle("/auth/", http.RedirectHandler("/auth", http.StatusSeeOther))
 	r.Group(func(r chi.Router) {
+		// Authentication pages are rendered before the webapp can apply its
+		// runtime locale. Honour the deployment-wide Docker default for
+		// anonymous auth requests; authenticated users can still override this
+		// with their preferred language in the handler context.
+		r.Use(func(next http.Handler) http.Handler {
+			return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				if lang := strings.TrimSpace(os.Getenv("CORTEZA_DEFAULT_LOCALE")); lang != "" &&
+					r.URL.Query().Get("lng") == "" {
+					r.Header.Set(locale.AcceptLanguageHeader, lang)
+				}
+
+				next.ServeHTTP(w, r)
+			})
+		})
+
 		r.Use(locale.DetectLanguage(locale.Global()))
 
 		r.Use(func(next http.Handler) http.Handler {
@@ -41,6 +67,10 @@ func (h *AuthHandlers) MountHttpRoutes(r chi.Router) {
 		r.Group(func(r chi.Router) {
 			// all routes protected with CSRF:
 			if h.Opt.CsrfEnabled {
+				if !h.Opt.SessionCookieSecure {
+					r.Use(markPlaintextHTTP)
+				}
+
 				r.Use(csrf.Protect(
 					[]byte(h.Opt.CsrfSecret),
 					csrf.SameSite(csrf.SameSiteStrictMode),

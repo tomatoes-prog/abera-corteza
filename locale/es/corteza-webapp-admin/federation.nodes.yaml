@@ -1,0 +1,59 @@
+editor:
+  generate:
+    body: '{{ userLabel }} te ha enviado una invitación a la red federada de Corteza. Para empezar a compartir datos entre organizaciones, ve al panel de administración de tu aplicación Corteza, haz clic en «Federación» y selecciona «Emparejar red de federación» en la esquina superior derecha. Copia el enlace siguiente y espera la confirmación de otro administrador.'
+    description: Para añadir tu organización a una red federada, envía una invitación por correo o comparte el enlace siguiente con un administrador de otra organización.
+    hello: 'Hola:'
+    invitation: Invitación a la red federada
+    kindRegards: Atentamente, el equipo de Corteza.
+    notGenerated: Enlace no generado
+    sendEmail: Enviar correo
+    subject: 'Asunto:'
+  generateUri: Generar enlace de federación
+  info:
+    delete: Eliminar
+    email: Correo del administrador
+    enabled: Activado
+    name: Nombre del servidor *
+    status: Estado
+    tags:
+      label: Etiquetas
+      placeholder: +Añadir
+    title: Información básica
+    undelete: Restaurar
+    url: URL del servidor *
+  title:
+    create: Crear nodo federado
+    edit: Editar nodo federado
+list:
+  columns:
+    actions: ''
+    createdAt: Creado
+    enabled: Activado
+    name: Nombre
+    status: Estado
+    tags: ''
+  filterForm:
+    query:
+      label: Filtrar lista de servidores
+      placeholder: Filtrar servidores por nombre
+  loading: Cargando nodos federados
+  new: Nuevo nodo federado
+  pair:
+    confirm: Confirmar
+    label: Emparejar nodo federado
+    networkEstablished: La red federada se establecerá después de la confirmación final del administrador del otro nodo federado de Corteza.
+    note: 'Nota:'
+    status:
+      confirmPending:
+        description: |
+          {{ email }} aceptó la invitación para unirse a la red federada «{{ name }}».
+          Haz clic en «Confirmar» para empezar a compartir los datos.
+        descriptionNoMail: |
+          El administrador de «{{ name }}» aceptó la invitación para unirse a la red federada.
+          Haz clic en «Confirmar» para empezar a compartir los datos.
+      none:
+        description: Para emparejar tu organización con una red federada, pega abajo la URL generada por otra organización.
+      pending:
+        description: Emparejamiento correcto; pendiente de confirmación final del administrador
+  title: Redes federadas
+  yaml: YAML

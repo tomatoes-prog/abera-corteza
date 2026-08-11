@@ -172,6 +172,14 @@ func (h helper) apiInit() *apitest.APITest {
 		Intercept(helpers.ReqHeaderRawAuthBearer(h.token))
 }
 
+func (h helper) apiInitAnonymous() *apitest.APITest {
+	InitTestApp()
+
+	return apitest.
+		New().
+		Handler(r)
+}
+
 func (h helper) mockPermissions(rules ...*rbac.Rule) {
 	h.a.NoError(rbac.Global().Grant(
 		// TestService we use does not have any backend storage,

@@ -1,0 +1,119 @@
+automation:
+  add: Añadir script
+  edit:
+    asyncHelp: No esperar los resultados e ignorar errores. Incompatible con la marca crítica.
+    asyncLabel: Ejecutar este script de forma asíncrona
+    codeTabLabel: Código
+    criticalHelp: Esperar hasta que se ejecute este script. En caso de errores, cancelar la ejecución de otros scripts y del disparador anterior.
+    criticalLabel: Script crítico
+    delete: Eliminar script
+    enabledHelp: Los scripts desactivados se ignorarán
+    enabledLabel: Activado
+    mailAutomationTriggers:
+      addMatcher: Añadir condición
+      addTrigger: Añadir disparador
+      delete: Eliminar disparador
+      deleteTrigger: Eliminar
+      enable: Activar disparador
+      matchAll: Debe coincidir con todas las condiciones
+      matcher:
+        fields:
+          bcc: CCO
+          cc: CC
+          from: De
+          placeholder: Campo de encabezado del correo
+          replyTo: Responder a
+          subject: Asunto
+          to: Para
+        match: Valor que debe coincidir
+        operators:
+          equal-ci: Coincidencia completa
+          placeholder: Operador
+          prefix-ci: Coincidir prefijo
+          regex: Expresión regular
+          suffix-ci: Coincidir sufijo
+          user: Usuario existente
+      tabLabel: Disparadores de correo
+    nameLabel: Nombre
+    namePlaceholder: Nombre del script de automatización
+    runAsCurrentUser: Ejecutar como "{{ user }}"
+    runAsHelp: Ejecutor del script
+    scheduledTriggers:
+      tabLabel: Programados
+    securityLabel: Seguridad
+    settingsTabLabel: Configuración
+    timeoutHelp: ¿Cuánto tiempo esperamos antes de cancelar el script? Valor en milisegundos (1000 ms = 1 s). De forma predeterminada, cuando es 0, son 2 s, con un máximo de 30 s. Consulta al administrador para conocer los valores y límites exactos.
+    timeoutLabel: Tiempo de espera de ejecución del script
+    timeoutPlaceholder: 1500
+    title: Script de automatización
+    userPickerPlaceholder: Seleccionar usuario
+  import: Importar script(s) de automatización
+  list:
+    column:
+      label:
+        async: Asíncrono
+        critical: Crítico
+        enabled: Activado
+        runAs: Ejecutar como
+        runInUA: En el navegador
+    unnamed: (Script sin nombre)
+  manage: Gestionar scripts de automatización ({{count}})
+  manage-id-permissions: Gestionar permisos de este script
+  manage-wc-permissions: Gestionar permisos de todos los scripts
+  newLabel: Crear un script nuevo
+  newPlaceholder: Nombre del script
+  testing:
+    load: Cargar
+    parametersHeadline: "Parámetros y carga útil:"
+    resultsHeadline: "Resultados:"
+    testInBrowser: Probar en el navegador
+    testInCorredor: Probar en Corredor
+    warning:
+  title: Lista de scripts de automatización
+general:
+  resource-list:
+    no-items: No hay coincidencias para tu búsqueda
+  notFound: No encontrado
+  loading: Cargando
+  label:
+    'no': No
+    submit: Enviar
+    'yes': Sí
+    selectOption: Selecciona una opción
+  logout: Cerrar sesión
+  noAccess: No tienes permisos para acceder al panel de administración
+  pagination:
+    next: Siguiente
+    prev: Anterior
+    showing: "{{from}} - {{to}} de {{count}} {{data}}"
+    single_one: "Un {{data}}"
+    single_other: "{{count}} {{data}}"
+navigation:
+  appMenu: Menú
+  adminPanel: Panel de administración
+  automation: Automatización
+  chart: Gráficos
+  configuration: Configuración
+  help:
+    documentation: Documentación
+    feedback: Enviar comentarios
+    forum: Ayuda
+    version: 'Versión:'
+  module: Módulos
+  more: Más
+  namespace: Espacios de nombres
+  noPageTitle: Página sin título
+  page: Páginas
+  publicPages: Páginas públicas
+  userSettings:
+    changePassword: Cambiar contraseña
+    loggedInAs: Sesión iniciada como {{user}}
+    logout: Cerrar sesión
+    profile: Perfil
+    theme: Tema
+picker:
+  unnamed: Sin nombre
+  role:
+    placeholder: Comienza a escribir para buscar roles
+  member:
+    placeholder: Comienza a escribir para buscar usuarios

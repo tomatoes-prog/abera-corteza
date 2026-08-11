@@ -1919,6 +1919,11 @@ func (e StoreEncoder) encodeUser(ctx context.Context, p envoyx.EncodeParams, s s
 			err = errors.Wrap(err, "failed to upsert User")
 			return
 		}
+
+		if err = e.syncUserRoleMembership(ctx, s, n, tree); err != nil {
+			err = errors.Wrap(err, "failed to sync User role memberships")
+			return
+		}
 	}
 
 	// Handle resources nested under it

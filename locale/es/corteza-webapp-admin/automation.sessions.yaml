@@ -1,0 +1,50 @@
+editor:
+  info:
+    createdByUserName: Creado por - Nombre
+    delete: Eliminar
+    error: Error
+    eventType: Tipo de evento
+    id: ID
+    resourceType: Tipo de recurso
+    status: Estado
+    title: Información básica
+    workflowID: ID del workflow
+    openWorkflow: Abrir workflow
+    cancel: Cancelar sesión
+  title: Sesión
+list:
+  columns:
+    actions: ''
+    createdAt: Creada el
+    eventType: Tipo de evento
+    sessionID: ID de sesión
+    state: Estado
+    status: Estado
+    workflowID: ID del workflow
+  filterForm:
+    all:
+      label: Todas
+    completed:
+      label: Completadas
+    excluded:
+      label: Sin
+    exclusive:
+      label: Solo
+    failed:
+      label: Fallidas
+    inProgress:
+      label: sesiones completadas
+    inclusive:
+      label: Incluyendo
+    prompted:
+      label: Con solicitud
+    sessions:
+      label: sesiones
+    started:
+      label: Iniciadas
+    suspended:
+      label: Suspendidas
+    canceled:
+      label: Canceladas
+  loading: Cargando sesiones
+  title: Sesiones

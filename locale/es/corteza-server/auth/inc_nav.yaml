@@ -1,0 +1,7 @@
+template:
+  authorize-client: Finalizar la autorización de
+  class:
+    your-profile: Tu perfil
+    security: Seguridad
+    login-session: Inicios de sesión
+    authorized-clients: Clientes autorizados

@@ -23,6 +23,18 @@ const storeKeyRefreshToken = 'auth.refresh-token'
 
 const maxStartAttempts = 5
 
+const defaultPreferredLanguage = (): string => {
+  if (typeof window !== 'undefined') {
+    // @ts-ignore runtime configuration is injected into index.html
+    if (typeof window.CortezaLocale === 'string' && window.CortezaLocale.length > 0) {
+      // @ts-ignore runtime configuration is injected into index.html
+      return window.CortezaLocale
+    }
+  }
+
+  return 'en'
+}
+
 // signature copied from dom definition
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-undef
 type eventListenerSignature = <K extends keyof WindowEventMap>(type: K, listener: (this: Window, ev: WindowEventMap[K]) => any, options?: boolean | AddEventListenerOptions) => void
@@ -402,7 +414,7 @@ export class Auth {
         const authUser = new system.User({
           userID: data.sub,
           meta: {
-            preferredLanguage: data.preferred_language || 'en',
+            preferredLanguage: data.preferred_language || defaultPreferredLanguage(),
             avatarID: data.avatarID,
             theme: data.theme,
           },
@@ -626,7 +638,7 @@ export class Auth {
     const u = new system.User({
       userID: oa2tkn.sub,
       meta: {
-        preferredLanguage: oa2tkn.preferred_language || 'en',
+        preferredLanguage: oa2tkn.preferred_language || defaultPreferredLanguage(),
         avatarID: oa2tkn.avatarID,
         theme: oa2tkn.theme,
       },

@@ -1,0 +1,161 @@
+page-layout:
+  layouts: Diseños
+  title: Título *
+  handle: Identificador
+  add: Añadir diseño
+  configure: 'Configurar diseño - "{{title}}"'
+  visibility: Visibilidad
+  general: General
+  useTitle: Usar título del diseño
+  tooltip:
+    title: Usar el título del diseño en lugar del título predeterminado de la página de registros. Se evalúan variables como {{0}}, {{1}}, {{2}} y {{3}} cuando están disponibles
+    configure: Configurar diseño
+    builder: Abrir diseño en el editor
+    performance:
+      condition: Usar condiciones de visibilidad afectará al rendimiento
+      requiredFields: Usar campos obligatorios afectará al rendimiento
+  condition:
+    label: Condición
+    placeholder: Cuándo se mostrará el diseño
+    description:
+      record-page: 'Puedes usar {{0}}, {{1}}, {{2}} y {{3}} dentro de la expresión; por ejemplo: {{4}} o {{5}}'
+      non-record-page: 'Puedes usar {{0}} y {{1}} dentro de la expresión; por ejemplo: {{2}} o {{3}}'
+  roles:
+    label: Roles
+    placeholder: Selecciona los roles a los que se mostrará el diseño
+  recordToolbar:
+    label: Barra de herramientas del registro
+    buttons:
+      label: Botones
+      showBack: Mostrar el botón «Atrás»
+      showDelete: Mostrar el botón «Eliminar»
+      showClone: Mostrar el botón «Guardar como copia»
+      showNew: Mostrar el botón «Añadir nuevo»
+      showEdit: Mostrar el botón «Editar»
+      showSave: Mostrar el botón «Guardar»
+    actions:
+      label: Acciones
+      add: Añadir acción
+      buttonLabel: Etiqueta
+      variant: Variante
+      visible: Visible
+      kind:
+        label: Tipo
+        toLayout: Redirigir al diseño
+        toURL: Redirigir a URL
+      placement:
+        label: Ubicación
+        start: Inicio
+        center: Centro
+        end: Fin
+      openIn:
+        label: Abrir en
+        sameTab: Misma pestaña
+        newTab: Nueva pestaña
+      toLayout:
+        label: Redirigir al diseño
+        placeholder: No se ha seleccionado ningún diseño
+      toURL:
+        label: Redirigir a URL
+        placeholder: No se ha especificado ninguna URL
+  requiredFields:
+    label: Campos obligatorios
+    description: Define los campos que deben ser obligatorios según una condición
+    field: Campo
+    condition: Condición
+    selectPlaceholder: Selecciona un campo
+    conditionPlaceholder: Si no se establece una condición, el campo será obligatorio
+    help: 'Puedes usar {{0}}, {{1}} y {{2}} dentro de la expresión para definir cuándo debe ser obligatorio un campo'
+block:
+  general:
+    label:
+      cancel: Cancelar
+      noHandle: Sin identificador
+      pageBuilder: Editor de páginas
+      saveAndClose: Guardar y cerrar
+    placeholder:
+      handle: Identificador único (a-z, 0-9, guion bajo o guion)
+      sample: Ejemplo
+    title: Añadir bloque nuevo
+    invalid-handle-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+changeBlock: Cambiar bloque existente
+referencedBlock: Este bloque se utiliza en otros diseños
+copyOf: "Copia de {{title}}"
+build:
+  addBlock: Añadir bloque
+  selectBlockTitle: Selecciona el tipo de bloque nuevo
+  saveAsCopy:
+    ref: Con referencias
+    noRef: Sin referencias
+edit:
+  create: Crear página
+  edit: Editar página
+  otherOptions: Otras opciones
+  pageDescription: Descripción de la página
+  visible: ¿La página es visible?
+  notifications:
+    enabled: Mostrar notificaciones al guardar registros
+icon:
+  configure: Configurar icono de página
+  noIcon: Sin icono
+  page: Icono de página
+  upload: Cargar icono
+  list: Iconos cargados
+  delete: Eliminar icono seleccionado
+url:
+  label: O añadir URL al icono
+import: 'Importar página(s):'
+instructions: Arrastra y suelta las páginas para ajustar el orden y la jerarquía
+invalid: Configuración no válida
+label:
+  title: Título *
+  cancel: Cancelar
+  description: Descripción
+  handle: Identificador
+  pageBuilder: Editor de páginas
+  permissions: Permisos
+  saveAndClose: Guardar y cerrar
+  delete: Eliminar bloque
+  createPage: Crear página
+placeholder:
+  title: Título de la página (por ejemplo, «Clientes potenciales»)
+loading: Cargando
+moduleEdit: Editar módulo
+navigation:
+  page: Páginas
+  viewPage: Ver página
+  editModule: Editar módulo
+noBlock: Aún no se ha añadido ningún bloque
+noPages: No hay páginas
+notVisible: Oculta
+pageMoveFailed: No se pudo mover esta página
+reordered: Página reordenada
+showSubPages: Expandir subpáginas en la barra lateral
+customTitle: Usar título personalizado
+title: Lista de páginas
+tooltip:
+  view: Ver página
+  edit:
+    page: Editar página
+    block: Editar bloque
+  copy:
+    block: Copiar bloque
+  clone:
+    block: Clonar bloque
+  delete:
+    block: Eliminar bloque
+  preview-link: Enlace de vista previa
+  saveAsCopy: No se puede duplicar la página de registros
+view: Ver
+visible: Visible
+delete:
+  rebase: Actualizar el padre de las subpáginas
+  cascade: Eliminar subpáginas
+public:
+  record:
+    create:
+      title: Crear registro
+    edit:
+      title: Editar registro
+    view:
+      title: Ver registro

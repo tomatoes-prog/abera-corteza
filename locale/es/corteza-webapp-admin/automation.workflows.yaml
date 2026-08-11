@@ -1,0 +1,54 @@
+editor:
+  info:
+    delete: Eliminar
+    enabled: Activado
+    handle: Identificador
+    invalid-handle-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+    id: ID
+    name: Nombre *
+    openBuilder: Abrir editor
+    title: Información básica
+    undelete: Restaurar
+  new: Nuevo workflow
+  permissions: Permisos
+  title:
+    create: Crear workflow
+    edit: Editar workflow
+  triggers:
+    and: y
+    columns:
+      constraints: Restricciones
+      eventType: Evento
+      resourceType: Recurso
+    title: Activadores
+list:
+  columns:
+    actions: ''
+    createdAt: Creado
+    enabled: Activado
+    handle: Identificador
+    name: Nombre
+    state: Estado
+  delete: Eliminar
+  undelete: Restaurar
+  export: Exportar
+  rows:
+    filters:
+      deleted: Eliminados
+  filterForm:
+    deleted:
+      label: workflows eliminados
+    excluded:
+      label: Sin
+    exclusive:
+      label: Solo
+    inclusive:
+      label: Incluyendo
+    query:
+      label: Filtrar lista de workflows
+      placeholder: Filtrar workflows por nombre
+  loading: Cargando workflows
+  new: Nuevo workflow
+  permissions: Permisos
+  title: Workflows
+  yaml: YAML

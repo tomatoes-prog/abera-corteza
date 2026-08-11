@@ -1,0 +1,10 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespaces:
+  automotriz-co:
+    name: CRM Automotriz
+    enabled: true
+    meta:
+      subtitle: Ventas de vehículos y posventa
+      description: Prospectos, inventario, pruebas de manejo, oportunidades y taller.

@@ -1,0 +1,31 @@
+notification:
+  search-error: Se produjo un problema al obtener los resultados de búsqueda
+input-placeholder: Introduce una consulta de búsqueda
+card:
+  button-text: Mostrar más
+  type: Tipo
+  handle: Identificador
+  namespace: Espacio de nombres
+  module: Módulo
+  user: Usuario
+  email: Correo electrónico
+  record: Registro
+  fields: Campos
+range: Mostrando {{actual}} de {{all}} resultados
+discovering: Buscando
+no-results: No hay resultados
+show-more: Mostrar más
+loading-more: Cargando más resultados
+show-map: Mostrar mapa
+hide-map: Ocultar mapa
+comments:
+  enter: Escribe un comentario...
+  label: Comentarios
+  sort:
+    first:
+      newest: Más recientes primero
+      oldest: Más antiguos primero
+  submit: Enviar
+  unknown:
+    date: Fecha desconocida
+    user: Usuario desconocido

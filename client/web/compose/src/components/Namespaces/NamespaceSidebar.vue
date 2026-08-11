@@ -12,6 +12,7 @@
           :get-option-label="getNamespaceLabel"
           :selectable="option => option.namespaceID !== namespace.namespaceID"
           :placeholder="$t('pickNamespace')"
+          :aria-label="$t('pickNamespace')"
           :clearable="false"
           :autoscroll="false"
           :append-to-body="false"

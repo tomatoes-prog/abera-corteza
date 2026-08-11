@@ -1,0 +1,23 @@
+template:
+  title: Registrarse
+  form:
+    email:
+      label: Correo electrónico
+      placeholder: email@domain.tld
+    password:
+      label: Contraseña
+      placeholder: Contraseña
+    name:
+      label: Nombre completo
+      placeholder: Tu nombre completo
+    nickname:
+      label: Nombre corto, apodo o identificador
+      placeholder: Nombre corto, apodo o identificador
+    button:
+      sign-up: Enviar
+  log-in: '¿Ya tienes una cuenta? <a data-test-id="link-login" href="{{link}}">Inicia sesión</a>'
+alerts:
+  signup-successful: Registro correcto
+  email-confirmed-logged-in: Correo confirmado; ahora has iniciado sesión.
+  invalid-expired-token: Token de confirmación no válido o caducado; vuelve a enviar la solicitud.
+  signup-disabled: Registro desactivado

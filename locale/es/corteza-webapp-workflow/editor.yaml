@@ -1,0 +1,32 @@
+auto-initialize-empty-variable: Las variables que no se puedan cargar se inicializarán automáticamente como vacías
+back: Atrás
+click-to-save: Haz clic aquí para guardar
+deferred: Pospuesto
+delete: Eliminar
+deleted: Eliminado
+detected-changes: 'Cambios detectados'
+detected-issues: Problemas detectados
+disabled: Desactivado
+help: Ayuda
+handle: (Identificador)
+id: 'ID:'
+id-parenthesis: ' (ID)'
+initial-scope: Ámbito inicial
+input-ids-or-handles: El ámbito inicial se inyecta en el workflow durante la ejecución. Para cargar las variables disponibles, introduce abajo los ID o identificadores relacionados
+issues: Problemas
+load-and-configure: Cargar y configurar
+modify-initial-scope-if-no-variables-are-loaded: Si no quieres cargar variables, haz clic en «Configurar» para modificar el ámbito inicial antes de ejecutar el workflow
+open-webapp-on-prompt-use: 'ADVERTENCIA: Si el workflow utiliza pasos de solicitud, asegúrate de abrir también la aplicación web relacionada. De lo contrario, el workflow agotará el tiempo de espera'
+reset: Restablecer
+run-as: 'Ejecutar como:'
+run-workflow: Ejecutar workflow
+required-namespace: El espacio de nombres es obligatorio
+required-namespace-and-module: El espacio de nombres y el módulo son obligatorios
+save: Guardar
+saving: Guardando
+spinning: Procesando
+test-in-progress: 'Prueba en curso. Si el workflow incluye pasos de solicitud o demora, puede estar esperando a que terminen'
+unsupported-browser: ¡El navegador no es compatible!
+undelete: Restaurar
+workflow-configuration: Configuración del workflow
+editor: Editor

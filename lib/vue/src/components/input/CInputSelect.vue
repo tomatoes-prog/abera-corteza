@@ -141,6 +141,11 @@ export default {
       default: false,
     },
 
+    ariaLabel: {
+      type: String,
+      default: '',
+    },
+
     badge: {
       type: Boolean,
       default: false,
@@ -170,7 +175,30 @@ export default {
     },
   },
 
+  watch: {
+    ariaLabel: 'updateAriaLabel',
+  },
+
+  mounted () {
+    this.updateAriaLabel()
+  },
+
   methods: {
+    updateAriaLabel () {
+      if (!this.ariaLabel) {
+        return
+      }
+
+      this.$nextTick(() => {
+        const vueSelect = this.$refs.vueSelect
+        const toggle = vueSelect && vueSelect.$refs.toggle
+
+        if (toggle) {
+          toggle.setAttribute('aria-label', this.ariaLabel)
+        }
+      })
+    },
+
     calculateDropdownPosition (dropdownList, component, { width }) {
       /**
        * We need to explicitly define the dropdown width since

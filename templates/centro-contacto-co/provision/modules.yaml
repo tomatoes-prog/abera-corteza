@@ -1,0 +1,312 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: centro-contacto-co
+modules:
+  contactos-leads:
+    name: Contactos y leads
+    fields:
+      nombres: { label: Nombres, kind: String, required: true }
+      apellidos: { label: Apellidos, kind: String }
+      identificacion: { label: Identificación, kind: String }
+      telefonoPrincipal: { label: Teléfono principal, kind: String, required: true }
+      telefonoAlterno: { label: Teléfono alterno, kind: String }
+      correo: { label: Correo electrónico, kind: String }
+      ciudad: { label: Ciudad, kind: String }
+      autorizaTratamientoDatos:
+        label: Autoriza el tratamiento de datos
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      autorizaContacto:
+        label: Autoriza contacto comercial
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      noLlamar:
+        label: No llamar
+        kind: Bool
+        options: { falseLabel: "No", trueLabel: "Sí" }
+      productoInteres: { label: Producto de interés, kind: String }
+      presupuesto:
+        label: Presupuesto
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      estadoComercial:
+        label: Estado comercial
+        kind: Select
+        default: Cargado
+        options:
+          options:
+            - { text: Cargado, value: Cargado }
+            - { text: Intentado, value: Intentado }
+            - { text: Contactado, value: Contactado }
+            - { text: Calificado, value: Calificado }
+            - { text: Oportunidad, value: Oportunidad }
+            - { text: Venta, value: Venta }
+            - { text: No interesado, value: No interesado }
+          selectType: default
+      responsable: { label: Responsable, kind: User }
+      totalIntentos:
+        label: Total de intentos
+        kind: Number
+        options: { format: "0", precision: 0 }
+      proximaLlamada: { label: Próxima llamada, kind: DateTime }
+      notas:
+        label: Notas
+        kind: String
+        options: { multiLine: true }
+      externalID: { label: Identificador externo, kind: String }
+      proveedorExterno: { label: Proveedor externo, kind: String }
+      estadoIntegracion:
+        label: Estado de integración
+        kind: Select
+        default: Local
+        options:
+          options:
+            - { text: Local, value: Local }
+            - { text: Pendiente, value: Pendiente }
+            - { text: Sincronizado, value: Sincronizado }
+            - { text: Error, value: Error }
+          selectType: default
+      ultimoErrorIntegracion:
+        label: Último error de integración
+        kind: String
+        options: { multiLine: true }
+
+  campanas:
+    name: Campañas
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      nombre: { label: Nombre, kind: String, required: true }
+      objetivo:
+        label: Objetivo
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Venta, value: Venta }
+            - { text: Venta adicional, value: Venta adicional }
+            - { text: Recuperación, value: Recuperación }
+            - { text: Encuesta, value: Encuesta }
+            - { text: Confirmación, value: Confirmación }
+          selectType: default
+      producto: { label: Producto o servicio, kind: String }
+      guion:
+        label: Guion
+        kind: String
+        options: { multiLine: true, useRichTextEditor: true }
+      prioridad:
+        label: Prioridad
+        kind: Select
+        default: Media
+        options:
+          options:
+            - { text: Baja, value: Baja }
+            - { text: Media, value: Media }
+            - { text: Alta, value: Alta }
+          selectType: default
+      fechaInicio:
+        label: Fecha de inicio
+        kind: DateTime
+        options: { onlyDate: true }
+      fechaFin:
+        label: Fecha de finalización
+        kind: DateTime
+        options: { onlyDate: true }
+      horaInicio: { label: Hora permitida desde, kind: String }
+      horaFin: { label: Hora permitida hasta, kind: String }
+      metaContactos:
+        label: Meta de contactos
+        kind: Number
+        options: { format: "0", precision: 0 }
+      metaVentas:
+        label: Meta de ventas
+        kind: Number
+        options: { format: "0", precision: 0 }
+      maximoIntentos:
+        label: Máximo de intentos
+        kind: Number
+        default: "5"
+        options: { format: "0", precision: 0 }
+      estado:
+        label: Estado
+        kind: Select
+        default: Borrador
+        options:
+          options:
+            - { text: Borrador, value: Borrador }
+            - { text: Activa, value: Activa }
+            - { text: Pausada, value: Pausada }
+            - { text: Finalizada, value: Finalizada }
+          selectType: default
+      externalID: { label: Identificador externo, kind: String }
+
+  registros-campana:
+    name: Registros de campaña
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      campana:
+        label: Campaña
+        kind: Record
+        required: true
+        options: { module: campanas, labelField: nombre }
+      contacto:
+        label: Contacto
+        kind: Record
+        required: true
+        options: { module: contactos-leads, labelField: nombres }
+      agente: { label: Agente, kind: User }
+      prioridad:
+        label: Prioridad
+        kind: Select
+        default: Media
+        options:
+          options:
+            - { text: Baja, value: Baja }
+            - { text: Media, value: Media }
+            - { text: Alta, value: Alta }
+          selectType: default
+      intentos:
+        label: Intentos
+        kind: Number
+        default: "0"
+        options: { format: "0", precision: 0 }
+      proximoIntento: { label: Próximo intento, kind: DateTime }
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Pendiente
+        options:
+          options:
+            - { text: Pendiente, value: Pendiente }
+            - { text: En gestión, value: En gestión }
+            - { text: Callback, value: Callback }
+            - { text: Contactado, value: Contactado }
+            - { text: Calificado, value: Calificado }
+            - { text: Cerrado, value: Cerrado }
+            - { text: Agotado, value: Agotado }
+          selectType: default
+      ultimoResultado: { label: Último resultado, kind: String }
+      fechaAsignacion: { label: Fecha de asignación, kind: DateTime }
+      externalID: { label: Identificador externo, kind: String }
+
+  llamadas:
+    name: Llamadas
+    fields:
+      registroCampana:
+        label: Registro de campaña
+        kind: Record
+        required: true
+        options: { module: registros-campana, labelField: codigo }
+      contacto:
+        label: Contacto
+        kind: Record
+        required: true
+        options: { module: contactos-leads, labelField: nombres }
+      campana:
+        label: Campaña
+        kind: Record
+        required: true
+        options: { module: campanas, labelField: nombre }
+      agente: { label: Agente, kind: User, required: true }
+      direccion:
+        label: Dirección
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: Saliente, value: Saliente }
+            - { text: Entrante, value: Entrante }
+          selectType: default
+      inicio: { label: Inicio, kind: DateTime, required: true }
+      fin: { label: Fin, kind: DateTime }
+      duracionSegundos:
+        label: Duración
+        kind: Number
+        options: { format: "0", precision: 0, suffix: " s" }
+      disposicion:
+        label: Disposición
+        kind: Select
+        required: true
+        options:
+          options:
+            - { text: No contesta, value: No contesta }
+            - { text: Ocupado, value: Ocupado }
+            - { text: Número incorrecto, value: Número incorrecto }
+            - { text: Callback, value: Callback }
+            - { text: Contactado, value: Contactado }
+            - { text: Calificado, value: Calificado }
+            - { text: No interesado, value: No interesado }
+            - { text: No llamar, value: No llamar }
+            - { text: Venta, value: Venta }
+          selectType: default
+      resumen:
+        label: Resumen
+        kind: String
+        options: { multiLine: true }
+      callback: { label: Callback programado, kind: DateTime }
+      externalID: { label: Identificador de llamada externo, kind: String }
+      proveedorExterno: { label: Proveedor de telefonía, kind: String }
+      grabacionURL: { label: URL de grabación, kind: Url }
+      transcripcionURL: { label: URL de transcripción, kind: Url }
+      estadoIntegracion:
+        label: Estado de integración
+        kind: Select
+        default: Local
+        options:
+          options:
+            - { text: Local, value: Local }
+            - { text: Pendiente, value: Pendiente }
+            - { text: Sincronizado, value: Sincronizado }
+            - { text: Error, value: Error }
+          selectType: default
+      ultimoErrorIntegracion:
+        label: Último error de integración
+        kind: String
+        options: { multiLine: true }
+
+  oportunidades:
+    name: Oportunidades
+    fields:
+      codigo: { label: Código, kind: String, required: true }
+      contacto:
+        label: Contacto
+        kind: Record
+        required: true
+        options: { module: contactos-leads, labelField: nombres }
+      campana:
+        label: Campaña
+        kind: Record
+        options: { module: campanas, labelField: nombre }
+      closer: { label: Closer, kind: User }
+      producto: { label: Producto o servicio, kind: String, required: true }
+      etapa:
+        label: Etapa
+        kind: Select
+        default: Calificada
+        options:
+          options:
+            - { text: Calificada, value: Calificada }
+            - { text: Contacto comercial, value: Contacto comercial }
+            - { text: Propuesta, value: Propuesta }
+            - { text: Negociación, value: Negociación }
+            - { text: Venta, value: Venta }
+            - { text: Perdida, value: Perdida }
+          selectType: default
+      valor:
+        label: Valor
+        kind: Number
+        options: { format: "0", precision: 0, prefix: "$ " }
+      probabilidad:
+        label: Probabilidad
+        kind: Number
+        options: { format: "0", precision: 0, suffix: "%" }
+      fechaEstimadaCierre:
+        label: Fecha estimada de cierre
+        kind: DateTime
+        options: { onlyDate: true }
+      motivoPerdida: { label: Motivo de pérdida, kind: String }
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: { multiLine: true }

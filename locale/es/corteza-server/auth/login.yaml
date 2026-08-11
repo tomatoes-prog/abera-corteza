@@ -1,0 +1,21 @@
+template:
+  title: Inicia sesión para continuar
+  form:
+    email:
+      label: Correo electrónico
+      placeholder: Introduce tu correo electrónico
+    password:
+      label: Contraseña
+      placeholder: contraseña
+    button:
+      login-and-remember: Iniciar sesión y recordarme
+      login: Iniciar sesión
+      continue: Continuar
+  links:
+    request-password-reset: '¿Olvidaste tu contraseña?'
+    signup: Crear una cuenta nueva
+    external:
+      login-with: Iniciar sesión con {{idp}}
+alerts:
+  logged-in: Has iniciado sesión
+  local-disabled: Cuentas locales deshabilitadas

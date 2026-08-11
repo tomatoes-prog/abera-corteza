@@ -1,0 +1,123 @@
+editor:
+  external-auth-providers:
+    label: Etiqueta
+    title: Gestionar proveedores de autenticación externos
+    type: Tipo
+  info:
+    confirmEmail: Confirmar dirección de correo
+    id: ID
+    delete: Eliminar
+    email: Correo electrónico *
+    handle: Identificador
+    placeholder-handle: identificador (a-z, 0-9, guion bajo o guion)
+    invalid-handle-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+    name: Nombre completo
+    revokeAllSession: Revocar todas las sesiones activas
+    suspend: Suspender
+    title: Información básica
+    undelete: Restaurar
+    unsuspend: Quitar suspensión
+    userGroup:
+      label: Grupo de usuarios
+      placeholder: Grupo de usuarios
+  avatar:
+    title: Avatar de perfil
+    preview:
+      label: Avatar
+      title: Avatar
+    initial:
+      color: Color del texto
+      backgroundColor: Color de fondo
+    uploader:
+      instructions: Cargar avatar
+      uploading: Cargando avatar del usuario
+    colorPicker: Elegir un color
+  mfa:
+    TOTP:
+      disabled:
+        text: El usuario no ha configurado la protección TOTP
+      enabled:
+        text: El usuario configuró la protección TOTP en la aplicación móvil
+      remove:
+        label: Quitar
+    emailOTP:
+      disable:
+        label: Desactivar
+      disabled:
+        text: |
+          La protección OTP por correo está desactivada para este usuario
+          No se enviará un correo con el código de seguridad en cada inicio de sesión
+      enable:
+        label: Activar
+      enabled:
+        text: |
+          La protección OTP por correo está activada para este usuario
+          El usuario recibirá un correo con el código de seguridad en cada inicio de sesión
+    title: Autenticación multifactor
+  new: Nuevo usuario
+  password:
+    confirm: Confirmar contraseña
+    length: ¡Las contraseñas deben tener al menos {{length}} caracteres!
+    missmatch: Las contraseñas deben coincidir
+    new: Nueva contraseña
+    title: Contraseña
+    removePassword: Quitar contraseña
+  permissions: Permisos
+  roles:
+    add: Añadir
+    count: roles
+    remove: Quitar
+    title: Pertenencia a roles
+    unnamed: Rol sin nombre
+  title:
+    create: Crear usuario
+    edit: Editar usuario
+list:
+  columns:
+    actions: ''
+    createdAt: Creado
+    email: Correo electrónico
+    enabled: Activado
+    handle: Identificador
+    name: Nombre
+    state: Estado
+  suspend: Suspender
+  unsuspend: Quitar suspensión
+  delete: Eliminar
+  undelete: Restaurar
+  revokeActiveSession: Revocar sesión
+  export: Exportar
+  rows:
+    filters:
+      deleted: Eliminados
+      suspended: Suspendidos
+  filterForm:
+    deleted:
+      label: usuarios eliminados
+    excluded:
+      label: Sin
+    exclusive:
+      label: Solo
+    inclusive:
+      label: Incluyendo
+    query:
+      label: Filtrar lista de usuarios
+      placeholder: Filtrar usuarios por nombre o correo
+    suspended:
+      label: usuarios suspendidos
+  loading: Cargando usuarios
+  new: Nuevo usuario
+  permissions: Permisos
+  title: Usuarios
+  yaml: YAML
+export:
+  buttonLabel: Exportar
+  title: Exportar usuarios
+  inclRoleMembership: Incluir pertenencia a roles
+  inclRoles: Incluir roles
+  membershipRequiredLabel: Los roles solo se pueden exportar al seleccionar la pertenencia a roles
+  export: Exportar
+import:
+  buttonLabel: Importar
+  title: Importar usuarios
+  uploadFilePlaceholder: Haz clic o arrastra archivos aquí para importar

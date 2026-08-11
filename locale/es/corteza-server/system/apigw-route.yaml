@@ -1,0 +1,13 @@
+errors:
+  notAllowedToSearch: no se permite buscar rutas
+  alreadyExists: la ruta por ese endpoint ya existe
+  existsEndpoint: la ruta con ese endpoint ya existe
+  invalidEndpoint: endpoint inválido
+  invalidID: ID inválido
+  notAllowedToCreate: no tiene permitido crear una ruta
+  notAllowedToDelete: no tiene permitido eliminar esta ruta
+  notAllowedToExec: no tiene permitido ejecutar esta ruta
+  notAllowedToRead: no tiene permitido leer esta ruta
+  notAllowedToUndelete: no tiene permitido deshacer la eliminación de esta ruta
+  notAllowedToUpdate: no tiene permitido actualizar esta ruta
+  notFound: ruta no encontrada

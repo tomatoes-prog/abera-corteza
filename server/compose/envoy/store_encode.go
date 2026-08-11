@@ -170,18 +170,31 @@ func (e StoreEncoder) encodeModuleExtend(ctx context.Context, p envoyx.EncodePar
 
 	// Push fields under mod
 	mod := n.Resource.(*types.Module)
-	for _, n := range nested {
-		if n.ResourceType != types.ModuleFieldResourceType {
-			continue
-		}
-
-		mod.Fields = append(mod.Fields, n.Resource.(*types.ModuleField))
+	for _, fieldNode := range ownedModuleFieldNodes(n, nested) {
+		mod.Fields = append(mod.Fields, fieldNode.Resource.(*types.ModuleField))
 	}
 
 	// Register to DAL
 	dl, err := e.grabDal(p)
 	if err != nil {
 		return
+	}
+
+	// Resolve the default DAL connection before the next provisioning phase
+	// reads the module back from the store. An unresolved zero value can be
+	// persisted as a JSON scalar by SQLite and makes the module unreadable.
+	if mod.Config.DAL.ConnectionID == 0 {
+		conn := dl.GetConnectionByID(0)
+		if conn == nil {
+			return errors.Errorf("could not find default DAL connection")
+		}
+
+		mod.Config.DAL.ConnectionID = conn.ID
+		if !n.Evaluated.Skip {
+			if err = store.UpdateComposeModule(ctx, s, mod); err != nil {
+				return errors.Wrap(err, "failed to persist default DAL connection on module")
+			}
+		}
 	}
 
 	nsNode := tree.ParentForRef(n, n.References["NamespaceID"])
@@ -195,6 +208,23 @@ func (e StoreEncoder) encodeModuleExtend(ctx context.Context, p envoyx.EncodePar
 
 	// @note there is only one model so this is ok
 	_, err = dl.ReplaceModel(ctx, nil, models[0])
+	return
+}
+
+func ownedModuleFieldNodes(moduleNode *envoyx.Node, candidates envoyx.NodeSet) (out envoyx.NodeSet) {
+	moduleRef := moduleNode.ToRef()
+	for _, candidate := range candidates {
+		if candidate.ResourceType != types.ModuleFieldResourceType {
+			continue
+		}
+
+		ownerRef, ok := candidate.References["ModuleID"]
+		if !ok || !ownerRef.Equals(moduleRef) {
+			continue
+		}
+
+		out = append(out, candidate)
+	}
 	return
 }
 

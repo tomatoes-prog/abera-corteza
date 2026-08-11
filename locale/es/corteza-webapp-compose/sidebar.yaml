@@ -1,0 +1,12 @@
+adminPanel: Panel de administración
+chart: Gráficos
+manageNamespaces: Gestionar espacios de trabajo
+module: Módulos
+noResults: Sin resultados
+page: Páginas
+pickNamespace: Seleccionar un espacio de trabajo
+publicPages: Páginas públicas
+editNamespace: Editar espacio de trabajo
+searchPlaceholder:
+  admin: Buscar recursos...
+  public: Buscar páginas...

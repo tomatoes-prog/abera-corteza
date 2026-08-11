@@ -1,0 +1,89 @@
+label:
+  add: Añadir
+  general:
+    yes: Sí
+    no: No
+  template:
+    single: Plantilla
+    plural: Plantillas
+  user:
+    single: Usuario
+    plural: Usuarios
+  role:
+    single: Rol
+    plural: Roles
+  user-group:
+    single: Grupo de usuarios
+    plural: Grupos de usuarios
+  application:
+    single: Aplicación
+    plural: Aplicaciones
+  auth-client:
+    single: Cliente de autenticación
+    plural: Clientes de autenticación
+  queue:
+    single: Cola de mensajes
+    plural: Colas de mensajes
+  route:
+    single: Ruta
+    plural: Rutas
+  connection:
+    single: Conexión de base de datos
+    plural: Conexiones de base de datos
+  sensitivity-level:
+    single: Nivel de sensibilidad
+    plural: Niveles de sensibilidad
+  session:
+    single: Sesión
+    plural: Sesiones
+  workflow:
+    single: Flujo de trabajo
+    plural: Flujos de trabajo
+  plus-add: + Añadir
+  clear: Limpiar
+  all: Todos
+  none: Ninguno
+  experimental: Experimental
+  now: Ahora
+  openMap: Abrir mapa
+  today: Hoy
+  routes: Rutas
+  requests: Solicitudes
+  refresh: Actualizar
+  loadMore: Cargar más
+  loading: Cargando
+  saveAndClose: Guardar y cerrar
+  cancel: Cancelar
+  submit: Enviar
+  delete: Eliminar
+  undelete: Restaurar
+  fileTypeNotAllowed: Tipo de archivo no permitido
+  uploading: Cargando
+  dropFiles: Haz clic o suelta archivos aquí para cargarlos
+editor:
+  unsavedChanges: Los cambios sin guardar se perderán. ¿Deseas salir de la página?
+system:
+  field:
+    createdAt: Creado el
+    createdBy: Creado por
+    updatedAt: Actualizado el
+    updatedBy: Actualizado por
+    deletedAt: Eliminado el
+    deletedBy: Eliminado por
+    archivedAt: Archivado el
+    suspendedAt: Suspendido el
+    lastUsedAt: Usado por última vez el
+    completedAt: Completado el
+    ownedBy: Responsable
+    runAs: Ejecutar como
+resourceList:
+  pagination:
+    recordsPerPage: Por página
+themes:
+  labels:
+    light: Claro
+    dark: Oscuro
+extendSession:
+  labels:
+    extend: Extender sesión
+    warning: Tu sesión se cerrará en {{ countdownTime }} segundos

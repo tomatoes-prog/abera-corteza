@@ -1,0 +1,45 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+users:
+  asesora-demo:
+    name: Laura Gómez
+    email: asesora.demo@abera.local
+    emailConfirmed: true
+    roles:
+      - asesor-comercial
+      - asesor-automotriz
+      - asesor-admisiones
+  asesor-demo:
+    name: Sebastián Martínez
+    email: asesor.demo@abera.local
+    emailConfirmed: true
+    roles:
+      - asesor-comercial
+      - asesor-automotriz
+      - asesor-admisiones
+  tecnica-demo:
+    name: Diana Rodríguez
+    email: tecnica.demo@abera.local
+    emailConfirmed: true
+    roles:
+      - tecnico-servicio
+      - coordinador-taller
+  agente-demo:
+    name: Nicolás Herrera
+    email: agente.demo@abera.local
+    emailConfirmed: true
+    roles:
+      - agente-contacto
+      - agente-soporte
+  supervisora-demo:
+    name: Marcela Restrepo
+    email: supervisora.demo@abera.local
+    emailConfirmed: true
+    roles:
+      - jefe-comercial-automotriz
+      - director-admisiones
+      - gerente-servicio
+      - supervisor-contacto
+      - supervisor-soporte
+      - gestor-renovaciones

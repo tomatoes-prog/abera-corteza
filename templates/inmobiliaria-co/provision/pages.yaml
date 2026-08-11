@@ -1,0 +1,718 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: inmobiliaria-co
+pages:
+  inicio:
+    title: Inicio
+    visible: true
+    blocks:
+    - title: Leads por estado
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 16
+      - 30
+      options:
+        chart: leads-por-estado
+      blockID: 1
+    - title: Inmuebles por estado
+      kind: Chart
+      xywh:
+      - 16
+      - 0
+      - 16
+      - 30
+      options:
+        chart: inmuebles-por-estado
+      blockID: 2
+    - title: Negociaciones por etapa
+      kind: Chart
+      xywh:
+      - 32
+      - 0
+      - 16
+      - 30
+      options:
+        chart: negociaciones-por-etapa
+      blockID: 3
+    - title: Leads sin asignar
+      kind: RecordList
+      xywh:
+      - 0
+      - 30
+      - 48
+      - 18
+      options:
+        module: leads
+        fields:
+        - name: nombres
+        - name: apellidos
+        - name: telefono
+        - name: ciudadBusqueda
+        - name: estado
+        - name: createdAt
+        prefilter: responsable IS NULL
+        presort: createdAt ASC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 4
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Inicio
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 16
+          - 30
+        - blockID: 2
+          xywh:
+          - 16
+          - 0
+          - 16
+          - 30
+        - blockID: 3
+          xywh:
+          - 32
+          - 0
+          - 16
+          - 30
+        - blockID: 4
+          xywh:
+          - 0
+          - 30
+          - 48
+          - 18
+  leads:
+    title: Leads
+    visible: true
+    blocks:
+    - title: Leads
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: leads
+        fields:
+        - name: nombres
+        - name: apellidos
+        - name: telefono
+        - name: ciudadBusqueda
+        - name: presupuestoMaximo
+        - name: estado
+        - name: responsable
+        - name: proximoContacto
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      lead-registro:
+        title: Detalle del lead
+        module: leads
+        visible: false
+        blocks:
+        - title: Información de contacto
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 4
+          - 14
+          options:
+            fields:
+            - name: nombres
+            - name: apellidos
+            - name: telefono
+            - name: correo
+            - name: autorizaTratamientoDatos
+            - name: estado
+            - name: responsable
+            - name: fechaAsignacion
+            - name: proximoContacto
+          blockID: 1
+        - title: Búsqueda e inmuebles de interés
+          kind: Record
+          xywh:
+          - 4
+          - 0
+          - 8
+          - 14
+          options:
+            fields:
+            - name: tipoOperacion
+            - name: tiposInmueble
+            - name: departamentoBusqueda
+            - name: ciudadBusqueda
+            - name: presupuestoMinimo
+            - name: presupuestoMaximo
+            - name: habitacionesMinimas
+            - name: banosMinimos
+            - name: inmueblesInteres
+            - name: notas
+          blockID: 2
+        - title: Citas
+          kind: RecordList
+          xywh:
+          - 0
+          - 14
+          - 12
+          - 9
+          options:
+            module: citas
+            fields:
+            - name: asunto
+            - name: inicio
+            - name: tipo
+            - name: estado
+            - name: asesor
+            - name: inmuebles
+            prefilter: lead = ${recordID}
+            presort: inicio DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 3
+        - title: Actividades
+          kind: RecordList
+          xywh:
+          - 0
+          - 23
+          - 6
+          - 9
+          options:
+            module: actividades
+            fields:
+            - name: fecha
+            - name: tipo
+            - name: resultado
+            - name: asesor
+            - name: proximaAccion
+            prefilter: lead = ${recordID}
+            presort: fecha DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 4
+        - title: Negociaciones
+          kind: RecordList
+          xywh:
+          - 6
+          - 23
+          - 6
+          - 9
+          options:
+            module: negociaciones
+            fields:
+            - name: inmueble
+            - name: etapa
+            - name: valorOfrecido
+            - name: probabilidad
+            - name: estado
+            prefilter: lead = ${recordID}
+            presort: createdAt DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 5
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del lead
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 4
+              - 14
+            - blockID: 2
+              xywh:
+              - 4
+              - 0
+              - 8
+              - 14
+            - blockID: 3
+              xywh:
+              - 0
+              - 14
+              - 12
+              - 9
+            - blockID: 4
+              xywh:
+              - 0
+              - 23
+              - 6
+              - 9
+            - blockID: 5
+              xywh:
+              - 6
+              - 23
+              - 6
+              - 9
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Leads
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  inmuebles:
+    title: Inmuebles
+    visible: true
+    blocks:
+    - title: Inventario de inmuebles
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: inmuebles
+        fields:
+        - name: codigo
+        - name: nombre
+        - name: tipoOperacion
+        - name: tipoInmueble
+        - name: ciudad
+        - name: precioVenta
+        - name: canonArrendamiento
+        - name: estado
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      inmueble-registro:
+        title: Detalle del inmueble
+        module: inmuebles
+        visible: false
+        blocks:
+        - title: Información comercial
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 6
+          - 16
+          options:
+            fields:
+            - name: codigo
+            - name: nombre
+            - name: descripcion
+            - name: tipoOperacion
+            - name: tipoInmueble
+            - name: estado
+            - name: precioVenta
+            - name: canonArrendamiento
+            - name: administracion
+            - name: fotografias
+            - name: documentos
+          blockID: 1
+        - title: Ubicación y características
+          kind: Record
+          xywh:
+          - 6
+          - 0
+          - 6
+          - 16
+          options:
+            fields:
+            - name: departamento
+            - name: ciudad
+            - name: direccion
+            - name: area
+            - name: habitaciones
+            - name: banos
+            - name: parqueaderos
+            - name: estrato
+            - name: propietarioNombre
+            - name: propietarioTelefono
+          blockID: 2
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del inmueble
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 6
+              - 16
+            - blockID: 2
+              xywh:
+              - 6
+              - 0
+              - 6
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Inmuebles
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  agenda:
+    title: Agenda
+    visible: true
+    blocks:
+    - title: Calendario de citas
+      kind: Calendar
+      xywh:
+      - 0
+      - 0
+      - 8
+      - 18
+      options:
+        defaultView: dayGridMonth
+        locale: es
+        feeds:
+        - resource: compose:record
+          startField: inicio
+          endField: fin
+          titleField: asunto
+          allDay: false
+          options:
+            module: citas
+            color: '#2563eb'
+            prefilter: ''
+      blockID: 1
+    - title: Próximas citas
+      kind: RecordList
+      xywh:
+      - 8
+      - 0
+      - 4
+      - 18
+      options:
+        module: citas
+        fields:
+        - name: asunto
+        - name: inicio
+        - name: lead
+        - name: asesor
+        - name: estado
+        presort: inicio ASC
+        perPage: 20
+        hideRecordCloneButton: true
+      blockID: 2
+    children:
+      cita-registro:
+        title: Detalle de la cita
+        module: citas
+        visible: false
+        blocks:
+        - title: Cita
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: asunto
+            - name: lead
+            - name: asesor
+            - name: inmuebles
+            - name: inicio
+            - name: fin
+            - name: tipo
+            - name: estado
+            - name: puntoEncuentro
+            - name: resultado
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la cita
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Agenda
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 8
+          - 18
+        - blockID: 2
+          xywh:
+          - 8
+          - 0
+          - 4
+          - 18
+  actividades:
+    title: Actividades
+    visible: true
+    blocks:
+    - title: Actividades comerciales
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: actividades
+        fields:
+        - name: fecha
+        - name: lead
+        - name: inmueble
+        - name: tipo
+        - name: resultado
+        - name: asesor
+        - name: proximaAccion
+        presort: fecha DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      actividad-registro:
+        title: Detalle de la actividad
+        module: actividades
+        visible: false
+        blocks:
+        - title: Actividad
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 14
+          options:
+            fields:
+            - name: lead
+            - name: inmueble
+            - name: asesor
+            - name: tipo
+            - name: fecha
+            - name: resultado
+            - name: proximaAccion
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la actividad
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 14
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Actividades
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  negociaciones:
+    title: Negociaciones
+    visible: true
+    blocks:
+    - title: Pipeline comercial
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: negociaciones
+        fields:
+        - name: lead
+        - name: inmueble
+        - name: asesor
+        - name: tipoOperacion
+        - name: etapa
+        - name: valorOfrecido
+        - name: probabilidad
+        - name: fechaEstimadaCierre
+        - name: estado
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      negociacion-registro:
+        title: Detalle de la negociación
+        module: negociaciones
+        visible: false
+        blocks:
+        - title: Negociación
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: lead
+            - name: inmueble
+            - name: asesor
+            - name: tipoOperacion
+            - name: etapa
+            - name: valorPublicado
+            - name: valorOfrecido
+            - name: probabilidad
+            - name: fechaEstimadaCierre
+            - name: estado
+            - name: motivoPerdida
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la negociación
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Negociaciones
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18

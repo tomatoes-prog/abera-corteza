@@ -1,0 +1,76 @@
+kind:
+  correct: Solicitud de corrección
+  delete: Solicitud de eliminación
+  export: Solicitud de exportación
+status:
+  canceled: Cancelada
+  pending: Pendiente
+  rejected: Rechazada
+  approved: Aprobada
+list:
+  title: Solicitudes de privacidad
+  export: Exportar
+  columns:
+    kind: Tipo
+    requestedAt: Solicitada el
+    requestedBy: Solicitada por
+    status: Estado
+  request:
+    approve: Aprobar solicitudes
+    cancel: Cancelar solicitud
+    reject: Rechazar solicitud
+edit:
+  correct:
+    private-fields: Campos privados
+    no-data-available: No hay datos disponibles
+    submit: Enviar solicitud de corrección
+    connection:
+      label: Conexión
+      placeholder: Selecciona una conexión
+  delete:
+    private-fields: Campos privados
+    no-data-available: No hay datos disponibles
+    submit: Eliminar datos seleccionados
+    connection:
+      label: Conexión
+      placeholder: Selecciona una conexión
+  export:
+    submit: Exportar datos seleccionados
+    data-type:
+      label: Tipo de datos que se exportarán
+      profile-information: Información del perfil
+      application-data: Datos de la aplicación
+    date-range:
+      label: Intervalo de fechas
+      all: Todos mis datos
+    file-format:
+      label: Formato del archivo
+      json: JSON
+      csv: CSV
+view:
+  approve: Aprobar solicitud
+  cancel: Cancelar solicitud
+  reject: Rechazar solicitud
+  export:
+    data-type:
+      label: Tipo de datos que se exportarán
+      profile-information: Información del perfil
+      application-data: Datos de la aplicación
+    date-range:
+      label: Intervalo de fechas
+      all: Todos mis datos
+    file-format:
+      label: Formato del archivo
+      json: JSON
+      csv: CSV
+comments:
+  enter: Escribe un comentario...
+  label: Comentarios
+  sort:
+    first:
+      newest: Más recientes primero
+      oldest: Más antiguos primero
+  submit: Enviar
+  unknown:
+    date: Fecha desconocida
+    user: Usuario desconocido

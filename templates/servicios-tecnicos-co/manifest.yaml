@@ -1,0 +1,29 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+id: servicios-tecnicos-co
+name: CRM de Servicios Técnicos Colombia
+version: 1.0.1
+minimumCortezaVersion: 2024.9.9
+defaultLocale: es
+license: Apache-2.0
+description: Ventas, agenda y ejecución de servicios técnicos en campo.
+resources:
+  namespace: servicios-tecnicos-co
+  roles: [coordinador-servicio, tecnico-servicio, gerente-servicio, automatizacion-servicios]
+  users: [automatizacion-servicios]
+  modules: [clientes-prospectos, activos, solicitudes, cotizaciones, ordenes-trabajo]
+  pages: [inicio, clientes-prospectos, activos, solicitudes, cotizaciones, ordenes-trabajo]
+  charts:
+    - funnel-servicios
+    - solicitudes-por-prioridad
+    - ordenes-por-estado
+    - ordenes-por-tecnico
+    - valor-por-servicio
+  workflows:
+    - preparar-solicitud-servicio
+    - crear-orden-desde-cotizacion
+    - asignar-tecnico-menor-carga
+    - validar-agenda-tecnico
+    - completar-orden-servicio
+  scripts: [scripts/seed-demo.ps1]

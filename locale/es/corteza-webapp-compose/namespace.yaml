@@ -1,0 +1,75 @@
+manage-view:
+  label: Gestionar espacios de trabajo
+application:
+  label: Mostrar en la lista de aplicaciones
+clickOpen: Haz clic para abrir
+import:
+  buttonLabel: Importar
+  title: Importar espacio de trabajo
+  uploadFileLabel: Sube el archivo que deseas importar (formato .zip)
+  uploadFilePlaceholder: Haz clic o suelta aquí el archivo para subirlo (formato .zip)
+  back: Volver
+  import: Importar
+  slug:
+    label: Nombre corto *
+description:
+  label: Descripción del espacio de trabajo
+  placeholder: Introduce la descripción del espacio de trabajo
+disabled: El espacio de trabajo está deshabilitado
+edit: Editar espacio de trabajo
+clone: Clonar espacio de trabajo
+cloneSuffix: copia
+cloneWarning:
+  wfInclusion: Los workflows y otras automatizaciones no se clonan. Usa el editor de workflows para clonar los que necesites.
+create: Crear espacio de trabajo
+export: Exportar
+enabled:
+  label: Habilitar espacio de trabajo
+icon:
+  label: Icono
+  placeholder: Elige una imagen para el icono del espacio de trabajo o suéltala aquí...
+label:
+  permissions: Permisos
+logo:
+  label: Logo
+  placeholder: Elige una imagen para el logo del espacio de trabajo o suéltala aquí...
+  show: Mostrar logo
+  preview: Vista previa
+  reset: Restablecer
+name:
+  label: Nombre completo del espacio de trabajo *
+  placeholder: Introduce el nombre del espacio de trabajo
+noResults: No se encontraron espacios de trabajo
+searchPlaceholder: Buscar espacios de trabajo
+setPermissions: Configurar permisos del espacio de trabajo
+slug:
+  description: El nombre corto se utilizará en la URL
+  label: Nombre corto
+  placeholder: Introduce un nombre corto para el espacio de trabajo
+  invalid-handle-characters: Debe tener al menos 2 caracteres. Solo puede contener letras, números, guiones bajos y puntos. Debe terminar con una letra o un número
+subtitle:
+  label: Subtítulo
+  placeholder: Introduce el subtítulo del espacio de trabajo
+title: Espacios de trabajo
+tooltip:
+  translations: Traducciones del espacio de trabajo
+visit: Ver espacio de trabajo
+configure: Configurar espacio de trabajo
+manage:
+  title: Gestionar espacios de trabajo
+  list-view: Volver a la lista de espacios de trabajo
+  delete: Eliminar
+  disabled: Deshabilitado
+  toolbar:
+    buttons:
+      create: Nuevo espacio de trabajo
+      permissions: Permisos
+  table:
+    columns:
+      enabled: Habilitado
+      name: Nombre
+      slug: Nombre corto
+      changedAt: Último cambio
+sidebar:
+  configure: Páginas del espacio de trabajo
+  hide: Ocultar la barra lateral en las páginas públicas del espacio de trabajo

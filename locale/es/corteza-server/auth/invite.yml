@@ -1,0 +1,14 @@
+template:
+  title: Aceptar invitación
+  form:
+    email:
+      label: Correo electrónico
+      placeholder: email@domain.tld
+    new-password:
+      label: Contraseña
+      placeholder: contraseña
+    buttons:
+      password: Establecer contraseña
+alert:
+  invalid-expired-invite-token: El token de invitación no es válido o ha caducado. Solicita un restablecimiento de contraseña.
+  success: Contraseña actualizada correctamente

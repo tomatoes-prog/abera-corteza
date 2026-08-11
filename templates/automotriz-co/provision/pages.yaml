@@ -1,0 +1,742 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: automotriz-co
+pages:
+  inicio:
+    title: Inicio
+    visible: true
+    blocks:
+    - title: Funnel de ventas
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 16
+      - 30
+      options:
+        chart: funnel-ventas
+      blockID: 1
+    - title: Inventario
+      kind: Chart
+      xywh:
+      - 16
+      - 0
+      - 16
+      - 30
+      options:
+        chart: inventario-por-estado
+      blockID: 2
+    - title: Posventa
+      kind: Chart
+      xywh:
+      - 32
+      - 0
+      - 16
+      - 30
+      options:
+        chart: servicio-por-estado
+      blockID: 3
+    - title: Prospectos sin asignar
+      kind: RecordList
+      xywh:
+      - 0
+      - 30
+      - 24
+      - 18
+      options:
+        module: prospectos
+        fields:
+        - name: nombres
+        - name: telefono
+        - name: presupuestoMaximo
+        - name: estado
+        - name: createdAt
+        prefilter: asesor IS NULL
+        presort: createdAt ASC
+        perPage: 15
+        hideRecordCloneButton: true
+      blockID: 4
+    - title: Clientes por recuperar
+      kind: RecordList
+      xywh:
+      - 24
+      - 30
+      - 24
+      - 18
+      options:
+        module: vehiculos
+        fields:
+        - name: codigo
+        - name: clienteFinal
+        - name: proximoMantenimiento
+        - name: estado
+        prefilter: estado = 'Vendido' AND proximoMantenimiento IS NOT NULL
+        presort: proximoMantenimiento ASC
+        perPage: 15
+        hideRecordCloneButton: true
+      blockID: 5
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Inicio
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 16
+          - 30
+        - blockID: 2
+          xywh:
+          - 16
+          - 0
+          - 16
+          - 30
+        - blockID: 3
+          xywh:
+          - 32
+          - 0
+          - 16
+          - 30
+        - blockID: 4
+          xywh:
+          - 0
+          - 30
+          - 24
+          - 18
+        - blockID: 5
+          xywh:
+          - 24
+          - 30
+          - 24
+          - 18
+  prospectos:
+    title: Prospectos
+    visible: true
+    blocks:
+    - title: Prospectos comerciales
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: prospectos
+        fields:
+        - name: nombres
+        - name: apellidos
+        - name: telefono
+        - name: ciudad
+        - name: presupuestoMaximo
+        - name: estado
+        - name: asesor
+        - name: proximoContacto
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      prospecto-registro:
+        title: Detalle del prospecto
+        module: prospectos
+        visible: false
+        blocks:
+        - title: Información y necesidad
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 14
+          options:
+            fields:
+            - name: nombres
+            - name: apellidos
+            - name: telefono
+            - name: correo
+            - name: autorizaTratamientoDatos
+            - name: ciudad
+            - name: presupuestoMinimo
+            - name: presupuestoMaximo
+            - name: plazoCompra
+            - name: vehiculoActual
+            - name: requiereFinanciacion
+            - name: vehiculosInteres
+            - name: origen
+            - name: estado
+            - name: asesor
+            - name: fechaAsignacion
+            - name: proximoContacto
+            - name: notas
+          blockID: 1
+        - title: Pruebas de manejo
+          kind: RecordList
+          xywh:
+          - 0
+          - 14
+          - 6
+          - 9
+          options:
+            module: pruebas-manejo
+            fields:
+            - name: asunto
+            - name: vehiculo
+            - name: inicio
+            - name: estado
+            - name: resultado
+            prefilter: prospecto = ${recordID}
+            presort: inicio DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 2
+        - title: Oportunidades
+          kind: RecordList
+          xywh:
+          - 6
+          - 14
+          - 6
+          - 9
+          options:
+            module: oportunidades
+            fields:
+            - name: vehiculo
+            - name: etapa
+            - name: valorOfertado
+            - name: probabilidad
+            - name: fechaEstimadaCierre
+            prefilter: prospecto = ${recordID}
+            presort: createdAt DESC
+            perPage: 10
+            hideRecordCloneButton: true
+          blockID: 3
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del prospecto
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 14
+            - blockID: 2
+              xywh:
+              - 0
+              - 14
+              - 6
+              - 9
+            - blockID: 3
+              xywh:
+              - 6
+              - 14
+              - 6
+              - 9
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Prospectos
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  vehiculos:
+    title: Inventario
+    visible: true
+    blocks:
+    - title: Vehículos
+      kind: RecordList
+      xywh:
+      - 0
+      - 0
+      - 12
+      - 18
+      options:
+        module: vehiculos
+        fields:
+        - name: codigo
+        - name: marca
+        - name: modelo
+        - name: anio
+        - name: condicion
+        - name: precio
+        - name: sede
+        - name: estado
+        presort: createdAt DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 1
+    children:
+      vehiculo-registro:
+        title: Detalle del vehículo
+        module: vehiculos
+        visible: false
+        blocks:
+        - title: Vehículo
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: codigo
+            - name: vin
+            - name: placa
+            - name: marca
+            - name: modelo
+            - name: version
+            - name: anio
+            - name: condicion
+            - name: kilometraje
+            - name: color
+            - name: precio
+            - name: sede
+            - name: fechaIngreso
+            - name: estado
+            - name: clienteFinal
+            - name: proximoMantenimiento
+            - name: fotografias
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle del vehículo
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Inventario
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+  pruebas-manejo:
+    title: Pruebas de manejo
+    visible: true
+    blocks:
+    - title: Agenda de pruebas
+      kind: Calendar
+      xywh:
+      - 0
+      - 0
+      - 8
+      - 18
+      options:
+        defaultView: dayGridMonth
+        locale: es
+        feeds:
+        - resource: compose:record
+          startField: inicio
+          endField: fin
+          titleField: asunto
+          allDay: false
+          options:
+            module: pruebas-manejo
+            color: '#2563eb'
+            prefilter: ''
+      blockID: 1
+    - title: Próximas pruebas
+      kind: RecordList
+      xywh:
+      - 8
+      - 0
+      - 4
+      - 18
+      options:
+        module: pruebas-manejo
+        fields:
+        - name: inicio
+        - name: prospecto
+        - name: vehiculo
+        - name: asesor
+        - name: estado
+        presort: inicio ASC
+        perPage: 20
+        hideRecordCloneButton: true
+      blockID: 2
+    children:
+      prueba-registro:
+        title: Detalle de la prueba
+        module: pruebas-manejo
+        visible: false
+        blocks:
+        - title: Prueba de manejo
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: asunto
+            - name: prospecto
+            - name: vehiculo
+            - name: asesor
+            - name: inicio
+            - name: fin
+            - name: sede
+            - name: estado
+            - name: resultado
+            - name: siguienteAccion
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la prueba
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Pruebas de manejo
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 8
+          - 18
+        - blockID: 2
+          xywh:
+          - 8
+          - 0
+          - 4
+          - 18
+  oportunidades:
+    title: Pipeline
+    visible: true
+    blocks:
+    - title: Oportunidades por etapa
+      kind: Chart
+      xywh:
+      - 0
+      - 0
+      - 6
+      - 30
+      options:
+        chart: oportunidades-por-etapa
+      blockID: 1
+    - title: Resultados de pruebas
+      kind: Chart
+      xywh:
+      - 6
+      - 0
+      - 6
+      - 30
+      options:
+        chart: pruebas-por-resultado
+      blockID: 2
+    - title: Oportunidades
+      kind: RecordList
+      xywh:
+      - 0
+      - 30
+      - 12
+      - 14
+      options:
+        module: oportunidades
+        fields:
+        - name: prospecto
+        - name: vehiculo
+        - name: asesor
+        - name: etapa
+        - name: valorOfertado
+        - name: probabilidad
+        - name: fechaEstimadaCierre
+        presort: fechaEstimadaCierre ASC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 3
+    children:
+      oportunidad-registro:
+        title: Detalle de la oportunidad
+        module: oportunidades
+        visible: false
+        blocks:
+        - title: Negociación
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: prospecto
+            - name: vehiculo
+            - name: asesor
+            - name: etapa
+            - name: valorPublicado
+            - name: valorOfertado
+            - name: requiereFinanciacion
+            - name: valorFinanciado
+            - name: recibeRetoma
+            - name: descripcionRetoma
+            - name: probabilidad
+            - name: fechaEstimadaCierre
+            - name: motivoPerdida
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la oportunidad
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Pipeline
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 6
+          - 30
+        - blockID: 2
+          xywh:
+          - 6
+          - 0
+          - 6
+          - 30
+        - blockID: 3
+          xywh:
+          - 0
+          - 30
+          - 12
+          - 14
+  ordenes-servicio:
+    title: Taller
+    visible: true
+    blocks:
+    - title: Agenda de taller
+      kind: Calendar
+      xywh:
+      - 0
+      - 0
+      - 8
+      - 18
+      options:
+        defaultView: timeGridWeek
+        locale: es
+        feeds:
+        - resource: compose:record
+          startField: inicio
+          endField: fin
+          titleField: codigo
+          allDay: false
+          options:
+            module: ordenes-servicio
+            color: '#059669'
+            prefilter: ''
+      blockID: 1
+    - title: Órdenes
+      kind: RecordList
+      xywh:
+      - 8
+      - 0
+      - 4
+      - 18
+      options:
+        module: ordenes-servicio
+        fields:
+        - name: codigo
+        - name: cliente
+        - name: vehiculo
+        - name: inicio
+        - name: estado
+        - name: valorFinal
+        presort: inicio DESC
+        perPage: 20
+        allowExport: true
+        hideRecordCloneButton: true
+      blockID: 2
+    children:
+      orden-registro:
+        title: Detalle de la orden
+        module: ordenes-servicio
+        visible: false
+        blocks:
+        - title: Orden de servicio
+          kind: Record
+          xywh:
+          - 0
+          - 0
+          - 12
+          - 16
+          options:
+            fields:
+            - name: codigo
+            - name: cliente
+            - name: vehiculo
+            - name: coordinador
+            - name: tecnico
+            - name: inicio
+            - name: fin
+            - name: tipoServicio
+            - name: estado
+            - name: solicitud
+            - name: diagnostico
+            - name: valorEstimado
+            - name: valorFinal
+            - name: proximoMantenimiento
+            - name: observaciones
+          blockID: 1
+        page_layouts:
+          principal:
+            primary: true
+            meta:
+              title: Diseño principal · Detalle de la orden
+            config:
+              useTitle: true
+              buttons:
+                new:
+                  enabled: true
+                edit:
+                  enabled: true
+                submit:
+                  enabled: true
+                delete:
+                  enabled: true
+                clone:
+                  enabled: true
+                back:
+                  enabled: true
+            blocks:
+            - blockID: 1
+              xywh:
+              - 0
+              - 0
+              - 12
+              - 16
+    page_layouts:
+      principal:
+        primary: true
+        meta:
+          title: Diseño principal · Taller
+        config:
+          useTitle: true
+        blocks:
+        - blockID: 1
+          xywh:
+          - 0
+          - 0
+          - 8
+          - 18
+        - blockID: 2
+          xywh:
+          - 8
+          - 0
+          - 4
+          - 18

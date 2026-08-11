@@ -1,0 +1,70 @@
+ui:
+  save: Guardar cambios
+  cancel: Cancelar
+  set-for: Configurar permisos para {{target}}
+  loading: Cargando permisos
+  label: Permisos
+  notification:
+    save:
+      success: Permisos guardados
+      failed: No se pudieron guardar los permisos
+  edit:
+    title: Editar permisos
+    label: Roles de usuario
+    description: Selecciona el rol cuyos permisos quieres configurar
+  evaluate:
+    title: Evaluar permisos
+    description: Evaluar los permisos aplicados
+  add:
+    label: Añadir
+    title: Evaluar permisos
+    save: Guardar y cerrar
+    role:
+      label: Roles
+      placeholder: Selecciona uno o varios roles
+    user:
+      label: Usuarios
+      placeholder: Busca o selecciona un usuario
+  access:
+    allow: Permitir
+    inherit: Heredar
+    deny: Denegar
+  tooltip:
+    unknown-context:
+      user: No se pueden evaluar los permisos de un usuario con un rol contextual sobre un recurso no específico
+      role: No se pueden evaluar los permisos de un rol contextual sobre un recurso no específico
+resources:
+  automation:
+    workflow:
+      all: todos los workflows
+      specific: workflow "{{target}}"
+      tooltip: Permisos del workflow
+      operations:
+        delete:
+          description: 'Predeterminado: denegar'
+          specific: Eliminar este workflow
+          title: Eliminar cualquier workflow
+        execute:
+          description: 'Predeterminado: denegar'
+          specific: Ejecutar este workflow
+          title: Ejecutar cualquier workflow
+        read:
+          description: 'Predeterminado: denegar'
+          specific: Leer este workflow
+          title: Leer cualquier workflow
+        sessions.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar las sesiones de este workflow
+          title: Gestionar todas las sesiones
+        triggers.manage:
+          description: 'Predeterminado: denegar'
+          specific: Gestionar los activadores de este workflow
+          title: Gestionar todos los activadores
+        undelete:
+          description: 'Predeterminado: denegar'
+          specific: Restaurar este workflow
+          title: Restaurar cualquier workflow
+        update:
+          description: 'Predeterminado: denegar'
+          specific: Actualizar este workflow
+          title: Actualizar cualquier workflow

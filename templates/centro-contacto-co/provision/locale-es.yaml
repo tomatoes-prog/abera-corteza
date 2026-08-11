@@ -1,0 +1,20 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    corteza::compose:namespace/centro-contacto-co:
+      name: Centro de Contacto
+      meta.subtitle: Televentas y campañas
+      meta.description: Contactos, campañas, cola de marcación, llamadas y oportunidades.
+    corteza::compose:module/centro-contacto-co/contactos-leads: { name: Contactos y leads }
+    corteza::compose:module/centro-contacto-co/campanas: { name: Campañas }
+    corteza::compose:module/centro-contacto-co/registros-campana: { name: Cola de marcación }
+    corteza::compose:module/centro-contacto-co/llamadas: { name: Llamadas }
+    corteza::compose:module/centro-contacto-co/oportunidades: { name: Oportunidades }
+    corteza::compose:page/centro-contacto-co/inicio: { title: Inicio }
+    corteza::compose:page/centro-contacto-co/contactos-leads: { title: Contactos }
+    corteza::compose:page/centro-contacto-co/campanas: { title: Campañas }
+    corteza::compose:page/centro-contacto-co/registros-campana: { title: Cola de marcación }
+    corteza::compose:page/centro-contacto-co/llamadas: { title: Llamadas }
+    corteza::compose:page/centro-contacto-co/oportunidades: { title: Oportunidades }

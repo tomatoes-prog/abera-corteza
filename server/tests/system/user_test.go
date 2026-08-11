@@ -624,6 +624,21 @@ func TestUserMemberList(t *testing.T) {
 		End()
 }
 
+func TestUserMemberListForbidden(t *testing.T) {
+	h := newHelper(t)
+	h.clearUsers()
+
+	u := h.createUserWithEmail(h.randEmail())
+
+	h.apiInitAnonymous().
+		Get(fmt.Sprintf("/users/%d/membership", u.ID)).
+		Header("Accept", "application/json").
+		Expect(t).
+		Status(http.StatusOK).
+		Assert(helpers.AssertError("user.errors.notAllowedToRead")).
+		End()
+}
+
 func TestUserMemberAdd(t *testing.T) {
 	h := newHelper(t)
 	h.clearUsers()

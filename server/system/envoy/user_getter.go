@@ -14,7 +14,7 @@ type (
 	// UserGetter is a utility struct to resolve user references from
 	// different parts of the system such as the dep graph and the database
 	UserGetter struct {
-		depGraph *envoyx.DepGraph
+		depGraph envoyx.Traverser
 
 		store      store.Storer
 		baseFilter types.UserFilter
@@ -23,7 +23,8 @@ type (
 
 func MakeUserGetter(s store.Storer, tt envoyx.Traverser) (g *UserGetter) {
 	g = &UserGetter{
-		store: s,
+		depGraph: tt,
+		store:    s,
 	}
 
 	g.baseFilter = types.UserFilter{}

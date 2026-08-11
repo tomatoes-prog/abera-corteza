@@ -1,0 +1,30 @@
+adminPanel: Panel de administración
+automation: Automatización
+chart: Gráficos
+configuration: Configuración
+help:
+  documentation: Documentación
+  feedback: Enviar comentarios
+  forum: Ayuda
+  version: 'Versión:'
+module: Módulos
+more: Más
+namespace: Espacios de nombres
+noPageTitle: Página sin título
+page: Páginas
+publicPages: Páginas públicas
+appMenu: Menú
+userSettings:
+  changePassword: Cambiar contraseña
+  loggedInAs: Sesión iniciada como {{user}}
+  logout: Cerrar sesión
+  profile: Perfil
+  theme: Tema
+themes:
+  labels:
+    light: Claro
+    dark: Oscuro
+extendSession:
+  labels:
+    extend: Extender sesión
+    warning: Tu sesión se cerrará en {{ countdownTime }} segundos

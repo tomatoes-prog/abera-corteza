@@ -111,6 +111,11 @@ func fix_2022_09_00_migrateComposeModuleDiscoveryConfigSettings(ctx context.Cont
 			SET config = CAST('%s' AS JSON)
 			WHERE id = %d`
 
+		updateSQLiteModuleDiscoverySettings = `
+			UPDATE compose_module
+			SET config = json('%s')
+			WHERE id = %d`
+
 		updatePSQLModuleDiscoverySettings = `
 			UPDATE compose_module
 			SET config = '%s'::jsonb
@@ -227,9 +232,15 @@ func fix_2022_09_00_migrateComposeModuleDiscoveryConfigSettings(ctx context.Cont
 		}
 
 		for _, u := range uu {
-			if driver == "postgres" || driver == "postgres+debug" {
+			switch {
+			case strings.HasPrefix(driver, "postgres"):
 				query = fmt.Sprintf(updatePSQLModuleDiscoverySettings, u.Config, u.ID)
-			} else {
+			case strings.HasPrefix(driver, "sqlite3"):
+				// SQLite treats CAST(... AS JSON) as a numeric cast and turns
+				// JSON objects into the scalar 0. json(...) validates and
+				// preserves the document as JSON text.
+				query = fmt.Sprintf(updateSQLiteModuleDiscoverySettings, u.Config, u.ID)
+			default:
 				query = fmt.Sprintf(updateModuleDiscoverySettings, u.Config, u.ID)
 			}
 			log.Debug("saving migrated module.config.discovery settings", logger.Uint64("id", u.ID))

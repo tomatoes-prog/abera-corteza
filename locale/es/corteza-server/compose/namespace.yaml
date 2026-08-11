@@ -1,0 +1,16 @@
+errors:
+  staleData: Los datos fueron modificados por otro usuario o flujo de trabajo; actualiza la página
+  handleNotUnique: el identificador no es único
+  invalidHandle: identificador inválido
+  invalidID: ID inválido
+  notAllowedToCreate: no tiene permitido crear namespaces
+  notAllowedToDelete: no tiene permitido eliminar este namespace
+  notAllowedToRead: no tiene permitido leer este namespace
+  notAllowedToSearch: no tiene permitido buscar o listar namespaces
+  notAllowedToUndelete: no tiene permitido deshacer la eliminación de este namespace
+  notAllowedToUpdate: no tiene permitido actualizar este namespace
+  notFound: el namespace no existe
+  unsupportedExportFormat: formato de exportación no compatible
+  unsupportedImportFormat: formato de importación no compatible
+  importMissingNamespace: la fuente de importación no contiene una definición de namespace
+  cloneMultiple: no se permite clonar múltiples namespaces a la vez

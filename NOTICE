@@ -1,0 +1,12 @@
+Abera Corteza distribution
+Copyright 2026 the Abera Corteza contributors
+
+This product includes software developed by the Corteza Project
+(https://cortezaproject.org/) and its contributors.
+
+This distribution contains modifications for Spanish localization, selectable
+business templates, demonstration data, and provider-neutral encrypted OAuth
+bootstrap provisioning.
+
+The software and modifications are licensed under the Apache License, Version
+2.0. See the LICENSE file distributed with this work.

@@ -1,0 +1,59 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+namespace: admisiones-educativas-co
+charts:
+  funnel-admisiones:
+    name: Funnel de admisiones
+    config:
+      reports:
+        - module: prospectos
+          filter: ""
+          dimensions: [{ field: estado, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: funnel, fixTooltips: true }]
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  solicitudes-por-programa:
+    name: Solicitudes por programa
+    config:
+      reports:
+        - module: solicitudes
+          filter: ""
+          dimensions: [{ field: programa, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10
+  solicitudes-por-estado:
+    name: Solicitudes por estado
+    config:
+      reports:
+        - module: solicitudes
+          filter: ""
+          dimensions: [{ field: estado, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: pie, fixTooltips: true }]
+          renderer: {}
+      colorScheme: tableau.Tableau10
+  matriculas-por-programa:
+    name: Matrículas confirmadas por programa
+    config:
+      reports:
+        - module: matriculas
+          filter: estado = 'Confirmada'
+          dimensions: [{ field: programa, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: bar, fixTooltips: true }]
+          renderer: {}
+          yAxis:
+            horizontal: true
+      colorScheme: tableau.Tableau10
+  prospectos-por-origen:
+    name: Prospectos por origen
+    config:
+      reports:
+        - module: prospectos
+          filter: ""
+          dimensions: [{ field: origen, modifier: (no grouping / buckets) }]
+          metrics: [{ field: count, type: pie, fixTooltips: true }]
+          renderer: {}
+      colorScheme: tableau.Tableau10

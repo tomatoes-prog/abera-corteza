@@ -1,0 +1,39 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+id: inmobiliaria-co
+name: CRM Inmobiliario Colombia
+version: 1.0.1
+minimumCortezaVersion: 2024.9.9
+defaultLocale: es
+license: Apache-2.0
+description: CRM simplificado para venta y arrendamiento de inmuebles en Colombia.
+resources:
+  namespace: inmobiliaria-co
+  roles:
+    - asesor-comercial
+    - coordinador-comercial
+    - automatizacion-inmobiliaria
+  users:
+    - automatizacion-inmobiliaria
+  modules:
+    - leads
+    - inmuebles
+    - citas
+    - actividades
+    - negociaciones
+  pages:
+    - inicio
+    - leads
+    - inmuebles
+    - agenda
+    - actividades
+    - negociaciones
+  charts:
+    - leads-por-estado
+    - inmuebles-por-estado
+    - negociaciones-por-etapa
+  workflows:
+    - asignar-lead-menor-carga
+  scripts:
+    - scripts/seed-demo.ps1

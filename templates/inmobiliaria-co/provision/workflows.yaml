@@ -1,0 +1,144 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+workflows:
+  asignar-lead-menor-carga:
+    enabled: true
+    trace: false
+    runAs: automatizacion-inmobiliaria
+    keepSessions: 20
+    meta:
+      name: Asignar lead por menor carga
+      description: Asigna leads nuevos al asesor comercial activo con menos leads abiertos.
+    triggers:
+      - enabled: true
+        stepID: 10
+        resourceType: compose:record
+        eventType: beforeCreate
+        constraints:
+          - name: namespace.handle
+            op: "="
+            values:
+              - inmobiliaria-co
+          - name: module.handle
+            op: "="
+            values:
+              - leads
+    steps:
+      # Envoyx decodes embedded workflow steps with yaml.v3 field names.
+      # Use `id` here (instead of the JSON/export key `stepID`) so the
+      # identifier survives provisioning.
+      - id: 10
+        kind: gateway
+        ref: excl
+        meta:
+          name: ¿El lead no tiene responsable?
+
+      - id: 11
+        kind: expressions
+        arguments:
+          - target: record.values.fechaAsignacion
+            type: String
+            expr: strftime(now(), "%Y-%m-%dT%H:%M:%S")
+        meta:
+          name: Conservar asignación manual
+
+      - id: 12
+        kind: expressions
+        arguments:
+          - { target: bestUserID, type: ID, value: "0" }
+          - { target: bestCount, type: UnsignedInteger, value: "0" }
+        meta:
+          name: Inicializar selección
+
+      - id: 20
+        kind: iterator
+        ref: rolesEachMember
+        arguments:
+          - { target: lookup, type: Handle, value: asesor-comercial }
+        results:
+          - { target: candidate, expr: user }
+        meta:
+          name: Recorrer asesores activos
+
+      - id: 21
+        kind: function
+        ref: composeRecordsSearch
+        arguments:
+          - { target: namespace, type: Handle, value: inmobiliaria-co }
+          - { target: module, type: Handle, value: leads }
+          - target: query
+            type: String
+            expr: format("responsable = %d AND estado != 'Ganado' AND estado != 'Perdido' AND estado != 'Descartado'", candidate.ID)
+          - { target: limit, type: UnsignedInteger, value: "1" }
+          - { target: incTotal, type: Boolean, value: true }
+        results:
+          - { target: candidateCount, expr: total }
+        meta:
+          name: Contar leads activos
+
+      - id: 22
+        kind: gateway
+        ref: excl
+        meta:
+          name: ¿Es la menor carga?
+
+      - id: 23
+        kind: expressions
+        arguments:
+          - { target: bestUserID, type: ID, expr: candidate.ID }
+          - { target: bestCount, type: UnsignedInteger, expr: candidateCount }
+        meta:
+          name: Conservar candidato
+
+      - id: 24
+        kind: continue
+
+      - id: 25
+        kind: continue
+
+      - id: 30
+        kind: gateway
+        ref: excl
+        meta:
+          name: ¿Se encontró un asesor?
+
+      - id: 31
+        kind: expressions
+        arguments:
+          - target: record.values.responsable
+            type: String
+            expr: format("%d", bestUserID)
+          - target: record.values.fechaAsignacion
+            type: String
+            expr: strftime(now(), "%Y-%m-%dT%H:%M:%S")
+        meta:
+          name: Asignar responsable
+
+      - id: 32
+        kind: termination
+
+      - id: 33
+        kind: termination
+        meta:
+          name: Guardar sin responsable
+
+    paths:
+      # Workflow paths follow the same yaml.v3 naming rule.
+      - parentid: 10
+        childid: 12
+        expr: isEmpty(record.values.responsable)
+      - { parentid: 10, childid: 11, expr: "" }
+      - { parentid: 11, childid: 32 }
+      - { parentid: 12, childid: 20 }
+      - { parentid: 20, childid: 21 }
+      - { parentid: 20, childid: 30 }
+      - { parentid: 21, childid: 22 }
+      - parentid: 22
+        childid: 23
+        expr: bestUserID == 0 || candidateCount < bestCount || (candidateCount == bestCount && candidate.ID < bestUserID)
+      - { parentid: 22, childid: 25, expr: "" }
+      - { parentid: 23, childid: 24 }
+      - { parentid: 30, childid: 31, expr: bestUserID > 0 }
+      - { parentid: 30, childid: 33, expr: "" }
+      - { parentid: 31, childid: 32 }

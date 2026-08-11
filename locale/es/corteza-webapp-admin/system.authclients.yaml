@@ -1,0 +1,101 @@
+editor:
+  info:
+    add: Añadir
+    api: Permitir acceso del cliente a la API de Corteza en nombre del usuario
+    choose-date: Elegir una fecha
+    delete: Eliminar
+    enabled:
+      disabledFootnote: No se puede desactivar el cliente predeterminado
+      label: Activado
+    expiresAt:
+      description: Si no se define, el cliente no tiene fecha de caducidad
+      label: Caduca el
+    grant:
+      authorization_code: Se usará para autenticar usuarios (tipo de concesión = authorization_code)
+      client_credentials: Se usará para autenticar máquinas (tipo de concesión = client_credentials)
+    handle:
+      disabledFootnote: No se puede cambiar el identificador del cliente de autenticación predeterminado
+      label: Identificador
+      placeholder-handle: identificador (a-z, 0-9, guion bajo o guion)
+      invalid-handle-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+    name: Nombre *
+    no-time: No se ha seleccionado una hora
+    profile: Permitir acceso del cliente al perfil del usuario
+    redirectURI: URI de redirección
+    remove: Quitar
+    secret: Secreto
+    security:
+      defaultUserGroup:
+        label: Grupo de usuarios predeterminado para usuarios nuevos
+        placeholder: Grupo de usuarios predeterminado para usuarios nuevos
+      prohibitedRoles:
+        description: Los roles de esta lista se quitarán del contexto de seguridad cuando el usuario autorice este cliente
+        label: Roles prohibidos
+      forcedRoles:
+        description: Los roles de esta lista siempre se añadirán al contexto de seguridad cuando el usuario autorice este cliente
+        label: Roles forzados
+      impersonateUser:
+        description: Al autenticar con credenciales de cliente, actuar en nombre del usuario suplantado
+        placeholder: Selecciona un usuario
+        label: Suplantar usuario
+      permittedRoles:
+        description: Solo los roles de esta lista se añadirán al contexto de seguridad cuando el usuario autorice este cliente
+        label: Roles permitidos
+    title: Información básica
+    tooltip:
+      regenerate-secret: Regenerar secreto
+      reset-value: Restablecer valor
+      show-client-secret: Mostrar secreto del cliente
+      hide-client-secret: Ocultar secreto del cliente
+      copy-access-token: Copiar token de acceso
+      copy-cURL: Copiar cURL
+    trusted:
+      description: Cuando el cliente es de confianza, los usuarios no verán el paso de autorización
+      label: De confianza
+    undelete: Restaurar
+    unnamed: Rol sin nombre
+    uri: URI
+    validFrom:
+      description: Si no se define, el cliente será válido hasta su caducidad
+      label: Válido desde
+    cUrl: Ejemplo de cURL
+    accessToken: Token de acceso
+    generateAccessToken: Generar token de acceso
+    discovery: Permitir acceso del cliente a la API de Discovery en nombre del usuario
+    openid: Permitir al cliente usar OIDC y verificar la identidad del usuario
+  new: Nuevo cliente de autenticación
+  permissions: Permisos
+  title:
+    create: Crear cliente
+    edit: Editar cliente
+list:
+  columns:
+    actions: ''
+    createdAt: Creado
+    enabled: Activado
+    handle: Identificador
+    meta:
+      name: Nombre
+    state: Estado
+  rows:
+    filters:
+      deleted: Eliminados
+  filterForm:
+    deleted:
+      label: clientes eliminados
+    excluded:
+      label: Sin
+    exclusive:
+      label: Solo
+    inclusive:
+      label: Incluyendo
+    query:
+      label: Filtrar lista de clientes
+      placeholder: Filtrar clientes
+  loading: Cargando clientes
+  new: Nuevo cliente de autenticación
+  permissions: Permisos
+  title: Clientes de autenticación
+  yaml: YAML
+  delete: Eliminar
+  undelete: Restaurar

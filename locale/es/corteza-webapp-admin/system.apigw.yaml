@@ -1,0 +1,155 @@
+title: Gateway de integración
+list:
+  export: Exportar
+  title: Rutas
+  new: Nueva ruta
+  permissions: Permisos
+  profiler: Profiler
+  yaml: YAML
+  loading: Cargando rutas
+  filterForm:
+    query:
+      label: Filtrar lista de rutas
+      placeholder: Filtrar rutas por nombre
+    excluded:
+      label: Sin
+    inclusive:
+      label: Incluyendo
+    exclusive:
+      label: Solo
+    deleted:
+      label: rutas eliminadas
+    handle:
+      placeholder: Filtrar endpoints por ruta
+  delete: Eliminar
+  undelete: Restaurar
+  columns:
+    endpoint: Endpoint
+    createdAt: Creada
+    enabled: Activada
+    method: Método
+    actions: ''
+    state: Estado
+  rows:
+    filters:
+      deleted: Eliminada
+settings:
+  title: Ajustes
+  profiler:
+    label: Profiler
+    enabled: Activado
+    global: Activado globalmente
+  proxy:
+    label: Proxy
+    follow: Seguir redirecciones
+editor:
+  title: Editar ruta
+  new: Nueva ruta
+  permissions: Permisos
+  info:
+    title: Información básica
+    id: ID
+    endpoint: Endpoint
+    method: Método
+    description: Descripción
+    enabled: Activada
+    delete: Eliminar
+    undelete: Restaurar
+    tooltip: El endpoint debe comenzar con una barra "/" y no puede contener caracteres especiales excepto guion bajo "_" y guion "-"
+    validation:
+      slash: El endpoint debe comenzar con una barra "/"
+      minLength: El endpoint debe contener al menos un carácter
+      invalidCharacters: El endpoint contiene caracteres no válidos
+  filters:
+    title: Lista de filtros
+    enabled: Activado
+    disabled: Desactivado
+    add: Añadir
+    addFilter: Añadir filtro
+    addHeader: Añadir encabezado
+    params: Parámetros
+    filterListEmpty: ¡La lista de filtros está vacía!
+    modal:
+      title: Verificador de parámetros de consulta
+      ok: Guardar y cerrar
+    step_title:
+      prefilter: Prefiltrado
+      processer: Procesamiento
+      postfilter: Posfiltrado
+    list:
+      remove: Eliminar
+      filters: Filtros
+      status: Estado
+      actions: Acciones
+      active: Activo
+      noFilters: No hay filtros
+    labels:
+      expr: Expresión
+      location: URL
+      workflow: Workflow
+      status: Estado HTTP
+      jsfunc: Función
+      input: Entrada
+      header: Encabezados
+      name: Nombre
+      value: Valor
+    httpStatus:
+      none: Sin estado
+      '300': 300 - Varias opciones
+      '301': 301 - Movido permanentemente
+      '302': 302 - Encontrado
+      '303': 303 - Ver otro
+      '304': 304 - No modificado
+      '307': 307 - Redirección temporal
+      '308': 308 - Redirección permanente
+    placeholders:
+      workflow: Selecciona un workflow
+    help:
+      expression:
+        example: Example == "match string" && match(SecondParam, "^foo\\s.*$")
+        link: Documentación
+profiler:
+  label: Profiler
+  title: Profiler del gateway de integración
+  refreshingIn: Se actualizará en {{seconds}} s
+  description:
+    globalEnabled: Mostrando rutas de todas las solicitudes entrantes
+    globalDisabled: Mostrando solo rutas registradas con prefiltrado de profiler
+  purge:
+    all: Purgar solicitudes de todas las rutas
+    this: Purgar solicitudes de esta ruta
+  hit:
+    title: Detalles de la solicitud
+    general:
+      label: General
+      id: ID de solicitud
+      route: Ruta de solicitud
+      URL: URL de solicitud
+      method: Método de solicitud
+      statusCode: Código de estado
+      headers: Encabezados de solicitud
+      remoteAddress: Dirección remota
+      duration: Duración
+      start: Inicio
+      end: Fin
+      openRoute: Abrir ruta
+    headers:
+      label: Encabezados
+    body:
+      label: Cuerpo
+  columns:
+    actions: ''
+    path: Ruta
+    count: Cantidad
+    content_length: Longitud del contenido
+    http_method: Método
+    http_status_code: Código de estado
+    size_min: Tamaño (mín.)
+    size_max: Tamaño (máx.)
+    size_avg: Tamaño (prom.)
+    time_min: Tiempo (mín.)
+    time_max: Tiempo (máx.)
+    time_avg: Tiempo (prom.)
+    time_start: Hora de inicio
+    time_finish: Hora de finalización
+    time_duration: Duración

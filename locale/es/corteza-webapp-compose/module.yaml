@@ -1,0 +1,244 @@
+public:
+  record:
+    create:
+      title: '{{name}} - Creando registro'
+    edit:
+      title: '{{name}} - Editando registro'
+    view:
+      title: '{{name}} - Viendo registro'
+allRecords:
+  create:
+    title: Crear registro para el módulo «{{name}}»
+  edit:
+    title: Editar registro para el módulo «{{name}}»
+  label: Todos los registros
+  list:
+    title: Todos los registros del módulo «{{name}}»
+  columns:
+    title: Configurar columnas
+    description: Las columnas seleccionadas no se guardarán después de actualizar la página
+  tooltip:
+    configureColumns: Seleccionar muchos campos o mostrar campos de registros o usuarios afectará al rendimiento
+  view:
+    title: Ver registro del módulo «{{name}}»
+block:
+  record:
+    recordDeleted: Este registro fue eliminado
+    loadFailed: No se pudo cargar el registro
+createLabel: Nuevo módulo
+federated: Federado
+forModule:
+  recordPage: '{{name}} - Página de registro'
+general:
+  fields: Campos del módulo
+  label:
+    attributes: Atributos
+    handle: Identificador
+    name: 'Nombre del módulo *'
+    permissions: Permisos
+    title: Título
+    type: Tipo
+    saveAndClose: Guardar y cerrar
+  placeholder:
+    name: 'Nombre (por ejemplo, «Clientes potenciales»)'
+    handle: Identificador único (a-z, 0-9, guion bajo o guion)
+    sample: Ejemplo
+    invalid-handle-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
+import: Importación de módulos
+navigation:
+  module: Módulos
+noModule: No hay módulos
+noModuleFilter: Ningún módulo coincide con tu búsqueda
+list:
+  columns:
+    name: Nombre
+    handle: Identificador
+    changedAt: Último cambio
+  delete: Eliminar
+recordPage:
+  create: Crear página de registro
+  edit: Editar página de registro
+recordListPage:
+  create: Crear página de lista de registros
+  edit: Editar página de lista de registros
+related-pages: Páginas relacionadas
+searchPlaceholder: Buscar módulos en este espacio de trabajo
+title: Lista de módulos
+tooltip:
+  permissions: Permisos del módulo
+edit:
+  create: Crear módulo
+  edit: Editar módulo
+  fields:
+    label: Campos
+    columns:
+      name:
+        label: Nombre
+      title:
+        label: Título
+      type:
+        label: Tipo
+  federationSettings:
+    downstream:
+      allFields: Todos los campos
+      description: 'Relaciona los campos federados con los existentes:'
+      title: Mapear
+    error:
+      fetch:
+        data: Error al obtener los datos del servidor
+        exposed: Error al obtener la información del módulo expuesto
+        shared: Error al obtener la información del módulo compartido
+        mmap: Error al obtener la información del mapeo del módulo
+        node: Error al obtener la información de los nodos
+      persist:
+        exposed: Error al guardar la información del módulo expuesto
+        shared: Error al guardar la información del módulo compartido
+        mmap: Error al guardar la información del mapeo del módulo
+    general:
+      receive: Recibir nuevos registros de otra organización (descendente)
+      send: Enviar nuevos registros a la red federada (ascendente)
+      title: General
+    noNodes: No hay servidores federados disponibles
+    noPermission: No tienes permiso para gestionar el módulo expuesto
+    pickModule: Selecciona un módulo federado
+    pickModuleField: Selecciona un campo del módulo
+    pickServer: Selecciona un servidor federado
+    specificTitle: Ajustes de federación ({{handle}})
+    title: Ajustes de federación
+    upstream:
+      copyFrom: Copiar ajustes de
+      allFields: Todos los campos
+      description: Selecciona los campos que quieres compartir con la red seleccionada
+      title: Exponer
+  discoverySettings:
+    title: Ajustes de Discovery
+    public: Público
+    private: Privado
+    protected: Protegido
+  fieldPermissions: Permisos de campos
+  manageRecordFields: Gestionar campos de registros
+  moduleFieldSettings: Ajustes de campos del módulo
+  moduleInfo: Información del módulo
+  newField: Añadir campo nuevo
+  recordPermissions: Permisos de registros
+  reorderFields: Reordenar campos
+  specificFieldSettings: Ajustes del campo ({{name}})
+  steps:
+    recordList: Página con lista de registros
+    recordPage: Página de registro
+  systemFields: 'Campos del sistema'
+  tooltip:
+    attributes: Selecciona si el campo puede contener varios valores, si es obligatorio o si contiene datos sensibles
+    name: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y guiones, y terminar en letra o número.
+    private: Datos sensibles
+    required: Campo obligatorio
+    title: Nombre mostrado en los formularios y listas de datos
+  issues:
+    label: Problemas ({{count}})
+  schemaAlterations:
+    title: Alteraciones del esquema
+    resolve: Resolver
+    resolveAuto: Resolver automáticamente
+    resolved: Resuelta
+    dismiss: Descartar
+    waitingFor: 'Esperando a {{id}}'
+    noAlterations: No hay alteraciones del esquema pendientes de resolución
+    columns:
+      alteration: Alteración
+      change: Cambio
+      status: Estado
+    params:
+      attribute:
+        add: Añadir columna {{ident}} codificada como {{storeType}} de tipo {{attrType}}
+        delete: Eliminar columna {{ident}} codificada como {{storeType}}
+        reType: Cambiar el tipo de la columna {{ident}} a {{toType}}
+        reEncode: Cambiar la codificación de la columna {{ident}} a {{toType}}
+      model:
+        add: Añadir esquema para el modelo {{ident}}
+        delete: Eliminar esquema del modelo {{ident}}
+  config:
+    validation:
+      title: Validación
+      record-duplication:
+        title: Detección de duplicación de registros
+        strict-fields:
+          label: Validación estricta de valores duplicados
+          description: El registro no se guardará cuando se detecte un valor duplicado en los campos seleccionados de cualquier registro existente de este módulo
+        non-strict-fields:
+          label: Validación flexible de valores duplicados
+          description: El registro se guardará y se mostrará una advertencia cuando se detecte un valor duplicado en los campos seleccionados de cualquier registro existente de este módulo
+    uniqueValues:
+      title: Valores únicos
+      duplicationDetection: Detección de duplicados
+      preventRecordsSave: Impedir guardar registros si se encuentran valores duplicados
+      warningLabel: Mensaje de advertencia o error cuando coincide la restricción
+      valueModifiers: Modificadores de valores
+      multiValues: Valores de varios campos
+      add: Añadir
+      searchFields: Añadir campo(s) a la restricción
+      ignoreCase: Ignorar mayúsculas y minúsculas
+      fuzzyMatch: Coincidencia aproximada
+      soundsLike: Suena como
+      caseSensitive: Distinguir mayúsculas y minúsculas
+      oneOf: Uno de
+      equal: Igual
+      warningMessage: Mensaje de advertencia o error cuando coincide la restricción
+      field: Campo
+      type: Tipo
+      none: Ninguno
+      addNewConstraint: Añadir nueva restricción
+      uniqueValueConstraint: 'Restricción de valor único #{{index}}'
+      tooltip:
+        performance: Usar la detección de duplicados afectará al rendimiento
+    dal:
+      title: Almacén de datos
+      connection:
+        label: Conexión de base de datos
+        placeholder: Selecciona una conexión de base de datos
+        description: Cambiar la conexión restablecerá la configuración del nivel de sensibilidad del módulo y sus campos si es incompatible con la nueva conexión
+      ident:
+        label: Nombre de colección o tabla de base de datos
+        placeholder: compose_record
+        description: 'Nombre de la tabla o colección donde se pueden consultar y almacenar registros. Admite los marcadores {{module}} y {{namespace}}.'
+      connections:
+        fetch-failed: No se pudieron obtener las conexiones disponibles
+      module-fields:
+        label: Mapeo y codificación de campos del módulo
+        description: Configura cómo se almacenan y leen los campos de registros en la base de datos.
+      system-fields:
+        label: Mapeo y codificación de campos del sistema
+        description: Los campos del sistema almacenan metadatos del registro.
+        grouptypes:
+          all: Todos
+          partition: Partición
+          userReference: Referencia de usuario
+          timestamps: Marcas de tiempo
+          extras: Extras
+      encoding-strategy:
+        unavailable: no disponible
+        ident:
+          placeholder: Nombre del campo o columna de la tabla
+        strategies:
+          plain:
+            label: Columna
+          alias:
+            label: Alias
+          json:
+            label: JSON
+    privacy:
+      title: Privacidad
+      sensitivity-level:
+        label: Nivel de sensibilidad máximo permitido
+        placeholder: Selecciona un nivel de sensibilidad
+        description: Nivel máximo permitido para los campos del módulo
+      usage-disclosure:
+        label: Divulgación del uso de datos sensibles
+      sensitivity-levels:
+        fetch-failed: No se pudieron obtener los niveles de sensibilidad
+    record-revisions:
+      title: Revisiones de registros
+      enabled: Activar revisiones de registros
+      ident:
+        label: Identificador
+        placeholder: compose_record_revisions
+        description: 'Nombre de la tabla o colección donde se almacenan las revisiones. Admite {{module}} y {{namespace}}.'

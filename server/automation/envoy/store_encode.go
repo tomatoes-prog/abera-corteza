@@ -17,6 +17,7 @@ func (e StoreEncoder) setWorkflowDefaults(res *types.Workflow) (err error) {
 	if res.CreatedAt.IsZero() {
 		res.CreatedAt = time.Now()
 	}
+	ensureWorkflowVisuals(res)
 	return
 }
 

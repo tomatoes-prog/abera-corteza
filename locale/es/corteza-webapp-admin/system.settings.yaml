@@ -1,0 +1,143 @@
+editor:
+  title: Ajustes del sistema
+  auth:
+    title: Autenticación
+    url: URL
+    internal:
+      title: Interna
+      enabled: Autenticación interna activada
+      password-reset:
+        enabled: Restablecimiento de contraseña activado
+      password-constraints:
+        title: Restricciones de contraseña
+        ignored-security: El sistema está configurado para ignorar las restricciones de seguridad de contraseñas, lo que no es seguro en producción. Si este entorno está en producción, contacta con el administrador para actualizar AUTH_PASSWORD_SECURITY en la configuración.
+        min-length: Longitud mínima
+        min-length-description: Debe tener al menos 8 caracteres
+        min-num-count: Número mínimo de dígitos
+        min-num-count-description: La contraseña debe incluir el número de dígitos indicado; se desactiva con 0
+        min-special-count: Número mínimo de caracteres especiales
+        min-special-count-description: La contraseña debe incluir el número de caracteres especiales indicado; se desactiva con 0
+        min-upper-case-length: Número mínimo de mayúsculas
+        min-upper-case-description: La contraseña debe incluir el número de mayúsculas indicado; se desactiva con 0
+        min-lower-case-length: Número mínimo de minúsculas
+        min-lower-case-description: La contraseña debe incluir el número de minúsculas indicado; se desactiva con 0
+      signup:
+        email-confirmation-required: Se requiere confirmación por correo electrónico
+        enabled: Registro activado
+        split-credentials-check:
+          description: 'Divide el inicio de sesión en dos pasos: primero solicita el correo y después muestra la contraseña. Redirige automáticamente al proveedor de identidad externo cuando el usuario no tiene contraseña y solo hay un IdP disponible.'
+          label: Activar comprobación de credenciales separadas
+      profile-avatar:
+        enabled: Avatar de perfil activado
+      send-user-invite-email:
+        title: Correo de invitación
+        enabled: Enviar correo de invitación al crear usuarios
+        description: Al activarse, esta configuración envía un correo de invitación a los usuarios nuevos mediante la CLI
+        expires:
+          label: Válido durante
+          description: Tiempo de validez del token de invitación
+    mail:
+      title: Correo remitente de autenticación
+      from-address: Dirección del remitente
+      from-name: Nombre del remitente
+      validate-email: Introduce una dirección de correo válida
+    mfa:
+      title: Autenticación multifactor
+      TOTP:
+        enabled: Activar TOTP (contraseña de un solo uso basada en tiempo mediante una aplicación móvil)
+        enforced: Exigir TOTP a todos los usuarios
+        issuer:
+          description: El nombre del emisor se enviará a la aplicación autenticadora al configurarla
+          label: Emisor
+      emailOTP:
+        enabled: Activar OTP por correo electrónico
+        enforced: Exigir OTP por correo electrónico a todos los usuarios
+        expires:
+          description: Tiempo de validez de la contraseña
+          label: Válido durante
+    auto-logout:
+      title: Cierre de sesión automático
+      enabled:
+        label: Activado
+        description: Cerrar sesión automáticamente después de un periodo de inactividad
+      timeout:
+        label: Tiempo de espera
+        description: Periodo de inactividad, en segundos, antes de cerrar sesión
+  external:
+    title: Proveedores de autenticación externos
+    enabled: Activar autenticación externa
+    table:
+      header:
+        enabled: Activado
+        provider: Proveedor
+        info: Emisor, ID de cliente
+    standard:
+      enabled: Activado
+      apiAccess: Acceso a API
+      clientKey: Clave de cliente
+      clientSecret: Secreto
+    oidc:
+      add: Añadir proveedor OIDC
+      enabled: Activado
+      handle: Identificador
+      title: OpenID Connect
+      issuer: URL del emisor OIDC
+      issuerHint: Dónde encontrar /.well-known/openid-configuration, sin incluir esa parte
+      clientKey: Clave de cliente
+      clientSecret: Secreto
+      scope: Ámbito
+      scopePlaceholder: Lista los valores de ámbito OAuth compatibles
+      scopeHint: Usa una cadena separada por espacios
+    saml:
+      enabled: Activado
+      title: SAML
+      requests:
+        title: Solicitudes
+        sign-requests: Firmar solicitudes
+        sign-method: Método de firma
+        binding: Vinculación
+        binding-redirect: Redirección HTTP
+        binding-post: HTTP POST
+      cert:
+        public: Clave pública
+        private: Clave privada
+      name: Nombre
+      certificate: Certificado
+      idp:
+        title: Proveedor de identidad
+        ident-handle: Campo de identificador
+        ident-identifier: Campo de identificador único
+        ident-name: Campo de nombre
+        url: URL
+      desc:
+        name: 'Nombre del IdP que se mostrará en la pantalla de inicio de sesión (Iniciar sesión con <name>)'
+        cert:
+          public: El contenido se minimizará
+          private: El contenido se minimizará
+        requests:
+          sign-requests: Firmar AuthNRequest y la aserción
+          sign-method: Método que se usará en las solicitudes firmadas
+          binding: 'Tipo de vinculación HTTP para AuthNRequest; predeterminado: redirección HTTP (GET)'
+        idp:
+          url: Ubicación de los metadatos del IdP
+          ident-handle: Nombre del campo del IdP usado para completar el identificador o apodo del usuario de Corteza
+          ident-identifier: Nombre del campo del IdP usado para completar y asociar el correo del usuario de Corteza
+          ident-name: Nombre del campo del IdP usado para completar el nombre completo del usuario de Corteza
+    security:
+      title: Seguridad
+      prohibited-roles:
+        description: Los roles de esta lista se eliminarán del contexto de seguridad al autenticarse con este proveedor
+        label: Roles prohibidos
+      forced-roles:
+        description: Los roles de esta lista siempre se añadirán al contexto de seguridad al autenticarse con este proveedor
+        label: Roles forzados
+      permitted-roles:
+        description: Solo los roles de esta lista se añadirán al contexto de seguridad al autenticarse con este proveedor
+        label: Roles permitidos
+  bgScreen:
+    title: Pantalla de fondo de autenticación
+    image:
+      uploader:
+        label: Imagen de fondo
+      editor:
+        label: CSS personalizado

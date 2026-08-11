@@ -1,0 +1,61 @@
+ID,codigo,cliente,tipoEquipo,marca,modelo,serial,fechaInstalacion,garantiaHasta,estado,proximoMantenimiento,ubicacion,observaciones,externalID
+activo-001,ACT-DEMO-001,cliente-servicio-002,Caldera,LG,Modelo-01,SN-DEMO-000001,2026-03-30,2026-10-30,Requiere mantenimiento,2026-08-01,Medellín,Activo sintético.,IOT-ACT-001
+activo-002,ACT-DEMO-002,cliente-servicio-003,Panel solar,Bosch,Modelo-02,SN-DEMO-000002,2026-03-27,2026-10-31,Fuera de servicio,2026-08-02,Cali,Activo sintético.,IOT-ACT-002
+activo-003,ACT-DEMO-003,cliente-servicio-004,Equipo industrial,Siemens,Modelo-03,SN-DEMO-000003,2026-03-24,2026-11-01,Operativo,2026-08-03,Barranquilla,Activo sintético.,IOT-ACT-003
+activo-004,ACT-DEMO-004,cliente-servicio-005,Aire acondicionado,Samsung,Modelo-04,SN-DEMO-000004,2026-03-21,2026-11-02,Requiere mantenimiento,2026-08-04,Cartagena,Activo sintético.,IOT-ACT-004
+activo-005,ACT-DEMO-005,cliente-servicio-006,Caldera,LG,Modelo-05,SN-DEMO-000005,2026-03-18,2026-11-03,Fuera de servicio,2026-08-05,Bucaramanga,Activo sintético.,IOT-ACT-005
+activo-006,ACT-DEMO-006,cliente-servicio-007,Panel solar,Bosch,Modelo-06,SN-DEMO-000006,2026-03-15,2026-11-04,Operativo,2026-08-06,Bogotá,Activo sintético.,IOT-ACT-006
+activo-007,ACT-DEMO-007,cliente-servicio-008,Equipo industrial,Siemens,Modelo-07,SN-DEMO-000007,2026-03-12,2026-11-05,Requiere mantenimiento,2026-08-07,Medellín,Activo sintético.,IOT-ACT-007
+activo-008,ACT-DEMO-008,cliente-servicio-009,Aire acondicionado,Samsung,Modelo-08,SN-DEMO-000008,2026-03-09,2026-11-06,Fuera de servicio,2026-08-08,Cali,Activo sintético.,IOT-ACT-008
+activo-009,ACT-DEMO-009,cliente-servicio-010,Caldera,LG,Modelo-09,SN-DEMO-000009,2026-03-06,2026-11-07,Operativo,2026-08-09,Barranquilla,Activo sintético.,IOT-ACT-009
+activo-010,ACT-DEMO-010,cliente-servicio-011,Panel solar,Bosch,Modelo-10,SN-DEMO-000010,2026-03-03,2026-11-08,Requiere mantenimiento,2026-08-10,Cartagena,Activo sintético.,IOT-ACT-010
+activo-011,ACT-DEMO-011,cliente-servicio-012,Equipo industrial,Siemens,Modelo-11,SN-DEMO-000011,2026-02-28,2026-11-09,Fuera de servicio,2026-08-11,Bucaramanga,Activo sintético.,IOT-ACT-011
+activo-012,ACT-DEMO-012,cliente-servicio-013,Aire acondicionado,Samsung,Modelo-12,SN-DEMO-000012,2026-02-25,2026-11-10,Operativo,2026-08-12,Bogotá,Activo sintético.,IOT-ACT-012
+activo-013,ACT-DEMO-013,cliente-servicio-014,Caldera,LG,Modelo-13,SN-DEMO-000013,2026-02-22,2026-11-11,Requiere mantenimiento,2026-08-13,Medellín,Activo sintético.,IOT-ACT-013
+activo-014,ACT-DEMO-014,cliente-servicio-015,Panel solar,Bosch,Modelo-14,SN-DEMO-000014,2026-02-19,2026-11-12,Fuera de servicio,2026-08-14,Cali,Activo sintético.,IOT-ACT-014
+activo-015,ACT-DEMO-015,cliente-servicio-016,Equipo industrial,Siemens,Modelo-00,SN-DEMO-000015,2026-02-16,2026-11-13,Operativo,2026-08-15,Barranquilla,Activo sintético.,IOT-ACT-015
+activo-016,ACT-DEMO-016,cliente-servicio-017,Aire acondicionado,Samsung,Modelo-01,SN-DEMO-000016,2026-02-13,2026-11-14,Requiere mantenimiento,2026-08-16,Cartagena,Activo sintético.,IOT-ACT-016
+activo-017,ACT-DEMO-017,cliente-servicio-018,Caldera,LG,Modelo-02,SN-DEMO-000017,2026-02-10,2026-11-15,Fuera de servicio,2026-08-17,Bucaramanga,Activo sintético.,IOT-ACT-017
+activo-018,ACT-DEMO-018,cliente-servicio-019,Panel solar,Bosch,Modelo-03,SN-DEMO-000018,2026-02-07,2026-11-16,Operativo,2026-08-18,Bogotá,Activo sintético.,IOT-ACT-018
+activo-019,ACT-DEMO-019,cliente-servicio-020,Equipo industrial,Siemens,Modelo-04,SN-DEMO-000019,2026-02-04,2026-11-17,Requiere mantenimiento,2026-08-19,Medellín,Activo sintético.,IOT-ACT-019
+activo-020,ACT-DEMO-020,cliente-servicio-021,Aire acondicionado,Samsung,Modelo-05,SN-DEMO-000020,2026-02-01,2026-11-18,Fuera de servicio,2026-08-20,Cali,Activo sintético.,IOT-ACT-020
+activo-021,ACT-DEMO-021,cliente-servicio-022,Caldera,LG,Modelo-06,SN-DEMO-000021,2026-01-29,2026-11-19,Operativo,2026-08-21,Barranquilla,Activo sintético.,IOT-ACT-021
+activo-022,ACT-DEMO-022,cliente-servicio-023,Panel solar,Bosch,Modelo-07,SN-DEMO-000022,2026-01-26,2026-11-20,Requiere mantenimiento,2026-08-22,Cartagena,Activo sintético.,IOT-ACT-022
+activo-023,ACT-DEMO-023,cliente-servicio-024,Equipo industrial,Siemens,Modelo-08,SN-DEMO-000023,2026-01-23,2026-11-21,Fuera de servicio,2026-08-23,Bucaramanga,Activo sintético.,IOT-ACT-023
+activo-024,ACT-DEMO-024,cliente-servicio-025,Aire acondicionado,Samsung,Modelo-09,SN-DEMO-000024,2026-01-20,2026-11-22,Operativo,2026-08-24,Bogotá,Activo sintético.,IOT-ACT-024
+activo-025,ACT-DEMO-025,cliente-servicio-026,Caldera,LG,Modelo-10,SN-DEMO-000025,2026-01-17,2026-11-23,Requiere mantenimiento,2026-08-25,Medellín,Activo sintético.,IOT-ACT-025
+activo-026,ACT-DEMO-026,cliente-servicio-027,Panel solar,Bosch,Modelo-11,SN-DEMO-000026,2026-01-14,2026-11-24,Fuera de servicio,2026-08-26,Cali,Activo sintético.,IOT-ACT-026
+activo-027,ACT-DEMO-027,cliente-servicio-028,Equipo industrial,Siemens,Modelo-12,SN-DEMO-000027,2026-01-11,2026-11-25,Operativo,2026-08-27,Barranquilla,Activo sintético.,IOT-ACT-027
+activo-028,ACT-DEMO-028,cliente-servicio-029,Aire acondicionado,Samsung,Modelo-13,SN-DEMO-000028,2026-01-08,2026-11-26,Requiere mantenimiento,2026-08-28,Cartagena,Activo sintético.,IOT-ACT-028
+activo-029,ACT-DEMO-029,cliente-servicio-030,Caldera,LG,Modelo-14,SN-DEMO-000029,2026-01-05,2026-11-27,Fuera de servicio,2026-08-29,Bucaramanga,Activo sintético.,IOT-ACT-029
+activo-030,ACT-DEMO-030,cliente-servicio-031,Panel solar,Bosch,Modelo-00,SN-DEMO-000030,2026-01-02,2026-11-28,Operativo,2026-08-30,Bogotá,Activo sintético.,IOT-ACT-030
+activo-031,ACT-DEMO-031,cliente-servicio-032,Equipo industrial,Siemens,Modelo-01,SN-DEMO-000031,2025-12-30,2026-11-29,Requiere mantenimiento,2026-08-31,Medellín,Activo sintético.,IOT-ACT-031
+activo-032,ACT-DEMO-032,cliente-servicio-033,Aire acondicionado,Samsung,Modelo-02,SN-DEMO-000032,2025-12-27,2026-11-30,Fuera de servicio,2026-09-01,Cali,Activo sintético.,IOT-ACT-032
+activo-033,ACT-DEMO-033,cliente-servicio-034,Caldera,LG,Modelo-03,SN-DEMO-000033,2025-12-24,2026-12-01,Operativo,2026-09-02,Barranquilla,Activo sintético.,IOT-ACT-033
+activo-034,ACT-DEMO-034,cliente-servicio-035,Panel solar,Bosch,Modelo-04,SN-DEMO-000034,2025-12-21,2026-12-02,Requiere mantenimiento,2026-09-03,Cartagena,Activo sintético.,IOT-ACT-034
+activo-035,ACT-DEMO-035,cliente-servicio-036,Equipo industrial,Siemens,Modelo-05,SN-DEMO-000035,2025-12-18,2026-12-03,Fuera de servicio,2026-09-04,Bucaramanga,Activo sintético.,IOT-ACT-035
+activo-036,ACT-DEMO-036,cliente-servicio-037,Aire acondicionado,Samsung,Modelo-06,SN-DEMO-000036,2025-12-15,2026-12-04,Operativo,2026-09-05,Bogotá,Activo sintético.,IOT-ACT-036
+activo-037,ACT-DEMO-037,cliente-servicio-038,Caldera,LG,Modelo-07,SN-DEMO-000037,2025-12-12,2026-12-05,Requiere mantenimiento,2026-09-06,Medellín,Activo sintético.,IOT-ACT-037
+activo-038,ACT-DEMO-038,cliente-servicio-039,Panel solar,Bosch,Modelo-08,SN-DEMO-000038,2025-12-09,2026-12-06,Fuera de servicio,2026-09-07,Cali,Activo sintético.,IOT-ACT-038
+activo-039,ACT-DEMO-039,cliente-servicio-040,Equipo industrial,Siemens,Modelo-09,SN-DEMO-000039,2025-12-06,2026-12-07,Operativo,2026-09-08,Barranquilla,Activo sintético.,IOT-ACT-039
+activo-040,ACT-DEMO-040,cliente-servicio-041,Aire acondicionado,Samsung,Modelo-10,SN-DEMO-000040,2025-12-03,2026-12-08,Requiere mantenimiento,2026-09-09,Cartagena,Activo sintético.,IOT-ACT-040
+activo-041,ACT-DEMO-041,cliente-servicio-042,Caldera,LG,Modelo-11,SN-DEMO-000041,2025-11-30,2026-12-09,Fuera de servicio,2026-09-10,Bucaramanga,Activo sintético.,IOT-ACT-041
+activo-042,ACT-DEMO-042,cliente-servicio-043,Panel solar,Bosch,Modelo-12,SN-DEMO-000042,2025-11-27,2026-12-10,Operativo,2026-09-11,Bogotá,Activo sintético.,IOT-ACT-042
+activo-043,ACT-DEMO-043,cliente-servicio-044,Equipo industrial,Siemens,Modelo-13,SN-DEMO-000043,2025-11-24,2026-12-11,Requiere mantenimiento,2026-09-12,Medellín,Activo sintético.,IOT-ACT-043
+activo-044,ACT-DEMO-044,cliente-servicio-045,Aire acondicionado,Samsung,Modelo-14,SN-DEMO-000044,2025-11-21,2026-12-12,Fuera de servicio,2026-09-13,Cali,Activo sintético.,IOT-ACT-044
+activo-045,ACT-DEMO-045,cliente-servicio-046,Caldera,LG,Modelo-00,SN-DEMO-000045,2025-11-18,2026-12-13,Operativo,2026-09-14,Barranquilla,Activo sintético.,IOT-ACT-045
+activo-046,ACT-DEMO-046,cliente-servicio-047,Panel solar,Bosch,Modelo-01,SN-DEMO-000046,2025-11-15,2026-12-14,Requiere mantenimiento,2026-09-15,Cartagena,Activo sintético.,IOT-ACT-046
+activo-047,ACT-DEMO-047,cliente-servicio-048,Equipo industrial,Siemens,Modelo-02,SN-DEMO-000047,2025-11-12,2026-12-15,Fuera de servicio,2026-09-16,Bucaramanga,Activo sintético.,IOT-ACT-047
+activo-048,ACT-DEMO-048,cliente-servicio-049,Aire acondicionado,Samsung,Modelo-03,SN-DEMO-000048,2025-11-09,2026-12-16,Operativo,2026-09-17,Bogotá,Activo sintético.,IOT-ACT-048
+activo-049,ACT-DEMO-049,cliente-servicio-050,Caldera,LG,Modelo-04,SN-DEMO-000049,2025-11-06,2026-12-17,Requiere mantenimiento,2026-09-18,Medellín,Activo sintético.,IOT-ACT-049
+activo-050,ACT-DEMO-050,cliente-servicio-051,Panel solar,Bosch,Modelo-05,SN-DEMO-000050,2025-11-03,2026-12-18,Fuera de servicio,2026-09-19,Cali,Activo sintético.,IOT-ACT-050
+activo-051,ACT-DEMO-051,cliente-servicio-052,Equipo industrial,Siemens,Modelo-06,SN-DEMO-000051,2025-10-31,2026-12-19,Operativo,2026-09-20,Barranquilla,Activo sintético.,IOT-ACT-051
+activo-052,ACT-DEMO-052,cliente-servicio-053,Aire acondicionado,Samsung,Modelo-07,SN-DEMO-000052,2025-10-28,2026-12-20,Requiere mantenimiento,2026-09-21,Cartagena,Activo sintético.,IOT-ACT-052
+activo-053,ACT-DEMO-053,cliente-servicio-054,Caldera,LG,Modelo-08,SN-DEMO-000053,2025-10-25,2026-12-21,Fuera de servicio,2026-09-22,Bucaramanga,Activo sintético.,IOT-ACT-053
+activo-054,ACT-DEMO-054,cliente-servicio-055,Panel solar,Bosch,Modelo-09,SN-DEMO-000054,2025-10-22,2026-12-22,Operativo,2026-09-23,Bogotá,Activo sintético.,IOT-ACT-054
+activo-055,ACT-DEMO-055,cliente-servicio-056,Equipo industrial,Siemens,Modelo-10,SN-DEMO-000055,2025-10-19,2026-12-23,Requiere mantenimiento,2026-09-24,Medellín,Activo sintético.,IOT-ACT-055
+activo-056,ACT-DEMO-056,cliente-servicio-057,Aire acondicionado,Samsung,Modelo-11,SN-DEMO-000056,2025-10-16,2026-12-24,Fuera de servicio,2026-09-25,Cali,Activo sintético.,IOT-ACT-056
+activo-057,ACT-DEMO-057,cliente-servicio-058,Caldera,LG,Modelo-12,SN-DEMO-000057,2025-10-13,2026-12-25,Operativo,2026-09-26,Barranquilla,Activo sintético.,IOT-ACT-057
+activo-058,ACT-DEMO-058,cliente-servicio-059,Panel solar,Bosch,Modelo-13,SN-DEMO-000058,2025-10-10,2026-12-26,Requiere mantenimiento,2026-09-27,Cartagena,Activo sintético.,IOT-ACT-058
+activo-059,ACT-DEMO-059,cliente-servicio-060,Equipo industrial,Siemens,Modelo-14,SN-DEMO-000059,2025-10-07,2026-12-27,Fuera de servicio,2026-09-28,Bucaramanga,Activo sintético.,IOT-ACT-059
+activo-060,ACT-DEMO-060,cliente-servicio-061,Aire acondicionado,Samsung,Modelo-00,SN-DEMO-000060,2025-10-04,2026-12-28,Operativo,2026-09-29,Bogotá,Activo sintético.,IOT-ACT-060
