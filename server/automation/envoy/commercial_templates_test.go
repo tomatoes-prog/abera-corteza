@@ -71,6 +71,8 @@ func TestCommercialTemplatesDecode(t *testing.T) {
 					req.NotEmpty(workflow.Handle)
 					req.True(workflow.Enabled, workflow.Handle)
 					req.NotEmpty(workflow.Steps, workflow.Handle)
+					ensureWorkflowVisuals(workflow)
+					assertWorkflowVisuals(t, workflow)
 
 					hasRoleIterator := false
 					for _, step := range workflow.Steps {
@@ -100,10 +102,14 @@ func TestCommercialTemplatesDecode(t *testing.T) {
 					for _, path := range workflow.Paths {
 						req.NotZero(path.ParentID, workflow.Handle)
 						req.NotZero(path.ChildID, workflow.Handle)
+						req.True(hasVisualFields(path.Meta.Visual, "id", "parent"), workflow.Handle)
 						if path.Expr != "" {
 							_, err := expr.NewParser().Parse(path.Expr)
 							req.NoError(err, "workflow %q has an invalid path expression", workflow.Handle)
 						}
+					}
+					for _, step := range workflow.Steps {
+						req.True(hasVisualFields(step.Meta.Visual, "id", "xywh", "parent"), workflow.Handle)
 					}
 				}
 			}

@@ -2,6 +2,8 @@ package envoy
 
 import (
 	"context"
+	"fmt"
+	"strings"
 	"time"
 
 	"github.com/cortezaproject/corteza/server/pkg/envoyx"
@@ -9,6 +11,52 @@ import (
 	"github.com/cortezaproject/corteza/server/store"
 	"github.com/cortezaproject/corteza/server/system/types"
 )
+
+// syncUserRoleMembership applies the role references declared by a user
+// resource. The generated store encoder persists the user itself, but role
+// memberships live in the role_members table and are not fields on types.User.
+// Without this step, users declared with `roles:` in Envoy YAML are created
+// without their memberships.
+func (e StoreEncoder) syncUserRoleMembership(ctx context.Context, s store.Storer, n *envoyx.Node, tree envoyx.Traverser) error {
+	roleIDs := make(map[uint64]struct{})
+	for fieldLabel, ref := range n.References {
+		if !strings.HasPrefix(fieldLabel, "Roles.") {
+			continue
+		}
+
+		roleID := safeParentID(tree, n, ref)
+		if roleID == 0 {
+			return fmt.Errorf("failed to resolve user role reference %s", fieldLabel)
+		}
+		roleIDs[roleID] = struct{}{}
+	}
+
+	// A user without a roles reference is intentionally left untouched. This
+	// preserves existing memberships for legacy exports that do not include
+	// role information. An explicit roles list always produces at least one
+	// Roles.N reference.
+	if len(roleIDs) == 0 {
+		return nil
+	}
+
+	resource := fmt.Sprintf("corteza::system:user/%d", n.Resource.(*types.User).ID)
+	members, _, err := store.SearchRoleMembers(ctx, s, types.RoleMemberFilter{Resource: resource})
+	if err != nil {
+		return err
+	}
+	for _, member := range members {
+		if err = store.DeleteRoleMember(ctx, s, member); err != nil {
+			return err
+		}
+	}
+	for roleID := range roleIDs {
+		if err = store.CreateRoleMember(ctx, s, &types.RoleMember{Resource: resource, RoleID: roleID}); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
 
 func (e StoreEncoder) prepare(ctx context.Context, p envoyx.EncodeParams, s store.Storer, rt string, nn envoyx.NodeSet) (err error) {
 	switch rt {

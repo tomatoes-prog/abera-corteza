@@ -43,7 +43,7 @@ pages:
       - 0
       - 30
       - 24
-      - 10
+      - 18
       options:
         module: registros-campana
         fields:
@@ -65,7 +65,7 @@ pages:
       - 24
       - 30
       - 24
-      - 10
+      - 18
       options:
         module: oportunidades
         fields:
@@ -112,13 +112,13 @@ pages:
           - 0
           - 30
           - 24
-          - 10
+          - 18
         - blockID: 5
           xywh:
           - 24
           - 30
           - 24
-          - 10
+          - 18
   contactos-leads:
     title: Contactos
     visible: true
@@ -482,7 +482,7 @@ pages:
           - 0
           - 12
           - 48
-          - 10
+          - 18
           options:
             module: llamadas
             fields:
@@ -530,7 +530,7 @@ pages:
               - 0
               - 12
               - 48
-              - 10
+              - 18
     page_layouts:
       principal:
         primary: true

@@ -43,7 +43,7 @@ pages:
       - 0
       - 30
       - 24
-      - 10
+      - 18
       options:
         module: solicitudes
         fields:
@@ -64,7 +64,7 @@ pages:
       - 24
       - 30
       - 24
-      - 10
+      - 18
       options:
         module: activos
         fields:
@@ -109,13 +109,13 @@ pages:
           - 0
           - 30
           - 24
-          - 10
+          - 18
         - blockID: 5
           xywh:
           - 24
           - 30
           - 24
-          - 10
+          - 18
   clientes-prospectos:
     title: Clientes
     visible: true
@@ -668,7 +668,7 @@ pages:
       - 8
       - 30
       - 4
-      - 10
+      - 18
       options:
         module: ordenes-trabajo
         fields:
@@ -765,5 +765,5 @@ pages:
           xywh:
           - 8
           - 30
-          - 4
-          - 10
+              - 4
+              - 18

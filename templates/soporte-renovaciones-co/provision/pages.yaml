@@ -43,7 +43,7 @@ pages:
       - 0
       - 30
       - 24
-      - 10
+      - 18
       options:
         module: casos
         fields:
@@ -66,7 +66,7 @@ pages:
       - 24
       - 30
       - 24
-      - 10
+      - 18
       options:
         module: renovaciones
         fields:
@@ -113,13 +113,13 @@ pages:
           - 0
           - 30
           - 24
-          - 10
+          - 18
         - blockID: 5
           xywh:
           - 24
           - 30
           - 24
-          - 10
+          - 18
   clientes:
     title: Clientes
     visible: true
@@ -494,7 +494,7 @@ pages:
           - 0
           - 15
           - 12
-          - 10
+          - 18
           options:
             module: interacciones
             fields:
@@ -540,7 +540,7 @@ pages:
               - 0
               - 15
               - 12
-              - 10
+              - 18
     page_layouts:
       principal:
         primary: true

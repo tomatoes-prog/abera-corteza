@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	automationEnvoy "github.com/cortezaproject/corteza/server/automation/envoy"
 	"github.com/cortezaproject/corteza/server/pkg/options"
 	"github.com/cortezaproject/corteza/server/store"
 	"go.uber.org/zap"
@@ -40,6 +41,7 @@ func Run(ctx context.Context, log *zap.Logger, s store.Storer, provisionOpt opti
 
 		// Config (full & partial)
 		func() error { return importConfig(ctx, log.Named("config"), s, provisionOpt.Path) },
+		func() error { return automationEnvoy.RepairWorkflowVisuals(ctx, log.Named("workflow.visuals"), s) },
 
 		// *************************************************************************************************************
 

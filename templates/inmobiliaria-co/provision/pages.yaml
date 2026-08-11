@@ -43,7 +43,7 @@ pages:
       - 0
       - 30
       - 48
-      - 10
+      - 18
       options:
         module: leads
         fields:
@@ -90,7 +90,7 @@ pages:
           - 0
           - 30
           - 48
-          - 10
+          - 18
   leads:
     title: Leads
     visible: true

@@ -57,4 +57,13 @@ func TestInmobiliariaWorkflowKeepsStepAndPathIDs(t *testing.T) {
 
 	req.Equal(uint64(10), workflow.Steps[0].ID)
 	req.Equal(uint64(12), workflow.Paths[0].ChildID)
+
+	req.True(ensureWorkflowVisuals(workflow))
+	assertWorkflowVisuals(t, workflow)
+	for _, step := range workflow.Steps {
+		req.True(hasVisualFields(step.Meta.Visual, "id", "xywh", "parent"), "step %d has no visual layout", step.ID)
+	}
+	for _, path := range workflow.Paths {
+		req.True(hasVisualFields(path.Meta.Visual, "id", "parent"), "path %d -> %d has no visual layout", path.ParentID, path.ChildID)
+	}
 }

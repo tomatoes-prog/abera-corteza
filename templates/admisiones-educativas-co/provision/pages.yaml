@@ -43,7 +43,7 @@ pages:
       - 0
       - 30
       - 24
-      - 10
+      - 18
       options:
         module: prospectos
         fields:
@@ -63,7 +63,7 @@ pages:
       - 24
       - 30
       - 24
-      - 10
+      - 18
       options:
         module: solicitudes
         fields:
@@ -108,13 +108,13 @@ pages:
           - 0
           - 30
           - 24
-          - 10
+          - 18
         - blockID: 5
           xywh:
           - 24
           - 30
           - 24
-          - 10
+          - 18
   prospectos:
     title: Prospectos
     visible: true
