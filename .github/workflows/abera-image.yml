@@ -1,0 +1,138 @@
+name: Abera image
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 2024.9.x
+    tags:
+      - "2024.9.*-abera.*"
+
+permissions:
+  attestations: write
+  contents: read
+  id-token: write
+
+concurrency:
+  group: abera-image-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  GO_VERSION: 1.25.12
+  DOCKERHUB_REPOSITORY: ${{ vars.DOCKERHUB_REPOSITORY }}
+
+jobs:
+  validate-source:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: server/go.sum
+      - name: Install deterministic test dependency
+        run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
+      - name: Validate solution datasets and layouts
+        run: python3 tests/validate-demo.py
+      - name: Validate template selection and restart invariants
+        run: bash tests/docker-template-select.sh
+      - name: Test Abera provisioning and OAuth bootstrap
+        working-directory: server
+        run: go test -mod=vendor ./pkg/provision ./automation/envoy ./auth/oauth2
+
+  build-and-test-image:
+    runs-on: ubuntu-24.04
+    needs: validate-source
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
+      - name: Derive immutable build version
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            version="$GITHUB_REF_NAME"
+          else
+            version="sha-${GITHUB_SHA:0:12}"
+          fi
+          printf 'BUILD_VERSION=%s\n' "$version" >> "$GITHUB_ENV"
+          printf 'TEST_IMAGE=abera-corteza-ci:%s\n' "$version" >> "$GITHUB_ENV"
+      - name: Build the exact AMD64 image
+        run: >-
+          docker buildx build
+          --platform linux/amd64
+          --build-arg BUILD_VERSION="$BUILD_VERSION"
+          --load
+          --tag "$TEST_IMAGE"
+          .
+      - name: Verify image platform and version label
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(docker image inspect --format '{{.Os}}/{{.Architecture}}' "$TEST_IMAGE")" = linux/amd64
+          test "$(docker image inspect --format '{{index .Config.Labels "org.opencontainers.image.version"}}' "$TEST_IMAGE")" = "$BUILD_VERSION"
+      - name: Scan critical vulnerabilities
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25
+        with:
+          image-ref: ${{ env.TEST_IMAGE }}
+          severity: CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+          format: table
+      - name: Generate SBOM
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610
+        with:
+          image: ${{ env.TEST_IMAGE }}
+          format: spdx-json
+          output-file: abera-corteza.spdx.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: abera-corteza-sbom-${{ env.BUILD_VERSION }}
+          path: abera-corteza.spdx.json
+          if-no-files-found: error
+      - name: Test PostgreSQL 15, 1 GiB memory and restart idempotency
+        run: bash tests/docker-postgres-smoke.sh "$TEST_IMAGE"
+      - name: Authenticate to Docker Hub
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Publish the already-tested image
+        id: publish
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$BUILD_VERSION" =~ ^2024\.9\.[0-9]+-abera\.[0-9]+$ ]]
+          [[ "$DOCKERHUB_REPOSITORY" =~ ^[a-z0-9]+([._-][a-z0-9]+)*/[a-z0-9]+([._-][a-z0-9]+)*$ ]]
+          publish_image="${DOCKERHUB_REPOSITORY}:${BUILD_VERSION}"
+          docker tag "$TEST_IMAGE" "$publish_image"
+          docker push "$publish_image"
+          docker buildx imagetools inspect "$publish_image"
+          digest=$(docker buildx imagetools inspect "$publish_image" --format '{{.Manifest.Digest}}')
+          [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]]
+          printf 'digest=%s\n' "$digest" >> "$GITHUB_OUTPUT"
+          printf '{"repository":"%s","tag":"%s","digest":"%s","platform":"linux/amd64"}\n' \
+            "$DOCKERHUB_REPOSITORY" "$BUILD_VERSION" "$digest" > abera-image-release.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: abera-corteza-release-${{ env.BUILD_VERSION }}
+          path: abera-image-release.json
+          if-no-files-found: error
+      - name: Attest build provenance
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45
+        with:
+          subject-name: ${{ env.DOCKERHUB_REPOSITORY }}
+          subject-digest: ${{ steps.publish.outputs.digest }}
+          push-to-registry: true
+      - name: Attest the generated SBOM
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/attest-sbom@10926c72720ffc3f7b666661c8e55b1344e2a365
+        with:
+          subject-name: ${{ env.DOCKERHUB_REPOSITORY }}
+          subject-digest: ${{ steps.publish.outputs.digest }}
+          sbom-path: abera-corteza.spdx.json
+          push-to-registry: true

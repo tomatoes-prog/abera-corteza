@@ -1,8 +1,8 @@
 # Frontend build stage. The previous Dockerfile downloaded a 2022.9.0
 # prebuilt webapp, which meant repository changes could not affect the image.
-FROM node:20.18-bookworm AS webapp-build
+FROM node:22.22.0-bookworm@sha256:20a424ecd1d2064a44e12fe287bf3dae443aab31dc5e0c0cb6c74bef9c78911c AS webapp-build
 
-ARG BUILD_VERSION=2024.9.9-hotfix.1
+ARG BUILD_VERSION=dev
 ENV BUILD_VERSION=${BUILD_VERSION}
 
 WORKDIR /src
@@ -29,9 +29,11 @@ RUN cp -a client/web/workflow/dist/. /out/webapp/workflow/
 
 # Server build stage. Locale files are copied into the embedded filesystem so
 # the image remains self-contained and does not depend on a mounted locale dir.
-FROM golang:1.25-bookworm AS server-build
+FROM golang:1.25.12-bookworm@sha256:6359592445455f2dbe2412bed411336035bc019a50017720d77454ffdd6d0f82 AS server-build
 
-ARG SASS_VERSION=1.69.5
+ARG BUILD_VERSION=dev
+ARG SASS_VERSION=1.85.1
+ARG SASS_SHA256=019a728e78c713caf32a6abc4501059de5ba26648d2e7f2f12ee7984e5a82389
 
 WORKDIR /src
 
@@ -46,15 +48,17 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
     mkdir -p /out/bin \
     && cd server \
     && CGO_ENABLED=1 go build -mod=vendor -trimpath \
-       -ldflags "-X github.com/cortezaproject/corteza/server/pkg/version.Version=2024.9.9-hotfix.1" \
+       -ldflags "-X github.com/cortezaproject/corteza/server/pkg/version.Version=${BUILD_VERSION}" \
        -o /out/bin/corteza-server ./cmd/corteza/main.go
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends ca-certificates curl \
     && rm -rf /var/lib/apt/lists/* \
     && curl --fail --silent --show-error --location \
+       --retry 5 --retry-all-errors --retry-delay 2 \
        "https://github.com/sass/dart-sass/releases/download/${SASS_VERSION}/dart-sass-${SASS_VERSION}-linux-x64.tar.gz" \
        --output /tmp/dart-sass.tar.gz \
+    && echo "${SASS_SHA256}  /tmp/dart-sass.tar.gz" | sha256sum --check --strict \
     && mkdir -p /out \
     && tar -xzf /tmp/dart-sass.tar.gz -C /out
 
@@ -67,10 +71,14 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
     && CGO_ENABLED=1 go test -mod=vendor ./pkg/provision ./auth/oauth2
 
 # Runtime stage
-FROM ubuntu:22.04
+FROM ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f
+
+ARG BUILD_VERSION=dev
 
 LABEL org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.documentation="TRANSLATIONS.md"
+      org.opencontainers.image.documentation="TRANSLATIONS.md" \
+      org.opencontainers.image.source="https://github.com/tomatoes-prog/abera-corteza" \
+      org.opencontainers.image.version="${BUILD_VERSION}"
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends ca-certificates curl sed \
