@@ -1,0 +1,12 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  asesor-admisiones: &reportes-admisiones
+    corteza::system/: [reports.search]
+    corteza::system:report/admisiones-educativas-co-ejecutivo: [read, run]
+    corteza::system:report/admisiones-educativas-co-operativo: [read, run]
+  revisor-admisiones: *reportes-admisiones
+  director-admisiones: *reportes-admisiones
+  automatizacion-admisiones:
+    corteza::system/: [notification.assign]

@@ -644,6 +644,21 @@ func (d *auxYamlDoc) unmarshalModuleNode(dctx documentContext, n *yaml.Node, met
 
 			break
 
+		case "meta":
+			// yaml.v3 cannot decode mappings into json.RawMessage; use the
+			// custom decoder declared on compose/module.cue.
+			var (
+				auxRefs   map[string]envoyx.Ref
+				auxIdents envoyx.Identifiers
+			)
+			auxRefs, auxIdents, err = d.unmarshalModuleMetaNode(r, n)
+			if err != nil {
+				return err
+			}
+			refs = envoyx.MergeRefs(refs, auxRefs)
+			ii = ii.Merge(auxIdents)
+			break
+
 		case "namespaceid", "namespace", "namespace_id", "ns", "ns_id":
 			// Handle references
 			err = y7s.DecodeScalar(n, "namespaceID", &auxNodeValue)

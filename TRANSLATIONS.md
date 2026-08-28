@@ -28,15 +28,29 @@ repositorio y se mantienen bajo Apache License 2.0, igual que el proyecto
 original. No sustituyen la atribución de Corteza ni la licencia de origen.
 
 Esta ampliación cubre menús, acciones, búsqueda, notificaciones, mensajes
-generales y pasos de workflow de las aplicaciones One, Admin, Compose y
+generales y pasos de workflow de las aplicaciones One, Admin, Compose,
+Discovery, Privacy, Reporter y
 Workflow. Se conservaron las claves, la sintaxis YAML y todos los
 placeholders (`{{...}}`, `{...}` y variables técnicas).
+
+La auditoría complementaria está limitada deliberadamente a la capa web. No
+traduce mensajes internos, logs ni recursos del backend, y no modifica el
+comportamiento de las APIs. El validador tests/validate-spanish-locale.py
+comprueba la paridad de claves, placeholders, etiquetas HTML, codificación y
+frases visibles que continúen idénticas al inglés. Acrónimos, marcas,
+expresiones, formatos y palabras válidas en ambos idiomas se conservan
+mediante una lista explícita de excepciones técnicas.
 
 La estructura española contiene todas las claves presentes en los locales
 ingleses incluidos en esta versión. Los nombres propios y términos técnicos
 que perderían precisión al traducirse se conservan sin cambios. En la interfaz
 de Compose, el concepto técnico `namespace` se presenta al usuario como
 «espacio de trabajo», sin modificar la clave ni los identificadores internos.
+La portada resuelve los nombres de las aplicaciones integradas mediante sus
+rutas estables, por lo que las bases existentes también muestran «Espacios de
+trabajo», «Configuración», «Flujos automáticos», «Analítica» y «Privacidad»
+sin renombrar los recursos almacenados. La integración existente de Jitsi se
+mantiene accesible y se presenta como «Videoconferencias Jitsi».
 
 ## Cambios de este repositorio
 

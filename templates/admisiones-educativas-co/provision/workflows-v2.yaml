@@ -1,0 +1,205 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+workflows:
+    avisar-asignacion-admisiones-educativas-co:
+        enabled: true
+        keepSessions: 20
+        meta:
+            description: Después de crear el registro, envía una notificación nativa al responsable con enlace directo. No contacta servicios externos; si el responsable está vacío termina sin error.
+            name: Avisar prospecto asignado
+        paths:
+            - childid: 701
+              expr: '!isEmpty(record.values.asesor)'
+              parentid: 700
+            - childid: 702
+              expr: ""
+              parentid: 700
+            - childid: 702
+              parentid: 701
+        runAs: automatizacion-admisiones
+        steps:
+            - id: 700
+              kind: gateway
+              meta:
+                name: ¿Tiene responsable?
+              ref: excl
+            - arguments:
+                - expr: record.values.asesor
+                  target: recipient
+                  type: ID
+                - target: title
+                  type: String
+                  value: Nuevo prospecto asignado
+                - expr: format("Abre el registro y revisa su próxima acción. ID %d", record.ID)
+                  target: description
+                  type: String
+                - target: module
+                  type: Handle
+                  value: prospectos
+                - target: namespace
+                  type: Handle
+                  value: admisiones-educativas-co
+                - expr: record.ID
+                  target: record
+                  type: ID
+                - target: openMode
+                  type: String
+                  value: sameTab
+                - target: edit
+                  type: Boolean
+                  value: false
+              id: 701
+              kind: function
+              meta:
+                name: Notificar al responsable
+              ref: notificationSendRecord
+            - id: 702
+              kind: termination
+              meta:
+                name: Finalizar
+        trace: false
+        triggers:
+            - constraints:
+                - name: namespace.handle
+                  op: =
+                  values:
+                    - admisiones-educativas-co
+                - name: module.handle
+                  op: =
+                  values:
+                    - prospectos
+              enabled: true
+              eventType: afterCreate
+              resourceType: compose:record
+              stepID: 700
+    ejemplo-correo-responsable-admisiones-educativas-co:
+        enabled: false
+        meta:
+            description: Ejemplo visual desactivado. Para habilitarlo, configure SMTP, revise remitente y contenido, pruebe en un entorno no productivo y active tanto el workflow como su trigger. Resuelve al responsable por ID y envía un correo; sin SMTP devolverá error.
+            name: EJEMPLO - DESACTIVADO · Correo al responsable
+        paths:
+            - childid: 801
+              expr: '!isEmpty(record.values.asesor)'
+              parentid: 800
+            - childid: 803
+              expr: ""
+              parentid: 800
+            - childid: 802
+              parentid: 801
+            - childid: 803
+              parentid: 802
+        runAs: automatizacion-admisiones
+        steps:
+            - id: 800
+              kind: gateway
+              meta:
+                name: ¿Tiene responsable?
+              ref: excl
+            - arguments:
+                - expr: record.values.asesor
+                  target: lookup
+                  type: ID
+              id: 801
+              kind: function
+              meta:
+                name: Consultar responsable
+              ref: usersLookup
+              results:
+                - expr: user
+                  target: assignedUser
+            - arguments:
+                - expr: assignedUser
+                  target: to
+                  type: User
+                - target: subject
+                  type: String
+                  value: Nuevo prospecto asignado
+                - expr: format("Tienes un nuevo registro asignado en Corteza. ID %d", record.ID)
+                  target: plain
+                  type: String
+              id: 802
+              kind: function
+              meta:
+                name: Enviar correo
+              ref: emailSend
+            - id: 803
+              kind: termination
+              meta:
+                name: Finalizar
+        trace: false
+        triggers:
+            - constraints:
+                - name: namespace.handle
+                  op: =
+                  values:
+                    - admisiones-educativas-co
+                - name: module.handle
+                  op: =
+                  values:
+                    - prospectos
+              enabled: false
+              eventType: afterCreate
+              resourceType: compose:record
+              stepID: 800
+    ejemplo-slack-hito-admisiones-educativas-co:
+        enabled: false
+        meta:
+            description: Ejemplo visual desactivado. Sustituya la URL example.invalid por un webhook protegido, no guarde secretos en el YAML, valide el mensaje y active workflow y trigger. Solo se ejecutaría cuando el registro alcance el hito indicado.
+            name: EJEMPLO - DESACTIVADO · Aviso de matrícula confirmada en Slack
+        paths:
+            - childid: 901
+              expr: record.values.estado == "Confirmada" && oldRecord.values.estado != "Confirmada"
+              parentid: 900
+            - childid: 902
+              expr: ""
+              parentid: 900
+            - childid: 902
+              parentid: 901
+        runAs: automatizacion-admisiones
+        steps:
+            - id: 900
+              kind: gateway
+              meta:
+                name: ¿Alcanzó el hito?
+              ref: excl
+            - arguments:
+                - target: url
+                  type: String
+                  value: https://example.invalid/configure-slack-webhook
+                - target: method
+                  type: String
+                  value: POST
+                - target: headerContentType
+                  type: String
+                  value: application/json
+                - target: timeout
+                  type: Duration
+                  value: 10s
+                - target: body
+                  type: String
+                  value: '{"text":"Abera: matrícula confirmada"}'
+              id: 901
+              kind: function
+              meta:
+                name: Publicar aviso
+              ref: httpRequestSend
+            - id: 902
+              kind: termination
+              meta:
+                name: Finalizar
+        trace: false
+        triggers:
+            - constraints:
+                - name: namespace.handle
+                  op: =
+                  values:
+                    - admisiones-educativas-co
+                - name: module.handle
+                  op: =
+                  values:
+                    - matriculas
+              enabled: false
+              eventType: afterUpdate
+              resourceType: compose:record
+              stepID: 900

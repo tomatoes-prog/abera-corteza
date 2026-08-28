@@ -67,3 +67,31 @@ record_sources:
     ID:
       column: ID
       skip: true
+- source: automotriz-co-actividades-comerciales.csv
+  key: ID
+  references:
+    namespace: automotriz-co
+    module: actividades-comerciales
+    prospecto.module: prospectos
+    prospecto.datasource: prospectos
+    vehiculo.module: vehiculos
+    vehiculo.datasource: vehiculos
+    oportunidad.module: oportunidades
+    oportunidad.datasource: oportunidades
+  defaultable: true
+  map:
+    ID:
+      column: ID
+      skip: true
+- source: automotriz-co-tareas-servicio.csv
+  key: ID
+  references:
+    namespace: automotriz-co
+    module: tareas-servicio
+    orden.module: ordenes-servicio
+    orden.datasource: ordenes-servicio
+  defaultable: true
+  map:
+    ID:
+      column: ID
+      skip: true

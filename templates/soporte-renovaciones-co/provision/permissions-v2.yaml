@@ -1,0 +1,12 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  agente-soporte: &reportes-soporte
+    corteza::system/: [reports.search]
+    corteza::system:report/soporte-renovaciones-co-ejecutivo: [read, run]
+    corteza::system:report/soporte-renovaciones-co-operativo: [read, run]
+  supervisor-soporte: *reportes-soporte
+  gestor-renovaciones: *reportes-soporte
+  automatizacion-soporte:
+    corteza::system/: [notification.assign]

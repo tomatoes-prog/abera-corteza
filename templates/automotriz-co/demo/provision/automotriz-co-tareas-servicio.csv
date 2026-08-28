@@ -1,0 +1,101 @@
+ID,orden,secuencia,tarea,obligatoria,tecnico,estado,resultado,inicioReal,finReal
+tarea-taller-001,orden-taller-001,1,Inspección y evidencia de la orden #1,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-31T11:00:00Z,
+tarea-taller-002,orden-taller-002,1,Inspección y evidencia de la orden #2,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-31T10:00:00Z,2026-07-31T10:45:00Z
+tarea-taller-003,orden-taller-003,1,Inspección y evidencia de la orden #3,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-31T09:00:00Z,
+tarea-taller-004,orden-taller-004,1,Inspección y evidencia de la orden #4,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T08:00:00Z,
+tarea-taller-005,orden-taller-005,1,Inspección y evidencia de la orden #5,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-31T07:00:00Z,
+tarea-taller-006,orden-taller-006,1,Inspección y evidencia de la orden #6,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-31T06:00:00Z,2026-07-31T06:45:00Z
+tarea-taller-007,orden-taller-007,1,Inspección y evidencia de la orden #7,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-31T05:00:00Z,
+tarea-taller-008,orden-taller-008,1,Inspección y evidencia de la orden #8,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T04:00:00Z,
+tarea-taller-009,orden-taller-009,1,Inspección y evidencia de la orden #9,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-31T03:00:00Z,
+tarea-taller-010,orden-taller-010,1,Inspección y evidencia de la orden #10,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-31T02:00:00Z,2026-07-31T02:45:00Z
+tarea-taller-011,orden-taller-011,1,Inspección y evidencia de la orden #11,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-31T01:00:00Z,
+tarea-taller-012,orden-taller-012,1,Inspección y evidencia de la orden #12,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T00:00:00Z,
+tarea-taller-013,orden-taller-013,1,Inspección y evidencia de la orden #13,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T23:00:00Z,
+tarea-taller-014,orden-taller-014,1,Inspección y evidencia de la orden #14,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T22:00:00Z,2026-07-30T22:45:00Z
+tarea-taller-015,orden-taller-015,1,Inspección y evidencia de la orden #15,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T21:00:00Z,
+tarea-taller-016,orden-taller-016,1,Inspección y evidencia de la orden #16,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T20:00:00Z,
+tarea-taller-017,orden-taller-017,1,Inspección y evidencia de la orden #17,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T19:00:00Z,
+tarea-taller-018,orden-taller-018,1,Inspección y evidencia de la orden #18,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T18:00:00Z,2026-07-30T18:45:00Z
+tarea-taller-019,orden-taller-019,1,Inspección y evidencia de la orden #19,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T17:00:00Z,
+tarea-taller-020,orden-taller-020,1,Inspección y evidencia de la orden #20,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T16:00:00Z,
+tarea-taller-021,orden-taller-021,1,Inspección y evidencia de la orden #21,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T15:00:00Z,
+tarea-taller-022,orden-taller-022,1,Inspección y evidencia de la orden #22,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T14:00:00Z,2026-07-30T14:45:00Z
+tarea-taller-023,orden-taller-023,1,Inspección y evidencia de la orden #23,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T13:00:00Z,
+tarea-taller-024,orden-taller-024,1,Inspección y evidencia de la orden #24,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T12:00:00Z,
+tarea-taller-025,orden-taller-025,1,Inspección y evidencia de la orden #25,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T11:00:00Z,
+tarea-taller-026,orden-taller-026,1,Inspección y evidencia de la orden #26,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T10:00:00Z,2026-07-30T10:45:00Z
+tarea-taller-027,orden-taller-027,1,Inspección y evidencia de la orden #27,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T09:00:00Z,
+tarea-taller-028,orden-taller-028,1,Inspección y evidencia de la orden #28,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T08:00:00Z,
+tarea-taller-029,orden-taller-029,1,Inspección y evidencia de la orden #29,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T07:00:00Z,
+tarea-taller-030,orden-taller-030,1,Inspección y evidencia de la orden #30,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T06:00:00Z,2026-07-30T06:45:00Z
+tarea-taller-031,orden-taller-031,1,Inspección y evidencia de la orden #31,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T05:00:00Z,
+tarea-taller-032,orden-taller-032,1,Inspección y evidencia de la orden #32,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T04:00:00Z,
+tarea-taller-033,orden-taller-033,1,Inspección y evidencia de la orden #33,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T03:00:00Z,
+tarea-taller-034,orden-taller-034,1,Inspección y evidencia de la orden #34,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T02:00:00Z,2026-07-30T02:45:00Z
+tarea-taller-035,orden-taller-035,1,Inspección y evidencia de la orden #35,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T01:00:00Z,
+tarea-taller-036,orden-taller-036,1,Inspección y evidencia de la orden #36,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T12:00:00Z,
+tarea-taller-037,orden-taller-037,1,Inspección y evidencia de la orden #37,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-31T11:00:00Z,
+tarea-taller-038,orden-taller-038,1,Inspección y evidencia de la orden #38,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-31T10:00:00Z,2026-07-31T10:45:00Z
+tarea-taller-039,orden-taller-039,1,Inspección y evidencia de la orden #39,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-31T09:00:00Z,
+tarea-taller-040,orden-taller-040,1,Inspección y evidencia de la orden #40,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T08:00:00Z,
+tarea-taller-041,orden-taller-041,1,Inspección y evidencia de la orden #41,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-31T07:00:00Z,
+tarea-taller-042,orden-taller-042,1,Inspección y evidencia de la orden #42,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-31T06:00:00Z,2026-07-31T06:45:00Z
+tarea-taller-043,orden-taller-043,1,Inspección y evidencia de la orden #43,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-31T05:00:00Z,
+tarea-taller-044,orden-taller-044,1,Inspección y evidencia de la orden #44,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T04:00:00Z,
+tarea-taller-045,orden-taller-045,1,Inspección y evidencia de la orden #45,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-31T03:00:00Z,
+tarea-taller-046,orden-taller-046,1,Inspección y evidencia de la orden #46,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-31T02:00:00Z,2026-07-31T02:45:00Z
+tarea-taller-047,orden-taller-047,1,Inspección y evidencia de la orden #47,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-31T01:00:00Z,
+tarea-taller-048,orden-taller-048,1,Inspección y evidencia de la orden #48,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T00:00:00Z,
+tarea-taller-049,orden-taller-049,1,Inspección y evidencia de la orden #49,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T23:00:00Z,
+tarea-taller-050,orden-taller-050,1,Inspección y evidencia de la orden #50,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T22:00:00Z,2026-07-30T22:45:00Z
+tarea-taller-051,orden-taller-051,1,Inspección y evidencia de la orden #51,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T21:00:00Z,
+tarea-taller-052,orden-taller-052,1,Inspección y evidencia de la orden #52,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T20:00:00Z,
+tarea-taller-053,orden-taller-053,1,Inspección y evidencia de la orden #53,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T19:00:00Z,
+tarea-taller-054,orden-taller-054,1,Inspección y evidencia de la orden #54,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T18:00:00Z,2026-07-30T18:45:00Z
+tarea-taller-055,orden-taller-055,1,Inspección y evidencia de la orden #55,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T17:00:00Z,
+tarea-taller-056,orden-taller-056,1,Inspección y evidencia de la orden #56,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T16:00:00Z,
+tarea-taller-057,orden-taller-057,1,Inspección y evidencia de la orden #57,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T15:00:00Z,
+tarea-taller-058,orden-taller-058,1,Inspección y evidencia de la orden #58,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T14:00:00Z,2026-07-30T14:45:00Z
+tarea-taller-059,orden-taller-059,1,Inspección y evidencia de la orden #59,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T13:00:00Z,
+tarea-taller-060,orden-taller-060,1,Inspección y evidencia de la orden #60,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T12:00:00Z,
+tarea-taller-061,orden-taller-061,1,Inspección y evidencia de la orden #61,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T11:00:00Z,
+tarea-taller-062,orden-taller-062,1,Inspección y evidencia de la orden #62,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T10:00:00Z,2026-07-30T10:45:00Z
+tarea-taller-063,orden-taller-063,1,Inspección y evidencia de la orden #63,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T09:00:00Z,
+tarea-taller-064,orden-taller-064,1,Inspección y evidencia de la orden #64,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T08:00:00Z,
+tarea-taller-065,orden-taller-065,1,Inspección y evidencia de la orden #65,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T07:00:00Z,
+tarea-taller-066,orden-taller-066,1,Inspección y evidencia de la orden #66,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T06:00:00Z,2026-07-30T06:45:00Z
+tarea-taller-067,orden-taller-067,1,Inspección y evidencia de la orden #67,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T05:00:00Z,
+tarea-taller-068,orden-taller-068,1,Inspección y evidencia de la orden #68,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T04:00:00Z,
+tarea-taller-069,orden-taller-069,1,Inspección y evidencia de la orden #69,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T03:00:00Z,
+tarea-taller-070,orden-taller-070,1,Inspección y evidencia de la orden #70,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T02:00:00Z,2026-07-30T02:45:00Z
+tarea-taller-071,orden-taller-071,1,Inspección y evidencia de la orden #71,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T01:00:00Z,
+tarea-taller-072,orden-taller-072,1,Inspección y evidencia de la orden #72,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T12:00:00Z,
+tarea-taller-073,orden-taller-073,1,Inspección y evidencia de la orden #73,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-31T11:00:00Z,
+tarea-taller-074,orden-taller-074,1,Inspección y evidencia de la orden #74,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-31T10:00:00Z,2026-07-31T10:45:00Z
+tarea-taller-075,orden-taller-075,1,Inspección y evidencia de la orden #75,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-31T09:00:00Z,
+tarea-taller-076,orden-taller-076,1,Inspección y evidencia de la orden #76,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T08:00:00Z,
+tarea-taller-077,orden-taller-077,1,Inspección y evidencia de la orden #77,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-31T07:00:00Z,
+tarea-taller-078,orden-taller-078,1,Inspección y evidencia de la orden #78,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-31T06:00:00Z,2026-07-31T06:45:00Z
+tarea-taller-079,orden-taller-079,1,Inspección y evidencia de la orden #79,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-31T05:00:00Z,
+tarea-taller-080,orden-taller-080,1,Inspección y evidencia de la orden #80,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T04:00:00Z,
+tarea-taller-081,orden-taller-081,1,Inspección y evidencia de la orden #81,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-31T03:00:00Z,
+tarea-taller-082,orden-taller-082,1,Inspección y evidencia de la orden #82,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-31T02:00:00Z,2026-07-31T02:45:00Z
+tarea-taller-083,orden-taller-083,1,Inspección y evidencia de la orden #83,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-31T01:00:00Z,
+tarea-taller-084,orden-taller-084,1,Inspección y evidencia de la orden #84,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-31T00:00:00Z,
+tarea-taller-085,orden-taller-085,1,Inspección y evidencia de la orden #85,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T23:00:00Z,
+tarea-taller-086,orden-taller-086,1,Inspección y evidencia de la orden #86,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T22:00:00Z,2026-07-30T22:45:00Z
+tarea-taller-087,orden-taller-087,1,Inspección y evidencia de la orden #87,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T21:00:00Z,
+tarea-taller-088,orden-taller-088,1,Inspección y evidencia de la orden #88,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T20:00:00Z,
+tarea-taller-089,orden-taller-089,1,Inspección y evidencia de la orden #89,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T19:00:00Z,
+tarea-taller-090,orden-taller-090,1,Inspección y evidencia de la orden #90,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T18:00:00Z,2026-07-30T18:45:00Z
+tarea-taller-091,orden-taller-091,1,Inspección y evidencia de la orden #91,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T17:00:00Z,
+tarea-taller-092,orden-taller-092,1,Inspección y evidencia de la orden #92,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T16:00:00Z,
+tarea-taller-093,orden-taller-093,1,Inspección y evidencia de la orden #93,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T15:00:00Z,
+tarea-taller-094,orden-taller-094,1,Inspección y evidencia de la orden #94,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T14:00:00Z,2026-07-30T14:45:00Z
+tarea-taller-095,orden-taller-095,1,Inspección y evidencia de la orden #95,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T13:00:00Z,
+tarea-taller-096,orden-taller-096,1,Inspección y evidencia de la orden #96,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T12:00:00Z,
+tarea-taller-097,orden-taller-097,1,Inspección y evidencia de la orden #97,1,tecnica-demo,En ejecución,Punto de control técnico documentado.,2026-07-30T11:00:00Z,
+tarea-taller-098,orden-taller-098,1,Inspección y evidencia de la orden #98,1,tecnica-demo,Completada,Punto de control técnico documentado.,2026-07-30T10:00:00Z,2026-07-30T10:45:00Z
+tarea-taller-099,orden-taller-099,1,Inspección y evidencia de la orden #99,1,tecnica-demo,No aplica,Punto de control técnico documentado.,2026-07-30T09:00:00Z,
+tarea-taller-100,orden-taller-100,1,Inspección y evidencia de la orden #100,1,tecnica-demo,Pendiente,Punto de control técnico documentado.,2026-07-30T08:00:00Z,

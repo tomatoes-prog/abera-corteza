@@ -1,89 +1,89 @@
 add:
-  datasource: Add datasource
-  display-element: Add display element
-available: Available
+  datasource: Añadir fuente de datos
+  display-element: Añadir elemento de visualización
+available: Disponible
 block:
-  description: Block description
-  save: Save Block
-  title: Block title
-  configuration: Block configuration
+  description: Descripción del bloque
+  save: Guardar bloque
+  title: Título del bloque
+  configuration: Configuración del bloque
 datasource:
-  label: Datasource
+  label: Fuente de datos
   types:
     load:
-      label: Load
-      data-from-resource: Loads data from a specified resource, such as Compose records
+      label: Cargar
+      data-from-resource: Carga datos desde un recurso específico, como los registros de Compose.
     link:
-      label: Link
-      load-datasources: Links two Load datasources with a unique column that links them together, such as a Compose record selector
+      label: Vincular
+      load-datasources: Vincula dos fuentes de datos mediante una columna única, como un selector de registros de Compose.
     join:
-      label: Join
-      load-datasources: Joins two datasources with a unique column that joins them together, such as a Compose record selector. The join step produces a single set of rows in contrast to the link step which produces an independent data frame for each local row
+      label: Combinar
+      load-datasources: Combina dos fuentes mediante una columna común. El resultado es un único conjunto de filas, a diferencia de la vinculación, que produce un conjunto independiente para cada fila local.
     aggregate:
-      label: Aggregate
-      load-datasource: Aggregates data from a load datasource based on a column value and aggregates it, such as counting the number of Accounts with the same status
+      label: Agregar
+      load-datasource: Agrupa los datos por el valor de una columna y calcula un resultado, como contar registros que comparten el mismo estado.
 datasources:
-  label: Datasources
-  save: Save Datasources
-description: Description
+  label: Fuentes de datos
+  save: Guardar fuentes de datos
+description: Descripción
 display-elements:
   types:
-    text: Text
-    metric: Metric
-    table: Table
-    chart: Chart
-element: Element
-elements: Elements
-filter-expression: Filter expression
+    text: Texto
+    metric: Indicador
+    table: Tabla
+    chart: Gráfico
+element: Elemento
+elements: Elementos
+filter-expression: Expresión de filtro
 general: General
-joined-datasource-handling: Joined datasource handling
-layout: Layout
+joined-datasource-handling: Tratamiento de fuentes combinadas
+layout: Diseño
 layout-options:
   horizontal: Horizontal
   vertical: Vertical
-limit: Limit
-no-blocks-added: No blocks added yet
-or: Or
-pick-scenario: Pick a scenario
-prefilter: Prefilter
-presort-order: Presort order
+limit: Límite
+no-blocks-added: Aún no se han añadido bloques
+or: O
+pick-scenario: Selecciona un escenario
+prefilter: Prefiltro
+presort-order: Ordenamiento previo
 report:
-  builder: Report Builder
-  view: View Report
-save-button: Save
+  builder: Constructor de informes
+  view: Ver informe
+save-button: Guardar
 scenarios:
-  label: Scenarios
-  save: Save Scenarios
-title: Title
+  label: Escenarios
+  save: Guardar escenarios
+title: Título
 tooltip:
   edit:
-    report: Edit report
-    block: Edit block
+    report: Editar informe
+    block: Editar bloque
   add:
-    displayElement: Add display element
+    displayElement: Añadir elemento de visualización
   delete:
-    block: Delete block
-  configure-scenarios: Configure scenarios
-  unsavedChanges: Unsaved changes
-available-columns: Available columns
-selected-columns: Selected columns
-no-columns-found: No columns found
-type-to-search: Type here to search among columns
-selected: Selected
-select-all: Select all
-unselect-all: Unselect all
-value: Value
-name: Name
-unsaved-changes: Unsaved changes will be lost. Do you wish to leave the page?
+    block: Eliminar bloque
+  configure-scenarios: Configurar escenarios
+  unsavedChanges: Cambios sin guardar
+available-columns: Columnas disponibles
+selected-columns: Columnas seleccionadas
+no-columns-found: No se encontraron columnas
+type-to-search: Escribe para buscar entre las columnas
+selected: Seleccionadas
+select-all: Seleccionar todas
+unselect-all: Deseleccionar todas
+value: Valor
+name: Nombre
+unsaved-changes: Los cambios sin guardar se perderán. ¿Deseas salir de la página?
 filter:
   operators:
-    like: Like
-    notLike: Not Like
-    contains: Contains
-    notContains: Not contains
-    equal: Equal
-    greaterThan: Greater than
-    greaterThanEqualTo: Greater than or equal to
-    lessThanEqualTo: Less than or equal to
-    lessThan: Less than
-    notEqual: Not equal
+    like: Coincide con
+    notLike: No coincide con
+    contains: Contiene
+    notContains: No contiene
+    equal: Igual a
+    greaterThan: Mayor que
+    greaterThanEqualTo: Mayor o igual que
+    lessThanEqualTo: Menor o igual que
+    lessThan: Menor que
+    notEqual: Diferente de

@@ -1,3 +1,10 @@
 no-applications: No applications
 no-applications-found: No applications found
 search: Type here to search
+applications:
+  compose: Namespaces
+  admin: Admin Area
+  workflow: Workflows
+  jitsi: Jitsi Video Conferencing
+  reporter: Reporter
+  privacy: Privacy

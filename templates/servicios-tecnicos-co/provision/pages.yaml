@@ -7,77 +7,186 @@ pages:
     title: Centro de operaciones
     visible: true
     blocks:
-    - title: Funnel de servicios
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 16
-      - 30
-      options:
-        chart: funnel-servicios
-      blockID: 1
-    - title: Prioridades abiertas
-      kind: Chart
-      xywh:
-      - 16
-      - 0
-      - 16
-      - 30
-      options:
-        chart: solicitudes-por-prioridad
-      blockID: 2
-    - title: Órdenes por estado
-      kind: Chart
-      xywh:
-      - 32
-      - 0
-      - 16
-      - 30
-      options:
-        chart: ordenes-por-estado
-      blockID: 3
-    - title: Solicitudes próximas al SLA
-      kind: RecordList
-      xywh:
-      - 0
-      - 30
-      - 24
-      - 18
-      options:
-        module: solicitudes
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: prioridad
-        - name: estado
-        - name: responsable
-        - name: vencimientoSLA
-        prefilter: estado != 'Cerrada' AND estado != 'Perdida'
-        presort: vencimientoSLA ASC
-        perPage: 15
-        hideRecordCloneButton: true
-      blockID: 4
-    - title: Mantenimientos próximos
-      kind: RecordList
-      xywh:
-      - 24
-      - 30
-      - 24
-      - 18
-      options:
-        module: activos
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: tipoEquipo
-        - name: estado
-        - name: proximoMantenimiento
-        prefilter: estado != 'Retirado' AND proximoMantenimiento IS NOT NULL
-        presort: proximoMantenimiento ASC
-        perPage: 15
-        hideRecordCloneButton: true
-      blockID: 5
+      - title: Funnel de servicios
+        kind: Chart
+        xywh:
+          - 0
+          - 18
+          - 24
+          - 30
+        options:
+          chart: funnel-servicios
+        blockID: 1
+        description: Gráfico que resume funnel de servicios a partir de datos actuales.
+      - title: Prioridades abiertas
+        kind: Chart
+        xywh:
+          - 24
+          - 18
+          - 24
+          - 30
+        options:
+          chart: solicitudes-por-prioridad
+        blockID: 2
+        description: Gráfico que resume prioridades abiertas a partir de datos actuales.
+      - title: Órdenes por estado
+        kind: Chart
+        xywh:
+          - 0
+          - 48
+          - 48
+          - 30
+        options:
+          chart: ordenes-por-estado
+        blockID: 3
+        description: Gráfico que resume órdenes por estado a partir de datos actuales.
+      - title: Solicitudes próximas al SLA
+        kind: RecordList
+        xywh:
+          - 0
+          - 78
+          - 24
+          - 48
+        options:
+          module: solicitudes
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: prioridad
+            - name: estado
+            - name: responsable
+            - name: vencimientoSLA
+          prefilter: estado != 'Cerrada' AND estado != 'Perdida'
+          presort: vencimientoSLA ASC
+          perPage: 15
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 4
+        description: Listado operativo de solicitudes próximas al sla con búsqueda, filtros, conteo y exportación.
+      - title: Mantenimientos próximos
+        kind: RecordList
+        xywh:
+          - 24
+          - 78
+          - 24
+          - 48
+        options:
+          module: activos
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: tipoEquipo
+            - name: estado
+            - name: proximoMantenimiento
+          prefilter: estado != 'Retirado' AND proximoMantenimiento IS NOT NULL
+          presort: proximoMantenimiento ASC
+          perPage: 15
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 5
+        description: Listado operativo de mantenimientos próximos con búsqueda, filtros, conteo y exportación.
+      - blockID: 6
+        description: Solicitudes que todavía requieren gestión operativa.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado != 'Cerrada' AND estado != 'Perdida'
+              label: Solicitudes abiertas
+              metricField: count
+              module: solicitudes
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Solicitudes abiertas
+        xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+      - blockID: 7
+        description: Solicitudes vencidas o próximas a incumplir su SLA.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: slaIncumplido = '1' OR vencimientoSLA < NOW()
+              label: SLA en riesgo
+              metricField: count
+              module: solicitudes
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: SLA en riesgo
+        xywh:
+          - 12
+          - 0
+          - 12
+          - 18
+      - blockID: 8
+        description: Órdenes de trabajo pendientes de completar.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado != 'Completada' AND estado != 'Cancelada'
+              label: Órdenes abiertas
+              metricField: count
+              module: ordenes-trabajo
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Órdenes abiertas
+        xywh:
+          - 24
+          - 0
+          - 12
+          - 18
+      - blockID: 9
+        description: Valor total de las cotizaciones aceptadas en COP.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado = 'Aceptada'
+              label: Valor vendido
+              metricField: total
+              module: cotizaciones
+              numberFormat: 0,0
+              operation: sum
+              prefix: '$ '
+              suffix: ""
+          showRefresh: true
+        title: Valor vendido
+        xywh:
+          - 36
+          - 0
+          - 12
+          - 18
     page_layouts:
       principal:
         primary: true
@@ -86,137 +195,203 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 16
-          - 30
-        - blockID: 2
-          xywh:
-          - 16
-          - 0
-          - 16
-          - 30
-        - blockID: 3
-          xywh:
-          - 32
-          - 0
-          - 16
-          - 30
-        - blockID: 4
-          xywh:
-          - 0
-          - 30
-          - 24
-          - 18
-        - blockID: 5
-          xywh:
-          - 24
-          - 30
-          - 24
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 18
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 18
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 48
+              - 48
+              - 30
+          - blockID: 4
+            xywh:
+              - 0
+              - 78
+              - 24
+              - 48
+          - blockID: 5
+            xywh:
+              - 24
+              - 78
+              - 24
+              - 48
+          - blockID: 6
+            xywh:
+              - 0
+              - 0
+              - 12
+              - 18
+          - blockID: 7
+            xywh:
+              - 12
+              - 0
+              - 12
+              - 18
+          - blockID: 8
+            xywh:
+              - 24
+              - 0
+              - 12
+              - 18
+          - blockID: 9
+            xywh:
+              - 36
+              - 0
+              - 12
+              - 18
+    description: Vista operativa de centro de operaciones. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   clientes-prospectos:
     title: Clientes
     visible: true
     blocks:
-    - title: Clientes y prospectos
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: clientes-prospectos
-        fields:
-        - name: tipo
-        - name: nombre
-        - name: contacto
-        - name: telefono
-        - name: ciudad
-        - name: segmento
-        - name: estadoComercial
-        - name: responsable
-        - name: proximoContacto
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
+      - title: Clientes y prospectos
+        kind: RecordList
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 38
+        options:
+          module: clientes-prospectos
+          fields:
+            - name: tipo
+            - name: nombre
+            - name: contacto
+            - name: telefono
+            - name: ciudad
+            - name: segmento
+            - name: estadoComercial
+            - name: responsable
+            - name: proximoContacto
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de clientes y prospectos con búsqueda, filtros, conteo y exportación.
     children:
       cliente-registro:
         title: Detalle del cliente
         module: clientes-prospectos
         visible: false
         blocks:
-        - title: Cliente o prospecto
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 14
-          options:
-            fields:
-            - name: tipo
-            - name: tipoPersona
-            - name: nombre
-            - name: identificacion
-            - name: contacto
-            - name: telefono
-            - name: correo
-            - name: autorizaTratamientoDatos
-            - name: departamento
-            - name: ciudad
-            - name: direccion
-            - name: segmento
-            - name: estadoComercial
-            - name: responsable
-            - name: proximoContacto
-            - name: notas
-          blockID: 1
-        - title: Activos
-          kind: RecordList
-          xywh:
-          - 0
-          - 14
-          - 6
-          - 9
-          options:
-            module: activos
-            fields:
-            - name: codigo
-            - name: tipoEquipo
-            - name: marca
-            - name: modelo
-            - name: estado
-            - name: proximoMantenimiento
-            prefilter: cliente = ${recordID}
-            presort: createdAt DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 2
-        - title: Solicitudes
-          kind: RecordList
-          xywh:
-          - 6
-          - 14
-          - 6
-          - 9
-          options:
-            module: solicitudes
-            fields:
-            - name: codigo
-            - name: tipoServicio
-            - name: prioridad
-            - name: estado
-            - name: vencimientoSLA
-            prefilter: cliente = ${recordID}
-            presort: createdAt DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 3
+          - title: Cliente o prospecto
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 90
+            options:
+              fields:
+                - name: tipo
+                - name: tipoPersona
+                - name: nombre
+                - name: identificacion
+                - name: contacto
+                - name: telefono
+                - name: correo
+                - name: autorizaTratamientoDatos
+                - name: departamento
+                - name: ciudad
+                - name: direccion
+                - name: segmento
+                - name: estadoComercial
+                - name: responsable
+                - name: proximoContacto
+                - name: notas
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar cliente o prospecto.
+          - title: Activos
+            kind: RecordList
+            xywh:
+              - 0
+              - 90
+              - 24
+              - 38
+            options:
+              module: activos
+              fields:
+                - name: codigo
+                - name: tipoEquipo
+                - name: marca
+                - name: modelo
+                - name: estado
+                - name: proximoMantenimiento
+              prefilter: cliente = ${recordID}
+              presort: createdAt DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 2
+            description: Listado operativo de activos con búsqueda, filtros, conteo y exportación.
+          - title: Solicitudes
+            kind: RecordList
+            xywh:
+              - 24
+              - 90
+              - 24
+              - 38
+            options:
+              module: solicitudes
+              fields:
+                - name: codigo
+                - name: tipoServicio
+                - name: prioridad
+                - name: estado
+                - name: vencimientoSLA
+              prefilter: cliente = ${recordID}
+              presort: createdAt DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 3
+            description: Listado operativo de solicitudes con búsqueda, filtros, conteo y exportación.
+          - blockID: 4
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: fechaAutorizacion
+                - name: codigoDivipola
+                - name: ubicacionServicio
+            title: Gestión y control
+            xywh:
+              - 0
+              - 128
+              - 48
+              - 30
         page_layouts:
           principal:
             primary: true
@@ -238,24 +413,31 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 14
-            - blockID: 2
-              xywh:
-              - 0
-              - 14
-              - 6
-              - 9
-            - blockID: 3
-              xywh:
-              - 6
-              - 14
-              - 6
-              - 9
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 90
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 90
+                  - 24
+                  - 38
+              - blockID: 3
+                xywh:
+                  - 24
+                  - 90
+                  - 24
+                  - 38
+              - blockID: 4
+                xywh:
+                  - 0
+                  - 128
+                  - 48
+                  - 30
+        description: Vista operativa de detalle del cliente. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -264,68 +446,125 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de clientes. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   activos:
     title: Activos
     visible: true
     blocks:
-    - title: Equipos instalados
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: activos
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: tipoEquipo
-        - name: marca
-        - name: modelo
-        - name: serial
-        - name: estado
-        - name: proximoMantenimiento
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
-    children:
-      activo-registro:
-        title: Detalle del activo
-        module: activos
-        visible: false
-        blocks:
-        - title: Activo
-          kind: Record
-          xywh:
+      - title: Equipos instalados
+        kind: RecordList
+        xywh:
           - 0
           - 0
-          - 12
-          - 16
-          options:
-            fields:
+          - 48
+          - 38
+        options:
+          module: activos
+          fields:
             - name: codigo
             - name: cliente
             - name: tipoEquipo
             - name: marca
             - name: modelo
             - name: serial
-            - name: fechaInstalacion
-            - name: garantiaHasta
             - name: estado
             - name: proximoMantenimiento
-            - name: ubicacion
-            - name: fotografias
-            - name: observaciones
-          blockID: 1
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de equipos instalados con búsqueda, filtros, conteo y exportación.
+    children:
+      activo-registro:
+        title: Detalle del activo
+        module: activos
+        visible: false
+        blocks:
+          - title: Activo
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 75
+            options:
+              fields:
+                - name: codigo
+                - name: cliente
+                - name: tipoEquipo
+                - name: marca
+                - name: modelo
+                - name: serial
+                - name: fechaInstalacion
+                - name: garantiaHasta
+                - name: estado
+                - name: proximoMantenimiento
+                - name: ubicacion
+                - name: fotografias
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar activo.
+          - blockID: 2
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: criticidad
+                - name: ultimaIntervencion
+                - name: ubicacionMapa
+            title: Gestión y control
+            xywh:
+              - 0
+              - 75
+              - 48
+              - 30
+          - blockID: 3
+            description: Historial relacionado que completa la vista 360° del registro actual.
+            kind: RecordList
+            options:
+              allowExport: true
+              enableRecordPageNavigation: true
+              fields:
+                - name: codigo
+                - name: solicitud
+                - name: tecnico
+                - name: inicio
+                - name: estado
+                - name: diagnostico
+                - name: proximoMantenimiento
+              hideConfigureFieldsButton: false
+              hideRecordCloneButton: true
+              inlineValueFiltering: true
+              module: ordenes-trabajo
+              perPage: 10
+              prefilter: activo = ${recordID}
+              presort: inicio DESC
+              refField: activo
+              showRecordPerPageOption: true
+              showTotalCount: true
+              hideSearch: false
+              hideFiltering: false
+              customFilterPresets: true
+            title: Historial de órdenes
+            xywh:
+              - 0
+              - 105
+              - 48
+              - 38
         page_layouts:
           principal:
             primary: true
@@ -347,12 +586,25 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 16
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 75
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 75
+                  - 48
+                  - 30
+              - blockID: 3
+                xywh:
+                  - 0
+                  - 105
+                  - 48
+                  - 38
+        description: Vista operativa de detalle del activo. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -361,109 +613,153 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de activos. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   solicitudes:
     title: Solicitudes
     visible: true
     blocks:
-    - title: Solicitudes de servicio
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: solicitudes
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: activo
-        - name: canal
-        - name: tipoServicio
-        - name: prioridad
-        - name: estado
-        - name: responsable
-        - name: vencimientoSLA
-        - name: slaIncumplido
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
-    children:
-      solicitud-registro:
-        title: Detalle de la solicitud
-        module: solicitudes
-        visible: false
-        blocks:
-        - title: Solicitud
-          kind: Record
-          xywh:
+      - title: Solicitudes de servicio
+        kind: RecordList
+        xywh:
           - 0
           - 0
-          - 12
-          - 14
-          options:
-            fields:
+          - 48
+          - 38
+        options:
+          module: solicitudes
+          fields:
             - name: codigo
             - name: cliente
             - name: activo
             - name: canal
             - name: tipoServicio
             - name: prioridad
-            - name: descripcion
-            - name: fotografias
             - name: estado
             - name: responsable
             - name: vencimientoSLA
             - name: slaIncumplido
-          blockID: 1
-        - title: Cotizaciones
-          kind: RecordList
-          xywh:
-          - 0
-          - 14
-          - 6
-          - 9
-          options:
-            module: cotizaciones
-            fields:
-            - name: codigo
-            - name: total
-            - name: fechaVencimiento
-            - name: estado
-            - name: fechaAceptacion
-            prefilter: solicitud = ${recordID}
-            presort: createdAt DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 2
-        - title: Órdenes de trabajo
-          kind: RecordList
-          xywh:
-          - 6
-          - 14
-          - 6
-          - 9
-          options:
-            module: ordenes-trabajo
-            fields:
-            - name: codigo
-            - name: tecnico
-            - name: inicio
-            - name: estado
-            - name: valorFinal
-            prefilter: solicitud = ${recordID}
-            presort: inicio DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 3
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de solicitudes de servicio con búsqueda, filtros, conteo y exportación.
+    children:
+      solicitud-registro:
+        title: Detalle de la solicitud
+        module: solicitudes
+        visible: false
+        blocks:
+          - title: Solicitud
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 70
+            options:
+              fields:
+                - name: codigo
+                - name: cliente
+                - name: activo
+                - name: canal
+                - name: tipoServicio
+                - name: prioridad
+                - name: descripcion
+                - name: fotografias
+                - name: estado
+                - name: responsable
+                - name: vencimientoSLA
+                - name: slaIncumplido
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar solicitud.
+          - title: Cotizaciones
+            kind: RecordList
+            xywh:
+              - 0
+              - 70
+              - 24
+              - 38
+            options:
+              module: cotizaciones
+              fields:
+                - name: codigo
+                - name: total
+                - name: fechaVencimiento
+                - name: estado
+                - name: fechaAceptacion
+              prefilter: solicitud = ${recordID}
+              presort: createdAt DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 2
+            description: Listado operativo de cotizaciones con búsqueda, filtros, conteo y exportación.
+          - title: Órdenes de trabajo
+            kind: RecordList
+            xywh:
+              - 24
+              - 70
+              - 24
+              - 38
+            options:
+              module: ordenes-trabajo
+              fields:
+                - name: codigo
+                - name: tecnico
+                - name: inicio
+                - name: estado
+                - name: valorFinal
+              prefilter: solicitud = ${recordID}
+              presort: inicio DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 3
+            description: Listado operativo de órdenes de trabajo con búsqueda, filtros, conteo y exportación.
+          - blockID: 4
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: contactoEnSitio
+                - name: ubicacionServicio
+                - name: ventanaInicio
+                - name: ventanaFin
+                - name: requiereVisitaDiagnostico
+            title: Gestión y control
+            xywh:
+              - 0
+              - 108
+              - 48
+              - 35
         page_layouts:
           principal:
             primary: true
@@ -485,24 +781,31 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 14
-            - blockID: 2
-              xywh:
-              - 0
-              - 14
-              - 6
-              - 9
-            - blockID: 3
-              xywh:
-              - 6
-              - 14
-              - 6
-              - 9
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 70
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 70
+                  - 24
+                  - 38
+              - blockID: 3
+                xywh:
+                  - 24
+                  - 70
+                  - 24
+                  - 38
+              - blockID: 4
+                xywh:
+                  - 0
+                  - 108
+                  - 48
+                  - 35
+        description: Vista operativa de detalle de la solicitud. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -511,75 +814,119 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de solicitudes. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   cotizaciones:
     title: Cotizaciones
     visible: true
     blocks:
-    - title: Valor por servicio
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 4
-      - 30
-      options:
-        chart: valor-por-servicio
-      blockID: 1
-    - title: Cotizaciones comerciales
-      kind: RecordList
-      xywh:
-      - 4
-      - 0
-      - 8
-      - 18
-      options:
-        module: cotizaciones
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: solicitud
-        - name: total
-        - name: fechaVencimiento
-        - name: estado
-        - name: fechaAceptacion
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 2
+      - title: Valor por servicio
+        kind: Chart
+        xywh:
+          - 0
+          - 0
+          - 24
+          - 30
+        options:
+          chart: valor-por-servicio
+        blockID: 1
+        description: Gráfico que resume valor por servicio a partir de datos actuales.
+      - title: Cotizaciones comerciales
+        kind: RecordList
+        xywh:
+          - 24
+          - 0
+          - 24
+          - 38
+        options:
+          module: cotizaciones
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: solicitud
+            - name: total
+            - name: fechaVencimiento
+            - name: estado
+            - name: fechaAceptacion
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 2
+        description: Listado operativo de cotizaciones comerciales con búsqueda, filtros, conteo y exportación.
     children:
       cotizacion-registro:
         title: Detalle de la cotización
         module: cotizaciones
         visible: false
         blocks:
-        - title: Cotización
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 16
-          options:
-            fields:
-            - name: codigo
-            - name: solicitud
-            - name: cliente
-            - name: alcance
-            - name: valorAntesImpuestos
-            - name: impuestos
-            - name: total
-            - name: fechaVencimiento
-            - name: estado
-            - name: fechaAceptacion
-            - name: observaciones
-          blockID: 1
+          - title: Cotización
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 65
+            options:
+              fields:
+                - name: codigo
+                - name: solicitud
+                - name: cliente
+                - name: alcance
+                - name: valorAntesImpuestos
+                - name: impuestos
+                - name: total
+                - name: fechaVencimiento
+                - name: estado
+                - name: fechaAceptacion
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar cotización.
+          - blockID: 2
+            description: Historial relacionado que completa la vista 360° del registro actual.
+            kind: RecordList
+            options:
+              allowExport: true
+              enableRecordPageNavigation: true
+              fields:
+                - name: secuencia
+                - name: tipo
+                - name: descripcion
+                - name: cantidad
+                - name: valorUnitario
+                - name: impuestoPorcentaje
+                - name: total
+              hideConfigureFieldsButton: false
+              hideRecordCloneButton: true
+              inlineValueFiltering: true
+              module: items-cotizacion
+              perPage: 10
+              prefilter: cotizacion = ${recordID}
+              presort: secuencia ASC
+              refField: cotizacion
+              showRecordPerPageOption: true
+              showTotalCount: true
+              hideSearch: false
+              hideFiltering: false
+              customFilterPresets: true
+            title: Ítems de la cotización
+            xywh:
+              - 0
+              - 65
+              - 48
+              - 38
         page_layouts:
           principal:
             primary: true
@@ -601,12 +948,71 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 65
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 65
+                  - 48
+                  - 38
+        description: Vista operativa de detalle de la cotización. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+      item-cotizacion-registro:
+        blocks:
+          - blockID: 1
+            description: Edición de una línea económica de la cotización.
+            kind: Record
+            options:
+              fields:
+                - name: cotizacion
+                - name: secuencia
+                - name: tipo
+                - name: descripcion
+                - name: cantidad
+                - name: valorUnitario
+                - name: impuestoPorcentaje
+                - name: total
+            title: Información principal
+            xywh:
               - 0
               - 0
-              - 12
-              - 16
+              - 48
+              - 50
+        description: Edición de una línea económica de la cotización.
+        module: items-cotizacion
+        page_layouts:
+          principal:
+            blocks:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 50
+            config:
+              buttons:
+                back:
+                  enabled: true
+                clone:
+                  enabled: true
+                delete:
+                  enabled: true
+                edit:
+                  enabled: true
+                new:
+                  enabled: true
+                submit:
+                  enabled: true
+              useTitle: true
+            meta:
+              title: Diseño principal · Detalle de ítem de cotización
+            primary: true
+        title: Detalle de ítem de cotización
+        visible: false
     page_layouts:
       principal:
         primary: true
@@ -615,105 +1021,212 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 4
-          - 30
-        - blockID: 2
-          xywh:
-          - 4
-          - 0
-          - 8
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 38
+    description: Vista operativa de cotizaciones. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   ordenes-trabajo:
     title: Agenda de servicio
     visible: true
     blocks:
-    - title: Agenda de técnicos
-      kind: Calendar
-      xywh:
-      - 0
-      - 0
-      - 8
-      - 18
-      options:
-        defaultView: timeGridWeek
-        locale: es
-        feeds:
-        - resource: compose:record
-          startField: inicio
-          endField: fin
-          titleField: codigo
-          allDay: false
-          options:
-            module: ordenes-trabajo
-            color: '#0d9488'
-            prefilter: ''
-      blockID: 1
-    - title: Carga por técnico
-      kind: Chart
-      xywh:
-      - 8
-      - 0
-      - 4
-      - 30
-      options:
-        chart: ordenes-por-tecnico
-      blockID: 2
-    - title: Órdenes
-      kind: RecordList
-      xywh:
-      - 8
-      - 30
-      - 4
-      - 18
-      options:
-        module: ordenes-trabajo
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: tecnico
-        - name: inicio
-        - name: estado
-        presort: inicio ASC
-        perPage: 20
-        hideRecordCloneButton: true
-      blockID: 3
+      - title: Agenda de técnicos
+        kind: Calendar
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 44
+        options:
+          defaultView: timeGridWeek
+          locale: es
+          feeds:
+            - resource: compose:record
+              startField: inicio
+              endField: fin
+              titleField: codigo
+              allDay: false
+              options:
+                module: ordenes-trabajo
+                color: '#0d9488'
+                prefilter: ''
+        blockID: 1
+        description: Calendario operativo de agenda de técnicos en la zona horaria America/Bogota.
+      - title: Carga por técnico
+        kind: Chart
+        xywh:
+          - 0
+          - 44
+          - 48
+          - 30
+        options:
+          chart: ordenes-por-tecnico
+        blockID: 2
+        description: Gráfico que resume carga por técnico a partir de datos actuales.
+      - title: Órdenes
+        kind: RecordList
+        xywh:
+          - 0
+          - 74
+          - 48
+          - 38
+        options:
+          module: ordenes-trabajo
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: tecnico
+            - name: inicio
+            - name: estado
+          presort: inicio ASC
+          perPage: 20
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 3
+        description: Listado operativo de órdenes con búsqueda, filtros, conteo y exportación.
+      - blockID: 4
+        description: Pipeline operativo agrupado por etapa; permite visualizar y actualizar el avance de cada registro.
+        kind: RecordOrganizer
+        options:
+          descriptionField: direccion
+          displayOption: sameTab
+          filter: estado != 'Completada' AND estado != 'Cancelada'
+          groupField: estado
+          labelField: codigo
+          module: ordenes-trabajo
+          showRefresh: true
+        title: Tablero de órdenes
+        xywh:
+          - 0
+          - 112
+          - 48
+          - 44
+      - blockID: 5
+        description: Mapa de los registros con ubicación geográfica válida; seleccione un marcador para abrir su ficha.
+        kind: Geometry
+        options:
+          center:
+            - 4.711
+            - -74.0721
+          displayOption: sameTab
+          feeds:
+            - displayMarker: true
+              geometryField: ubicacionTrabajo
+              options:
+                color: '#2563EB'
+                module: ordenes-trabajo
+                prefilter: estado != 'Completada' AND estado != 'Cancelada'
+              resource: compose:record
+              titleField: codigo
+          hideGeoSearch: false
+          showRefresh: true
+          zoomMax: 18
+          zoomMin: 4
+          zoomStarting: 6
+        title: Mapa de órdenes programadas
+        xywh:
+          - 0
+          - 156
+          - 48
+          - 44
     children:
       orden-registro:
         title: Detalle de la orden
         module: ordenes-trabajo
         visible: false
         blocks:
-        - title: Orden de trabajo
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
-          options:
-            fields:
-            - name: codigo
-            - name: solicitud
-            - name: cotizacion
-            - name: cliente
-            - name: activo
-            - name: tecnico
-            - name: direccion
-            - name: inicio
-            - name: fin
-            - name: estado
-            - name: diagnostico
-            - name: solucion
-            - name: resolucionPrimeraVisita
-            - name: evidencias
-            - name: firma
-            - name: valorFinal
-            - name: proximoMantenimiento
-          blockID: 1
+          - title: Orden de trabajo
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 95
+            options:
+              fields:
+                - name: codigo
+                - name: solicitud
+                - name: cotizacion
+                - name: cliente
+                - name: activo
+                - name: tecnico
+                - name: direccion
+                - name: inicio
+                - name: fin
+                - name: estado
+                - name: diagnostico
+                - name: solucion
+                - name: resolucionPrimeraVisita
+                - name: evidencias
+                - name: firma
+                - name: valorFinal
+                - name: proximoMantenimiento
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar orden de trabajo.
+          - blockID: 2
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: contactoEnSitio
+                - name: ubicacionTrabajo
+                - name: inicioReal
+                - name: finReal
+                - name: aceptacionCliente
+            title: Gestión y control
+            xywh:
+              - 0
+              - 95
+              - 48
+              - 35
+          - blockID: 3
+            description: Historial relacionado que completa la vista 360° del registro actual.
+            kind: RecordList
+            options:
+              allowExport: true
+              enableRecordPageNavigation: true
+              fields:
+                - name: secuencia
+                - name: tarea
+                - name: obligatoria
+                - name: tecnico
+                - name: estado
+                - name: inicioReal
+                - name: finReal
+              hideConfigureFieldsButton: false
+              hideRecordCloneButton: true
+              inlineValueFiltering: true
+              module: tareas-orden
+              perPage: 10
+              prefilter: orden = ${recordID}
+              presort: secuencia ASC
+              refField: orden
+              showRecordPerPageOption: true
+              showTotalCount: true
+              hideSearch: false
+              hideFiltering: false
+              customFilterPresets: true
+            title: Checklist de ejecución
+            xywh:
+              - 0
+              - 130
+              - 48
+              - 38
         page_layouts:
           principal:
             primary: true
@@ -735,12 +1248,79 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 95
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 95
+                  - 48
+                  - 35
+              - blockID: 3
+                xywh:
+                  - 0
+                  - 130
+                  - 48
+                  - 38
+        description: Vista operativa de detalle de la orden. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+      tarea-orden-registro:
+        blocks:
+          - blockID: 1
+            description: Ejecución y evidencia de una tarea del checklist técnico.
+            kind: Record
+            options:
+              fields:
+                - name: orden
+                - name: secuencia
+                - name: tarea
+                - name: obligatoria
+                - name: tecnico
+                - name: estado
+                - name: inicioReal
+                - name: finReal
+                - name: resultado
+                - name: evidencia
+            title: Información principal
+            xywh:
               - 0
               - 0
-              - 12
-              - 18
+              - 48
+              - 60
+        description: Ejecución y evidencia de una tarea del checklist técnico.
+        module: tareas-orden
+        page_layouts:
+          principal:
+            blocks:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 60
+            config:
+              buttons:
+                back:
+                  enabled: true
+                clone:
+                  enabled: true
+                delete:
+                  enabled: true
+                edit:
+                  enabled: true
+                new:
+                  enabled: true
+                submit:
+                  enabled: true
+              useTitle: true
+            meta:
+              title: Diseño principal · Detalle de tarea de orden
+            primary: true
+        title: Detalle de tarea de orden
+        visible: false
     page_layouts:
       principal:
         primary: true
@@ -749,21 +1329,151 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 44
+          - blockID: 2
+            xywh:
+              - 0
+              - 44
+              - 48
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 74
+              - 48
+              - 38
+          - blockID: 4
+            xywh:
+              - 0
+              - 112
+              - 48
+              - 44
+          - blockID: 5
+            xywh:
+              - 0
+              - 156
+              - 48
+              - 44
+    description: Vista operativa de agenda de servicio. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+  reportes:
+    blocks:
+      - blockID: 1
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: funnel-servicios
+        title: Funnel servicios
+        xywh:
           - 0
           - 0
-          - 8
-          - 18
-        - blockID: 2
-          xywh:
-          - 8
-          - 0
-          - 4
+          - 24
           - 30
-        - blockID: 3
-          xywh:
-          - 8
+      - blockID: 2
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: solicitudes-por-prioridad
+        title: Solicitudes por prioridad
+        xywh:
+          - 24
+          - 0
+          - 24
           - 30
-          - 4
-          - 18
+      - blockID: 3
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: ordenes-por-estado
+        title: Ordenes por estado
+        xywh:
+          - 0
+          - 30
+          - 24
+          - 30
+      - blockID: 4
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: valor-por-servicio
+        title: Valor por servicio
+        xywh:
+          - 24
+          - 30
+          - 24
+          - 30
+      - blockID: 5
+        description: Registros que respaldan los indicadores; permite buscar, filtrar, contar y exportar el resultado.
+        kind: RecordList
+        options:
+          allowExport: true
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: activo
+            - name: tecnico
+            - name: inicio
+            - name: fin
+            - name: estado
+            - name: valorFinal
+          hideConfigureFieldsButton: false
+          inlineValueFiltering: true
+          module: ordenes-trabajo
+          perPage: 20
+          presort: createdAt DESC
+          showRecordPerPageOption: true
+          showTotalCount: true
+          hideSearch: false
+          hideFiltering: false
+          customFilterPresets: true
+        title: Detalle operativo
+        xywh:
+          - 0
+          - 60
+          - 48
+          - 38
+    description: Vista ejecutiva y operativa para analizar resultados, encontrar desviaciones y exportar información.
+    page_layouts:
+      principal:
+        blocks:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 30
+              - 24
+              - 30
+          - blockID: 4
+            xywh:
+              - 24
+              - 30
+              - 24
+              - 30
+          - blockID: 5
+            xywh:
+              - 0
+              - 60
+              - 48
+              - 38
+        config:
+          useTitle: true
+        meta:
+          title: Diseño principal · Reportes
+        primary: true
+    title: Reportes
+    visible: true

@@ -215,13 +215,18 @@ func (c *composePageBlock) MarshalYAML() (interface{}, error) {
 		delete(opt, "chart")
 		break
 
-	case "Calendar":
+	case "Calendar", "Geometry":
 		ff, _ := opt["feeds"].([]interface{})
-		for i, f := range ff {
+		refIndex := 0
+		for _, f := range ff {
 			feed, _ := f.(map[string]interface{})
 			fOpts, _ := (feed["options"]).(map[string]interface{})
-			fOpts["module"] = c.refMod[i]
+			if fOpts == nil || refIndex >= len(c.refMod) {
+				continue
+			}
+			fOpts["module"] = c.refMod[refIndex]
 			delete(fOpts, "moduleID")
+			refIndex++
 		}
 		break
 

@@ -8,8 +8,8 @@ editor:
     resourceType: Tipo de recurso
     status: Estado
     title: Información básica
-    workflowID: ID del workflow
-    openWorkflow: Abrir workflow
+    workflowID: 'ID del flujo de trabajo'
+    openWorkflow: 'Abrir flujo de trabajo'
     cancel: Cancelar sesión
   title: Sesión
 list:
@@ -20,7 +20,7 @@ list:
     sessionID: ID de sesión
     state: Estado
     status: Estado
-    workflowID: ID del workflow
+    workflowID: 'ID del flujo de trabajo'
   filterForm:
     all:
       label: Todas

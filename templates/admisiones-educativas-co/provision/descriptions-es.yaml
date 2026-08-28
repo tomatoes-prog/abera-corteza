@@ -1,0 +1,331 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    "corteza::compose:module/admisiones-educativas-co/programas":
+      meta.description: "Oferta académica disponible para captación y matrícula. Registra nivel, modalidad, sede, periodo, valor, cupos y meta comercial."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/nombre":
+      meta.description.edit: "Ingrese nombre del programa con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Nombre del programa» conserva información operativa del registro en Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/nivel":
+      meta.description.edit: "Seleccione un valor para nivel educativo entre: Educación continua, Técnico, Tecnólogo, Pregrado, Especialización, Maestría. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de nivel educativo para este registro de Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/modalidad":
+      meta.description.edit: "Seleccione un valor para modalidad entre: Presencial, Virtual, Híbrida. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de modalidad para este registro de Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/jornada":
+      meta.description.edit: "Seleccione un valor para jornada entre: Diurna, Nocturna, Fines de semana, Flexible. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de jornada para este registro de Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/sede":
+      meta.description.edit: "Ingrese sede con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Sede» conserva información operativa del registro en Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/fechaInicio":
+      meta.description.edit: "Indique fecha de inicio en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de fecha de inicio para este registro de Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/duracion":
+      meta.description.edit: "Ingrese duración con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Duración» conserva información operativa del registro en Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/valor":
+      meta.description.edit: "Ingrese valor en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor expresado en pesos colombianos (COP) para este registro de Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/periodo":
+      meta.description.edit: "Ingrese periodo académico con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Periodo académico» conserva información operativa del registro en Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/cupos":
+      meta.description.edit: "Ingrese cupos como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de cupos para este registro de Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/metaMatriculas":
+      meta.description.edit: "Ingrese meta de matrículas como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de meta de matrículas para este registro de Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Activo, Cerrado, Inactivo. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de estado para este registro de Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/descripcion":
+      meta.description.edit: "Ingrese descripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Descripción» conserva información operativa del registro en Programas."
+    "corteza::compose:module-field/admisiones-educativas-co/programas/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Programas."
+    "corteza::compose:module/admisiones-educativas-co/prospectos":
+      meta.description: "Personas interesadas en la oferta educativa. Centraliza estudiante, acudiente cuando aplica, autorización, programa principal, programas de interés, asesor y avance hacia la matrícula."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/nombres":
+      meta.description.edit: "Ingrese nombres con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Nombres» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/apellidos":
+      meta.description.edit: "Ingrese apellidos con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Apellidos» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/tipoDocumento":
+      meta.description.edit: "Seleccione un valor para tipo de documento entre: Registro civil, Tarjeta de identidad, Cédula de ciudadanía, Cédula de extranjería, Pasaporte. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de tipo de documento para este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/documento":
+      meta.description.edit: "Ingrese documento con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Documento» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/fechaNacimiento":
+      meta.description.edit: "Indique fecha de nacimiento en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de fecha de nacimiento para este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/esMenorEdad":
+      meta.description.edit: "Marque Sí únicamente cuando es menor de edad esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si es menor de edad aplica a este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/telefono":
+      meta.description.edit: "Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Teléfono» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/correo":
+      meta.description.edit: "Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Correo electrónico» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/autorizaTratamientoDatos":
+      meta.description.edit: "Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/fechaAutorizacion":
+      meta.description.edit: "Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/acudienteNombre":
+      meta.description.edit: "Ingrese nombre del acudiente con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Nombre del acudiente» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/acudienteTelefono":
+      meta.description.edit: "Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Teléfono del acudiente» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/ciudad":
+      meta.description.edit: "Ingrese ciudad con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Ciudad» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/nivelInteres":
+      meta.description.edit: "Seleccione un valor para nivel de interés entre: Educación continua, Técnico, Tecnólogo, Pregrado, Posgrado. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de nivel de interés para este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/modalidadPreferida":
+      meta.description.edit: "Seleccione un valor para modalidad preferida entre: Presencial, Virtual, Híbrida. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de modalidad preferida para este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/programaPrincipal":
+      meta.description.edit: "Seleccione programa principal de interés dentro del módulo programas. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con programas. Permite consultar un registro vinculado en este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/programasInteres":
+      meta.description.edit: "Seleccione programas de interés dentro del módulo programas. La relación admite varios registros; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con programas. Permite consultar varios registros vinculados en este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/origen":
+      meta.description.edit: "Seleccione un valor para origen entre: Sitio web, Feria educativa, Referido, Redes sociales, Llamada, Visita. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de origen para este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Interesado, Contactado, Calificado, Solicitud iniciada, Solicitud completa, Admitido, Matriculado, No matriculado. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/asesor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de asesor responsable en este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/prioridad":
+      meta.description.edit: "Seleccione un valor para prioridad comercial entre: Baja, Media, Alta, Urgente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de prioridad comercial para este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/fechaAsignacion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de fecha de asignación para este registro de Prospectos, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/proximoContacto":
+      meta.description.edit: "Indique próximo contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de próximo contacto para este registro de Prospectos, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/ultimoContacto":
+      meta.description.edit: "Indique último contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de último contacto para este registro de Prospectos, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/motivoCierre":
+      meta.description.edit: "Ingrese motivo de cierre o no matrícula con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Motivo de cierre o no matrícula» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/notas":
+      meta.description.edit: "Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Notas» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/proveedorExterno":
+      meta.description.edit: "Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Proveedor externo» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/estadoIntegracion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Clasificación de estado de integración para este registro de Prospectos."
+    "corteza::compose:module-field/admisiones-educativas-co/prospectos/ultimoErrorIntegracion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "El campo «Último error de integración» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module/admisiones-educativas-co/solicitudes":
+      meta.description: "Postulaciones formales de un prospecto a un programa y periodo. Consolida requisitos, completitud, revisión, decisión y observaciones del proceso de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/prospecto":
+      meta.description.edit: "Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con prospectos. Permite consultar un registro vinculado en este registro de Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/programa":
+      meta.description.edit: "Seleccione programa dentro del módulo programas. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con programas. Permite consultar un registro vinculado en este registro de Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/periodo":
+      meta.description.edit: "Ingrese periodo académico con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Periodo académico» conserva información operativa del registro en Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Borrador, Enviada, En revisión, Incompleta, Lista para decisión, Admitida, No admitida, Retirada. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/completitud":
+      meta.description.edit: "Ingrese completitud como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de completitud para este registro de Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/documentos":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para documentos. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con documentos en este registro de Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/documentosVerificados":
+      meta.description.edit: "Marque Sí únicamente cuando documentos verificados esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si documentos verificados aplica a este registro de Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/revisor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de revisor en este registro de Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/puntaje":
+      meta.description.edit: "Ingrese puntaje como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de puntaje para este registro de Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/decision":
+      meta.description.edit: "Seleccione un valor para decisión entre: Admitir, Lista de espera, No admitir. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de decisión para este registro de Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/fechaEnvio":
+      meta.description.edit: "Indique fecha de envío usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fecha de envío para este registro de Solicitudes de admisión, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/fechaDecision":
+      meta.description.edit: "Indique fecha de decisión usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fecha de decisión para este registro de Solicitudes de admisión, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Solicitudes de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/solicitudes/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Solicitudes de admisión."
+    "corteza::compose:module/admisiones-educativas-co/citas-admision":
+      meta.description: "Llamadas, entrevistas, visitas o sesiones virtuales del proceso de admisión. Relaciona prospecto, programa, asesor, horario, resultado y siguiente acción."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/asunto":
+      meta.description.edit: "Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Asunto» conserva información operativa del registro en Citas de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/prospecto":
+      meta.description.edit: "Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con prospectos. Permite consultar un registro vinculado en este registro de Citas de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/asesor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Usuario de Corteza responsable de asesor en este registro de Citas de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/programa":
+      meta.description.edit: "Seleccione programa dentro del módulo programas. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con programas. Permite consultar un registro vinculado en este registro de Citas de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/tipo":
+      meta.description.edit: "Seleccione un valor para tipo entre: Llamada, Entrevista, Visita a sede, Sesión virtual. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo para este registro de Citas de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/inicio":
+      meta.description.edit: "Indique inicio usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de inicio para este registro de Citas de admisión, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/fin":
+      meta.description.edit: "Indique fin usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de fin para este registro de Citas de admisión, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Pendiente, Confirmada, Completada, Cancelada, No asistió. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Citas de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/resultado":
+      meta.description.edit: "Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Resultado» conserva información operativa del registro en Citas de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/siguienteAccion":
+      meta.description.edit: "Ingrese siguiente acción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Siguiente acción» conserva información operativa del registro en Citas de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/citas-admision/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Citas de admisión."
+    "corteza::compose:module/admisiones-educativas-co/matriculas":
+      meta.description: "Confirmaciones académicas y financieras derivadas de una solicitud admitida. Registra programa, periodo, valor, beneficios, pago y estado de matrícula."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Matrículas."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/solicitud":
+      meta.description.edit: "Seleccione solicitud dentro del módulo solicitudes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con solicitudes. Permite consultar un registro vinculado en este registro de Matrículas."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/estudiante":
+      meta.description.edit: "Seleccione estudiante dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con prospectos. Permite consultar un registro vinculado en este registro de Matrículas."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/programa":
+      meta.description.edit: "Seleccione programa dentro del módulo programas. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con programas. Permite consultar un registro vinculado en este registro de Matrículas."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/periodo":
+      meta.description.edit: "Ingrese periodo académico con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Periodo académico» conserva información operativa del registro en Matrículas."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/valor":
+      meta.description.edit: "Ingrese valor de matrícula en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor de matrícula expresado en pesos colombianos (COP) para este registro de Matrículas."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/descuentoBeca":
+      meta.description.edit: "Ingrese descuento o beca en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Descuento o beca expresado en pesos colombianos (COP) para este registro de Matrículas."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/estadoPago":
+      meta.description.edit: "Seleccione un valor para estado de pago entre: Pendiente, Parcial, Pagado, Financiado. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de estado de pago para este registro de Matrículas."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/estado":
+      meta.description.edit: "Seleccione un valor para estado de matrícula entre: Preparada, Documentos pendientes, Confirmada, Cancelada. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado de matrícula para este registro de Matrículas."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/fechaMatricula":
+      meta.description.edit: "Indique fecha de matrícula usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fecha de matrícula para este registro de Matrículas, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Matrículas."
+    "corteza::compose:module-field/admisiones-educativas-co/matriculas/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Matrículas."
+    "corteza::compose:module/admisiones-educativas-co/requisitos-solicitud":
+      meta.description: "Documentos o condiciones individuales que debe cumplir una solicitud. Permite revisar cada requisito, adjuntar evidencia y registrar aceptación o rechazo."
+    "corteza::compose:module-field/admisiones-educativas-co/requisitos-solicitud/solicitud":
+      meta.description.edit: "Seleccione solicitud dentro del módulo solicitudes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con solicitudes. Permite consultar un registro vinculado en este registro de Requisitos de solicitud."
+    "corteza::compose:module-field/admisiones-educativas-co/requisitos-solicitud/requisito":
+      meta.description.edit: "Ingrese requisito con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Requisito» conserva información operativa del registro en Requisitos de solicitud."
+    "corteza::compose:module-field/admisiones-educativas-co/requisitos-solicitud/obligatorio":
+      meta.description.edit: "Marque Sí únicamente cuando obligatorio esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si obligatorio aplica a este registro de Requisitos de solicitud."
+    "corteza::compose:module-field/admisiones-educativas-co/requisitos-solicitud/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Pendiente, Recibido, Validado, Rechazado, No aplica. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Requisitos de solicitud."
+    "corteza::compose:module-field/admisiones-educativas-co/requisitos-solicitud/archivo":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para archivo del requisito. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con archivo del requisito en este registro de Requisitos de solicitud."
+    "corteza::compose:module-field/admisiones-educativas-co/requisitos-solicitud/fechaRecepcion":
+      meta.description.edit: "Indique fecha de recepción usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fecha de recepción para este registro de Requisitos de solicitud, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/requisitos-solicitud/fechaValidacion":
+      meta.description.edit: "Indique fecha de validación usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fecha de validación para este registro de Requisitos de solicitud, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/requisitos-solicitud/revisor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de revisor en este registro de Requisitos de solicitud."
+    "corteza::compose:module-field/admisiones-educativas-co/requisitos-solicitud/motivoRechazo":
+      meta.description.edit: "Ingrese motivo de rechazo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Motivo de rechazo» conserva información operativa del registro en Requisitos de solicitud."
+    "corteza::compose:module-field/admisiones-educativas-co/requisitos-solicitud/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Requisitos de solicitud."
+    "corteza::compose:module/admisiones-educativas-co/actividades-admision":
+      meta.description: "Historial de seguimientos realizados con un prospecto durante captación y admisión, relacionado opcionalmente con un programa o solicitud."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/asunto":
+      meta.description.edit: "Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Asunto» conserva información operativa del registro en Actividades de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/prospecto":
+      meta.description.edit: "Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con prospectos. Permite consultar un registro vinculado en este registro de Actividades de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/solicitud":
+      meta.description.edit: "Seleccione solicitud dentro del módulo solicitudes. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con solicitudes. Permite consultar un registro vinculado en este registro de Actividades de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/programa":
+      meta.description.edit: "Seleccione programa dentro del módulo programas. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con programas. Permite consultar un registro vinculado en este registro de Actividades de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/asesor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Usuario de Corteza responsable de asesor responsable en este registro de Actividades de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/tipo":
+      meta.description.edit: "Seleccione un valor para tipo entre: Llamada, WhatsApp, Correo, Nota, Seguimiento. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo para este registro de Actividades de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Pendiente, Completada, Cancelada. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Actividades de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/fecha":
+      meta.description.edit: "Indique fecha usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de fecha para este registro de Actividades de admisión, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/resultado":
+      meta.description.edit: "Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Resultado» conserva información operativa del registro en Actividades de admisión."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/proximaAccion":
+      meta.description.edit: "Indique próxima acción usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de próxima acción para este registro de Actividades de admisión, interpretada en America/Bogota."
+    "corteza::compose:module-field/admisiones-educativas-co/actividades-admision/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Actividades de admisión."

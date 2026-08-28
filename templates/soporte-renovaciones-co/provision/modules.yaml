@@ -6,120 +6,142 @@ modules:
   clientes:
     name: Clientes
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Clientes., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       tipo:
         label: Tipo
         kind: Select
         options:
           options:
-            - { text: Persona, value: Persona }
-            - { text: Empresa, value: Empresa }
+            - {text: Persona, value: Persona}
+            - {text: Empresa, value: Empresa}
           selectType: default
-      nombre: { label: Nombre o razón social, kind: String, required: true }
-      identificacion: { label: Identificación o NIT, kind: String }
-      contactoPrincipal: { label: Contacto principal, kind: String }
-      telefono: { label: Teléfono, kind: String }
-      correo: { label: Correo electrónico, kind: String, required: true }
+          description:
+            view: Clasificación de tipo para este registro de Clientes.
+            edit: 'Seleccione un valor para tipo entre: Persona, Empresa. Es opcional; complételo cuando la información esté disponible.'
+      nombre: {label: Nombre o razón social, kind: String, required: true, options: {description: {view: El campo «Nombre o razón social» conserva información operativa del registro en Clientes., edit: 'Ingrese nombre o razón social con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      identificacion: {label: Identificación o NIT, kind: String, options: {description: {view: El campo «Identificación o NIT» conserva información operativa del registro en Clientes., edit: 'Ingrese identificación o nit con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      contactoPrincipal: {label: Contacto principal, kind: String, options: {description: {view: El campo «Contacto principal» conserva información operativa del registro en Clientes., edit: 'Ingrese contacto principal con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      telefono: {label: Teléfono, kind: String, options: {description: {view: El campo «Teléfono» conserva información operativa del registro en Clientes., edit: 'Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es opcional; complételo cuando la información esté disponible.'}}}
+      correo: {label: Correo electrónico, kind: String, required: true, options: {description: {view: El campo «Correo electrónico» conserva información operativa del registro en Clientes., edit: 'Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es obligatorio para guardar un registro completo.'}}}
       autorizaTratamientoDatos:
         label: Autoriza el tratamiento de datos
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.'}}
+      fechaAutorizacion: {label: Fecha de autorización, kind: DateTime, options: {description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible.'}}}
       segmento:
         label: Segmento
         kind: Select
         options:
           options:
-            - { text: Emprendimiento, value: Emprendimiento }
-            - { text: Pyme, value: Pyme }
-            - { text: Corporativo, value: Corporativo }
+            - {text: Emprendimiento, value: Emprendimiento}
+            - {text: Pyme, value: Pyme}
+            - {text: Corporativo, value: Corporativo}
           selectType: default
-      planActual: { label: Plan actual, kind: String }
-      responsable: { label: Responsable de cuenta, kind: User }
+          description:
+            view: Clasificación de segmento para este registro de Clientes.
+            edit: 'Seleccione un valor para segmento entre: Emprendimiento, Pyme, Corporativo. Es opcional; complételo cuando la información esté disponible.'
+      planActual: {label: Plan actual, kind: String, options: {description: {view: El campo «Plan actual» conserva información operativa del registro en Clientes., edit: 'Ingrese plan actual con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      responsable: {label: Responsable de cuenta, kind: User, options: {description: {view: Usuario de Corteza responsable de responsable de cuenta en este registro de Clientes., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
       valorRecurrente:
         label: Valor recurrente
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor recurrente expresado en pesos colombianos (COP) para este registro de Clientes., edit: 'Ingrese valor recurrente en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       salud:
         label: Salud del cliente
         kind: Select
         default: Saludable
         options:
           options:
-            - { text: Saludable, value: Saludable }
-            - { text: Atención, value: Atención }
-            - { text: En riesgo, value: En riesgo }
-            - { text: Perdido, value: Perdido }
+            - {text: Saludable, value: Saludable}
+            - {text: Atención, value: Atención}
+            - {text: En riesgo, value: En riesgo}
+            - {text: Perdido, value: Perdido}
           selectType: default
+          description:
+            view: Clasificación de salud del cliente para este registro de Clientes.
+            edit: 'Seleccione un valor para salud del cliente entre: Saludable, Atención, En riesgo, Perdido. Es opcional; complételo cuando la información esté disponible.'
       satisfaccion:
         label: Satisfacción
         kind: Number
-        options: { format: "0", precision: 0, suffix: "/5" }
+        options: {format: "0", precision: 0, suffix: "/5", description: {view: Valor numérico de satisfacción para este registro de Clientes., edit: Ingrese satisfacción como número. Es opcional; complételo cuando la información esté disponible.}}
       riesgo:
         label: Riesgo
         kind: Select
         default: Bajo
         options:
           options:
-            - { text: Bajo, value: Bajo }
-            - { text: Medio, value: Medio }
-            - { text: Alto, value: Alto }
+            - {text: Bajo, value: Bajo}
+            - {text: Medio, value: Medio}
+            - {text: Alto, value: Alto}
           selectType: default
+          description:
+            view: Clasificación de riesgo para este registro de Clientes.
+            edit: 'Seleccione un valor para riesgo entre: Bajo, Medio, Alto. Es opcional; complételo cuando la información esté disponible.'
       notas:
         label: Notas
         kind: String
-        options: { multiLine: true }
-      externalID: { label: Identificador externo, kind: String }
-      proveedorExterno: { label: Proveedor externo, kind: String }
-
+        options: {multiLine: true, description: {view: El campo «Notas» conserva información operativa del registro en Clientes., edit: 'Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Clientes., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+      proveedorExterno: {label: Proveedor externo, kind: String, options: {description: {view: El campo «Proveedor externo» conserva información operativa del registro en Clientes., edit: 'Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+    meta:
+      description: Personas o empresas atendidas por soporte. Consolida responsable, plan, valor recurrente, salud, satisfacción, riesgo, contratos, casos y renovaciones.
   contratos:
     name: Contratos
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Contratos., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       cliente:
         label: Cliente
         kind: Record
         required: true
-        options: { module: clientes, labelField: nombre }
-      producto: { label: Producto o servicio, kind: String, required: true }
+        options: {module: clientes, labelField: nombre, description: {view: Relación con clientes. Permite consultar un registro vinculado en este registro de Contratos., edit: Seleccione cliente dentro del módulo clientes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      producto: {label: Producto o servicio, kind: String, required: true, options: {description: {view: El campo «Producto o servicio» conserva información operativa del registro en Contratos., edit: 'Ingrese producto o servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       nivelSoporte:
         label: Nivel de soporte
         kind: Select
         required: true
         options:
           options:
-            - { text: Básico, value: Básico }
-            - { text: Estándar, value: Estándar }
-            - { text: Premium, value: Premium }
+            - {text: Básico, value: Básico}
+            - {text: Estándar, value: Estándar}
+            - {text: Premium, value: Premium}
           selectType: default
+          description:
+            view: Clasificación de nivel de soporte para este registro de Contratos.
+            edit: 'Seleccione un valor para nivel de soporte entre: Básico, Estándar, Premium. Es obligatorio para guardar un registro completo.'
       fechaInicio:
         label: Fecha de inicio
         kind: DateTime
         required: true
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de fecha de inicio para este registro de Contratos., edit: Indique fecha de inicio en formato de fecha; no agregue una hora. Es obligatorio para guardar un registro completo.}}
       fechaFin:
         label: Fecha de vencimiento
         kind: DateTime
         required: true
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de fecha de vencimiento para este registro de Contratos., edit: Indique fecha de vencimiento en formato de fecha; no agregue una hora. Es obligatorio para guardar un registro completo.}}
       renovacionAutomatica:
         label: Renovación automática
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si renovación automática aplica a este registro de Contratos., edit: Marque Sí únicamente cuando renovación automática esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
+      diasAvisoRenovacion:
+        label: Días de aviso para renovación
+        kind: Number
+        default: 60
+        options: {format: "0", precision: 0, description: {view: Valor numérico de días de aviso para renovación para este registro de Contratos., edit: Ingrese días de aviso para renovación como número. Es opcional; complételo cuando la información esté disponible.}}
       valor:
         label: Valor recurrente
         kind: Number
         required: true
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor recurrente expresado en pesos colombianos (COP) para este registro de Contratos., edit: 'Ingrese valor recurrente en COP, sin símbolos ni separadores manuales. Es obligatorio para guardar un registro completo.'}}
       slaRespuestaHoras:
         label: SLA primera respuesta
         kind: Number
         required: true
-        options: { format: "0", precision: 0, suffix: " h" }
+        options: {format: "0", precision: 0, suffix: " h", description: {view: Valor numérico de sla primera respuesta para este registro de Contratos., edit: Ingrese sla primera respuesta como número. Es obligatorio para guardar un registro completo.}}
       slaResolucionHoras:
         label: SLA resolución
         kind: Number
         required: true
-        options: { format: "0", precision: 0, suffix: " h" }
+        options: {format: "0", precision: 0, suffix: " h", description: {view: Valor numérico de sla resolución para este registro de Contratos., edit: Ingrese sla resolución como número. Es obligatorio para guardar un registro completo.}}
       estado:
         label: Estado
         kind: Select
@@ -127,52 +149,67 @@ modules:
         default: Activo
         options:
           options:
-            - { text: Pendiente, value: Pendiente }
-            - { text: Activo, value: Activo }
-            - { text: Suspendido, value: Suspendido }
-            - { text: Vencido, value: Vencido }
-            - { text: Cancelado, value: Cancelado }
+            - {text: Pendiente, value: Pendiente}
+            - {text: Activo, value: Activo}
+            - {text: Suspendido, value: Suspendido}
+            - {text: Vencido, value: Vencido}
+            - {text: Cancelado, value: Cancelado}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Contratos.
+            edit: 'Seleccione un valor para estado entre: Pendiente, Activo, Suspendido, Vencido, Cancelado. Es obligatorio para guardar un registro completo.'
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
-      externalID: { label: Identificador externo, kind: String }
-
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Contratos., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Contratos., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+    meta:
+      description: Acuerdos de servicio vigentes para un cliente y producto. Define cobertura, fechas, valor y objetivos de respuesta y resolución que gobiernan los casos.
   casos:
     name: Casos de soporte
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Casos de soporte., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       cliente:
         label: Cliente
         kind: Record
         required: true
-        options: { module: clientes, labelField: nombre }
+        options: {module: clientes, labelField: nombre, description: {view: Relación con clientes. Permite consultar un registro vinculado en este registro de Casos de soporte., edit: Seleccione cliente dentro del módulo clientes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       contrato:
         label: Contrato
         kind: Record
         required: true
-        options: { module: contratos, labelField: codigo }
-      contacto: { label: Contacto solicitante, kind: String }
-      producto: { label: Producto o servicio, kind: String }
+        options: {module: contratos, labelField: codigo, description: {view: Relación con contratos. Permite consultar un registro vinculado en este registro de Casos de soporte., edit: Seleccione contrato dentro del módulo contratos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      casoPadre:
+        label: Caso padre
+        kind: Record
+        options: {module: casos, labelField: codigo, description: {view: Relación con casos. Permite consultar un registro vinculado en este registro de Casos de soporte., edit: Seleccione caso padre dentro del módulo casos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
+      problemaConocido:
+        label: Problema conocido
+        kind: Record
+        options: {module: problemas-conocidos, labelField: codigo, description: {view: Relación con problemas conocidos. Permite consultar un registro vinculado en este registro de Casos de soporte., edit: Seleccione problema conocido dentro del módulo problemas conocidos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
+      contacto: {label: Contacto solicitante, kind: String, options: {description: {view: El campo «Contacto solicitante» conserva información operativa del registro en Casos de soporte., edit: 'Ingrese contacto solicitante con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      producto: {label: Producto o servicio, kind: String, options: {description: {view: El campo «Producto o servicio» conserva información operativa del registro en Casos de soporte., edit: 'Ingrese producto o servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       canal:
         label: Canal
         kind: Select
         options:
           options:
-            - { text: Correo, value: Correo }
-            - { text: Teléfono, value: Teléfono }
-            - { text: Chat, value: Chat }
-            - { text: WhatsApp, value: WhatsApp }
-            - { text: Portal, value: Portal }
+            - {text: Correo, value: Correo}
+            - {text: Teléfono, value: Teléfono}
+            - {text: Chat, value: Chat}
+            - {text: WhatsApp, value: WhatsApp}
+            - {text: Portal, value: Portal}
           selectType: default
-      categoria: { label: Categoría, kind: String, required: true }
-      asunto: { label: Asunto, kind: String, required: true }
+          description:
+            view: Clasificación de canal para este registro de Casos de soporte.
+            edit: 'Seleccione un valor para canal entre: Correo, Teléfono, Chat, WhatsApp, Portal. Es opcional; complételo cuando la información esté disponible.'
+      categoria: {label: Categoría, kind: String, required: true, options: {description: {view: El campo «Categoría» conserva información operativa del registro en Casos de soporte., edit: 'Ingrese categoría con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      asunto: {label: Asunto, kind: String, required: true, options: {description: {view: El campo «Asunto» conserva información operativa del registro en Casos de soporte., edit: 'Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       descripcion:
         label: Descripción
         kind: String
         required: true
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Descripción» conserva información operativa del registro en Casos de soporte., edit: 'Ingrese descripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}
       prioridad:
         label: Prioridad
         kind: Select
@@ -180,11 +217,60 @@ modules:
         default: Media
         options:
           options:
-            - { text: Baja, value: Baja }
-            - { text: Media, value: Media }
-            - { text: Alta, value: Alta }
-            - { text: Crítica, value: Crítica }
+            - {text: Baja, value: Baja}
+            - {text: Media, value: Media}
+            - {text: Alta, value: Alta}
+            - {text: Crítica, value: Crítica}
           selectType: default
+          description:
+            view: Clasificación de prioridad para este registro de Casos de soporte.
+            edit: 'Seleccione un valor para prioridad entre: Baja, Media, Alta, Crítica. Es obligatorio para guardar un registro completo.'
+      impacto:
+        label: Impacto
+        kind: Select
+        default: Moderado
+        options:
+          options:
+            - {text: Bajo, value: Bajo}
+            - {text: Moderado, value: Moderado}
+            - {text: Alto, value: Alto}
+            - {text: Generalizado, value: Generalizado}
+          selectType: default
+          description:
+            view: Clasificación de impacto para este registro de Casos de soporte.
+            edit: 'Seleccione un valor para impacto entre: Bajo, Moderado, Alto, Generalizado. Es opcional; complételo cuando la información esté disponible.'
+      urgencia:
+        label: Urgencia
+        kind: Select
+        default: Normal
+        options:
+          options:
+            - {text: Baja, value: Baja}
+            - {text: Normal, value: Normal}
+            - {text: Alta, value: Alta}
+            - {text: Inmediata, value: Inmediata}
+          selectType: default
+          description:
+            view: Clasificación de urgencia para este registro de Casos de soporte.
+            edit: 'Seleccione un valor para urgencia entre: Baja, Normal, Alta, Inmediata. Es opcional; complételo cuando la información esté disponible.'
+      nivelEscalamiento:
+        label: Nivel de escalamiento
+        kind: Select
+        default: Nivel 1
+        options:
+          options:
+            - {text: Nivel 1, value: Nivel 1}
+            - {text: Nivel 2, value: Nivel 2}
+            - {text: Nivel 3, value: Nivel 3}
+            - {text: Proveedor, value: Proveedor}
+          selectType: default
+          description:
+            view: Clasificación de nivel de escalamiento para este registro de Casos de soporte.
+            edit: 'Seleccione un valor para nivel de escalamiento entre: Nivel 1, Nivel 2, Nivel 3, Proveedor. Es opcional; complételo cuando la información esté disponible.'
+      motivoEscalamiento:
+        label: Motivo de escalamiento
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Motivo de escalamiento» conserva información operativa del registro en Casos de soporte., edit: 'Ingrese motivo de escalamiento con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
       estado:
         label: Estado
         kind: Select
@@ -192,65 +278,99 @@ modules:
         default: Nuevo
         options:
           options:
-            - { text: Nuevo, value: Nuevo }
-            - { text: Asignado, value: Asignado }
-            - { text: En progreso, value: En progreso }
-            - { text: Esperando cliente, value: Esperando cliente }
-            - { text: Resuelto, value: Resuelto }
-            - { text: Cerrado, value: Cerrado }
-            - { text: Cancelado, value: Cancelado }
+            - {text: Nuevo, value: Nuevo}
+            - {text: Asignado, value: Asignado}
+            - {text: En progreso, value: En progreso}
+            - {text: Esperando cliente, value: Esperando cliente}
+            - {text: Resuelto, value: Resuelto}
+            - {text: Cerrado, value: Cerrado}
+            - {text: Cancelado, value: Cancelado}
           selectType: default
-      agente: { label: Agente responsable, kind: User }
-      primeraRespuesta: { label: Primera respuesta, kind: DateTime }
-      fechaResolucion: { label: Fecha de resolución, kind: DateTime }
-      vencimientoRespuesta: { label: Vencimiento primera respuesta, kind: DateTime }
-      vencimientoResolucion: { label: Vencimiento resolución, kind: DateTime }
-      umbralRespuestaSLA: { label: Umbral 75% primera respuesta, kind: DateTime }
-      umbralResolucionSLA: { label: Umbral 75% resolución, kind: DateTime }
+          description:
+            view: Clasificación de estado para este registro de Casos de soporte.
+            edit: 'Seleccione un valor para estado entre: Nuevo, Asignado, En progreso, Esperando cliente, Resuelto, Cerrado, Cancelado. Es obligatorio para guardar un registro completo.'
+      agente: {label: Agente responsable, kind: User, options: {description: {view: Usuario de Corteza responsable de agente responsable en este registro de Casos de soporte., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      primeraRespuesta: {label: Primera respuesta, kind: DateTime, options: {description: {view: 'Fecha y hora de primera respuesta para este registro de Casos de soporte, interpretada en America/Bogota.', edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}}
+      fechaResolucion: {label: Fecha de resolución, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de resolución para este registro de Casos de soporte, interpretada en America/Bogota.', edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}}
+      vencimientoRespuesta: {label: Vencimiento primera respuesta, kind: DateTime, options: {description: {view: 'Fecha y hora de vencimiento primera respuesta para este registro de Casos de soporte, interpretada en America/Bogota.', edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}}
+      vencimientoResolucion: {label: Vencimiento resolución, kind: DateTime, options: {description: {view: 'Fecha y hora de vencimiento resolución para este registro de Casos de soporte, interpretada en America/Bogota.', edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}}
+      umbralRespuestaSLA: {label: Umbral 75% primera respuesta, kind: DateTime, options: {description: {view: 'Fecha y hora de umbral 75% primera respuesta para este registro de Casos de soporte, interpretada en America/Bogota.', edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}}
+      umbralResolucionSLA: {label: Umbral 75% resolución, kind: DateTime, options: {description: {view: 'Fecha y hora de umbral 75% resolución para este registro de Casos de soporte, interpretada en America/Bogota.', edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}}
       estadoSLA:
         label: Estado de SLA
         kind: Select
         default: En tiempo
         options:
           options:
-            - { text: En tiempo, value: En tiempo }
-            - { text: En riesgo, value: En riesgo }
-            - { text: Incumplido, value: Incumplido }
+            - {text: En tiempo, value: En tiempo}
+            - {text: En riesgo, value: En riesgo}
+            - {text: Incumplido, value: Incumplido}
           selectType: default
+          description:
+            view: Clasificación de estado de sla para este registro de Casos de soporte.
+            edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.
       slaIncumplido:
         label: SLA incumplido
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si sla incumplido aplica a este registro de Casos de soporte., edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}
       resolucion:
         label: Resolución
         kind: String
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Resolución» conserva información operativa del registro en Casos de soporte., edit: 'Ingrese resolución con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      causaRaiz:
+        label: Causa raíz
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Causa raíz» conserva información operativa del registro en Casos de soporte., edit: 'Ingrese causa raíz con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      categoriaResolucion:
+        label: Categoría de resolución
+        kind: Select
+        options:
+          options:
+            - {text: Configuración, value: Configuración}
+            - {text: Capacitación, value: Capacitación}
+            - {text: Corrección, value: Corrección}
+            - {text: Solución temporal, value: Solución temporal}
+            - {text: No reproducible, value: No reproducible}
+            - {text: Duplicado, value: Duplicado}
+          selectType: default
+          description:
+            view: Clasificación de categoría de resolución para este registro de Casos de soporte.
+            edit: 'Seleccione un valor para categoría de resolución entre: Configuración, Capacitación, Corrección, Solución temporal, No reproducible, Duplicado. Es opcional; complételo cuando la información esté disponible.'
+      evidencias:
+        label: Evidencias de resolución
+        kind: File
+        multi: true
+        options: {allowDocuments: true, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con evidencias de resolución en este registro de Casos de soporte., edit: Adjunte uno o varios archivos pertinentes para evidencias de resolución. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
       resolucionPrimerContacto:
         label: Resuelto en primer contacto
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si resuelto en primer contacto aplica a este registro de Casos de soporte., edit: Marque Sí únicamente cuando resuelto en primer contacto esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
       csat:
         label: Satisfacción
         kind: Number
-        options: { format: "0", precision: 0, suffix: "/5" }
-      externalID: { label: Identificador externo, kind: String }
-      proveedorExterno: { label: Proveedor externo, kind: String }
+        options: {format: "0", precision: 0, suffix: "/5", description: {view: Valor numérico de satisfacción para este registro de Casos de soporte., edit: Ingrese satisfacción como número. Es opcional; complételo cuando la información esté disponible.}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Casos de soporte., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+      proveedorExterno: {label: Proveedor externo, kind: String, options: {description: {view: El campo «Proveedor externo» conserva información operativa del registro en Casos de soporte., edit: 'Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       estadoIntegracion:
         label: Estado de integración
         kind: Select
         default: Local
         options:
           options:
-            - { text: Local, value: Local }
-            - { text: Pendiente, value: Pendiente }
-            - { text: Sincronizado, value: Sincronizado }
-            - { text: Error, value: Error }
+            - {text: Local, value: Local}
+            - {text: Pendiente, value: Pendiente}
+            - {text: Sincronizado, value: Sincronizado}
+            - {text: Error, value: Error}
           selectType: default
+          description:
+            view: Clasificación de estado de integración para este registro de Casos de soporte.
+            edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.
       ultimoErrorIntegracion:
         label: Último error de integración
         kind: String
-        options: { multiLine: true }
-
+        options: {multiLine: true, description: {view: El campo «Último error de integración» conserva información operativa del registro en Casos de soporte., edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}
+    meta:
+      description: Solicitudes o incidentes reportados por clientes. Controla clasificación, responsable, prioridad, SLA, escalamiento, interacciones, causa y resolución.
   interacciones:
     name: Interacciones
     fields:
@@ -258,73 +378,88 @@ modules:
         label: Caso
         kind: Record
         required: true
-        options: { module: casos, labelField: codigo }
+        options: {module: casos, labelField: codigo, description: {view: Relación con casos. Permite consultar un registro vinculado en este registro de Interacciones., edit: Seleccione caso dentro del módulo casos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      renovacion:
+        label: Renovación relacionada
+        kind: Record
+        options: {module: renovaciones, labelField: codigo, description: {view: Relación con renovaciones. Permite consultar un registro vinculado en este registro de Interacciones., edit: Seleccione renovación relacionada dentro del módulo renovaciones. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
       cliente:
         label: Cliente
         kind: Record
         required: true
-        options: { module: clientes, labelField: nombre }
+        options: {module: clientes, labelField: nombre, description: {view: Relación con clientes. Permite consultar un registro vinculado en este registro de Interacciones., edit: Seleccione cliente dentro del módulo clientes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       canal:
         label: Canal
         kind: Select
         required: true
         options:
           options:
-            - { text: Correo, value: Correo }
-            - { text: Teléfono, value: Teléfono }
-            - { text: Chat, value: Chat }
-            - { text: WhatsApp, value: WhatsApp }
-            - { text: Nota interna, value: Nota interna }
+            - {text: Correo, value: Correo}
+            - {text: Teléfono, value: Teléfono}
+            - {text: Chat, value: Chat}
+            - {text: WhatsApp, value: WhatsApp}
+            - {text: Nota interna, value: Nota interna}
           selectType: default
-      agente: { label: Agente, kind: User, required: true }
-      fecha: { label: Fecha, kind: DateTime, required: true }
+          description:
+            view: Clasificación de canal para este registro de Interacciones.
+            edit: 'Seleccione un valor para canal entre: Correo, Teléfono, Chat, WhatsApp, Nota interna. Es obligatorio para guardar un registro completo.'
+      agente: {label: Agente, kind: User, required: true, options: {description: {view: Usuario de Corteza responsable de agente en este registro de Interacciones., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo.}}}
+      fecha: {label: Fecha, kind: DateTime, required: true, options: {description: {view: 'Fecha y hora de fecha para este registro de Interacciones, interpretada en America/Bogota.', edit: Indique fecha usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.}}}
       tipo:
         label: Tipo
         kind: Select
         required: true
         options:
           options:
-            - { text: Respuesta al cliente, value: Respuesta al cliente }
-            - { text: Mensaje del cliente, value: Mensaje del cliente }
-            - { text: Nota interna, value: Nota interna }
+            - {text: Respuesta al cliente, value: Respuesta al cliente}
+            - {text: Mensaje del cliente, value: Mensaje del cliente}
+            - {text: Nota interna, value: Nota interna}
           selectType: default
+          description:
+            view: Clasificación de tipo para este registro de Interacciones.
+            edit: 'Seleccione un valor para tipo entre: Respuesta al cliente, Mensaje del cliente, Nota interna. Es obligatorio para guardar un registro completo.'
+      esRespuestaAgente:
+        label: Es respuesta del agente
+        kind: Bool
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si es respuesta del agente aplica a este registro de Interacciones., edit: Marque Sí únicamente cuando es respuesta del agente esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
       resumen:
         label: Resumen
         kind: String
         required: true
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Resumen» conserva información operativa del registro en Interacciones., edit: 'Ingrese resumen con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}
       archivos:
         label: Archivos
         kind: File
         multi: true
-        options: { allowDocuments: true, allowImages: true, maxSize: 0, mode: list }
-      externalID: { label: Identificador externo, kind: String }
-      proveedorExterno: { label: Proveedor externo, kind: String }
-
+        options: {allowDocuments: true, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con archivos en este registro de Interacciones., edit: Adjunte uno o varios archivos pertinentes para archivos. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Interacciones., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+      proveedorExterno: {label: Proveedor externo, kind: String, options: {description: {view: El campo «Proveedor externo» conserva información operativa del registro en Interacciones., edit: 'Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+    meta:
+      description: Historial cronológico de comunicaciones y acciones sobre un caso o renovación. Permite distinguir respuestas del agente y conservar archivos.
   renovaciones:
     name: Renovaciones
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Renovaciones., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       cliente:
         label: Cliente
         kind: Record
         required: true
-        options: { module: clientes, labelField: nombre }
+        options: {module: clientes, labelField: nombre, description: {view: Relación con clientes. Permite consultar un registro vinculado en este registro de Renovaciones., edit: Seleccione cliente dentro del módulo clientes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       contrato:
         label: Contrato
         kind: Record
         required: true
-        options: { module: contratos, labelField: codigo }
-      responsable: { label: Gestor responsable, kind: User }
+        options: {module: contratos, labelField: codigo, description: {view: Relación con contratos. Permite consultar un registro vinculado en este registro de Renovaciones., edit: Seleccione contrato dentro del módulo contratos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      responsable: {label: Gestor responsable, kind: User, options: {description: {view: Usuario de Corteza responsable de gestor responsable en este registro de Renovaciones., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
       fechaGestion:
         label: Fecha de inicio de gestión
         kind: DateTime
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de fecha de inicio de gestión para este registro de Renovaciones., edit: Indique fecha de inicio de gestión en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
       fechaVencimiento:
         label: Fecha de vencimiento
         kind: DateTime
         required: true
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de fecha de vencimiento para este registro de Renovaciones., edit: Indique fecha de vencimiento en formato de fecha; no agregue una hora. Es obligatorio para guardar un registro completo.}}
       etapa:
         label: Etapa
         kind: Select
@@ -332,45 +467,112 @@ modules:
         default: Próxima a vencer
         options:
           options:
-            - { text: Próxima a vencer, value: Próxima a vencer }
-            - { text: Contactada, value: Contactada }
-            - { text: Propuesta, value: Propuesta }
-            - { text: Comprometida, value: Comprometida }
-            - { text: Renovada, value: Renovada }
-            - { text: Perdida, value: Perdida }
+            - {text: Próxima a vencer, value: Próxima a vencer}
+            - {text: Contactada, value: Contactada}
+            - {text: Propuesta, value: Propuesta}
+            - {text: Comprometida, value: Comprometida}
+            - {text: Renovada, value: Renovada}
+            - {text: Perdida, value: Perdida}
           selectType: default
+          description:
+            view: Clasificación de etapa para este registro de Renovaciones.
+            edit: 'Seleccione un valor para etapa entre: Próxima a vencer, Contactada, Propuesta, Comprometida, Renovada, Perdida. Es obligatorio para guardar un registro completo.'
       valorActual:
         label: Valor actual
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor actual expresado en pesos colombianos (COP) para este registro de Renovaciones., edit: 'Ingrese valor actual en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       nuevoValor:
         label: Nuevo valor
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Nuevo valor expresado en pesos colombianos (COP) para este registro de Renovaciones., edit: 'Ingrese nuevo valor en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       probabilidad:
         label: Probabilidad
         kind: Number
-        options: { format: "0", precision: 0, suffix: "%" }
+        options: {format: "0", precision: 0, suffix: "%", description: {view: Valor numérico de probabilidad para este registro de Renovaciones., edit: Ingrese probabilidad como número. Es opcional; complételo cuando la información esté disponible.}}
       riesgo:
         label: Riesgo
         kind: Select
         default: Bajo
         options:
           options:
-            - { text: Bajo, value: Bajo }
-            - { text: Medio, value: Medio }
-            - { text: Alto, value: Alto }
+            - {text: Bajo, value: Bajo}
+            - {text: Medio, value: Medio}
+            - {text: Alto, value: Alto}
           selectType: default
+          description:
+            view: Clasificación de riesgo para este registro de Renovaciones.
+            edit: 'Seleccione un valor para riesgo entre: Bajo, Medio, Alto. Es opcional; complételo cuando la información esté disponible.'
+      motivoRiesgo: {label: Motivo de riesgo, kind: String, options: {description: {view: El campo «Motivo de riesgo» conserva información operativa del registro en Renovaciones., edit: 'Ingrese motivo de riesgo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      proximoPaso: {label: Próximo paso, kind: String, options: {description: {view: El campo «Próximo paso» conserva información operativa del registro en Renovaciones., edit: 'Ingrese próximo paso con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      fechaProximaGestion: {label: Próxima gestión, kind: DateTime, options: {description: {view: 'Fecha y hora de próxima gestión para este registro de Renovaciones, interpretada en America/Bogota.', edit: Indique próxima gestión usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       ventaAdicional:
         label: Venta adicional
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si venta adicional aplica a este registro de Renovaciones., edit: Marque Sí únicamente cuando venta adicional esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
       valorExpansion:
         label: Valor de expansión
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
-      motivoPerdida: { label: Motivo de pérdida, kind: String }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor de expansión expresado en pesos colombianos (COP) para este registro de Renovaciones., edit: 'Ingrese valor de expansión en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
+      motivoPerdida: {label: Motivo de pérdida, kind: String, options: {description: {view: El campo «Motivo de pérdida» conserva información operativa del registro en Renovaciones., edit: 'Ingrese motivo de pérdida con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Renovaciones., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+    meta:
+      description: Proceso comercial previo al vencimiento de un contrato. Registra responsable, etapa, valor, probabilidad, riesgo, expansión, próxima gestión y resultado.
+  problemas-conocidos:
+    name: Problemas conocidos
+    fields:
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Problemas conocidos., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      titulo: {label: Título, kind: String, required: true, options: {description: {view: El campo «Título» conserva información operativa del registro en Problemas conocidos., edit: 'Ingrese título con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      producto: {label: Producto o servicio, kind: String, options: {description: {view: El campo «Producto o servicio» conserva información operativa del registro en Problemas conocidos., edit: 'Ingrese producto o servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: En investigación
+        options:
+          options:
+            - {text: En investigación, value: En investigación}
+            - {text: Solución temporal, value: Solución temporal}
+            - {text: Resuelto, value: Resuelto}
+            - {text: Cerrado, value: Cerrado}
+          selectType: default
+          description:
+            view: Clasificación de estado para este registro de Problemas conocidos.
+            edit: 'Seleccione un valor para estado entre: En investigación, Solución temporal, Resuelto, Cerrado. Es obligatorio para guardar un registro completo.'
+      impacto:
+        label: Impacto
+        kind: Select
+        default: Moderado
+        options:
+          options:
+            - {text: Bajo, value: Bajo}
+            - {text: Moderado, value: Moderado}
+            - {text: Alto, value: Alto}
+            - {text: Generalizado, value: Generalizado}
+          selectType: default
+          description:
+            view: Clasificación de impacto para este registro de Problemas conocidos.
+            edit: 'Seleccione un valor para impacto entre: Bajo, Moderado, Alto, Generalizado. Es opcional; complételo cuando la información esté disponible.'
+      causaRaiz:
+        label: Causa raíz
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Causa raíz» conserva información operativa del registro en Problemas conocidos., edit: 'Ingrese causa raíz con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      solucionTemporal:
+        label: Solución temporal
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Solución temporal» conserva información operativa del registro en Problemas conocidos., edit: 'Ingrese solución temporal con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      solucionDefinitiva:
+        label: Solución definitiva
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Solución definitiva» conserva información operativa del registro en Problemas conocidos., edit: 'Ingrese solución definitiva con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      responsable: {label: Responsable, kind: User, options: {description: {view: Usuario de Corteza responsable de responsable en este registro de Problemas conocidos., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      fechaDeteccion: {label: Fecha de detección, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de detección para este registro de Problemas conocidos, interpretada en America/Bogota.', edit: Indique fecha de detección usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      fechaResolucion: {label: Fecha de resolución, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de resolución para este registro de Problemas conocidos, interpretada en America/Bogota.', edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}}
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Problemas conocidos., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+    meta:
+      description: Problemas recurrentes que agrupan varios casos bajo una causa, impacto, solución temporal y solución definitiva comunes.

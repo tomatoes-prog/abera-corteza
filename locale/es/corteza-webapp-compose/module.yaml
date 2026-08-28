@@ -111,7 +111,7 @@ edit:
       description: Selecciona los campos que quieres compartir con la red seleccionada
       title: Exponer
   discoverySettings:
-    title: Ajustes de Discovery
+    title: Configuración de búsqueda
     public: Público
     private: Privado
     protected: Protegido

@@ -1,3 +1,10 @@
 no-applications: No hay aplicaciones
 no-applications-found: No se encontraron aplicaciones
 search: Escribe aquí para buscar
+applications:
+  compose: Espacios de trabajo
+  admin: Configuración
+  workflow: Flujos automáticos
+  jitsi: Videoconferencias Jitsi
+  reporter: Analítica
+  privacy: Privacidad

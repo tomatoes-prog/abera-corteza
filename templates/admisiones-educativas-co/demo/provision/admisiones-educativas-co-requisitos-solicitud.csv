@@ -1,0 +1,101 @@
+ID,solicitud,requisito,obligatorio,estado,fechaRecepcion,revisor,observaciones,fechaValidacion,motivoRechazo
+requisito-001,solicitud-edu-001,Documento de identidad y autorización · Solicitud 001,1,Recibido,2026-07-30T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-002,solicitud-edu-002,Documento de identidad y autorización · Solicitud 002,1,Validado,2026-07-29T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-29T12:00:00Z,
+requisito-003,solicitud-edu-003,Documento de identidad y autorización · Solicitud 003,1,Rechazado,2026-07-28T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-004,solicitud-edu-004,Documento de identidad y autorización · Solicitud 004,1,No aplica,2026-07-27T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-005,solicitud-edu-005,Documento de identidad y autorización · Solicitud 005,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-006,solicitud-edu-006,Documento de identidad y autorización · Solicitud 006,1,Recibido,2026-07-25T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-007,solicitud-edu-007,Documento de identidad y autorización · Solicitud 007,1,Validado,2026-07-24T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-24T12:00:00Z,
+requisito-008,solicitud-edu-008,Documento de identidad y autorización · Solicitud 008,1,Rechazado,2026-07-23T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-009,solicitud-edu-009,Documento de identidad y autorización · Solicitud 009,1,No aplica,2026-07-22T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-010,solicitud-edu-010,Documento de identidad y autorización · Solicitud 010,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-011,solicitud-edu-011,Documento de identidad y autorización · Solicitud 011,1,Recibido,2026-07-20T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-012,solicitud-edu-012,Documento de identidad y autorización · Solicitud 012,1,Validado,2026-07-19T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-19T12:00:00Z,
+requisito-013,solicitud-edu-013,Documento de identidad y autorización · Solicitud 013,1,Rechazado,2026-07-18T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-014,solicitud-edu-014,Documento de identidad y autorización · Solicitud 014,1,No aplica,2026-07-17T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-015,solicitud-edu-015,Documento de identidad y autorización · Solicitud 015,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-016,solicitud-edu-016,Documento de identidad y autorización · Solicitud 016,1,Recibido,2026-07-15T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-017,solicitud-edu-017,Documento de identidad y autorización · Solicitud 017,1,Validado,2026-07-14T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-14T12:00:00Z,
+requisito-018,solicitud-edu-018,Documento de identidad y autorización · Solicitud 018,1,Rechazado,2026-07-13T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-019,solicitud-edu-019,Documento de identidad y autorización · Solicitud 019,1,No aplica,2026-07-12T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-020,solicitud-edu-020,Documento de identidad y autorización · Solicitud 020,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-021,solicitud-edu-021,Documento de identidad y autorización · Solicitud 021,1,Recibido,2026-07-10T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-022,solicitud-edu-022,Documento de identidad y autorización · Solicitud 022,1,Validado,2026-07-09T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-29T12:00:00Z,
+requisito-023,solicitud-edu-023,Documento de identidad y autorización · Solicitud 023,1,Rechazado,2026-07-08T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-024,solicitud-edu-024,Documento de identidad y autorización · Solicitud 024,1,No aplica,2026-07-07T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-025,solicitud-edu-025,Documento de identidad y autorización · Solicitud 025,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-026,solicitud-edu-026,Documento de identidad y autorización · Solicitud 026,1,Recibido,2026-07-05T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-027,solicitud-edu-027,Documento de identidad y autorización · Solicitud 027,1,Validado,2026-07-04T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-24T12:00:00Z,
+requisito-028,solicitud-edu-028,Documento de identidad y autorización · Solicitud 028,1,Rechazado,2026-07-03T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-029,solicitud-edu-029,Documento de identidad y autorización · Solicitud 029,1,No aplica,2026-07-02T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-030,solicitud-edu-030,Documento de identidad y autorización · Solicitud 030,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-031,solicitud-edu-031,Documento de identidad y autorización · Solicitud 031,1,Recibido,2026-07-30T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-032,solicitud-edu-032,Documento de identidad y autorización · Solicitud 032,1,Validado,2026-07-29T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-19T12:00:00Z,
+requisito-033,solicitud-edu-033,Documento de identidad y autorización · Solicitud 033,1,Rechazado,2026-07-28T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-034,solicitud-edu-034,Documento de identidad y autorización · Solicitud 034,1,No aplica,2026-07-27T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-035,solicitud-edu-035,Documento de identidad y autorización · Solicitud 035,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-036,solicitud-edu-036,Documento de identidad y autorización · Solicitud 036,1,Recibido,2026-07-25T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-037,solicitud-edu-037,Documento de identidad y autorización · Solicitud 037,1,Validado,2026-07-24T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-14T12:00:00Z,
+requisito-038,solicitud-edu-038,Documento de identidad y autorización · Solicitud 038,1,Rechazado,2026-07-23T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-039,solicitud-edu-039,Documento de identidad y autorización · Solicitud 039,1,No aplica,2026-07-22T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-040,solicitud-edu-040,Documento de identidad y autorización · Solicitud 040,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-041,solicitud-edu-041,Documento de identidad y autorización · Solicitud 041,1,Recibido,2026-07-20T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-042,solicitud-edu-042,Documento de identidad y autorización · Solicitud 042,1,Validado,2026-07-19T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-29T12:00:00Z,
+requisito-043,solicitud-edu-043,Documento de identidad y autorización · Solicitud 043,1,Rechazado,2026-07-18T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-044,solicitud-edu-044,Documento de identidad y autorización · Solicitud 044,1,No aplica,2026-07-17T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-045,solicitud-edu-045,Documento de identidad y autorización · Solicitud 045,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-046,solicitud-edu-046,Documento de identidad y autorización · Solicitud 046,1,Recibido,2026-07-15T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-047,solicitud-edu-047,Documento de identidad y autorización · Solicitud 047,1,Validado,2026-07-14T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-24T12:00:00Z,
+requisito-048,solicitud-edu-048,Documento de identidad y autorización · Solicitud 048,1,Rechazado,2026-07-13T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-049,solicitud-edu-049,Documento de identidad y autorización · Solicitud 049,1,No aplica,2026-07-12T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-050,solicitud-edu-050,Documento de identidad y autorización · Solicitud 050,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-051,solicitud-edu-051,Documento de identidad y autorización · Solicitud 051,1,Recibido,2026-07-10T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-052,solicitud-edu-052,Documento de identidad y autorización · Solicitud 052,1,Validado,2026-07-09T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-19T12:00:00Z,
+requisito-053,solicitud-edu-053,Documento de identidad y autorización · Solicitud 053,1,Rechazado,2026-07-08T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-054,solicitud-edu-054,Documento de identidad y autorización · Solicitud 054,1,No aplica,2026-07-07T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-055,solicitud-edu-055,Documento de identidad y autorización · Solicitud 055,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-056,solicitud-edu-056,Documento de identidad y autorización · Solicitud 056,1,Recibido,2026-07-05T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-057,solicitud-edu-057,Documento de identidad y autorización · Solicitud 057,1,Validado,2026-07-04T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-14T12:00:00Z,
+requisito-058,solicitud-edu-058,Documento de identidad y autorización · Solicitud 058,1,Rechazado,2026-07-03T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-059,solicitud-edu-059,Documento de identidad y autorización · Solicitud 059,1,No aplica,2026-07-02T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-060,solicitud-edu-060,Documento de identidad y autorización · Solicitud 060,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-061,solicitud-edu-061,Documento de identidad y autorización · Solicitud 061,1,Recibido,2026-07-30T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-062,solicitud-edu-062,Documento de identidad y autorización · Solicitud 062,1,Validado,2026-07-29T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-29T12:00:00Z,
+requisito-063,solicitud-edu-063,Documento de identidad y autorización · Solicitud 063,1,Rechazado,2026-07-28T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-064,solicitud-edu-064,Documento de identidad y autorización · Solicitud 064,1,No aplica,2026-07-27T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-065,solicitud-edu-065,Documento de identidad y autorización · Solicitud 065,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-066,solicitud-edu-066,Documento de identidad y autorización · Solicitud 066,1,Recibido,2026-07-25T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-067,solicitud-edu-067,Documento de identidad y autorización · Solicitud 067,1,Validado,2026-07-24T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-24T12:00:00Z,
+requisito-068,solicitud-edu-068,Documento de identidad y autorización · Solicitud 068,1,Rechazado,2026-07-23T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-069,solicitud-edu-069,Documento de identidad y autorización · Solicitud 069,1,No aplica,2026-07-22T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-070,solicitud-edu-070,Documento de identidad y autorización · Solicitud 070,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-071,solicitud-edu-071,Documento de identidad y autorización · Solicitud 071,1,Recibido,2026-07-20T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-072,solicitud-edu-072,Documento de identidad y autorización · Solicitud 072,1,Validado,2026-07-19T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-19T12:00:00Z,
+requisito-073,solicitud-edu-073,Documento de identidad y autorización · Solicitud 073,1,Rechazado,2026-07-18T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-074,solicitud-edu-074,Documento de identidad y autorización · Solicitud 074,1,No aplica,2026-07-17T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-075,solicitud-edu-075,Documento de identidad y autorización · Solicitud 075,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-076,solicitud-edu-076,Documento de identidad y autorización · Solicitud 076,1,Recibido,2026-07-15T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-077,solicitud-edu-077,Documento de identidad y autorización · Solicitud 077,1,Validado,2026-07-14T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-14T12:00:00Z,
+requisito-078,solicitud-edu-078,Documento de identidad y autorización · Solicitud 078,1,Rechazado,2026-07-13T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-079,solicitud-edu-079,Documento de identidad y autorización · Solicitud 079,1,No aplica,2026-07-12T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-080,solicitud-edu-080,Documento de identidad y autorización · Solicitud 080,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-081,solicitud-edu-081,Documento de identidad y autorización · Solicitud 081,1,Recibido,2026-07-10T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-082,solicitud-edu-082,Documento de identidad y autorización · Solicitud 082,1,Validado,2026-07-09T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-29T12:00:00Z,
+requisito-083,solicitud-edu-083,Documento de identidad y autorización · Solicitud 083,1,Rechazado,2026-07-08T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-084,solicitud-edu-084,Documento de identidad y autorización · Solicitud 084,1,No aplica,2026-07-07T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-085,solicitud-edu-085,Documento de identidad y autorización · Solicitud 085,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-086,solicitud-edu-086,Documento de identidad y autorización · Solicitud 086,1,Recibido,2026-07-05T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-087,solicitud-edu-087,Documento de identidad y autorización · Solicitud 087,1,Validado,2026-07-04T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-24T12:00:00Z,
+requisito-088,solicitud-edu-088,Documento de identidad y autorización · Solicitud 088,1,Rechazado,2026-07-03T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-089,solicitud-edu-089,Documento de identidad y autorización · Solicitud 089,1,No aplica,2026-07-02T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-090,solicitud-edu-090,Documento de identidad y autorización · Solicitud 090,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-091,solicitud-edu-091,Documento de identidad y autorización · Solicitud 091,1,Recibido,2026-07-30T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-092,solicitud-edu-092,Documento de identidad y autorización · Solicitud 092,1,Validado,2026-07-29T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-19T12:00:00Z,
+requisito-093,solicitud-edu-093,Documento de identidad y autorización · Solicitud 093,1,Rechazado,2026-07-28T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-094,solicitud-edu-094,Documento de identidad y autorización · Solicitud 094,1,No aplica,2026-07-27T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-095,solicitud-edu-095,Documento de identidad y autorización · Solicitud 095,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-096,solicitud-edu-096,Documento de identidad y autorización · Solicitud 096,1,Recibido,2026-07-25T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-097,solicitud-edu-097,Documento de identidad y autorización · Solicitud 097,1,Validado,2026-07-24T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,2026-07-14T12:00:00Z,
+requisito-098,solicitud-edu-098,Documento de identidad y autorización · Solicitud 098,1,Rechazado,2026-07-23T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,El documento no es legible.
+requisito-099,solicitud-edu-099,Documento de identidad y autorización · Solicitud 099,1,No aplica,2026-07-22T12:00:00Z,supervisora-demo,Requisito sintético relacionado con la solicitud.,,
+requisito-100,solicitud-edu-100,Documento de identidad y autorización · Solicitud 100,1,Pendiente,,supervisora-demo,Requisito sintético relacionado con la solicitud.,,

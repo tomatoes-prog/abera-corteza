@@ -42,6 +42,13 @@ module: {
 				dal: { type: "JSON", defaultEmptyObject: true }
 				omitSetter: true
 				omitGetter: true
+				envoy: {
+					yaml: {
+						// yaml.v3 cannot decode a mapping directly into json.RawMessage.
+						// Preserve module metadata through the custom JSON bridge.
+						customDecoder: true
+					}
+				}
 			}
 			config: {
 				goType: "types.ModuleConfig"

@@ -7,10 +7,10 @@ selector:
       noRef: Clonar sin referencias
 automation:
   addPlaceholderLabel: Añadir marcador (botón de prueba)
-  availableScriptsAndWorkflow: Scripts y workflows disponibles ({{count}})
+  availableScriptsAndWorkflow: Scripts y flujos de trabajo disponibles ({{count}})
   badge:
     script: script
-    workflow: workflow
+    workflow: flujo de trabajo
   buttonLabel: Etiqueta
   buttonVariant: Variante
   configuredButtons: Botones configurados
@@ -18,11 +18,11 @@ automation:
   editButton: Editar
   editTitle:
     script: Editar botón de script de automatización
-    workflow: Editar botón de workflow
+    workflow: Editar botón de flujo de trabajo
   label: Automatización
   noDescription: Sin descripción
   noLabel: Sin etiqueta
-  noScript: No hay ningún script o workflow configurado para este botón
+  noScript: 'No hay ningún script o flujo de trabajo configurado para este botón'
   noScripts: No hay scripts manuales compatibles con este bloque de página
   removeAll: Quitar todos
   searchPlaceholder: Filtrar scripts disponibles por etiqueta, nombre y descripción
@@ -520,7 +520,7 @@ recordOrganizer:
     placeholder: Selecciona el campo de posición
     label: Campo de posición
   preview:
-    label: Vista previa
+    label: 'Bloque organizador de registros para el módulo {{0}}. Campo de etiqueta {{1}}, campo de descripción {{2}}, campo de configuración de valor {{3}}, ordenado por el campo de posición {{4}}.'
     moduleNotSelected: No se ha seleccionado ningún módulo
   addNewRecord: Añadir nuevo registro
 recordRevisions:
@@ -530,8 +530,8 @@ recordRevisions:
       no-record: No se ha seleccionado ningún registro
       no-revisions: No hay revisiones disponibles
       disabled-on-module: Las revisiones están desactivadas para este módulo
-    show-revisions: Mostrar revisiones
-    show-changes: Mostrar cambios
+    show-revisions: Mostrar revisiones del registro ({{ revision }})
+    show-changes: '{{ count }} cambio(s)'
     operations:
       created: Creado
       updated: Actualizado
@@ -726,7 +726,7 @@ tabs:
     editDisabled: Edición desactivada
     addBlock: Añadir bloque
 noConfiguration: Este bloque no tiene configuración
-interpolationFootnote: Puedes utilizar variables de interpolación en este campo
+interpolationFootnote: Se evalúan variables como {{0}}, {{1}}, {{2}} y {{3}} cuando están disponibles
 recordList:
   export-extra:
     limitations: 'Limitación de exportación CSV: solo se exportará el primer valor de los campos multivalor'

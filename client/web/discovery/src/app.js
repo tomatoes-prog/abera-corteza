@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { mountAssistant } from '../../../abera-assistant'
 
 import './config-check'
 import './console-splash'
@@ -59,6 +60,7 @@ export default (options = {}) => {
         this.$store.dispatch('notifications/fetchNotifications')
 
         this.loaded = true
+        mountAssistant({ Vue, auth: this.$auth })
       })
         .catch((err) => {
           if (err instanceof Error && err.message === 'Unauthenticated') {

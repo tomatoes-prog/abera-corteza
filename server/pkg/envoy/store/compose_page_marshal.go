@@ -274,7 +274,7 @@ func (n *composePage) Encode(ctx context.Context, pl *payload) (err error) {
 			b.Options["moduleID"] = strconv.FormatUint(mID, 10)
 			delete(b.Options, "module")
 
-		case "Calendar":
+		case "Calendar", "Geometry":
 			ff, _ := b.Options["feeds"].([]interface{})
 			for _, f := range ff {
 				feed, _ := f.(map[string]interface{})

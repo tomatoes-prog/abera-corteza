@@ -9,9 +9,7 @@ on:
       - "2024.9.*-abera.*"
 
 permissions:
-  attestations: write
   contents: read
-  id-token: write
 
 concurrency:
   group: abera-image-${{ github.ref }}
@@ -34,6 +32,8 @@ jobs:
         run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
       - name: Validate solution datasets and layouts
         run: python3 tests/validate-demo.py
+      - name: Validate Spanish web application locales
+        run: python3 tests/validate-spanish-locale.py
       - name: Validate template selection and restart invariants
         run: bash tests/docker-template-select.sh
       - name: Test Abera provisioning and OAuth bootstrap
@@ -43,6 +43,8 @@ jobs:
   build-and-test-image:
     runs-on: ubuntu-24.04
     needs: validate-source
+    outputs:
+      digest: ${{ steps.publish.outputs.digest }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
@@ -62,6 +64,8 @@ jobs:
           docker buildx build
           --platform linux/amd64
           --build-arg BUILD_VERSION="$BUILD_VERSION"
+          --cache-from type=gha,scope=abera-image-amd64
+          --cache-to type=gha,scope=abera-image-amd64,mode=max,ignore-error=true
           --load
           --tag "$TEST_IMAGE"
           .
@@ -121,18 +125,42 @@ jobs:
           name: abera-corteza-release-${{ env.BUILD_VERSION }}
           path: abera-image-release.json
           if-no-files-found: error
-      - name: Attest build provenance
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45
+
+  attest-image:
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-24.04
+    needs: build-and-test-image
+    permissions:
+      attestations: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Derive immutable build version
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'BUILD_VERSION=%s\n' "$GITHUB_REF_NAME" >> "$GITHUB_ENV"
+      - name: Authenticate to Docker Hub
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9
         with:
-          subject-name: ${{ env.DOCKERHUB_REPOSITORY }}
-          subject-digest: ${{ steps.publish.outputs.digest }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Generate SBOM for the published digest
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610
+        with:
+          image: docker.io/${{ env.DOCKERHUB_REPOSITORY }}:${{ env.BUILD_VERSION }}
+          format: spdx-json
+          output-file: abera-corteza-attested.spdx.json
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8
+        with:
+          subject-name: docker.io/${{ env.DOCKERHUB_REPOSITORY }}
+          subject-digest: ${{ needs.build-and-test-image.outputs.digest }}
           push-to-registry: true
       - name: Attest the generated SBOM
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/attest-sbom@10926c72720ffc3f7b666661c8e55b1344e2a365
+        uses: actions/attest-sbom@c604332985a26aa8cf1bdc465b92731239ec6b9e
         with:
-          subject-name: ${{ env.DOCKERHUB_REPOSITORY }}
-          subject-digest: ${{ steps.publish.outputs.digest }}
-          sbom-path: abera-corteza.spdx.json
+          subject-name: docker.io/${{ env.DOCKERHUB_REPOSITORY }}
+          subject-digest: ${{ needs.build-and-test-image.outputs.digest }}
+          sbom-path: abera-corteza-attested.spdx.json
           push-to-registry: true

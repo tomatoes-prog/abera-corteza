@@ -20,7 +20,7 @@ edit: Editar espacio de trabajo
 clone: Clonar espacio de trabajo
 cloneSuffix: copia
 cloneWarning:
-  wfInclusion: Los workflows y otras automatizaciones no se clonan. Usa el editor de workflows para clonar los que necesites.
+  wfInclusion: Los flujos de trabajo y otras automatizaciones no se clonan. Usa el editor de flujos para clonar los que necesites.
 create: Crear espacio de trabajo
 export: Exportar
 enabled:

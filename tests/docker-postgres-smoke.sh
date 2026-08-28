@@ -11,9 +11,14 @@ network="${run_id}-network"
 database="${run_id}-postgres"
 application="${run_id}-app"
 data_volume="${run_id}-data"
-runtime_dir=$(mktemp -d)
-key_dir=$(mktemp -d)
+script_dir=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
+repo_dir=$(CDPATH= cd -- "${script_dir}/.." && pwd)
+runtime_dir="${repo_dir}/.tmp-docker-smoke-runtime-${run_id}"
+key_dir="${repo_dir}/.tmp-docker-smoke-key-${run_id}"
+mkdir "$runtime_dir" "$key_dir"
 runtime_mount=$runtime_dir
+private_key_host=${key_dir}/private-key.pem
+envelope_host=${runtime_dir}/bootstrap.enc.json
 windows_docker=false
 
 # Git Bash otherwise rewrites container paths and misreads the colon in a
@@ -39,12 +44,14 @@ docker network create "$network" >/dev/null
 docker volume create "$data_volume" >/dev/null
 
 openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:3072 \
-	-out "${key_dir}/private-key.pem" >/dev/null 2>&1
-openssl pkey -in "${key_dir}/private-key.pem" -pubout \
+	-out "$private_key_host" >/dev/null 2>&1
+openssl pkey -in "$private_key_host" -pubout \
 	-out "${runtime_dir}/public-key.pem" >/dev/null 2>&1
 
 if "$windows_docker"; then
 	export MSYS_NO_PATHCONV=1
+	private_key_host=$(cygpath -w "$private_key_host")
+	envelope_host=$(cygpath -w "$envelope_host")
 fi
 
 docker run --detach --name "$database" --network "$network" \
@@ -64,6 +71,7 @@ done
 
 docker run --detach --name "$application" --network "$network" \
 	--memory 1g --memory-swap 1g \
+	--publish 127.0.0.1::80 \
 	--volume "${data_volume}:/data" \
 	--mount "type=bind,source=${runtime_mount},target=/run/abera" \
 	--env 'DB_DSN=postgres://corteza:corteza-ci-password@'"${database}"':5432/corteza?sslmode=disable' \
@@ -73,7 +81,7 @@ docker run --detach --name "$application" --network "$network" \
 	--env ABERA_INITIAL_ADMIN_EMAIL=admin-ci@abera.invalid \
 	--env 'ABERA_INITIAL_ADMIN_NAME=Administrador CI' \
 	--env ABERA_INITIAL_ADMIN_HANDLE=admin-ci \
-	--env ABERA_MCP_MODE=basic \
+	--env ABERA_MCP_MODE=admin \
 	--env ABERA_BOOTSTRAP_PUBLIC_KEY_FILE=/run/abera/public-key.pem \
 	--env ABERA_BOOTSTRAP_OUTPUT_FILE=/run/abera/bootstrap.enc.json \
 	--env DOMAIN=localhost \
@@ -99,6 +107,62 @@ docker exec "$application" grep -q \
 	'"algorithm":"RSA-OAEP-256+A256GCM"' \
 	/run/abera/bootstrap.enc.json
 test "$(docker inspect --format '{{.State.OOMKilled}}' "$application")" = false
+
+pwsh_bin=pwsh
+command -v "$pwsh_bin" >/dev/null 2>&1 || pwsh_bin=pwsh.exe
+command -v "$pwsh_bin" >/dev/null 2>&1 || {
+	echo "docker-postgres-smoke: pwsh is required for the API verification" >&2
+	exit 1
+}
+application_port=$(docker port "$application" 80/tcp | sed -n 's/.*:\([0-9][0-9]*\)$/\1/p' | head -n 1)
+[ -n "$application_port" ] || {
+	echo "docker-postgres-smoke: application port was not published" >&2
+	exit 1
+}
+verify_private_key=$private_key_host
+verify_envelope=$envelope_host
+
+windows_path_from_posix() {
+	case "$1" in
+		/mnt/[A-Za-z]/*)
+			drive=${1#/mnt/}
+			drive=${drive%%/*}
+			rest=${1#/mnt/$drive/}
+			printf '%s:\\%s\n' "$(printf '%s' "$drive" | tr '[:lower:]' '[:upper:]')" \
+				"$(printf '%s' "$rest" | sed 's|/|\\\\|g')"
+			;;
+		/[A-Za-z]/*)
+			drive=${1#/}
+			drive=${drive%%/*}
+			rest=${1#/$drive/}
+			printf '%s:\\%s\n' "$(printf '%s' "$drive" | tr '[:lower:]' '[:upper:]')" \
+				"$(printf '%s' "$rest" | sed 's|/|\\\\|g')"
+			;;
+		*) return 1 ;;
+	esac
+}
+
+case "$pwsh_bin" in
+	*pwsh.exe)
+		if [ "$windows_docker" = true ] && command -v cygpath >/dev/null 2>&1; then
+			verify_private_key=$(cygpath -w "$private_key_host")
+			verify_envelope=$(cygpath -w "$envelope_host")
+		elif command -v wslpath >/dev/null 2>&1; then
+			verify_private_key=$(wslpath -w "$private_key_host" 2>/dev/null || windows_path_from_posix "$private_key_host")
+			verify_envelope=$(wslpath -w "$envelope_host" 2>/dev/null || windows_path_from_posix "$envelope_host")
+		elif command -v cygpath >/dev/null 2>&1; then
+			verify_private_key=$(cygpath -w "$private_key_host")
+			verify_envelope=$(cygpath -w "$envelope_host")
+		else
+			verify_private_key=$(windows_path_from_posix "$private_key_host")
+			verify_envelope=$(windows_path_from_posix "$envelope_host")
+		fi
+		;;
+esac
+"$pwsh_bin" -NoLogo -NoProfile -NonInteractive -File tests/verify-demo-api.ps1 \
+	-BaseUrl "http://127.0.0.1:${application_port}" \
+	-PrivateKeyFile "$verify_private_key" \
+	-EnvelopeFile "$verify_envelope"
 
 before=$(docker exec "$application" sha256sum \
 	/run/abera/bootstrap.enc.json | cut -d ' ' -f 1)

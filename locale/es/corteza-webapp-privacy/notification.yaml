@@ -1,11 +1,11 @@
 general:
   error: Error
-  success: Success
-  warning: Warning
+  success: Correcto
+  warning: Advertencia
 search:
-  failed: Search failed
+  failed: No se pudo realizar la búsqueda
 list:
   load:
-    error: Failed to load resource list
-connection-load-failed: Failed to load connections
-sensitive-data-fetch-failed: Failed to fetch sensitive data
+    error: No se pudo cargar la lista de recursos
+connection-load-failed: No se pudieron cargar las conexiones
+sensitive-data-fetch-failed: No se pudieron obtener los datos sensibles

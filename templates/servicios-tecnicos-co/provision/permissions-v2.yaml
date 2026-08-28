@@ -1,0 +1,12 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  coordinador-servicio: &reportes-servicios
+    corteza::system/: [reports.search]
+    corteza::system:report/servicios-tecnicos-co-ejecutivo: [read, run]
+    corteza::system:report/servicios-tecnicos-co-operativo: [read, run]
+  tecnico-servicio: *reportes-servicios
+  gerente-servicio: *reportes-servicios
+  automatizacion-servicios:
+    corteza::system/: [notification.assign]

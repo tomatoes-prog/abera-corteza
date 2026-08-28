@@ -6,114 +6,177 @@ modules:
   programas:
     name: Programas
     fields:
-      codigo: { label: Código, kind: String, required: true }
-      nombre: { label: Nombre del programa, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Programas., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      nombre: {label: Nombre del programa, kind: String, required: true, options: {description: {view: El campo «Nombre del programa» conserva información operativa del registro en Programas., edit: 'Ingrese nombre del programa con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       nivel:
         label: Nivel educativo
         kind: Select
         required: true
         options:
           options:
-            - { text: Educación continua, value: Educación continua }
-            - { text: Técnico, value: Técnico }
-            - { text: Tecnólogo, value: Tecnólogo }
-            - { text: Pregrado, value: Pregrado }
-            - { text: Especialización, value: Especialización }
-            - { text: Maestría, value: Maestría }
+            - {text: Educación continua, value: Educación continua}
+            - {text: Técnico, value: Técnico}
+            - {text: Tecnólogo, value: Tecnólogo}
+            - {text: Pregrado, value: Pregrado}
+            - {text: Especialización, value: Especialización}
+            - {text: Maestría, value: Maestría}
           selectType: default
+          description:
+            view: Clasificación de nivel educativo para este registro de Programas.
+            edit: 'Seleccione un valor para nivel educativo entre: Educación continua, Técnico, Tecnólogo, Pregrado, Especialización, Maestría. Es obligatorio para guardar un registro completo.'
       modalidad:
         label: Modalidad
         kind: Select
         required: true
         options:
           options:
-            - { text: Presencial, value: Presencial }
-            - { text: Virtual, value: Virtual }
-            - { text: Híbrida, value: Híbrida }
+            - {text: Presencial, value: Presencial}
+            - {text: Virtual, value: Virtual}
+            - {text: Híbrida, value: Híbrida}
           selectType: default
-      sede: { label: Sede, kind: String }
-      duracion: { label: Duración, kind: String }
+          description:
+            view: Clasificación de modalidad para este registro de Programas.
+            edit: 'Seleccione un valor para modalidad entre: Presencial, Virtual, Híbrida. Es obligatorio para guardar un registro completo.'
+      jornada:
+        label: Jornada
+        kind: Select
+        options:
+          options:
+            - {text: Diurna, value: Diurna}
+            - {text: Nocturna, value: Nocturna}
+            - {text: Fines de semana, value: Fines de semana}
+            - {text: Flexible, value: Flexible}
+          selectType: default
+          description:
+            view: Clasificación de jornada para este registro de Programas.
+            edit: 'Seleccione un valor para jornada entre: Diurna, Nocturna, Fines de semana, Flexible. Es opcional; complételo cuando la información esté disponible.'
+      sede: {label: Sede, kind: String, options: {description: {view: El campo «Sede» conserva información operativa del registro en Programas., edit: 'Ingrese sede con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      fechaInicio:
+        label: Fecha de inicio
+        kind: DateTime
+        options: {onlyDate: true, description: {view: Fecha de fecha de inicio para este registro de Programas., edit: Indique fecha de inicio en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
+      duracion: {label: Duración, kind: String, options: {description: {view: El campo «Duración» conserva información operativa del registro en Programas., edit: 'Ingrese duración con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       valor:
         label: Valor
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
-      periodo: { label: Periodo académico, kind: String, required: true }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor expresado en pesos colombianos (COP) para este registro de Programas., edit: 'Ingrese valor en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
+      periodo: {label: Periodo académico, kind: String, required: true, options: {description: {view: El campo «Periodo académico» conserva información operativa del registro en Programas., edit: 'Ingrese periodo académico con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       cupos:
         label: Cupos
         kind: Number
-        options: { format: "0", precision: 0 }
+        options: {format: "0", precision: 0, description: {view: Valor numérico de cupos para este registro de Programas., edit: Ingrese cupos como número. Es opcional; complételo cuando la información esté disponible.}}
       metaMatriculas:
         label: Meta de matrículas
         kind: Number
-        options: { format: "0", precision: 0 }
+        options: {format: "0", precision: 0, description: {view: Valor numérico de meta de matrículas para este registro de Programas., edit: Ingrese meta de matrículas como número. Es opcional; complételo cuando la información esté disponible.}}
       estado:
         label: Estado
         kind: Select
         default: Activo
         options:
           options:
-            - { text: Activo, value: Activo }
-            - { text: Cerrado, value: Cerrado }
-            - { text: Inactivo, value: Inactivo }
+            - {text: Activo, value: Activo}
+            - {text: Cerrado, value: Cerrado}
+            - {text: Inactivo, value: Inactivo}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Programas.
+            edit: 'Seleccione un valor para estado entre: Activo, Cerrado, Inactivo. Es opcional; complételo cuando la información esté disponible.'
       descripcion:
         label: Descripción
         kind: String
-        options: { multiLine: true, useRichTextEditor: true }
-      externalID: { label: Identificador externo, kind: String }
-
+        options: {multiLine: true, useRichTextEditor: true, description: {view: El campo «Descripción» conserva información operativa del registro en Programas., edit: 'Ingrese descripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Programas., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+    meta:
+      description: Oferta académica disponible para captación y matrícula. Registra nivel, modalidad, sede, periodo, valor, cupos y meta comercial.
   prospectos:
     name: Prospectos
     fields:
-      nombres: { label: Nombres, kind: String, required: true }
-      apellidos: { label: Apellidos, kind: String }
-      documento: { label: Documento, kind: String }
-      telefono: { label: Teléfono, kind: String, required: true }
-      correo: { label: Correo electrónico, kind: String }
+      nombres: {label: Nombres, kind: String, required: true, options: {description: {view: El campo «Nombres» conserva información operativa del registro en Prospectos., edit: 'Ingrese nombres con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      apellidos: {label: Apellidos, kind: String, options: {description: {view: El campo «Apellidos» conserva información operativa del registro en Prospectos., edit: 'Ingrese apellidos con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      tipoDocumento:
+        label: Tipo de documento
+        kind: Select
+        options:
+          options:
+            - {text: Registro civil, value: Registro civil}
+            - {text: Tarjeta de identidad, value: Tarjeta de identidad}
+            - {text: Cédula de ciudadanía, value: Cédula de ciudadanía}
+            - {text: Cédula de extranjería, value: Cédula de extranjería}
+            - {text: Pasaporte, value: Pasaporte}
+          selectType: default
+          description:
+            view: Clasificación de tipo de documento para este registro de Prospectos.
+            edit: 'Seleccione un valor para tipo de documento entre: Registro civil, Tarjeta de identidad, Cédula de ciudadanía, Cédula de extranjería, Pasaporte. Es opcional; complételo cuando la información esté disponible.'
+      documento: {label: Documento, kind: String, options: {description: {view: El campo «Documento» conserva información operativa del registro en Prospectos., edit: 'Ingrese documento con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      fechaNacimiento:
+        label: Fecha de nacimiento
+        kind: DateTime
+        options: {onlyDate: true, description: {view: Fecha de fecha de nacimiento para este registro de Prospectos., edit: Indique fecha de nacimiento en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
+      esMenorEdad:
+        label: Es menor de edad
+        kind: Bool
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si es menor de edad aplica a este registro de Prospectos., edit: Marque Sí únicamente cuando es menor de edad esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
+      telefono: {label: Teléfono, kind: String, required: true, options: {description: {view: El campo «Teléfono» conserva información operativa del registro en Prospectos., edit: 'Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es obligatorio para guardar un registro completo.'}}}
+      correo: {label: Correo electrónico, kind: String, options: {description: {view: El campo «Correo electrónico» conserva información operativa del registro en Prospectos., edit: 'Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es opcional; complételo cuando la información esté disponible.'}}}
       autorizaTratamientoDatos:
         label: Autoriza el tratamiento de datos
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
-      acudienteNombre: { label: Nombre del acudiente, kind: String }
-      acudienteTelefono: { label: Teléfono del acudiente, kind: String }
-      ciudad: { label: Ciudad, kind: String }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.'}}
+      fechaAutorizacion: {label: Fecha de autorización, kind: DateTime, options: {description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible.'}}}
+      acudienteNombre: {label: Nombre del acudiente, kind: String, options: {description: {view: El campo «Nombre del acudiente» conserva información operativa del registro en Prospectos., edit: 'Ingrese nombre del acudiente con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      acudienteTelefono: {label: Teléfono del acudiente, kind: String, options: {description: {view: El campo «Teléfono del acudiente» conserva información operativa del registro en Prospectos., edit: 'Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es opcional; complételo cuando la información esté disponible.'}}}
+      ciudad: {label: Ciudad, kind: String, options: {description: {view: El campo «Ciudad» conserva información operativa del registro en Prospectos., edit: 'Ingrese ciudad con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       nivelInteres:
         label: Nivel de interés
         kind: Select
         options:
           options:
-            - { text: Educación continua, value: Educación continua }
-            - { text: Técnico, value: Técnico }
-            - { text: Tecnólogo, value: Tecnólogo }
-            - { text: Pregrado, value: Pregrado }
-            - { text: Posgrado, value: Posgrado }
+            - {text: Educación continua, value: Educación continua}
+            - {text: Técnico, value: Técnico}
+            - {text: Tecnólogo, value: Tecnólogo}
+            - {text: Pregrado, value: Pregrado}
+            - {text: Posgrado, value: Posgrado}
           selectType: default
+          description:
+            view: Clasificación de nivel de interés para este registro de Prospectos.
+            edit: 'Seleccione un valor para nivel de interés entre: Educación continua, Técnico, Tecnólogo, Pregrado, Posgrado. Es opcional; complételo cuando la información esté disponible.'
       modalidadPreferida:
         label: Modalidad preferida
         kind: Select
         options:
           options:
-            - { text: Presencial, value: Presencial }
-            - { text: Virtual, value: Virtual }
-            - { text: Híbrida, value: Híbrida }
+            - {text: Presencial, value: Presencial}
+            - {text: Virtual, value: Virtual}
+            - {text: Híbrida, value: Híbrida}
           selectType: default
+          description:
+            view: Clasificación de modalidad preferida para este registro de Prospectos.
+            edit: 'Seleccione un valor para modalidad preferida entre: Presencial, Virtual, Híbrida. Es opcional; complételo cuando la información esté disponible.'
+      programaPrincipal:
+        label: Programa principal de interés
+        kind: Record
+        options: {module: programas, labelField: nombre, description: {view: Relación con programas. Permite consultar un registro vinculado en este registro de Prospectos., edit: Seleccione programa principal de interés dentro del módulo programas. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
       programasInteres:
         label: Programas de interés
         kind: Record
         multi: true
-        options: { module: programas, labelField: nombre }
+        options: {module: programas, labelField: nombre, description: {view: Relación con programas. Permite consultar varios registros vinculados en este registro de Prospectos., edit: Seleccione programas de interés dentro del módulo programas. La relación admite varios registros; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
       origen:
         label: Origen
         kind: Select
         options:
           options:
-            - { text: Sitio web, value: Sitio web }
-            - { text: Feria educativa, value: Feria educativa }
-            - { text: Referido, value: Referido }
-            - { text: Redes sociales, value: Redes sociales }
-            - { text: Llamada, value: Llamada }
-            - { text: Visita, value: Visita }
+            - {text: Sitio web, value: Sitio web}
+            - {text: Feria educativa, value: Feria educativa}
+            - {text: Referido, value: Referido}
+            - {text: Redes sociales, value: Redes sociales}
+            - {text: Llamada, value: Llamada}
+            - {text: Visita, value: Visita}
           selectType: default
+          description:
+            view: Clasificación de origen para este registro de Prospectos.
+            edit: 'Seleccione un valor para origen entre: Sitio web, Feria educativa, Referido, Redes sociales, Llamada, Visita. Es opcional; complételo cuando la información esté disponible.'
       estado:
         label: Estado
         kind: Select
@@ -121,55 +184,78 @@ modules:
         default: Interesado
         options:
           options:
-            - { text: Interesado, value: Interesado }
-            - { text: Contactado, value: Contactado }
-            - { text: Calificado, value: Calificado }
-            - { text: Solicitud iniciada, value: Solicitud iniciada }
-            - { text: Solicitud completa, value: Solicitud completa }
-            - { text: Admitido, value: Admitido }
-            - { text: Matriculado, value: Matriculado }
-            - { text: No matriculado, value: No matriculado }
+            - {text: Interesado, value: Interesado}
+            - {text: Contactado, value: Contactado}
+            - {text: Calificado, value: Calificado}
+            - {text: Solicitud iniciada, value: Solicitud iniciada}
+            - {text: Solicitud completa, value: Solicitud completa}
+            - {text: Admitido, value: Admitido}
+            - {text: Matriculado, value: Matriculado}
+            - {text: No matriculado, value: No matriculado}
           selectType: default
-      asesor: { label: Asesor responsable, kind: User }
-      fechaAsignacion: { label: Fecha de asignación, kind: DateTime }
-      proximoContacto: { label: Próximo contacto, kind: DateTime }
+          description:
+            view: Clasificación de estado para este registro de Prospectos.
+            edit: 'Seleccione un valor para estado entre: Interesado, Contactado, Calificado, Solicitud iniciada, Solicitud completa, Admitido, Matriculado, No matriculado. Es obligatorio para guardar un registro completo.'
+      asesor: {label: Asesor responsable, kind: User, options: {description: {view: Usuario de Corteza responsable de asesor responsable en este registro de Prospectos., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      prioridad:
+        label: Prioridad comercial
+        kind: Select
+        default: Media
+        options:
+          options:
+            - {text: Baja, value: Baja}
+            - {text: Media, value: Media}
+            - {text: Alta, value: Alta}
+            - {text: Urgente, value: Urgente}
+          selectType: default
+          description:
+            view: Clasificación de prioridad comercial para este registro de Prospectos.
+            edit: 'Seleccione un valor para prioridad comercial entre: Baja, Media, Alta, Urgente. Es opcional; complételo cuando la información esté disponible.'
+      fechaAsignacion: {label: Fecha de asignación, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de asignación para este registro de Prospectos, interpretada en America/Bogota.', edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}}
+      proximoContacto: {label: Próximo contacto, kind: DateTime, options: {description: {view: 'Fecha y hora de próximo contacto para este registro de Prospectos, interpretada en America/Bogota.', edit: Indique próximo contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      ultimoContacto: {label: Último contacto, kind: DateTime, options: {description: {view: 'Fecha y hora de último contacto para este registro de Prospectos, interpretada en America/Bogota.', edit: Indique último contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      motivoCierre: {label: Motivo de cierre o no matrícula, kind: String, options: {description: {view: El campo «Motivo de cierre o no matrícula» conserva información operativa del registro en Prospectos., edit: 'Ingrese motivo de cierre o no matrícula con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       notas:
         label: Notas
         kind: String
-        options: { multiLine: true }
-      externalID: { label: Identificador externo, kind: String }
-      proveedorExterno: { label: Proveedor externo, kind: String }
+        options: {multiLine: true, description: {view: El campo «Notas» conserva información operativa del registro en Prospectos., edit: 'Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Prospectos., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+      proveedorExterno: {label: Proveedor externo, kind: String, options: {description: {view: El campo «Proveedor externo» conserva información operativa del registro en Prospectos., edit: 'Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       estadoIntegracion:
         label: Estado de integración
         kind: Select
         default: Local
         options:
           options:
-            - { text: Local, value: Local }
-            - { text: Pendiente, value: Pendiente }
-            - { text: Sincronizado, value: Sincronizado }
-            - { text: Error, value: Error }
+            - {text: Local, value: Local}
+            - {text: Pendiente, value: Pendiente}
+            - {text: Sincronizado, value: Sincronizado}
+            - {text: Error, value: Error}
           selectType: default
+          description:
+            view: Clasificación de estado de integración para este registro de Prospectos.
+            edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.
       ultimoErrorIntegracion:
         label: Último error de integración
         kind: String
-        options: { multiLine: true }
-
+        options: {multiLine: true, description: {view: El campo «Último error de integración» conserva información operativa del registro en Prospectos., edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}
+    meta:
+      description: Personas interesadas en la oferta educativa. Centraliza estudiante, acudiente cuando aplica, autorización, programa principal, programas de interés, asesor y avance hacia la matrícula.
   solicitudes:
     name: Solicitudes de admisión
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Solicitudes de admisión., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       prospecto:
         label: Prospecto
         kind: Record
         required: true
-        options: { module: prospectos, labelField: nombres }
+        options: {module: prospectos, labelField: nombres, description: {view: Relación con prospectos. Permite consultar un registro vinculado en este registro de Solicitudes de admisión., edit: Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       programa:
         label: Programa
         kind: Record
         required: true
-        options: { module: programas, labelField: nombre }
-      periodo: { label: Periodo académico, kind: String, required: true }
+        options: {module: programas, labelField: nombre, description: {view: Relación con programas. Permite consultar un registro vinculado en este registro de Solicitudes de admisión., edit: Seleccione programa dentro del módulo programas. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      periodo: {label: Periodo académico, kind: String, required: true, options: {description: {view: El campo «Periodo académico» conserva información operativa del registro en Solicitudes de admisión., edit: 'Ingrese periodo académico con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       estado:
         label: Estado
         kind: Select
@@ -177,77 +263,87 @@ modules:
         default: Borrador
         options:
           options:
-            - { text: Borrador, value: Borrador }
-            - { text: Enviada, value: Enviada }
-            - { text: En revisión, value: En revisión }
-            - { text: Incompleta, value: Incompleta }
-            - { text: Lista para decisión, value: Lista para decisión }
-            - { text: Admitida, value: Admitida }
-            - { text: No admitida, value: No admitida }
-            - { text: Retirada, value: Retirada }
+            - {text: Borrador, value: Borrador}
+            - {text: Enviada, value: Enviada}
+            - {text: En revisión, value: En revisión}
+            - {text: Incompleta, value: Incompleta}
+            - {text: Lista para decisión, value: Lista para decisión}
+            - {text: Admitida, value: Admitida}
+            - {text: No admitida, value: No admitida}
+            - {text: Retirada, value: Retirada}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Solicitudes de admisión.
+            edit: 'Seleccione un valor para estado entre: Borrador, Enviada, En revisión, Incompleta, Lista para decisión, Admitida, No admitida, Retirada. Es obligatorio para guardar un registro completo.'
       completitud:
         label: Completitud
         kind: Number
-        options: { format: "0", precision: 0, suffix: "%" }
+        options: {format: "0", precision: 0, suffix: "%", description: {view: Valor numérico de completitud para este registro de Solicitudes de admisión., edit: Ingrese completitud como número. Es opcional; complételo cuando la información esté disponible.}}
       documentos:
         label: Documentos
         kind: File
         multi: true
-        options: { allowDocuments: true, allowImages: true, maxSize: 0, mode: list }
+        options: {allowDocuments: true, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con documentos en este registro de Solicitudes de admisión., edit: Adjunte uno o varios archivos pertinentes para documentos. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
       documentosVerificados:
         label: Documentos verificados
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
-      revisor: { label: Revisor, kind: User }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si documentos verificados aplica a este registro de Solicitudes de admisión., edit: Marque Sí únicamente cuando documentos verificados esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
+      revisor: {label: Revisor, kind: User, options: {description: {view: Usuario de Corteza responsable de revisor en este registro de Solicitudes de admisión., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
       puntaje:
         label: Puntaje
         kind: Number
-        options: { format: "0.00", precision: 2 }
+        options: {format: "0.00", precision: 2, description: {view: Valor numérico de puntaje para este registro de Solicitudes de admisión., edit: Ingrese puntaje como número. Es opcional; complételo cuando la información esté disponible.}}
       decision:
         label: Decisión
         kind: Select
         options:
           options:
-            - { text: Admitir, value: Admitir }
-            - { text: Lista de espera, value: Lista de espera }
-            - { text: No admitir, value: No admitir }
+            - {text: Admitir, value: Admitir}
+            - {text: Lista de espera, value: Lista de espera}
+            - {text: No admitir, value: No admitir}
           selectType: default
-      fechaEnvio: { label: Fecha de envío, kind: DateTime }
-      fechaDecision: { label: Fecha de decisión, kind: DateTime }
+          description:
+            view: Clasificación de decisión para este registro de Solicitudes de admisión.
+            edit: 'Seleccione un valor para decisión entre: Admitir, Lista de espera, No admitir. Es opcional; complételo cuando la información esté disponible.'
+      fechaEnvio: {label: Fecha de envío, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de envío para este registro de Solicitudes de admisión, interpretada en America/Bogota.', edit: Indique fecha de envío usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      fechaDecision: {label: Fecha de decisión, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de decisión para este registro de Solicitudes de admisión, interpretada en America/Bogota.', edit: Indique fecha de decisión usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
-      externalID: { label: Identificador externo, kind: String }
-
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Solicitudes de admisión., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Solicitudes de admisión., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+    meta:
+      description: Postulaciones formales de un prospecto a un programa y periodo. Consolida requisitos, completitud, revisión, decisión y observaciones del proceso de admisión.
   citas-admision:
     name: Citas de admisión
     fields:
-      asunto: { label: Asunto, kind: String, required: true }
+      asunto: {label: Asunto, kind: String, required: true, options: {description: {view: El campo «Asunto» conserva información operativa del registro en Citas de admisión., edit: 'Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       prospecto:
         label: Prospecto
         kind: Record
         required: true
-        options: { module: prospectos, labelField: nombres }
-      asesor: { label: Asesor, kind: User, required: true }
+        options: {module: prospectos, labelField: nombres, description: {view: Relación con prospectos. Permite consultar un registro vinculado en este registro de Citas de admisión., edit: Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      asesor: {label: Asesor, kind: User, required: true, options: {description: {view: Usuario de Corteza responsable de asesor en este registro de Citas de admisión., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo.}}}
       programa:
         label: Programa
         kind: Record
-        options: { module: programas, labelField: nombre }
+        options: {module: programas, labelField: nombre, description: {view: Relación con programas. Permite consultar un registro vinculado en este registro de Citas de admisión., edit: Seleccione programa dentro del módulo programas. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
       tipo:
         label: Tipo
         kind: Select
         required: true
         options:
           options:
-            - { text: Llamada, value: Llamada }
-            - { text: Entrevista, value: Entrevista }
-            - { text: Visita a sede, value: Visita a sede }
-            - { text: Sesión virtual, value: Sesión virtual }
+            - {text: Llamada, value: Llamada}
+            - {text: Entrevista, value: Entrevista}
+            - {text: Visita a sede, value: Visita a sede}
+            - {text: Sesión virtual, value: Sesión virtual}
           selectType: default
-      inicio: { label: Inicio, kind: DateTime, required: true }
-      fin: { label: Fin, kind: DateTime, required: true }
+          description:
+            view: Clasificación de tipo para este registro de Citas de admisión.
+            edit: 'Seleccione un valor para tipo entre: Llamada, Entrevista, Visita a sede, Sesión virtual. Es obligatorio para guardar un registro completo.'
+      inicio: {label: Inicio, kind: DateTime, required: true, options: {description: {view: 'Fecha y hora de inicio para este registro de Citas de admisión, interpretada en America/Bogota.', edit: Indique inicio usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.}}}
+      fin: {label: Fin, kind: DateTime, required: true, options: {description: {view: 'Fecha y hora de fin para este registro de Citas de admisión, interpretada en America/Bogota.', edit: Indique fin usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.}}}
       estado:
         label: Estado
         kind: Select
@@ -255,57 +351,64 @@ modules:
         default: Pendiente
         options:
           options:
-            - { text: Pendiente, value: Pendiente }
-            - { text: Confirmada, value: Confirmada }
-            - { text: Completada, value: Completada }
-            - { text: Cancelada, value: Cancelada }
-            - { text: No asistió, value: No asistió }
+            - {text: Pendiente, value: Pendiente}
+            - {text: Confirmada, value: Confirmada}
+            - {text: Completada, value: Completada}
+            - {text: Cancelada, value: Cancelada}
+            - {text: No asistió, value: No asistió}
           selectType: default
-      resultado: { label: Resultado, kind: String }
-      siguienteAccion: { label: Siguiente acción, kind: String }
+          description:
+            view: Clasificación de estado para este registro de Citas de admisión.
+            edit: 'Seleccione un valor para estado entre: Pendiente, Confirmada, Completada, Cancelada, No asistió. Es obligatorio para guardar un registro completo.'
+      resultado: {label: Resultado, kind: String, options: {description: {view: El campo «Resultado» conserva información operativa del registro en Citas de admisión., edit: 'Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      siguienteAccion: {label: Siguiente acción, kind: String, options: {description: {view: El campo «Siguiente acción» conserva información operativa del registro en Citas de admisión., edit: 'Ingrese siguiente acción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
-
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Citas de admisión., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+    meta:
+      description: Llamadas, entrevistas, visitas o sesiones virtuales del proceso de admisión. Relaciona prospecto, programa, asesor, horario, resultado y siguiente acción.
   matriculas:
     name: Matrículas
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Matrículas., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       solicitud:
         label: Solicitud
         kind: Record
         required: true
-        options: { module: solicitudes, labelField: codigo }
+        options: {module: solicitudes, labelField: codigo, description: {view: Relación con solicitudes. Permite consultar un registro vinculado en este registro de Matrículas., edit: Seleccione solicitud dentro del módulo solicitudes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       estudiante:
         label: Estudiante
         kind: Record
         required: true
-        options: { module: prospectos, labelField: nombres }
+        options: {module: prospectos, labelField: nombres, description: {view: Relación con prospectos. Permite consultar un registro vinculado en este registro de Matrículas., edit: Seleccione estudiante dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       programa:
         label: Programa
         kind: Record
         required: true
-        options: { module: programas, labelField: nombre }
-      periodo: { label: Periodo académico, kind: String, required: true }
+        options: {module: programas, labelField: nombre, description: {view: Relación con programas. Permite consultar un registro vinculado en este registro de Matrículas., edit: Seleccione programa dentro del módulo programas. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      periodo: {label: Periodo académico, kind: String, required: true, options: {description: {view: El campo «Periodo académico» conserva información operativa del registro en Matrículas., edit: 'Ingrese periodo académico con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       valor:
         label: Valor de matrícula
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor de matrícula expresado en pesos colombianos (COP) para este registro de Matrículas., edit: 'Ingrese valor de matrícula en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       descuentoBeca:
         label: Descuento o beca
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Descuento o beca expresado en pesos colombianos (COP) para este registro de Matrículas., edit: 'Ingrese descuento o beca en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       estadoPago:
         label: Estado de pago
         kind: Select
         options:
           options:
-            - { text: Pendiente, value: Pendiente }
-            - { text: Parcial, value: Parcial }
-            - { text: Pagado, value: Pagado }
-            - { text: Financiado, value: Financiado }
+            - {text: Pendiente, value: Pendiente}
+            - {text: Parcial, value: Parcial}
+            - {text: Pagado, value: Pagado}
+            - {text: Financiado, value: Financiado}
           selectType: default
+          description:
+            view: Clasificación de estado de pago para este registro de Matrículas.
+            edit: 'Seleccione un valor para estado de pago entre: Pendiente, Parcial, Pagado, Financiado. Es opcional; complételo cuando la información esté disponible.'
       estado:
         label: Estado de matrícula
         kind: Select
@@ -313,16 +416,128 @@ modules:
         default: Preparada
         options:
           options:
-            - { text: Preparada, value: Preparada }
-            - { text: Documentos pendientes, value: Documentos pendientes }
-            - { text: Confirmada, value: Confirmada }
-            - { text: Cancelada, value: Cancelada }
+            - {text: Preparada, value: Preparada}
+            - {text: Documentos pendientes, value: Documentos pendientes}
+            - {text: Confirmada, value: Confirmada}
+            - {text: Cancelada, value: Cancelada}
           selectType: default
+          description:
+            view: Clasificación de estado de matrícula para este registro de Matrículas.
+            edit: 'Seleccione un valor para estado de matrícula entre: Preparada, Documentos pendientes, Confirmada, Cancelada. Es obligatorio para guardar un registro completo.'
       fechaMatricula:
         label: Fecha de matrícula
         kind: DateTime
+        options:
+          description:
+            view: Fecha y hora de fecha de matrícula para este registro de Matrículas, interpretada en America/Bogota.
+            edit: Indique fecha de matrícula usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
-      externalID: { label: Identificador externo, kind: String }
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Matrículas., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Matrículas., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+    meta:
+      description: Confirmaciones académicas y financieras derivadas de una solicitud admitida. Registra programa, periodo, valor, beneficios, pago y estado de matrícula.
+  requisitos-solicitud:
+    name: Requisitos de solicitud
+    fields:
+      solicitud:
+        label: Solicitud
+        kind: Record
+        required: true
+        options: {module: solicitudes, labelField: codigo, description: {view: Relación con solicitudes. Permite consultar un registro vinculado en este registro de Requisitos de solicitud., edit: Seleccione solicitud dentro del módulo solicitudes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      requisito: {label: Requisito, kind: String, required: true, options: {description: {view: El campo «Requisito» conserva información operativa del registro en Requisitos de solicitud., edit: 'Ingrese requisito con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      obligatorio:
+        label: Obligatorio
+        kind: Bool
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si obligatorio aplica a este registro de Requisitos de solicitud., edit: Marque Sí únicamente cuando obligatorio esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Pendiente
+        options:
+          options:
+            - {text: Pendiente, value: Pendiente}
+            - {text: Recibido, value: Recibido}
+            - {text: Validado, value: Validado}
+            - {text: Rechazado, value: Rechazado}
+            - {text: No aplica, value: No aplica}
+          selectType: default
+          description:
+            view: Clasificación de estado para este registro de Requisitos de solicitud.
+            edit: 'Seleccione un valor para estado entre: Pendiente, Recibido, Validado, Rechazado, No aplica. Es obligatorio para guardar un registro completo.'
+      archivo:
+        label: Archivo del requisito
+        kind: File
+        multi: true
+        options: {allowDocuments: true, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con archivo del requisito en este registro de Requisitos de solicitud., edit: Adjunte uno o varios archivos pertinentes para archivo del requisito. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
+      fechaRecepcion: {label: Fecha de recepción, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de recepción para este registro de Requisitos de solicitud, interpretada en America/Bogota.', edit: Indique fecha de recepción usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      fechaValidacion: {label: Fecha de validación, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de validación para este registro de Requisitos de solicitud, interpretada en America/Bogota.', edit: Indique fecha de validación usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      revisor: {label: Revisor, kind: User, options: {description: {view: Usuario de Corteza responsable de revisor en este registro de Requisitos de solicitud., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      motivoRechazo:
+        label: Motivo de rechazo
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Motivo de rechazo» conserva información operativa del registro en Requisitos de solicitud., edit: 'Ingrese motivo de rechazo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Requisitos de solicitud., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+    meta:
+      description: Documentos o condiciones individuales que debe cumplir una solicitud. Permite revisar cada requisito, adjuntar evidencia y registrar aceptación o rechazo.
+  actividades-admision:
+    name: Actividades de admisión
+    fields:
+      asunto: {label: Asunto, kind: String, required: true, options: {description: {view: El campo «Asunto» conserva información operativa del registro en Actividades de admisión., edit: 'Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      prospecto:
+        label: Prospecto
+        kind: Record
+        required: true
+        options: {module: prospectos, labelField: nombres, description: {view: Relación con prospectos. Permite consultar un registro vinculado en este registro de Actividades de admisión., edit: Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      solicitud:
+        label: Solicitud
+        kind: Record
+        options: {module: solicitudes, labelField: codigo, description: {view: Relación con solicitudes. Permite consultar un registro vinculado en este registro de Actividades de admisión., edit: Seleccione solicitud dentro del módulo solicitudes. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
+      programa:
+        label: Programa
+        kind: Record
+        options: {module: programas, labelField: nombre, description: {view: Relación con programas. Permite consultar un registro vinculado en este registro de Actividades de admisión., edit: Seleccione programa dentro del módulo programas. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
+      asesor: {label: Asesor responsable, kind: User, required: true, options: {description: {view: Usuario de Corteza responsable de asesor responsable en este registro de Actividades de admisión., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo.}}}
+      tipo:
+        label: Tipo
+        kind: Select
+        required: true
+        options:
+          options:
+            - {text: Llamada, value: Llamada}
+            - {text: WhatsApp, value: WhatsApp}
+            - {text: Correo, value: Correo}
+            - {text: Nota, value: Nota}
+            - {text: Seguimiento, value: Seguimiento}
+          selectType: default
+          description:
+            view: Clasificación de tipo para este registro de Actividades de admisión.
+            edit: 'Seleccione un valor para tipo entre: Llamada, WhatsApp, Correo, Nota, Seguimiento. Es obligatorio para guardar un registro completo.'
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Pendiente
+        options:
+          options:
+            - {text: Pendiente, value: Pendiente}
+            - {text: Completada, value: Completada}
+            - {text: Cancelada, value: Cancelada}
+          selectType: default
+          description:
+            view: Clasificación de estado para este registro de Actividades de admisión.
+            edit: 'Seleccione un valor para estado entre: Pendiente, Completada, Cancelada. Es obligatorio para guardar un registro completo.'
+      fecha: {label: Fecha, kind: DateTime, required: true, options: {description: {view: 'Fecha y hora de fecha para este registro de Actividades de admisión, interpretada en America/Bogota.', edit: Indique fecha usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.}}}
+      resultado: {label: Resultado, kind: String, options: {description: {view: El campo «Resultado» conserva información operativa del registro en Actividades de admisión., edit: 'Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      proximaAccion: {label: Próxima acción, kind: DateTime, options: {description: {view: 'Fecha y hora de próxima acción para este registro de Actividades de admisión, interpretada en America/Bogota.', edit: Indique próxima acción usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Actividades de admisión., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+    meta:
+      description: Historial de seguimientos realizados con un prospecto durante captación y admisión, relacionado opcionalmente con un programa o solicitud.

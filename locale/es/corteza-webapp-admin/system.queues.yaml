@@ -1,50 +1,50 @@
 editor:
   info:
-    consumer: Consumer
-    createdAt: Created at
-    createdBy: Created by
-    delete: Delete
-    deletedAt: Deleted at
-    dispatch_events: Dispatch events
-    dispatch_events_desc: Dispatch events notifies the eventbus of queue message changes (new, processed, ...)
-    name: Queue name *
-    invalid-handle-characters: Should be at least 2 characters long. Can contain only letters, numbers, underscores and dots. Must end with letter or number
-    poll_delay: Polling changes delay
-    poll_delay_empty: 'Poll delay will not be used; to enable, use duration format (ie: 1h / 1m15s / 1h90s)'
-    poll_delay_set: Poll delay will be used; if empty, it will not be used.
-    title: Basic information
-    undelete: Undelete
-    updatedAt: Updated at
-  new: New Queue
+    consumer: Consumidor
+    createdAt: Creada el
+    createdBy: Creada por
+    delete: Eliminar
+    deletedAt: Eliminada el
+    dispatch_events: Emitir eventos
+    dispatch_events_desc: Notifica al bus de eventos cuando cambia un mensaje de la cola, por ejemplo al crearse o procesarse.
+    name: Nombre de la cola *
+    invalid-handle-characters: Debe tener al menos 2 caracteres. Solo admite letras, números, guiones bajos y puntos, y debe terminar en una letra o un número.
+    poll_delay: Intervalo de consulta de cambios
+    poll_delay_empty: 'No se usará un intervalo. Para habilitarlo, indica una duración, por ejemplo: 1h, 1m15s o 1h90s.'
+    poll_delay_set: Se usará el intervalo indicado; si queda vacío, se deshabilitará.
+    title: Información básica
+    undelete: Restaurar
+    updatedAt: Actualizada el
+  new: Nueva cola
   title:
-    edit: Edit queue
-    new: Add a queue
+    edit: Editar cola
+    new: Añadir una cola
 list:
   columns:
     actions: ''
-    consumer: Consumer
-    createdAt: Created At
-    createdBy: Created by
-    state: State
-    queue: Queue
-  export: Export
-  delete: Delete
-  undelete: Undelete
+    consumer: Consumidor
+    createdAt: Creada el
+    createdBy: Creada por
+    state: Estado
+    queue: Cola
+  export: Exportar
+  delete: Eliminar
+  undelete: Restaurar
   rows:
     filters:
-      deleted: Deleted
+      deleted: Eliminadas
   filterForm:
     deleted:
-      label: deleted queues
+      label: colas eliminadas
     excluded:
-      label: Without
+      label: Sin
     exclusive:
-      label: Only
+      label: Solo
     handle:
-      label: Filter queues list
-      placeholder: Filter queues by name
+      label: Filtrar la lista de colas
+      placeholder: Filtrar colas por nombre
     inclusive:
-      label: Including
-  loading: Loading messaging queues
-  new: New Queue
-  title: Messaging queues
+      label: Incluyendo
+  loading: Cargando colas de mensajería
+  new: Nueva cola
+  title: Colas de mensajería

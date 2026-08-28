@@ -3,17 +3,17 @@
 
 id: servicios-tecnicos-co
 name: CRM de Servicios Técnicos Colombia
-version: 1.0.1
+version: 2.0.0
 minimumCortezaVersion: 2024.9.9
 defaultLocale: es
 license: Apache-2.0
-description: Ventas, agenda y ejecución de servicios técnicos en campo.
+description: Operación de servicio en campo con activos, SLA, cotizaciones detalladas, mapa, checklist y evidencias.
 resources:
   namespace: servicios-tecnicos-co
   roles: [coordinador-servicio, tecnico-servicio, gerente-servicio, automatizacion-servicios]
   users: [automatizacion-servicios]
-  modules: [clientes-prospectos, activos, solicitudes, cotizaciones, ordenes-trabajo]
-  pages: [inicio, clientes-prospectos, activos, solicitudes, cotizaciones, ordenes-trabajo]
+  modules: [clientes-prospectos, activos, solicitudes, cotizaciones, ordenes-trabajo, items-cotizacion, tareas-orden]
+  pages: [inicio, clientes-prospectos, activos, solicitudes, cotizaciones, ordenes-trabajo, reportes]
   charts:
     - funnel-servicios
     - solicitudes-por-prioridad
@@ -26,4 +26,8 @@ resources:
     - asignar-tecnico-menor-carga
     - validar-agenda-tecnico
     - completar-orden-servicio
+    - avisar-asignacion-servicios-tecnicos-co
+    - ejemplo-correo-responsable-servicios-tecnicos-co
+    - ejemplo-slack-hito-servicios-tecnicos-co
+  reports: [servicios-tecnicos-co-ejecutivo, servicios-tecnicos-co-operativo]
   scripts: [scripts/seed-demo.ps1]

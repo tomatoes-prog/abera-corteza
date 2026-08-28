@@ -3,17 +3,17 @@
 
 id: admisiones-educativas-co
 name: CRM de Admisiones Educativas Colombia
-version: 1.0.1
+version: 2.0.0
 minimumCortezaVersion: 2024.9.9
 defaultLocale: es
 license: Apache-2.0
-description: Captación, admisión y matrícula para instituciones educativas.
+description: Captación y admisión productiva con protección de menores, checklist documental, actividades y matrícula.
 resources:
   namespace: admisiones-educativas-co
   roles: [asesor-admisiones, revisor-admisiones, director-admisiones, automatizacion-admisiones]
   users: [automatizacion-admisiones]
-  modules: [prospectos, programas, solicitudes, citas-admision, matriculas]
-  pages: [inicio, prospectos, programas, solicitudes, citas-admision, matriculas]
+  modules: [prospectos, programas, solicitudes, citas-admision, matriculas, requisitos-solicitud, actividades-admision]
+  pages: [inicio, prospectos, programas, solicitudes, citas-admision, matriculas, reportes]
   charts:
     - funnel-admisiones
     - solicitudes-por-programa
@@ -25,4 +25,8 @@ resources:
     - validar-solicitud-admision
     - crear-matricula-desde-admision
     - confirmar-matricula
+    - avisar-asignacion-admisiones-educativas-co
+    - ejemplo-correo-responsable-admisiones-educativas-co
+    - ejemplo-slack-hito-admisiones-educativas-co
+  reports: [admisiones-educativas-co-ejecutivo, admisiones-educativas-co-operativo]
   scripts: [scripts/seed-demo.ps1]

@@ -13,151 +13,222 @@ modules:
         default: Prospecto
         options:
           options:
-            - { text: Prospecto, value: Prospecto }
-            - { text: Cliente, value: Cliente }
+            - {text: Prospecto, value: Prospecto}
+            - {text: Cliente, value: Cliente}
           selectType: default
+          description:
+            view: Clasificación de tipo para este registro de Clientes y prospectos.
+            edit: 'Seleccione un valor para tipo entre: Prospecto, Cliente. Es obligatorio para guardar un registro completo.'
       tipoPersona:
         label: Tipo de persona
         kind: Select
         options:
           options:
-            - { text: Persona, value: Persona }
-            - { text: Empresa, value: Empresa }
+            - {text: Persona, value: Persona}
+            - {text: Empresa, value: Empresa}
           selectType: default
-      nombre: { label: Nombre o razón social, kind: String, required: true }
-      identificacion: { label: Identificación o NIT, kind: String }
-      contacto: { label: Persona de contacto, kind: String }
-      telefono: { label: Teléfono, kind: String, required: true }
-      correo: { label: Correo electrónico, kind: String }
+          description:
+            view: Clasificación de tipo de persona para este registro de Clientes y prospectos.
+            edit: 'Seleccione un valor para tipo de persona entre: Persona, Empresa. Es opcional; complételo cuando la información esté disponible.'
+      nombre: {label: Nombre o razón social, kind: String, required: true, options: {description: {view: El campo «Nombre o razón social» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese nombre o razón social con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      identificacion: {label: Identificación o NIT, kind: String, options: {description: {view: El campo «Identificación o NIT» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese identificación o nit con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      contacto: {label: Persona de contacto, kind: String, options: {description: {view: El campo «Persona de contacto» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese persona de contacto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      telefono: {label: Teléfono, kind: String, required: true, options: {description: {view: El campo «Teléfono» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es obligatorio para guardar un registro completo.'}}}
+      correo: {label: Correo electrónico, kind: String, options: {description: {view: El campo «Correo electrónico» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es opcional; complételo cuando la información esté disponible.'}}}
       autorizaTratamientoDatos:
         label: Autoriza el tratamiento de datos
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
-      departamento: { label: Departamento, kind: String }
-      ciudad: { label: Ciudad, kind: String }
-      direccion: { label: Dirección de servicio, kind: String }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.'}}
+      fechaAutorizacion: {label: Fecha de autorización, kind: DateTime, options: {description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible.'}}}
+      departamento: {label: Departamento, kind: String, options: {description: {view: El campo «Departamento» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese departamento con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      ciudad: {label: Ciudad, kind: String, options: {description: {view: El campo «Ciudad» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese ciudad con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      codigoDivipola: {label: Código DIVIPOLA, kind: String, options: {description: {view: El campo «Código DIVIPOLA» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese código divipola con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      direccion: {label: Dirección de servicio, kind: String, options: {description: {view: El campo «Dirección de servicio» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese dirección de servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      ubicacionServicio:
+        label: Ubicación principal en el mapa
+        kind: Geometry
+        options:
+          center: [4.711, -74.0721]
+          zoom: 11
+          description:
+            view: Ubicación geográfica de Clientes y prospectos, utilizada por los mapas y la planeación operativa.
+            edit: Busque o marque en el mapa la ubicación correspondiente a ubicación principal en el mapa. Verifique el punto antes de guardar. Es opcional; complételo cuando la información esté disponible.
       latitud:
         label: Latitud
         kind: Number
-        options: { format: "0.000000", precision: 6 }
+        options: {format: "0.000000", precision: 6, description: {view: Valor numérico de latitud para este registro de Clientes y prospectos., edit: Ingrese latitud como número. Es opcional; complételo cuando la información esté disponible.}}
       longitud:
         label: Longitud
         kind: Number
-        options: { format: "0.000000", precision: 6 }
+        options: {format: "0.000000", precision: 6, description: {view: Valor numérico de longitud para este registro de Clientes y prospectos., edit: Ingrese longitud como número. Es opcional; complételo cuando la información esté disponible.}}
       segmento:
         label: Segmento
         kind: Select
         options:
           options:
-            - { text: Hogar, value: Hogar }
-            - { text: Pyme, value: Pyme }
-            - { text: Corporativo, value: Corporativo }
+            - {text: Hogar, value: Hogar}
+            - {text: Pyme, value: Pyme}
+            - {text: Corporativo, value: Corporativo}
           selectType: default
+          description:
+            view: Clasificación de segmento para este registro de Clientes y prospectos.
+            edit: 'Seleccione un valor para segmento entre: Hogar, Pyme, Corporativo. Es opcional; complételo cuando la información esté disponible.'
       estadoComercial:
         label: Estado comercial
         kind: Select
         default: Nuevo
         options:
           options:
-            - { text: Nuevo, value: Nuevo }
-            - { text: Diagnóstico, value: Diagnóstico }
-            - { text: Cotización, value: Cotización }
-            - { text: Cliente, value: Cliente }
-            - { text: Perdido, value: Perdido }
+            - {text: Nuevo, value: Nuevo}
+            - {text: Diagnóstico, value: Diagnóstico}
+            - {text: Cotización, value: Cotización}
+            - {text: Cliente, value: Cliente}
+            - {text: Perdido, value: Perdido}
           selectType: default
-      responsable: { label: Responsable comercial, kind: User }
-      proximoContacto: { label: Próximo contacto, kind: DateTime }
+          description:
+            view: Clasificación de estado comercial para este registro de Clientes y prospectos.
+            edit: 'Seleccione un valor para estado comercial entre: Nuevo, Diagnóstico, Cotización, Cliente, Perdido. Es opcional; complételo cuando la información esté disponible.'
+      responsable: {label: Responsable comercial, kind: User, options: {description: {view: Usuario de Corteza responsable de responsable comercial en este registro de Clientes y prospectos., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      proximoContacto: {label: Próximo contacto, kind: DateTime, options: {description: {view: 'Fecha y hora de próximo contacto para este registro de Clientes y prospectos, interpretada en America/Bogota.', edit: Indique próximo contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       notas:
         label: Notas
         kind: String
-        options: { multiLine: true }
-      externalID: { label: Identificador externo, kind: String }
-      proveedorExterno: { label: Proveedor externo, kind: String }
-
+        options: {multiLine: true, description: {view: El campo «Notas» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Clientes y prospectos., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+      proveedorExterno: {label: Proveedor externo, kind: String, options: {description: {view: El campo «Proveedor externo» conserva información operativa del registro en Clientes y prospectos., edit: 'Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+    meta:
+      description: Personas o empresas que solicitan, cotizan o reciben servicios. Es el punto de entrada para activos, solicitudes, cotizaciones y órdenes de trabajo.
   activos:
     name: Activos
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Activos., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       cliente:
         label: Cliente
         kind: Record
         required: true
-        options: { module: clientes-prospectos, labelField: nombre }
-      tipoEquipo: { label: Tipo de equipo, kind: String, required: true }
-      marca: { label: Marca, kind: String }
-      modelo: { label: Modelo, kind: String }
-      serial: { label: Serial, kind: String }
+        options: {module: clientes-prospectos, labelField: nombre, description: {view: Relación con clientes prospectos. Permite consultar un registro vinculado en este registro de Activos., edit: Seleccione cliente dentro del módulo clientes prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      tipoEquipo: {label: Tipo de equipo, kind: String, required: true, options: {description: {view: El campo «Tipo de equipo» conserva información operativa del registro en Activos., edit: 'Ingrese tipo de equipo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      marca: {label: Marca, kind: String, options: {description: {view: El campo «Marca» conserva información operativa del registro en Activos., edit: 'Ingrese marca con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      modelo: {label: Modelo, kind: String, options: {description: {view: El campo «Modelo» conserva información operativa del registro en Activos., edit: 'Ingrese modelo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      serial: {label: Serial, kind: String, options: {description: {view: El campo «Serial» conserva información operativa del registro en Activos., edit: 'Ingrese serial con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       fechaInstalacion:
         label: Fecha de instalación
         kind: DateTime
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de fecha de instalación para este registro de Activos., edit: Indique fecha de instalación en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
       garantiaHasta:
         label: Garantía hasta
         kind: DateTime
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de garantía hasta para este registro de Activos., edit: Indique garantía hasta en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
+      criticidad:
+        label: Criticidad
+        kind: Select
+        default: Media
+        options:
+          options:
+            - {text: Baja, value: Baja}
+            - {text: Media, value: Media}
+            - {text: Alta, value: Alta}
+            - {text: Crítica, value: Crítica}
+          selectType: default
+          description:
+            view: Clasificación de criticidad para este registro de Activos.
+            edit: 'Seleccione un valor para criticidad entre: Baja, Media, Alta, Crítica. Es opcional; complételo cuando la información esté disponible.'
       estado:
         label: Estado
         kind: Select
         default: Operativo
         options:
           options:
-            - { text: Operativo, value: Operativo }
-            - { text: Requiere mantenimiento, value: Requiere mantenimiento }
-            - { text: Fuera de servicio, value: Fuera de servicio }
-            - { text: Retirado, value: Retirado }
+            - {text: Operativo, value: Operativo}
+            - {text: Requiere mantenimiento, value: Requiere mantenimiento}
+            - {text: Fuera de servicio, value: Fuera de servicio}
+            - {text: Retirado, value: Retirado}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Activos.
+            edit: 'Seleccione un valor para estado entre: Operativo, Requiere mantenimiento, Fuera de servicio, Retirado. Es opcional; complételo cuando la información esté disponible.'
       proximoMantenimiento:
         label: Próximo mantenimiento
         kind: DateTime
-        options: { onlyDate: true }
-      ubicacion: { label: Ubicación, kind: String }
+        options: {onlyDate: true, description: {view: Fecha de próximo mantenimiento para este registro de Activos., edit: Indique próximo mantenimiento en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
+      ultimaIntervencion:
+        label: Última intervención
+        kind: DateTime
+        options: {onlyDate: true, description: {view: Fecha de última intervención para este registro de Activos., edit: Indique última intervención en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
+      ubicacion: {label: Ubicación, kind: String, options: {description: {view: El campo «Ubicación» conserva información operativa del registro en Activos., edit: 'Ingrese ubicación con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      ubicacionMapa:
+        label: Ubicación en el mapa
+        kind: Geometry
+        options:
+          center: [4.711, -74.0721]
+          zoom: 11
+          description:
+            view: Ubicación geográfica de Activos, utilizada por los mapas y la planeación operativa.
+            edit: Busque o marque en el mapa la ubicación correspondiente a ubicación en el mapa. Verifique el punto antes de guardar. Es opcional; complételo cuando la información esté disponible.
       fotografias:
         label: Fotografías
         kind: File
         multi: true
-        options: { allowDocuments: false, allowImages: true, maxSize: 0, mode: list }
+        options: {allowDocuments: false, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con fotografías en este registro de Activos., edit: Adjunte uno o varios archivos pertinentes para fotografías. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
-      externalID: { label: Identificador externo, kind: String }
-
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Activos., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Activos., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+    meta:
+      description: Equipos instalados o atendidos para un cliente. Mantiene identificación, criticidad, ubicación, garantía e historial de solicitudes, órdenes y mantenimiento.
   solicitudes:
     name: Solicitudes de servicio
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Solicitudes de servicio., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       cliente:
         label: Cliente o prospecto
         kind: Record
         required: true
-        options: { module: clientes-prospectos, labelField: nombre }
+        options: {module: clientes-prospectos, labelField: nombre, description: {view: Relación con clientes prospectos. Permite consultar un registro vinculado en este registro de Solicitudes de servicio., edit: Seleccione cliente o prospecto dentro del módulo clientes prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       activo:
         label: Activo
         kind: Record
-        options: { module: activos, labelField: codigo }
+        options: {module: activos, labelField: codigo, description: {view: Relación con activos. Permite consultar un registro vinculado en este registro de Solicitudes de servicio., edit: Seleccione activo dentro del módulo activos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
+      contactoEnSitio: {label: Contacto en sitio, kind: String, options: {description: {view: El campo «Contacto en sitio» conserva información operativa del registro en Solicitudes de servicio., edit: 'Ingrese contacto en sitio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      ubicacionServicio:
+        label: Ubicación solicitada
+        kind: Geometry
+        options:
+          center: [4.711, -74.0721]
+          zoom: 11
+          description:
+            view: Ubicación geográfica de Solicitudes de servicio, utilizada por los mapas y la planeación operativa.
+            edit: Busque o marque en el mapa la ubicación correspondiente a ubicación solicitada. Verifique el punto antes de guardar. Es opcional; complételo cuando la información esté disponible.
       canal:
         label: Canal
         kind: Select
         options:
           options:
-            - { text: Teléfono, value: Teléfono }
-            - { text: WhatsApp, value: WhatsApp }
-            - { text: Correo, value: Correo }
-            - { text: Web, value: Web }
-            - { text: Presencial, value: Presencial }
+            - {text: Teléfono, value: Teléfono}
+            - {text: WhatsApp, value: WhatsApp}
+            - {text: Correo, value: Correo}
+            - {text: Web, value: Web}
+            - {text: Presencial, value: Presencial}
           selectType: default
+          description:
+            view: Clasificación de canal para este registro de Solicitudes de servicio.
+            edit: 'Seleccione un valor para canal entre: Teléfono, WhatsApp, Correo, Web, Presencial. Es opcional; complételo cuando la información esté disponible.'
       tipoServicio:
         label: Tipo de servicio
         kind: Select
         required: true
         options:
           options:
-            - { text: Instalación, value: Instalación }
-            - { text: Reparación, value: Reparación }
-            - { text: Mantenimiento, value: Mantenimiento }
-            - { text: Inspección, value: Inspección }
-            - { text: Diagnóstico remoto, value: Diagnóstico remoto }
+            - {text: Instalación, value: Instalación}
+            - {text: Reparación, value: Reparación}
+            - {text: Mantenimiento, value: Mantenimiento}
+            - {text: Inspección, value: Inspección}
+            - {text: Diagnóstico remoto, value: Diagnóstico remoto}
           selectType: default
+          description:
+            view: Clasificación de tipo de servicio para este registro de Solicitudes de servicio.
+            edit: 'Seleccione un valor para tipo de servicio entre: Instalación, Reparación, Mantenimiento, Inspección, Diagnóstico remoto. Es obligatorio para guardar un registro completo.'
       prioridad:
         label: Prioridad
         kind: Select
@@ -165,21 +236,24 @@ modules:
         default: Media
         options:
           options:
-            - { text: Baja, value: Baja }
-            - { text: Media, value: Media }
-            - { text: Alta, value: Alta }
-            - { text: Crítica, value: Crítica }
+            - {text: Baja, value: Baja}
+            - {text: Media, value: Media}
+            - {text: Alta, value: Alta}
+            - {text: Crítica, value: Crítica}
           selectType: default
+          description:
+            view: Clasificación de prioridad para este registro de Solicitudes de servicio.
+            edit: 'Seleccione un valor para prioridad entre: Baja, Media, Alta, Crítica. Es obligatorio para guardar un registro completo.'
       descripcion:
         label: Descripción
         kind: String
         required: true
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Descripción» conserva información operativa del registro en Solicitudes de servicio., edit: 'Ingrese descripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}
       fotografias:
         label: Fotografías
         kind: File
         multi: true
-        options: { allowDocuments: false, allowImages: true, maxSize: 0, mode: list }
+        options: {allowDocuments: false, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con fotografías en este registro de Solicitudes de servicio., edit: Adjunte uno o varios archivos pertinentes para fotografías. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
       estado:
         label: Estado
         kind: Select
@@ -187,75 +261,88 @@ modules:
         default: Recibida
         options:
           options:
-            - { text: Recibida, value: Recibida }
-            - { text: En diagnóstico, value: En diagnóstico }
-            - { text: Cotizada, value: Cotizada }
-            - { text: Aceptada, value: Aceptada }
-            - { text: Programada, value: Programada }
-            - { text: Ejecutada, value: Ejecutada }
-            - { text: Cerrada, value: Cerrada }
-            - { text: Perdida, value: Perdida }
+            - {text: Recibida, value: Recibida}
+            - {text: En diagnóstico, value: En diagnóstico}
+            - {text: Cotizada, value: Cotizada}
+            - {text: Aceptada, value: Aceptada}
+            - {text: Programada, value: Programada}
+            - {text: Ejecutada, value: Ejecutada}
+            - {text: Cerrada, value: Cerrada}
+            - {text: Perdida, value: Perdida}
           selectType: default
-      responsable: { label: Coordinador responsable, kind: User }
-      vencimientoSLA: { label: Vencimiento de SLA, kind: DateTime }
+          description:
+            view: Clasificación de estado para este registro de Solicitudes de servicio.
+            edit: 'Seleccione un valor para estado entre: Recibida, En diagnóstico, Cotizada, Aceptada, Programada, Ejecutada, Cerrada, Perdida. Es obligatorio para guardar un registro completo.'
+      responsable: {label: Coordinador responsable, kind: User, options: {description: {view: Usuario de Corteza responsable de coordinador responsable en este registro de Solicitudes de servicio., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      ventanaInicio: {label: Inicio de ventana de atención, kind: DateTime, options: {description: {view: 'Fecha y hora de inicio de ventana de atención para este registro de Solicitudes de servicio, interpretada en America/Bogota.', edit: Indique inicio de ventana de atención usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      ventanaFin: {label: Fin de ventana de atención, kind: DateTime, options: {description: {view: 'Fecha y hora de fin de ventana de atención para este registro de Solicitudes de servicio, interpretada en America/Bogota.', edit: Indique fin de ventana de atención usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      requiereVisitaDiagnostico:
+        label: Requiere visita de diagnóstico
+        kind: Bool
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si requiere visita de diagnóstico aplica a este registro de Solicitudes de servicio., edit: Marque Sí únicamente cuando requiere visita de diagnóstico esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
+      vencimientoSLA: {label: Vencimiento de SLA, kind: DateTime, options: {description: {view: 'Fecha y hora de vencimiento de sla para este registro de Solicitudes de servicio, interpretada en America/Bogota.', edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}}
       slaIncumplido:
         label: SLA incumplido
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
-      externalID: { label: Identificador externo, kind: String }
-      proveedorExterno: { label: Proveedor externo, kind: String }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si sla incumplido aplica a este registro de Solicitudes de servicio., edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Solicitudes de servicio., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+      proveedorExterno: {label: Proveedor externo, kind: String, options: {description: {view: El campo «Proveedor externo» conserva información operativa del registro en Solicitudes de servicio., edit: 'Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       estadoIntegracion:
         label: Estado de integración
         kind: Select
         default: Local
         options:
           options:
-            - { text: Local, value: Local }
-            - { text: Pendiente, value: Pendiente }
-            - { text: Sincronizado, value: Sincronizado }
-            - { text: Error, value: Error }
+            - {text: Local, value: Local}
+            - {text: Pendiente, value: Pendiente}
+            - {text: Sincronizado, value: Sincronizado}
+            - {text: Error, value: Error}
           selectType: default
+          description:
+            view: Clasificación de estado de integración para este registro de Solicitudes de servicio.
+            edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.
       ultimoErrorIntegracion:
         label: Último error de integración
         kind: String
-        options: { multiLine: true }
-
+        options: {multiLine: true, description: {view: El campo «Último error de integración» conserva información operativa del registro en Solicitudes de servicio., edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}
+    meta:
+      description: Necesidades de instalación, diagnóstico, reparación o mantenimiento reportadas por un cliente. Controla prioridad, responsable, ubicación, estado y SLA.
   cotizaciones:
     name: Cotizaciones
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Cotizaciones., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       solicitud:
         label: Solicitud
         kind: Record
         required: true
-        options: { module: solicitudes, labelField: codigo }
+        options: {module: solicitudes, labelField: codigo, description: {view: Relación con solicitudes. Permite consultar un registro vinculado en este registro de Cotizaciones., edit: Seleccione solicitud dentro del módulo solicitudes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       cliente:
         label: Cliente
         kind: Record
         required: true
-        options: { module: clientes-prospectos, labelField: nombre }
+        options: {module: clientes-prospectos, labelField: nombre, description: {view: Relación con clientes prospectos. Permite consultar un registro vinculado en este registro de Cotizaciones., edit: Seleccione cliente dentro del módulo clientes prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       alcance:
         label: Alcance
         kind: String
         required: true
-        options: { multiLine: true, useRichTextEditor: true }
+        options: {multiLine: true, useRichTextEditor: true, description: {view: El campo «Alcance» conserva información operativa del registro en Cotizaciones., edit: 'Ingrese alcance con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}
       valorAntesImpuestos:
         label: Valor antes de impuestos
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor antes de impuestos expresado en pesos colombianos (COP) para este registro de Cotizaciones., edit: 'Ingrese valor antes de impuestos en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       impuestos:
         label: Impuestos
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Impuestos expresado en pesos colombianos (COP) para este registro de Cotizaciones., edit: 'Ingrese impuestos en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       total:
         label: Total
         kind: Number
         required: true
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Total expresado en pesos colombianos (COP) para este registro de Cotizaciones., edit: 'Ingrese total en COP, sin símbolos ni separadores manuales. Es obligatorio para guardar un registro completo.'}}
       fechaVencimiento:
         label: Válida hasta
         kind: DateTime
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de válida hasta para este registro de Cotizaciones., edit: Indique válida hasta en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
       estado:
         label: Estado
         kind: Select
@@ -263,45 +350,61 @@ modules:
         default: Borrador
         options:
           options:
-            - { text: Borrador, value: Borrador }
-            - { text: Enviada, value: Enviada }
-            - { text: Aceptada, value: Aceptada }
-            - { text: Rechazada, value: Rechazada }
-            - { text: Vencida, value: Vencida }
+            - {text: Borrador, value: Borrador}
+            - {text: Enviada, value: Enviada}
+            - {text: Aceptada, value: Aceptada}
+            - {text: Rechazada, value: Rechazada}
+            - {text: Vencida, value: Vencida}
           selectType: default
-      fechaAceptacion: { label: Fecha de aceptación, kind: DateTime }
+          description:
+            view: Clasificación de estado para este registro de Cotizaciones.
+            edit: 'Seleccione un valor para estado entre: Borrador, Enviada, Aceptada, Rechazada, Vencida. Es obligatorio para guardar un registro completo.'
+      fechaAceptacion: {label: Fecha de aceptación, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de aceptación para este registro de Cotizaciones, interpretada en America/Bogota.', edit: Indique fecha de aceptación usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
-      externalID: { label: Identificador externo, kind: String }
-
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Cotizaciones., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Cotizaciones., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+    meta:
+      description: Propuestas económicas asociadas con una solicitud. Resume alcance, vigencia, impuestos, total, aceptación y líneas detalladas de productos o servicios.
   ordenes-trabajo:
     name: Órdenes de trabajo
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Órdenes de trabajo., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       solicitud:
         label: Solicitud
         kind: Record
         required: true
-        options: { module: solicitudes, labelField: codigo }
+        options: {module: solicitudes, labelField: codigo, description: {view: Relación con solicitudes. Permite consultar un registro vinculado en este registro de Órdenes de trabajo., edit: Seleccione solicitud dentro del módulo solicitudes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       cotizacion:
         label: Cotización
         kind: Record
-        options: { module: cotizaciones, labelField: codigo }
+        options: {module: cotizaciones, labelField: codigo, description: {view: Relación con cotizaciones. Permite consultar un registro vinculado en este registro de Órdenes de trabajo., edit: Seleccione cotización dentro del módulo cotizaciones. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
       cliente:
         label: Cliente
         kind: Record
         required: true
-        options: { module: clientes-prospectos, labelField: nombre }
+        options: {module: clientes-prospectos, labelField: nombre, description: {view: Relación con clientes prospectos. Permite consultar un registro vinculado en este registro de Órdenes de trabajo., edit: Seleccione cliente dentro del módulo clientes prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       activo:
         label: Activo
         kind: Record
-        options: { module: activos, labelField: codigo }
-      tecnico: { label: Técnico, kind: User }
-      direccion: { label: Dirección del servicio, kind: String, required: true }
-      inicio: { label: Inicio programado, kind: DateTime, required: true }
-      fin: { label: Fin programado, kind: DateTime, required: true }
+        options: {module: activos, labelField: codigo, description: {view: Relación con activos. Permite consultar un registro vinculado en este registro de Órdenes de trabajo., edit: Seleccione activo dentro del módulo activos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
+      tecnico: {label: Técnico, kind: User, options: {description: {view: Usuario de Corteza responsable de técnico en este registro de Órdenes de trabajo., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      contactoEnSitio: {label: Contacto en sitio, kind: String, options: {description: {view: El campo «Contacto en sitio» conserva información operativa del registro en Órdenes de trabajo., edit: 'Ingrese contacto en sitio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      direccion: {label: Dirección del servicio, kind: String, required: true, options: {description: {view: El campo «Dirección del servicio» conserva información operativa del registro en Órdenes de trabajo., edit: 'Ingrese dirección del servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      ubicacionTrabajo:
+        label: Ubicación de la orden
+        kind: Geometry
+        options:
+          center: [4.711, -74.0721]
+          zoom: 11
+          description:
+            view: Ubicación geográfica de Órdenes de trabajo, utilizada por los mapas y la planeación operativa.
+            edit: Busque o marque en el mapa la ubicación correspondiente a ubicación de la orden. Verifique el punto antes de guardar. Es opcional; complételo cuando la información esté disponible.
+      inicio: {label: Inicio programado, kind: DateTime, required: true, options: {description: {view: 'Fecha y hora de inicio programado para este registro de Órdenes de trabajo, interpretada en America/Bogota.', edit: Indique inicio programado usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.}}}
+      fin: {label: Fin programado, kind: DateTime, required: true, options: {description: {view: 'Fecha y hora de fin programado para este registro de Órdenes de trabajo, interpretada en America/Bogota.', edit: Indique fin programado usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.}}}
+      inicioReal: {label: Inicio real, kind: DateTime, options: {description: {view: 'Fecha y hora de inicio real para este registro de Órdenes de trabajo, interpretada en America/Bogota.', edit: Indique inicio real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      finReal: {label: Fin real, kind: DateTime, options: {description: {view: 'Fecha y hora de fin real para este registro de Órdenes de trabajo, interpretada en America/Bogota.', edit: Indique fin real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       estado:
         label: Estado
         kind: Select
@@ -309,40 +412,122 @@ modules:
         default: Programada
         options:
           options:
-            - { text: Programada, value: Programada }
-            - { text: En camino, value: En camino }
-            - { text: En ejecución, value: En ejecución }
-            - { text: Pausada, value: Pausada }
-            - { text: Completada, value: Completada }
-            - { text: Cancelada, value: Cancelada }
+            - {text: Programada, value: Programada}
+            - {text: En camino, value: En camino}
+            - {text: En ejecución, value: En ejecución}
+            - {text: Pausada, value: Pausada}
+            - {text: Completada, value: Completada}
+            - {text: Cancelada, value: Cancelada}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Órdenes de trabajo.
+            edit: 'Seleccione un valor para estado entre: Programada, En camino, En ejecución, Pausada, Completada, Cancelada. Es obligatorio para guardar un registro completo.'
       diagnostico:
         label: Diagnóstico
         kind: String
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Diagnóstico» conserva información operativa del registro en Órdenes de trabajo., edit: 'Ingrese diagnóstico con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
       solucion:
         label: Solución
         kind: String
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Solución» conserva información operativa del registro en Órdenes de trabajo., edit: 'Ingrese solución con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
       resolucionPrimeraVisita:
         label: Resuelto en primera visita
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si resuelto en primera visita aplica a este registro de Órdenes de trabajo., edit: Marque Sí únicamente cuando resuelto en primera visita esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
       evidencias:
         label: Evidencias
         kind: File
         multi: true
-        options: { allowDocuments: true, allowImages: true, maxSize: 0, mode: list }
+        options: {allowDocuments: true, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con evidencias en este registro de Órdenes de trabajo., edit: Adjunte uno o varios archivos pertinentes para evidencias. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
       firma:
         label: Firma o acta
         kind: File
-        options: { allowDocuments: true, allowImages: true, maxSize: 0, mode: list }
+        options: {allowDocuments: true, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con firma o acta en este registro de Órdenes de trabajo., edit: Adjunte el archivo pertinente para firma o acta. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
+      aceptacionCliente:
+        label: Cliente acepta el trabajo realizado
+        kind: Bool
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si cliente acepta el trabajo realizado aplica a este registro de Órdenes de trabajo., edit: Marque Sí únicamente cuando cliente acepta el trabajo realizado esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
       valorFinal:
         label: Valor final
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor final expresado en pesos colombianos (COP) para este registro de Órdenes de trabajo., edit: 'Ingrese valor final en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       proximoMantenimiento:
         label: Próximo mantenimiento
         kind: DateTime
-        options: { onlyDate: true }
-      externalID: { label: Identificador externo, kind: String }
+        options: {onlyDate: true, description: {view: Fecha de próximo mantenimiento para este registro de Órdenes de trabajo., edit: Indique próximo mantenimiento en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Órdenes de trabajo., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+    meta:
+      description: Trabajos programados para ejecutar una solicitud aceptada. Relaciona cliente, activo, técnico, agenda, ubicación, diagnóstico, tareas, evidencias y cierre.
+  items-cotizacion:
+    name: Ítems de cotización
+    fields:
+      cotizacion:
+        label: Cotización
+        kind: Record
+        required: true
+        options: {module: cotizaciones, labelField: codigo, description: {view: Relación con cotizaciones. Permite consultar un registro vinculado en este registro de Ítems de cotización., edit: Seleccione cotización dentro del módulo cotizaciones. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      secuencia: {label: Secuencia, kind: Number, options: {format: "0", precision: 0, description: {view: Valor numérico de secuencia para este registro de Ítems de cotización., edit: Ingrese secuencia como número. Es opcional; complételo cuando la información esté disponible.}}}
+      tipo:
+        label: Tipo de ítem
+        kind: Select
+        required: true
+        options:
+          options:
+            - {text: Mano de obra, value: Mano de obra}
+            - {text: Material, value: Material}
+            - {text: Desplazamiento, value: Desplazamiento}
+            - {text: Otro, value: Otro}
+          selectType: default
+          description:
+            view: Clasificación de tipo de ítem para este registro de Ítems de cotización.
+            edit: 'Seleccione un valor para tipo de ítem entre: Mano de obra, Material, Desplazamiento, Otro. Es obligatorio para guardar un registro completo.'
+      descripcion: {label: Descripción, kind: String, required: true, options: {description: {view: El campo «Descripción» conserva información operativa del registro en Ítems de cotización., edit: 'Ingrese descripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      cantidad: {label: Cantidad, kind: Number, required: true, options: {format: "0.00", precision: 2, description: {view: Valor numérico de cantidad para este registro de Ítems de cotización., edit: Ingrese cantidad como número. Es obligatorio para guardar un registro completo.}}}
+      valorUnitario: {label: Valor unitario, kind: Number, required: true, options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor unitario expresado en pesos colombianos (COP) para este registro de Ítems de cotización., edit: 'Ingrese valor unitario en COP, sin símbolos ni separadores manuales. Es obligatorio para guardar un registro completo.'}}}
+      impuestoPorcentaje: {label: Impuesto, kind: Number, options: {format: "0.00", precision: 2, suffix: "%", description: {view: Valor numérico de impuesto para este registro de Ítems de cotización., edit: Ingrese impuesto como número. Es opcional; complételo cuando la información esté disponible.}}}
+      total: {label: Total, kind: Number, required: true, options: {format: "0", precision: 0, prefix: "$ ", description: {view: Total expresado en pesos colombianos (COP) para este registro de Ítems de cotización., edit: 'Ingrese total en COP, sin símbolos ni separadores manuales. Es obligatorio para guardar un registro completo.'}}}
+    meta:
+      description: Líneas económicas de una cotización. Se usa una línea por mano de obra, material, desplazamiento u otro concepto, con cantidad, valor e impuestos.
+  tareas-orden:
+    name: Tareas de orden
+    fields:
+      orden:
+        label: Orden de trabajo
+        kind: Record
+        required: true
+        options: {module: ordenes-trabajo, labelField: codigo, description: {view: Relación con ordenes trabajo. Permite consultar un registro vinculado en este registro de Tareas de orden., edit: Seleccione orden de trabajo dentro del módulo ordenes trabajo. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      secuencia: {label: Secuencia, kind: Number, options: {format: "0", precision: 0, description: {view: Valor numérico de secuencia para este registro de Tareas de orden., edit: Ingrese secuencia como número. Es opcional; complételo cuando la información esté disponible.}}}
+      tarea: {label: Tarea, kind: String, required: true, options: {description: {view: El campo «Tarea» conserva información operativa del registro en Tareas de orden., edit: 'Ingrese tarea con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      obligatoria:
+        label: Obligatoria
+        kind: Bool
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si obligatoria aplica a este registro de Tareas de orden., edit: Marque Sí únicamente cuando obligatoria esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
+      tecnico: {label: Técnico responsable, kind: User, options: {description: {view: Usuario de Corteza responsable de técnico responsable en este registro de Tareas de orden., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Pendiente
+        options:
+          options:
+            - {text: Pendiente, value: Pendiente}
+            - {text: En ejecución, value: En ejecución}
+            - {text: Completada, value: Completada}
+            - {text: No aplica, value: No aplica}
+          selectType: default
+          description:
+            view: Clasificación de estado para este registro de Tareas de orden.
+            edit: 'Seleccione un valor para estado entre: Pendiente, En ejecución, Completada, No aplica. Es obligatorio para guardar un registro completo.'
+      inicioReal: {label: Inicio real, kind: DateTime, options: {description: {view: 'Fecha y hora de inicio real para este registro de Tareas de orden, interpretada en America/Bogota.', edit: Indique inicio real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      finReal: {label: Fin real, kind: DateTime, options: {description: {view: 'Fecha y hora de fin real para este registro de Tareas de orden, interpretada en America/Bogota.', edit: Indique fin real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      resultado:
+        label: Resultado
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Resultado» conserva información operativa del registro en Tareas de orden., edit: 'Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      evidencia:
+        label: Evidencia
+        kind: File
+        multi: true
+        options: {allowDocuments: true, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con evidencia en este registro de Tareas de orden., edit: Adjunte uno o varios archivos pertinentes para evidencia. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
+    meta:
+      description: Checklist de ejecución de una orden de trabajo. Registra responsable, obligatoriedad, tiempos, resultado y evidencias de cada actividad técnica.

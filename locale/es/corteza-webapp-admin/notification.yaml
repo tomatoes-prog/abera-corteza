@@ -1,284 +1,284 @@
 general:
   error: Error
-  success: Success
-  warning: Warning
-notAllowed: Not allowed to access Admin Area. Redirecting
+  success: 'Operación completada'
+  warning: 'Advertencia'
+notAllowed: 'No tienes permiso para acceder a Configuración. Redirigiendo.'
 list:
   load:
-    error: 'Failed to load resource list'
+    error: 'No se pudo cargar la lista de recursos'
 user:
   external-auth-providers:
-    error: External auth providers fetch failed
-    success: External auth providers updated
+    error: 'No se pudo obtener los proveedores de autenticación externa'
+    success: 'Se actualizaron los proveedores de autenticación externa'
   fetch:
-    error: User fetch failed
+    error: 'No se pudo obtener el usuario'
   roles:
-    error: Role fetch failed
+    error: 'No se pudo obtener el rol'
   update:
-    success: User updated
-    error: User update failed
+    success: 'Se actualizó el usuario'
+    error: 'No se pudo actualizar el usuario'
   create:
-    success: User created
-    error: User create failed
+    success: 'Se creó el usuario'
+    error: 'No se pudo crear el usuario'
   delete:
-    success: User deleted
-    error: User delete failed
+    success: 'Se eliminó el usuario'
+    error: 'No se pudo eliminar el usuario'
   undelete:
-    success: User restored
-    error: User restore failed
+    success: 'Se restauró el usuario'
+    error: 'No se pudo restaurar el usuario'
   membershipUpdate:
-    success: Membership updated
-    error: Membership update failed
+    success: 'Se actualizó la membresía'
+    error: 'No se pudo actualizar la membresía'
   passwordChange:
-    success: Password changed
-    error: Password change failed
+    success: 'Contraseña cambiada'
+    error: 'No se pudo cambiar la contraseña'
   sessionsRevoke:
-    success: Sessions revoked
-    error: Session revoke failed
+    success: 'Sesiones revocadas'
+    error: 'No se pudo revocar la sesión'
   suspend:
-    success: User suspended
-    error: User suspension failed
+    success: 'Usuario suspendido'
+    error: 'No se pudo suspender el usuario'
   unsuspend:
-    success: User unsuspended
-    error: User suspension failed
+    success: 'Se reactivó el usuario'
+    error: 'No se pudo suspender el usuario'
   import:
-    success: Users imported successfully
+    success: 'Usuarios importados correctamente'
   avatarUpload:
-    success: Avatar updated
-    error: Avatar upload failed
+    success: 'Avatar actualizado'
+    error: 'No se pudo cargar el avatar'
   avatarSettings:
-    success: Avatar settings updated
-    error: Avatar settings update failed
+    success: 'Se actualizó la configuración del avatar'
+    error: 'No se pudo actualizar la configuración del avatar'
   avatarDelete:
-    success: Avatar deleted
-    error: Avatar delete failed
+    success: 'Se eliminó el avatar'
+    error: 'No se pudo eliminar el avatar'
 role:
   fetch:
-    error: Role fetch failed
+    error: 'No se pudo obtener el rol'
   create:
-    success: Role created
-    error: Role create failed
+    success: 'Se creó el rol'
+    error: 'No se pudo crear el rol'
   update:
-    success: Role updated
-    error: Role update failed
+    success: 'Se actualizó el rol'
+    error: 'No se pudo actualizar el rol'
   delete:
-    success: Role deleted
-    error: Role delete failed
+    success: 'Se eliminó el rol'
+    error: 'No se pudo eliminar el rol'
   undelete:
-    success: Role restored
-    error: Role restore failed
+    success: 'Se restauró el rol'
+    error: 'No se pudo restaurar el rol'
   archive:
-    success: Role archived
-    error: Role archive failed
+    success: 'Se archivó el rol'
+    error: 'No se pudo archivar el rol'
   unarchive:
-    success: Role unarchived
-    error: Role unarchive failed
+    success: 'Se desarchivó el rol'
+    error: 'No se pudo desarchivar el rol'
   membershipUpdate:
-    success: Membership updated
-    error: Membership update failed
+    success: 'Se actualizó la membresía'
+    error: 'No se pudo actualizar la membresía'
 application:
   fetch:
-    error: Application fetch failed
+    error: 'No se pudo obtener la aplicación'
   update:
-    success: Application updated
-    error: Application update failed
+    success: 'Se actualizó la aplicación'
+    error: 'No se pudo actualizar la aplicación'
   create:
-    success: Application created
-    error: Application create failed
+    success: 'Se creó la aplicación'
+    error: 'No se pudo crear la aplicación'
   delete:
-    success: Application deleted
-    error: Application delete failed
+    success: 'Se eliminó la aplicación'
+    error: 'No se pudo eliminar la aplicación'
   undelete:
-    success: Application restored
-    error: Application restore failed
+    success: 'Se restauró la aplicación'
+    error: 'No se pudo restaurar la aplicación'
   assetsUpload:
-    error: Application assets upload failed
+    error: 'No se pudieron cargar los recursos de la aplicación'
 template:
   fetch:
-    error: Template fetch failed
+    error: 'No se pudo obtener la plantilla'
   fetchPartials:
-    error: Partial templates fetch failed
+    error: 'No se pudo obtener las plantillas parciales'
   create:
-    success: Template created
-    error: Template create failed
+    success: 'Se creó la plantilla'
+    error: 'No se pudo crear la plantilla'
   update:
-    success: Template updated
-    error: Template update failed
+    success: 'Se actualizó la plantilla'
+    error: 'No se pudo actualizar la plantilla'
   delete:
-    success: Template deleted
-    error: Template delete failed
+    success: 'Se eliminó la plantilla'
+    error: 'No se pudo eliminar la plantilla'
   undelete:
-    success: Template restored
-    error: Template restore failed
+    success: 'Se restauró la plantilla'
+    error: 'No se pudo restaurar la plantilla'
   driver:
-    error: Template render drivers fetch failed
+    error: 'No se pudo obtener los controladores de renderizado de plantillas'
   preview:
-    error: Template preview fetch failed
+    error: 'No se pudo obtener la vista previa de la plantilla'
 authclient:
   fetch:
-    error: Auth Client fetch failed
+    error: 'No se pudo obtener el cliente OAuth'
   create:
-    success: Auth Client created
-    error: Auth Client create failed
+    success: 'Se creó el cliente OAuth'
+    error: 'No se pudo crear el cliente OAuth'
   update:
-    success: Auth Client updated
-    error: Auth Client update failed
+    success: 'Se actualizó el cliente OAuth'
+    error: 'No se pudo actualizar el cliente OAuth'
   delete:
-    success: Auth Client deleted
-    error: Auth Client delete failed
+    success: 'Se eliminó el cliente OAuth'
+    error: 'No se pudo eliminar el cliente OAuth'
   undelete:
-    success: Auth Client restored
-    error: Auth Client restore failed
+    success: 'Se restauró el cliente OAuth'
+    error: 'No se pudo restaurar el cliente OAuth'
 queue:
   fetch:
-    error: Queue fetch failed
+    error: 'No se pudo obtener la cola'
   create:
-    success: Queue created
-    error: Queue create failed
+    success: 'Se creó la cola'
+    error: 'No se pudo crear la cola'
   update:
-    success: Queue updated
-    error: Queue update failed
+    success: 'Se actualizó la cola'
+    error: 'No se pudo actualizar la cola'
   delete:
-    success: Queue deleted
-    error: Queue delete failed
+    success: 'Se eliminó la cola'
+    error: 'No se pudo eliminar la cola'
   undelete:
-    success: Queue restored
-    error: Queue restore failed
+    success: 'Se restauró la cola'
+    error: 'No se pudo restaurar la cola'
 gateway:
   fetch:
-    error: Route fetch failed
+    error: 'No se pudo obtener la ruta'
   create:
-    success: Route created
-    error: Route create failed
+    success: 'Se creó la ruta'
+    error: 'No se pudo crear la ruta'
   update:
-    success: Route updated
-    error: Route update failed
+    success: 'Se actualizó la ruta'
+    error: 'No se pudo actualizar la ruta'
   filter:
     fetch:
-      error: Filter fetch failed
+      error: 'No se pudo obtener el filtro'
     update:
-      success: Filters updated
-      error: Filters update failed
+      success: 'Se actualizaron los filtros'
+      error: 'No se pudo actualizar los filtros'
   delete:
-    success: Route deleted
-    error: Route delete failed
+    success: 'Se eliminó la ruta'
+    error: 'No se pudo eliminar la ruta'
   undelete:
-    success: Route restored
-    error: Route restore failed
+    success: 'Se restauró la ruta'
+    error: 'No se pudo restaurar la ruta'
   profiler:
     fetch:
-      error: Requests fetch failed
+      error: 'No se pudo obtener las solicitudes'
     purge:
-      success: Requests purged
-      error: Requests purge failed
+      success: 'Solicitudes depuradas'
+      error: 'No se pudieron depurar las solicitudes'
 workflow:
   trigger:
     error: No se pudo obtener el activador
   fetch:
-    error: Workflow fetch failed
+    error: 'No se pudo obtener el flujo de trabajo'
   create:
-    success: Workflow created
-    error: Workflow create failed
+    success: 'Se creó el flujo de trabajo'
+    error: 'No se pudo crear el flujo de trabajo'
   update:
-    success: Workflow updated
-    error: Workflow update failed
+    success: 'Se actualizó el flujo de trabajo'
+    error: 'No se pudo actualizar el flujo de trabajo'
   delete:
-    success: Workflow deleted
-    error: Workflow delete failed
+    success: 'Se eliminó el flujo de trabajo'
+    error: 'No se pudo eliminar el flujo de trabajo'
   undelete:
-    success: Workflow restored
-    error: Workflow restore failed
+    success: 'Se restauró el flujo de trabajo'
+    error: 'No se pudo restaurar el flujo de trabajo'
 session:
   fetch:
-    error: Session fetch failed
+    error: 'No se pudo obtener la sesión'
   trigger:
-    error: Trigger fetch failed
+    error: 'No se pudo obtener el disparador'
   cancel:
-    success: Session canceled
-    error: Session cancel failed
+    success: 'Sesión cancelada'
+    error: 'No se pudo cancelar la sesión'
 federation:
   fetch:
-    error: Node fetch failed
+    error: 'No se pudo obtener el nodo'
   create:
-    success: Node created
-    error: Node create failed
+    success: 'Se creó el nodo'
+    error: 'No se pudo crear el nodo'
   update:
-    success: Node updated
-    error: Node update failed
+    success: 'Se actualizó el nodo'
+    error: 'No se pudo actualizar el nodo'
   delete:
-    success: Node deleted
-    error: Node delete failed
+    success: 'Se eliminó el nodo'
+    error: 'No se pudo eliminar el nodo'
   undelete:
-    success: Node restored
-    error: Node restore failed
+    success: 'Se restauró el nodo'
+    error: 'No se pudo restaurar el nodo'
   url:
-    error: Generated URL fetch failed
+    error: 'No se pudo obtener la URL generada'
   email:
-    success: Email sent
-    error: Failed to send email
+    success: 'Correo electrónico enviado'
+    error: 'No se pudo enviar el correo electrónico'
   pair:
-    success: Node paired
-    error: Failed to pair node
+    success: 'Nodo emparejado'
+    error: 'No se pudo emparejar el nodo'
   handshake:
-    success: Handshake complete paired
-    error: Handshake failed
+    success: 'Intercambio completado y nodo emparejado'
+    error: 'Falló el intercambio de conexión'
 sensitivityLevel:
   create:
-    success: Sensitivity level created
-    error: Sensitivity level create failed
+    success: 'Se creó el nivel de sensibilidad'
+    error: 'No se pudo crear el nivel de sensibilidad'
   delete:
-    success: Sensitivity level deleted
-    error: Sensitivity level delete failed
+    success: 'Se eliminó el nivel de sensibilidad'
+    error: 'No se pudo eliminar el nivel de sensibilidad'
   fetch:
-    success: Sensitivity level fetched
-    error: Sensitivity level fetch failed
+    success: 'Se obtuvo el nivel de sensibilidad'
+    error: 'No se pudo obtener el nivel de sensibilidad'
   undelete:
-    success: Sensitivity level restored
-    error: Sensitivity level restore failed
+    success: 'Se restauró el nivel de sensibilidad'
+    error: 'No se pudo restaurar el nivel de sensibilidad'
   update:
-    success: Sensitivity level updated
-    error: Sensitivity level update failed
+    success: 'Se actualizó el nivel de sensibilidad'
+    error: 'No se pudo actualizar el nivel de sensibilidad'
 settings:
   system:
     fetch:
-      error: System settings fetch failed
+      error: 'No se pudo obtener la configuración del sistema'
     auth:
-      success: Auth settings updated
-      error: Auth settings update failed
+      success: 'Se actualizó la configuración de autenticación'
+      error: 'No se pudo actualizar la configuración de autenticación'
     external:
-      success: External settings updated
-      error: External settings update failed
+      success: 'Se actualizó la configuración externa'
+      error: 'No se pudo actualizar la configuración externa'
     bgScreen:
       style:
-        success: Auth background styles updated
-        error: Auth background styles update failed
+        success: 'Se actualizaron los estilos de fondo de autenticación'
+        error: 'No se pudo actualizar los estilos de fondo de autenticación'
     smtpCheck:
-      success: SMTP configuration check  passed
-      error: SMTP configuration check failed
+      success: 'La configuración SMTP es válida'
+      error: 'La comprobación de la configuración SMTP falló'
     apigw:
-      success: Integration gateway settings saved
-      error: Integration gateway settings update failed
+      success: 'Configuración de la pasarela de integración guardada'
+      error: 'No se pudo actualizar la configuración de la pasarela de integración'
   compose:
     fetch:
-      error: Compose settings fetch failed
+      error: 'No se pudo obtener la configuración de Compose'
     update:
-      success: Compose settings updated
-      error: Compose settings update failed
+      success: 'Se actualizó la configuración de Compose'
+      error: 'No se pudo actualizar la configuración de Compose'
   ui:
     fetch:
-      error: UI settings fetch failed
+      error: 'No se pudo obtener la configuración de la interfaz'
     update:
-      success: UI settings updated
-      error: UI settings update failed
+      success: 'Se actualizó la configuración de la interfaz'
+      error: 'No se pudo actualizar la configuración de la interfaz'
   code-snippet:
     fetch:
-      error: Code snippets fetch failed
+      error: 'No se pudieron obtener los fragmentos de código'
     update:
-      success: Code snippets updated, refresh the page to see the changes
-      error: Code snippets update failed
+      success: 'Fragmentos de código actualizados. Actualiza la página para ver los cambios.'
+      error: 'No se pudieron actualizar los fragmentos de código'
     delete:
-      success: Code snippet deleted, refresh the page to see the changes
-      error: Code snippet delete failed
+      success: 'Fragmento de código eliminado. Actualiza la página para ver los cambios.'
+      error: 'No se pudo eliminar el fragmento de código'
   theming:
     fetch:
       error: No se pudieron obtener los ajustes de temas
@@ -299,30 +299,30 @@ settings:
       error: No se pudieron actualizar los ajustes de ubicación
 permissions:
   fetch:
-    error: Permissions fetch failed
+    error: 'No se pudo obtener los permisos'
   update:
-    success: Permissions updated
-    error: Permissions update failed
+    success: 'Se actualizaron los permisos'
+    error: 'No se pudo actualizar los permisos'
   clone:
-    success: Permissions cloned
-    error: Permissions clone failed
+    success: 'Permisos clonados'
+    error: 'No se pudieron clonar los permisos'
   role:
-    error: Failed to add role
+    error: 'No se pudo añadir el rol'
 connection:
   fetch:
-    error: Connection fetch failed
+    error: 'No se pudo obtener la conexión'
   update:
-    success: Connection updated
-    error: Connection update failed
+    success: 'Se actualizó la conexión'
+    error: 'No se pudo actualizar la conexión'
   create:
-    success: Connection created
-    error: Connection create failed
+    success: 'Se creó la conexión'
+    error: 'No se pudo crear la conexión'
   delete:
-    success: Connection deleted
-    error: Connection delete failed
+    success: 'Se eliminó la conexión'
+    error: 'No se pudo eliminar la conexión'
   undelete:
-    success: Connection restored
-    error: Connection restore failed
+    success: 'Se restauró la conexión'
+    error: 'No se pudo restaurar la conexión'
 userGroup:
   fetch:
     error: No se pudo obtener el grupo de usuarios

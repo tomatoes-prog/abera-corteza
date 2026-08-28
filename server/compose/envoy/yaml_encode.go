@@ -130,11 +130,14 @@ func (e YamlEncoder) encodePageBlockC(ctx context.Context, p envoyx.EncodeParams
 		delete(b.Options, "chartID")
 		break
 
-	case "Calendar":
+	case "Calendar", "Geometry":
 		ff, _ := b.Options["feeds"].([]interface{})
 		for i, f := range ff {
 			feed, _ := f.(map[string]interface{})
 			fOpts, _ := (feed["options"]).(map[string]interface{})
+			if fOpts == nil {
+				continue
+			}
 
 			modRef := n.References[fmt.Sprintf("Blocks.%d.Options.feeds.%d.ModuleID", index, i)]
 			fOpts["module"] = safeParentIdentifier(tt, n, modRef)

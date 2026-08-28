@@ -10,43 +10,60 @@ modules:
         label: Código
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Código» conserva información operativa del registro en Inmuebles.
+            edit: Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       nombre:
         label: Nombre
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Nombre» conserva información operativa del registro en Inmuebles.
+            edit: Ingrese nombre con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       descripcion:
         label: Descripción
         kind: String
         options:
           multiLine: true
           useRichTextEditor: true
+          description:
+            view: El campo «Descripción» conserva información operativa del registro en Inmuebles.
+            edit: Ingrese descripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       tipoOperacion:
         label: Tipo de operación
         kind: Select
         required: true
         options:
           options: &tipos-operacion
-            - { text: Venta, value: Venta }
-            - { text: Arriendo, value: Arriendo }
-            - { text: Venta o arriendo, value: Venta o arriendo }
+            - {text: Venta, value: Venta}
+            - {text: Arriendo, value: Arriendo}
+            - {text: Venta o arriendo, value: Venta o arriendo}
           selectType: default
+          description:
+            view: Clasificación de tipo de operación para este registro de Inmuebles.
+            edit: 'Seleccione un valor para tipo de operación entre: Venta, Arriendo, Venta o arriendo. Es obligatorio para guardar un registro completo.'
       tipoInmueble:
         label: Tipo de inmueble
         kind: Select
         required: true
         options:
           options: &tipos-inmueble
-            - { text: Apartamento, value: Apartamento }
-            - { text: Casa, value: Casa }
-            - { text: Oficina, value: Oficina }
-            - { text: Local, value: Local }
-            - { text: Lote, value: Lote }
-            - { text: Finca, value: Finca }
-            - { text: Bodega, value: Bodega }
-            - { text: Consultorio, value: Consultorio }
-            - { text: Habitación, value: Habitación }
-            - { text: Otro, value: Otro }
+            - {text: Apartamento, value: Apartamento}
+            - {text: Casa, value: Casa}
+            - {text: Oficina, value: Oficina}
+            - {text: Local, value: Local}
+            - {text: Lote, value: Lote}
+            - {text: Finca, value: Finca}
+            - {text: Bodega, value: Bodega}
+            - {text: Consultorio, value: Consultorio}
+            - {text: Habitación, value: Habitación}
+            - {text: Otro, value: Otro}
           selectType: default
+          description:
+            view: Clasificación de tipo de inmueble para este registro de Inmuebles.
+            edit: 'Seleccione un valor para tipo de inmueble entre: Apartamento, Casa, Oficina, Local, Lote, Finca, Bodega, Consultorio, Habitación, Otro. Es obligatorio para guardar un registro completo.'
       estado:
         label: Estado
         kind: Select
@@ -54,59 +71,132 @@ modules:
         default: Disponible
         options:
           options:
-            - { text: Disponible, value: Disponible }
-            - { text: Reservado, value: Reservado }
-            - { text: Arrendado, value: Arrendado }
-            - { text: Vendido, value: Vendido }
-            - { text: Inactivo, value: Inactivo }
+            - {text: Disponible, value: Disponible}
+            - {text: Reservado, value: Reservado}
+            - {text: Arrendado, value: Arrendado}
+            - {text: Vendido, value: Vendido}
+            - {text: Inactivo, value: Inactivo}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Inmuebles.
+            edit: 'Seleccione un valor para estado entre: Disponible, Reservado, Arrendado, Vendido, Inactivo. Es obligatorio para guardar un registro completo.'
       departamento:
         label: Departamento
         kind: Select
         required: true
         options:
           options: &departamentos-colombia
-            - { text: Amazonas, value: Amazonas }
-            - { text: Antioquia, value: Antioquia }
-            - { text: Arauca, value: Arauca }
-            - { text: Atlántico, value: Atlántico }
-            - { text: Bogotá D.C., value: Bogotá D.C. }
-            - { text: Bolívar, value: Bolívar }
-            - { text: Boyacá, value: Boyacá }
-            - { text: Caldas, value: Caldas }
-            - { text: Caquetá, value: Caquetá }
-            - { text: Casanare, value: Casanare }
-            - { text: Cauca, value: Cauca }
-            - { text: Cesar, value: Cesar }
-            - { text: Chocó, value: Chocó }
-            - { text: Córdoba, value: Córdoba }
-            - { text: Cundinamarca, value: Cundinamarca }
-            - { text: Guainía, value: Guainía }
-            - { text: Guaviare, value: Guaviare }
-            - { text: Huila, value: Huila }
-            - { text: La Guajira, value: La Guajira }
-            - { text: Magdalena, value: Magdalena }
-            - { text: Meta, value: Meta }
-            - { text: Nariño, value: Nariño }
-            - { text: Norte de Santander, value: Norte de Santander }
-            - { text: Putumayo, value: Putumayo }
-            - { text: Quindío, value: Quindío }
-            - { text: Risaralda, value: Risaralda }
-            - { text: San Andrés y Providencia, value: San Andrés y Providencia }
-            - { text: Santander, value: Santander }
-            - { text: Sucre, value: Sucre }
-            - { text: Tolima, value: Tolima }
-            - { text: Valle del Cauca, value: Valle del Cauca }
-            - { text: Vaupés, value: Vaupés }
-            - { text: Vichada, value: Vichada }
+            - {text: Amazonas, value: Amazonas}
+            - {text: Antioquia, value: Antioquia}
+            - {text: Arauca, value: Arauca}
+            - {text: Atlántico, value: Atlántico}
+            - {text: Bogotá D.C., value: Bogotá D.C.}
+            - {text: Bolívar, value: Bolívar}
+            - {text: Boyacá, value: Boyacá}
+            - {text: Caldas, value: Caldas}
+            - {text: Caquetá, value: Caquetá}
+            - {text: Casanare, value: Casanare}
+            - {text: Cauca, value: Cauca}
+            - {text: Cesar, value: Cesar}
+            - {text: Chocó, value: Chocó}
+            - {text: Córdoba, value: Córdoba}
+            - {text: Cundinamarca, value: Cundinamarca}
+            - {text: Guainía, value: Guainía}
+            - {text: Guaviare, value: Guaviare}
+            - {text: Huila, value: Huila}
+            - {text: La Guajira, value: La Guajira}
+            - {text: Magdalena, value: Magdalena}
+            - {text: Meta, value: Meta}
+            - {text: Nariño, value: Nariño}
+            - {text: Norte de Santander, value: Norte de Santander}
+            - {text: Putumayo, value: Putumayo}
+            - {text: Quindío, value: Quindío}
+            - {text: Risaralda, value: Risaralda}
+            - {text: San Andrés y Providencia, value: San Andrés y Providencia}
+            - {text: Santander, value: Santander}
+            - {text: Sucre, value: Sucre}
+            - {text: Tolima, value: Tolima}
+            - {text: Valle del Cauca, value: Valle del Cauca}
+            - {text: Vaupés, value: Vaupés}
+            - {text: Vichada, value: Vichada}
           selectType: default
+          description:
+            view: Clasificación de departamento para este registro de Inmuebles.
+            edit: Seleccione un valor para departamento. Es obligatorio para guardar un registro completo.
       ciudad:
         label: Ciudad
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Ciudad» conserva información operativa del registro en Inmuebles.
+            edit: Ingrese ciudad con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       direccion:
         label: Dirección
         kind: String
+        options:
+          description:
+            view: El campo «Dirección» conserva información operativa del registro en Inmuebles.
+            edit: Ingrese dirección con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+      codigoDivipola:
+        label: Código DIVIPOLA
+        kind: String
+        options:
+          description:
+            view: El campo «Código DIVIPOLA» conserva información operativa del registro en Inmuebles.
+            edit: Ingrese código divipola con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+      sector:
+        label: Barrio o sector
+        kind: String
+        options:
+          description:
+            view: El campo «Barrio o sector» conserva información operativa del registro en Inmuebles.
+            edit: Ingrese barrio o sector con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+      ubicacion:
+        label: Ubicación en el mapa
+        kind: Geometry
+        options:
+          center: [4.711, -74.0721]
+          zoom: 12
+          hideGeoSearch: false
+          description:
+            view: Ubicación geográfica de Inmuebles, utilizada por los mapas y la planeación operativa.
+            edit: Busque o marque en el mapa la ubicación correspondiente a ubicación en el mapa. Verifique el punto antes de guardar. Es opcional; complételo cuando la información esté disponible.
+      disponibleDesde:
+        label: Disponible desde
+        kind: DateTime
+        options:
+          onlyDate: true
+          description:
+            view: Fecha de disponible desde para este registro de Inmuebles.
+            edit: Indique disponible desde en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.
+      destacado:
+        label: Inmueble destacado
+        kind: Bool
+        options:
+          falseLabel: "No"
+          trueLabel: "Sí"
+          description:
+            view: Indica si inmueble destacado aplica a este registro de Inmuebles.
+            edit: Marque Sí únicamente cuando inmueble destacado esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.
+      caracteristicas:
+        label: Características
+        kind: Select
+        multi: true
+        options:
+          options:
+            - {text: Balcón, value: Balcón}
+            - {text: Ascensor, value: Ascensor}
+            - {text: Portería, value: Portería}
+            - {text: Depósito, value: Depósito}
+            - {text: Terraza, value: Terraza}
+            - {text: Zona verde, value: Zona verde}
+            - {text: Amoblado, value: Amoblado}
+            - {text: Acceso para movilidad reducida, value: Acceso para movilidad reducida}
+          selectType: multiple
+          description:
+            view: Clasificación de características para este registro de Inmuebles.
+            edit: 'Seleccione uno o varios valores para características entre: Balcón, Ascensor, Portería, Depósito, Terraza, Zona verde, Amoblado, Acceso para movilidad reducida. Es opcional; complételo cuando la información esté disponible.'
       precioVenta:
         label: Precio de venta
         kind: Number
@@ -114,6 +204,9 @@ modules:
           format: "0"
           precision: 0
           prefix: "$ "
+          description:
+            view: Precio de venta expresado en pesos colombianos (COP) para este registro de Inmuebles.
+            edit: Ingrese precio de venta en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.
       canonArrendamiento:
         label: Canon de arrendamiento
         kind: Number
@@ -121,6 +214,9 @@ modules:
           format: "0"
           precision: 0
           prefix: "$ "
+          description:
+            view: Canon de arrendamiento expresado en pesos colombianos (COP) para este registro de Inmuebles.
+            edit: Ingrese canon de arrendamiento en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.
       administracion:
         label: Administración
         kind: Number
@@ -128,6 +224,9 @@ modules:
           format: "0"
           precision: 0
           prefix: "$ "
+          description:
+            view: Administración expresado en pesos colombianos (COP) para este registro de Inmuebles.
+            edit: Ingrese administración en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.
       area:
         label: Área en m²
         kind: Number
@@ -135,37 +234,52 @@ modules:
           format: "0.00"
           precision: 2
           suffix: " m²"
+          description:
+            view: Valor numérico de área en m² para este registro de Inmuebles.
+            edit: Ingrese área en m² como número. Es opcional; complételo cuando la información esté disponible.
       habitaciones:
         label: Habitaciones
         kind: Number
         options:
           format: "0"
           precision: 0
+          description:
+            view: Valor numérico de habitaciones para este registro de Inmuebles.
+            edit: Ingrese habitaciones como número. Es opcional; complételo cuando la información esté disponible.
       banos:
         label: Baños
         kind: Number
         options:
           format: "0"
           precision: 0
+          description:
+            view: Valor numérico de baños para este registro de Inmuebles.
+            edit: Ingrese baños como número. Es opcional; complételo cuando la información esté disponible.
       parqueaderos:
         label: Parqueaderos
         kind: Number
         options:
           format: "0"
           precision: 0
+          description:
+            view: Valor numérico de parqueaderos para este registro de Inmuebles.
+            edit: Ingrese parqueaderos como número. Es opcional; complételo cuando la información esté disponible.
       estrato:
         label: Estrato
         kind: Select
         options:
           options:
-            - { text: "1", value: "1" }
-            - { text: "2", value: "2" }
-            - { text: "3", value: "3" }
-            - { text: "4", value: "4" }
-            - { text: "5", value: "5" }
-            - { text: "6", value: "6" }
-            - { text: Rural o no aplica, value: Rural o no aplica }
+            - {text: "1", value: "1"}
+            - {text: "2", value: "2"}
+            - {text: "3", value: "3"}
+            - {text: "4", value: "4"}
+            - {text: "5", value: "5"}
+            - {text: "6", value: "6"}
+            - {text: Rural o no aplica, value: Rural o no aplica}
           selectType: default
+          description:
+            view: Clasificación de estrato para este registro de Inmuebles.
+            edit: 'Seleccione un valor para estrato entre: 1, 2, 3, 4, 5, 6, Rural o no aplica. Es opcional; complételo cuando la información esté disponible.'
       fotografias:
         label: Fotografías
         kind: File
@@ -175,6 +289,9 @@ modules:
           allowImages: true
           maxSize: 0
           mode: list
+          description:
+            view: Archivos asociados con fotografías en este registro de Inmuebles.
+            edit: Adjunte uno o varios archivos pertinentes para fotografías. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.
       documentos:
         label: Documentos
         kind: File
@@ -184,13 +301,25 @@ modules:
           allowImages: false
           maxSize: 0
           mode: list
+          description:
+            view: Archivos asociados con documentos en este registro de Inmuebles.
+            edit: Adjunte uno o varios archivos pertinentes para documentos. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.
       propietarioNombre:
         label: Nombre del propietario
         kind: String
+        options:
+          description:
+            view: El campo «Nombre del propietario» conserva información operativa del registro en Inmuebles.
+            edit: Ingrese nombre del propietario con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       propietarioTelefono:
         label: Teléfono del propietario
         kind: String
-
+        options:
+          description:
+            view: El campo «Teléfono del propietario» conserva información operativa del registro en Inmuebles.
+            edit: Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es opcional; complételo cuando la información esté disponible.
+    meta:
+      description: Inventario comercial de inmuebles disponibles para venta o arriendo. Se crea un registro por inmueble y se relaciona con los leads interesados, sus visitas, actividades y negociaciones.
   leads:
     name: Leads
     fields:
@@ -198,22 +327,62 @@ modules:
         label: Nombres
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Nombres» conserva información operativa del registro en Leads.
+            edit: Ingrese nombres con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       apellidos:
         label: Apellidos
         kind: String
+        options:
+          description:
+            view: El campo «Apellidos» conserva información operativa del registro en Leads.
+            edit: Ingrese apellidos con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       telefono:
         label: Teléfono
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Teléfono» conserva información operativa del registro en Leads.
+            edit: Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es obligatorio para guardar un registro completo.
       correo:
         label: Correo electrónico
         kind: String
+        options:
+          description:
+            view: El campo «Correo electrónico» conserva información operativa del registro en Leads.
+            edit: Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es opcional; complételo cuando la información esté disponible.
       autorizaTratamientoDatos:
         label: Autoriza el tratamiento de datos
         kind: Bool
         options:
           falseLabel: "No"
           trueLabel: "Sí"
+          description:
+            view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada.
+            edit: Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.
+      fechaAutorizacion:
+        label: Fecha de autorización
+        kind: DateTime
+        options:
+          description:
+            view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada.
+            edit: Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible.
+      origenAutorizacion:
+        label: Origen de la autorización
+        kind: Select
+        options:
+          options:
+            - {text: Formulario web, value: Formulario web}
+            - {text: WhatsApp, value: WhatsApp}
+            - {text: Correo, value: Correo}
+            - {text: Telefónica, value: Telefónica}
+            - {text: Presencial, value: Presencial}
+          selectType: default
+          description:
+            view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada.
+            edit: Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.
       tipoOperacion:
         label: Tipo de operación
         kind: Select
@@ -221,6 +390,9 @@ modules:
         options:
           options: *tipos-operacion
           selectType: default
+          description:
+            view: Clasificación de tipo de operación para este registro de Leads.
+            edit: Seleccione un valor para tipo de operación. Es obligatorio para guardar un registro completo.
       tiposInmueble:
         label: Tipos de inmueble buscados
         kind: Select
@@ -228,6 +400,9 @@ modules:
         options:
           options: *tipos-inmueble
           selectType: multiple
+          description:
+            view: Clasificación de tipos de inmueble buscados para este registro de Leads.
+            edit: Seleccione uno o varios valores para tipos de inmueble buscados. Es opcional; complételo cuando la información esté disponible.
       departamentoBusqueda:
         label: Departamento de búsqueda
         kind: Select
@@ -235,10 +410,17 @@ modules:
         options:
           options: *departamentos-colombia
           selectType: default
+          description:
+            view: Clasificación de departamento de búsqueda para este registro de Leads.
+            edit: Seleccione un valor para departamento de búsqueda. Es obligatorio para guardar un registro completo.
       ciudadBusqueda:
         label: Ciudad de búsqueda
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Ciudad de búsqueda» conserva información operativa del registro en Leads.
+            edit: Ingrese ciudad de búsqueda con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       presupuestoMinimo:
         label: Presupuesto mínimo
         kind: Number
@@ -246,6 +428,9 @@ modules:
           format: "0"
           precision: 0
           prefix: "$ "
+          description:
+            view: Presupuesto mínimo expresado en pesos colombianos (COP) para este registro de Leads.
+            edit: Ingrese presupuesto mínimo en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.
       presupuestoMaximo:
         label: Presupuesto máximo
         kind: Number
@@ -253,18 +438,27 @@ modules:
           format: "0"
           precision: 0
           prefix: "$ "
+          description:
+            view: Presupuesto máximo expresado en pesos colombianos (COP) para este registro de Leads.
+            edit: Ingrese presupuesto máximo en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.
       habitacionesMinimas:
         label: Habitaciones mínimas
         kind: Number
         options:
           format: "0"
           precision: 0
+          description:
+            view: Valor numérico de habitaciones mínimas para este registro de Leads.
+            edit: Ingrese habitaciones mínimas como número. Es opcional; complételo cuando la información esté disponible.
       banosMinimos:
         label: Baños mínimos
         kind: Number
         options:
           format: "0"
           precision: 0
+          description:
+            view: Valor numérico de baños mínimos para este registro de Leads.
+            edit: Ingrese baños mínimos como número. Es opcional; complételo cuando la información esté disponible.
       inmueblesInteres:
         label: Inmuebles de interés
         kind: Record
@@ -277,6 +471,9 @@ modules:
             - nombre
             - ciudad
           selectType: multiple
+          description:
+            view: Relación con inmuebles. Permite consultar varios registros vinculados en este registro de Leads.
+            edit: Seleccione inmuebles de interés dentro del módulo inmuebles. La relación admite varios registros; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.
       estado:
         label: Estado
         kind: Select
@@ -284,33 +481,79 @@ modules:
         default: Nuevo
         options:
           options:
-            - { text: Nuevo, value: Nuevo }
-            - { text: En contacto, value: En contacto }
-            - { text: Calificado, value: Calificado }
-            - { text: Cita agendada, value: Cita agendada }
-            - { text: Negociación, value: Negociación }
-            - { text: Ganado, value: Ganado }
-            - { text: Perdido, value: Perdido }
-            - { text: Descartado, value: Descartado }
+            - {text: Nuevo, value: Nuevo}
+            - {text: En contacto, value: En contacto}
+            - {text: Calificado, value: Calificado}
+            - {text: Cita agendada, value: Cita agendada}
+            - {text: Negociación, value: Negociación}
+            - {text: Ganado, value: Ganado}
+            - {text: Perdido, value: Perdido}
+            - {text: Descartado, value: Descartado}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Leads.
+            edit: 'Seleccione un valor para estado entre: Nuevo, En contacto, Calificado, Cita agendada, Negociación, Ganado, Perdido, Descartado. Es obligatorio para guardar un registro completo.'
       responsable:
         label: Asesor responsable
         kind: User
         options:
           selectType: default
+          description:
+            view: Usuario de Corteza responsable de asesor responsable en este registro de Leads.
+            edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.
+      prioridad:
+        label: Prioridad comercial
+        kind: Select
+        default: Media
+        options:
+          options:
+            - {text: Baja, value: Baja}
+            - {text: Media, value: Media}
+            - {text: Alta, value: Alta}
+            - {text: Urgente, value: Urgente}
+          selectType: default
+          description:
+            view: Clasificación de prioridad comercial para este registro de Leads.
+            edit: 'Seleccione un valor para prioridad comercial entre: Baja, Media, Alta, Urgente. Es opcional; complételo cuando la información esté disponible.'
       fechaAsignacion:
         label: Fecha de asignación
         kind: DateTime
+        options:
+          description:
+            view: Fecha y hora de fecha de asignación para este registro de Leads, interpretada en America/Bogota.
+            edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.
       proximoContacto:
         label: Próximo contacto
         kind: DateTime
+        options:
+          description:
+            view: Fecha y hora de próximo contacto para este registro de Leads, interpretada en America/Bogota.
+            edit: Indique próximo contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.
+      ultimoContacto:
+        label: Último contacto
+        kind: DateTime
+        options:
+          description:
+            view: Fecha y hora de último contacto para este registro de Leads, interpretada en America/Bogota.
+            edit: Indique último contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.
+      motivoCierre:
+        label: Motivo de cierre o descarte
+        kind: String
+        options:
+          description:
+            view: El campo «Motivo de cierre o descarte» conserva información operativa del registro en Leads.
+            edit: Ingrese motivo de cierre o descarte con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       notas:
         label: Notas
         kind: String
         options:
           multiLine: true
           useRichTextEditor: true
-
+          description:
+            view: El campo «Notas» conserva información operativa del registro en Leads.
+            edit: Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+    meta:
+      description: Personas interesadas en comprar o arrendar inmuebles. Centraliza sus datos de contacto, autorización, necesidad, presupuesto, inmuebles de interés, responsable y avance comercial.
   citas:
     name: Citas
     fields:
@@ -318,6 +561,10 @@ modules:
         label: Asunto
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Asunto» conserva información operativa del registro en Citas.
+            edit: Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       lead:
         label: Lead
         kind: Record
@@ -330,12 +577,18 @@ modules:
             - apellidos
             - telefono
           selectType: default
+          description:
+            view: Relación con leads. Permite consultar un registro vinculado en este registro de Citas.
+            edit: Seleccione lead dentro del módulo leads. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.
       asesor:
         label: Asesor
         kind: User
         required: true
         options:
           selectType: default
+          description:
+            view: Usuario de Corteza responsable de asesor en este registro de Citas.
+            edit: Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo.
       inmuebles:
         label: Inmuebles
         kind: Record
@@ -348,24 +601,38 @@ modules:
             - nombre
             - ciudad
           selectType: multiple
+          description:
+            view: Relación con inmuebles. Permite consultar varios registros vinculados en este registro de Citas.
+            edit: Seleccione inmuebles dentro del módulo inmuebles. La relación admite varios registros; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.
       inicio:
         label: Inicio
         kind: DateTime
         required: true
+        options:
+          description:
+            view: Fecha y hora de inicio para este registro de Citas, interpretada en America/Bogota.
+            edit: Indique inicio usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.
       fin:
         label: Finalización
         kind: DateTime
+        options:
+          description:
+            view: Fecha y hora de finalización para este registro de Citas, interpretada en America/Bogota.
+            edit: Indique finalización usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.
       tipo:
         label: Tipo
         kind: Select
         required: true
         options:
           options:
-            - { text: Visita, value: Visita }
-            - { text: Llamada, value: Llamada }
-            - { text: Virtual, value: Virtual }
-            - { text: Oficina, value: Oficina }
+            - {text: Visita, value: Visita}
+            - {text: Llamada, value: Llamada}
+            - {text: Virtual, value: Virtual}
+            - {text: Oficina, value: Oficina}
           selectType: default
+          description:
+            view: Clasificación de tipo para este registro de Citas.
+            edit: 'Seleccione un valor para tipo entre: Visita, Llamada, Virtual, Oficina. Es obligatorio para guardar un registro completo.'
       estado:
         label: Estado
         kind: Select
@@ -373,31 +640,53 @@ modules:
         default: Pendiente
         options:
           options:
-            - { text: Pendiente, value: Pendiente }
-            - { text: Confirmada, value: Confirmada }
-            - { text: Completada, value: Completada }
-            - { text: Cancelada, value: Cancelada }
-            - { text: Reprogramada, value: Reprogramada }
-            - { text: No asistió, value: No asistió }
+            - {text: Pendiente, value: Pendiente}
+            - {text: Confirmada, value: Confirmada}
+            - {text: Completada, value: Completada}
+            - {text: Cancelada, value: Cancelada}
+            - {text: Reprogramada, value: Reprogramada}
+            - {text: No asistió, value: No asistió}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Citas.
+            edit: 'Seleccione un valor para estado entre: Pendiente, Confirmada, Completada, Cancelada, Reprogramada, No asistió. Es obligatorio para guardar un registro completo.'
       puntoEncuentro:
         label: Punto de encuentro
         kind: String
+        options:
+          description:
+            view: El campo «Punto de encuentro» conserva información operativa del registro en Citas.
+            edit: Ingrese punto de encuentro con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       resultado:
         label: Resultado
         kind: String
         options:
           multiLine: true
+          description:
+            view: El campo «Resultado» conserva información operativa del registro en Citas.
+            edit: Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       observaciones:
         label: Observaciones
         kind: String
         options:
           multiLine: true
           useRichTextEditor: true
-
+          description:
+            view: El campo «Observaciones» conserva información operativa del registro en Citas.
+            edit: Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+    meta:
+      description: Visitas, llamadas o reuniones acordadas con un lead. Una cita puede incluir varios inmuebles y conserva responsable, horario, estado, resultado y observaciones.
   actividades:
     name: Actividades
     fields:
+      asunto:
+        label: Asunto
+        kind: String
+        required: true
+        options:
+          description:
+            view: El campo «Asunto» conserva información operativa del registro en Actividades.
+            edit: Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       lead:
         label: Lead
         kind: Record
@@ -410,6 +699,9 @@ modules:
             - apellidos
             - telefono
           selectType: default
+          description:
+            view: Relación con leads. Permite consultar un registro vinculado en este registro de Actividades.
+            edit: Seleccione lead dentro del módulo leads. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.
       inmueble:
         label: Inmueble
         kind: Record
@@ -421,41 +713,101 @@ modules:
             - nombre
             - ciudad
           selectType: default
+          description:
+            view: Relación con inmuebles. Permite consultar un registro vinculado en este registro de Actividades.
+            edit: Seleccione inmueble dentro del módulo inmuebles. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.
       asesor:
         label: Asesor
         kind: User
         required: true
         options:
           selectType: default
+          description:
+            view: Usuario de Corteza responsable de asesor en este registro de Actividades.
+            edit: Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo.
       tipo:
         label: Tipo
         kind: Select
         required: true
         options:
           options:
-            - { text: Llamada, value: Llamada }
-            - { text: WhatsApp, value: WhatsApp }
-            - { text: Correo, value: Correo }
-            - { text: Nota, value: Nota }
-            - { text: Seguimiento, value: Seguimiento }
+            - {text: Llamada, value: Llamada}
+            - {text: WhatsApp, value: WhatsApp}
+            - {text: Correo, value: Correo}
+            - {text: Nota, value: Nota}
+            - {text: Seguimiento, value: Seguimiento}
           selectType: default
+          description:
+            view: Clasificación de tipo para este registro de Actividades.
+            edit: 'Seleccione un valor para tipo entre: Llamada, WhatsApp, Correo, Nota, Seguimiento. Es obligatorio para guardar un registro completo.'
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Pendiente
+        options:
+          options:
+            - {text: Pendiente, value: Pendiente}
+            - {text: En curso, value: En curso}
+            - {text: Completada, value: Completada}
+            - {text: Cancelada, value: Cancelada}
+          selectType: default
+          description:
+            view: Clasificación de estado para este registro de Actividades.
+            edit: 'Seleccione un valor para estado entre: Pendiente, En curso, Completada, Cancelada. Es obligatorio para guardar un registro completo.'
+      prioridad:
+        label: Prioridad
+        kind: Select
+        default: Media
+        options:
+          options:
+            - {text: Baja, value: Baja}
+            - {text: Media, value: Media}
+            - {text: Alta, value: Alta}
+          selectType: default
+          description:
+            view: Clasificación de prioridad para este registro de Actividades.
+            edit: 'Seleccione un valor para prioridad entre: Baja, Media, Alta. Es opcional; complételo cuando la información esté disponible.'
       fecha:
         label: Fecha
         kind: DateTime
         required: true
+        options:
+          description:
+            view: Fecha y hora de fecha para este registro de Actividades, interpretada en America/Bogota.
+            edit: Indique fecha usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.
       resultado:
         label: Resultado
         kind: String
+        options:
+          description:
+            view: El campo «Resultado» conserva información operativa del registro en Actividades.
+            edit: Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       proximaAccion:
         label: Próxima acción
         kind: DateTime
+        options:
+          description:
+            view: Fecha y hora de próxima acción para este registro de Actividades, interpretada en America/Bogota.
+            edit: Indique próxima acción usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.
+      vencimiento:
+        label: Vencimiento
+        kind: DateTime
+        options:
+          description:
+            view: Fecha y hora de vencimiento para este registro de Actividades, interpretada en America/Bogota.
+            edit: Indique vencimiento usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.
       observaciones:
         label: Observaciones
         kind: String
         options:
           multiLine: true
           useRichTextEditor: true
-
+          description:
+            view: El campo «Observaciones» conserva información operativa del registro en Actividades.
+            edit: Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+    meta:
+      description: Historial y agenda de seguimientos comerciales realizados con un lead, opcionalmente relacionados con un inmueble. Permite controlar responsables, vencimientos y resultados.
   negociaciones:
     name: Negociaciones
     fields:
@@ -471,6 +823,9 @@ modules:
             - apellidos
             - telefono
           selectType: default
+          description:
+            view: Relación con leads. Permite consultar un registro vinculado en este registro de Negociaciones.
+            edit: Seleccione lead dentro del módulo leads. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.
       inmueble:
         label: Inmueble
         kind: Record
@@ -483,21 +838,30 @@ modules:
             - nombre
             - ciudad
           selectType: default
+          description:
+            view: Relación con inmuebles. Permite consultar un registro vinculado en este registro de Negociaciones.
+            edit: Seleccione inmueble dentro del módulo inmuebles. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.
       asesor:
         label: Asesor
         kind: User
         required: true
         options:
           selectType: default
+          description:
+            view: Usuario de Corteza responsable de asesor en este registro de Negociaciones.
+            edit: Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo.
       tipoOperacion:
         label: Tipo de operación
         kind: Select
         required: true
         options:
           options:
-            - { text: Venta, value: Venta }
-            - { text: Arriendo, value: Arriendo }
+            - {text: Venta, value: Venta}
+            - {text: Arriendo, value: Arriendo}
           selectType: default
+          description:
+            view: Clasificación de tipo de operación para este registro de Negociaciones.
+            edit: 'Seleccione un valor para tipo de operación entre: Venta, Arriendo. Es obligatorio para guardar un registro completo.'
       etapa:
         label: Etapa
         kind: Select
@@ -505,11 +869,14 @@ modules:
         default: Calificación
         options:
           options:
-            - { text: Calificación, value: Calificación }
-            - { text: Oferta, value: Oferta }
-            - { text: Documentación, value: Documentación }
-            - { text: Cierre, value: Cierre }
+            - {text: Calificación, value: Calificación}
+            - {text: Oferta, value: Oferta}
+            - {text: Documentación, value: Documentación}
+            - {text: Cierre, value: Cierre}
           selectType: default
+          description:
+            view: Clasificación de etapa para este registro de Negociaciones.
+            edit: 'Seleccione un valor para etapa entre: Calificación, Oferta, Documentación, Cierre. Es obligatorio para guardar un registro completo.'
       valorPublicado:
         label: Valor publicado
         kind: Number
@@ -517,6 +884,9 @@ modules:
           format: "0"
           precision: 0
           prefix: "$ "
+          description:
+            view: Valor publicado expresado en pesos colombianos (COP) para este registro de Negociaciones.
+            edit: Ingrese valor publicado en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.
       valorOfrecido:
         label: Valor ofrecido
         kind: Number
@@ -524,6 +894,9 @@ modules:
           format: "0"
           precision: 0
           prefix: "$ "
+          description:
+            view: Valor ofrecido expresado en pesos colombianos (COP) para este registro de Negociaciones.
+            edit: Ingrese valor ofrecido en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.
       probabilidad:
         label: Probabilidad
         kind: Number
@@ -531,11 +904,42 @@ modules:
           format: "0"
           precision: 0
           suffix: "%"
+          description:
+            view: Valor numérico de probabilidad para este registro de Negociaciones.
+            edit: Ingrese probabilidad como número. Es opcional; complételo cuando la información esté disponible.
       fechaEstimadaCierre:
         label: Fecha estimada de cierre
         kind: DateTime
         options:
           onlyDate: true
+          description:
+            view: Fecha de fecha estimada de cierre para este registro de Negociaciones.
+            edit: Indique fecha estimada de cierre en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.
+      proximoPaso:
+        label: Próximo paso
+        kind: String
+        options:
+          description:
+            view: El campo «Próximo paso» conserva información operativa del registro en Negociaciones.
+            edit: Ingrese próximo paso con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+      fechaCierreReal:
+        label: Fecha real de cierre
+        kind: DateTime
+        options:
+          onlyDate: true
+          description:
+            view: Fecha de fecha real de cierre para este registro de Negociaciones.
+            edit: Indique fecha real de cierre en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.
+      comisionEstimada:
+        label: Comisión estimada
+        kind: Number
+        options:
+          format: "0"
+          precision: 0
+          prefix: "$ "
+          description:
+            view: Comisión estimada expresado en pesos colombianos (COP) para este registro de Negociaciones.
+            edit: Ingrese comisión estimada en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.
       estado:
         label: Estado
         kind: Select
@@ -543,16 +947,28 @@ modules:
         default: Abierta
         options:
           options:
-            - { text: Abierta, value: Abierta }
-            - { text: Ganada, value: Ganada }
-            - { text: Perdida, value: Perdida }
+            - {text: Abierta, value: Abierta}
+            - {text: Ganada, value: Ganada}
+            - {text: Perdida, value: Perdida}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Negociaciones.
+            edit: 'Seleccione un valor para estado entre: Abierta, Ganada, Perdida. Es obligatorio para guardar un registro completo.'
       motivoPerdida:
         label: Motivo de pérdida
         kind: String
+        options:
+          description:
+            view: El campo «Motivo de pérdida» conserva información operativa del registro en Negociaciones.
+            edit: Ingrese motivo de pérdida con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       observaciones:
         label: Observaciones
         kind: String
         options:
           multiLine: true
           useRichTextEditor: true
+          description:
+            view: El campo «Observaciones» conserva información operativa del registro en Negociaciones.
+            edit: Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+    meta:
+      description: Oportunidades comerciales abiertas para un lead y un inmueble concretos. Registra valores, etapa, probabilidad, próximo paso y resultado de venta o arriendo.

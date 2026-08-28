@@ -1,0 +1,282 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    "corteza::compose:module/inmobiliaria-co/inmuebles":
+      meta.description: "Inventario comercial de inmuebles disponibles para venta o arriendo. Se crea un registro por inmueble y se relaciona con los leads interesados, sus visitas, actividades y negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/nombre":
+      meta.description.edit: "Ingrese nombre con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Nombre» conserva información operativa del registro en Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/descripcion":
+      meta.description.edit: "Ingrese descripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Descripción» conserva información operativa del registro en Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/tipoOperacion":
+      meta.description.edit: "Seleccione un valor para tipo de operación entre: Venta, Arriendo, Venta o arriendo. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo de operación para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/tipoInmueble":
+      meta.description.edit: "Seleccione un valor para tipo de inmueble entre: Apartamento, Casa, Oficina, Local, Lote, Finca, Bodega, Consultorio, Habitación, Otro. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo de inmueble para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Disponible, Reservado, Arrendado, Vendido, Inactivo. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/departamento":
+      meta.description.edit: "Seleccione un valor para departamento. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de departamento para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/ciudad":
+      meta.description.edit: "Ingrese ciudad con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Ciudad» conserva información operativa del registro en Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/direccion":
+      meta.description.edit: "Ingrese dirección con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Dirección» conserva información operativa del registro en Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/codigoDivipola":
+      meta.description.edit: "Ingrese código divipola con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Código DIVIPOLA» conserva información operativa del registro en Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/sector":
+      meta.description.edit: "Ingrese barrio o sector con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Barrio o sector» conserva información operativa del registro en Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/ubicacion":
+      meta.description.edit: "Busque o marque en el mapa la ubicación correspondiente a ubicación en el mapa. Verifique el punto antes de guardar. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Ubicación geográfica de Inmuebles, utilizada por los mapas y la planeación operativa."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/disponibleDesde":
+      meta.description.edit: "Indique disponible desde en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de disponible desde para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/destacado":
+      meta.description.edit: "Marque Sí únicamente cuando inmueble destacado esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si inmueble destacado aplica a este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/caracteristicas":
+      meta.description.edit: "Seleccione uno o varios valores para características entre: Balcón, Ascensor, Portería, Depósito, Terraza, Zona verde, Amoblado, Acceso para movilidad reducida. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de características para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/precioVenta":
+      meta.description.edit: "Ingrese precio de venta en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Precio de venta expresado en pesos colombianos (COP) para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/canonArrendamiento":
+      meta.description.edit: "Ingrese canon de arrendamiento en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Canon de arrendamiento expresado en pesos colombianos (COP) para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/administracion":
+      meta.description.edit: "Ingrese administración en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Administración expresado en pesos colombianos (COP) para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/area":
+      meta.description.edit: "Ingrese área en m² como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de área en m² para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/habitaciones":
+      meta.description.edit: "Ingrese habitaciones como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de habitaciones para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/banos":
+      meta.description.edit: "Ingrese baños como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de baños para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/parqueaderos":
+      meta.description.edit: "Ingrese parqueaderos como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de parqueaderos para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/estrato":
+      meta.description.edit: "Seleccione un valor para estrato entre: 1, 2, 3, 4, 5, 6, Rural o no aplica. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de estrato para este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/fotografias":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para fotografías. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con fotografías en este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/documentos":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para documentos. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con documentos en este registro de Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/propietarioNombre":
+      meta.description.edit: "Ingrese nombre del propietario con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Nombre del propietario» conserva información operativa del registro en Inmuebles."
+    "corteza::compose:module-field/inmobiliaria-co/inmuebles/propietarioTelefono":
+      meta.description.edit: "Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Teléfono del propietario» conserva información operativa del registro en Inmuebles."
+    "corteza::compose:module/inmobiliaria-co/leads":
+      meta.description: "Personas interesadas en comprar o arrendar inmuebles. Centraliza sus datos de contacto, autorización, necesidad, presupuesto, inmuebles de interés, responsable y avance comercial."
+    "corteza::compose:module-field/inmobiliaria-co/leads/nombres":
+      meta.description.edit: "Ingrese nombres con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Nombres» conserva información operativa del registro en Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/apellidos":
+      meta.description.edit: "Ingrese apellidos con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Apellidos» conserva información operativa del registro en Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/telefono":
+      meta.description.edit: "Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Teléfono» conserva información operativa del registro en Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/correo":
+      meta.description.edit: "Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Correo electrónico» conserva información operativa del registro en Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/autorizaTratamientoDatos":
+      meta.description.edit: "Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/inmobiliaria-co/leads/fechaAutorizacion":
+      meta.description.edit: "Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/inmobiliaria-co/leads/origenAutorizacion":
+      meta.description.edit: "Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/inmobiliaria-co/leads/tipoOperacion":
+      meta.description.edit: "Seleccione un valor para tipo de operación. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo de operación para este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/tiposInmueble":
+      meta.description.edit: "Seleccione uno o varios valores para tipos de inmueble buscados. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de tipos de inmueble buscados para este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/departamentoBusqueda":
+      meta.description.edit: "Seleccione un valor para departamento de búsqueda. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de departamento de búsqueda para este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/ciudadBusqueda":
+      meta.description.edit: "Ingrese ciudad de búsqueda con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Ciudad de búsqueda» conserva información operativa del registro en Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/presupuestoMinimo":
+      meta.description.edit: "Ingrese presupuesto mínimo en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Presupuesto mínimo expresado en pesos colombianos (COP) para este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/presupuestoMaximo":
+      meta.description.edit: "Ingrese presupuesto máximo en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Presupuesto máximo expresado en pesos colombianos (COP) para este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/habitacionesMinimas":
+      meta.description.edit: "Ingrese habitaciones mínimas como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de habitaciones mínimas para este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/banosMinimos":
+      meta.description.edit: "Ingrese baños mínimos como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de baños mínimos para este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/inmueblesInteres":
+      meta.description.edit: "Seleccione inmuebles de interés dentro del módulo inmuebles. La relación admite varios registros; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con inmuebles. Permite consultar varios registros vinculados en este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Nuevo, En contacto, Calificado, Cita agendada, Negociación, Ganado, Perdido, Descartado. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/responsable":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de asesor responsable en este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/prioridad":
+      meta.description.edit: "Seleccione un valor para prioridad comercial entre: Baja, Media, Alta, Urgente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de prioridad comercial para este registro de Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/fechaAsignacion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de fecha de asignación para este registro de Leads, interpretada en America/Bogota."
+    "corteza::compose:module-field/inmobiliaria-co/leads/proximoContacto":
+      meta.description.edit: "Indique próximo contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de próximo contacto para este registro de Leads, interpretada en America/Bogota."
+    "corteza::compose:module-field/inmobiliaria-co/leads/ultimoContacto":
+      meta.description.edit: "Indique último contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de último contacto para este registro de Leads, interpretada en America/Bogota."
+    "corteza::compose:module-field/inmobiliaria-co/leads/motivoCierre":
+      meta.description.edit: "Ingrese motivo de cierre o descarte con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Motivo de cierre o descarte» conserva información operativa del registro en Leads."
+    "corteza::compose:module-field/inmobiliaria-co/leads/notas":
+      meta.description.edit: "Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Notas» conserva información operativa del registro en Leads."
+    "corteza::compose:module/inmobiliaria-co/citas":
+      meta.description: "Visitas, llamadas o reuniones acordadas con un lead. Una cita puede incluir varios inmuebles y conserva responsable, horario, estado, resultado y observaciones."
+    "corteza::compose:module-field/inmobiliaria-co/citas/asunto":
+      meta.description.edit: "Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Asunto» conserva información operativa del registro en Citas."
+    "corteza::compose:module-field/inmobiliaria-co/citas/lead":
+      meta.description.edit: "Seleccione lead dentro del módulo leads. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con leads. Permite consultar un registro vinculado en este registro de Citas."
+    "corteza::compose:module-field/inmobiliaria-co/citas/asesor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Usuario de Corteza responsable de asesor en este registro de Citas."
+    "corteza::compose:module-field/inmobiliaria-co/citas/inmuebles":
+      meta.description.edit: "Seleccione inmuebles dentro del módulo inmuebles. La relación admite varios registros; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con inmuebles. Permite consultar varios registros vinculados en este registro de Citas."
+    "corteza::compose:module-field/inmobiliaria-co/citas/inicio":
+      meta.description.edit: "Indique inicio usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de inicio para este registro de Citas, interpretada en America/Bogota."
+    "corteza::compose:module-field/inmobiliaria-co/citas/fin":
+      meta.description.edit: "Indique finalización usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de finalización para este registro de Citas, interpretada en America/Bogota."
+    "corteza::compose:module-field/inmobiliaria-co/citas/tipo":
+      meta.description.edit: "Seleccione un valor para tipo entre: Visita, Llamada, Virtual, Oficina. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo para este registro de Citas."
+    "corteza::compose:module-field/inmobiliaria-co/citas/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Pendiente, Confirmada, Completada, Cancelada, Reprogramada, No asistió. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Citas."
+    "corteza::compose:module-field/inmobiliaria-co/citas/puntoEncuentro":
+      meta.description.edit: "Ingrese punto de encuentro con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Punto de encuentro» conserva información operativa del registro en Citas."
+    "corteza::compose:module-field/inmobiliaria-co/citas/resultado":
+      meta.description.edit: "Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Resultado» conserva información operativa del registro en Citas."
+    "corteza::compose:module-field/inmobiliaria-co/citas/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Citas."
+    "corteza::compose:module/inmobiliaria-co/actividades":
+      meta.description: "Historial y agenda de seguimientos comerciales realizados con un lead, opcionalmente relacionados con un inmueble. Permite controlar responsables, vencimientos y resultados."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/asunto":
+      meta.description.edit: "Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Asunto» conserva información operativa del registro en Actividades."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/lead":
+      meta.description.edit: "Seleccione lead dentro del módulo leads. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con leads. Permite consultar un registro vinculado en este registro de Actividades."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/inmueble":
+      meta.description.edit: "Seleccione inmueble dentro del módulo inmuebles. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con inmuebles. Permite consultar un registro vinculado en este registro de Actividades."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/asesor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Usuario de Corteza responsable de asesor en este registro de Actividades."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/tipo":
+      meta.description.edit: "Seleccione un valor para tipo entre: Llamada, WhatsApp, Correo, Nota, Seguimiento. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo para este registro de Actividades."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Pendiente, En curso, Completada, Cancelada. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Actividades."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/prioridad":
+      meta.description.edit: "Seleccione un valor para prioridad entre: Baja, Media, Alta. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de prioridad para este registro de Actividades."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/fecha":
+      meta.description.edit: "Indique fecha usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de fecha para este registro de Actividades, interpretada en America/Bogota."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/resultado":
+      meta.description.edit: "Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Resultado» conserva información operativa del registro en Actividades."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/proximaAccion":
+      meta.description.edit: "Indique próxima acción usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de próxima acción para este registro de Actividades, interpretada en America/Bogota."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/vencimiento":
+      meta.description.edit: "Indique vencimiento usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de vencimiento para este registro de Actividades, interpretada en America/Bogota."
+    "corteza::compose:module-field/inmobiliaria-co/actividades/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Actividades."
+    "corteza::compose:module/inmobiliaria-co/negociaciones":
+      meta.description: "Oportunidades comerciales abiertas para un lead y un inmueble concretos. Registra valores, etapa, probabilidad, próximo paso y resultado de venta o arriendo."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/lead":
+      meta.description.edit: "Seleccione lead dentro del módulo leads. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con leads. Permite consultar un registro vinculado en este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/inmueble":
+      meta.description.edit: "Seleccione inmueble dentro del módulo inmuebles. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con inmuebles. Permite consultar un registro vinculado en este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/asesor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Usuario de Corteza responsable de asesor en este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/tipoOperacion":
+      meta.description.edit: "Seleccione un valor para tipo de operación entre: Venta, Arriendo. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo de operación para este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/etapa":
+      meta.description.edit: "Seleccione un valor para etapa entre: Calificación, Oferta, Documentación, Cierre. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de etapa para este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/valorPublicado":
+      meta.description.edit: "Ingrese valor publicado en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor publicado expresado en pesos colombianos (COP) para este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/valorOfrecido":
+      meta.description.edit: "Ingrese valor ofrecido en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor ofrecido expresado en pesos colombianos (COP) para este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/probabilidad":
+      meta.description.edit: "Ingrese probabilidad como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de probabilidad para este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/fechaEstimadaCierre":
+      meta.description.edit: "Indique fecha estimada de cierre en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de fecha estimada de cierre para este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/proximoPaso":
+      meta.description.edit: "Ingrese próximo paso con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Próximo paso» conserva información operativa del registro en Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/fechaCierreReal":
+      meta.description.edit: "Indique fecha real de cierre en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de fecha real de cierre para este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/comisionEstimada":
+      meta.description.edit: "Ingrese comisión estimada en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Comisión estimada expresado en pesos colombianos (COP) para este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Abierta, Ganada, Perdida. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/motivoPerdida":
+      meta.description.edit: "Ingrese motivo de pérdida con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Motivo de pérdida» conserva información operativa del registro en Negociaciones."
+    "corteza::compose:module-field/inmobiliaria-co/negociaciones/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Negociaciones."

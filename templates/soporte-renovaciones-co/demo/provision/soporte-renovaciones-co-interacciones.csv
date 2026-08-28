@@ -1,101 +1,101 @@
-ID,caso,cliente,canal,agente,fecha,tipo,resumen,externalID,proveedorExterno
-interaccion-001,caso-001,cliente-soporte-001,Teléfono,agente-demo,2026-07-31T11:41:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0001,Canal demo
-interaccion-002,caso-002,cliente-soporte-002,Chat,agente-demo,2026-07-31T11:22:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0002,Canal demo
-interaccion-003,caso-003,cliente-soporte-003,WhatsApp,agente-demo,2026-07-31T11:03:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0003,Canal demo
-interaccion-004,caso-004,cliente-soporte-004,Nota interna,agente-demo,2026-07-31T10:44:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0004,Canal demo
-interaccion-005,caso-005,cliente-soporte-005,Correo,agente-demo,2026-07-31T10:25:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0005,Canal demo
-interaccion-006,caso-006,cliente-soporte-006,Teléfono,agente-demo,2026-07-31T10:06:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0006,Canal demo
-interaccion-007,caso-007,cliente-soporte-007,Chat,agente-demo,2026-07-31T09:47:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0007,Canal demo
-interaccion-008,caso-008,cliente-soporte-008,WhatsApp,agente-demo,2026-07-31T09:28:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0008,Canal demo
-interaccion-009,caso-009,cliente-soporte-009,Nota interna,agente-demo,2026-07-31T09:09:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0009,Canal demo
-interaccion-010,caso-010,cliente-soporte-010,Correo,agente-demo,2026-07-31T08:50:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0010,Canal demo
-interaccion-011,caso-011,cliente-soporte-011,Teléfono,agente-demo,2026-07-31T08:31:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0011,Canal demo
-interaccion-012,caso-012,cliente-soporte-012,Chat,agente-demo,2026-07-31T08:12:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0012,Canal demo
-interaccion-013,caso-013,cliente-soporte-013,WhatsApp,agente-demo,2026-07-31T07:53:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0013,Canal demo
-interaccion-014,caso-014,cliente-soporte-014,Nota interna,agente-demo,2026-07-31T07:34:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0014,Canal demo
-interaccion-015,caso-015,cliente-soporte-015,Correo,agente-demo,2026-07-31T07:15:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0015,Canal demo
-interaccion-016,caso-016,cliente-soporte-016,Teléfono,agente-demo,2026-07-31T06:56:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0016,Canal demo
-interaccion-017,caso-017,cliente-soporte-017,Chat,agente-demo,2026-07-31T06:37:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0017,Canal demo
-interaccion-018,caso-018,cliente-soporte-018,WhatsApp,agente-demo,2026-07-31T06:18:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0018,Canal demo
-interaccion-019,caso-019,cliente-soporte-019,Nota interna,agente-demo,2026-07-31T05:59:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0019,Canal demo
-interaccion-020,caso-020,cliente-soporte-020,Correo,agente-demo,2026-07-31T05:40:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0020,Canal demo
-interaccion-021,caso-021,cliente-soporte-021,Teléfono,agente-demo,2026-07-31T05:21:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0021,Canal demo
-interaccion-022,caso-022,cliente-soporte-022,Chat,agente-demo,2026-07-31T05:02:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0022,Canal demo
-interaccion-023,caso-023,cliente-soporte-023,WhatsApp,agente-demo,2026-07-31T04:43:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0023,Canal demo
-interaccion-024,caso-024,cliente-soporte-024,Nota interna,agente-demo,2026-07-31T04:24:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0024,Canal demo
-interaccion-025,caso-025,cliente-soporte-025,Correo,agente-demo,2026-07-31T04:05:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0025,Canal demo
-interaccion-026,caso-026,cliente-soporte-026,Teléfono,agente-demo,2026-07-31T03:46:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0026,Canal demo
-interaccion-027,caso-027,cliente-soporte-027,Chat,agente-demo,2026-07-31T03:27:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0027,Canal demo
-interaccion-028,caso-028,cliente-soporte-028,WhatsApp,agente-demo,2026-07-31T03:08:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0028,Canal demo
-interaccion-029,caso-029,cliente-soporte-029,Nota interna,agente-demo,2026-07-31T02:49:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0029,Canal demo
-interaccion-030,caso-030,cliente-soporte-030,Correo,agente-demo,2026-07-31T02:30:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0030,Canal demo
-interaccion-031,caso-031,cliente-soporte-031,Teléfono,agente-demo,2026-07-31T02:11:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0031,Canal demo
-interaccion-032,caso-032,cliente-soporte-032,Chat,agente-demo,2026-07-31T01:52:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0032,Canal demo
-interaccion-033,caso-033,cliente-soporte-033,WhatsApp,agente-demo,2026-07-31T01:33:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0033,Canal demo
-interaccion-034,caso-034,cliente-soporte-034,Nota interna,agente-demo,2026-07-31T01:14:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0034,Canal demo
-interaccion-035,caso-035,cliente-soporte-035,Correo,agente-demo,2026-07-31T00:55:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0035,Canal demo
-interaccion-036,caso-036,cliente-soporte-036,Teléfono,agente-demo,2026-07-31T00:36:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0036,Canal demo
-interaccion-037,caso-037,cliente-soporte-037,Chat,agente-demo,2026-07-31T00:17:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0037,Canal demo
-interaccion-038,caso-038,cliente-soporte-038,WhatsApp,agente-demo,2026-07-30T23:58:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0038,Canal demo
-interaccion-039,caso-039,cliente-soporte-039,Nota interna,agente-demo,2026-07-30T23:39:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0039,Canal demo
-interaccion-040,caso-040,cliente-soporte-040,Correo,agente-demo,2026-07-30T23:20:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0040,Canal demo
-interaccion-041,caso-041,cliente-soporte-041,Teléfono,agente-demo,2026-07-30T23:01:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0041,Canal demo
-interaccion-042,caso-042,cliente-soporte-042,Chat,agente-demo,2026-07-30T22:42:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0042,Canal demo
-interaccion-043,caso-043,cliente-soporte-043,WhatsApp,agente-demo,2026-07-30T22:23:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0043,Canal demo
-interaccion-044,caso-044,cliente-soporte-044,Nota interna,agente-demo,2026-07-30T22:04:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0044,Canal demo
-interaccion-045,caso-045,cliente-soporte-045,Correo,agente-demo,2026-07-30T21:45:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0045,Canal demo
-interaccion-046,caso-046,cliente-soporte-046,Teléfono,agente-demo,2026-07-30T21:26:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0046,Canal demo
-interaccion-047,caso-047,cliente-soporte-047,Chat,agente-demo,2026-07-30T21:07:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0047,Canal demo
-interaccion-048,caso-048,cliente-soporte-048,WhatsApp,agente-demo,2026-07-30T20:48:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0048,Canal demo
-interaccion-049,caso-049,cliente-soporte-049,Nota interna,agente-demo,2026-07-30T20:29:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0049,Canal demo
-interaccion-050,caso-050,cliente-soporte-050,Correo,agente-demo,2026-07-30T20:10:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0050,Canal demo
-interaccion-051,caso-051,cliente-soporte-051,Teléfono,agente-demo,2026-07-30T19:51:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0051,Canal demo
-interaccion-052,caso-052,cliente-soporte-052,Chat,agente-demo,2026-07-30T19:32:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0052,Canal demo
-interaccion-053,caso-053,cliente-soporte-053,WhatsApp,agente-demo,2026-07-30T19:13:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0053,Canal demo
-interaccion-054,caso-054,cliente-soporte-054,Nota interna,agente-demo,2026-07-30T18:54:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0054,Canal demo
-interaccion-055,caso-055,cliente-soporte-055,Correo,agente-demo,2026-07-30T18:35:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0055,Canal demo
-interaccion-056,caso-056,cliente-soporte-056,Teléfono,agente-demo,2026-07-30T18:16:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0056,Canal demo
-interaccion-057,caso-057,cliente-soporte-057,Chat,agente-demo,2026-07-30T17:57:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0057,Canal demo
-interaccion-058,caso-058,cliente-soporte-058,WhatsApp,agente-demo,2026-07-30T17:38:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0058,Canal demo
-interaccion-059,caso-059,cliente-soporte-059,Nota interna,agente-demo,2026-07-30T17:19:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0059,Canal demo
-interaccion-060,caso-060,cliente-soporte-060,Correo,agente-demo,2026-07-30T17:00:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0060,Canal demo
-interaccion-061,caso-061,cliente-soporte-001,Teléfono,agente-demo,2026-07-30T16:41:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0061,Canal demo
-interaccion-062,caso-062,cliente-soporte-002,Chat,agente-demo,2026-07-30T16:22:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0062,Canal demo
-interaccion-063,caso-063,cliente-soporte-003,WhatsApp,agente-demo,2026-07-30T16:03:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0063,Canal demo
-interaccion-064,caso-064,cliente-soporte-004,Nota interna,agente-demo,2026-07-30T15:44:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0064,Canal demo
-interaccion-065,caso-065,cliente-soporte-005,Correo,agente-demo,2026-07-30T15:25:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0065,Canal demo
-interaccion-066,caso-066,cliente-soporte-006,Teléfono,agente-demo,2026-07-30T15:06:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0066,Canal demo
-interaccion-067,caso-067,cliente-soporte-007,Chat,agente-demo,2026-07-30T14:47:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0067,Canal demo
-interaccion-068,caso-068,cliente-soporte-008,WhatsApp,agente-demo,2026-07-30T14:28:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0068,Canal demo
-interaccion-069,caso-069,cliente-soporte-009,Nota interna,agente-demo,2026-07-30T14:09:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0069,Canal demo
-interaccion-070,caso-070,cliente-soporte-010,Correo,agente-demo,2026-07-30T13:50:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0070,Canal demo
-interaccion-071,caso-071,cliente-soporte-011,Teléfono,agente-demo,2026-07-30T13:31:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0071,Canal demo
-interaccion-072,caso-072,cliente-soporte-012,Chat,agente-demo,2026-07-30T13:12:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0072,Canal demo
-interaccion-073,caso-073,cliente-soporte-013,WhatsApp,agente-demo,2026-07-30T12:53:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0073,Canal demo
-interaccion-074,caso-074,cliente-soporte-014,Nota interna,agente-demo,2026-07-30T12:34:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0074,Canal demo
-interaccion-075,caso-075,cliente-soporte-015,Correo,agente-demo,2026-07-30T12:15:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0075,Canal demo
-interaccion-076,caso-076,cliente-soporte-016,Teléfono,agente-demo,2026-07-30T11:56:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0076,Canal demo
-interaccion-077,caso-077,cliente-soporte-017,Chat,agente-demo,2026-07-30T11:37:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0077,Canal demo
-interaccion-078,caso-078,cliente-soporte-018,WhatsApp,agente-demo,2026-07-30T11:18:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0078,Canal demo
-interaccion-079,caso-079,cliente-soporte-019,Nota interna,agente-demo,2026-07-30T10:59:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0079,Canal demo
-interaccion-080,caso-080,cliente-soporte-020,Correo,agente-demo,2026-07-30T10:40:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0080,Canal demo
-interaccion-081,caso-081,cliente-soporte-021,Teléfono,agente-demo,2026-07-30T10:21:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0081,Canal demo
-interaccion-082,caso-082,cliente-soporte-022,Chat,agente-demo,2026-07-30T10:02:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0082,Canal demo
-interaccion-083,caso-083,cliente-soporte-023,WhatsApp,agente-demo,2026-07-30T09:43:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0083,Canal demo
-interaccion-084,caso-084,cliente-soporte-024,Nota interna,agente-demo,2026-07-30T09:24:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0084,Canal demo
-interaccion-085,caso-085,cliente-soporte-025,Correo,agente-demo,2026-07-30T09:05:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0085,Canal demo
-interaccion-086,caso-086,cliente-soporte-026,Teléfono,agente-demo,2026-07-30T08:46:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0086,Canal demo
-interaccion-087,caso-087,cliente-soporte-027,Chat,agente-demo,2026-07-30T08:27:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0087,Canal demo
-interaccion-088,caso-088,cliente-soporte-028,WhatsApp,agente-demo,2026-07-30T08:08:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0088,Canal demo
-interaccion-089,caso-089,cliente-soporte-029,Nota interna,agente-demo,2026-07-30T07:49:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0089,Canal demo
-interaccion-090,caso-090,cliente-soporte-030,Correo,agente-demo,2026-07-30T07:30:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0090,Canal demo
-interaccion-091,caso-091,cliente-soporte-031,Teléfono,agente-demo,2026-07-30T07:11:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0091,Canal demo
-interaccion-092,caso-092,cliente-soporte-032,Chat,agente-demo,2026-07-30T06:52:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0092,Canal demo
-interaccion-093,caso-093,cliente-soporte-033,WhatsApp,agente-demo,2026-07-30T06:33:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0093,Canal demo
-interaccion-094,caso-094,cliente-soporte-034,Nota interna,agente-demo,2026-07-30T06:14:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0094,Canal demo
-interaccion-095,caso-095,cliente-soporte-035,Correo,agente-demo,2026-07-30T05:55:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0095,Canal demo
-interaccion-096,caso-096,cliente-soporte-036,Teléfono,agente-demo,2026-07-30T05:36:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0096,Canal demo
-interaccion-097,caso-097,cliente-soporte-037,Chat,agente-demo,2026-07-30T05:17:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0097,Canal demo
-interaccion-098,caso-098,cliente-soporte-038,WhatsApp,agente-demo,2026-07-30T04:58:00Z,Nota interna,Interacción sintética de soporte.,SUP-INT-0098,Canal demo
-interaccion-099,caso-099,cliente-soporte-039,Nota interna,agente-demo,2026-07-30T04:39:00Z,Respuesta al cliente,Interacción sintética de soporte.,SUP-INT-0099,Canal demo
-interaccion-100,caso-100,cliente-soporte-040,Correo,agente-demo,2026-07-30T04:20:00Z,Mensaje del cliente,Interacción sintética de soporte.,SUP-INT-0100,Canal demo
+ID,caso,cliente,canal,agente,fecha,tipo,esRespuestaAgente,resumen,externalID,proveedorExterno,renovacion
+interaccion-001,caso-001,cliente-soporte-001,Teléfono,agente-demo,2026-07-31T11:41:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0001,Canal demo,
+interaccion-002,caso-002,cliente-soporte-002,Chat,agente-demo,2026-07-31T11:22:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0002,Canal demo,
+interaccion-003,caso-003,cliente-soporte-003,WhatsApp,agente-demo,2026-07-31T11:03:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0003,Canal demo,
+interaccion-004,caso-004,cliente-soporte-004,Nota interna,agente-demo,2026-07-31T10:44:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0004,Canal demo,
+interaccion-005,caso-005,cliente-soporte-005,Correo,agente-demo,2026-07-31T10:25:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0005,Canal demo,renovacion-005
+interaccion-006,caso-006,cliente-soporte-006,Teléfono,agente-demo,2026-07-31T10:06:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0006,Canal demo,
+interaccion-007,caso-007,cliente-soporte-007,Chat,agente-demo,2026-07-31T09:47:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0007,Canal demo,
+interaccion-008,caso-008,cliente-soporte-008,WhatsApp,agente-demo,2026-07-31T09:28:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0008,Canal demo,
+interaccion-009,caso-009,cliente-soporte-009,Nota interna,agente-demo,2026-07-31T09:09:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0009,Canal demo,
+interaccion-010,caso-010,cliente-soporte-010,Correo,agente-demo,2026-07-31T08:50:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0010,Canal demo,renovacion-010
+interaccion-011,caso-011,cliente-soporte-011,Teléfono,agente-demo,2026-07-31T08:31:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0011,Canal demo,
+interaccion-012,caso-012,cliente-soporte-012,Chat,agente-demo,2026-07-31T08:12:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0012,Canal demo,
+interaccion-013,caso-013,cliente-soporte-013,WhatsApp,agente-demo,2026-07-31T07:53:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0013,Canal demo,
+interaccion-014,caso-014,cliente-soporte-014,Nota interna,agente-demo,2026-07-31T07:34:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0014,Canal demo,
+interaccion-015,caso-015,cliente-soporte-015,Correo,agente-demo,2026-07-31T07:15:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0015,Canal demo,renovacion-015
+interaccion-016,caso-016,cliente-soporte-016,Teléfono,agente-demo,2026-07-31T06:56:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0016,Canal demo,
+interaccion-017,caso-017,cliente-soporte-017,Chat,agente-demo,2026-07-31T06:37:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0017,Canal demo,
+interaccion-018,caso-018,cliente-soporte-018,WhatsApp,agente-demo,2026-07-31T06:18:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0018,Canal demo,
+interaccion-019,caso-019,cliente-soporte-019,Nota interna,agente-demo,2026-07-31T05:59:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0019,Canal demo,
+interaccion-020,caso-020,cliente-soporte-020,Correo,agente-demo,2026-07-31T05:40:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0020,Canal demo,renovacion-020
+interaccion-021,caso-021,cliente-soporte-021,Teléfono,agente-demo,2026-07-31T05:21:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0021,Canal demo,
+interaccion-022,caso-022,cliente-soporte-022,Chat,agente-demo,2026-07-31T05:02:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0022,Canal demo,
+interaccion-023,caso-023,cliente-soporte-023,WhatsApp,agente-demo,2026-07-31T04:43:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0023,Canal demo,
+interaccion-024,caso-024,cliente-soporte-024,Nota interna,agente-demo,2026-07-31T04:24:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0024,Canal demo,
+interaccion-025,caso-025,cliente-soporte-025,Correo,agente-demo,2026-07-31T04:05:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0025,Canal demo,renovacion-025
+interaccion-026,caso-026,cliente-soporte-026,Teléfono,agente-demo,2026-07-31T03:46:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0026,Canal demo,
+interaccion-027,caso-027,cliente-soporte-027,Chat,agente-demo,2026-07-31T03:27:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0027,Canal demo,
+interaccion-028,caso-028,cliente-soporte-028,WhatsApp,agente-demo,2026-07-31T03:08:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0028,Canal demo,
+interaccion-029,caso-029,cliente-soporte-029,Nota interna,agente-demo,2026-07-31T02:49:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0029,Canal demo,
+interaccion-030,caso-030,cliente-soporte-030,Correo,agente-demo,2026-07-31T02:30:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0030,Canal demo,renovacion-030
+interaccion-031,caso-031,cliente-soporte-031,Teléfono,agente-demo,2026-07-31T02:11:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0031,Canal demo,
+interaccion-032,caso-032,cliente-soporte-032,Chat,agente-demo,2026-07-31T01:52:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0032,Canal demo,
+interaccion-033,caso-033,cliente-soporte-033,WhatsApp,agente-demo,2026-07-31T01:33:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0033,Canal demo,
+interaccion-034,caso-034,cliente-soporte-034,Nota interna,agente-demo,2026-07-31T01:14:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0034,Canal demo,
+interaccion-035,caso-035,cliente-soporte-035,Correo,agente-demo,2026-07-31T00:55:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0035,Canal demo,renovacion-035
+interaccion-036,caso-036,cliente-soporte-036,Teléfono,agente-demo,2026-07-31T00:36:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0036,Canal demo,
+interaccion-037,caso-037,cliente-soporte-037,Chat,agente-demo,2026-07-31T00:17:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0037,Canal demo,
+interaccion-038,caso-038,cliente-soporte-038,WhatsApp,agente-demo,2026-07-30T23:58:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0038,Canal demo,
+interaccion-039,caso-039,cliente-soporte-039,Nota interna,agente-demo,2026-07-30T23:39:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0039,Canal demo,
+interaccion-040,caso-040,cliente-soporte-040,Correo,agente-demo,2026-07-30T23:20:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0040,Canal demo,renovacion-040
+interaccion-041,caso-041,cliente-soporte-041,Teléfono,agente-demo,2026-07-30T23:01:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0041,Canal demo,
+interaccion-042,caso-042,cliente-soporte-042,Chat,agente-demo,2026-07-30T22:42:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0042,Canal demo,
+interaccion-043,caso-043,cliente-soporte-043,WhatsApp,agente-demo,2026-07-30T22:23:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0043,Canal demo,
+interaccion-044,caso-044,cliente-soporte-044,Nota interna,agente-demo,2026-07-30T22:04:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0044,Canal demo,
+interaccion-045,caso-045,cliente-soporte-045,Correo,agente-demo,2026-07-30T21:45:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0045,Canal demo,renovacion-045
+interaccion-046,caso-046,cliente-soporte-046,Teléfono,agente-demo,2026-07-30T21:26:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0046,Canal demo,
+interaccion-047,caso-047,cliente-soporte-047,Chat,agente-demo,2026-07-30T21:07:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0047,Canal demo,
+interaccion-048,caso-048,cliente-soporte-048,WhatsApp,agente-demo,2026-07-30T20:48:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0048,Canal demo,
+interaccion-049,caso-049,cliente-soporte-049,Nota interna,agente-demo,2026-07-30T20:29:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0049,Canal demo,
+interaccion-050,caso-050,cliente-soporte-050,Correo,agente-demo,2026-07-30T20:10:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0050,Canal demo,renovacion-050
+interaccion-051,caso-051,cliente-soporte-051,Teléfono,agente-demo,2026-07-30T19:51:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0051,Canal demo,
+interaccion-052,caso-052,cliente-soporte-052,Chat,agente-demo,2026-07-30T19:32:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0052,Canal demo,
+interaccion-053,caso-053,cliente-soporte-053,WhatsApp,agente-demo,2026-07-30T19:13:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0053,Canal demo,
+interaccion-054,caso-054,cliente-soporte-054,Nota interna,agente-demo,2026-07-30T18:54:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0054,Canal demo,
+interaccion-055,caso-055,cliente-soporte-055,Correo,agente-demo,2026-07-30T18:35:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0055,Canal demo,renovacion-055
+interaccion-056,caso-056,cliente-soporte-056,Teléfono,agente-demo,2026-07-30T18:16:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0056,Canal demo,
+interaccion-057,caso-057,cliente-soporte-057,Chat,agente-demo,2026-07-30T17:57:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0057,Canal demo,
+interaccion-058,caso-058,cliente-soporte-058,WhatsApp,agente-demo,2026-07-30T17:38:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0058,Canal demo,
+interaccion-059,caso-059,cliente-soporte-059,Nota interna,agente-demo,2026-07-30T17:19:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0059,Canal demo,
+interaccion-060,caso-060,cliente-soporte-060,Correo,agente-demo,2026-07-30T17:00:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0060,Canal demo,renovacion-060
+interaccion-061,caso-061,cliente-soporte-061,Teléfono,agente-demo,2026-07-30T16:41:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0061,Canal demo,
+interaccion-062,caso-062,cliente-soporte-062,Chat,agente-demo,2026-07-30T16:22:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0062,Canal demo,
+interaccion-063,caso-063,cliente-soporte-063,WhatsApp,agente-demo,2026-07-30T16:03:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0063,Canal demo,
+interaccion-064,caso-064,cliente-soporte-064,Nota interna,agente-demo,2026-07-30T15:44:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0064,Canal demo,
+interaccion-065,caso-065,cliente-soporte-065,Correo,agente-demo,2026-07-30T15:25:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0065,Canal demo,renovacion-065
+interaccion-066,caso-066,cliente-soporte-066,Teléfono,agente-demo,2026-07-30T15:06:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0066,Canal demo,
+interaccion-067,caso-067,cliente-soporte-067,Chat,agente-demo,2026-07-30T14:47:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0067,Canal demo,
+interaccion-068,caso-068,cliente-soporte-068,WhatsApp,agente-demo,2026-07-30T14:28:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0068,Canal demo,
+interaccion-069,caso-069,cliente-soporte-069,Nota interna,agente-demo,2026-07-30T14:09:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0069,Canal demo,
+interaccion-070,caso-070,cliente-soporte-070,Correo,agente-demo,2026-07-30T13:50:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0070,Canal demo,renovacion-070
+interaccion-071,caso-071,cliente-soporte-071,Teléfono,agente-demo,2026-07-30T13:31:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0071,Canal demo,
+interaccion-072,caso-072,cliente-soporte-072,Chat,agente-demo,2026-07-30T13:12:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0072,Canal demo,
+interaccion-073,caso-073,cliente-soporte-073,WhatsApp,agente-demo,2026-07-30T12:53:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0073,Canal demo,
+interaccion-074,caso-074,cliente-soporte-074,Nota interna,agente-demo,2026-07-30T12:34:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0074,Canal demo,
+interaccion-075,caso-075,cliente-soporte-075,Correo,agente-demo,2026-07-30T12:15:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0075,Canal demo,renovacion-075
+interaccion-076,caso-076,cliente-soporte-076,Teléfono,agente-demo,2026-07-30T11:56:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0076,Canal demo,
+interaccion-077,caso-077,cliente-soporte-077,Chat,agente-demo,2026-07-30T11:37:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0077,Canal demo,
+interaccion-078,caso-078,cliente-soporte-078,WhatsApp,agente-demo,2026-07-30T11:18:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0078,Canal demo,
+interaccion-079,caso-079,cliente-soporte-079,Nota interna,agente-demo,2026-07-30T10:59:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0079,Canal demo,
+interaccion-080,caso-080,cliente-soporte-080,Correo,agente-demo,2026-07-30T10:40:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0080,Canal demo,renovacion-080
+interaccion-081,caso-081,cliente-soporte-081,Teléfono,agente-demo,2026-07-30T10:21:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0081,Canal demo,
+interaccion-082,caso-082,cliente-soporte-082,Chat,agente-demo,2026-07-30T10:02:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0082,Canal demo,
+interaccion-083,caso-083,cliente-soporte-083,WhatsApp,agente-demo,2026-07-30T09:43:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0083,Canal demo,
+interaccion-084,caso-084,cliente-soporte-084,Nota interna,agente-demo,2026-07-30T09:24:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0084,Canal demo,
+interaccion-085,caso-085,cliente-soporte-085,Correo,agente-demo,2026-07-30T09:05:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0085,Canal demo,renovacion-085
+interaccion-086,caso-086,cliente-soporte-086,Teléfono,agente-demo,2026-07-30T08:46:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0086,Canal demo,
+interaccion-087,caso-087,cliente-soporte-087,Chat,agente-demo,2026-07-30T08:27:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0087,Canal demo,
+interaccion-088,caso-088,cliente-soporte-088,WhatsApp,agente-demo,2026-07-30T08:08:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0088,Canal demo,
+interaccion-089,caso-089,cliente-soporte-089,Nota interna,agente-demo,2026-07-30T07:49:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0089,Canal demo,
+interaccion-090,caso-090,cliente-soporte-090,Correo,agente-demo,2026-07-30T07:30:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0090,Canal demo,renovacion-090
+interaccion-091,caso-091,cliente-soporte-091,Teléfono,agente-demo,2026-07-30T07:11:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0091,Canal demo,
+interaccion-092,caso-092,cliente-soporte-092,Chat,agente-demo,2026-07-30T06:52:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0092,Canal demo,
+interaccion-093,caso-093,cliente-soporte-093,WhatsApp,agente-demo,2026-07-30T06:33:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0093,Canal demo,
+interaccion-094,caso-094,cliente-soporte-094,Nota interna,agente-demo,2026-07-30T06:14:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0094,Canal demo,
+interaccion-095,caso-095,cliente-soporte-095,Correo,agente-demo,2026-07-30T05:55:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0095,Canal demo,renovacion-095
+interaccion-096,caso-096,cliente-soporte-096,Teléfono,agente-demo,2026-07-30T05:36:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0096,Canal demo,
+interaccion-097,caso-097,cliente-soporte-097,Chat,agente-demo,2026-07-30T05:17:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0097,Canal demo,
+interaccion-098,caso-098,cliente-soporte-098,WhatsApp,agente-demo,2026-07-30T04:58:00Z,Nota interna,true,Interacción sintética de soporte.,SUP-INT-0098,Canal demo,
+interaccion-099,caso-099,cliente-soporte-099,Nota interna,agente-demo,2026-07-30T04:39:00Z,Respuesta al cliente,true,Interacción sintética de soporte.,SUP-INT-0099,Canal demo,
+interaccion-100,caso-100,cliente-soporte-100,Correo,agente-demo,2026-07-30T04:20:00Z,Mensaje del cliente,false,Interacción sintética de soporte.,SUP-INT-0100,Canal demo,renovacion-100

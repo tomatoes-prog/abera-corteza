@@ -7,80 +7,189 @@ pages:
     title: Panel del supervisor
     visible: true
     blocks:
-    - title: Funnel comercial
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 16
-      - 30
-      options:
-        chart: funnel-contacto
-      blockID: 1
-    - title: Resultados de llamadas
-      kind: Chart
-      xywh:
-      - 16
-      - 0
-      - 16
-      - 30
-      options:
-        chart: resultados-llamadas
-      blockID: 2
-    - title: Productividad por agente
-      kind: Chart
-      xywh:
-      - 32
-      - 0
-      - 16
-      - 30
-      options:
-        chart: llamadas-por-agente
-      blockID: 3
-    - title: Callbacks vencidos y pendientes
-      kind: RecordList
-      xywh:
-      - 0
-      - 30
-      - 24
-      - 18
-      options:
-        module: registros-campana
-        fields:
-        - name: codigo
-        - name: campana
-        - name: contacto
-        - name: agente
-        - name: intentos
-        - name: proximoIntento
-        - name: estado
-        prefilter: estado = 'Callback' OR estado = 'Pendiente'
-        presort: proximoIntento ASC
-        perPage: 20
-        hideRecordCloneButton: true
-      blockID: 4
-    - title: Oportunidades recientes
-      kind: RecordList
-      xywh:
-      - 24
-      - 30
-      - 24
-      - 18
-      options:
-        module: oportunidades
-        fields:
-        - name: contacto
-        - name: campana
-        - name: closer
-        - name: producto
-        - name: etapa
-        - name: valor
-        - name: probabilidad
-        prefilter: etapa != 'Venta' AND etapa != 'Perdida'
-        presort: createdAt DESC
-        perPage: 15
-        hideRecordCloneButton: true
-      blockID: 5
+      - title: Funnel comercial
+        kind: Chart
+        xywh:
+          - 0
+          - 18
+          - 24
+          - 30
+        options:
+          chart: funnel-contacto
+        blockID: 1
+        description: Gráfico que resume funnel comercial a partir de datos actuales.
+      - title: Resultados de llamadas
+        kind: Chart
+        xywh:
+          - 24
+          - 18
+          - 24
+          - 30
+        options:
+          chart: resultados-llamadas
+        blockID: 2
+        description: Gráfico que resume resultados de llamadas a partir de datos actuales.
+      - title: Productividad por agente
+        kind: Chart
+        xywh:
+          - 0
+          - 48
+          - 48
+          - 30
+        options:
+          chart: llamadas-por-agente
+        blockID: 3
+        description: Gráfico que resume productividad por agente a partir de datos actuales.
+      - title: Callbacks vencidos y pendientes
+        kind: RecordList
+        xywh:
+          - 0
+          - 78
+          - 24
+          - 48
+        options:
+          module: registros-campana
+          fields:
+            - name: codigo
+            - name: campana
+            - name: contacto
+            - name: agente
+            - name: intentos
+            - name: proximoIntento
+            - name: estado
+          prefilter: estado = 'Callback' OR estado = 'Pendiente'
+          presort: proximoIntento ASC
+          perPage: 20
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 4
+        description: Listado operativo de callbacks vencidos y pendientes con búsqueda, filtros, conteo y exportación.
+      - title: Oportunidades recientes
+        kind: RecordList
+        xywh:
+          - 24
+          - 78
+          - 24
+          - 48
+        options:
+          module: oportunidades
+          fields:
+            - name: contacto
+            - name: campana
+            - name: closer
+            - name: producto
+            - name: etapa
+            - name: valor
+            - name: probabilidad
+          prefilter: etapa != 'Venta' AND etapa != 'Perdida'
+          presort: createdAt DESC
+          perPage: 15
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 5
+        description: Listado operativo de oportunidades recientes con búsqueda, filtros, conteo y exportación.
+      - blockID: 6
+        description: Contactos pendientes o con devolución de llamada programada.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado = 'Pendiente' OR estado = 'Callback'
+              label: Gestiones pendientes
+              metricField: count
+              module: registros-campana
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Gestiones pendientes
+        xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+      - blockID: 7
+        description: Devoluciones de llamada cuya fecha ya venció.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado = 'Callback' AND proximoIntento < NOW()
+              label: Callbacks vencidos
+              metricField: count
+              module: registros-campana
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Callbacks vencidos
+        xywh:
+          - 12
+          - 0
+          - 12
+          - 18
+      - blockID: 8
+        description: Oportunidades que continúan en gestión comercial.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: etapa != 'Venta' AND etapa != 'Perdida'
+              label: Oportunidades abiertas
+              metricField: count
+              module: oportunidades
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Oportunidades abiertas
+        xywh:
+          - 24
+          - 0
+          - 12
+          - 18
+      - blockID: 9
+        description: Valor de las oportunidades convertidas en venta en COP.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: etapa = 'Venta'
+              label: Ventas
+              metricField: valor
+              module: oportunidades
+              numberFormat: 0,0
+              operation: sum
+              prefix: '$ '
+              suffix: ""
+          showRefresh: true
+        title: Ventas
+        xywh:
+          - 36
+          - 0
+          - 12
+          - 18
     page_layouts:
       principal:
         primary: true
@@ -89,140 +198,211 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 16
-          - 30
-        - blockID: 2
-          xywh:
-          - 16
-          - 0
-          - 16
-          - 30
-        - blockID: 3
-          xywh:
-          - 32
-          - 0
-          - 16
-          - 30
-        - blockID: 4
-          xywh:
-          - 0
-          - 30
-          - 24
-          - 18
-        - blockID: 5
-          xywh:
-          - 24
-          - 30
-          - 24
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 18
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 18
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 48
+              - 48
+              - 30
+          - blockID: 4
+            xywh:
+              - 0
+              - 78
+              - 24
+              - 48
+          - blockID: 5
+            xywh:
+              - 24
+              - 78
+              - 24
+              - 48
+          - blockID: 6
+            xywh:
+              - 0
+              - 0
+              - 12
+              - 18
+          - blockID: 7
+            xywh:
+              - 12
+              - 0
+              - 12
+              - 18
+          - blockID: 8
+            xywh:
+              - 24
+              - 0
+              - 12
+              - 18
+          - blockID: 9
+            xywh:
+              - 36
+              - 0
+              - 12
+              - 18
+    description: Vista operativa de panel del supervisor. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   contactos-leads:
     title: Contactos
     visible: true
     blocks:
-    - title: Contactos y leads
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: contactos-leads
-        fields:
-        - name: nombres
-        - name: apellidos
-        - name: telefonoPrincipal
-        - name: ciudad
-        - name: productoInteres
-        - name: presupuesto
-        - name: estadoComercial
-        - name: responsable
-        - name: totalIntentos
-        - name: proximaLlamada
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
-    children:
-      contacto-registro:
-        title: Detalle del contacto
-        module: contactos-leads
-        visible: false
-        blocks:
-        - title: Contacto
-          kind: Record
-          xywh:
+      - title: Contactos y leads
+        kind: RecordList
+        xywh:
           - 0
           - 0
-          - 12
-          - 14
-          options:
-            fields:
+          - 48
+          - 38
+        options:
+          module: contactos-leads
+          fields:
             - name: nombres
             - name: apellidos
-            - name: identificacion
             - name: telefonoPrincipal
-            - name: telefonoAlterno
-            - name: correo
             - name: ciudad
-            - name: autorizaTratamientoDatos
-            - name: autorizaContacto
-            - name: noLlamar
             - name: productoInteres
             - name: presupuesto
             - name: estadoComercial
             - name: responsable
             - name: totalIntentos
             - name: proximaLlamada
-            - name: notas
-          blockID: 1
-        - title: Llamadas
-          kind: RecordList
-          xywh:
-          - 0
-          - 14
-          - 6
-          - 9
-          options:
-            module: llamadas
-            fields:
-            - name: inicio
-            - name: campana
-            - name: agente
-            - name: duracionSegundos
-            - name: disposicion
-            - name: callback
-            prefilter: contacto = ${recordID}
-            presort: inicio DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 2
-        - title: Oportunidades
-          kind: RecordList
-          xywh:
-          - 6
-          - 14
-          - 6
-          - 9
-          options:
-            module: oportunidades
-            fields:
-            - name: campana
-            - name: producto
-            - name: closer
-            - name: etapa
-            - name: valor
-            - name: probabilidad
-            prefilter: contacto = ${recordID}
-            presort: createdAt DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 3
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de contactos y leads con búsqueda, filtros, conteo y exportación.
+    children:
+      contacto-registro:
+        title: Detalle del contacto
+        module: contactos-leads
+        visible: false
+        blocks:
+          - title: Contacto
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 95
+            options:
+              fields:
+                - name: nombres
+                - name: apellidos
+                - name: identificacion
+                - name: telefonoPrincipal
+                - name: telefonoAlterno
+                - name: correo
+                - name: ciudad
+                - name: autorizaTratamientoDatos
+                - name: autorizaContacto
+                - name: noLlamar
+                - name: productoInteres
+                - name: presupuesto
+                - name: estadoComercial
+                - name: responsable
+                - name: totalIntentos
+                - name: proximaLlamada
+                - name: notas
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar contacto.
+          - title: Llamadas
+            kind: RecordList
+            xywh:
+              - 0
+              - 95
+              - 24
+              - 38
+            options:
+              module: llamadas
+              fields:
+                - name: inicio
+                - name: campana
+                - name: agente
+                - name: duracionSegundos
+                - name: disposicion
+                - name: callback
+              prefilter: contacto = ${recordID}
+              presort: inicio DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 2
+            description: Listado operativo de llamadas con búsqueda, filtros, conteo y exportación.
+          - title: Oportunidades
+            kind: RecordList
+            xywh:
+              - 24
+              - 95
+              - 24
+              - 38
+            options:
+              module: oportunidades
+              fields:
+                - name: campana
+                - name: producto
+                - name: closer
+                - name: etapa
+                - name: valor
+                - name: probabilidad
+              prefilter: contacto = ${recordID}
+              presort: createdAt DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 3
+            description: Listado operativo de oportunidades con búsqueda, filtros, conteo y exportación.
+          - blockID: 4
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: fechaAutorizacion
+                - name: origenAutorizacion
+                - name: canalesAutorizados
+                - name: rneConsultado
+                - name: fechaConsultaRNE
+                - name: motivoNoContactar
+                - name: prioridad
+                - name: ultimaGestion
+            title: Gestión y control
+            xywh:
+              - 0
+              - 133
+              - 48
+              - 50
         page_layouts:
           principal:
             primary: true
@@ -244,24 +424,31 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 14
-            - blockID: 2
-              xywh:
-              - 0
-              - 14
-              - 6
-              - 9
-            - blockID: 3
-              xywh:
-              - 6
-              - 14
-              - 6
-              - 9
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 95
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 95
+                  - 24
+                  - 38
+              - blockID: 3
+                xywh:
+                  - 24
+                  - 95
+                  - 24
+                  - 38
+              - blockID: 4
+                xywh:
+                  - 0
+                  - 133
+                  - 48
+                  - 50
+        description: Vista operativa de detalle del contacto. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -270,104 +457,124 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de contactos. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   campanas:
     title: Campañas
     visible: true
     blocks:
-    - title: Conversión por campaña
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 4
-      - 30
-      options:
-        chart: conversion-por-campana
-      blockID: 1
-    - title: Campañas
-      kind: RecordList
-      xywh:
-      - 4
-      - 0
-      - 8
-      - 18
-      options:
-        module: campanas
-        fields:
-        - name: codigo
-        - name: nombre
-        - name: objetivo
-        - name: producto
-        - name: prioridad
-        - name: fechaInicio
-        - name: fechaFin
-        - name: metaContactos
-        - name: metaVentas
-        - name: estado
-        presort: fechaInicio DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 2
+      - title: Conversión por campaña
+        kind: Chart
+        xywh:
+          - 0
+          - 0
+          - 24
+          - 30
+        options:
+          chart: conversion-por-campana
+        blockID: 1
+        description: Gráfico que resume conversión por campaña a partir de datos actuales.
+      - title: Campañas
+        kind: RecordList
+        xywh:
+          - 24
+          - 0
+          - 24
+          - 38
+        options:
+          module: campanas
+          fields:
+            - name: codigo
+            - name: nombre
+            - name: objetivo
+            - name: producto
+            - name: prioridad
+            - name: fechaInicio
+            - name: fechaFin
+            - name: metaContactos
+            - name: metaVentas
+            - name: estado
+          presort: fechaInicio DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 2
+        description: Listado operativo de campañas con búsqueda, filtros, conteo y exportación.
     children:
       campana-registro:
         title: Detalle de la campaña
         module: campanas
         visible: false
         blocks:
-        - title: Campaña
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 14
-          options:
-            fields:
-            - name: codigo
-            - name: nombre
-            - name: objetivo
-            - name: producto
-            - name: guion
-            - name: prioridad
-            - name: fechaInicio
-            - name: fechaFin
-            - name: horaInicio
-            - name: horaFin
-            - name: metaContactos
-            - name: metaVentas
-            - name: maximoIntentos
-            - name: estado
-          blockID: 1
-        - title: Registros de campaña
-          kind: RecordList
-          xywh:
-          - 0
-          - 14
-          - 12
-          - 9
-          options:
-            module: registros-campana
-            fields:
-            - name: codigo
-            - name: contacto
-            - name: agente
-            - name: prioridad
-            - name: intentos
-            - name: proximoIntento
-            - name: estado
-            - name: ultimoResultado
-            prefilter: campana = ${recordID}
-            presort: createdAt DESC
-            perPage: 20
-            hideRecordCloneButton: true
-          blockID: 2
+          - title: Campaña
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 80
+            options:
+              fields:
+                - name: codigo
+                - name: nombre
+                - name: objetivo
+                - name: producto
+                - name: guion
+                - name: prioridad
+                - name: fechaInicio
+                - name: fechaFin
+                - name: horaInicio
+                - name: horaFin
+                - name: metaContactos
+                - name: metaVentas
+                - name: maximoIntentos
+                - name: estado
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar campaña.
+          - title: Registros de campaña
+            kind: RecordList
+            xywh:
+              - 0
+              - 80
+              - 48
+              - 38
+            options:
+              module: registros-campana
+              fields:
+                - name: codigo
+                - name: contacto
+                - name: agente
+                - name: prioridad
+                - name: intentos
+                - name: proximoIntento
+                - name: estado
+                - name: ultimoResultado
+              prefilter: campana = ${recordID}
+              presort: createdAt DESC
+              perPage: 20
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 2
+            description: Listado operativo de registros de campaña con búsqueda, filtros, conteo y exportación.
         page_layouts:
           principal:
             primary: true
@@ -389,18 +596,19 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 14
-            - blockID: 2
-              xywh:
-              - 0
-              - 14
-              - 12
-              - 9
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 80
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 80
+                  - 48
+                  - 38
+        description: Vista operativa de detalle de la campaña. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -409,62 +617,33 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 4
-          - 30
-        - blockID: 2
-          xywh:
-          - 4
-          - 0
-          - 8
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 38
+    description: Vista operativa de campañas. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   registros-campana:
     title: Cola de marcación
     visible: true
     blocks:
-    - title: Trabajo pendiente
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: registros-campana
-        fields:
-        - name: codigo
-        - name: campana
-        - name: contacto
-        - name: agente
-        - name: prioridad
-        - name: intentos
-        - name: proximoIntento
-        - name: estado
-        - name: ultimoResultado
-        prefilter: estado != 'Cerrado' AND estado != 'Agotado'
-        presort: proximoIntento ASC
-        perPage: 30
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
-    children:
-      registro-campana-registro:
-        title: Detalle del registro
-        module: registros-campana
-        visible: false
-        blocks:
-        - title: Registro de campaña
-          kind: Record
-          xywh:
+      - title: Trabajo pendiente
+        kind: RecordList
+        xywh:
           - 0
           - 0
           - 48
-          - 12
-          options:
-            fields:
+          - 38
+        options:
+          module: registros-campana
+          fields:
             - name: codigo
             - name: campana
             - name: contacto
@@ -474,30 +653,78 @@ pages:
             - name: proximoIntento
             - name: estado
             - name: ultimoResultado
-            - name: fechaAsignacion
-          blockID: 1
-        - title: Historial de llamadas
-          kind: RecordList
-          xywh:
-          - 0
-          - 12
-          - 48
-          - 18
-          options:
-            module: llamadas
-            fields:
-            - name: inicio
-            - name: agente
-            - name: direccion
-            - name: duracionSegundos
-            - name: disposicion
-            - name: callback
-            - name: resumen
-            prefilter: registroCampana = ${recordID}
-            presort: inicio DESC
-            perPage: 20
-            hideRecordCloneButton: true
-          blockID: 2
+          prefilter: estado != 'Cerrado' AND estado != 'Agotado'
+          presort: proximoIntento ASC
+          perPage: 30
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de trabajo pendiente con búsqueda, filtros, conteo y exportación.
+    children:
+      registro-campana-registro:
+        title: Detalle del registro
+        module: registros-campana
+        visible: false
+        blocks:
+          - title: Registro de campaña
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 60
+            options:
+              fields:
+                - name: codigo
+                - name: campana
+                - name: contacto
+                - name: agente
+                - name: prioridad
+                - name: intentos
+                - name: proximoIntento
+                - name: estado
+                - name: ultimoResultado
+                - name: fechaAsignacion
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar registro de campaña.
+          - title: Historial de llamadas
+            kind: RecordList
+            xywh:
+              - 0
+              - 60
+              - 48
+              - 38
+            options:
+              module: llamadas
+              fields:
+                - name: inicio
+                - name: agente
+                - name: direccion
+                - name: duracionSegundos
+                - name: disposicion
+                - name: callback
+                - name: resumen
+              prefilter: registroCampana = ${recordID}
+              presort: inicio DESC
+              perPage: 20
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 2
+            description: Listado operativo de historial de llamadas con búsqueda, filtros, conteo y exportación.
         page_layouts:
           principal:
             primary: true
@@ -519,18 +746,19 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 48
-              - 12
-            - blockID: 2
-              xywh:
-              - 0
-              - 12
-              - 48
-              - 18
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 60
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 60
+                  - 48
+                  - 38
+        description: Vista operativa de detalle del registro. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -539,73 +767,83 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de cola de marcación. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   llamadas:
     title: Llamadas
     visible: true
     blocks:
-    - title: Historial de llamadas
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: llamadas
-        fields:
-        - name: inicio
-        - name: contacto
-        - name: campana
-        - name: agente
-        - name: direccion
-        - name: duracionSegundos
-        - name: disposicion
-        - name: callback
-        - name: proveedorExterno
-        presort: inicio DESC
-        perPage: 30
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
+      - title: Historial de llamadas
+        kind: RecordList
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 38
+        options:
+          module: llamadas
+          fields:
+            - name: inicio
+            - name: contacto
+            - name: campana
+            - name: agente
+            - name: direccion
+            - name: duracionSegundos
+            - name: disposicion
+            - name: callback
+            - name: proveedorExterno
+          presort: inicio DESC
+          perPage: 30
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de historial de llamadas con búsqueda, filtros, conteo y exportación.
     children:
       llamada-registro:
         title: Detalle de la llamada
         module: llamadas
         visible: false
         blocks:
-        - title: Llamada
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 16
-          options:
-            fields:
-            - name: registroCampana
-            - name: contacto
-            - name: campana
-            - name: agente
-            - name: direccion
-            - name: inicio
-            - name: fin
-            - name: duracionSegundos
-            - name: disposicion
-            - name: resumen
-            - name: callback
-            - name: externalID
-            - name: proveedorExterno
-            - name: grabacionURL
-            - name: transcripcionURL
-            - name: estadoIntegracion
-            - name: ultimoErrorIntegracion
-          blockID: 1
+          - title: Llamada
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 95
+            options:
+              fields:
+                - name: registroCampana
+                - name: contacto
+                - name: campana
+                - name: agente
+                - name: direccion
+                - name: inicio
+                - name: fin
+                - name: duracionSegundos
+                - name: disposicion
+                - name: resumen
+                - name: callback
+                - name: externalID
+                - name: proveedorExterno
+                - name: grabacionURL
+                - name: transcripcionURL
+                - name: estadoIntegracion
+                - name: ultimoErrorIntegracion
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar llamada.
         page_layouts:
           principal:
             primary: true
@@ -627,12 +865,13 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 16
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 95
+        description: Vista operativa de detalle de la llamada. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -641,65 +880,38 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de llamadas. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   oportunidades:
     title: Oportunidades
     visible: true
     blocks:
-    - title: Valor por etapa
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 4
-      - 30
-      options:
-        chart: oportunidades-por-etapa
-      blockID: 1
-    - title: Pipeline de oportunidades
-      kind: RecordList
-      xywh:
-      - 4
-      - 0
-      - 8
-      - 18
-      options:
-        module: oportunidades
-        fields:
-        - name: codigo
-        - name: contacto
-        - name: campana
-        - name: closer
-        - name: producto
-        - name: etapa
-        - name: valor
-        - name: probabilidad
-        - name: fechaEstimadaCierre
-        presort: fechaEstimadaCierre ASC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 2
-    children:
-      oportunidad-registro:
-        title: Detalle de la oportunidad
-        module: oportunidades
-        visible: false
-        blocks:
-        - title: Oportunidad
-          kind: Record
-          xywh:
+      - title: Valor por etapa
+        kind: Chart
+        xywh:
           - 0
           - 0
-          - 12
-          - 16
-          options:
-            fields:
+          - 24
+          - 30
+        options:
+          chart: oportunidades-por-etapa
+        blockID: 1
+        description: Gráfico que resume valor por etapa a partir de datos actuales.
+      - title: Pipeline de oportunidades
+        kind: RecordList
+        xywh:
+          - 24
+          - 0
+          - 24
+          - 38
+        options:
+          module: oportunidades
+          fields:
             - name: codigo
             - name: contacto
             - name: campana
@@ -709,9 +921,64 @@ pages:
             - name: valor
             - name: probabilidad
             - name: fechaEstimadaCierre
-            - name: motivoPerdida
-            - name: observaciones
-          blockID: 1
+          presort: fechaEstimadaCierre ASC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 2
+        description: Listado operativo de pipeline de oportunidades con búsqueda, filtros, conteo y exportación.
+      - blockID: 3
+        description: Pipeline operativo agrupado por etapa; permite visualizar y actualizar el avance de cada registro.
+        kind: RecordOrganizer
+        options:
+          descriptionField: producto
+          displayOption: sameTab
+          filter: etapa != 'Venta' AND etapa != 'Perdida'
+          groupField: etapa
+          labelField: contacto
+          module: oportunidades
+          showRefresh: true
+        title: Pipeline comercial
+        xywh:
+          - 0
+          - 38
+          - 48
+          - 44
+    children:
+      oportunidad-registro:
+        title: Detalle de la oportunidad
+        module: oportunidades
+        visible: false
+        blocks:
+          - title: Oportunidad
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 65
+            options:
+              fields:
+                - name: codigo
+                - name: contacto
+                - name: campana
+                - name: closer
+                - name: producto
+                - name: etapa
+                - name: valor
+                - name: probabilidad
+                - name: fechaEstimadaCierre
+                - name: motivoPerdida
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar oportunidad.
         page_layouts:
           principal:
             primary: true
@@ -733,12 +1000,13 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 16
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 65
+        description: Vista operativa de detalle de la oportunidad. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -747,15 +1015,187 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 38
+          - blockID: 3
+            xywh:
+              - 0
+              - 38
+              - 48
+              - 44
+    description: Vista operativa de oportunidades. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+  mi-cola:
+    blocks:
+      - blockID: 1
+        description: Gestiones telefónicas pendientes asignadas al usuario actual, ordenadas por prioridad y próximo intento.
+        kind: RecordList
+        options:
+          allowExport: true
+          fields:
+            - name: campana
+            - name: contacto
+            - name: prioridad
+            - name: intentos
+            - name: proximoIntento
+            - name: estado
+            - name: resultadoAcumulado
+          hideConfigureFieldsButton: false
+          inlineValueFiltering: true
+          module: registros-campana
+          perPage: 20
+          prefilter: agente = ${userID} AND (estado = 'Pendiente' OR estado = 'Callback')
+          presort: prioridad DESC, proximoIntento ASC
+          showRecordPerPageOption: true
+          showTotalCount: true
+          hideSearch: false
+          hideFiltering: false
+          customFilterPresets: true
+        title: Mi cola
+        xywh:
           - 0
           - 0
-          - 4
+          - 48
+          - 38
+    description: Gestiones telefónicas pendientes asignadas al usuario actual, ordenadas por prioridad y próximo intento.
+    page_layouts:
+      principal:
+        blocks:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+        config:
+          useTitle: true
+        meta:
+          title: Diseño principal · Mi cola
+        primary: true
+    title: Mi cola
+    visible: true
+  reportes:
+    blocks:
+      - blockID: 1
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: funnel-contacto
+        title: Funnel contacto
+        xywh:
+          - 0
+          - 0
+          - 24
           - 30
-        - blockID: 2
-          xywh:
-          - 4
+      - blockID: 2
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: resultados-llamadas
+        title: Resultados llamadas
+        xywh:
+          - 24
           - 0
-          - 8
-          - 18
+          - 24
+          - 30
+      - blockID: 3
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: conversion-por-campana
+        title: Conversion por campana
+        xywh:
+          - 0
+          - 30
+          - 24
+          - 30
+      - blockID: 4
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: llamadas-por-agente
+        title: Llamadas por agente
+        xywh:
+          - 24
+          - 30
+          - 24
+          - 30
+      - blockID: 5
+        description: Registros que respaldan los indicadores; permite buscar, filtrar, contar y exportar el resultado.
+        kind: RecordList
+        options:
+          allowExport: true
+          fields:
+            - name: contacto
+            - name: campana
+            - name: agente
+            - name: inicio
+            - name: duracionSegundos
+            - name: disposicion
+            - name: callback
+          hideConfigureFieldsButton: false
+          inlineValueFiltering: true
+          module: llamadas
+          perPage: 20
+          presort: createdAt DESC
+          showRecordPerPageOption: true
+          showTotalCount: true
+          hideSearch: false
+          hideFiltering: false
+          customFilterPresets: true
+        title: Detalle operativo
+        xywh:
+          - 0
+          - 60
+          - 48
+          - 38
+    description: Vista ejecutiva y operativa para analizar resultados, encontrar desviaciones y exportar información.
+    page_layouts:
+      principal:
+        blocks:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 30
+              - 24
+              - 30
+          - blockID: 4
+            xywh:
+              - 24
+              - 30
+              - 24
+              - 30
+          - blockID: 5
+            xywh:
+              - 0
+              - 60
+              - 48
+              - 38
+        config:
+          useTitle: true
+        meta:
+          title: Diseño principal · Reportes
+        primary: true
+    title: Reportes
+    visible: true

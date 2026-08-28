@@ -9,7 +9,7 @@ help:
   version: 'Versión:'
 module: Módulos
 more: Más
-namespace: Espacios de nombres
+namespace: Espacios de trabajo
 noPageTitle: Página sin título
 page: Páginas
 publicPages: Páginas públicas

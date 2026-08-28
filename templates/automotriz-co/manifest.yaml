@@ -3,11 +3,11 @@
 
 id: automotriz-co
 name: CRM Automotriz Colombia
-version: 1.0.1
+version: 2.0.0
 minimumCortezaVersion: 2024.9.9
 defaultLocale: es
 license: Apache-2.0
-description: Gestión comercial de vehículos, pruebas de manejo y posventa.
+description: Gestión productiva de ventas, inventario, pruebas de manejo, actividades comerciales, taller y posventa.
 resources:
   namespace: automotriz-co
   roles:
@@ -23,6 +23,8 @@ resources:
     - pruebas-manejo
     - oportunidades
     - ordenes-servicio
+    - actividades-comerciales
+    - tareas-servicio
   pages:
     - inicio
     - prospectos
@@ -30,6 +32,7 @@ resources:
     - pruebas-manejo
     - oportunidades
     - ordenes-servicio
+    - reportes
   charts:
     - funnel-ventas
     - oportunidades-por-etapa
@@ -41,5 +44,11 @@ resources:
     - validar-disponibilidad-prueba
     - crear-oportunidad-desde-prueba
     - cerrar-venta-automotriz
+    - avisar-asignacion-automotriz-co
+    - ejemplo-correo-responsable-automotriz-co
+    - ejemplo-slack-hito-automotriz-co
+  reports:
+    - automotriz-co-ejecutivo
+    - automotriz-co-operativo
   scripts:
     - scripts/seed-demo.ps1

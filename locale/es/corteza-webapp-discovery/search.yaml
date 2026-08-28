@@ -5,7 +5,7 @@ card:
   button-text: Mostrar más
   type: Tipo
   handle: Identificador
-  namespace: Espacio de nombres
+  namespace: Espacio de trabajo
   module: Módulo
   user: Usuario
   email: Correo electrónico

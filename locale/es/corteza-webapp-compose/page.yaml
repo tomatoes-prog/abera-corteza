@@ -154,8 +154,8 @@ delete:
 public:
   record:
     create:
-      title: Crear registro
+      title: '{{name}} - Creando registro'
     edit:
-      title: Editar registro
+      title: '{{name}} - Editando registro'
     view:
-      title: Ver registro
+      title: '{{name}} - Viendo registro'

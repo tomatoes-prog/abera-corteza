@@ -7,75 +7,184 @@ pages:
     title: Inicio
     visible: true
     blocks:
-    - title: Funnel de ventas
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 16
-      - 30
-      options:
-        chart: funnel-ventas
-      blockID: 1
-    - title: Inventario
-      kind: Chart
-      xywh:
-      - 16
-      - 0
-      - 16
-      - 30
-      options:
-        chart: inventario-por-estado
-      blockID: 2
-    - title: Posventa
-      kind: Chart
-      xywh:
-      - 32
-      - 0
-      - 16
-      - 30
-      options:
-        chart: servicio-por-estado
-      blockID: 3
-    - title: Prospectos sin asignar
-      kind: RecordList
-      xywh:
-      - 0
-      - 30
-      - 24
-      - 18
-      options:
-        module: prospectos
-        fields:
-        - name: nombres
-        - name: telefono
-        - name: presupuestoMaximo
-        - name: estado
-        - name: createdAt
-        prefilter: asesor IS NULL
-        presort: createdAt ASC
-        perPage: 15
-        hideRecordCloneButton: true
-      blockID: 4
-    - title: Clientes por recuperar
-      kind: RecordList
-      xywh:
-      - 24
-      - 30
-      - 24
-      - 18
-      options:
-        module: vehiculos
-        fields:
-        - name: codigo
-        - name: clienteFinal
-        - name: proximoMantenimiento
-        - name: estado
-        prefilter: estado = 'Vendido' AND proximoMantenimiento IS NOT NULL
-        presort: proximoMantenimiento ASC
-        perPage: 15
-        hideRecordCloneButton: true
-      blockID: 5
+      - title: Funnel de ventas
+        kind: Chart
+        xywh:
+          - 0
+          - 18
+          - 24
+          - 30
+        options:
+          chart: funnel-ventas
+        blockID: 1
+        description: Gráfico que resume funnel de ventas a partir de datos actuales.
+      - title: Inventario
+        kind: Chart
+        xywh:
+          - 24
+          - 18
+          - 24
+          - 30
+        options:
+          chart: inventario-por-estado
+        blockID: 2
+        description: Gráfico que resume inventario a partir de datos actuales.
+      - title: Posventa
+        kind: Chart
+        xywh:
+          - 0
+          - 48
+          - 48
+          - 30
+        options:
+          chart: servicio-por-estado
+        blockID: 3
+        description: Gráfico que resume posventa a partir de datos actuales.
+      - title: Prospectos sin asignar
+        kind: RecordList
+        xywh:
+          - 0
+          - 78
+          - 24
+          - 48
+        options:
+          module: prospectos
+          fields:
+            - name: nombres
+            - name: telefono
+            - name: presupuestoMaximo
+            - name: estado
+            - name: createdAt
+          prefilter: asesor IS NULL
+          presort: createdAt ASC
+          perPage: 15
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 4
+        description: Listado operativo de prospectos sin asignar con búsqueda, filtros, conteo y exportación.
+      - title: Clientes por recuperar
+        kind: RecordList
+        xywh:
+          - 24
+          - 78
+          - 24
+          - 48
+        options:
+          module: vehiculos
+          fields:
+            - name: codigo
+            - name: clienteFinal
+            - name: proximoMantenimiento
+            - name: estado
+          prefilter: estado = 'Vendido' AND proximoMantenimiento IS NOT NULL
+          presort: proximoMantenimiento ASC
+          perPage: 15
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 5
+        description: Listado operativo de clientes por recuperar con búsqueda, filtros, conteo y exportación.
+      - blockID: 6
+        description: Prospectos que todavía no tienen un asesor responsable.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: asesor IS NULL
+              label: Prospectos sin asignar
+              metricField: count
+              module: prospectos
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Prospectos sin asignar
+        xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+      - blockID: 7
+        description: Pruebas de manejo pendientes o confirmadas.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado = 'Pendiente' OR estado = 'Confirmada'
+              label: Pruebas próximas
+              metricField: count
+              module: pruebas-manejo
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Pruebas próximas
+        xywh:
+          - 12
+          - 0
+          - 12
+          - 18
+      - blockID: 8
+        description: Valor de las oportunidades comerciales abiertas en COP.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: etapa != 'Vendido' AND etapa != 'Perdido'
+              label: Pipeline
+              metricField: valorOfertado
+              module: oportunidades
+              numberFormat: 0,0
+              operation: sum
+              prefix: '$ '
+              suffix: ""
+          showRefresh: true
+        title: Pipeline
+        xywh:
+          - 24
+          - 0
+          - 12
+          - 18
+      - blockID: 9
+        description: Vehículos del inventario disponibles para venta.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado = 'Disponible'
+              label: Vehículos disponibles
+              metricField: count
+              module: vehiculos
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Vehículos disponibles
+        xywh:
+          - 36
+          - 0
+          - 12
+          - 18
     page_layouts:
       principal:
         primary: true
@@ -84,137 +193,239 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 16
-          - 30
-        - blockID: 2
-          xywh:
-          - 16
-          - 0
-          - 16
-          - 30
-        - blockID: 3
-          xywh:
-          - 32
-          - 0
-          - 16
-          - 30
-        - blockID: 4
-          xywh:
-          - 0
-          - 30
-          - 24
-          - 18
-        - blockID: 5
-          xywh:
-          - 24
-          - 30
-          - 24
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 18
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 18
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 48
+              - 48
+              - 30
+          - blockID: 4
+            xywh:
+              - 0
+              - 78
+              - 24
+              - 48
+          - blockID: 5
+            xywh:
+              - 24
+              - 78
+              - 24
+              - 48
+          - blockID: 6
+            xywh:
+              - 0
+              - 0
+              - 12
+              - 18
+          - blockID: 7
+            xywh:
+              - 12
+              - 0
+              - 12
+              - 18
+          - blockID: 8
+            xywh:
+              - 24
+              - 0
+              - 12
+              - 18
+          - blockID: 9
+            xywh:
+              - 36
+              - 0
+              - 12
+              - 18
+    description: Vista operativa de inicio. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   prospectos:
     title: Prospectos
     visible: true
     blocks:
-    - title: Prospectos comerciales
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: prospectos
-        fields:
-        - name: nombres
-        - name: apellidos
-        - name: telefono
-        - name: ciudad
-        - name: presupuestoMaximo
-        - name: estado
-        - name: asesor
-        - name: proximoContacto
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
+      - title: Prospectos comerciales
+        kind: RecordList
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 38
+        options:
+          module: prospectos
+          fields:
+            - name: nombres
+            - name: apellidos
+            - name: telefono
+            - name: ciudad
+            - name: presupuestoMaximo
+            - name: estado
+            - name: asesor
+            - name: proximoContacto
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de prospectos comerciales con búsqueda, filtros, conteo y exportación.
     children:
       prospecto-registro:
         title: Detalle del prospecto
         module: prospectos
         visible: false
         blocks:
-        - title: Información y necesidad
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 14
-          options:
-            fields:
-            - name: nombres
-            - name: apellidos
-            - name: telefono
-            - name: correo
-            - name: autorizaTratamientoDatos
-            - name: ciudad
-            - name: presupuestoMinimo
-            - name: presupuestoMaximo
-            - name: plazoCompra
-            - name: vehiculoActual
-            - name: requiereFinanciacion
-            - name: vehiculosInteres
-            - name: origen
-            - name: estado
-            - name: asesor
-            - name: fechaAsignacion
-            - name: proximoContacto
-            - name: notas
-          blockID: 1
-        - title: Pruebas de manejo
-          kind: RecordList
-          xywh:
-          - 0
-          - 14
-          - 6
-          - 9
-          options:
-            module: pruebas-manejo
-            fields:
-            - name: asunto
-            - name: vehiculo
-            - name: inicio
-            - name: estado
-            - name: resultado
-            prefilter: prospecto = ${recordID}
-            presort: inicio DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 2
-        - title: Oportunidades
-          kind: RecordList
-          xywh:
-          - 6
-          - 14
-          - 6
-          - 9
-          options:
-            module: oportunidades
-            fields:
-            - name: vehiculo
-            - name: etapa
-            - name: valorOfertado
-            - name: probabilidad
-            - name: fechaEstimadaCierre
-            prefilter: prospecto = ${recordID}
-            presort: createdAt DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 3
+          - title: Información y necesidad
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 100
+            options:
+              fields:
+                - name: nombres
+                - name: apellidos
+                - name: telefono
+                - name: correo
+                - name: autorizaTratamientoDatos
+                - name: ciudad
+                - name: presupuestoMinimo
+                - name: presupuestoMaximo
+                - name: plazoCompra
+                - name: vehiculoActual
+                - name: requiereFinanciacion
+                - name: vehiculosInteres
+                - name: origen
+                - name: estado
+                - name: asesor
+                - name: fechaAsignacion
+                - name: proximoContacto
+                - name: notas
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar información y necesidad.
+          - title: Pruebas de manejo
+            kind: RecordList
+            xywh:
+              - 0
+              - 100
+              - 24
+              - 38
+            options:
+              module: pruebas-manejo
+              fields:
+                - name: asunto
+                - name: vehiculo
+                - name: inicio
+                - name: estado
+                - name: resultado
+              prefilter: prospecto = ${recordID}
+              presort: inicio DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 2
+            description: Listado operativo de pruebas de manejo con búsqueda, filtros, conteo y exportación.
+          - title: Oportunidades
+            kind: RecordList
+            xywh:
+              - 24
+              - 100
+              - 24
+              - 38
+            options:
+              module: oportunidades
+              fields:
+                - name: vehiculo
+                - name: etapa
+                - name: valorOfertado
+                - name: probabilidad
+                - name: fechaEstimadaCierre
+              prefilter: prospecto = ${recordID}
+              presort: createdAt DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 3
+            description: Listado operativo de oportunidades con búsqueda, filtros, conteo y exportación.
+          - blockID: 4
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: fechaAutorizacion
+                - name: origenAutorizacion
+                - name: prioridad
+                - name: ultimoContacto
+                - name: motivoCierre
+            title: Gestión y control
+            xywh:
+              - 0
+              - 138
+              - 48
+              - 35
+          - blockID: 5
+            description: Historial relacionado que completa la vista 360° del registro actual.
+            kind: RecordList
+            options:
+              allowExport: true
+              enableRecordPageNavigation: true
+              fields:
+                - name: asunto
+                - name: vehiculo
+                - name: oportunidad
+                - name: asesor
+                - name: tipo
+                - name: estado
+                - name: fecha
+                - name: proximaAccion
+              hideConfigureFieldsButton: false
+              hideRecordCloneButton: true
+              inlineValueFiltering: true
+              module: actividades-comerciales
+              perPage: 10
+              prefilter: prospecto = ${recordID}
+              presort: fecha DESC
+              refField: prospecto
+              showRecordPerPageOption: true
+              showTotalCount: true
+              hideSearch: false
+              hideFiltering: false
+              customFilterPresets: true
+            title: Actividades comerciales
+            xywh:
+              - 0
+              - 173
+              - 48
+              - 38
         page_layouts:
           principal:
             primary: true
@@ -236,24 +447,92 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 100
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 100
+                  - 24
+                  - 38
+              - blockID: 3
+                xywh:
+                  - 24
+                  - 100
+                  - 24
+                  - 38
+              - blockID: 4
+                xywh:
+                  - 0
+                  - 138
+                  - 48
+                  - 35
+              - blockID: 5
+                xywh:
+                  - 0
+                  - 173
+                  - 48
+                  - 38
+        description: Vista operativa de detalle del prospecto. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+      actividad-comercial-registro:
+        blocks:
+          - blockID: 1
+            description: Edición y consulta de un seguimiento comercial relacionado con prospecto, vehículo u oportunidad.
+            kind: Record
+            options:
+              fields:
+                - name: asunto
+                - name: prospecto
+                - name: vehiculo
+                - name: oportunidad
+                - name: asesor
+                - name: tipo
+                - name: estado
+                - name: fecha
+                - name: resultado
+                - name: proximaAccion
+                - name: observaciones
+            title: Información principal
+            xywh:
               - 0
               - 0
-              - 12
-              - 14
-            - blockID: 2
-              xywh:
-              - 0
-              - 14
-              - 6
-              - 9
-            - blockID: 3
-              xywh:
-              - 6
-              - 14
-              - 6
-              - 9
+              - 48
+              - 65
+        description: Edición y consulta de un seguimiento comercial relacionado con prospecto, vehículo u oportunidad.
+        module: actividades-comerciales
+        page_layouts:
+          principal:
+            blocks:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 65
+            config:
+              buttons:
+                back:
+                  enabled: true
+                clone:
+                  enabled: true
+                delete:
+                  enabled: true
+                edit:
+                  enabled: true
+                new:
+                  enabled: true
+                submit:
+                  enabled: true
+              useTitle: true
+            meta:
+              title: Diseño principal · Detalle de actividad comercial
+            primary: true
+        title: Detalle de actividad comercial
+        visible: false
     page_layouts:
       principal:
         primary: true
@@ -262,72 +541,114 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de prospectos. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   vehiculos:
     title: Inventario
     visible: true
     blocks:
-    - title: Vehículos
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: vehiculos
-        fields:
-        - name: codigo
-        - name: marca
-        - name: modelo
-        - name: anio
-        - name: condicion
-        - name: precio
-        - name: sede
-        - name: estado
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
+      - title: Vehículos
+        kind: RecordList
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 38
+        options:
+          module: vehiculos
+          fields:
+            - name: codigo
+            - name: marca
+            - name: modelo
+            - name: anio
+            - name: condicion
+            - name: precio
+            - name: sede
+            - name: estado
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de vehículos con búsqueda, filtros, conteo y exportación.
     children:
       vehiculo-registro:
         title: Detalle del vehículo
         module: vehiculos
         visible: false
         blocks:
-        - title: Vehículo
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 16
-          options:
-            fields:
-            - name: codigo
-            - name: vin
-            - name: placa
-            - name: marca
-            - name: modelo
-            - name: version
-            - name: anio
-            - name: condicion
-            - name: kilometraje
-            - name: color
-            - name: precio
-            - name: sede
-            - name: fechaIngreso
-            - name: estado
-            - name: clienteFinal
-            - name: proximoMantenimiento
-            - name: fotografias
-          blockID: 1
+          - title: Vehículo
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 95
+            options:
+              fields:
+                - name: codigo
+                - name: vin
+                - name: placa
+                - name: marca
+                - name: modelo
+                - name: version
+                - name: anio
+                - name: condicion
+                - name: kilometraje
+                - name: color
+                - name: precio
+                - name: sede
+                - name: fechaIngreso
+                - name: estado
+                - name: clienteFinal
+                - name: proximoMantenimiento
+                - name: fotografias
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar vehículo.
+          - blockID: 2
+            description: Historial relacionado que completa la vista 360° del registro actual.
+            kind: RecordList
+            options:
+              allowExport: true
+              enableRecordPageNavigation: true
+              fields:
+                - name: asunto
+                - name: prospecto
+                - name: oportunidad
+                - name: asesor
+                - name: estado
+                - name: fecha
+              hideConfigureFieldsButton: false
+              hideRecordCloneButton: true
+              inlineValueFiltering: true
+              module: actividades-comerciales
+              perPage: 10
+              prefilter: vehiculo = ${recordID}
+              presort: fecha DESC
+              refField: vehiculo
+              showRecordPerPageOption: true
+              showTotalCount: true
+              hideSearch: false
+              hideFiltering: false
+              customFilterPresets: true
+            title: Actividades relacionadas
+            xywh:
+              - 0
+              - 95
+              - 48
+              - 38
         page_layouts:
           principal:
             primary: true
@@ -349,12 +670,19 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 16
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 95
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 95
+                  - 48
+                  - 38
+        description: Vista operativa de detalle del vehículo. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -363,83 +691,95 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de inventario. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   pruebas-manejo:
     title: Pruebas de manejo
     visible: true
     blocks:
-    - title: Agenda de pruebas
-      kind: Calendar
-      xywh:
-      - 0
-      - 0
-      - 8
-      - 18
-      options:
-        defaultView: dayGridMonth
-        locale: es
-        feeds:
-        - resource: compose:record
-          startField: inicio
-          endField: fin
-          titleField: asunto
-          allDay: false
-          options:
-            module: pruebas-manejo
-            color: '#2563eb'
-            prefilter: ''
-      blockID: 1
-    - title: Próximas pruebas
-      kind: RecordList
-      xywh:
-      - 8
-      - 0
-      - 4
-      - 18
-      options:
-        module: pruebas-manejo
-        fields:
-        - name: inicio
-        - name: prospecto
-        - name: vehiculo
-        - name: asesor
-        - name: estado
-        presort: inicio ASC
-        perPage: 20
-        hideRecordCloneButton: true
-      blockID: 2
+      - title: Agenda de pruebas
+        kind: Calendar
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 44
+        options:
+          defaultView: dayGridMonth
+          locale: es
+          feeds:
+            - resource: compose:record
+              startField: inicio
+              endField: fin
+              titleField: asunto
+              allDay: false
+              options:
+                module: pruebas-manejo
+                color: '#2563eb'
+                prefilter: ''
+        blockID: 1
+        description: Calendario operativo de agenda de pruebas en la zona horaria America/Bogota.
+      - title: Próximas pruebas
+        kind: RecordList
+        xywh:
+          - 0
+          - 44
+          - 48
+          - 38
+        options:
+          module: pruebas-manejo
+          fields:
+            - name: inicio
+            - name: prospecto
+            - name: vehiculo
+            - name: asesor
+            - name: estado
+          presort: inicio ASC
+          perPage: 20
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 2
+        description: Listado operativo de próximas pruebas con búsqueda, filtros, conteo y exportación.
     children:
       prueba-registro:
         title: Detalle de la prueba
         module: pruebas-manejo
         visible: false
         blocks:
-        - title: Prueba de manejo
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 16
-          options:
-            fields:
-            - name: asunto
-            - name: prospecto
-            - name: vehiculo
-            - name: asesor
-            - name: inicio
-            - name: fin
-            - name: sede
-            - name: estado
-            - name: resultado
-            - name: siguienteAccion
-            - name: observaciones
-          blockID: 1
+          - title: Prueba de manejo
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 65
+            options:
+              fields:
+                - name: asunto
+                - name: prospecto
+                - name: vehiculo
+                - name: asesor
+                - name: inicio
+                - name: fin
+                - name: sede
+                - name: estado
+                - name: resultado
+                - name: siguienteAccion
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar prueba de manejo.
         page_layouts:
           principal:
             primary: true
@@ -461,12 +801,13 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 16
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 65
+        description: Vista operativa de detalle de la prueba. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -475,94 +816,136 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 8
-          - 18
-        - blockID: 2
-          xywh:
-          - 8
-          - 0
-          - 4
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 44
+          - blockID: 2
+            xywh:
+              - 0
+              - 44
+              - 48
+              - 38
+    description: Vista operativa de pruebas de manejo. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   oportunidades:
     title: Pipeline
     visible: true
     blocks:
-    - title: Oportunidades por etapa
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 6
-      - 30
-      options:
-        chart: oportunidades-por-etapa
-      blockID: 1
-    - title: Resultados de pruebas
-      kind: Chart
-      xywh:
-      - 6
-      - 0
-      - 6
-      - 30
-      options:
-        chart: pruebas-por-resultado
-      blockID: 2
-    - title: Oportunidades
-      kind: RecordList
-      xywh:
-      - 0
-      - 30
-      - 12
-      - 14
-      options:
-        module: oportunidades
-        fields:
-        - name: prospecto
-        - name: vehiculo
-        - name: asesor
-        - name: etapa
-        - name: valorOfertado
-        - name: probabilidad
-        - name: fechaEstimadaCierre
-        presort: fechaEstimadaCierre ASC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 3
+      - title: Oportunidades por etapa
+        kind: Chart
+        xywh:
+          - 0
+          - 0
+          - 24
+          - 30
+        options:
+          chart: oportunidades-por-etapa
+        blockID: 1
+        description: Gráfico que resume oportunidades por etapa a partir de datos actuales.
+      - title: Resultados de pruebas
+        kind: Chart
+        xywh:
+          - 24
+          - 0
+          - 24
+          - 30
+        options:
+          chart: pruebas-por-resultado
+        blockID: 2
+        description: Gráfico que resume resultados de pruebas a partir de datos actuales.
+      - title: Oportunidades
+        kind: RecordList
+        xywh:
+          - 0
+          - 30
+          - 48
+          - 38
+        options:
+          module: oportunidades
+          fields:
+            - name: prospecto
+            - name: vehiculo
+            - name: asesor
+            - name: etapa
+            - name: valorOfertado
+            - name: probabilidad
+            - name: fechaEstimadaCierre
+          presort: fechaEstimadaCierre ASC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 3
+        description: Listado operativo de oportunidades con búsqueda, filtros, conteo y exportación.
+      - blockID: 4
+        description: Pipeline operativo agrupado por etapa; permite visualizar y actualizar el avance de cada registro.
+        kind: RecordOrganizer
+        options:
+          descriptionField: proximoPaso
+          displayOption: sameTab
+          filter: etapa != 'Vendido' AND etapa != 'Perdido'
+          groupField: etapa
+          labelField: prospecto
+          module: oportunidades
+          showRefresh: true
+        title: Pipeline de oportunidades
+        xywh:
+          - 0
+          - 68
+          - 48
+          - 44
     children:
       oportunidad-registro:
         title: Detalle de la oportunidad
         module: oportunidades
         visible: false
         blocks:
-        - title: Negociación
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 16
-          options:
-            fields:
-            - name: prospecto
-            - name: vehiculo
-            - name: asesor
-            - name: etapa
-            - name: valorPublicado
-            - name: valorOfertado
-            - name: requiereFinanciacion
-            - name: valorFinanciado
-            - name: recibeRetoma
-            - name: descripcionRetoma
-            - name: probabilidad
-            - name: fechaEstimadaCierre
-            - name: motivoPerdida
-            - name: observaciones
-          blockID: 1
+          - title: Negociación
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 80
+            options:
+              fields:
+                - name: prospecto
+                - name: vehiculo
+                - name: asesor
+                - name: etapa
+                - name: valorPublicado
+                - name: valorOfertado
+                - name: requiereFinanciacion
+                - name: valorFinanciado
+                - name: recibeRetoma
+                - name: descripcionRetoma
+                - name: probabilidad
+                - name: fechaEstimadaCierre
+                - name: motivoPerdida
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar negociación.
+          - blockID: 2
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: proximoPaso
+                - name: fechaCierreReal
+            title: Gestión y control
+            xywh:
+              - 0
+              - 80
+              - 48
+              - 30
         page_layouts:
           principal:
             primary: true
@@ -584,12 +967,19 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 16
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 80
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 80
+                  - 48
+                  - 30
+        description: Vista operativa de detalle de la oportunidad. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -598,101 +988,167 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 6
-          - 30
-        - blockID: 2
-          xywh:
-          - 6
-          - 0
-          - 6
-          - 30
-        - blockID: 3
-          xywh:
-          - 0
-          - 30
-          - 12
-          - 14
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 30
+              - 48
+              - 38
+          - blockID: 4
+            xywh:
+              - 0
+              - 68
+              - 48
+              - 44
+    description: Vista operativa de pipeline. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   ordenes-servicio:
     title: Taller
     visible: true
     blocks:
-    - title: Agenda de taller
-      kind: Calendar
-      xywh:
-      - 0
-      - 0
-      - 8
-      - 18
-      options:
-        defaultView: timeGridWeek
-        locale: es
-        feeds:
-        - resource: compose:record
-          startField: inicio
-          endField: fin
-          titleField: codigo
-          allDay: false
-          options:
-            module: ordenes-servicio
-            color: '#059669'
-            prefilter: ''
-      blockID: 1
-    - title: Órdenes
-      kind: RecordList
-      xywh:
-      - 8
-      - 0
-      - 4
-      - 18
-      options:
-        module: ordenes-servicio
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: vehiculo
-        - name: inicio
-        - name: estado
-        - name: valorFinal
-        presort: inicio DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 2
+      - title: Agenda de taller
+        kind: Calendar
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 44
+        options:
+          defaultView: timeGridWeek
+          locale: es
+          feeds:
+            - resource: compose:record
+              startField: inicio
+              endField: fin
+              titleField: codigo
+              allDay: false
+              options:
+                module: ordenes-servicio
+                color: '#059669'
+                prefilter: ''
+        blockID: 1
+        description: Calendario operativo de agenda de taller en la zona horaria America/Bogota.
+      - title: Órdenes
+        kind: RecordList
+        xywh:
+          - 0
+          - 44
+          - 48
+          - 38
+        options:
+          module: ordenes-servicio
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: vehiculo
+            - name: inicio
+            - name: estado
+            - name: valorFinal
+          presort: inicio DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 2
+        description: Listado operativo de órdenes con búsqueda, filtros, conteo y exportación.
     children:
       orden-registro:
         title: Detalle de la orden
         module: ordenes-servicio
         visible: false
         blocks:
-        - title: Orden de servicio
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 16
-          options:
-            fields:
-            - name: codigo
-            - name: cliente
-            - name: vehiculo
-            - name: coordinador
-            - name: tecnico
-            - name: inicio
-            - name: fin
-            - name: tipoServicio
-            - name: estado
-            - name: solicitud
-            - name: diagnostico
-            - name: valorEstimado
-            - name: valorFinal
-            - name: proximoMantenimiento
-            - name: observaciones
-          blockID: 1
+          - title: Orden de servicio
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 85
+            options:
+              fields:
+                - name: codigo
+                - name: cliente
+                - name: vehiculo
+                - name: coordinador
+                - name: tecnico
+                - name: inicio
+                - name: fin
+                - name: tipoServicio
+                - name: estado
+                - name: solicitud
+                - name: diagnostico
+                - name: valorEstimado
+                - name: valorFinal
+                - name: proximoMantenimiento
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar orden de servicio.
+          - blockID: 2
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: kilometrajeIngreso
+                - name: inicioReal
+                - name: finReal
+                - name: evidencias
+                - name: firmaEntrega
+                - name: fechaEntrega
+            title: Gestión y control
+            xywh:
+              - 0
+              - 85
+              - 48
+              - 40
+          - blockID: 3
+            description: Historial relacionado que completa la vista 360° del registro actual.
+            kind: RecordList
+            options:
+              allowExport: true
+              enableRecordPageNavigation: true
+              fields:
+                - name: secuencia
+                - name: tarea
+                - name: obligatoria
+                - name: tecnico
+                - name: estado
+                - name: finReal
+              hideConfigureFieldsButton: false
+              hideRecordCloneButton: true
+              inlineValueFiltering: true
+              module: tareas-servicio
+              perPage: 10
+              prefilter: orden = ${recordID}
+              presort: secuencia ASC
+              refField: orden
+              showRecordPerPageOption: true
+              showTotalCount: true
+              hideSearch: false
+              hideFiltering: false
+              customFilterPresets: true
+            title: Checklist de servicio
+            xywh:
+              - 0
+              - 125
+              - 48
+              - 38
         page_layouts:
           principal:
             primary: true
@@ -714,12 +1170,79 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 85
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 85
+                  - 48
+                  - 40
+              - blockID: 3
+                xywh:
+                  - 0
+                  - 125
+                  - 48
+                  - 38
+        description: Vista operativa de detalle de la orden. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+      tarea-servicio-registro:
+        blocks:
+          - blockID: 1
+            description: Edición y consulta de una tarea del checklist técnico de la orden.
+            kind: Record
+            options:
+              fields:
+                - name: orden
+                - name: secuencia
+                - name: tarea
+                - name: obligatoria
+                - name: tecnico
+                - name: estado
+                - name: inicioReal
+                - name: finReal
+                - name: resultado
+                - name: evidencia
+            title: Información principal
+            xywh:
               - 0
               - 0
-              - 12
-              - 16
+              - 48
+              - 60
+        description: Edición y consulta de una tarea del checklist técnico de la orden.
+        module: tareas-servicio
+        page_layouts:
+          principal:
+            blocks:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 60
+            config:
+              buttons:
+                back:
+                  enabled: true
+                clone:
+                  enabled: true
+                delete:
+                  enabled: true
+                edit:
+                  enabled: true
+                new:
+                  enabled: true
+                submit:
+                  enabled: true
+              useTitle: true
+            meta:
+              title: Diseño principal · Detalle de tarea de servicio
+            primary: true
+        title: Detalle de tarea de servicio
+        visible: false
     page_layouts:
       principal:
         primary: true
@@ -728,15 +1251,133 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 44
+          - blockID: 2
+            xywh:
+              - 0
+              - 44
+              - 48
+              - 38
+    description: Vista operativa de taller. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+  reportes:
+    blocks:
+      - blockID: 1
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: funnel-ventas
+        title: Funnel ventas
+        xywh:
           - 0
           - 0
-          - 8
-          - 18
-        - blockID: 2
-          xywh:
-          - 8
+          - 24
+          - 30
+      - blockID: 2
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: oportunidades-por-etapa
+        title: Oportunidades por etapa
+        xywh:
+          - 24
           - 0
-          - 4
-          - 18
+          - 24
+          - 30
+      - blockID: 3
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: inventario-por-estado
+        title: Inventario por estado
+        xywh:
+          - 0
+          - 30
+          - 24
+          - 30
+      - blockID: 4
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: servicio-por-estado
+        title: Servicio por estado
+        xywh:
+          - 24
+          - 30
+          - 24
+          - 30
+      - blockID: 5
+        description: Registros que respaldan los indicadores; permite buscar, filtrar, contar y exportar el resultado.
+        kind: RecordList
+        options:
+          allowExport: true
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: vehiculo
+            - name: tecnico
+            - name: inicio
+            - name: estado
+            - name: valor
+            - name: proximoMantenimiento
+          hideConfigureFieldsButton: false
+          inlineValueFiltering: true
+          module: ordenes-servicio
+          perPage: 20
+          presort: createdAt DESC
+          showRecordPerPageOption: true
+          showTotalCount: true
+          hideSearch: false
+          hideFiltering: false
+          customFilterPresets: true
+        title: Detalle operativo
+        xywh:
+          - 0
+          - 60
+          - 48
+          - 38
+    description: Vista ejecutiva y operativa para analizar resultados, encontrar desviaciones y exportar información.
+    page_layouts:
+      principal:
+        blocks:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 30
+              - 24
+              - 30
+          - blockID: 4
+            xywh:
+              - 24
+              - 30
+              - 24
+              - 30
+          - blockID: 5
+            xywh:
+              - 0
+              - 60
+              - 48
+              - 38
+        config:
+          useTitle: true
+        meta:
+          title: Diseño principal · Reportes
+        primary: true
+    title: Reportes
+    visible: true

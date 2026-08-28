@@ -1,0 +1,11 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  asesor-comercial: &reportes-inmobiliaria
+    corteza::system/: [reports.search]
+    corteza::system:report/inmobiliaria-co-ejecutivo: [read, run]
+    corteza::system:report/inmobiliaria-co-operativo: [read, run]
+  coordinador-comercial: *reportes-inmobiliaria
+  automatizacion-inmobiliaria:
+    corteza::system/: [notification.assign]

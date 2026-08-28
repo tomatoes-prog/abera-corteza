@@ -7,7 +7,9 @@ workflows:
     trace: false
     runAs: automatizacion-admisiones
     keepSessions: 20
-    meta: { name: Asignar prospecto de admisiones por menor carga }
+    meta:
+      name: Asignar prospecto de admisiones por menor carga
+      description: Antes de crear un prospecto sin asesor, selecciona el usuario activo con menor carga y registra la fecha de asignación. Conserva asignaciones manuales y deja el registro sin responsable si no hay candidatos.
     triggers:
       - enabled: true
         stepID: 10
@@ -76,7 +78,9 @@ workflows:
   validar-solicitud-admision:
     enabled: true
     trace: false
-    meta: { name: Validar solicitud antes de enviarla }
+    meta:
+      name: Validar solicitud antes de enviarla
+      description: Antes de actualizar una solicitud a Enviada, comprueba prospecto, programa, periodo y documentos verificados. Detiene la operación con un mensaje claro cuando faltan requisitos.
     triggers:
       - enabled: true
         stepID: 100
@@ -106,7 +110,9 @@ workflows:
   crear-matricula-desde-admision:
     enabled: true
     trace: false
-    meta: { name: Preparar matrícula al admitir }
+    meta:
+      name: Preparar matrícula al admitir
+      description: Después de cambiar una solicitud a Admitida, crea la matrícula relacionada y actualiza el prospecto a Admitido. Termina sin cambios para otras transiciones y reporta fallos de lectura o creación.
     triggers:
       - enabled: true
         stepID: 200
@@ -167,7 +173,9 @@ workflows:
   confirmar-matricula:
     enabled: true
     trace: false
-    meta: { name: Confirmar matrícula y convertir prospecto }
+    meta:
+      name: Confirmar matrícula y convertir prospecto
+      description: Después de confirmar una matrícula, actualiza el prospecto relacionado a Matriculado. Solo actúa en la primera transición a Confirmada y reporta si la relación no puede resolverse.
     triggers:
       - enabled: true
         stepID: 300

@@ -1,0 +1,12 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  asesor-automotriz: &reportes-automotriz
+    corteza::system/: [reports.search]
+    corteza::system:report/automotriz-co-ejecutivo: [read, run]
+    corteza::system:report/automotriz-co-operativo: [read, run]
+  jefe-comercial-automotriz: *reportes-automotriz
+  coordinador-taller: *reportes-automotriz
+  automatizacion-automotriz:
+    corteza::system/: [notification.assign]

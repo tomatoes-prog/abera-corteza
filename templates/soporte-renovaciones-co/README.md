@@ -5,25 +5,37 @@ Copyright 2026 Abera/Corteza contributors
 Licensed under the Apache License, Version 2.0. See
 [`../../LICENSE`](../../LICENSE).
 
-Plantilla para atención al cliente y gestión de ingresos recurrentes:
+Solución inicial para resolver casos dentro del SLA y convertir el conocimiento
+de soporte en retención, renovación y expansión de ingresos.
 
 ```env
+ABERA_MODE=template
 ABERA_TEMPLATE=soporte-renovaciones-co
 ```
 
-El SLA inicial utiliza horas calendario. Un workflow ejecutado cada 15 minutos
-marca los casos como `En riesgo` al consumir el 75 % del plazo y como
-`Incumplido` al vencer la primera respuesta o la resolución.
+## Modelo de trabajo
 
-Una tarea diaria crea de forma idempotente las renovaciones de contratos
-activos que entran en la ventana de 60 días antes del vencimiento. Casos
-críticos, incumplimientos y CSAT bajo elevan automáticamente el riesgo.
+Clientes se relacionan con Contratos, Casos, Interacciones y Renovaciones.
+`problemas-conocidos` agrupa incidentes con causa y solución compartida; se ve
+desde el caso sin añadir complejidad a la operación diaria.
 
-Las tareas programadas y la asignación por carga se ejecutan con el usuario
-interno `automatizacion-soporte`, que solo tiene permisos de lectura de
-usuarios y roles y CRUD sin eliminación dentro de esta plantilla.
+Un caso puede depender de un caso padre y registra impacto, urgencia, nivel de
+escalamiento, SLA, causa raíz, evidencias y satisfacción. Las interacciones
+pueden aportar primera respuesta o contexto de renovación. La experiencia se
+distingue por Mi cola, panel de SLA, ficha 360° del cliente, problemas conocidos
+y pipeline de valor recurrente en riesgo.
 
-Los campos de integración aceptan identificadores de correo, chat, voz o
-plataformas externas, pero ningún workflow contacta proveedores por defecto.
+## Automatización
 
-El sembrador API usa los prefijos `SUP-DEMO-` y `sup.demo.`.
+Los workflows enrutan casos, calculan y escalan SLA, registran primera respuesta,
+crean renovaciones 60 días antes, calculan riesgo y actualizan el contrato al
+renovar. Las horas son calendario. Los ejemplos de correo y Slack están
+desactivados, sin credenciales ni tráfico externo.
+
+## Demo y producción
+
+El showroom aporta 100 registros sintéticos por módulo principal y 20 problemas
+conocidos relacionados. El modo plantilla instala la solución vacía. Los datos
+son CSV/YAML versionados y no se materializan durante el arranque.
+
+La versión 2.0.0 requiere una base nueva.

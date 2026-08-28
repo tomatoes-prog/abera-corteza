@@ -123,6 +123,7 @@ workflows:
     trace: false
     meta:
       name: Crear oportunidad desde prueba positiva
+      description: Después de completar una prueba con interés positivo, crea una oportunidad relacionada con prospecto, vehículo y asesor. Termina sin cambios si la prueba no cumple la condición y reporta errores de creación.
     triggers:
       - enabled: true
         stepID: 200

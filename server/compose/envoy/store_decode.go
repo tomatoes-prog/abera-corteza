@@ -177,7 +177,7 @@ func decodePageRefs(p *types.Page) (refs map[string]envoyx.Ref) {
 		case "Chart":
 			refs = envoyx.MergeRefs(refs, getPageBlockChartRefs(b, index))
 
-		case "Calendar":
+		case "Calendar", "Geometry":
 			refs = envoyx.MergeRefs(refs, getPageBlockCalendarRefs(b, index))
 
 		case "Metric":

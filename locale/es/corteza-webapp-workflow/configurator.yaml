@@ -6,25 +6,25 @@ labels:
   label: Etiquetas
 name:
   label: Nombre *
-  placeholder: Nombre del workflow
+  placeholder: 'Nombre del flujo de trabajo'
 handle:
   label: Identificador
   placeholder: identificador (a-z, 0-9, guion bajo o guion)
   invalid-handle-characters: Debe tener al menos 2 caracteres, contener solo letras, números, guiones bajos y puntos, y terminar en letra o número
 description:
   label: Descripción
-  placeholder: Describe qué hace este workflow
+  placeholder: 'Describe qué hace este flujo de trabajo'
 target: Destino
 tooltip:
-  run-workflow: Ejecutar workflow
+  run-workflow: 'Ejecutar flujo de trabajo'
   configure-step: Configurar paso
 run-as:
   label: Ejecutar como
-  placeholder: Usuario que ejecutará el workflow
-  description: Si no se establece explícitamente, el workflow será ejecutado por el usuario que lo inició
+  placeholder: 'Usuario que ejecutará el flujo de trabajo'
+  description: 'Si no se establece explícitamente, el flujo de trabajo será ejecutado por el usuario que lo inició'
 sub-workflow:
-  label: Subworkflow
-  description: Los subworkflows no pueden tener activadores habilitados
+  label: Subflujo de trabajo
+  description: Los subflujos de trabajo no pueden tener disparadores habilitados
 delay:
   duration:
     label: Duración

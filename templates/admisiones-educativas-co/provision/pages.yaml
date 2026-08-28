@@ -7,76 +7,185 @@ pages:
     title: Inicio
     visible: true
     blocks:
-    - title: Funnel de admisiones
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 16
-      - 30
-      options:
-        chart: funnel-admisiones
-      blockID: 1
-    - title: Solicitudes por estado
-      kind: Chart
-      xywh:
-      - 16
-      - 0
-      - 16
-      - 30
-      options:
-        chart: solicitudes-por-estado
-      blockID: 2
-    - title: Matrículas por programa
-      kind: Chart
-      xywh:
-      - 32
-      - 0
-      - 16
-      - 30
-      options:
-        chart: matriculas-por-programa
-      blockID: 3
-    - title: Prospectos sin asignar
-      kind: RecordList
-      xywh:
-      - 0
-      - 30
-      - 24
-      - 18
-      options:
-        module: prospectos
-        fields:
-        - name: nombres
-        - name: telefono
-        - name: programasInteres
-        - name: estado
-        - name: createdAt
-        prefilter: asesor IS NULL
-        presort: createdAt ASC
-        perPage: 15
-        hideRecordCloneButton: true
-      blockID: 4
-    - title: Solicitudes que requieren atención
-      kind: RecordList
-      xywh:
-      - 24
-      - 30
-      - 24
-      - 18
-      options:
-        module: solicitudes
-        fields:
-        - name: codigo
-        - name: prospecto
-        - name: programa
-        - name: estado
-        - name: completitud
-        prefilter: estado = 'Incompleta' OR estado = 'En revisión'
-        presort: createdAt ASC
-        perPage: 15
-        hideRecordCloneButton: true
-      blockID: 5
+      - title: Funnel de admisiones
+        kind: Chart
+        xywh:
+          - 0
+          - 18
+          - 24
+          - 30
+        options:
+          chart: funnel-admisiones
+        blockID: 1
+        description: Gráfico que resume funnel de admisiones a partir de datos actuales.
+      - title: Solicitudes por estado
+        kind: Chart
+        xywh:
+          - 24
+          - 18
+          - 24
+          - 30
+        options:
+          chart: solicitudes-por-estado
+        blockID: 2
+        description: Gráfico que resume solicitudes por estado a partir de datos actuales.
+      - title: Matrículas por programa
+        kind: Chart
+        xywh:
+          - 0
+          - 48
+          - 48
+          - 30
+        options:
+          chart: matriculas-por-programa
+        blockID: 3
+        description: Gráfico que resume matrículas por programa a partir de datos actuales.
+      - title: Prospectos sin asignar
+        kind: RecordList
+        xywh:
+          - 0
+          - 78
+          - 24
+          - 48
+        options:
+          module: prospectos
+          fields:
+            - name: nombres
+            - name: telefono
+            - name: programasInteres
+            - name: estado
+            - name: createdAt
+          prefilter: asesor IS NULL
+          presort: createdAt ASC
+          perPage: 15
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 4
+        description: Listado operativo de prospectos sin asignar con búsqueda, filtros, conteo y exportación.
+      - title: Solicitudes que requieren atención
+        kind: RecordList
+        xywh:
+          - 24
+          - 78
+          - 24
+          - 48
+        options:
+          module: solicitudes
+          fields:
+            - name: codigo
+            - name: prospecto
+            - name: programa
+            - name: estado
+            - name: completitud
+          prefilter: estado = 'Incompleta' OR estado = 'En revisión'
+          presort: createdAt ASC
+          perPage: 15
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 5
+        description: Listado operativo de solicitudes que requieren atención con búsqueda, filtros, conteo y exportación.
+      - blockID: 6
+        description: Personas que continúan en el proceso de admisión.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado != 'Matriculado' AND estado != 'No matriculado'
+              label: Prospectos activos
+              metricField: count
+              module: prospectos
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Prospectos activos
+        xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+      - blockID: 7
+        description: Solicitudes incompletas o pendientes de revisión.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado = 'Incompleta' OR estado = 'En revisión'
+              label: Solicitudes incompletas
+              metricField: count
+              module: solicitudes
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Solicitudes incompletas
+        xywh:
+          - 12
+          - 0
+          - 12
+          - 18
+      - blockID: 8
+        description: Admitidos con matrícula o documentos pendientes.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado = 'Preparada' OR estado = 'Documentos pendientes'
+              label: Admitidos pendientes
+              metricField: count
+              module: matriculas
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Admitidos pendientes
+        xywh:
+          - 24
+          - 0
+          - 12
+          - 18
+      - blockID: 9
+        description: Estudiantes con matrícula confirmada.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado = 'Confirmada'
+              label: Matrículas confirmadas
+              metricField: count
+              module: matriculas
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Matrículas confirmadas
+        xywh:
+          - 36
+          - 0
+          - 12
+          - 18
     page_layouts:
       principal:
         primary: true
@@ -85,138 +194,243 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 16
-          - 30
-        - blockID: 2
-          xywh:
-          - 16
-          - 0
-          - 16
-          - 30
-        - blockID: 3
-          xywh:
-          - 32
-          - 0
-          - 16
-          - 30
-        - blockID: 4
-          xywh:
-          - 0
-          - 30
-          - 24
-          - 18
-        - blockID: 5
-          xywh:
-          - 24
-          - 30
-          - 24
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 18
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 18
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 48
+              - 48
+              - 30
+          - blockID: 4
+            xywh:
+              - 0
+              - 78
+              - 24
+              - 48
+          - blockID: 5
+            xywh:
+              - 24
+              - 78
+              - 24
+              - 48
+          - blockID: 6
+            xywh:
+              - 0
+              - 0
+              - 12
+              - 18
+          - blockID: 7
+            xywh:
+              - 12
+              - 0
+              - 12
+              - 18
+          - blockID: 8
+            xywh:
+              - 24
+              - 0
+              - 12
+              - 18
+          - blockID: 9
+            xywh:
+              - 36
+              - 0
+              - 12
+              - 18
+    description: Vista operativa de inicio. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   prospectos:
     title: Prospectos
     visible: true
     blocks:
-    - title: Prospectos
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: prospectos
-        fields:
-        - name: nombres
-        - name: apellidos
-        - name: telefono
-        - name: ciudad
-        - name: programasInteres
-        - name: origen
-        - name: estado
-        - name: asesor
-        - name: proximoContacto
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
+      - title: Prospectos
+        kind: RecordList
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 38
+        options:
+          module: prospectos
+          fields:
+            - name: nombres
+            - name: apellidos
+            - name: telefono
+            - name: ciudad
+            - name: programasInteres
+            - name: origen
+            - name: estado
+            - name: asesor
+            - name: proximoContacto
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de prospectos con búsqueda, filtros, conteo y exportación.
     children:
       prospecto-registro:
         title: Detalle del prospecto
         module: prospectos
         visible: false
         blocks:
-        - title: Perfil del prospecto
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 14
-          options:
-            fields:
-            - name: nombres
-            - name: apellidos
-            - name: documento
-            - name: telefono
-            - name: correo
-            - name: autorizaTratamientoDatos
-            - name: acudienteNombre
-            - name: acudienteTelefono
-            - name: ciudad
-            - name: nivelInteres
-            - name: modalidadPreferida
-            - name: programasInteres
-            - name: origen
-            - name: estado
-            - name: asesor
-            - name: fechaAsignacion
-            - name: proximoContacto
-            - name: notas
-          blockID: 1
-        - title: Solicitudes
-          kind: RecordList
-          xywh:
-          - 0
-          - 14
-          - 6
-          - 9
-          options:
-            module: solicitudes
-            fields:
-            - name: codigo
-            - name: programa
-            - name: periodo
-            - name: estado
-            - name: completitud
-            prefilter: prospecto = ${recordID}
-            presort: createdAt DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 2
-        - title: Citas
-          kind: RecordList
-          xywh:
-          - 6
-          - 14
-          - 6
-          - 9
-          options:
-            module: citas-admision
-            fields:
-            - name: asunto
-            - name: programa
-            - name: tipo
-            - name: inicio
-            - name: estado
-            prefilter: prospecto = ${recordID}
-            presort: inicio DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 3
+          - title: Perfil del prospecto
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 100
+            options:
+              fields:
+                - name: nombres
+                - name: apellidos
+                - name: documento
+                - name: telefono
+                - name: correo
+                - name: autorizaTratamientoDatos
+                - name: acudienteNombre
+                - name: acudienteTelefono
+                - name: ciudad
+                - name: nivelInteres
+                - name: modalidadPreferida
+                - name: programasInteres
+                - name: origen
+                - name: estado
+                - name: asesor
+                - name: fechaAsignacion
+                - name: proximoContacto
+                - name: notas
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar perfil del prospecto.
+          - title: Solicitudes
+            kind: RecordList
+            xywh:
+              - 0
+              - 100
+              - 24
+              - 38
+            options:
+              module: solicitudes
+              fields:
+                - name: codigo
+                - name: programa
+                - name: periodo
+                - name: estado
+                - name: completitud
+              prefilter: prospecto = ${recordID}
+              presort: createdAt DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 2
+            description: Listado operativo de solicitudes con búsqueda, filtros, conteo y exportación.
+          - title: Citas
+            kind: RecordList
+            xywh:
+              - 24
+              - 100
+              - 24
+              - 38
+            options:
+              module: citas-admision
+              fields:
+                - name: asunto
+                - name: programa
+                - name: tipo
+                - name: inicio
+                - name: estado
+              prefilter: prospecto = ${recordID}
+              presort: inicio DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 3
+            description: Listado operativo de citas con búsqueda, filtros, conteo y exportación.
+          - blockID: 4
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: tipoDocumento
+                - name: fechaNacimiento
+                - name: esMenorEdad
+                - name: fechaAutorizacion
+                - name: programaPrincipal
+                - name: prioridad
+                - name: ultimoContacto
+                - name: motivoCierre
+            title: Gestión y control
+            xywh:
+              - 0
+              - 138
+              - 48
+              - 50
+          - blockID: 5
+            description: Historial relacionado que completa la vista 360° del registro actual.
+            kind: RecordList
+            options:
+              allowExport: true
+              enableRecordPageNavigation: true
+              fields:
+                - name: asunto
+                - name: programa
+                - name: solicitud
+                - name: asesor
+                - name: tipo
+                - name: estado
+                - name: fecha
+                - name: proximaAccion
+              hideConfigureFieldsButton: false
+              hideRecordCloneButton: true
+              inlineValueFiltering: true
+              module: actividades-admision
+              perPage: 10
+              prefilter: prospecto = ${recordID}
+              presort: fecha DESC
+              refField: prospecto
+              showRecordPerPageOption: true
+              showTotalCount: true
+              hideSearch: false
+              hideFiltering: false
+              customFilterPresets: true
+            title: Actividades de admisión
+            xywh:
+              - 0
+              - 188
+              - 48
+              - 38
         page_layouts:
           principal:
             primary: true
@@ -238,24 +452,92 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 100
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 100
+                  - 24
+                  - 38
+              - blockID: 3
+                xywh:
+                  - 24
+                  - 100
+                  - 24
+                  - 38
+              - blockID: 4
+                xywh:
+                  - 0
+                  - 138
+                  - 48
+                  - 50
+              - blockID: 5
+                xywh:
+                  - 0
+                  - 188
+                  - 48
+                  - 38
+        description: Vista operativa de detalle del prospecto. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+      actividad-admision-registro:
+        blocks:
+          - blockID: 1
+            description: Edición y consulta de una actividad de captación o admisión.
+            kind: Record
+            options:
+              fields:
+                - name: asunto
+                - name: prospecto
+                - name: solicitud
+                - name: programa
+                - name: asesor
+                - name: tipo
+                - name: estado
+                - name: fecha
+                - name: resultado
+                - name: proximaAccion
+                - name: observaciones
+            title: Información principal
+            xywh:
               - 0
               - 0
-              - 12
-              - 14
-            - blockID: 2
-              xywh:
-              - 0
-              - 14
-              - 6
-              - 9
-            - blockID: 3
-              xywh:
-              - 6
-              - 14
-              - 6
-              - 9
+              - 48
+              - 65
+        description: Edición y consulta de una actividad de captación o admisión.
+        module: actividades-admision
+        page_layouts:
+          principal:
+            blocks:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 65
+            config:
+              buttons:
+                back:
+                  enabled: true
+                clone:
+                  enabled: true
+                delete:
+                  enabled: true
+                edit:
+                  enabled: true
+                new:
+                  enabled: true
+                submit:
+                  enabled: true
+              useTitle: true
+            meta:
+              title: Diseño principal · Detalle de actividad de admisión
+            primary: true
+        title: Detalle de actividad de admisión
+        visible: false
     page_layouts:
       principal:
         primary: true
@@ -264,69 +546,92 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de prospectos. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   programas:
     title: Programas
     visible: true
     blocks:
-    - title: Oferta académica
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: programas
-        fields:
-        - name: codigo
-        - name: nombre
-        - name: nivel
-        - name: modalidad
-        - name: sede
-        - name: periodo
-        - name: valor
-        - name: cupos
-        - name: metaMatriculas
-        - name: estado
-        presort: nombre ASC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
+      - title: Oferta académica
+        kind: RecordList
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 38
+        options:
+          module: programas
+          fields:
+            - name: codigo
+            - name: nombre
+            - name: nivel
+            - name: modalidad
+            - name: sede
+            - name: periodo
+            - name: valor
+            - name: cupos
+            - name: metaMatriculas
+            - name: estado
+          presort: nombre ASC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de oferta académica con búsqueda, filtros, conteo y exportación.
     children:
       programa-registro:
         title: Detalle del programa
         module: programas
         visible: false
         blocks:
-        - title: Programa
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 14
-          options:
-            fields:
-            - name: codigo
-            - name: nombre
-            - name: nivel
-            - name: modalidad
-            - name: sede
-            - name: duracion
-            - name: valor
-            - name: periodo
-            - name: cupos
-            - name: metaMatriculas
-            - name: estado
-            - name: descripcion
-          blockID: 1
+          - title: Programa
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 70
+            options:
+              fields:
+                - name: codigo
+                - name: nombre
+                - name: nivel
+                - name: modalidad
+                - name: sede
+                - name: duracion
+                - name: valor
+                - name: periodo
+                - name: cupos
+                - name: metaMatriculas
+                - name: estado
+                - name: descripcion
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar programa.
+          - blockID: 2
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: jornada
+                - name: fechaInicio
+            title: Gestión y control
+            xywh:
+              - 0
+              - 70
+              - 48
+              - 30
         page_layouts:
           principal:
             primary: true
@@ -348,12 +653,19 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 14
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 70
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 70
+                  - 48
+                  - 30
+        description: Vista operativa de detalle del programa. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -362,89 +674,184 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de programas. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   solicitudes:
     title: Solicitudes
     visible: true
     blocks:
-    - title: Solicitudes por programa
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 6
-      - 30
-      options:
-        chart: solicitudes-por-programa
-      blockID: 1
-    - title: Prospectos por origen
-      kind: Chart
-      xywh:
-      - 6
-      - 0
-      - 6
-      - 30
-      options:
-        chart: prospectos-por-origen
-      blockID: 2
-    - title: Solicitudes de admisión
-      kind: RecordList
-      xywh:
-      - 0
-      - 30
-      - 12
-      - 14
-      options:
-        module: solicitudes
-        fields:
-        - name: codigo
-        - name: prospecto
-        - name: programa
-        - name: periodo
-        - name: estado
-        - name: completitud
-        - name: revisor
-        - name: puntaje
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 3
-    children:
-      solicitud-registro:
-        title: Detalle de la solicitud
-        module: solicitudes
-        visible: false
-        blocks:
-        - title: Solicitud de admisión
-          kind: Record
-          xywh:
+      - title: Solicitudes por programa
+        kind: Chart
+        xywh:
           - 0
           - 0
-          - 12
-          - 16
-          options:
-            fields:
+          - 24
+          - 30
+        options:
+          chart: solicitudes-por-programa
+        blockID: 1
+        description: Gráfico que resume solicitudes por programa a partir de datos actuales.
+      - title: Prospectos por origen
+        kind: Chart
+        xywh:
+          - 24
+          - 0
+          - 24
+          - 30
+        options:
+          chart: prospectos-por-origen
+        blockID: 2
+        description: Gráfico que resume prospectos por origen a partir de datos actuales.
+      - title: Solicitudes de admisión
+        kind: RecordList
+        xywh:
+          - 0
+          - 30
+          - 48
+          - 38
+        options:
+          module: solicitudes
+          fields:
             - name: codigo
             - name: prospecto
             - name: programa
             - name: periodo
             - name: estado
             - name: completitud
-            - name: documentos
-            - name: documentosVerificados
             - name: revisor
             - name: puntaje
-            - name: decision
-            - name: fechaEnvio
-            - name: fechaDecision
-            - name: observaciones
-          blockID: 1
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 3
+        description: Listado operativo de solicitudes de admisión con búsqueda, filtros, conteo y exportación.
+      - blockID: 4
+        description: Pipeline operativo agrupado por etapa; permite visualizar y actualizar el avance de cada registro.
+        kind: RecordOrganizer
+        options:
+          descriptionField: periodo
+          displayOption: sameTab
+          filter: estado != 'No admitida' AND estado != 'Retirada'
+          groupField: estado
+          labelField: codigo
+          module: solicitudes
+          showRefresh: true
+        title: Etapas de solicitudes
+        xywh:
+          - 0
+          - 68
+          - 48
+          - 44
+    children:
+      solicitud-registro:
+        title: Detalle de la solicitud
+        module: solicitudes
+        visible: false
+        blocks:
+          - title: Solicitud de admisión
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 80
+            options:
+              fields:
+                - name: codigo
+                - name: prospecto
+                - name: programa
+                - name: periodo
+                - name: estado
+                - name: completitud
+                - name: documentos
+                - name: documentosVerificados
+                - name: revisor
+                - name: puntaje
+                - name: decision
+                - name: fechaEnvio
+                - name: fechaDecision
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar solicitud de admisión.
+          - blockID: 2
+            description: Historial relacionado que completa la vista 360° del registro actual.
+            kind: RecordList
+            options:
+              allowExport: true
+              enableRecordPageNavigation: true
+              fields:
+                - name: requisito
+                - name: obligatorio
+                - name: estado
+                - name: fechaRecepcion
+                - name: fechaValidacion
+                - name: revisor
+                - name: motivoRechazo
+              hideConfigureFieldsButton: false
+              hideRecordCloneButton: true
+              inlineValueFiltering: true
+              module: requisitos-solicitud
+              perPage: 10
+              prefilter: solicitud = ${recordID}
+              presort: createdAt ASC
+              refField: solicitud
+              showRecordPerPageOption: true
+              showTotalCount: true
+              hideSearch: false
+              hideFiltering: false
+              customFilterPresets: true
+            title: Checklist documental
+            xywh:
+              - 0
+              - 80
+              - 48
+              - 38
+          - blockID: 3
+            description: Historial relacionado que completa la vista 360° del registro actual.
+            kind: RecordList
+            options:
+              allowExport: true
+              enableRecordPageNavigation: true
+              fields:
+                - name: asunto
+                - name: prospecto
+                - name: asesor
+                - name: tipo
+                - name: estado
+                - name: fecha
+                - name: resultado
+              hideConfigureFieldsButton: false
+              hideRecordCloneButton: true
+              inlineValueFiltering: true
+              module: actividades-admision
+              perPage: 10
+              prefilter: solicitud = ${recordID}
+              presort: fecha DESC
+              refField: solicitud
+              showRecordPerPageOption: true
+              showTotalCount: true
+              hideSearch: false
+              hideFiltering: false
+              customFilterPresets: true
+            title: Actividades de la solicitud
+            xywh:
+              - 0
+              - 118
+              - 48
+              - 38
         page_layouts:
           principal:
             primary: true
@@ -466,12 +873,79 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 80
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 80
+                  - 48
+                  - 38
+              - blockID: 3
+                xywh:
+                  - 0
+                  - 118
+                  - 48
+                  - 38
+        description: Vista operativa de detalle de la solicitud. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+      requisito-solicitud-registro:
+        blocks:
+          - blockID: 1
+            description: Recepción y validación de un requisito individual de la solicitud.
+            kind: Record
+            options:
+              fields:
+                - name: solicitud
+                - name: requisito
+                - name: obligatorio
+                - name: estado
+                - name: archivo
+                - name: fechaRecepcion
+                - name: fechaValidacion
+                - name: revisor
+                - name: motivoRechazo
+                - name: observaciones
+            title: Información principal
+            xywh:
               - 0
               - 0
-              - 12
-              - 16
+              - 48
+              - 60
+        description: Recepción y validación de un requisito individual de la solicitud.
+        module: requisitos-solicitud
+        page_layouts:
+          principal:
+            blocks:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 60
+            config:
+              buttons:
+                back:
+                  enabled: true
+                clone:
+                  enabled: true
+                delete:
+                  enabled: true
+                edit:
+                  enabled: true
+                new:
+                  enabled: true
+                submit:
+                  enabled: true
+              useTitle: true
+            meta:
+              title: Diseño principal · Detalle de requisito
+            primary: true
+        title: Detalle de requisito
+        visible: false
     page_layouts:
       principal:
         primary: true
@@ -480,96 +954,114 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 6
-          - 30
-        - blockID: 2
-          xywh:
-          - 6
-          - 0
-          - 6
-          - 30
-        - blockID: 3
-          xywh:
-          - 0
-          - 30
-          - 12
-          - 14
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 30
+              - 48
+              - 38
+          - blockID: 4
+            xywh:
+              - 0
+              - 68
+              - 48
+              - 44
+    description: Vista operativa de solicitudes. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   citas-admision:
     title: Agenda
     visible: true
     blocks:
-    - title: Calendario de admisiones
-      kind: Calendar
-      xywh:
-      - 0
-      - 0
-      - 8
-      - 18
-      options:
-        defaultView: dayGridMonth
-        locale: es
-        feeds:
-        - resource: compose:record
-          startField: inicio
-          endField: fin
-          titleField: asunto
-          allDay: false
-          options:
-            module: citas-admision
-            color: '#7c3aed'
-            prefilter: ''
-      blockID: 1
-    - title: Próximas citas
-      kind: RecordList
-      xywh:
-      - 8
-      - 0
-      - 4
-      - 18
-      options:
-        module: citas-admision
-        fields:
-        - name: inicio
-        - name: prospecto
-        - name: programa
-        - name: tipo
-        - name: asesor
-        - name: estado
-        presort: inicio ASC
-        perPage: 20
-        hideRecordCloneButton: true
-      blockID: 2
+      - title: Calendario de admisiones
+        kind: Calendar
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 44
+        options:
+          defaultView: dayGridMonth
+          locale: es
+          feeds:
+            - resource: compose:record
+              startField: inicio
+              endField: fin
+              titleField: asunto
+              allDay: false
+              options:
+                module: citas-admision
+                color: '#7c3aed'
+                prefilter: ''
+        blockID: 1
+        description: Calendario operativo de calendario de admisiones en la zona horaria America/Bogota.
+      - title: Próximas citas
+        kind: RecordList
+        xywh:
+          - 0
+          - 44
+          - 48
+          - 38
+        options:
+          module: citas-admision
+          fields:
+            - name: inicio
+            - name: prospecto
+            - name: programa
+            - name: tipo
+            - name: asesor
+            - name: estado
+          presort: inicio ASC
+          perPage: 20
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 2
+        description: Listado operativo de próximas citas con búsqueda, filtros, conteo y exportación.
     children:
       cita-registro:
         title: Detalle de la cita
         module: citas-admision
         visible: false
         blocks:
-        - title: Cita de admisión
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 16
-          options:
-            fields:
-            - name: asunto
-            - name: prospecto
-            - name: asesor
-            - name: programa
-            - name: tipo
-            - name: inicio
-            - name: fin
-            - name: estado
-            - name: resultado
-            - name: siguienteAccion
-            - name: observaciones
-          blockID: 1
+          - title: Cita de admisión
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 65
+            options:
+              fields:
+                - name: asunto
+                - name: prospecto
+                - name: asesor
+                - name: programa
+                - name: tipo
+                - name: inicio
+                - name: fin
+                - name: estado
+                - name: resultado
+                - name: siguienteAccion
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar cita de admisión.
         page_layouts:
           principal:
             primary: true
@@ -591,12 +1083,13 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 16
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 65
+        description: Vista operativa de detalle de la cita. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -605,63 +1098,34 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 8
-          - 18
-        - blockID: 2
-          xywh:
-          - 8
-          - 0
-          - 4
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 44
+          - blockID: 2
+            xywh:
+              - 0
+              - 44
+              - 48
+              - 38
+    description: Vista operativa de agenda. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   matriculas:
     title: Matrículas
     visible: true
     blocks:
-    - title: Matrículas
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: matriculas
-        fields:
-        - name: codigo
-        - name: estudiante
-        - name: programa
-        - name: periodo
-        - name: valor
-        - name: descuentoBeca
-        - name: estadoPago
-        - name: estado
-        - name: fechaMatricula
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
-    children:
-      matricula-registro:
-        title: Detalle de la matrícula
-        module: matriculas
-        visible: false
-        blocks:
-        - title: Matrícula
-          kind: Record
-          xywh:
+      - title: Matrículas
+        kind: RecordList
+        xywh:
           - 0
           - 0
-          - 12
-          - 16
-          options:
-            fields:
+          - 48
+          - 38
+        options:
+          module: matriculas
+          fields:
             - name: codigo
-            - name: solicitud
             - name: estudiante
             - name: programa
             - name: periodo
@@ -670,8 +1134,47 @@ pages:
             - name: estadoPago
             - name: estado
             - name: fechaMatricula
-            - name: observaciones
-          blockID: 1
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de matrículas con búsqueda, filtros, conteo y exportación.
+    children:
+      matricula-registro:
+        title: Detalle de la matrícula
+        module: matriculas
+        visible: false
+        blocks:
+          - title: Matrícula
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 65
+            options:
+              fields:
+                - name: codigo
+                - name: solicitud
+                - name: estudiante
+                - name: programa
+                - name: periodo
+                - name: valor
+                - name: descuentoBeca
+                - name: estadoPago
+                - name: estado
+                - name: fechaMatricula
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar matrícula.
         page_layouts:
           principal:
             primary: true
@@ -693,12 +1196,13 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 16
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 65
+        description: Vista operativa de detalle de la matrícula. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -707,9 +1211,127 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de matrículas. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+  reportes:
+    blocks:
+      - blockID: 1
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: funnel-admisiones
+        title: Funnel admisiones
+        xywh:
           - 0
           - 0
-          - 12
-          - 18
+          - 24
+          - 30
+      - blockID: 2
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: solicitudes-por-programa
+        title: Solicitudes por programa
+        xywh:
+          - 24
+          - 0
+          - 24
+          - 30
+      - blockID: 3
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: solicitudes-por-estado
+        title: Solicitudes por estado
+        xywh:
+          - 0
+          - 30
+          - 24
+          - 30
+      - blockID: 4
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: matriculas-por-programa
+        title: Matriculas por programa
+        xywh:
+          - 24
+          - 30
+          - 24
+          - 30
+      - blockID: 5
+        description: Registros que respaldan los indicadores; permite buscar, filtrar, contar y exportar el resultado.
+        kind: RecordList
+        options:
+          allowExport: true
+          fields:
+            - name: codigo
+            - name: prospecto
+            - name: programa
+            - name: periodo
+            - name: estado
+            - name: completitud
+            - name: revisor
+            - name: fechaDecision
+          hideConfigureFieldsButton: false
+          inlineValueFiltering: true
+          module: solicitudes
+          perPage: 20
+          presort: createdAt DESC
+          showRecordPerPageOption: true
+          showTotalCount: true
+          hideSearch: false
+          hideFiltering: false
+          customFilterPresets: true
+        title: Detalle operativo
+        xywh:
+          - 0
+          - 60
+          - 48
+          - 38
+    description: Vista ejecutiva y operativa para analizar resultados, encontrar desviaciones y exportar información.
+    page_layouts:
+      principal:
+        blocks:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 30
+              - 24
+              - 30
+          - blockID: 4
+            xywh:
+              - 24
+              - 30
+              - 24
+              - 30
+          - blockID: 5
+            xywh:
+              - 0
+              - 60
+              - 48
+              - 38
+        config:
+          useTitle: true
+        meta:
+          title: Diseño principal · Reportes
+        primary: true
+    title: Reportes
+    visible: true

@@ -1,30 +1,30 @@
 datasource:
-  describe-failed: Failed to describe datasource
+  describe-failed: No se pudo describir la fuente de datos
 general:
   info: Información
   error: Error
-  success: Success
-  warning: Warning
+  success: Correcto
+  warning: Advertencia
 list:
   load:
-    error: Failed to load resource list
+    error: No se pudo cargar la lista de recursos
 module:
-  fetch-failed: Failed to fetch modules
+  fetch-failed: No se pudieron obtener los módulos
 namespace:
-  fetch-failed: Failed to fetch namespaces
+  fetch-failed: No se pudieron obtener los espacios de trabajo
 report:
-  createFailed: Failed to create report
-  loadFailed: Loading the report failed
-  created: Report created
-  delete: Report deleted
-  deleteFailed: Failed to delete report
-  fetchFailed: Failed to fetch report
-  listFetchFailed: Failed to fetch reports
-  runFailed: Failed to run report
-  updateFailed: Failed to update report
-  updated: Report updated
+  createFailed: No se pudo crear el informe
+  loadFailed: No se pudo cargar el informe
+  created: Informe creado
+  delete: Informe eliminado
+  deleteFailed: No se pudo eliminar el informe
+  fetchFailed: No se pudo obtener el informe
+  listFetchFailed: No se pudieron obtener los informes
+  runFailed: No se pudo ejecutar el informe
+  updateFailed: No se pudo actualizar el informe
+  updated: Informe actualizado
   notAllowed:
-    read: Not allowed to read report
+    read: No tienes permiso para consultar el informe
   datasources:
-    updated: Datasources updated
-    updateFailed: Failed to update datasources
+    updated: Fuentes de datos actualizadas
+    updateFailed: No se pudieron actualizar las fuentes de datos

@@ -1,51 +1,51 @@
-'configure-triggers': Make sure all trigger steps are properly configured
-'confirm-unsaved-changes': You have unsaved changes, are you sure you want to exit?
+'configure-triggers': Comprueba que todos los pasos disparadores estén configurados correctamente
+'confirm-unsaved-changes': Tienes cambios sin guardar. ¿Seguro que deseas salir?
 error: " - ERROR: "
-'event-type-not-found': Event type not found
-'event-type-fetch-failed': Failed to fetch event types
-'failed-fetch-functions': Failed to fetch functions
-'failed-fetch-triggers': Failed to fetch triggers
-'failed-fetch-workflow': Failed to fetch workflow
-'failed-fetch-workflows': Failed to fetch workflows
-'failed-load-file': Failed to load file
-'failed-save': Save failed
-'failed-test': Test failed
-'fetch-types-failed': Failed to fetch types
+'event-type-not-found': No se encontró el tipo de evento
+'event-type-fetch-failed': No se pudieron obtener los tipos de evento
+'failed-fetch-functions': No se pudieron obtener las funciones
+'failed-fetch-triggers': No se pudieron obtener los disparadores
+'failed-fetch-workflow': No se pudo obtener el flujo de trabajo
+'failed-fetch-workflows': No se pudieron obtener los flujos de trabajo
+'failed-load-file': No se pudo cargar el archivo
+'failed-save': No se pudo guardar
+'failed-test': La prueba falló
+'fetch-types-failed': No se pudieron obtener los tipos
 general:
   error: Error
-  success: Success
-  warning: Warning
-  info: Info
+  success: Operación completada
+  warning: Advertencia
+  info: Información
 list:
   load:
-    error: Failed to fetch workflows
+    error: No se pudieron obtener los flujos de trabajo
   enable:
-    success: Workflow enabled
-    failed: Failed to enable workflow
+    success: Flujo de trabajo habilitado
+    failed: No se pudo habilitar el flujo de trabajo
   disable:
-    success: Workflow disabled
-    failed: Failed to disable workflow
+    success: Flujo de trabajo deshabilitado
+    failed: No se pudo deshabilitar el flujo de trabajo
 import:
-  'failed-import': Failed to import
-  'imported-workflows': Workflows imported
-  'skipped-workflows': Skipped workflows
-'imported-workflow': Workflow imported
-'import-failed': Import failed
-'initial-scope-load-failed': Failed to load initial scope
-'resolve-issues': Resolve issues to test workflow
-'save-workflow': Save workflow first to test it
-'started-test': Workflow test started
-'test-completed': Test completed
-'test-in-progress': Test in progress
-'trace-unavailable': Trace not available
-'trigger-paths-changed': Trigger paths changed
-'workflow-test-completed': Workflow test completed
+  'failed-import': No se pudo importar
+  'imported-workflows': Flujos de trabajo importados
+  'skipped-workflows': Flujos de trabajo omitidos
+'imported-workflow': Flujo de trabajo importado
+'import-failed': La importación falló
+'initial-scope-load-failed': No se pudo cargar el alcance inicial
+'resolve-issues': Corrige los problemas antes de probar el flujo de trabajo
+'save-workflow': Guarda el flujo de trabajo antes de probarlo
+'started-test': Prueba del flujo de trabajo iniciada
+'test-completed': Prueba completada
+'test-in-progress': Prueba en curso
+'trace-unavailable': La traza no está disponible
+'trigger-paths-changed': Las rutas de los disparadores cambiaron
+'workflow-test-completed': Prueba del flujo de trabajo completada
 update:
-  success: Workflow updated
-  failed: Failed to update workflow
+  success: Flujo de trabajo actualizado
+  failed: No se pudo actualizar el flujo de trabajo
 delete:
-  success: Workflow deleted
-  failed: Failed to delete workflow
+  success: Flujo de trabajo eliminado
+  failed: No se pudo eliminar el flujo de trabajo
 undelete:
-  success: Workflow restored
-  failed: Failed to restore workflow
+  success: Flujo de trabajo restaurado
+  failed: No se pudo restaurar el flujo de trabajo

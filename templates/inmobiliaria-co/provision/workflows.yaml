@@ -142,3 +142,192 @@ workflows:
       - { parentid: 30, childid: 31, expr: bestUserID > 0 }
       - { parentid: 30, childid: 33, expr: "" }
       - { parentid: 31, childid: 32 }
+
+  crear-seguimiento-inicial-inmobiliario:
+    enabled: true
+    trace: false
+    runAs: automatizacion-inmobiliaria
+    keepSessions: 20
+    meta:
+      name: Crear primer seguimiento del lead
+      description: Al crear un lead con asesor, agenda una actividad para el día siguiente. Crea una sola actividad vinculada y no contacta servicios externos.
+    triggers:
+      - enabled: true
+        stepID: 100
+        resourceType: compose:record
+        eventType: afterCreate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [inmobiliaria-co] }
+          - { name: module.handle, op: "=", values: [leads] }
+    steps:
+      - { id: 100, kind: gateway, ref: excl, meta: { name: "¿Tiene asesor?" } }
+      - id: 101
+        kind: function
+        ref: composeRecordsNew
+        arguments:
+          - { target: namespace, type: Handle, value: inmobiliaria-co }
+          - { target: module, type: Handle, value: actividades }
+        results:
+          - { target: followUp, expr: record }
+        meta: { name: Preparar actividad }
+      - id: 102
+        kind: expressions
+        arguments:
+          - { target: followUp.values.asunto, type: String, value: Primer contacto comercial }
+          - { target: followUp.values.lead, type: String, expr: 'format("%d", record.ID)' }
+          - { target: followUp.values.asesor, type: String, expr: record.values.responsable }
+          - { target: followUp.values.tipo, type: String, value: Seguimiento }
+          - { target: followUp.values.estado, type: String, value: Pendiente }
+          - { target: followUp.values.prioridad, type: String, value: Alta }
+          - { target: followUp.values.fecha, type: String, expr: 'strftime(now() + duration("P1D"), "%Y-%m-%dT%H:%M:%S")' }
+          - { target: followUp.values.vencimiento, type: String, expr: 'strftime(now() + duration("P1D"), "%Y-%m-%dT%H:%M:%S")' }
+          - { target: followUp.values.observaciones, type: String, value: Actividad creada automáticamente al ingresar el lead. }
+        meta: { name: Completar seguimiento }
+      - id: 103
+        kind: function
+        ref: composeRecordsCreate
+        arguments:
+          - { target: record, type: ComposeRecord, expr: followUp }
+        meta: { name: Guardar actividad }
+      - { id: 104, kind: termination, meta: { name: Finalizar } }
+    paths:
+      - { parentid: 100, childid: 101, expr: '!isEmpty(record.values.responsable)' }
+      - { parentid: 100, childid: 104, expr: "" }
+      - { parentid: 101, childid: 102 }
+      - { parentid: 102, childid: 103 }
+      - { parentid: 103, childid: 104 }
+
+  crear-negociacion-desde-visita:
+    enabled: true
+    trace: false
+    runAs: automatizacion-inmobiliaria
+    keepSessions: 20
+    meta:
+      name: Convertir visita positiva en negociación
+      description: Al completar una cita con resultado “Interés confirmado”, abre una negociación con el primer inmueble visitado y conserva las relaciones con lead y asesor.
+    triggers:
+      - enabled: true
+        stepID: 200
+        resourceType: compose:record
+        eventType: afterUpdate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [inmobiliaria-co] }
+          - { name: module.handle, op: "=", values: [citas] }
+    steps:
+      - { id: 200, kind: gateway, ref: excl, meta: { name: "¿Visita positiva?" } }
+      - id: 201
+        kind: function
+        ref: composeRecordsNew
+        arguments:
+          - { target: namespace, type: Handle, value: inmobiliaria-co }
+          - { target: module, type: Handle, value: negociaciones }
+        results:
+          - { target: deal, expr: record }
+        meta: { name: Preparar negociación }
+      - id: 202
+        kind: expressions
+        arguments:
+          - { target: deal.values.lead, type: String, expr: record.values.lead }
+          - { target: deal.values.inmueble, type: String, expr: 'record.values.inmuebles[0]' }
+          - { target: deal.values.asesor, type: String, expr: record.values.asesor }
+          - { target: deal.values.tipoOperacion, type: String, value: Venta }
+          - { target: deal.values.etapa, type: String, value: Calificación }
+          - { target: deal.values.probabilidad, type: Integer, value: "30" }
+          - { target: deal.values.fechaEstimadaCierre, type: String, expr: 'strftime(now() + duration("P30D"), "%Y-%m-%d")' }
+          - { target: deal.values.proximoPaso, type: String, value: Confirmar operación y preparar oferta }
+          - { target: deal.values.estado, type: String, value: Abierta }
+        meta: { name: Completar negociación }
+      - id: 203
+        kind: function
+        ref: composeRecordsCreate
+        arguments:
+          - { target: record, type: ComposeRecord, expr: deal }
+        meta: { name: Guardar negociación }
+      - { id: 204, kind: termination, meta: { name: Finalizar } }
+    paths:
+      - { parentid: 200, childid: 201, expr: 'record.values.estado == "Completada" && record.values.resultado == "Interés confirmado" && oldRecord.values.estado != "Completada" && !isEmpty(record.values.inmuebles)' }
+      - { parentid: 200, childid: 204, expr: "" }
+      - { parentid: 201, childid: 202 }
+      - { parentid: 202, childid: 203 }
+      - { parentid: 203, childid: 204 }
+
+  cerrar-negociacion-inmobiliaria:
+    enabled: true
+    trace: false
+    runAs: automatizacion-inmobiliaria
+    keepSessions: 20
+    meta:
+      name: Cerrar negocio ganado
+      description: Cuando una negociación pasa a Ganada, convierte el lead y cambia el inmueble a Vendido o Arrendado según la operación. No elimina ni reemplaza registros.
+    triggers:
+      - enabled: true
+        stepID: 300
+        resourceType: compose:record
+        eventType: afterUpdate
+        constraints:
+          - { name: namespace.handle, op: "=", values: [inmobiliaria-co] }
+          - { name: module.handle, op: "=", values: [negociaciones] }
+    steps:
+      - { id: 300, kind: gateway, ref: excl, meta: { name: "¿Negocio ganado?" } }
+      - id: 301
+        kind: function
+        ref: composeRecordsLookup
+        arguments:
+          - { target: namespace, type: Handle, value: inmobiliaria-co }
+          - { target: module, type: Handle, value: leads }
+          - { target: record, type: ID, expr: record.values.lead }
+        results:
+          - { target: wonLead, expr: record }
+        meta: { name: Consultar lead }
+      - id: 302
+        kind: expressions
+        arguments:
+          - { target: wonLead.values.estado, type: String, value: Ganado }
+          - { target: wonLead.values.motivoCierre, type: String, value: Negociación cerrada exitosamente. }
+        meta: { name: Convertir lead }
+      - id: 303
+        kind: function
+        ref: composeRecordsUpdate
+        arguments:
+          - { target: record, type: ComposeRecord, expr: wonLead }
+        meta: { name: Guardar lead }
+      - id: 304
+        kind: function
+        ref: composeRecordsLookup
+        arguments:
+          - { target: namespace, type: Handle, value: inmobiliaria-co }
+          - { target: module, type: Handle, value: inmuebles }
+          - { target: record, type: ID, expr: record.values.inmueble }
+        results:
+          - { target: closedProperty, expr: record }
+        meta: { name: Consultar inmueble }
+      - { id: 305, kind: gateway, ref: excl, meta: { name: "¿Venta o arriendo?" } }
+      - id: 306
+        kind: expressions
+        arguments:
+          - { target: closedProperty.values.estado, type: String, value: Vendido }
+        meta: { name: Marcar vendido }
+      - id: 307
+        kind: expressions
+        arguments:
+          - { target: closedProperty.values.estado, type: String, value: Arrendado }
+        meta: { name: Marcar arrendado }
+      - id: 308
+        kind: function
+        ref: composeRecordsUpdate
+        arguments:
+          - { target: record, type: ComposeRecord, expr: closedProperty }
+        meta: { name: Guardar inmueble }
+      - { id: 309, kind: termination, meta: { name: Finalizar } }
+    paths:
+      - { parentid: 300, childid: 301, expr: 'record.values.estado == "Ganada" && oldRecord.values.estado != "Ganada"' }
+      - { parentid: 300, childid: 309, expr: "" }
+      - { parentid: 301, childid: 302 }
+      - { parentid: 302, childid: 303 }
+      - { parentid: 303, childid: 304 }
+      - { parentid: 304, childid: 305 }
+      - { parentid: 305, childid: 306, expr: 'record.values.tipoOperacion == "Venta"' }
+      - { parentid: 305, childid: 307, expr: "" }
+      - { parentid: 306, childid: 308 }
+      - { parentid: 307, childid: 308 }
+      - { parentid: 308, childid: 309 }

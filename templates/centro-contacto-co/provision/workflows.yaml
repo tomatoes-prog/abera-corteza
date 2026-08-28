@@ -6,7 +6,9 @@ workflows:
     enabled: true
     trace: false
     runAs: automatizacion-contacto
-    meta: { name: Asignar registro de campaña por menor carga }
+    meta:
+      name: Asignar registro de campaña por menor carga
+      description: Antes de crear una gestión sin agente, asigna el usuario activo con menor cola pendiente y registra la fecha. Respeta asignaciones manuales y deja la gestión sin agente cuando no hay candidatos.
     triggers:
       - enabled: true
         stepID: 10
@@ -69,7 +71,9 @@ workflows:
   respetar-no-llamar:
     enabled: true
     trace: false
-    meta: { name: Respetar preferencia de no llamar }
+    meta:
+      name: Respetar preferencia de no llamar
+      description: Antes de crear una llamada, consulta el contacto y bloquea el intento cuando no autorizó contacto o está marcado como No llamar. Devuelve un error operativo sin contactar servicios externos.
     triggers:
       - enabled: true
         stepID: 100
@@ -100,7 +104,9 @@ workflows:
   procesar-resultado-llamada:
     enabled: true
     trace: false
-    meta: { name: Actualizar cola desde resultado de llamada }
+    meta:
+      name: Actualizar cola desde resultado de llamada
+      description: Después de registrar una llamada, incrementa intentos y actualiza estado, resultado y callback de la gestión de campaña. Reporta relaciones inválidas y no realiza llamadas reales.
     triggers:
       - enabled: true
         stepID: 200
@@ -164,7 +170,9 @@ workflows:
   crear-oportunidad-llamada:
     enabled: true
     trace: false
-    meta: { name: Crear oportunidad desde llamada calificada }
+    meta:
+      name: Crear oportunidad desde llamada calificada
+      description: Después de una llamada calificada, crea una oportunidad relacionada con contacto y campaña usando el producto configurado. Termina sin cambios para otras disposiciones y reporta fallos de creación.
     triggers:
       - enabled: true
         stepID: 300

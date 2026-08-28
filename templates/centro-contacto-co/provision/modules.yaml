@@ -6,171 +6,240 @@ modules:
   contactos-leads:
     name: Contactos y leads
     fields:
-      nombres: { label: Nombres, kind: String, required: true }
-      apellidos: { label: Apellidos, kind: String }
-      identificacion: { label: Identificación, kind: String }
-      telefonoPrincipal: { label: Teléfono principal, kind: String, required: true }
-      telefonoAlterno: { label: Teléfono alterno, kind: String }
-      correo: { label: Correo electrónico, kind: String }
-      ciudad: { label: Ciudad, kind: String }
+      nombres: {label: Nombres, kind: String, required: true, options: {description: {view: El campo «Nombres» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese nombres con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      apellidos: {label: Apellidos, kind: String, options: {description: {view: El campo «Apellidos» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese apellidos con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      identificacion: {label: Identificación, kind: String, options: {description: {view: El campo «Identificación» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese identificación con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      telefonoPrincipal: {label: Teléfono principal, kind: String, required: true, options: {description: {view: El campo «Teléfono principal» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es obligatorio para guardar un registro completo.'}}}
+      telefonoAlterno: {label: Teléfono alterno, kind: String, options: {description: {view: El campo «Teléfono alterno» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es opcional; complételo cuando la información esté disponible.'}}}
+      correo: {label: Correo electrónico, kind: String, options: {description: {view: El campo «Correo electrónico» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es opcional; complételo cuando la información esté disponible.'}}}
+      ciudad: {label: Ciudad, kind: String, options: {description: {view: El campo «Ciudad» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese ciudad con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       autorizaTratamientoDatos:
         label: Autoriza el tratamiento de datos
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.'}}
+      fechaAutorizacion: {label: Fecha de autorización, kind: DateTime, options: {description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible.'}}}
+      origenAutorizacion:
+        label: Origen de la autorización
+        kind: Select
+        options:
+          options:
+            - {text: Formulario web, value: Formulario web}
+            - {text: Telefónica, value: Telefónica}
+            - {text: Presencial, value: Presencial}
+            - {text: Contrato, value: Contrato}
+          selectType: default
+          description:
+            view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada.
+            edit: Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.
       autorizaContacto:
         label: Autoriza contacto comercial
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.'}}
+      canalesAutorizados:
+        label: Canales autorizados
+        kind: Select
+        multi: true
+        options:
+          options:
+            - {text: Llamada, value: Llamada}
+            - {text: WhatsApp, value: WhatsApp}
+            - {text: SMS, value: SMS}
+            - {text: Correo, value: Correo}
+          selectType: multiple
+          description:
+            view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada.
+            edit: Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.
+      rneConsultado:
+        label: Registro de Números Excluidos consultado
+        kind: Bool
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si registro de números excluidos consultado aplica a este registro de Contactos y leads., edit: Marque Sí únicamente cuando registro de números excluidos consultado esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
+      fechaConsultaRNE: {label: Fecha de consulta RNE, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de consulta rne para este registro de Contactos y leads, interpretada en America/Bogota.', edit: Indique fecha de consulta rne usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       noLlamar:
         label: No llamar
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
-      productoInteres: { label: Producto de interés, kind: String }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si no llamar aplica a este registro de Contactos y leads., edit: Marque Sí únicamente cuando no llamar esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
+      motivoNoContactar: {label: Motivo para no contactar, kind: String, options: {description: {view: El campo «Motivo para no contactar» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese motivo para no contactar con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      productoInteres: {label: Producto de interés, kind: String, options: {description: {view: El campo «Producto de interés» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese producto de interés con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       presupuesto:
         label: Presupuesto
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Presupuesto expresado en pesos colombianos (COP) para este registro de Contactos y leads., edit: 'Ingrese presupuesto en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       estadoComercial:
         label: Estado comercial
         kind: Select
         default: Cargado
         options:
           options:
-            - { text: Cargado, value: Cargado }
-            - { text: Intentado, value: Intentado }
-            - { text: Contactado, value: Contactado }
-            - { text: Calificado, value: Calificado }
-            - { text: Oportunidad, value: Oportunidad }
-            - { text: Venta, value: Venta }
-            - { text: No interesado, value: No interesado }
+            - {text: Cargado, value: Cargado}
+            - {text: Intentado, value: Intentado}
+            - {text: Contactado, value: Contactado}
+            - {text: Calificado, value: Calificado}
+            - {text: Oportunidad, value: Oportunidad}
+            - {text: Venta, value: Venta}
+            - {text: No interesado, value: No interesado}
           selectType: default
-      responsable: { label: Responsable, kind: User }
+          description:
+            view: Clasificación de estado comercial para este registro de Contactos y leads.
+            edit: 'Seleccione un valor para estado comercial entre: Cargado, Intentado, Contactado, Calificado, Oportunidad, Venta, No interesado. Es opcional; complételo cuando la información esté disponible.'
+      responsable: {label: Responsable, kind: User, options: {description: {view: Usuario de Corteza responsable de responsable en este registro de Contactos y leads., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      prioridad:
+        label: Prioridad comercial
+        kind: Select
+        default: Media
+        options:
+          options:
+            - {text: Baja, value: Baja}
+            - {text: Media, value: Media}
+            - {text: Alta, value: Alta}
+            - {text: Urgente, value: Urgente}
+          selectType: default
+          description:
+            view: Clasificación de prioridad comercial para este registro de Contactos y leads.
+            edit: 'Seleccione un valor para prioridad comercial entre: Baja, Media, Alta, Urgente. Es opcional; complételo cuando la información esté disponible.'
       totalIntentos:
         label: Total de intentos
         kind: Number
-        options: { format: "0", precision: 0 }
-      proximaLlamada: { label: Próxima llamada, kind: DateTime }
+        options: {format: "0", precision: 0, description: {view: Valor numérico de total de intentos para este registro de Contactos y leads., edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}
+      proximaLlamada: {label: Próxima llamada, kind: DateTime, options: {description: {view: 'Fecha y hora de próxima llamada para este registro de Contactos y leads, interpretada en America/Bogota.', edit: Indique próxima llamada usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      ultimaGestion: {label: Última gestión, kind: DateTime, options: {description: {view: 'Fecha y hora de última gestión para este registro de Contactos y leads, interpretada en America/Bogota.', edit: Indique última gestión usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       notas:
         label: Notas
         kind: String
-        options: { multiLine: true }
-      externalID: { label: Identificador externo, kind: String }
-      proveedorExterno: { label: Proveedor externo, kind: String }
+        options: {multiLine: true, description: {view: El campo «Notas» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Contactos y leads., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+      proveedorExterno: {label: Proveedor externo, kind: String, options: {description: {view: El campo «Proveedor externo» conserva información operativa del registro en Contactos y leads., edit: 'Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       estadoIntegracion:
         label: Estado de integración
         kind: Select
         default: Local
         options:
           options:
-            - { text: Local, value: Local }
-            - { text: Pendiente, value: Pendiente }
-            - { text: Sincronizado, value: Sincronizado }
-            - { text: Error, value: Error }
+            - {text: Local, value: Local}
+            - {text: Pendiente, value: Pendiente}
+            - {text: Sincronizado, value: Sincronizado}
+            - {text: Error, value: Error}
           selectType: default
+          description:
+            view: Clasificación de estado de integración para este registro de Contactos y leads.
+            edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.
       ultimoErrorIntegracion:
         label: Último error de integración
         kind: String
-        options: { multiLine: true }
-
+        options: {multiLine: true, description: {view: El campo «Último error de integración» conserva información operativa del registro en Contactos y leads., edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}
+    meta:
+      description: Personas cargadas para gestión telefónica o comercial. Centraliza autorización, canales permitidos, validación RNE, intentos, responsable y estado de conversión.
   campanas:
     name: Campañas
     fields:
-      codigo: { label: Código, kind: String, required: true }
-      nombre: { label: Nombre, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Campañas., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      nombre: {label: Nombre, kind: String, required: true, options: {description: {view: El campo «Nombre» conserva información operativa del registro en Campañas., edit: 'Ingrese nombre con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       objetivo:
         label: Objetivo
         kind: Select
         required: true
         options:
           options:
-            - { text: Venta, value: Venta }
-            - { text: Venta adicional, value: Venta adicional }
-            - { text: Recuperación, value: Recuperación }
-            - { text: Encuesta, value: Encuesta }
-            - { text: Confirmación, value: Confirmación }
+            - {text: Venta, value: Venta}
+            - {text: Venta adicional, value: Venta adicional}
+            - {text: Recuperación, value: Recuperación}
+            - {text: Encuesta, value: Encuesta}
+            - {text: Confirmación, value: Confirmación}
           selectType: default
-      producto: { label: Producto o servicio, kind: String }
+          description:
+            view: Clasificación de objetivo para este registro de Campañas.
+            edit: 'Seleccione un valor para objetivo entre: Venta, Venta adicional, Recuperación, Encuesta, Confirmación. Es obligatorio para guardar un registro completo.'
+      producto: {label: Producto o servicio, kind: String, options: {description: {view: El campo «Producto o servicio» conserva información operativa del registro en Campañas., edit: 'Ingrese producto o servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       guion:
         label: Guion
         kind: String
-        options: { multiLine: true, useRichTextEditor: true }
+        options: {multiLine: true, useRichTextEditor: true, description: {view: El campo «Guion» conserva información operativa del registro en Campañas., edit: 'Ingrese guion con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
       prioridad:
         label: Prioridad
         kind: Select
         default: Media
         options:
           options:
-            - { text: Baja, value: Baja }
-            - { text: Media, value: Media }
-            - { text: Alta, value: Alta }
+            - {text: Baja, value: Baja}
+            - {text: Media, value: Media}
+            - {text: Alta, value: Alta}
           selectType: default
+          description:
+            view: Clasificación de prioridad para este registro de Campañas.
+            edit: 'Seleccione un valor para prioridad entre: Baja, Media, Alta. Es opcional; complételo cuando la información esté disponible.'
       fechaInicio:
         label: Fecha de inicio
         kind: DateTime
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de fecha de inicio para este registro de Campañas., edit: Indique fecha de inicio en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
       fechaFin:
         label: Fecha de finalización
         kind: DateTime
-        options: { onlyDate: true }
-      horaInicio: { label: Hora permitida desde, kind: String }
-      horaFin: { label: Hora permitida hasta, kind: String }
+        options: {onlyDate: true, description: {view: Fecha de fecha de finalización para este registro de Campañas., edit: Indique fecha de finalización en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
+      horaInicio: {label: Hora permitida desde, kind: String, options: {description: {view: El campo «Hora permitida desde» conserva información operativa del registro en Campañas., edit: 'Ingrese hora permitida desde con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      horaFin: {label: Hora permitida hasta, kind: String, options: {description: {view: El campo «Hora permitida hasta» conserva información operativa del registro en Campañas., edit: 'Ingrese hora permitida hasta con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       metaContactos:
         label: Meta de contactos
         kind: Number
-        options: { format: "0", precision: 0 }
+        options: {format: "0", precision: 0, description: {view: Valor numérico de meta de contactos para este registro de Campañas., edit: Ingrese meta de contactos como número. Es opcional; complételo cuando la información esté disponible.}}
       metaVentas:
         label: Meta de ventas
         kind: Number
-        options: { format: "0", precision: 0 }
+        options: {format: "0", precision: 0, description: {view: Valor numérico de meta de ventas para este registro de Campañas., edit: Ingrese meta de ventas como número. Es opcional; complételo cuando la información esté disponible.}}
       maximoIntentos:
         label: Máximo de intentos
         kind: Number
         default: "5"
-        options: { format: "0", precision: 0 }
+        options: {format: "0", precision: 0, description: {view: Valor numérico de máximo de intentos para este registro de Campañas., edit: Ingrese máximo de intentos como número. Es opcional; complételo cuando la información esté disponible.}}
       estado:
         label: Estado
         kind: Select
         default: Borrador
         options:
           options:
-            - { text: Borrador, value: Borrador }
-            - { text: Activa, value: Activa }
-            - { text: Pausada, value: Pausada }
-            - { text: Finalizada, value: Finalizada }
+            - {text: Borrador, value: Borrador}
+            - {text: Activa, value: Activa}
+            - {text: Pausada, value: Pausada}
+            - {text: Finalizada, value: Finalizada}
           selectType: default
-      externalID: { label: Identificador externo, kind: String }
-
+          description:
+            view: Clasificación de estado para este registro de Campañas.
+            edit: 'Seleccione un valor para estado entre: Borrador, Activa, Pausada, Finalizada. Es opcional; complételo cuando la información esté disponible.'
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Campañas., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+    meta:
+      description: Iniciativas de contacto con objetivo, producto, guion, vigencia, horario, prioridad y metas. Agrupa registros, llamadas y oportunidades.
   registros-campana:
     name: Registros de campaña
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Registros de campaña., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       campana:
         label: Campaña
         kind: Record
         required: true
-        options: { module: campanas, labelField: nombre }
+        options: {module: campanas, labelField: nombre, description: {view: Relación con campanas. Permite consultar un registro vinculado en este registro de Registros de campaña., edit: Seleccione campaña dentro del módulo campanas. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       contacto:
         label: Contacto
         kind: Record
         required: true
-        options: { module: contactos-leads, labelField: nombres }
-      agente: { label: Agente, kind: User }
+        options: {module: contactos-leads, labelField: nombres, description: {view: Relación con contactos leads. Permite consultar un registro vinculado en este registro de Registros de campaña., edit: Seleccione contacto dentro del módulo contactos leads. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      agente: {label: Agente, kind: User, options: {description: {view: Usuario de Corteza responsable de agente en este registro de Registros de campaña., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
       prioridad:
         label: Prioridad
         kind: Select
         default: Media
         options:
           options:
-            - { text: Baja, value: Baja }
-            - { text: Media, value: Media }
-            - { text: Alta, value: Alta }
+            - {text: Baja, value: Baja}
+            - {text: Media, value: Media}
+            - {text: Alta, value: Alta}
           selectType: default
+          description:
+            view: Clasificación de prioridad para este registro de Registros de campaña.
+            edit: 'Seleccione un valor para prioridad entre: Baja, Media, Alta. Es opcional; complételo cuando la información esté disponible.'
       intentos:
         label: Intentos
         kind: Number
         default: "0"
-        options: { format: "0", precision: 0 }
-      proximoIntento: { label: Próximo intento, kind: DateTime }
+        options: {format: "0", precision: 0, description: {view: Valor numérico de intentos para este registro de Registros de campaña., edit: Ingrese intentos como número. Es opcional; complételo cuando la información esté disponible.}}
+      proximoIntento: {label: Próximo intento, kind: DateTime, options: {description: {view: 'Fecha y hora de próximo intento para este registro de Registros de campaña, interpretada en America/Bogota.', edit: Indique próximo intento usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       estado:
         label: Estado
         kind: Select
@@ -178,18 +247,22 @@ modules:
         default: Pendiente
         options:
           options:
-            - { text: Pendiente, value: Pendiente }
-            - { text: En gestión, value: En gestión }
-            - { text: Callback, value: Callback }
-            - { text: Contactado, value: Contactado }
-            - { text: Calificado, value: Calificado }
-            - { text: Cerrado, value: Cerrado }
-            - { text: Agotado, value: Agotado }
+            - {text: Pendiente, value: Pendiente}
+            - {text: En gestión, value: En gestión}
+            - {text: Callback, value: Callback}
+            - {text: Contactado, value: Contactado}
+            - {text: Calificado, value: Calificado}
+            - {text: Cerrado, value: Cerrado}
+            - {text: Agotado, value: Agotado}
           selectType: default
-      ultimoResultado: { label: Último resultado, kind: String }
-      fechaAsignacion: { label: Fecha de asignación, kind: DateTime }
-      externalID: { label: Identificador externo, kind: String }
-
+          description:
+            view: Clasificación de estado para este registro de Registros de campaña.
+            edit: 'Seleccione un valor para estado entre: Pendiente, En gestión, Callback, Contactado, Calificado, Cerrado, Agotado. Es obligatorio para guardar un registro completo.'
+      ultimoResultado: {label: Último resultado, kind: String, options: {description: {view: El campo «Último resultado» conserva información operativa del registro en Registros de campaña., edit: 'Ingrese último resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      fechaAsignacion: {label: Fecha de asignación, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de asignación para este registro de Registros de campaña, interpretada en America/Bogota.', edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}}
+      externalID: {label: Identificador externo, kind: String, options: {description: {view: El campo «Identificador externo» conserva información operativa del registro en Registros de campaña., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+    meta:
+      description: Relación operativa entre una campaña y un contacto. Funciona como cola de trabajo y conserva agente, prioridad, intentos, próxima gestión y resultado acumulado.
   llamadas:
     name: Llamadas
     fields:
@@ -197,116 +270,131 @@ modules:
         label: Registro de campaña
         kind: Record
         required: true
-        options: { module: registros-campana, labelField: codigo }
+        options: {module: registros-campana, labelField: codigo, description: {view: Relación con registros campana. Permite consultar un registro vinculado en este registro de Llamadas., edit: Seleccione registro de campaña dentro del módulo registros campana. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       contacto:
         label: Contacto
         kind: Record
         required: true
-        options: { module: contactos-leads, labelField: nombres }
+        options: {module: contactos-leads, labelField: nombres, description: {view: Relación con contactos leads. Permite consultar un registro vinculado en este registro de Llamadas., edit: Seleccione contacto dentro del módulo contactos leads. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       campana:
         label: Campaña
         kind: Record
         required: true
-        options: { module: campanas, labelField: nombre }
-      agente: { label: Agente, kind: User, required: true }
+        options: {module: campanas, labelField: nombre, description: {view: Relación con campanas. Permite consultar un registro vinculado en este registro de Llamadas., edit: Seleccione campaña dentro del módulo campanas. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      agente: {label: Agente, kind: User, required: true, options: {description: {view: Usuario de Corteza responsable de agente en este registro de Llamadas., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo.}}}
       direccion:
         label: Dirección
         kind: Select
         required: true
         options:
           options:
-            - { text: Saliente, value: Saliente }
-            - { text: Entrante, value: Entrante }
+            - {text: Saliente, value: Saliente}
+            - {text: Entrante, value: Entrante}
           selectType: default
-      inicio: { label: Inicio, kind: DateTime, required: true }
-      fin: { label: Fin, kind: DateTime }
+          description:
+            view: Clasificación de dirección para este registro de Llamadas.
+            edit: 'Seleccione un valor para dirección entre: Saliente, Entrante. Es obligatorio para guardar un registro completo.'
+      inicio: {label: Inicio, kind: DateTime, required: true, options: {description: {view: 'Fecha y hora de inicio para este registro de Llamadas, interpretada en America/Bogota.', edit: Indique inicio usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.}}}
+      fin: {label: Fin, kind: DateTime, options: {description: {view: 'Fecha y hora de fin para este registro de Llamadas, interpretada en America/Bogota.', edit: Indique fin usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       duracionSegundos:
         label: Duración
         kind: Number
-        options: { format: "0", precision: 0, suffix: " s" }
+        options: {format: "0", precision: 0, suffix: " s", description: {view: Valor numérico de duración para este registro de Llamadas., edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}
       disposicion:
         label: Disposición
         kind: Select
         required: true
         options:
           options:
-            - { text: No contesta, value: No contesta }
-            - { text: Ocupado, value: Ocupado }
-            - { text: Número incorrecto, value: Número incorrecto }
-            - { text: Callback, value: Callback }
-            - { text: Contactado, value: Contactado }
-            - { text: Calificado, value: Calificado }
-            - { text: No interesado, value: No interesado }
-            - { text: No llamar, value: No llamar }
-            - { text: Venta, value: Venta }
+            - {text: No contesta, value: No contesta}
+            - {text: Ocupado, value: Ocupado}
+            - {text: Número incorrecto, value: Número incorrecto}
+            - {text: Callback, value: Callback}
+            - {text: Contactado, value: Contactado}
+            - {text: Calificado, value: Calificado}
+            - {text: No interesado, value: No interesado}
+            - {text: No llamar, value: No llamar}
+            - {text: Venta, value: Venta}
           selectType: default
+          description:
+            view: Clasificación de disposición para este registro de Llamadas.
+            edit: 'Seleccione un valor para disposición entre: No contesta, Ocupado, Número incorrecto, Callback, Contactado, Calificado, No interesado, No llamar, Venta. Es obligatorio para guardar un registro completo.'
       resumen:
         label: Resumen
         kind: String
-        options: { multiLine: true }
-      callback: { label: Callback programado, kind: DateTime }
-      externalID: { label: Identificador de llamada externo, kind: String }
-      proveedorExterno: { label: Proveedor de telefonía, kind: String }
-      grabacionURL: { label: URL de grabación, kind: Url }
-      transcripcionURL: { label: URL de transcripción, kind: Url }
+        options: {multiLine: true, description: {view: El campo «Resumen» conserva información operativa del registro en Llamadas., edit: 'Ingrese resumen con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      callback: {label: Callback programado, kind: DateTime, options: {description: {view: 'Fecha y hora de callback programado para este registro de Llamadas, interpretada en America/Bogota.', edit: Indique callback programado usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      externalID: {label: Identificador de llamada externo, kind: String, options: {description: {view: El campo «Identificador de llamada externo» conserva información operativa del registro en Llamadas., edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.}}}
+      proveedorExterno: {label: Proveedor de telefonía, kind: String, options: {description: {view: El campo «Proveedor de telefonía» conserva información operativa del registro en Llamadas., edit: 'Ingrese proveedor de telefonía con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      grabacionURL: {label: URL de grabación, kind: Url, options: {description: {view: El campo «URL de grabación» conserva información operativa del registro en Llamadas., edit: 'Ingrese url de grabación con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      transcripcionURL: {label: URL de transcripción, kind: Url, options: {description: {view: El campo «URL de transcripción» conserva información operativa del registro en Llamadas., edit: 'Ingrese url de transcripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       estadoIntegracion:
         label: Estado de integración
         kind: Select
         default: Local
         options:
           options:
-            - { text: Local, value: Local }
-            - { text: Pendiente, value: Pendiente }
-            - { text: Sincronizado, value: Sincronizado }
-            - { text: Error, value: Error }
+            - {text: Local, value: Local}
+            - {text: Pendiente, value: Pendiente}
+            - {text: Sincronizado, value: Sincronizado}
+            - {text: Error, value: Error}
           selectType: default
+          description:
+            view: Clasificación de estado de integración para este registro de Llamadas.
+            edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.
       ultimoErrorIntegracion:
         label: Último error de integración
         kind: String
-        options: { multiLine: true }
-
+        options: {multiLine: true, description: {view: El campo «Último error de integración» conserva información operativa del registro en Llamadas., edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}
+    meta:
+      description: Historial de intentos y conversaciones de una campaña. Registra agente, horario, duración, disposición, resumen, callback e identificadores externos opcionales.
   oportunidades:
     name: Oportunidades
     fields:
-      codigo: { label: Código, kind: String, required: true }
+      codigo: {label: Código, kind: String, required: true, options: {description: {view: El campo «Código» conserva información operativa del registro en Oportunidades., edit: 'Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       contacto:
         label: Contacto
         kind: Record
         required: true
-        options: { module: contactos-leads, labelField: nombres }
+        options: {module: contactos-leads, labelField: nombres, description: {view: Relación con contactos leads. Permite consultar un registro vinculado en este registro de Oportunidades., edit: Seleccione contacto dentro del módulo contactos leads. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       campana:
         label: Campaña
         kind: Record
-        options: { module: campanas, labelField: nombre }
-      closer: { label: Closer, kind: User }
-      producto: { label: Producto o servicio, kind: String, required: true }
+        options: {module: campanas, labelField: nombre, description: {view: Relación con campanas. Permite consultar un registro vinculado en este registro de Oportunidades., edit: Seleccione campaña dentro del módulo campanas. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
+      closer: {label: Closer, kind: User, options: {description: {view: Usuario de Corteza responsable de closer en este registro de Oportunidades., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      producto: {label: Producto o servicio, kind: String, required: true, options: {description: {view: El campo «Producto o servicio» conserva información operativa del registro en Oportunidades., edit: 'Ingrese producto o servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       etapa:
         label: Etapa
         kind: Select
         default: Calificada
         options:
           options:
-            - { text: Calificada, value: Calificada }
-            - { text: Contacto comercial, value: Contacto comercial }
-            - { text: Propuesta, value: Propuesta }
-            - { text: Negociación, value: Negociación }
-            - { text: Venta, value: Venta }
-            - { text: Perdida, value: Perdida }
+            - {text: Calificada, value: Calificada}
+            - {text: Contacto comercial, value: Contacto comercial}
+            - {text: Propuesta, value: Propuesta}
+            - {text: Negociación, value: Negociación}
+            - {text: Venta, value: Venta}
+            - {text: Perdida, value: Perdida}
           selectType: default
+          description:
+            view: Clasificación de etapa para este registro de Oportunidades.
+            edit: 'Seleccione un valor para etapa entre: Calificada, Contacto comercial, Propuesta, Negociación, Venta, Perdida. Es opcional; complételo cuando la información esté disponible.'
       valor:
         label: Valor
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor expresado en pesos colombianos (COP) para este registro de Oportunidades., edit: 'Ingrese valor en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       probabilidad:
         label: Probabilidad
         kind: Number
-        options: { format: "0", precision: 0, suffix: "%" }
+        options: {format: "0", precision: 0, suffix: "%", description: {view: Valor numérico de probabilidad para este registro de Oportunidades., edit: Ingrese probabilidad como número. Es opcional; complételo cuando la información esté disponible.}}
       fechaEstimadaCierre:
         label: Fecha estimada de cierre
         kind: DateTime
-        options: { onlyDate: true }
-      motivoPerdida: { label: Motivo de pérdida, kind: String }
+        options: {onlyDate: true, description: {view: Fecha de fecha estimada de cierre para este registro de Oportunidades., edit: Indique fecha estimada de cierre en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
+      motivoPerdida: {label: Motivo de pérdida, kind: String, options: {description: {view: El campo «Motivo de pérdida» conserva información operativa del registro en Oportunidades., edit: 'Ingrese motivo de pérdida con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Oportunidades., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+    meta:
+      description: Oportunidades comerciales originadas en llamadas calificadas. Relaciona contacto, campaña, producto, responsable, valor, etapa y cierre esperado.

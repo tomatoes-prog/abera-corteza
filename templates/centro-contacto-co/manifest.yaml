@@ -3,17 +3,17 @@
 
 id: centro-contacto-co
 name: CRM Centro de Contacto Colombia
-version: 1.0.1
+version: 2.0.0
 minimumCortezaVersion: 2024.9.9
 defaultLocale: es
 license: Apache-2.0
-description: Televentas, campañas, callbacks y oportunidades comerciales.
+description: Televentas productivas con autorización, RNE, cola personal, callbacks, llamadas y pipeline comercial.
 resources:
   namespace: centro-contacto-co
   roles: [agente-contacto, supervisor-contacto, closer-comercial, automatizacion-contacto]
   users: [automatizacion-contacto]
   modules: [contactos-leads, campanas, registros-campana, llamadas, oportunidades]
-  pages: [inicio, contactos-leads, campanas, registros-campana, llamadas, oportunidades]
+  pages: [inicio, mi-cola, contactos-leads, campanas, registros-campana, llamadas, oportunidades, reportes]
   charts:
     - funnel-contacto
     - resultados-llamadas
@@ -25,4 +25,8 @@ resources:
     - respetar-no-llamar
     - procesar-resultado-llamada
     - crear-oportunidad-llamada
+    - avisar-asignacion-centro-contacto-co
+    - ejemplo-correo-responsable-centro-contacto-co
+    - ejemplo-slack-hito-centro-contacto-co
+  reports: [centro-contacto-co-ejecutivo, centro-contacto-co-operativo]
   scripts: [scripts/seed-demo.ps1]

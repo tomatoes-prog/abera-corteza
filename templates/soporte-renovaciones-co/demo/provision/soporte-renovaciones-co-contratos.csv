@@ -59,23 +59,43 @@ contrato-057,SUP-CON-057,cliente-soporte-057,Mesa de ayuda,Básico,2025-09-27,20
 contrato-058,SUP-CON-058,cliente-soporte-058,Analítica,Estándar,2025-09-26,2026-10-27,0,23360000,8,24,Activo,Contrato sintético.,BILL-CON-058
 contrato-059,SUP-CON-059,cliente-soporte-059,Automatización,Premium,2025-09-25,2026-10-28,1,23680000,2,8,Activo,Contrato sintético.,BILL-CON-059
 contrato-060,SUP-CON-060,cliente-soporte-060,Plataforma CRM,Básico,2025-09-24,2026-10-29,0,24000000,24,72,Activo,Contrato sintético.,BILL-CON-060
-contrato-061,SUP-CON-061,cliente-soporte-001,Mesa de ayuda,Estándar,2025-09-23,2026-10-30,1,24320000,8,24,Activo,Contrato sintético.,BILL-CON-061
-contrato-062,SUP-CON-062,cliente-soporte-002,Analítica,Premium,2025-09-22,2026-10-31,0,24640000,2,8,Activo,Contrato sintético.,BILL-CON-062
-contrato-063,SUP-CON-063,cliente-soporte-003,Automatización,Básico,2025-09-21,2026-11-01,1,24960000,24,72,Activo,Contrato sintético.,BILL-CON-063
-contrato-064,SUP-CON-064,cliente-soporte-004,Plataforma CRM,Estándar,2025-09-20,2026-11-02,0,25280000,8,24,Activo,Contrato sintético.,BILL-CON-064
-contrato-065,SUP-CON-065,cliente-soporte-005,Mesa de ayuda,Premium,2025-09-19,2026-11-03,1,25600000,2,8,Activo,Contrato sintético.,BILL-CON-065
-contrato-066,SUP-CON-066,cliente-soporte-006,Analítica,Básico,2025-09-18,2026-11-04,0,25920000,24,72,Activo,Contrato sintético.,BILL-CON-066
-contrato-067,SUP-CON-067,cliente-soporte-007,Automatización,Estándar,2025-09-17,2026-11-05,1,26240000,8,24,Activo,Contrato sintético.,BILL-CON-067
-contrato-068,SUP-CON-068,cliente-soporte-008,Plataforma CRM,Premium,2025-09-16,2026-11-06,0,26560000,2,8,Activo,Contrato sintético.,BILL-CON-068
-contrato-069,SUP-CON-069,cliente-soporte-009,Mesa de ayuda,Básico,2025-09-15,2026-11-07,1,26880000,24,72,Activo,Contrato sintético.,BILL-CON-069
-contrato-070,SUP-CON-070,cliente-soporte-010,Analítica,Estándar,2025-09-14,2026-11-08,0,27200000,8,24,Activo,Contrato sintético.,BILL-CON-070
-contrato-071,SUP-CON-071,cliente-soporte-011,Automatización,Premium,2025-09-13,2026-11-09,1,27520000,2,8,Activo,Contrato sintético.,BILL-CON-071
-contrato-072,SUP-CON-072,cliente-soporte-012,Plataforma CRM,Básico,2025-09-12,2026-11-10,0,27840000,24,72,Activo,Contrato sintético.,BILL-CON-072
-contrato-073,SUP-CON-073,cliente-soporte-013,Mesa de ayuda,Estándar,2025-09-11,2026-11-11,1,28160000,8,24,Activo,Contrato sintético.,BILL-CON-073
-contrato-074,SUP-CON-074,cliente-soporte-014,Analítica,Premium,2025-09-10,2026-11-12,0,28480000,2,8,Activo,Contrato sintético.,BILL-CON-074
-contrato-075,SUP-CON-075,cliente-soporte-015,Automatización,Básico,2025-09-09,2026-11-13,1,28800000,24,72,Activo,Contrato sintético.,BILL-CON-075
-contrato-076,SUP-CON-076,cliente-soporte-016,Plataforma CRM,Estándar,2025-09-08,2026-11-14,0,29120000,8,24,Activo,Contrato sintético.,BILL-CON-076
-contrato-077,SUP-CON-077,cliente-soporte-017,Mesa de ayuda,Premium,2025-09-07,2026-11-15,1,29440000,2,8,Activo,Contrato sintético.,BILL-CON-077
-contrato-078,SUP-CON-078,cliente-soporte-018,Analítica,Básico,2025-09-06,2026-11-16,0,29760000,24,72,Activo,Contrato sintético.,BILL-CON-078
-contrato-079,SUP-CON-079,cliente-soporte-019,Automatización,Estándar,2025-09-05,2026-11-17,1,30080000,8,24,Activo,Contrato sintético.,BILL-CON-079
-contrato-080,SUP-CON-080,cliente-soporte-020,Plataforma CRM,Premium,2025-09-04,2026-11-18,0,30400000,2,8,Activo,Contrato sintético.,BILL-CON-080
+contrato-061,SUP-CON-061,cliente-soporte-061,Mesa de ayuda,Estándar,2025-09-23,2026-10-30,1,24320000,8,24,Activo,Contrato sintético.,BILL-CON-061
+contrato-062,SUP-CON-062,cliente-soporte-062,Analítica,Premium,2025-09-22,2026-10-31,0,24640000,2,8,Activo,Contrato sintético.,BILL-CON-062
+contrato-063,SUP-CON-063,cliente-soporte-063,Automatización,Básico,2025-09-21,2026-11-01,1,24960000,24,72,Activo,Contrato sintético.,BILL-CON-063
+contrato-064,SUP-CON-064,cliente-soporte-064,Plataforma CRM,Estándar,2025-09-20,2026-11-02,0,25280000,8,24,Activo,Contrato sintético.,BILL-CON-064
+contrato-065,SUP-CON-065,cliente-soporte-065,Mesa de ayuda,Premium,2025-09-19,2026-11-03,1,25600000,2,8,Activo,Contrato sintético.,BILL-CON-065
+contrato-066,SUP-CON-066,cliente-soporte-066,Analítica,Básico,2025-09-18,2026-11-04,0,25920000,24,72,Activo,Contrato sintético.,BILL-CON-066
+contrato-067,SUP-CON-067,cliente-soporte-067,Automatización,Estándar,2025-09-17,2026-11-05,1,26240000,8,24,Activo,Contrato sintético.,BILL-CON-067
+contrato-068,SUP-CON-068,cliente-soporte-068,Plataforma CRM,Premium,2025-09-16,2026-11-06,0,26560000,2,8,Activo,Contrato sintético.,BILL-CON-068
+contrato-069,SUP-CON-069,cliente-soporte-069,Mesa de ayuda,Básico,2025-09-15,2026-11-07,1,26880000,24,72,Activo,Contrato sintético.,BILL-CON-069
+contrato-070,SUP-CON-070,cliente-soporte-070,Analítica,Estándar,2025-09-14,2026-11-08,0,27200000,8,24,Activo,Contrato sintético.,BILL-CON-070
+contrato-071,SUP-CON-071,cliente-soporte-071,Automatización,Premium,2025-09-13,2026-11-09,1,27520000,2,8,Activo,Contrato sintético.,BILL-CON-071
+contrato-072,SUP-CON-072,cliente-soporte-072,Plataforma CRM,Básico,2025-09-12,2026-11-10,0,27840000,24,72,Activo,Contrato sintético.,BILL-CON-072
+contrato-073,SUP-CON-073,cliente-soporte-073,Mesa de ayuda,Estándar,2025-09-11,2026-11-11,1,28160000,8,24,Activo,Contrato sintético.,BILL-CON-073
+contrato-074,SUP-CON-074,cliente-soporte-074,Analítica,Premium,2025-09-10,2026-11-12,0,28480000,2,8,Activo,Contrato sintético.,BILL-CON-074
+contrato-075,SUP-CON-075,cliente-soporte-075,Automatización,Básico,2025-09-09,2026-11-13,1,28800000,24,72,Activo,Contrato sintético.,BILL-CON-075
+contrato-076,SUP-CON-076,cliente-soporte-076,Plataforma CRM,Estándar,2025-09-08,2026-11-14,0,29120000,8,24,Activo,Contrato sintético.,BILL-CON-076
+contrato-077,SUP-CON-077,cliente-soporte-077,Mesa de ayuda,Premium,2025-09-07,2026-11-15,1,29440000,2,8,Activo,Contrato sintético.,BILL-CON-077
+contrato-078,SUP-CON-078,cliente-soporte-078,Analítica,Básico,2025-09-06,2026-11-16,0,29760000,24,72,Activo,Contrato sintético.,BILL-CON-078
+contrato-079,SUP-CON-079,cliente-soporte-079,Automatización,Estándar,2025-09-05,2026-11-17,1,30080000,8,24,Activo,Contrato sintético.,BILL-CON-079
+contrato-080,SUP-CON-080,cliente-soporte-080,Plataforma CRM,Premium,2025-09-04,2026-11-18,0,30400000,2,8,Activo,Contrato sintético.,BILL-CON-080
+contrato-081,SUP-CON-081,cliente-soporte-081,Mesa de ayuda,Básico,2025-09-03,2026-11-19,1,30720000,24,72,Activo,Contrato sintético.,BILL-CON-081
+contrato-082,SUP-CON-082,cliente-soporte-082,Analítica,Estándar,2025-09-02,2026-11-20,0,31040000,8,24,Activo,Contrato sintético.,BILL-CON-082
+contrato-083,SUP-CON-083,cliente-soporte-083,Automatización,Premium,2025-09-01,2026-11-21,1,31360000,2,8,Activo,Contrato sintético.,BILL-CON-083
+contrato-084,SUP-CON-084,cliente-soporte-084,Plataforma CRM,Básico,2025-08-31,2026-11-22,0,31680000,24,72,Activo,Contrato sintético.,BILL-CON-084
+contrato-085,SUP-CON-085,cliente-soporte-085,Mesa de ayuda,Estándar,2025-08-30,2026-11-23,1,32000000,8,24,Activo,Contrato sintético.,BILL-CON-085
+contrato-086,SUP-CON-086,cliente-soporte-086,Analítica,Premium,2025-08-29,2026-11-24,0,32320000,2,8,Activo,Contrato sintético.,BILL-CON-086
+contrato-087,SUP-CON-087,cliente-soporte-087,Automatización,Básico,2025-08-28,2026-11-25,1,32640000,24,72,Activo,Contrato sintético.,BILL-CON-087
+contrato-088,SUP-CON-088,cliente-soporte-088,Plataforma CRM,Estándar,2025-08-27,2026-11-26,0,32960000,8,24,Activo,Contrato sintético.,BILL-CON-088
+contrato-089,SUP-CON-089,cliente-soporte-089,Mesa de ayuda,Premium,2025-08-26,2026-11-27,1,33280000,2,8,Activo,Contrato sintético.,BILL-CON-089
+contrato-090,SUP-CON-090,cliente-soporte-090,Analítica,Básico,2025-11-23,2026-11-28,0,33600000,24,72,Activo,Contrato sintético.,BILL-CON-090
+contrato-091,SUP-CON-091,cliente-soporte-091,Automatización,Estándar,2025-11-22,2026-11-29,1,33920000,8,24,Activo,Contrato sintético.,BILL-CON-091
+contrato-092,SUP-CON-092,cliente-soporte-092,Plataforma CRM,Premium,2025-11-21,2026-11-30,0,34240000,2,8,Activo,Contrato sintético.,BILL-CON-092
+contrato-093,SUP-CON-093,cliente-soporte-093,Mesa de ayuda,Básico,2025-11-20,2026-12-01,1,34560000,24,72,Activo,Contrato sintético.,BILL-CON-093
+contrato-094,SUP-CON-094,cliente-soporte-094,Analítica,Estándar,2025-11-19,2026-12-02,0,34880000,8,24,Activo,Contrato sintético.,BILL-CON-094
+contrato-095,SUP-CON-095,cliente-soporte-095,Automatización,Premium,2025-11-18,2026-12-03,1,35200000,2,8,Activo,Contrato sintético.,BILL-CON-095
+contrato-096,SUP-CON-096,cliente-soporte-096,Plataforma CRM,Básico,2025-11-17,2026-12-04,0,35520000,24,72,Activo,Contrato sintético.,BILL-CON-096
+contrato-097,SUP-CON-097,cliente-soporte-097,Mesa de ayuda,Estándar,2025-11-16,2026-12-05,1,35840000,8,24,Activo,Contrato sintético.,BILL-CON-097
+contrato-098,SUP-CON-098,cliente-soporte-098,Analítica,Premium,2025-11-15,2026-12-06,0,36160000,2,8,Activo,Contrato sintético.,BILL-CON-098
+contrato-099,SUP-CON-099,cliente-soporte-099,Automatización,Básico,2025-11-14,2026-12-07,1,36480000,24,72,Activo,Contrato sintético.,BILL-CON-099
+contrato-100,SUP-CON-100,cliente-soporte-100,Plataforma CRM,Estándar,2025-11-13,2026-12-08,0,36800000,8,24,Activo,Contrato sintético.,BILL-CON-100

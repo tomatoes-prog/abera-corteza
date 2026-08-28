@@ -11,19 +11,20 @@ param(
     [string]$Password = $env:ABERA_ADMIN_PASSWORD,
     [ValidateRange(100, 1000)]
     [int]$LeadCount = 100,
-    [ValidateRange(24, 200)]
-    [int]$PropertyCount = 36,
+    [ValidateRange(100, 500)]
+    [int]$PropertyCount = 100,
     [ValidateRange(0, 500)]
-    [int]$AppointmentCount = 60,
+    [int]$AppointmentCount = 100,
     [ValidateRange(0, 1000)]
     [int]$ActivityCount = 100,
     [ValidateRange(0, 500)]
-    [int]$NegotiationCount = 35,
+    [int]$NegotiationCount = 100,
     [string]$NamespaceSlug = 'inmobiliaria-co'
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot '..\..\_shared\seed-api.ps1')
 
 if ([string]::IsNullOrWhiteSpace($ClientSecret)) {
     throw 'Defina ABERA_CLIENT_SECRET o use -ClientSecret.'
@@ -337,19 +338,39 @@ foreach ($requiredModule in @(
     }
 }
 
+$userResponse = Invoke-RestMethod `
+    -Method Get `
+    -Headers $apiHeaders `
+    -Uri "$BaseUrl/api/system/users/?email=$([uri]::EscapeDataString($Email))&limit=20"
+$actor = @($userResponse.response.set) |
+    Where-Object { $_.email -eq $Email } |
+    Select-Object -First 1
+if (-not $actor) {
+    throw "No se encontró el usuario autenticado '$Email'."
+}
+$actorId = [string]$actor.userID
+$script:AberaSeed = [pscustomobject]@{
+    BaseUrl = $BaseUrl
+    Headers = $apiHeaders
+}
+$pausedTriggers = @()
+
+try {
+    $pausedTriggers = @(Suspend-AberaTemplateTriggers -NamespaceHandle $NamespaceSlug)
+
 $locations = @(
-    [pscustomobject]@{ Department = 'Bogotá D.C.'; City = 'Bogotá'; Sector = 'Chapinero' },
-    [pscustomobject]@{ Department = 'Antioquia'; City = 'Medellín'; Sector = 'El Poblado' },
-    [pscustomobject]@{ Department = 'Valle del Cauca'; City = 'Cali'; Sector = 'Ciudad Jardín' },
-    [pscustomobject]@{ Department = 'Atlántico'; City = 'Barranquilla'; Sector = 'Riomar' },
-    [pscustomobject]@{ Department = 'Bolívar'; City = 'Cartagena'; Sector = 'Manga' },
-    [pscustomobject]@{ Department = 'Santander'; City = 'Bucaramanga'; Sector = 'Cabecera' },
-    [pscustomobject]@{ Department = 'Risaralda'; City = 'Pereira'; Sector = 'Pinares' },
-    [pscustomobject]@{ Department = 'Quindío'; City = 'Armenia'; Sector = 'La Castellana' },
-    [pscustomobject]@{ Department = 'Cundinamarca'; City = 'Chía'; Sector = 'La Balsa' },
-    [pscustomobject]@{ Department = 'Boyacá'; City = 'Tunja'; Sector = 'Unicentro' },
-    [pscustomobject]@{ Department = 'Tolima'; City = 'Ibagué'; Sector = 'El Vergel' },
-    [pscustomobject]@{ Department = 'Meta'; City = 'Villavicencio'; Sector = 'Buque' }
+    [pscustomobject]@{ Department = 'Bogotá D.C.'; City = 'Bogotá'; Sector = 'Chapinero'; Code = '11001'; Lat = 4.6486; Lng = -74.0637 },
+    [pscustomobject]@{ Department = 'Antioquia'; City = 'Medellín'; Sector = 'El Poblado'; Code = '05001'; Lat = 6.2088; Lng = -75.5679 },
+    [pscustomobject]@{ Department = 'Valle del Cauca'; City = 'Cali'; Sector = 'Ciudad Jardín'; Code = '76001'; Lat = 3.3697; Lng = -76.5311 },
+    [pscustomobject]@{ Department = 'Atlántico'; City = 'Barranquilla'; Sector = 'Riomar'; Code = '08001'; Lat = 11.0102; Lng = -74.8211 },
+    [pscustomobject]@{ Department = 'Bolívar'; City = 'Cartagena'; Sector = 'Manga'; Code = '13001'; Lat = 10.4096; Lng = -75.5395 },
+    [pscustomobject]@{ Department = 'Santander'; City = 'Bucaramanga'; Sector = 'Cabecera'; Code = '68001'; Lat = 7.1254; Lng = -73.1100 },
+    [pscustomobject]@{ Department = 'Risaralda'; City = 'Pereira'; Sector = 'Pinares'; Code = '66001'; Lat = 4.8060; Lng = -75.6810 },
+    [pscustomobject]@{ Department = 'Quindío'; City = 'Armenia'; Sector = 'La Castellana'; Code = '63001'; Lat = 4.5480; Lng = -75.6600 },
+    [pscustomobject]@{ Department = 'Cundinamarca'; City = 'Chía'; Sector = 'La Balsa'; Code = '25175'; Lat = 4.8619; Lng = -74.0583 },
+    [pscustomobject]@{ Department = 'Boyacá'; City = 'Tunja'; Sector = 'Unicentro'; Code = '15001'; Lat = 5.5353; Lng = -73.3678 },
+    [pscustomobject]@{ Department = 'Tolima'; City = 'Ibagué'; Sector = 'El Vergel'; Code = '73001'; Lat = 4.4389; Lng = -75.2322 },
+    [pscustomobject]@{ Department = 'Meta'; City = 'Villavicencio'; Sector = 'Buque'; Code = '50001'; Lat = 4.1420; Lng = -73.6266 }
 )
 $propertyTypes = @(
     'Apartamento',
@@ -433,7 +454,16 @@ for ($index = 1; $index -le $PropertyCount; $index++) {
             estado                 = $status
             departamento           = $location.Department
             ciudad                 = $location.City
+            codigoDivipola         = $location.Code
+            sector                 = $location.Sector
             direccion              = "Carrera $((($index * 3) % 90) + 1) # $((($index * 7) % 80) + 1)-$('{0:D2}' -f (($index * 13) % 99))"
+            ubicacion              = ConvertTo-AberaGeometryValue -Latitude ($location.Lat + (($index % 7) * 0.002)) -Longitude ($location.Lng - (($index % 7) * 0.002))
+            disponibleDesde        = (Get-Date).ToUniversalTime().AddDays(($index % 40) - 10).ToString('yyyy-MM-dd')
+            destacado              = [string]($(if ($index % 9 -eq 0) { 1 } else { 0 }))
+            caracteristicas        = @(
+                @('Balcón', 'Ascensor', 'Portería', 'Depósito', 'Terraza', 'Zona verde', 'Amoblado', 'Acceso para movilidad reducida')[$index % 8],
+                @('Balcón', 'Ascensor', 'Portería', 'Depósito', 'Terraza', 'Zona verde', 'Amoblado', 'Acceso para movilidad reducida')[($index + 3) % 8]
+            )
             administracion         = 180000 + (($index * 35000) % 650000)
             area                   = $area
             habitaciones           = $rooms
@@ -598,6 +628,7 @@ for ($index = 1; $index -le $LeadCount; $index++) {
         $nextContact = (Get-Date).ToUniversalTime().AddDays(
             1 + ($index % 21)
         ).AddHours(8 + ($index % 9))
+        $leadState = $leadStates[($index - 1) % $leadStates.Count]
 
         $values = [ordered]@{
             nombres                    = $leadFirstNames[($index - 1) % $leadFirstNames.Count]
@@ -605,6 +636,8 @@ for ($index = 1; $index -le $LeadCount; $index++) {
             telefono                   = '+57 30{0:D8}' -f (20000000 + $index)
             correo                     = $leadEmail
             autorizaTratamientoDatos   = '1'
+            fechaAutorizacion           = (Get-Date).ToUniversalTime().AddDays(-($index % 45)).ToString('yyyy-MM-ddTHH:mm:ssZ', $invariantCulture)
+            origenAutorizacion          = @('Formulario web', 'WhatsApp', 'Correo', 'Telefónica', 'Presencial')[$index % 5]
             tipoOperacion              = $operation
             tiposInmueble              = $wantedTypes
             departamentoBusqueda       = $location.Department
@@ -614,11 +647,16 @@ for ($index = 1; $index -le $LeadCount; $index++) {
             habitacionesMinimas        = 1 + ($index % 4)
             banosMinimos               = 1 + ($index % 3)
             inmueblesInteres            = @($interestProperties.RecordId)
-            estado                     = $leadStates[($index - 1) % $leadStates.Count]
+            estado                     = $leadState
+            responsable                = $actorId
+            prioridad                  = @('Baja', 'Media', 'Media', 'Alta', 'Urgente')[$index % 5]
+            fechaAsignacion             = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ', $invariantCulture)
             proximoContacto             = $nextContact.ToString(
                 'yyyy-MM-ddTHH:mm:ssZ',
                 $invariantCulture
             )
+            ultimoContacto              = (Get-Date).ToUniversalTime().AddDays(-($index % 14)).ToString('yyyy-MM-ddTHH:mm:ssZ', $invariantCulture)
+            motivoCierre                = $(if ($leadState -in @('Perdido', 'Descartado')) { 'El presupuesto, la zona o el plazo no coincidieron con el inventario disponible.' } else { $null })
             notas                       = (
                 "Lead de demostración #$('{0:D3}' -f $index). " +
                 "Busca $operation en $($location.City), " +
@@ -741,12 +779,16 @@ for ($offset = 0; $offset -lt $activityTarget; $offset++) {
     )[$offset % 5]
 
     $values = [ordered]@{
+        asunto        = "Seguimiento comercial - lead $($lead.Index)"
         lead          = $lead.RecordId
         asesor        = $lead.AdvisorId
         tipo          = $activityType
+        estado        = @('Pendiente', 'En curso', 'Completada', 'Completada')[$offset % 4]
+        prioridad     = @('Baja', 'Media', 'Alta')[$offset % 3]
         fecha         = $activityDate.ToString('yyyy-MM-ddTHH:mm:ssZ', $invariantCulture)
         resultado     = 'Contacto realizado; el lead mantiene interés.'
         proximaAccion = $nextAction.ToString('yyyy-MM-ddTHH:mm:ssZ', $invariantCulture)
+        vencimiento   = $nextAction.AddHours(4).ToString('yyyy-MM-ddTHH:mm:ssZ', $invariantCulture)
         observaciones = 'Seguimiento comercial de demostración creado mediante API.'
     }
     if ($interestIds.Count -gt 0) {
@@ -822,6 +864,9 @@ for ($offset = 0; $offset -lt $negotiationTarget; $offset++) {
         valorOfrecido        = [Math]::Round($publishedValue * (0.91 + (($offset % 5) / 100)), 0)
         probabilidad         = $probability
         fechaEstimadaCierre  = $closeDate.ToString('yyyy-MM-dd', $invariantCulture)
+        proximoPaso          = @('Validar necesidad', 'Presentar oferta', 'Revisar documentos', 'Preparar cierre')[$offset % 4]
+        fechaCierreReal      = $(if ($dealState -in @('Ganada', 'Perdida')) { (Get-Date).ToUniversalTime().AddDays(-($offset % 15)).ToString('yyyy-MM-dd', $invariantCulture) } else { $null })
+        comisionEstimada     = [Math]::Round($publishedValue * $(if ($dealOperation -eq 'Arriendo') { 0.08 } else { 0.025 }), 0)
         estado               = $dealState
         observaciones        = 'Negociación de demostración vinculada al lead y al inmueble.'
     }
@@ -833,6 +878,9 @@ for ($offset = 0; $offset -lt $negotiationTarget; $offset++) {
         -ModuleId $moduleIds.negociaciones `
         -Values $values
     $negotiationsByLead[$lead.RecordId] = $record
+}
+} finally {
+    Resume-AberaTemplateTriggers -Triggers $pausedTriggers -NamespaceHandle $NamespaceSlug
 }
 
 Write-Output 'Validando datos creados mediante API...'

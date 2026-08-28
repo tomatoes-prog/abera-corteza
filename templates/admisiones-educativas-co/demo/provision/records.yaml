@@ -18,6 +18,8 @@ record_sources:
   references:
     namespace: admisiones-educativas-co
     module: prospectos
+    programaPrincipal.module: programas
+    programaPrincipal.datasource: programas
     programasInteres.module: programas
     programasInteres.datasource: programas
   defaultable: true
@@ -62,6 +64,34 @@ record_sources:
     solicitud.datasource: solicitudes
     estudiante.module: prospectos
     estudiante.datasource: prospectos
+    programa.module: programas
+    programa.datasource: programas
+  defaultable: true
+  map:
+    ID:
+      column: ID
+      skip: true
+- source: admisiones-educativas-co-requisitos-solicitud.csv
+  key: ID
+  references:
+    namespace: admisiones-educativas-co
+    module: requisitos-solicitud
+    solicitud.module: solicitudes
+    solicitud.datasource: solicitudes
+  defaultable: true
+  map:
+    ID:
+      column: ID
+      skip: true
+- source: admisiones-educativas-co-actividades-admision.csv
+  key: ID
+  references:
+    namespace: admisiones-educativas-co
+    module: actividades-admision
+    prospecto.module: prospectos
+    prospecto.datasource: prospectos
+    solicitud.module: solicitudes
+    solicitud.datasource: solicitudes
     programa.module: programas
     programa.datasource: programas
   defaultable: true
