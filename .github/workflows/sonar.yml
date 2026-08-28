@@ -8,6 +8,9 @@ on:
 jobs:
   sonarqube:
     name: SonarQube
+    # The upstream project has a SonarCloud project, but this fork may not.
+    # Do not turn every pull request red when the fork has no token configured.
+    if: ${{ secrets.SONAR_TOKEN != '' }}
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4

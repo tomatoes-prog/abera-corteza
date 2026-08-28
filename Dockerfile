@@ -16,55 +16,55 @@ COPY lib ./lib
 
 # Build and link each shared package once. The old lib/dev target built both
 # packages twice before any application compilation started.
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn cd lib/js && yarn --frozen-lockfile --non-interactive && yarn build && yarn link && cd ../vue && yarn --frozen-lockfile --non-interactive && yarn cdeps && yarn build && yarn link
+RUN --mount=type=cache,id=abera-yarn-libs,target=/usr/local/share/.cache/yarn cd lib/js && yarn --frozen-lockfile --non-interactive && yarn build && yarn link && cd ../vue && yarn --frozen-lockfile --non-interactive && yarn cdeps && yarn build && yarn link
 
 # Copy dependency manifests before application sources. This keeps dependency
 # installation cached when only Vue, JavaScript or style sources change.
 FROM webapp-libs AS webapp-admin
 COPY client/web/admin/package.json client/web/admin/yarn.lock ./client/web/admin/
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn cd client/web/admin && yarn --frozen-lockfile --non-interactive
+RUN --mount=type=cache,id=abera-yarn-admin,target=/usr/local/share/.cache/yarn cd client/web/admin && yarn --frozen-lockfile --non-interactive
 COPY client/abera-assistant ./client/abera-assistant
 COPY client/web/admin ./client/web/admin
 RUN cd client/web/admin && yarn cdeps && yarn build
 
 FROM webapp-libs AS webapp-compose
 COPY client/web/compose/package.json client/web/compose/yarn.lock ./client/web/compose/
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn cd client/web/compose && yarn --frozen-lockfile --non-interactive
+RUN --mount=type=cache,id=abera-yarn-compose,target=/usr/local/share/.cache/yarn cd client/web/compose && yarn --frozen-lockfile --non-interactive
 COPY client/abera-assistant ./client/abera-assistant
 COPY client/web/compose ./client/web/compose
 RUN cd client/web/compose && yarn cdeps && yarn build
 
 FROM webapp-libs AS webapp-discovery
 COPY client/web/discovery/package.json client/web/discovery/yarn.lock ./client/web/discovery/
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn cd client/web/discovery && yarn --frozen-lockfile --non-interactive
+RUN --mount=type=cache,id=abera-yarn-discovery,target=/usr/local/share/.cache/yarn cd client/web/discovery && yarn --frozen-lockfile --non-interactive
 COPY client/abera-assistant ./client/abera-assistant
 COPY client/web/discovery ./client/web/discovery
 RUN cd client/web/discovery && yarn cdeps && yarn build
 
 FROM webapp-libs AS webapp-one
 COPY client/web/one/package.json client/web/one/yarn.lock ./client/web/one/
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn cd client/web/one && yarn --frozen-lockfile --non-interactive
+RUN --mount=type=cache,id=abera-yarn-one,target=/usr/local/share/.cache/yarn cd client/web/one && yarn --frozen-lockfile --non-interactive
 COPY client/abera-assistant ./client/abera-assistant
 COPY client/web/one ./client/web/one
 RUN cd client/web/one && yarn cdeps && yarn build
 
 FROM webapp-libs AS webapp-privacy
 COPY client/web/privacy/package.json client/web/privacy/yarn.lock ./client/web/privacy/
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn cd client/web/privacy && yarn --frozen-lockfile --non-interactive
+RUN --mount=type=cache,id=abera-yarn-privacy,target=/usr/local/share/.cache/yarn cd client/web/privacy && yarn --frozen-lockfile --non-interactive
 COPY client/abera-assistant ./client/abera-assistant
 COPY client/web/privacy ./client/web/privacy
 RUN cd client/web/privacy && yarn cdeps && yarn build
 
 FROM webapp-libs AS webapp-reporter
 COPY client/web/reporter/package.json client/web/reporter/yarn.lock ./client/web/reporter/
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn cd client/web/reporter && yarn --frozen-lockfile --non-interactive
+RUN --mount=type=cache,id=abera-yarn-reporter,target=/usr/local/share/.cache/yarn cd client/web/reporter && yarn --frozen-lockfile --non-interactive
 COPY client/abera-assistant ./client/abera-assistant
 COPY client/web/reporter ./client/web/reporter
 RUN cd client/web/reporter && yarn cdeps && yarn build
 
 FROM webapp-libs AS webapp-workflow
 COPY client/web/workflow/package.json client/web/workflow/yarn.lock ./client/web/workflow/
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn cd client/web/workflow && yarn --frozen-lockfile --non-interactive
+RUN --mount=type=cache,id=abera-yarn-workflow,target=/usr/local/share/.cache/yarn cd client/web/workflow && yarn --frozen-lockfile --non-interactive
 COPY client/abera-assistant ./client/abera-assistant
 COPY client/web/workflow ./client/web/workflow
 RUN cd client/web/workflow && yarn cdeps && yarn build
