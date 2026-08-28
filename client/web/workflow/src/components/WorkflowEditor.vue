@@ -783,7 +783,7 @@ export default {
 
       this.initialized = true
     } catch (e) {
-      console.error(e)
+      this.initialized = false
     }
   },
 

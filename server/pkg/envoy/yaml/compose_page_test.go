@@ -3,6 +3,7 @@ package yaml
 import (
 	"testing"
 
+	"github.com/cortezaproject/corteza/server/compose/types"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v3"
 )
@@ -46,5 +47,22 @@ func TestComposePage_UnmarshalYAML(t *testing.T) {
 		req.Equal(3, len(doc.compose.Pages[0].res.Blocks))
 		req.NotNil(doc.compose.Pages[0].rbac)
 		req.NotEmpty(doc.compose.Pages[0].rbac)
+	})
+}
+
+func TestComposePageBlock_MarshalGeometryWithIncompleteFeed(t *testing.T) {
+	block := &composePageBlock{res: &types.PageBlock{
+		Kind: "Geometry",
+		Options: map[string]interface{}{
+			"feeds": []interface{}{
+				map[string]interface{}{},
+				map[string]interface{}{"options": map[string]interface{}{}},
+			},
+		},
+	}}
+
+	require.NotPanics(t, func() {
+		_, err := block.MarshalYAML()
+		require.NoError(t, err)
 	})
 }

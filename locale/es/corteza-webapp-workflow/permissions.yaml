@@ -36,35 +36,35 @@ ui:
 resources:
   automation:
     workflow:
-      all: todos los workflows
-      specific: workflow "{{target}}"
-      tooltip: Permisos del workflow
+      all: 'todos los flujos de trabajo'
+      specific: 'flujo de trabajo "{{target}}"'
+      tooltip: 'Permisos del flujo de trabajo'
       operations:
         delete:
           description: 'Predeterminado: denegar'
-          specific: Eliminar este workflow
-          title: Eliminar cualquier workflow
+          specific: 'Eliminar este flujo de trabajo'
+          title: 'Eliminar cualquier flujo de trabajo'
         execute:
           description: 'Predeterminado: denegar'
-          specific: Ejecutar este workflow
-          title: Ejecutar cualquier workflow
+          specific: 'Ejecutar este flujo de trabajo'
+          title: 'Ejecutar cualquier flujo de trabajo'
         read:
           description: 'Predeterminado: denegar'
-          specific: Leer este workflow
-          title: Leer cualquier workflow
+          specific: 'Leer este flujo de trabajo'
+          title: 'Leer cualquier flujo de trabajo'
         sessions.manage:
           description: 'Predeterminado: denegar'
-          specific: Gestionar las sesiones de este workflow
+          specific: 'Gestionar las sesiones de este flujo de trabajo'
           title: Gestionar todas las sesiones
         triggers.manage:
           description: 'Predeterminado: denegar'
-          specific: Gestionar los activadores de este workflow
+          specific: 'Gestionar los activadores de este flujo de trabajo'
           title: Gestionar todos los activadores
         undelete:
           description: 'Predeterminado: denegar'
-          specific: Restaurar este workflow
-          title: Restaurar cualquier workflow
+          specific: 'Restaurar este flujo de trabajo'
+          title: 'Restaurar cualquier flujo de trabajo'
         update:
           description: 'Predeterminado: denegar'
-          specific: Actualizar este workflow
-          title: Actualizar cualquier workflow
+          specific: 'Actualizar este flujo de trabajo'
+          title: 'Actualizar cualquier flujo de trabajo'

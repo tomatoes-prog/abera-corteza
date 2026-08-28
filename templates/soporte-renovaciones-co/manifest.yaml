@@ -3,17 +3,17 @@
 
 id: soporte-renovaciones-co
 name: CRM Soporte y Renovaciones Colombia
-version: 1.0.1
+version: 2.0.0
 minimumCortezaVersion: 2024.9.9
 defaultLocale: es
 license: Apache-2.0
-description: Atención al cliente, SLA, retención, renovaciones y expansión.
+description: Soporte productivo con colas, SLA, escalamiento, problemas conocidos, renovación y expansión.
 resources:
   namespace: soporte-renovaciones-co
   roles: [agente-soporte, supervisor-soporte, gestor-renovaciones, automatizacion-soporte]
   users: [automatizacion-soporte]
-  modules: [clientes, contratos, casos, interacciones, renovaciones]
-  pages: [inicio, clientes, contratos, casos, interacciones, renovaciones]
+  modules: [clientes, contratos, casos, interacciones, renovaciones, problemas-conocidos]
+  pages: [inicio, mi-cola, clientes, contratos, casos, interacciones, problemas-conocidos, renovaciones, reportes]
   charts:
     - casos-por-prioridad
     - casos-por-estado
@@ -28,4 +28,8 @@ resources:
     - actualizar-estado-sla
     - marcar-renovacion-riesgo
     - confirmar-renovacion
+    - avisar-asignacion-soporte-renovaciones-co
+    - ejemplo-correo-responsable-soporte-renovaciones-co
+    - ejemplo-slack-hito-soporte-renovaciones-co
+  reports: [soporte-renovaciones-co-ejecutivo, soporte-renovaciones-co-operativo]
   scripts: [scripts/seed-demo.ps1]

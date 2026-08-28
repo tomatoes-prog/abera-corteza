@@ -34,6 +34,10 @@ record_sources:
     cliente.datasource: clientes
     contrato.module: contratos
     contrato.datasource: contratos
+    casoPadre.module: casos
+    casoPadre.datasource: casos
+    problemaConocido.module: problemas-conocidos
+    problemaConocido.datasource: problemas-conocidos
   defaultable: true
   map:
     ID:
@@ -46,6 +50,8 @@ record_sources:
     module: interacciones
     caso.module: casos
     caso.datasource: casos
+    renovacion.module: renovaciones
+    renovacion.datasource: renovaciones
     cliente.module: clientes
     cliente.datasource: clientes
   defaultable: true
@@ -62,6 +68,16 @@ record_sources:
     cliente.datasource: clientes
     contrato.module: contratos
     contrato.datasource: contratos
+  defaultable: true
+  map:
+    ID:
+      column: ID
+      skip: true
+- source: soporte-renovaciones-co-problemas-conocidos.csv
+  key: ID
+  references:
+    namespace: soporte-renovaciones-co
+    module: problemas-conocidos
   defaultable: true
   map:
     ID:

@@ -1,5 +1,5 @@
-datasource: Datasource
-label: Label
-none: None
-prefilter: Prefilter
-scenario-name: 'Scenario Name...'
+datasource: Fuente de datos
+label: Etiqueta
+none: Ninguno
+prefilter: Prefiltro
+scenario-name: 'Nombre del escenario...'

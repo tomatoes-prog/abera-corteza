@@ -10,6 +10,13 @@ roles:
   low-code-admin:
     name: Namespace administrator
 
+  abera-ai-user:
+    name: Usuario del asistente de IA
+    meta:
+      description: |-
+        Permite utilizar el asistente de IA de Abera.
+        Debe asignarse directamente al usuario y no concede permisos adicionales sobre los datos.
+
   owner:
     name: Owner
     meta:

@@ -6,7 +6,8 @@ This product includes software developed by the Corteza Project
 
 This distribution contains modifications for Spanish localization, selectable
 business templates, demonstration data, and provider-neutral encrypted OAuth
-bootstrap provisioning.
+bootstrap provisioning. It also contains an optional, isolated AI assistant
+bridge and shared web widget; the external agent and MCP remain separate works.
 
 The software and modifications are licensed under the Apache License, Version
 2.0. See the LICENSE file distributed with this work.

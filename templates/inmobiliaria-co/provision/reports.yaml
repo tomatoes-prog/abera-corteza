@@ -1,0 +1,105 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+report:
+    inmobiliaria-co-ejecutivo:
+        blocks:
+            - description: Cantidad de registros agrupada para identificar concentración, avance y desviaciones.
+              elements:
+                - description: Cantidad de registros agrupada para identificar concentración, avance y desviaciones.
+                  elementID: "1"
+                  kind: Table
+                  name: Resumen por etapa
+                  options:
+                    columns: {}
+                    datasources:
+                        - filter: {}
+                          name: resumen
+                          paging:
+                            limit: 100
+                          sort: ""
+                    hover: true
+                    responsive: true
+                    source: resumen
+                    striped: true
+              key: "1"
+              kind: ""
+              layout: horizontal
+              title: Resumen por etapa
+              xywh:
+                - 0
+                - 0
+                - 48
+                - 30
+        meta:
+            description: Distribución ejecutiva de los registros por etapa, útil para seguimiento de resultados y reuniones de gestión.
+            name: Resumen ejecutivo · Inmobiliaria co
+        sources:
+            - meta:
+                name: Registros de Negociaciones
+              step:
+                kind: load
+                load:
+                    definition:
+                        module: negociaciones
+                        namespace: inmobiliaria-co
+                    name: registros
+                    source: composeRecords
+            - meta:
+                name: Resumen por etapa
+              step:
+                aggregate:
+                    columns:
+                        - def: count(recordID)
+                          label: Total
+                          name: total
+                    keys:
+                        - def: etapa
+                          label: Etapa
+                          name: etapa
+                    name: resumen
+                    source: registros
+                kind: aggregate
+    inmobiliaria-co-operativo:
+        blocks:
+            - description: Tabla consultable y exportable para revisión operativa y control de calidad.
+              elements:
+                - description: Tabla consultable y exportable para revisión operativa y control de calidad.
+                  elementID: "1"
+                  kind: Table
+                  name: Detalle operativo
+                  options:
+                    columns: {}
+                    datasources:
+                        - filter: {}
+                          name: detalle
+                          paging:
+                            limit: 100
+                          sort: ""
+                    hover: true
+                    responsive: true
+                    source: detalle
+                    striped: true
+              key: "1"
+              kind: ""
+              layout: horizontal
+              title: Detalle operativo
+              xywh:
+                - 0
+                - 0
+                - 48
+                - 30
+        meta:
+            description: Detalle exportable de los registros operativos que respaldan los indicadores de la plantilla.
+            name: Detalle operativo · Inmobiliaria co
+        sources:
+            - meta:
+                name: Registros de Negociaciones
+              step:
+                kind: load
+                load:
+                    definition:
+                        module: negociaciones
+                        namespace: inmobiliaria-co
+                    name: detalle
+                    source: composeRecords

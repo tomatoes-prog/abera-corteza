@@ -7,81 +7,190 @@ pages:
     title: Centro de soporte y retención
     visible: true
     blocks:
-    - title: Casos por prioridad
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 16
-      - 30
-      options:
-        chart: casos-por-prioridad
-      blockID: 1
-    - title: Cumplimiento de SLA
-      kind: Chart
-      xywh:
-      - 16
-      - 0
-      - 16
-      - 30
-      options:
-        chart: cumplimiento-sla
-      blockID: 2
-    - title: Funnel de renovaciones
-      kind: Chart
-      xywh:
-      - 32
-      - 0
-      - 16
-      - 30
-      options:
-        chart: funnel-renovaciones
-      blockID: 3
-    - title: Casos próximos a incumplir
-      kind: RecordList
-      xywh:
-      - 0
-      - 30
-      - 24
-      - 18
-      options:
-        module: casos
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: asunto
-        - name: prioridad
-        - name: estado
-        - name: agente
-        - name: vencimientoResolucion
-        - name: estadoSLA
-        prefilter: estado != 'Cerrado' AND estado != 'Cancelado'
-        presort: vencimientoResolucion ASC
-        perPage: 15
-        hideRecordCloneButton: true
-      blockID: 4
-    - title: Renovaciones en riesgo
-      kind: RecordList
-      xywh:
-      - 24
-      - 30
-      - 24
-      - 18
-      options:
-        module: renovaciones
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: fechaVencimiento
-        - name: etapa
-        - name: nuevoValor
-        - name: probabilidad
-        - name: riesgo
-        prefilter: riesgo = 'Alto' OR riesgo = 'Medio'
-        presort: fechaVencimiento ASC
-        perPage: 15
-        hideRecordCloneButton: true
-      blockID: 5
+      - title: Casos por prioridad
+        kind: Chart
+        xywh:
+          - 0
+          - 18
+          - 24
+          - 30
+        options:
+          chart: casos-por-prioridad
+        blockID: 1
+        description: Gráfico que resume casos por prioridad a partir de datos actuales.
+      - title: Cumplimiento de SLA
+        kind: Chart
+        xywh:
+          - 24
+          - 18
+          - 24
+          - 30
+        options:
+          chart: cumplimiento-sla
+        blockID: 2
+        description: Gráfico que resume cumplimiento de sla a partir de datos actuales.
+      - title: Funnel de renovaciones
+        kind: Chart
+        xywh:
+          - 0
+          - 48
+          - 48
+          - 30
+        options:
+          chart: funnel-renovaciones
+        blockID: 3
+        description: Gráfico que resume funnel de renovaciones a partir de datos actuales.
+      - title: Casos próximos a incumplir
+        kind: RecordList
+        xywh:
+          - 0
+          - 78
+          - 24
+          - 48
+        options:
+          module: casos
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: asunto
+            - name: prioridad
+            - name: estado
+            - name: agente
+            - name: vencimientoResolucion
+            - name: estadoSLA
+          prefilter: estado != 'Cerrado' AND estado != 'Cancelado'
+          presort: vencimientoResolucion ASC
+          perPage: 15
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 4
+        description: Listado operativo de casos próximos a incumplir con búsqueda, filtros, conteo y exportación.
+      - title: Renovaciones en riesgo
+        kind: RecordList
+        xywh:
+          - 24
+          - 78
+          - 24
+          - 48
+        options:
+          module: renovaciones
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: fechaVencimiento
+            - name: etapa
+            - name: nuevoValor
+            - name: probabilidad
+            - name: riesgo
+          prefilter: riesgo = 'Alto' OR riesgo = 'Medio'
+          presort: fechaVencimiento ASC
+          perPage: 15
+          hideRecordCloneButton: true
+          allowExport: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 5
+        description: Listado operativo de renovaciones en riesgo con búsqueda, filtros, conteo y exportación.
+      - blockID: 6
+        description: Casos de soporte pendientes de cierre.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estado != 'Cerrado' AND estado != 'Cancelado'
+              label: Backlog abierto
+              metricField: count
+              module: casos
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Backlog abierto
+        xywh:
+          - 0
+          - 0
+          - 12
+          - 18
+      - blockID: 7
+        description: Casos críticos que todavía requieren atención.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: prioridad = 'Crítica' AND estado != 'Cerrado'
+              label: Casos críticos
+              metricField: count
+              module: casos
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: Casos críticos
+        xywh:
+          - 12
+          - 0
+          - 12
+          - 18
+      - blockID: 8
+        description: Casos con SLA en riesgo o ya incumplido.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: estadoSLA = 'En riesgo' OR estadoSLA = 'Incumplido'
+              label: SLA en riesgo
+              metricField: count
+              module: casos
+              numberFormat: 0,0
+              operation: count
+              prefix: ""
+              suffix: ""
+          showRefresh: true
+        title: SLA en riesgo
+        xywh:
+          - 24
+          - 0
+          - 12
+          - 18
+      - blockID: 9
+        description: Valor de renovaciones con riesgo medio o alto en COP.
+        kind: Metric
+        options:
+          metrics:
+            - drillDown:
+                enabled: false
+              filter: riesgo = 'Alto' OR riesgo = 'Medio'
+              label: Valor en riesgo
+              metricField: nuevoValor
+              module: renovaciones
+              numberFormat: 0,0
+              operation: sum
+              prefix: '$ '
+              suffix: ""
+          showRefresh: true
+        title: Valor en riesgo
+        xywh:
+          - 36
+          - 0
+          - 12
+          - 18
     page_layouts:
       principal:
         primary: true
@@ -90,89 +199,79 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 16
-          - 30
-        - blockID: 2
-          xywh:
-          - 16
-          - 0
-          - 16
-          - 30
-        - blockID: 3
-          xywh:
-          - 32
-          - 0
-          - 16
-          - 30
-        - blockID: 4
-          xywh:
-          - 0
-          - 30
-          - 24
-          - 18
-        - blockID: 5
-          xywh:
-          - 24
-          - 30
-          - 24
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 18
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 18
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 48
+              - 48
+              - 30
+          - blockID: 4
+            xywh:
+              - 0
+              - 78
+              - 24
+              - 48
+          - blockID: 5
+            xywh:
+              - 24
+              - 78
+              - 24
+              - 48
+          - blockID: 6
+            xywh:
+              - 0
+              - 0
+              - 12
+              - 18
+          - blockID: 7
+            xywh:
+              - 12
+              - 0
+              - 12
+              - 18
+          - blockID: 8
+            xywh:
+              - 24
+              - 0
+              - 12
+              - 18
+          - blockID: 9
+            xywh:
+              - 36
+              - 0
+              - 12
+              - 18
+    description: Vista operativa de centro de soporte y retención. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   clientes:
     title: Clientes
     visible: true
     blocks:
-    - title: Clientes
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: clientes
-        fields:
-        - name: codigo
-        - name: nombre
-        - name: contactoPrincipal
-        - name: correo
-        - name: segmento
-        - name: planActual
-        - name: responsable
-        - name: valorRecurrente
-        - name: salud
-        - name: satisfaccion
-        - name: riesgo
-        presort: createdAt DESC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
-    children:
-      cliente-registro:
-        title: Detalle del cliente
-        module: clientes
-        visible: false
-        blocks:
-        - title: Perfil del cliente
-          kind: Record
-          xywh:
+      - title: Clientes
+        kind: RecordList
+        xywh:
           - 0
           - 0
-          - 12
-          - 14
-          options:
-            fields:
+          - 48
+          - 38
+        options:
+          module: clientes
+          fields:
             - name: codigo
-            - name: tipo
             - name: nombre
-            - name: identificacion
             - name: contactoPrincipal
-            - name: telefono
             - name: correo
-            - name: autorizaTratamientoDatos
             - name: segmento
             - name: planActual
             - name: responsable
@@ -180,50 +279,124 @@ pages:
             - name: salud
             - name: satisfaccion
             - name: riesgo
-            - name: notas
-          blockID: 1
-        - title: Casos
-          kind: RecordList
-          xywh:
-          - 0
-          - 14
-          - 6
-          - 9
-          options:
-            module: casos
-            fields:
-            - name: codigo
-            - name: asunto
-            - name: prioridad
-            - name: estado
-            - name: agente
-            - name: estadoSLA
-            prefilter: cliente = ${recordID}
-            presort: createdAt DESC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 2
-        - title: Renovaciones
-          kind: RecordList
-          xywh:
-          - 6
-          - 14
-          - 6
-          - 9
-          options:
-            module: renovaciones
-            fields:
-            - name: codigo
-            - name: contrato
-            - name: fechaVencimiento
-            - name: etapa
-            - name: nuevoValor
-            - name: riesgo
-            prefilter: cliente = ${recordID}
-            presort: fechaVencimiento ASC
-            perPage: 10
-            hideRecordCloneButton: true
-          blockID: 3
+          presort: createdAt DESC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de clientes con búsqueda, filtros, conteo y exportación.
+    children:
+      cliente-registro:
+        title: Detalle del cliente
+        module: clientes
+        visible: false
+        blocks:
+          - title: Perfil del cliente
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 90
+            options:
+              fields:
+                - name: codigo
+                - name: tipo
+                - name: nombre
+                - name: identificacion
+                - name: contactoPrincipal
+                - name: telefono
+                - name: correo
+                - name: autorizaTratamientoDatos
+                - name: segmento
+                - name: planActual
+                - name: responsable
+                - name: valorRecurrente
+                - name: salud
+                - name: satisfaccion
+                - name: riesgo
+                - name: notas
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar perfil del cliente.
+          - title: Casos
+            kind: RecordList
+            xywh:
+              - 0
+              - 90
+              - 24
+              - 38
+            options:
+              module: casos
+              fields:
+                - name: codigo
+                - name: asunto
+                - name: prioridad
+                - name: estado
+                - name: agente
+                - name: estadoSLA
+              prefilter: cliente = ${recordID}
+              presort: createdAt DESC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 2
+            description: Listado operativo de casos con búsqueda, filtros, conteo y exportación.
+          - title: Renovaciones
+            kind: RecordList
+            xywh:
+              - 24
+              - 90
+              - 24
+              - 38
+            options:
+              module: renovaciones
+              fields:
+                - name: codigo
+                - name: contrato
+                - name: fechaVencimiento
+                - name: etapa
+                - name: nuevoValor
+                - name: riesgo
+              prefilter: cliente = ${recordID}
+              presort: fechaVencimiento ASC
+              perPage: 10
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 3
+            description: Listado operativo de renovaciones con búsqueda, filtros, conteo y exportación.
+          - blockID: 4
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: fechaAutorizacion
+            title: Gestión y control
+            xywh:
+              - 0
+              - 128
+              - 48
+              - 30
         page_layouts:
           principal:
             primary: true
@@ -245,24 +418,31 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 14
-            - blockID: 2
-              xywh:
-              - 0
-              - 14
-              - 6
-              - 9
-            - blockID: 3
-              xywh:
-              - 6
-              - 14
-              - 6
-              - 9
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 90
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 90
+                  - 24
+                  - 38
+              - blockID: 3
+                xywh:
+                  - 24
+                  - 90
+                  - 24
+                  - 38
+              - blockID: 4
+                xywh:
+                  - 0
+                  - 128
+                  - 48
+                  - 30
+        description: Vista operativa de detalle del cliente. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -271,57 +451,27 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de clientes. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   contratos:
     title: Contratos
     visible: true
     blocks:
-    - title: Contratos de soporte
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: contratos
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: producto
-        - name: nivelSoporte
-        - name: fechaInicio
-        - name: fechaFin
-        - name: renovacionAutomatica
-        - name: valor
-        - name: slaRespuestaHoras
-        - name: slaResolucionHoras
-        - name: estado
-        presort: fechaFin ASC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
-    children:
-      contrato-registro:
-        title: Detalle del contrato
-        module: contratos
-        visible: false
-        blocks:
-        - title: Contrato
-          kind: Record
-          xywh:
+      - title: Contratos de soporte
+        kind: RecordList
+        xywh:
           - 0
           - 0
-          - 12
-          - 14
-          options:
-            fields:
+          - 48
+          - 38
+        options:
+          module: contratos
+          fields:
             - name: codigo
             - name: cliente
             - name: producto
@@ -333,31 +483,92 @@ pages:
             - name: slaRespuestaHoras
             - name: slaResolucionHoras
             - name: estado
-            - name: observaciones
-          blockID: 1
-        - title: Casos del contrato
-          kind: RecordList
-          xywh:
-          - 0
-          - 14
-          - 12
-          - 9
-          options:
-            module: casos
-            fields:
-            - name: codigo
-            - name: asunto
-            - name: prioridad
-            - name: estado
-            - name: agente
-            - name: vencimientoRespuesta
-            - name: vencimientoResolucion
-            - name: estadoSLA
-            prefilter: contrato = ${recordID}
-            presort: createdAt DESC
-            perPage: 20
-            hideRecordCloneButton: true
-          blockID: 2
+          presort: fechaFin ASC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de contratos de soporte con búsqueda, filtros, conteo y exportación.
+    children:
+      contrato-registro:
+        title: Detalle del contrato
+        module: contratos
+        visible: false
+        blocks:
+          - title: Contrato
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 70
+            options:
+              fields:
+                - name: codigo
+                - name: cliente
+                - name: producto
+                - name: nivelSoporte
+                - name: fechaInicio
+                - name: fechaFin
+                - name: renovacionAutomatica
+                - name: valor
+                - name: slaRespuestaHoras
+                - name: slaResolucionHoras
+                - name: estado
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar contrato.
+          - title: Casos del contrato
+            kind: RecordList
+            xywh:
+              - 0
+              - 70
+              - 48
+              - 38
+            options:
+              module: casos
+              fields:
+                - name: codigo
+                - name: asunto
+                - name: prioridad
+                - name: estado
+                - name: agente
+                - name: vencimientoRespuesta
+                - name: vencimientoResolucion
+                - name: estadoSLA
+              prefilter: contrato = ${recordID}
+              presort: createdAt DESC
+              perPage: 20
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 2
+            description: Listado operativo de casos del contrato con búsqueda, filtros, conteo y exportación.
+          - blockID: 3
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: diasAvisoRenovacion
+            title: Gestión y control
+            xywh:
+              - 0
+              - 108
+              - 48
+              - 30
         page_layouts:
           principal:
             primary: true
@@ -379,18 +590,25 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 14
-            - blockID: 2
-              xywh:
-              - 0
-              - 14
-              - 12
-              - 9
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 70
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 70
+                  - 48
+                  - 38
+              - blockID: 3
+                xywh:
+                  - 0
+                  - 108
+                  - 48
+                  - 30
+        description: Vista operativa de detalle del contrato. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -399,115 +617,156 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de contratos. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   casos:
     title: Casos
     visible: true
     blocks:
-    - title: Casos por estado
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 4
-      - 30
-      options:
-        chart: casos-por-estado
-      blockID: 1
-    - title: Casos por categoría
-      kind: Chart
-      xywh:
-      - 4
-      - 0
-      - 4
-      - 30
-      options:
-        chart: casos-por-categoria
-      blockID: 2
-    - title: Cola de casos
-      kind: RecordList
-      xywh:
-      - 8
-      - 0
-      - 4
-      - 18
-      options:
-        module: casos
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: asunto
-        - name: prioridad
-        - name: estado
-        - name: agente
-        - name: estadoSLA
-        presort: createdAt DESC
-        perPage: 25
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 3
+      - title: Casos por estado
+        kind: Chart
+        xywh:
+          - 0
+          - 0
+          - 24
+          - 30
+        options:
+          chart: casos-por-estado
+        blockID: 1
+        description: Gráfico que resume casos por estado a partir de datos actuales.
+      - title: Casos por categoría
+        kind: Chart
+        xywh:
+          - 24
+          - 0
+          - 24
+          - 30
+        options:
+          chart: casos-por-categoria
+        blockID: 2
+        description: Gráfico que resume casos por categoría a partir de datos actuales.
+      - title: Cola de casos
+        kind: RecordList
+        xywh:
+          - 0
+          - 30
+          - 48
+          - 38
+        options:
+          module: casos
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: asunto
+            - name: prioridad
+            - name: estado
+            - name: agente
+            - name: estadoSLA
+          presort: createdAt DESC
+          perPage: 25
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 3
+        description: Listado operativo de cola de casos con búsqueda, filtros, conteo y exportación.
     children:
       caso-registro:
         title: Detalle del caso
         module: casos
         visible: false
         blocks:
-        - title: Caso de soporte
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 15
-          options:
-            fields:
-            - name: codigo
-            - name: cliente
-            - name: contrato
-            - name: contacto
-            - name: producto
-            - name: canal
-            - name: categoria
-            - name: asunto
-            - name: descripcion
-            - name: prioridad
-            - name: estado
-            - name: agente
-            - name: primeraRespuesta
-            - name: fechaResolucion
-            - name: vencimientoRespuesta
-            - name: vencimientoResolucion
-            - name: estadoSLA
-            - name: slaIncumplido
-            - name: resolucion
-            - name: resolucionPrimerContacto
-            - name: csat
-          blockID: 1
-        - title: Interacciones
-          kind: RecordList
-          xywh:
-          - 0
-          - 15
-          - 12
-          - 18
-          options:
-            module: interacciones
-            fields:
-            - name: fecha
-            - name: canal
-            - name: agente
-            - name: tipo
-            - name: resumen
-            prefilter: caso = ${recordID}
-            presort: fecha DESC
-            perPage: 20
-            hideRecordCloneButton: true
-          blockID: 2
+          - title: Caso de soporte
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 115
+            options:
+              fields:
+                - name: codigo
+                - name: cliente
+                - name: contrato
+                - name: contacto
+                - name: producto
+                - name: canal
+                - name: categoria
+                - name: asunto
+                - name: descripcion
+                - name: prioridad
+                - name: estado
+                - name: agente
+                - name: primeraRespuesta
+                - name: fechaResolucion
+                - name: vencimientoRespuesta
+                - name: vencimientoResolucion
+                - name: estadoSLA
+                - name: slaIncumplido
+                - name: resolucion
+                - name: resolucionPrimerContacto
+                - name: csat
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar caso de soporte.
+          - title: Interacciones
+            kind: RecordList
+            xywh:
+              - 0
+              - 115
+              - 48
+              - 38
+            options:
+              module: interacciones
+              fields:
+                - name: fecha
+                - name: canal
+                - name: agente
+                - name: tipo
+                - name: resumen
+              prefilter: caso = ${recordID}
+              presort: fecha DESC
+              perPage: 20
+              hideRecordCloneButton: true
+              allowExport: true
+              showTotalCount: true
+              showRecordPerPageOption: true
+              inlineValueFiltering: true
+              hideSearch: false
+              hideFiltering: false
+              hideConfigureFieldsButton: false
+              customFilterPresets: true
+            blockID: 2
+            description: Listado operativo de interacciones con búsqueda, filtros, conteo y exportación.
+          - blockID: 3
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: casoPadre
+                - name: problemaConocido
+                - name: impacto
+                - name: urgencia
+                - name: nivelEscalamiento
+                - name: motivoEscalamiento
+                - name: causaRaiz
+                - name: categoriaResolucion
+                - name: evidencias
+            title: Gestión y control
+            xywh:
+              - 0
+              - 153
+              - 48
+              - 55
         page_layouts:
           principal:
             primary: true
@@ -529,18 +788,25 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 15
-            - blockID: 2
-              xywh:
-              - 0
-              - 15
-              - 12
-              - 18
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 115
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 115
+                  - 48
+                  - 38
+              - blockID: 3
+                xywh:
+                  - 0
+                  - 153
+                  - 48
+                  - 55
+        description: Vista operativa de detalle del caso. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -549,77 +815,100 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 4
-          - 30
-        - blockID: 2
-          xywh:
-          - 4
-          - 0
-          - 4
-          - 30
-        - blockID: 3
-          xywh:
-          - 8
-          - 0
-          - 4
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 30
+              - 48
+              - 38
+    description: Vista operativa de casos. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   interacciones:
     title: Interacciones
     visible: true
     blocks:
-    - title: Historial de atención
-      kind: RecordList
-      xywh:
-      - 0
-      - 0
-      - 12
-      - 18
-      options:
-        module: interacciones
-        fields:
-        - name: fecha
-        - name: caso
-        - name: cliente
-        - name: canal
-        - name: agente
-        - name: tipo
-        - name: resumen
-        - name: proveedorExterno
-        presort: fecha DESC
-        perPage: 30
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 1
+      - title: Historial de atención
+        kind: RecordList
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 38
+        options:
+          module: interacciones
+          fields:
+            - name: fecha
+            - name: caso
+            - name: cliente
+            - name: canal
+            - name: agente
+            - name: tipo
+            - name: resumen
+            - name: proveedorExterno
+          presort: fecha DESC
+          perPage: 30
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 1
+        description: Listado operativo de historial de atención con búsqueda, filtros, conteo y exportación.
     children:
       interaccion-registro:
         title: Detalle de la interacción
         module: interacciones
         visible: false
         blocks:
-        - title: Interacción
-          kind: Record
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 16
-          options:
-            fields:
-            - name: caso
-            - name: cliente
-            - name: canal
-            - name: agente
-            - name: fecha
-            - name: tipo
-            - name: resumen
-            - name: archivos
-            - name: externalID
-            - name: proveedorExterno
-          blockID: 1
+          - title: Interacción
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 60
+            options:
+              fields:
+                - name: caso
+                - name: cliente
+                - name: canal
+                - name: agente
+                - name: fecha
+                - name: tipo
+                - name: resumen
+                - name: archivos
+                - name: externalID
+                - name: proveedorExterno
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar interacción.
+          - blockID: 2
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: renovacion
+                - name: esRespuestaAgente
+            title: Gestión y control
+            xywh:
+              - 0
+              - 60
+              - 48
+              - 30
         page_layouts:
           principal:
             primary: true
@@ -641,12 +930,19 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 16
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 60
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 60
+                  - 48
+                  - 30
+        description: Vista operativa de detalle de la interacción. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -655,68 +951,38 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
-          - 0
-          - 0
-          - 12
-          - 18
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+    description: Vista operativa de interacciones. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
   renovaciones:
     title: Renovaciones
     visible: true
     blocks:
-    - title: Valor por etapa
-      kind: Chart
-      xywh:
-      - 0
-      - 0
-      - 4
-      - 30
-      options:
-        chart: valor-renovaciones
-      blockID: 1
-    - title: Pipeline de renovaciones
-      kind: RecordList
-      xywh:
-      - 4
-      - 0
-      - 8
-      - 18
-      options:
-        module: renovaciones
-        fields:
-        - name: codigo
-        - name: cliente
-        - name: contrato
-        - name: responsable
-        - name: fechaGestion
-        - name: fechaVencimiento
-        - name: etapa
-        - name: valorActual
-        - name: nuevoValor
-        - name: probabilidad
-        - name: riesgo
-        - name: ventaAdicional
-        presort: fechaVencimiento ASC
-        perPage: 20
-        allowExport: true
-        hideRecordCloneButton: true
-      blockID: 2
-    children:
-      renovacion-registro:
-        title: Detalle de la renovación
-        module: renovaciones
-        visible: false
-        blocks:
-        - title: Renovación
-          kind: Record
-          xywh:
+      - title: Valor por etapa
+        kind: Chart
+        xywh:
           - 0
           - 0
-          - 12
-          - 16
-          options:
-            fields:
+          - 24
+          - 30
+        options:
+          chart: valor-renovaciones
+        blockID: 1
+        description: Gráfico que resume valor por etapa a partir de datos actuales.
+      - title: Pipeline de renovaciones
+        kind: RecordList
+        xywh:
+          - 24
+          - 0
+          - 24
+          - 38
+        options:
+          module: renovaciones
+          fields:
             - name: codigo
             - name: cliente
             - name: contrato
@@ -729,10 +995,82 @@ pages:
             - name: probabilidad
             - name: riesgo
             - name: ventaAdicional
-            - name: valorExpansion
-            - name: motivoPerdida
-            - name: observaciones
-          blockID: 1
+          presort: fechaVencimiento ASC
+          perPage: 20
+          allowExport: true
+          hideRecordCloneButton: true
+          showTotalCount: true
+          showRecordPerPageOption: true
+          inlineValueFiltering: true
+          hideSearch: false
+          hideFiltering: false
+          hideConfigureFieldsButton: false
+          customFilterPresets: true
+        blockID: 2
+        description: Listado operativo de pipeline de renovaciones con búsqueda, filtros, conteo y exportación.
+      - blockID: 3
+        description: Pipeline operativo agrupado por etapa; permite visualizar y actualizar el avance de cada registro.
+        kind: RecordOrganizer
+        options:
+          descriptionField: proximoPaso
+          displayOption: sameTab
+          filter: etapa != 'Renovada' AND etapa != 'Perdida'
+          groupField: etapa
+          labelField: codigo
+          module: renovaciones
+          showRefresh: true
+        title: Pipeline de renovaciones
+        xywh:
+          - 0
+          - 38
+          - 48
+          - 44
+    children:
+      renovacion-registro:
+        title: Detalle de la renovación
+        module: renovaciones
+        visible: false
+        blocks:
+          - title: Renovación
+            kind: Record
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 85
+            options:
+              fields:
+                - name: codigo
+                - name: cliente
+                - name: contrato
+                - name: responsable
+                - name: fechaGestion
+                - name: fechaVencimiento
+                - name: etapa
+                - name: valorActual
+                - name: nuevoValor
+                - name: probabilidad
+                - name: riesgo
+                - name: ventaAdicional
+                - name: valorExpansion
+                - name: motivoPerdida
+                - name: observaciones
+            blockID: 1
+            description: Sección de la ficha 360° para consultar y editar renovación.
+          - blockID: 2
+            description: Campos operativos complementarios para mantener contexto, trazabilidad y próximos pasos del registro.
+            kind: Record
+            options:
+              fields:
+                - name: motivoRiesgo
+                - name: proximoPaso
+                - name: fechaProximaGestion
+            title: Gestión y control
+            xywh:
+              - 0
+              - 85
+              - 48
+              - 30
         page_layouts:
           principal:
             primary: true
@@ -754,12 +1092,19 @@ pages:
                 back:
                   enabled: true
             blocks:
-            - blockID: 1
-              xywh:
-              - 0
-              - 0
-              - 12
-              - 16
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 85
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 85
+                  - 48
+                  - 30
+        description: Vista operativa de detalle de la renovación. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
     page_layouts:
       principal:
         primary: true
@@ -768,15 +1113,335 @@ pages:
         config:
           useTitle: true
         blocks:
-        - blockID: 1
-          xywh:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 38
+          - blockID: 3
+            xywh:
+              - 0
+              - 38
+              - 48
+              - 44
+    description: Vista operativa de renovaciones. Organiza la información y sus relaciones para apoyar decisiones y tareas diarias.
+  problemas-conocidos:
+    blocks:
+      - blockID: 1
+        description: Base operativa de causas y soluciones compartidas para agrupar casos recurrentes.
+        kind: RecordList
+        options:
+          allowExport: true
+          fields:
+            - name: codigo
+            - name: titulo
+            - name: producto
+            - name: estado
+            - name: impacto
+            - name: responsable
+            - name: fechaDeteccion
+            - name: fechaResolucion
+          hideConfigureFieldsButton: false
+          inlineValueFiltering: true
+          module: problemas-conocidos
+          perPage: 20
+          prefilter: ""
+          presort: createdAt DESC
+          showRecordPerPageOption: true
+          showTotalCount: true
+          hideSearch: false
+          hideFiltering: false
+          customFilterPresets: true
+        title: Problemas conocidos
+        xywh:
           - 0
           - 0
-          - 4
+          - 48
+          - 38
+    description: Base operativa de causas y soluciones compartidas para agrupar casos recurrentes.
+    page_layouts:
+      principal:
+        blocks:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+        config:
+          useTitle: true
+        meta:
+          title: Diseño principal · Problemas conocidos
+        primary: true
+    title: Problemas conocidos
+    visible: true
+    children:
+      problema-conocido-registro:
+        blocks:
+          - blockID: 1
+            description: Ficha de causa raíz, solución temporal y solución definitiva de un problema recurrente.
+            kind: Record
+            options:
+              fields:
+                - name: codigo
+                - name: titulo
+                - name: producto
+                - name: estado
+                - name: impacto
+                - name: causaRaiz
+                - name: solucionTemporal
+                - name: solucionDefinitiva
+                - name: responsable
+                - name: fechaDeteccion
+                - name: fechaResolucion
+                - name: observaciones
+            title: Información principal
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 70
+          - blockID: 2
+            description: Historial relacionado que completa la vista 360° del registro actual.
+            kind: RecordList
+            options:
+              allowExport: true
+              enableRecordPageNavigation: true
+              fields:
+                - name: codigo
+                - name: cliente
+                - name: producto
+                - name: asunto
+                - name: prioridad
+                - name: estado
+                - name: agente
+                - name: estadoSLA
+              hideConfigureFieldsButton: false
+              hideRecordCloneButton: true
+              inlineValueFiltering: true
+              module: casos
+              perPage: 10
+              prefilter: problemaConocido = ${recordID}
+              presort: createdAt DESC
+              refField: problemaConocido
+              showRecordPerPageOption: true
+              showTotalCount: true
+              hideSearch: false
+              hideFiltering: false
+              customFilterPresets: true
+            title: Casos relacionados
+            xywh:
+              - 0
+              - 70
+              - 48
+              - 38
+        description: Ficha de causa raíz, solución temporal y solución definitiva de un problema recurrente.
+        module: problemas-conocidos
+        page_layouts:
+          principal:
+            blocks:
+              - blockID: 1
+                xywh:
+                  - 0
+                  - 0
+                  - 48
+                  - 70
+              - blockID: 2
+                xywh:
+                  - 0
+                  - 70
+                  - 48
+                  - 38
+            config:
+              buttons:
+                back:
+                  enabled: true
+                clone:
+                  enabled: true
+                delete:
+                  enabled: true
+                edit:
+                  enabled: true
+                new:
+                  enabled: true
+                submit:
+                  enabled: true
+              useTitle: true
+            meta:
+              title: Diseño principal · Detalle de problema conocido
+            primary: true
+        title: Detalle de problema conocido
+        visible: false
+  mi-cola:
+    blocks:
+      - blockID: 1
+        description: Casos abiertos asignados al agente actual, ordenados por prioridad y vencimiento de SLA.
+        kind: RecordList
+        options:
+          allowExport: true
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: asunto
+            - name: prioridad
+            - name: estado
+            - name: estadoSLA
+            - name: vencimientoResolucion
+          hideConfigureFieldsButton: false
+          inlineValueFiltering: true
+          module: casos
+          perPage: 20
+          prefilter: agente = ${userID} AND estado != 'Cerrado' AND estado != 'Cancelado'
+          presort: prioridad DESC, vencimientoResolucion ASC
+          showRecordPerPageOption: true
+          showTotalCount: true
+          hideSearch: false
+          hideFiltering: false
+          customFilterPresets: true
+        title: Mi cola
+        xywh:
+          - 0
+          - 0
+          - 48
+          - 38
+    description: Casos abiertos asignados al agente actual, ordenados por prioridad y vencimiento de SLA.
+    page_layouts:
+      principal:
+        blocks:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 48
+              - 38
+        config:
+          useTitle: true
+        meta:
+          title: Diseño principal · Mi cola
+        primary: true
+    title: Mi cola
+    visible: true
+  reportes:
+    blocks:
+      - blockID: 1
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: casos-por-prioridad
+        title: Casos por prioridad
+        xywh:
+          - 0
+          - 0
+          - 24
           - 30
-        - blockID: 2
-          xywh:
-          - 4
+      - blockID: 2
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: cumplimiento-sla
+        title: Cumplimiento sla
+        xywh:
+          - 24
           - 0
-          - 8
-          - 18
+          - 24
+          - 30
+      - blockID: 3
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: funnel-renovaciones
+        title: Funnel renovaciones
+        xywh:
+          - 0
+          - 30
+          - 24
+          - 30
+      - blockID: 4
+        description: Visual ejecutivo para analizar tendencias y distribución de los registros.
+        kind: Chart
+        options:
+          chart: valor-renovaciones
+        title: Valor renovaciones
+        xywh:
+          - 24
+          - 30
+          - 24
+          - 30
+      - blockID: 5
+        description: Registros que respaldan los indicadores; permite buscar, filtrar, contar y exportar el resultado.
+        kind: RecordList
+        options:
+          allowExport: true
+          fields:
+            - name: codigo
+            - name: cliente
+            - name: contrato
+            - name: prioridad
+            - name: estado
+            - name: agente
+            - name: estadoSLA
+            - name: vencimientoResolucion
+          hideConfigureFieldsButton: false
+          inlineValueFiltering: true
+          module: casos
+          perPage: 20
+          presort: createdAt DESC
+          showRecordPerPageOption: true
+          showTotalCount: true
+          hideSearch: false
+          hideFiltering: false
+          customFilterPresets: true
+        title: Detalle operativo
+        xywh:
+          - 0
+          - 60
+          - 48
+          - 38
+    description: Vista ejecutiva y operativa para analizar resultados, encontrar desviaciones y exportar información.
+    page_layouts:
+      principal:
+        blocks:
+          - blockID: 1
+            xywh:
+              - 0
+              - 0
+              - 24
+              - 30
+          - blockID: 2
+            xywh:
+              - 24
+              - 0
+              - 24
+              - 30
+          - blockID: 3
+            xywh:
+              - 0
+              - 30
+              - 24
+              - 30
+          - blockID: 4
+            xywh:
+              - 24
+              - 30
+              - 24
+              - 30
+          - blockID: 5
+            xywh:
+              - 0
+              - 60
+              - 48
+              - 38
+        config:
+          useTitle: true
+        meta:
+          title: Diseño principal · Reportes
+        primary: true
+    title: Reportes
+    visible: true

@@ -1,0 +1,12 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+allow:
+  agente-contacto: &reportes-contacto
+    corteza::system/: [reports.search]
+    corteza::system:report/centro-contacto-co-ejecutivo: [read, run]
+    corteza::system:report/centro-contacto-co-operativo: [read, run]
+  supervisor-contacto: *reportes-contacto
+  closer-comercial: *reportes-contacto
+  automatizacion-contacto:
+    corteza::system/: [notification.assign]

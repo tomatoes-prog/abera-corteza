@@ -1,0 +1,361 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    "corteza::compose:module/servicios-tecnicos-co/clientes-prospectos":
+      meta.description: "Personas o empresas que solicitan, cotizan o reciben servicios. Es el punto de entrada para activos, solicitudes, cotizaciones y órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/tipo":
+      meta.description.edit: "Seleccione un valor para tipo entre: Prospecto, Cliente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo para este registro de Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/tipoPersona":
+      meta.description.edit: "Seleccione un valor para tipo de persona entre: Persona, Empresa. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de tipo de persona para este registro de Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/nombre":
+      meta.description.edit: "Ingrese nombre o razón social con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Nombre o razón social» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/identificacion":
+      meta.description.edit: "Ingrese identificación o nit con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Identificación o NIT» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/contacto":
+      meta.description.edit: "Ingrese persona de contacto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Persona de contacto» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/telefono":
+      meta.description.edit: "Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Teléfono» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/correo":
+      meta.description.edit: "Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Correo electrónico» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/autorizaTratamientoDatos":
+      meta.description.edit: "Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/fechaAutorizacion":
+      meta.description.edit: "Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/departamento":
+      meta.description.edit: "Ingrese departamento con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Departamento» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/ciudad":
+      meta.description.edit: "Ingrese ciudad con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Ciudad» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/codigoDivipola":
+      meta.description.edit: "Ingrese código divipola con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Código DIVIPOLA» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/direccion":
+      meta.description.edit: "Ingrese dirección de servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Dirección de servicio» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/ubicacionServicio":
+      meta.description.edit: "Busque o marque en el mapa la ubicación correspondiente a ubicación principal en el mapa. Verifique el punto antes de guardar. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Ubicación geográfica de Clientes y prospectos, utilizada por los mapas y la planeación operativa."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/latitud":
+      meta.description.edit: "Ingrese latitud como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de latitud para este registro de Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/longitud":
+      meta.description.edit: "Ingrese longitud como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de longitud para este registro de Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/segmento":
+      meta.description.edit: "Seleccione un valor para segmento entre: Hogar, Pyme, Corporativo. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de segmento para este registro de Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/estadoComercial":
+      meta.description.edit: "Seleccione un valor para estado comercial entre: Nuevo, Diagnóstico, Cotización, Cliente, Perdido. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de estado comercial para este registro de Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/responsable":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de responsable comercial en este registro de Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/proximoContacto":
+      meta.description.edit: "Indique próximo contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de próximo contacto para este registro de Clientes y prospectos, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/notas":
+      meta.description.edit: "Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Notas» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module-field/servicios-tecnicos-co/clientes-prospectos/proveedorExterno":
+      meta.description.edit: "Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Proveedor externo» conserva información operativa del registro en Clientes y prospectos."
+    "corteza::compose:module/servicios-tecnicos-co/activos":
+      meta.description: "Equipos instalados o atendidos para un cliente. Mantiene identificación, criticidad, ubicación, garantía e historial de solicitudes, órdenes y mantenimiento."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/cliente":
+      meta.description.edit: "Seleccione cliente dentro del módulo clientes prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con clientes prospectos. Permite consultar un registro vinculado en este registro de Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/tipoEquipo":
+      meta.description.edit: "Ingrese tipo de equipo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Tipo de equipo» conserva información operativa del registro en Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/marca":
+      meta.description.edit: "Ingrese marca con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Marca» conserva información operativa del registro en Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/modelo":
+      meta.description.edit: "Ingrese modelo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Modelo» conserva información operativa del registro en Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/serial":
+      meta.description.edit: "Ingrese serial con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Serial» conserva información operativa del registro en Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/fechaInstalacion":
+      meta.description.edit: "Indique fecha de instalación en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de fecha de instalación para este registro de Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/garantiaHasta":
+      meta.description.edit: "Indique garantía hasta en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de garantía hasta para este registro de Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/criticidad":
+      meta.description.edit: "Seleccione un valor para criticidad entre: Baja, Media, Alta, Crítica. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de criticidad para este registro de Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Operativo, Requiere mantenimiento, Fuera de servicio, Retirado. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de estado para este registro de Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/proximoMantenimiento":
+      meta.description.edit: "Indique próximo mantenimiento en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de próximo mantenimiento para este registro de Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/ultimaIntervencion":
+      meta.description.edit: "Indique última intervención en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de última intervención para este registro de Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/ubicacion":
+      meta.description.edit: "Ingrese ubicación con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Ubicación» conserva información operativa del registro en Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/ubicacionMapa":
+      meta.description.edit: "Busque o marque en el mapa la ubicación correspondiente a ubicación en el mapa. Verifique el punto antes de guardar. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Ubicación geográfica de Activos, utilizada por los mapas y la planeación operativa."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/fotografias":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para fotografías. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con fotografías en este registro de Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Activos."
+    "corteza::compose:module-field/servicios-tecnicos-co/activos/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Activos."
+    "corteza::compose:module/servicios-tecnicos-co/solicitudes":
+      meta.description: "Necesidades de instalación, diagnóstico, reparación o mantenimiento reportadas por un cliente. Controla prioridad, responsable, ubicación, estado y SLA."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/cliente":
+      meta.description.edit: "Seleccione cliente o prospecto dentro del módulo clientes prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con clientes prospectos. Permite consultar un registro vinculado en este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/activo":
+      meta.description.edit: "Seleccione activo dentro del módulo activos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con activos. Permite consultar un registro vinculado en este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/contactoEnSitio":
+      meta.description.edit: "Ingrese contacto en sitio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Contacto en sitio» conserva información operativa del registro en Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/ubicacionServicio":
+      meta.description.edit: "Busque o marque en el mapa la ubicación correspondiente a ubicación solicitada. Verifique el punto antes de guardar. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Ubicación geográfica de Solicitudes de servicio, utilizada por los mapas y la planeación operativa."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/canal":
+      meta.description.edit: "Seleccione un valor para canal entre: Teléfono, WhatsApp, Correo, Web, Presencial. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de canal para este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/tipoServicio":
+      meta.description.edit: "Seleccione un valor para tipo de servicio entre: Instalación, Reparación, Mantenimiento, Inspección, Diagnóstico remoto. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo de servicio para este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/prioridad":
+      meta.description.edit: "Seleccione un valor para prioridad entre: Baja, Media, Alta, Crítica. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de prioridad para este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/descripcion":
+      meta.description.edit: "Ingrese descripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Descripción» conserva información operativa del registro en Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/fotografias":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para fotografías. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con fotografías en este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Recibida, En diagnóstico, Cotizada, Aceptada, Programada, Ejecutada, Cerrada, Perdida. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/responsable":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de coordinador responsable en este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/ventanaInicio":
+      meta.description.edit: "Indique inicio de ventana de atención usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de inicio de ventana de atención para este registro de Solicitudes de servicio, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/ventanaFin":
+      meta.description.edit: "Indique fin de ventana de atención usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fin de ventana de atención para este registro de Solicitudes de servicio, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/requiereVisitaDiagnostico":
+      meta.description.edit: "Marque Sí únicamente cuando requiere visita de diagnóstico esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si requiere visita de diagnóstico aplica a este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/vencimientoSLA":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de vencimiento de sla para este registro de Solicitudes de servicio, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/slaIncumplido":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Indica si sla incumplido aplica a este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/proveedorExterno":
+      meta.description.edit: "Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Proveedor externo» conserva información operativa del registro en Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/estadoIntegracion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Clasificación de estado de integración para este registro de Solicitudes de servicio."
+    "corteza::compose:module-field/servicios-tecnicos-co/solicitudes/ultimoErrorIntegracion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "El campo «Último error de integración» conserva información operativa del registro en Solicitudes de servicio."
+    "corteza::compose:module/servicios-tecnicos-co/cotizaciones":
+      meta.description: "Propuestas económicas asociadas con una solicitud. Resume alcance, vigencia, impuestos, total, aceptación y líneas detalladas de productos o servicios."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Cotizaciones."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/solicitud":
+      meta.description.edit: "Seleccione solicitud dentro del módulo solicitudes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con solicitudes. Permite consultar un registro vinculado en este registro de Cotizaciones."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/cliente":
+      meta.description.edit: "Seleccione cliente dentro del módulo clientes prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con clientes prospectos. Permite consultar un registro vinculado en este registro de Cotizaciones."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/alcance":
+      meta.description.edit: "Ingrese alcance con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Alcance» conserva información operativa del registro en Cotizaciones."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/valorAntesImpuestos":
+      meta.description.edit: "Ingrese valor antes de impuestos en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor antes de impuestos expresado en pesos colombianos (COP) para este registro de Cotizaciones."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/impuestos":
+      meta.description.edit: "Ingrese impuestos en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Impuestos expresado en pesos colombianos (COP) para este registro de Cotizaciones."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/total":
+      meta.description.edit: "Ingrese total en COP, sin símbolos ni separadores manuales. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Total expresado en pesos colombianos (COP) para este registro de Cotizaciones."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/fechaVencimiento":
+      meta.description.edit: "Indique válida hasta en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de válida hasta para este registro de Cotizaciones."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Borrador, Enviada, Aceptada, Rechazada, Vencida. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Cotizaciones."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/fechaAceptacion":
+      meta.description.edit: "Indique fecha de aceptación usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fecha de aceptación para este registro de Cotizaciones, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Cotizaciones."
+    "corteza::compose:module-field/servicios-tecnicos-co/cotizaciones/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Cotizaciones."
+    "corteza::compose:module/servicios-tecnicos-co/ordenes-trabajo":
+      meta.description: "Trabajos programados para ejecutar una solicitud aceptada. Relaciona cliente, activo, técnico, agenda, ubicación, diagnóstico, tareas, evidencias y cierre."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/solicitud":
+      meta.description.edit: "Seleccione solicitud dentro del módulo solicitudes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con solicitudes. Permite consultar un registro vinculado en este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/cotizacion":
+      meta.description.edit: "Seleccione cotización dentro del módulo cotizaciones. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con cotizaciones. Permite consultar un registro vinculado en este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/cliente":
+      meta.description.edit: "Seleccione cliente dentro del módulo clientes prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con clientes prospectos. Permite consultar un registro vinculado en este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/activo":
+      meta.description.edit: "Seleccione activo dentro del módulo activos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con activos. Permite consultar un registro vinculado en este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/tecnico":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de técnico en este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/contactoEnSitio":
+      meta.description.edit: "Ingrese contacto en sitio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Contacto en sitio» conserva información operativa del registro en Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/direccion":
+      meta.description.edit: "Ingrese dirección del servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Dirección del servicio» conserva información operativa del registro en Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/ubicacionTrabajo":
+      meta.description.edit: "Busque o marque en el mapa la ubicación correspondiente a ubicación de la orden. Verifique el punto antes de guardar. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Ubicación geográfica de Órdenes de trabajo, utilizada por los mapas y la planeación operativa."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/inicio":
+      meta.description.edit: "Indique inicio programado usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de inicio programado para este registro de Órdenes de trabajo, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/fin":
+      meta.description.edit: "Indique fin programado usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de fin programado para este registro de Órdenes de trabajo, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/inicioReal":
+      meta.description.edit: "Indique inicio real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de inicio real para este registro de Órdenes de trabajo, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/finReal":
+      meta.description.edit: "Indique fin real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fin real para este registro de Órdenes de trabajo, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Programada, En camino, En ejecución, Pausada, Completada, Cancelada. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/diagnostico":
+      meta.description.edit: "Ingrese diagnóstico con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Diagnóstico» conserva información operativa del registro en Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/solucion":
+      meta.description.edit: "Ingrese solución con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Solución» conserva información operativa del registro en Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/resolucionPrimeraVisita":
+      meta.description.edit: "Marque Sí únicamente cuando resuelto en primera visita esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si resuelto en primera visita aplica a este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/evidencias":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para evidencias. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con evidencias en este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/firma":
+      meta.description.edit: "Adjunte el archivo pertinente para firma o acta. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con firma o acta en este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/aceptacionCliente":
+      meta.description.edit: "Marque Sí únicamente cuando cliente acepta el trabajo realizado esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si cliente acepta el trabajo realizado aplica a este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/valorFinal":
+      meta.description.edit: "Ingrese valor final en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor final expresado en pesos colombianos (COP) para este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/proximoMantenimiento":
+      meta.description.edit: "Indique próximo mantenimiento en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de próximo mantenimiento para este registro de Órdenes de trabajo."
+    "corteza::compose:module-field/servicios-tecnicos-co/ordenes-trabajo/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Órdenes de trabajo."
+    "corteza::compose:module/servicios-tecnicos-co/items-cotizacion":
+      meta.description: "Líneas económicas de una cotización. Se usa una línea por mano de obra, material, desplazamiento u otro concepto, con cantidad, valor e impuestos."
+    "corteza::compose:module-field/servicios-tecnicos-co/items-cotizacion/cotizacion":
+      meta.description.edit: "Seleccione cotización dentro del módulo cotizaciones. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con cotizaciones. Permite consultar un registro vinculado en este registro de Ítems de cotización."
+    "corteza::compose:module-field/servicios-tecnicos-co/items-cotizacion/secuencia":
+      meta.description.edit: "Ingrese secuencia como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de secuencia para este registro de Ítems de cotización."
+    "corteza::compose:module-field/servicios-tecnicos-co/items-cotizacion/tipo":
+      meta.description.edit: "Seleccione un valor para tipo de ítem entre: Mano de obra, Material, Desplazamiento, Otro. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo de ítem para este registro de Ítems de cotización."
+    "corteza::compose:module-field/servicios-tecnicos-co/items-cotizacion/descripcion":
+      meta.description.edit: "Ingrese descripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Descripción» conserva información operativa del registro en Ítems de cotización."
+    "corteza::compose:module-field/servicios-tecnicos-co/items-cotizacion/cantidad":
+      meta.description.edit: "Ingrese cantidad como número. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Valor numérico de cantidad para este registro de Ítems de cotización."
+    "corteza::compose:module-field/servicios-tecnicos-co/items-cotizacion/valorUnitario":
+      meta.description.edit: "Ingrese valor unitario en COP, sin símbolos ni separadores manuales. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Valor unitario expresado en pesos colombianos (COP) para este registro de Ítems de cotización."
+    "corteza::compose:module-field/servicios-tecnicos-co/items-cotizacion/impuestoPorcentaje":
+      meta.description.edit: "Ingrese impuesto como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de impuesto para este registro de Ítems de cotización."
+    "corteza::compose:module-field/servicios-tecnicos-co/items-cotizacion/total":
+      meta.description.edit: "Ingrese total en COP, sin símbolos ni separadores manuales. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Total expresado en pesos colombianos (COP) para este registro de Ítems de cotización."
+    "corteza::compose:module/servicios-tecnicos-co/tareas-orden":
+      meta.description: "Checklist de ejecución de una orden de trabajo. Registra responsable, obligatoriedad, tiempos, resultado y evidencias de cada actividad técnica."
+    "corteza::compose:module-field/servicios-tecnicos-co/tareas-orden/orden":
+      meta.description.edit: "Seleccione orden de trabajo dentro del módulo ordenes trabajo. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con ordenes trabajo. Permite consultar un registro vinculado en este registro de Tareas de orden."
+    "corteza::compose:module-field/servicios-tecnicos-co/tareas-orden/secuencia":
+      meta.description.edit: "Ingrese secuencia como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de secuencia para este registro de Tareas de orden."
+    "corteza::compose:module-field/servicios-tecnicos-co/tareas-orden/tarea":
+      meta.description.edit: "Ingrese tarea con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Tarea» conserva información operativa del registro en Tareas de orden."
+    "corteza::compose:module-field/servicios-tecnicos-co/tareas-orden/obligatoria":
+      meta.description.edit: "Marque Sí únicamente cuando obligatoria esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si obligatoria aplica a este registro de Tareas de orden."
+    "corteza::compose:module-field/servicios-tecnicos-co/tareas-orden/tecnico":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de técnico responsable en este registro de Tareas de orden."
+    "corteza::compose:module-field/servicios-tecnicos-co/tareas-orden/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Pendiente, En ejecución, Completada, No aplica. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Tareas de orden."
+    "corteza::compose:module-field/servicios-tecnicos-co/tareas-orden/inicioReal":
+      meta.description.edit: "Indique inicio real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de inicio real para este registro de Tareas de orden, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/tareas-orden/finReal":
+      meta.description.edit: "Indique fin real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fin real para este registro de Tareas de orden, interpretada en America/Bogota."
+    "corteza::compose:module-field/servicios-tecnicos-co/tareas-orden/resultado":
+      meta.description.edit: "Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Resultado» conserva información operativa del registro en Tareas de orden."
+    "corteza::compose:module-field/servicios-tecnicos-co/tareas-orden/evidencia":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para evidencia. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con evidencia en este registro de Tareas de orden."

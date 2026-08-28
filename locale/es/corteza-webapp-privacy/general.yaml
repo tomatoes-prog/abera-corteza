@@ -1,30 +1,30 @@
 label:
-  back: Back
-  all: All
+  back: Atrás
+  all: Todos
   privacy_request:
-    single: Privacy Request
-    plural: Privacy Requests
+    single: Solicitud de privacidad
+    plural: Solicitudes de privacidad
   sensitive_module:
-    single: Sensitive Module
-    plural: Sensitive Modules
+    single: Módulo con datos sensibles
+    plural: Módulos con datos sensibles
 resourceList:
-  loading: Loading
-  noItems: No items
-  notFound: Not found
+  loading: Cargando
+  noItems: No hay elementos
+  notFound: No encontrado
   search:
-    placeholder: Search
+    placeholder: Buscar
   pagination:
-    next: Next
-    prev: Previous
-    showing: '{{from}} - {{to}} of {{count}} {{data}}'
-    single_one: 'One {{data}}'
+    next: Siguiente
+    prev: Anterior
+    showing: '{{from}} - {{to}} de {{count}} {{data}}'
+    single_one: 'Un {{data}}'
     single_plural: '{{count}} {{data}}'
-    recordsPerPage: Per Page
+    recordsPerPage: Por página
 themes:
   labels:
-    light: Light
-    dark: Dark
+    light: Claro
+    dark: Oscuro
 extendSession:
   labels:
-    extend: Extend Session
-    warning: You will be logged out in {{ countdownTime }} seconds
+    extend: Extender sesión
+    warning: Tu sesión se cerrará en {{ countdownTime }} segundos

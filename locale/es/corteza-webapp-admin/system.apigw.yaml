@@ -4,7 +4,7 @@ list:
   title: Rutas
   new: Nueva ruta
   permissions: Permisos
-  profiler: Profiler
+  profiler: Perfilador
   yaml: YAML
   loading: Cargando rutas
   filterForm:
@@ -24,7 +24,7 @@ list:
   delete: Eliminar
   undelete: Restaurar
   columns:
-    endpoint: Endpoint
+    endpoint: Punto de acceso
     createdAt: Creada
     enabled: Activada
     method: Método
@@ -36,7 +36,7 @@ list:
 settings:
   title: Ajustes
   profiler:
-    label: Profiler
+    label: Perfilador
     enabled: Activado
     global: Activado globalmente
   proxy:
@@ -49,7 +49,7 @@ editor:
   info:
     title: Información básica
     id: ID
-    endpoint: Endpoint
+    endpoint: Punto de acceso
     method: Método
     description: Descripción
     enabled: Activada
@@ -86,7 +86,7 @@ editor:
     labels:
       expr: Expresión
       location: URL
-      workflow: Workflow
+      workflow: Flujo de trabajo
       status: Estado HTTP
       jsfunc: Función
       input: Entrada
@@ -103,13 +103,13 @@ editor:
       '307': 307 - Redirección temporal
       '308': 308 - Redirección permanente
     placeholders:
-      workflow: Selecciona un workflow
+      workflow: 'Selecciona un flujo de trabajo'
     help:
       expression:
         example: Example == "match string" && match(SecondParam, "^foo\\s.*$")
         link: Documentación
 profiler:
-  label: Profiler
+  label: Perfilador
   title: Profiler del gateway de integración
   refreshingIn: Se actualizará en {{seconds}} s
   description:

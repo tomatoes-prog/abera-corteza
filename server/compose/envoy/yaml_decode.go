@@ -1,6 +1,7 @@
 package envoy
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -15,6 +16,27 @@ import (
 const (
 	ComposeRecordDatasourceAuxType = "corteza::compose:record-datasource"
 )
+
+// unmarshalModuleMetaNode bridges YAML mappings to json.RawMessage. The
+// generic yaml.v3 decoder cannot populate raw JSON fields and silently leaves
+// module metadata empty during provisioning.
+func (d *auxYamlDoc) unmarshalModuleMetaNode(r *types.Module, n *yaml.Node) (refs map[string]envoyx.Ref, idents envoyx.Identifiers, err error) {
+	if !y7s.IsMapping(n) {
+		return nil, envoyx.Identifiers{}, fmt.Errorf("module meta must be a mapping")
+	}
+
+	var meta map[string]any
+	if err = n.Decode(&meta); err != nil {
+		return nil, envoyx.Identifiers{}, fmt.Errorf("decode module meta: %w", err)
+	}
+
+	r.Meta, err = json.Marshal(meta)
+	if err != nil {
+		return nil, envoyx.Identifiers{}, fmt.Errorf("encode module meta: %w", err)
+	}
+
+	return nil, envoyx.Identifiers{}, nil
+}
 
 func (d *auxYamlDoc) unmarshalYAML(k string, n *yaml.Node) (out envoyx.NodeSet, err error) {
 	switch k {
@@ -108,7 +130,7 @@ func (d *auxYamlDoc) unmarshalPageBlocksNode(r *types.Page, n *yaml.Node) (refs 
 		case "Chart":
 			refs = envoyx.MergeRefs(refs, getPageBlockChartRefs(b, index))
 
-		case "Calendar":
+		case "Calendar", "Geometry":
 			refs = envoyx.MergeRefs(refs, getPageBlockCalendarRefs(b, index))
 
 		case "Metric":

@@ -17,5 +17,5 @@ list:
     iterator: Iterador
     security: Seguridad
     triggers: Activadores
-  labelMissing: <etiqueta no disponible>
+  labelMissing: Falta <label>
   title: Scripts del corredor

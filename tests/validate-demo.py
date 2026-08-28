@@ -6,6 +6,7 @@
 """Validate demo datasets, explicit layouts and enabled workflows."""
 
 import csv
+import json
 from pathlib import Path
 
 import yaml
@@ -17,6 +18,24 @@ TEMPLATE_IDS = [
     for line in (ROOT / "demos" / "showroom-co" / "templates.list").read_text(encoding="utf-8").splitlines()
     if line.strip() and not line.lstrip().startswith("#")
 ]
+MAIN_MODULES = {
+    "inmobiliaria-co": {"leads", "inmuebles", "citas", "actividades", "negociaciones"},
+    "automotriz-co": {"prospectos", "vehiculos", "pruebas-manejo", "oportunidades", "ordenes-servicio"},
+    "admisiones-educativas-co": {"prospectos", "programas", "solicitudes", "citas-admision", "matriculas"},
+    "servicios-tecnicos-co": {"clientes-prospectos", "activos", "solicitudes", "cotizaciones", "ordenes-trabajo"},
+    "centro-contacto-co": {"contactos-leads", "campanas", "registros-campana", "llamadas", "oportunidades"},
+    "soporte-renovaciones-co": {"clientes", "contratos", "casos", "interacciones", "renovaciones"},
+}
+EXPECTED_AUXILIARY_MODULES = {
+    "inmobiliaria-co": set(),
+    "automotriz-co": {"actividades-comerciales", "tareas-servicio"},
+    "admisiones-educativas-co": {"requisitos-solicitud", "actividades-admision"},
+    "servicios-tecnicos-co": {"items-cotizacion", "tareas-orden"},
+    "centro-contacto-co": set(),
+    "soporte-renovaciones-co": {"problemas-conocidos"},
+}
+EXPECTED_MAPS = {"inmobiliaria-co": 1, "servicios-tecnicos-co": 1}
+EXPECTED_PERSONAL_QUEUES = {"centro-contacto-co", "soporte-renovaciones-co"}
 
 
 def walk_pages(pages):
@@ -31,6 +50,31 @@ def parse_multi_value(value):
     if value.startswith("[") and value.endswith("]"):
         return [item.strip() for item in value[1:-1].split(",") if item.strip()]
     return [value]
+
+
+def minimum_height(block):
+    kind = block.get("kind")
+    minimum = {
+        "Metric": 18,
+        "Chart": 30,
+        "RecordList": 38,
+        "Calendar": 44,
+        "Geometry": 44,
+        "RecordOrganizer": 44,
+        "Report": 44,
+        "Record": 30,
+        "Content": 12,
+        "Navigation": 12,
+    }.get(kind, 24)
+    if kind == "Record":
+        minimum = max(minimum, 10 + len(block.get("options", {}).get("fields", [])) * 5)
+    return minimum
+
+
+def rectangles_overlap(left, right):
+    lx, ly, lw, lh = left
+    rx, ry, rw, rh = right
+    return lx < rx + rw and rx < lx + lw and ly < ry + rh and ry < ly + lh
 
 
 def main() -> None:
@@ -65,6 +109,10 @@ def main() -> None:
             template_id,
             "every module must have exactly one demo datasource",
         )
+        assert set(modules) - MAIN_MODULES[template_id] == EXPECTED_AUXILIARY_MODULES[template_id], (
+            template_id,
+            "unexpected auxiliary module set",
+        )
 
         rows_by_module = {}
         for module_handle, source in sources_by_module.items():
@@ -74,7 +122,10 @@ def main() -> None:
                 rows = list(reader)
                 unknown_columns = set(reader.fieldnames or []) - {"ID"} - set(modules[module_handle]["fields"])
             assert not unknown_columns, (template_id, module_handle, "unknown CSV columns", unknown_columns)
-            assert 1 <= len(rows) <= 100, (template_id, module_handle, len(rows))
+            if module_handle in MAIN_MODULES[template_id]:
+                assert len(rows) == 100, (template_id, module_handle, "principal module must have 100 rows")
+            else:
+                assert 1 <= len(rows) <= 100, (template_id, module_handle, len(rows))
             assert len({row["ID"] for row in rows}) == len(rows), (
                 template_id,
                 module_handle,
@@ -89,6 +140,18 @@ def main() -> None:
 
         for module_handle, module in modules.items():
             for field_handle, field in module["fields"].items():
+                if field["kind"] == "Geometry":
+                    for record in rows_by_module[module_handle]:
+                        value = record.get(field_handle, "")
+                        if not value:
+                            continue
+                        point = json.loads(value)
+                        assert set(point) == {"coordinates"}, (
+                            template_id, module_handle, record["ID"], field_handle, "invalid Geometry object"
+                        )
+                        assert len(point["coordinates"]) == 2 and all(
+                            isinstance(coordinate, (int, float)) for coordinate in point["coordinates"]
+                        ), (template_id, module_handle, record["ID"], field_handle, "invalid Geometry point")
                 if field["kind"] != "Select":
                     continue
                 allowed = {
@@ -135,8 +198,13 @@ def main() -> None:
         assert relationship_count > 0, (template_id, "demo has no populated relationships")
 
         page_count = 0
+        metric_count = 0
+        map_count = 0
+        organizer_count = 0
+        page_handles = set()
         for handle, page in walk_pages(pages):
             page_count += 1
+            page_handles.add(handle)
             layouts = page.get("page_layouts", {})
             assert len(layouts) == 1, (template_id, handle, "missing explicit layout")
             layout = next(iter(layouts.values()))
@@ -144,6 +212,7 @@ def main() -> None:
             layout_ids = [block["blockID"] for block in layout.get("blocks", [])]
             assert block_ids == layout_ids, (template_id, handle, "layout/block mismatch")
             layout_positions = {block["blockID"]: block["xywh"] for block in layout.get("blocks", [])}
+            rectangles = []
             for block in page.get("blocks", []):
                 position = layout_positions[block["blockID"]]
                 assert len(position) == 4 and all(isinstance(value, int) for value in position), (
@@ -153,16 +222,84 @@ def main() -> None:
                     "invalid block position",
                 )
                 x, y, width, height = position
-                assert x >= 0 and y >= 0 and width > 0 and height >= 5 and x + width <= 48, (
+                assert x >= 0 and y >= 0 and width > 0 and x + width <= 48, (
                     template_id,
                     handle,
                     block["blockID"],
                     position,
                     "block outside 48-column grid",
                 )
-                if block.get("kind") == "Chart":
-                    assert height >= 30, (template_id, handle, block["blockID"], position, "chart too short")
+                assert height >= minimum_height(block), (
+                    template_id, handle, block["blockID"], position, "block below its minimum height"
+                )
+                for other in rectangles:
+                    assert not rectangles_overlap(position, other), (
+                        template_id, handle, block["blockID"], position, other, "overlapping blocks"
+                    )
+                rectangles.append(position)
+                kind = block.get("kind")
+                if handle == "inicio" and kind == "Metric":
+                    assert height >= 18, (
+                        template_id, handle, block["blockID"], position, "home metric is clipped"
+                    )
+                    assert not block.get("title", "").startswith("Indicador ·"), (
+                        template_id, handle, block["blockID"], "redundant metric title prefix"
+                    )
+                    assert "Indicador accionable calculado" not in block.get("description", ""), (
+                        template_id, handle, block["blockID"], "generic metric description"
+                    )
+                if handle == "inicio" and kind == "RecordList":
+                    assert height >= 48, (
+                        template_id, handle, block["blockID"], position, "home list is too short"
+                    )
+                metric_count += int(kind == "Metric")
+                map_count += int(kind == "Geometry")
+                organizer_count += int(kind == "RecordOrganizer")
+                if kind == "Geometry":
+                    feeds = block.get("options", {}).get("feeds", [])
+                    assert len(feeds) == 1, (template_id, handle, "Geometry requires one record feed")
+                    feed = feeds[0]
+                    feed_options = feed.get("options", {})
+                    module_handle = feed_options.get("module")
+                    geometry_field = feed.get("geometryField")
+                    title_field = feed.get("titleField")
+                    assert module_handle in modules, (template_id, handle, "unknown Geometry module")
+                    assert geometry_field in modules[module_handle]["fields"], (
+                        template_id, handle, geometry_field, "unknown Geometry field"
+                    )
+                    assert modules[module_handle]["fields"][geometry_field]["kind"] == "Geometry", (
+                        template_id, handle, geometry_field, "feed field is not Geometry"
+                    )
+                    assert title_field in modules[module_handle]["fields"], (
+                        template_id, handle, title_field, "unknown marker title field"
+                    )
+                    located = [row for row in rows_by_module[module_handle] if row.get(geometry_field)]
+                    assert located, (template_id, handle, "map has no records with coordinates")
+                    if template_id == "inmobiliaria-co":
+                        assert module_handle == "inmuebles"
+                        assert geometry_field == "ubicacion"
+                        assert title_field == "nombre"
+                        assert feed_options.get("prefilter") == "estado = 'Disponible'"
+                        visible = [row for row in located if row.get("estado") == "Disponible"]
+                        assert visible, (template_id, handle, "map filter has no visible properties")
+                        bounds = block.get("options", {}).get("bounds")
+                        assert bounds and len(bounds) == 2, (template_id, handle, "Colombia bounds missing")
+                        north_east, south_west = bounds
+                        for row in visible:
+                            latitude, longitude = json.loads(row[geometry_field])["coordinates"]
+                            assert south_west[0] <= latitude <= north_east[0], (
+                                template_id, row["ID"], "latitude outside map bounds"
+                            )
+                            assert south_west[1] <= longitude <= north_east[1], (
+                                template_id, row["ID"], "longitude outside map bounds"
+                            )
         assert page_count >= len(modules), (template_id, "not enough pages")
+        assert metric_count == 4, (template_id, metric_count, "expected four actionable metrics")
+        assert map_count == EXPECTED_MAPS.get(template_id, 0), (template_id, map_count, "unexpected map design")
+        assert organizer_count >= 1, (template_id, "missing pipeline organizer")
+        assert ("mi-cola" in page_handles) == (template_id in EXPECTED_PERSONAL_QUEUES), (
+            template_id, "personal queue must remain sector-specific"
+        )
 
         assert workflows, (template_id, "missing workflows")
         for handle, workflow in workflows.items():

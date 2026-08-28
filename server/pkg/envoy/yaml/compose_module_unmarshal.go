@@ -1,6 +1,7 @@
 package yaml
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/cortezaproject/corteza/server/compose/types"
@@ -71,6 +72,18 @@ func (wrap *composeModule) UnmarshalYAML(n *yaml.Node) (err error) {
 
 		case "handle":
 			return y7s.DecodeScalar(v, "module handle", &wrap.res.Handle)
+
+		case "meta":
+			var meta any
+			if err = v.Decode(&meta); err != nil {
+				return err
+			}
+			encoded, encodeErr := json.Marshal(meta)
+			if encodeErr != nil {
+				return encodeErr
+			}
+			wrap.res.Meta = encoded
+			return nil
 
 		case "fields":
 			if !y7s.IsKind(v, yaml.MappingNode) {

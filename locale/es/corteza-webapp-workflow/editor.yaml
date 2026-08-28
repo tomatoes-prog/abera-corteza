@@ -12,21 +12,21 @@ handle: (Identificador)
 id: 'ID:'
 id-parenthesis: ' (ID)'
 initial-scope: Ámbito inicial
-input-ids-or-handles: El ámbito inicial se inyecta en el workflow durante la ejecución. Para cargar las variables disponibles, introduce abajo los ID o identificadores relacionados
+input-ids-or-handles: 'El ámbito inicial se inyecta en el flujo de trabajo durante la ejecución. Para cargar las variables disponibles, introduce abajo los ID o identificadores relacionados'
 issues: Problemas
 load-and-configure: Cargar y configurar
-modify-initial-scope-if-no-variables-are-loaded: Si no quieres cargar variables, haz clic en «Configurar» para modificar el ámbito inicial antes de ejecutar el workflow
-open-webapp-on-prompt-use: 'ADVERTENCIA: Si el workflow utiliza pasos de solicitud, asegúrate de abrir también la aplicación web relacionada. De lo contrario, el workflow agotará el tiempo de espera'
+modify-initial-scope-if-no-variables-are-loaded: 'Si no quieres cargar variables, haz clic en «Configurar» para modificar el ámbito inicial antes de ejecutar el flujo de trabajo'
+open-webapp-on-prompt-use: 'ADVERTENCIA: Si el flujo de trabajo utiliza pasos de solicitud, asegúrate de abrir también la aplicación web relacionada. De lo contrario, el flujo de trabajo agotará el tiempo de espera'
 reset: Restablecer
 run-as: 'Ejecutar como:'
-run-workflow: Ejecutar workflow
-required-namespace: El espacio de nombres es obligatorio
-required-namespace-and-module: El espacio de nombres y el módulo son obligatorios
+run-workflow: 'Ejecutar flujo de trabajo'
+required-namespace: El espacio de trabajo es obligatorio
+required-namespace-and-module: El espacio de trabajo y el módulo son obligatorios
 save: Guardar
 saving: Guardando
 spinning: Procesando
-test-in-progress: 'Prueba en curso. Si el workflow incluye pasos de solicitud o demora, puede estar esperando a que terminen'
+test-in-progress: 'Prueba en curso. Si el flujo de trabajo incluye pasos de solicitud o demora, puede estar esperando a que terminen'
 unsupported-browser: ¡El navegador no es compatible!
 undelete: Restaurar
-workflow-configuration: Configuración del workflow
+workflow-configuration: 'Configuración del flujo de trabajo'
 editor: Editor

@@ -10,56 +10,91 @@ modules:
         label: Código de inventario
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Código de inventario» conserva información operativa del registro en Vehículos.
+            edit: Ingrese código de inventario con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       vin:
         label: VIN
         kind: String
+        options:
+          description:
+            view: El campo «VIN» conserva información operativa del registro en Vehículos.
+            edit: Ingrese vin con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       placa:
         label: Placa
         kind: String
+        options:
+          description:
+            view: El campo «Placa» conserva información operativa del registro en Vehículos.
+            edit: Ingrese placa con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       marca:
         label: Marca
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Marca» conserva información operativa del registro en Vehículos.
+            edit: Ingrese marca con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       modelo:
         label: Modelo
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Modelo» conserva información operativa del registro en Vehículos.
+            edit: Ingrese modelo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       version:
         label: Versión
         kind: String
+        options:
+          description:
+            view: El campo «Versión» conserva información operativa del registro en Vehículos.
+            edit: Ingrese versión con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       anio:
         label: Año
         kind: Number
         required: true
-        options: { format: "0", precision: 0 }
+        options: {format: "0", precision: 0, description: {view: Valor numérico de año para este registro de Vehículos., edit: Ingrese año como número. Es obligatorio para guardar un registro completo.}}
       condicion:
         label: Condición
         kind: Select
         required: true
         options:
           options:
-            - { text: Nuevo, value: Nuevo }
-            - { text: Usado, value: Usado }
+            - {text: Nuevo, value: Nuevo}
+            - {text: Usado, value: Usado}
           selectType: default
+          description:
+            view: Clasificación de condición para este registro de Vehículos.
+            edit: 'Seleccione un valor para condición entre: Nuevo, Usado. Es obligatorio para guardar un registro completo.'
       kilometraje:
         label: Kilometraje
         kind: Number
-        options: { format: "0", precision: 0, suffix: " km" }
+        options: {format: "0", precision: 0, suffix: " km", description: {view: Valor numérico de kilometraje para este registro de Vehículos., edit: Ingrese kilometraje como número. Es opcional; complételo cuando la información esté disponible.}}
       color:
         label: Color
         kind: String
+        options:
+          description:
+            view: El campo «Color» conserva información operativa del registro en Vehículos.
+            edit: Ingrese color con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       precio:
         label: Precio
         kind: Number
         required: true
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Precio expresado en pesos colombianos (COP) para este registro de Vehículos., edit: 'Ingrese precio en COP, sin símbolos ni separadores manuales. Es obligatorio para guardar un registro completo.'}}
       sede:
         label: Sede
         kind: String
+        options:
+          description:
+            view: El campo «Sede» conserva información operativa del registro en Vehículos.
+            edit: Ingrese sede con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       fechaIngreso:
         label: Fecha de ingreso
         kind: DateTime
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de fecha de ingreso para este registro de Vehículos., edit: Indique fecha de ingreso en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
       estado:
         label: Estado
         kind: Select
@@ -67,182 +102,96 @@ modules:
         default: Disponible
         options:
           options:
-            - { text: Disponible, value: Disponible }
-            - { text: Reservado, value: Reservado }
-            - { text: Vendido, value: Vendido }
-            - { text: En demostración, value: En demostración }
-            - { text: En taller, value: En taller }
-            - { text: Inactivo, value: Inactivo }
+            - {text: Disponible, value: Disponible}
+            - {text: Reservado, value: Reservado}
+            - {text: Vendido, value: Vendido}
+            - {text: En demostración, value: En demostración}
+            - {text: En taller, value: En taller}
+            - {text: Inactivo, value: Inactivo}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Vehículos.
+            edit: 'Seleccione un valor para estado entre: Disponible, Reservado, Vendido, En demostración, En taller, Inactivo. Es obligatorio para guardar un registro completo.'
       clienteFinal:
         label: Cliente final
         kind: Record
-        options: { module: prospectos, labelField: nombres }
+        options: {module: prospectos, labelField: nombres, description: {view: Relación con prospectos. Permite consultar un registro vinculado en este registro de Vehículos., edit: Seleccione cliente final dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
       proximoMantenimiento:
         label: Próximo mantenimiento
         kind: DateTime
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de próximo mantenimiento para este registro de Vehículos., edit: Indique próximo mantenimiento en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
       fotografias:
         label: Fotografías
         kind: File
         multi: true
-        options: { allowDocuments: false, allowImages: true, maxSize: 0, mode: list }
+        options: {allowDocuments: false, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con fotografías en este registro de Vehículos., edit: Adjunte uno o varios archivos pertinentes para fotografías. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
       externalID:
         label: Identificador externo
         kind: String
+        options:
+          description:
+            view: El campo «Identificador externo» conserva información operativa del registro en Vehículos.
+            edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.
       proveedorExterno:
         label: Proveedor externo
         kind: String
+        options:
+          description:
+            view: El campo «Proveedor externo» conserva información operativa del registro en Vehículos.
+            edit: Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       estadoIntegracion:
         label: Estado de integración
         kind: Select
         default: Local
         options:
           options:
-            - { text: Local, value: Local }
-            - { text: Pendiente, value: Pendiente }
-            - { text: Sincronizado, value: Sincronizado }
-            - { text: Error, value: Error }
+            - {text: Local, value: Local}
+            - {text: Pendiente, value: Pendiente}
+            - {text: Sincronizado, value: Sincronizado}
+            - {text: Error, value: Error}
           selectType: default
+          description:
+            view: Clasificación de estado de integración para este registro de Vehículos.
+            edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.
       ultimoErrorIntegracion:
         label: Último error de integración
         kind: String
-        options: { multiLine: true }
-
-  prospectos:
-    name: Prospectos
+        options: {multiLine: true, description: {view: El campo «Último error de integración» conserva información operativa del registro en Vehículos., edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.}}
+    meta:
+      description: Inventario de vehículos nuevos o usados. Reúne identificación, características, precio, sede, disponibilidad, cliente final y trazabilidad de pruebas, oportunidades y posventa.
+  actividades-comerciales:
+    name: Actividades comerciales
     fields:
-      nombres:
-        label: Nombres
-        kind: String
-        required: true
-      apellidos:
-        label: Apellidos
-        kind: String
-      telefono:
-        label: Teléfono
-        kind: String
-        required: true
-      correo:
-        label: Correo electrónico
-        kind: String
-      autorizaTratamientoDatos:
-        label: Autoriza el tratamiento de datos
-        kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
-      ciudad:
-        label: Ciudad
-        kind: String
-      presupuestoMinimo:
-        label: Presupuesto mínimo
-        kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
-      presupuestoMaximo:
-        label: Presupuesto máximo
-        kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
-      plazoCompra:
-        label: Plazo estimado de compra
-        kind: Select
-        options:
-          options:
-            - { text: Inmediato, value: Inmediato }
-            - { text: Menos de 30 días, value: Menos de 30 días }
-            - { text: Entre 1 y 3 meses, value: Entre 1 y 3 meses }
-            - { text: Más de 3 meses, value: Más de 3 meses }
-          selectType: default
-      vehiculoActual:
-        label: Vehículo actual
-        kind: String
-      requiereFinanciacion:
-        label: Requiere financiación
-        kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
-      vehiculosInteres:
-        label: Vehículos de interés
-        kind: Record
-        multi: true
-        options: { module: vehiculos, labelField: codigo }
-      origen:
-        label: Origen
-        kind: Select
-        options:
-          options:
-            - { text: Sitio web, value: Sitio web }
-            - { text: Sala de ventas, value: Sala de ventas }
-            - { text: Referido, value: Referido }
-            - { text: Redes sociales, value: Redes sociales }
-            - { text: Llamada, value: Llamada }
-            - { text: Otro, value: Otro }
-          selectType: default
-      estado:
-        label: Estado comercial
-        kind: Select
-        required: true
-        default: Nuevo
-        options:
-          options:
-            - { text: Nuevo, value: Nuevo }
-            - { text: Contactado, value: Contactado }
-            - { text: Calificado, value: Calificado }
-            - { text: Prueba de manejo, value: Prueba de manejo }
-            - { text: Cotización, value: Cotización }
-            - { text: Negociación, value: Negociación }
-            - { text: Vendido, value: Vendido }
-            - { text: Perdido, value: Perdido }
-          selectType: default
-      asesor:
-        label: Asesor responsable
-        kind: User
-      fechaAsignacion:
-        label: Fecha de asignación
-        kind: DateTime
-      proximoContacto:
-        label: Próximo contacto
-        kind: DateTime
-      notas:
-        label: Notas
-        kind: String
-        options: { multiLine: true, useRichTextEditor: true }
-      externalID:
-        label: Identificador externo
-        kind: String
-      proveedorExterno:
-        label: Proveedor externo
-        kind: String
-
-  pruebas-manejo:
-    name: Pruebas de manejo
-    fields:
-      asunto:
-        label: Asunto
-        kind: String
-        required: true
+      asunto: {label: Asunto, kind: String, required: true, options: {description: {view: El campo «Asunto» conserva información operativa del registro en Actividades comerciales., edit: 'Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
       prospecto:
         label: Prospecto
         kind: Record
         required: true
-        options: { module: prospectos, labelField: nombres }
+        options: {module: prospectos, labelField: nombres, description: {view: Relación con prospectos. Permite consultar un registro vinculado en este registro de Actividades comerciales., edit: Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       vehiculo:
         label: Vehículo
         kind: Record
+        options: {module: vehiculos, labelField: codigo, description: {view: Relación con vehiculos. Permite consultar un registro vinculado en este registro de Actividades comerciales., edit: Seleccione vehículo dentro del módulo vehiculos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
+      oportunidad:
+        label: Oportunidad
+        kind: Record
+        options: {module: oportunidades, labelField: prospecto, description: {view: Relación con oportunidades. Permite consultar un registro vinculado en este registro de Actividades comerciales., edit: Seleccione oportunidad dentro del módulo oportunidades. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
+      asesor: {label: Asesor, kind: User, required: true, options: {description: {view: Usuario de Corteza responsable de asesor en este registro de Actividades comerciales., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo.}}}
+      tipo:
+        label: Tipo
+        kind: Select
         required: true
-        options: { module: vehiculos, labelField: codigo }
-      asesor:
-        label: Asesor
-        kind: User
-        required: true
-      inicio:
-        label: Inicio
-        kind: DateTime
-        required: true
-      fin:
-        label: Fin
-        kind: DateTime
-        required: true
-      sede:
-        label: Sede
-        kind: String
+        options:
+          options:
+            - {text: Llamada, value: Llamada}
+            - {text: WhatsApp, value: WhatsApp}
+            - {text: Correo, value: Correo}
+            - {text: Reunión, value: Reunión}
+            - {text: Seguimiento, value: Seguimiento}
+          selectType: default
+          description:
+            view: Clasificación de tipo para este registro de Actividades comerciales.
+            edit: 'Seleccione un valor para tipo entre: Llamada, WhatsApp, Correo, Reunión, Seguimiento. Es obligatorio para guardar un registro completo.'
       estado:
         label: Estado
         kind: Select
@@ -250,29 +199,341 @@ modules:
         default: Pendiente
         options:
           options:
-            - { text: Pendiente, value: Pendiente }
-            - { text: Confirmada, value: Confirmada }
-            - { text: Completada, value: Completada }
-            - { text: Cancelada, value: Cancelada }
-            - { text: No asistió, value: No asistió }
+            - {text: Pendiente, value: Pendiente}
+            - {text: Completada, value: Completada}
+            - {text: Cancelada, value: Cancelada}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Actividades comerciales.
+            edit: 'Seleccione un valor para estado entre: Pendiente, Completada, Cancelada. Es obligatorio para guardar un registro completo.'
+      fecha: {label: Fecha, kind: DateTime, required: true, options: {description: {view: 'Fecha y hora de fecha para este registro de Actividades comerciales, interpretada en America/Bogota.', edit: Indique fecha usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.}}}
+      resultado: {label: Resultado, kind: String, options: {description: {view: El campo «Resultado» conserva información operativa del registro en Actividades comerciales., edit: 'Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      proximaAccion: {label: Próxima acción, kind: DateTime, options: {description: {view: 'Fecha y hora de próxima acción para este registro de Actividades comerciales, interpretada en America/Bogota.', edit: Indique próxima acción usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      observaciones:
+        label: Observaciones
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Actividades comerciales., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+    meta:
+      description: Seguimientos comerciales relacionados con un prospecto y, opcionalmente, un vehículo u oportunidad. Conserva responsable, fecha, resultado y próxima acción.
+  tareas-servicio:
+    name: Tareas de servicio
+    fields:
+      orden:
+        label: Orden de servicio
+        kind: Record
+        required: true
+        options: {module: ordenes-servicio, labelField: codigo, description: {view: Relación con ordenes servicio. Permite consultar un registro vinculado en este registro de Tareas de servicio., edit: Seleccione orden de servicio dentro del módulo ordenes servicio. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      secuencia: {label: Secuencia, kind: Number, options: {format: "0", precision: 0, description: {view: Valor numérico de secuencia para este registro de Tareas de servicio., edit: Ingrese secuencia como número. Es opcional; complételo cuando la información esté disponible.}}}
+      tarea: {label: Tarea, kind: String, required: true, options: {description: {view: El campo «Tarea» conserva información operativa del registro en Tareas de servicio., edit: 'Ingrese tarea con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.'}}}
+      obligatoria: {label: Obligatoria, kind: Bool, options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si obligatoria aplica a este registro de Tareas de servicio., edit: Marque Sí únicamente cuando obligatoria esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}}
+      tecnico: {label: Técnico responsable, kind: User, options: {description: {view: Usuario de Corteza responsable de técnico responsable en este registro de Tareas de servicio., edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.}}}
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Pendiente
+        options:
+          options:
+            - {text: Pendiente, value: Pendiente}
+            - {text: En ejecución, value: En ejecución}
+            - {text: Completada, value: Completada}
+            - {text: No aplica, value: No aplica}
+          selectType: default
+          description:
+            view: Clasificación de estado para este registro de Tareas de servicio.
+            edit: 'Seleccione un valor para estado entre: Pendiente, En ejecución, Completada, No aplica. Es obligatorio para guardar un registro completo.'
+      resultado:
+        label: Resultado
+        kind: String
+        options: {multiLine: true, description: {view: El campo «Resultado» conserva información operativa del registro en Tareas de servicio., edit: 'Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      evidencia:
+        label: Evidencia
+        kind: File
+        multi: true
+        options: {allowDocuments: true, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con evidencia en este registro de Tareas de servicio., edit: Adjunte uno o varios archivos pertinentes para evidencia. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
+      inicioReal: {label: Inicio real, kind: DateTime, options: {description: {view: 'Fecha y hora de inicio real para este registro de Tareas de servicio, interpretada en America/Bogota.', edit: Indique inicio real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      finReal: {label: Fin real, kind: DateTime, options: {description: {view: 'Fecha y hora de fin real para este registro de Tareas de servicio, interpretada en America/Bogota.', edit: Indique fin real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+    meta:
+      description: Checklist operativo de una orden de servicio. Cada tarea identifica responsable, obligatoriedad, estado, resultado y evidencia antes del cierre de la orden.
+  prospectos:
+    name: Prospectos
+    fields:
+      nombres:
+        label: Nombres
+        kind: String
+        required: true
+        options:
+          description:
+            view: El campo «Nombres» conserva información operativa del registro en Prospectos.
+            edit: Ingrese nombres con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
+      apellidos:
+        label: Apellidos
+        kind: String
+        options:
+          description:
+            view: El campo «Apellidos» conserva información operativa del registro en Prospectos.
+            edit: Ingrese apellidos con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+      telefono:
+        label: Teléfono
+        kind: String
+        required: true
+        options:
+          description:
+            view: El campo «Teléfono» conserva información operativa del registro en Prospectos.
+            edit: Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es obligatorio para guardar un registro completo.
+      correo:
+        label: Correo electrónico
+        kind: String
+        options:
+          description:
+            view: El campo «Correo electrónico» conserva información operativa del registro en Prospectos.
+            edit: Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es opcional; complételo cuando la información esté disponible.
+      autorizaTratamientoDatos:
+        label: Autoriza el tratamiento de datos
+        kind: Bool
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.'}}
+      fechaAutorizacion: {label: Fecha de autorización, kind: DateTime, options: {description: {view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada., edit: 'Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible.'}}}
+      origenAutorizacion:
+        label: Origen de la autorización
+        kind: Select
+        options:
+          options:
+            - {text: Formulario web, value: Formulario web}
+            - {text: Sala de ventas, value: Sala de ventas}
+            - {text: WhatsApp, value: WhatsApp}
+            - {text: Telefónica, value: Telefónica}
+          selectType: default
+          description:
+            view: Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada.
+            edit: Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles.
+      ciudad:
+        label: Ciudad
+        kind: String
+        options:
+          description:
+            view: El campo «Ciudad» conserva información operativa del registro en Prospectos.
+            edit: Ingrese ciudad con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+      presupuestoMinimo:
+        label: Presupuesto mínimo
+        kind: Number
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Presupuesto mínimo expresado en pesos colombianos (COP) para este registro de Prospectos., edit: 'Ingrese presupuesto mínimo en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
+      presupuestoMaximo:
+        label: Presupuesto máximo
+        kind: Number
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Presupuesto máximo expresado en pesos colombianos (COP) para este registro de Prospectos., edit: 'Ingrese presupuesto máximo en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
+      plazoCompra:
+        label: Plazo estimado de compra
+        kind: Select
+        options:
+          options:
+            - {text: Inmediato, value: Inmediato}
+            - {text: Menos de 30 días, value: Menos de 30 días}
+            - {text: Entre 1 y 3 meses, value: Entre 1 y 3 meses}
+            - {text: Más de 3 meses, value: Más de 3 meses}
+          selectType: default
+          description:
+            view: Clasificación de plazo estimado de compra para este registro de Prospectos.
+            edit: 'Seleccione un valor para plazo estimado de compra entre: Inmediato, Menos de 30 días, Entre 1 y 3 meses, Más de 3 meses. Es opcional; complételo cuando la información esté disponible.'
+      vehiculoActual:
+        label: Vehículo actual
+        kind: String
+        options:
+          description:
+            view: El campo «Vehículo actual» conserva información operativa del registro en Prospectos.
+            edit: Ingrese vehículo actual con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+      requiereFinanciacion:
+        label: Requiere financiación
+        kind: Bool
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si requiere financiación aplica a este registro de Prospectos., edit: Marque Sí únicamente cuando requiere financiación esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
+      vehiculosInteres:
+        label: Vehículos de interés
+        kind: Record
+        multi: true
+        options: {module: vehiculos, labelField: codigo, description: {view: Relación con vehiculos. Permite consultar varios registros vinculados en este registro de Prospectos., edit: Seleccione vehículos de interés dentro del módulo vehiculos. La relación admite varios registros; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible.}}
+      origen:
+        label: Origen
+        kind: Select
+        options:
+          options:
+            - {text: Sitio web, value: Sitio web}
+            - {text: Sala de ventas, value: Sala de ventas}
+            - {text: Referido, value: Referido}
+            - {text: Redes sociales, value: Redes sociales}
+            - {text: Llamada, value: Llamada}
+            - {text: Otro, value: Otro}
+          selectType: default
+          description:
+            view: Clasificación de origen para este registro de Prospectos.
+            edit: 'Seleccione un valor para origen entre: Sitio web, Sala de ventas, Referido, Redes sociales, Llamada, Otro. Es opcional; complételo cuando la información esté disponible.'
+      estado:
+        label: Estado comercial
+        kind: Select
+        required: true
+        default: Nuevo
+        options:
+          options:
+            - {text: Nuevo, value: Nuevo}
+            - {text: Contactado, value: Contactado}
+            - {text: Calificado, value: Calificado}
+            - {text: Prueba de manejo, value: Prueba de manejo}
+            - {text: Cotización, value: Cotización}
+            - {text: Negociación, value: Negociación}
+            - {text: Vendido, value: Vendido}
+            - {text: Perdido, value: Perdido}
+          selectType: default
+          description:
+            view: Clasificación de estado comercial para este registro de Prospectos.
+            edit: 'Seleccione un valor para estado comercial entre: Nuevo, Contactado, Calificado, Prueba de manejo, Cotización, Negociación, Vendido, Perdido. Es obligatorio para guardar un registro completo.'
+      asesor:
+        label: Asesor responsable
+        kind: User
+        options:
+          description:
+            view: Usuario de Corteza responsable de asesor responsable en este registro de Prospectos.
+            edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.
+      prioridad:
+        label: Prioridad comercial
+        kind: Select
+        default: Media
+        options:
+          options:
+            - {text: Baja, value: Baja}
+            - {text: Media, value: Media}
+            - {text: Alta, value: Alta}
+            - {text: Urgente, value: Urgente}
+          selectType: default
+          description:
+            view: Clasificación de prioridad comercial para este registro de Prospectos.
+            edit: 'Seleccione un valor para prioridad comercial entre: Baja, Media, Alta, Urgente. Es opcional; complételo cuando la información esté disponible.'
+      fechaAsignacion:
+        label: Fecha de asignación
+        kind: DateTime
+        options:
+          description:
+            view: Fecha y hora de fecha de asignación para este registro de Prospectos, interpretada en America/Bogota.
+            edit: No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla.
+      proximoContacto:
+        label: Próximo contacto
+        kind: DateTime
+        options:
+          description:
+            view: Fecha y hora de próximo contacto para este registro de Prospectos, interpretada en America/Bogota.
+            edit: Indique próximo contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.
+      ultimoContacto: {label: Último contacto, kind: DateTime, options: {description: {view: 'Fecha y hora de último contacto para este registro de Prospectos, interpretada en America/Bogota.', edit: Indique último contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      motivoCierre: {label: Motivo de cierre o pérdida, kind: String, options: {description: {view: El campo «Motivo de cierre o pérdida» conserva información operativa del registro en Prospectos., edit: 'Ingrese motivo de cierre o pérdida con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      notas:
+        label: Notas
+        kind: String
+        options: {multiLine: true, useRichTextEditor: true, description: {view: El campo «Notas» conserva información operativa del registro en Prospectos., edit: 'Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+      externalID:
+        label: Identificador externo
+        kind: String
+        options:
+          description:
+            view: El campo «Identificador externo» conserva información operativa del registro en Prospectos.
+            edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.
+      proveedorExterno:
+        label: Proveedor externo
+        kind: String
+        options:
+          description:
+            view: El campo «Proveedor externo» conserva información operativa del registro en Prospectos.
+            edit: Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+    meta:
+      description: Personas interesadas en adquirir un vehículo. Centraliza consentimiento, presupuesto, financiación, vehículos de interés, responsable y estado del proceso comercial.
+  pruebas-manejo:
+    name: Pruebas de manejo
+    fields:
+      asunto:
+        label: Asunto
+        kind: String
+        required: true
+        options:
+          description:
+            view: El campo «Asunto» conserva información operativa del registro en Pruebas de manejo.
+            edit: Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
+      prospecto:
+        label: Prospecto
+        kind: Record
+        required: true
+        options: {module: prospectos, labelField: nombres, description: {view: Relación con prospectos. Permite consultar un registro vinculado en este registro de Pruebas de manejo., edit: Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      vehiculo:
+        label: Vehículo
+        kind: Record
+        required: true
+        options: {module: vehiculos, labelField: codigo, description: {view: Relación con vehiculos. Permite consultar un registro vinculado en este registro de Pruebas de manejo., edit: Seleccione vehículo dentro del módulo vehiculos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
+      asesor:
+        label: Asesor
+        kind: User
+        required: true
+        options:
+          description:
+            view: Usuario de Corteza responsable de asesor en este registro de Pruebas de manejo.
+            edit: Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo.
+      inicio:
+        label: Inicio
+        kind: DateTime
+        required: true
+        options:
+          description:
+            view: Fecha y hora de inicio para este registro de Pruebas de manejo, interpretada en America/Bogota.
+            edit: Indique inicio usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.
+      fin:
+        label: Fin
+        kind: DateTime
+        required: true
+        options:
+          description:
+            view: Fecha y hora de fin para este registro de Pruebas de manejo, interpretada en America/Bogota.
+            edit: Indique fin usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.
+      sede:
+        label: Sede
+        kind: String
+        options:
+          description:
+            view: El campo «Sede» conserva información operativa del registro en Pruebas de manejo.
+            edit: Ingrese sede con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
+      estado:
+        label: Estado
+        kind: Select
+        required: true
+        default: Pendiente
+        options:
+          options:
+            - {text: Pendiente, value: Pendiente}
+            - {text: Confirmada, value: Confirmada}
+            - {text: Completada, value: Completada}
+            - {text: Cancelada, value: Cancelada}
+            - {text: No asistió, value: No asistió}
+          selectType: default
+          description:
+            view: Clasificación de estado para este registro de Pruebas de manejo.
+            edit: 'Seleccione un valor para estado entre: Pendiente, Confirmada, Completada, Cancelada, No asistió. Es obligatorio para guardar un registro completo.'
       resultado:
         label: Resultado
         kind: Select
         options:
           options:
-            - { text: Interesado, value: Interesado }
-            - { text: Requiere otra opción, value: Requiere otra opción }
-            - { text: Sin interés, value: Sin interés }
+            - {text: Interesado, value: Interesado}
+            - {text: Requiere otra opción, value: Requiere otra opción}
+            - {text: Sin interés, value: Sin interés}
           selectType: default
+          description:
+            view: Clasificación de resultado para este registro de Pruebas de manejo.
+            edit: 'Seleccione un valor para resultado entre: Interesado, Requiere otra opción, Sin interés. Es opcional; complételo cuando la información esté disponible.'
       siguienteAccion:
         label: Siguiente acción
         kind: String
+        options:
+          description:
+            view: El campo «Siguiente acción» conserva información operativa del registro en Pruebas de manejo.
+            edit: Ingrese siguiente acción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
-
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Pruebas de manejo., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+    meta:
+      description: Reservas de vehículos para pruebas de manejo. Relaciona prospecto, vehículo y asesor, evita cruces de horario y registra el resultado y la siguiente acción.
   oportunidades:
     name: Oportunidades
     fields:
@@ -280,15 +541,19 @@ modules:
         label: Prospecto
         kind: Record
         required: true
-        options: { module: prospectos, labelField: nombres }
+        options: {module: prospectos, labelField: nombres, description: {view: Relación con prospectos. Permite consultar un registro vinculado en este registro de Oportunidades., edit: Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       vehiculo:
         label: Vehículo
         kind: Record
         required: true
-        options: { module: vehiculos, labelField: codigo }
+        options: {module: vehiculos, labelField: codigo, description: {view: Relación con vehiculos. Permite consultar un registro vinculado en este registro de Oportunidades., edit: Seleccione vehículo dentro del módulo vehiculos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       asesor:
         label: Asesor
         kind: User
+        options:
+          description:
+            view: Usuario de Corteza responsable de asesor en este registro de Oportunidades.
+            edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.
       etapa:
         label: Etapa
         kind: Select
@@ -296,52 +561,69 @@ modules:
         default: Cotización
         options:
           options:
-            - { text: Cotización, value: Cotización }
-            - { text: Financiación, value: Financiación }
-            - { text: Negociación, value: Negociación }
-            - { text: Documentación, value: Documentación }
-            - { text: Vendido, value: Vendido }
-            - { text: Perdido, value: Perdido }
+            - {text: Cotización, value: Cotización}
+            - {text: Financiación, value: Financiación}
+            - {text: Negociación, value: Negociación}
+            - {text: Documentación, value: Documentación}
+            - {text: Vendido, value: Vendido}
+            - {text: Perdido, value: Perdido}
           selectType: default
+          description:
+            view: Clasificación de etapa para este registro de Oportunidades.
+            edit: 'Seleccione un valor para etapa entre: Cotización, Financiación, Negociación, Documentación, Vendido, Perdido. Es obligatorio para guardar un registro completo.'
       valorPublicado:
         label: Valor publicado
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor publicado expresado en pesos colombianos (COP) para este registro de Oportunidades., edit: 'Ingrese valor publicado en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       valorOfertado:
         label: Valor ofertado
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor ofertado expresado en pesos colombianos (COP) para este registro de Oportunidades., edit: 'Ingrese valor ofertado en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       requiereFinanciacion:
         label: Requiere financiación
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si requiere financiación aplica a este registro de Oportunidades., edit: Marque Sí únicamente cuando requiere financiación esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
       valorFinanciado:
         label: Valor financiado
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor financiado expresado en pesos colombianos (COP) para este registro de Oportunidades., edit: 'Ingrese valor financiado en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       recibeRetoma:
         label: Incluye retoma
         kind: Bool
-        options: { falseLabel: "No", trueLabel: "Sí" }
+        options: {falseLabel: "No", trueLabel: "Sí", description: {view: Indica si incluye retoma aplica a este registro de Oportunidades., edit: Marque Sí únicamente cuando incluye retoma esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible.}}
       descripcionRetoma:
         label: Descripción de retoma
         kind: String
+        options:
+          description:
+            view: El campo «Descripción de retoma» conserva información operativa del registro en Oportunidades.
+            edit: Ingrese descripción de retoma con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       probabilidad:
         label: Probabilidad
         kind: Number
-        options: { format: "0", precision: 0, suffix: "%" }
+        options: {format: "0", precision: 0, suffix: "%", description: {view: Valor numérico de probabilidad para este registro de Oportunidades., edit: Ingrese probabilidad como número. Es opcional; complételo cuando la información esté disponible.}}
       fechaEstimadaCierre:
         label: Fecha estimada de cierre
         kind: DateTime
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de fecha estimada de cierre para este registro de Oportunidades., edit: Indique fecha estimada de cierre en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
+      proximoPaso: {label: Próximo paso, kind: String, options: {description: {view: El campo «Próximo paso» conserva información operativa del registro en Oportunidades., edit: 'Ingrese próximo paso con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}}
+      fechaCierreReal:
+        label: Fecha real de cierre
+        kind: DateTime
+        options: {onlyDate: true, description: {view: Fecha de fecha real de cierre para este registro de Oportunidades., edit: Indique fecha real de cierre en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
       motivoPerdida:
         label: Motivo de pérdida
         kind: String
+        options:
+          description:
+            view: El campo «Motivo de pérdida» conserva información operativa del registro en Oportunidades.
+            edit: Ingrese motivo de pérdida con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
-
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Oportunidades., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
+    meta:
+      description: Negociaciones de venta de un vehículo a un prospecto. Contiene oferta, financiación, retoma, probabilidad, etapa y fecha estimada de cierre.
   ordenes-servicio:
     name: Órdenes de servicio
     fields:
@@ -349,41 +631,70 @@ modules:
         label: Código
         kind: String
         required: true
+        options:
+          description:
+            view: El campo «Código» conserva información operativa del registro en Órdenes de servicio.
+            edit: Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo.
       cliente:
         label: Cliente
         kind: Record
         required: true
-        options: { module: prospectos, labelField: nombres }
+        options: {module: prospectos, labelField: nombres, description: {view: Relación con prospectos. Permite consultar un registro vinculado en este registro de Órdenes de servicio., edit: Seleccione cliente dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       vehiculo:
         label: Vehículo
         kind: Record
         required: true
-        options: { module: vehiculos, labelField: codigo }
+        options: {module: vehiculos, labelField: codigo, description: {view: Relación con vehiculos. Permite consultar un registro vinculado en este registro de Órdenes de servicio., edit: Seleccione vehículo dentro del módulo vehiculos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo.}}
       coordinador:
         label: Coordinador
         kind: User
+        options:
+          description:
+            view: Usuario de Corteza responsable de coordinador en este registro de Órdenes de servicio.
+            edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.
       tecnico:
         label: Técnico
         kind: User
+        options:
+          description:
+            view: Usuario de Corteza responsable de técnico en este registro de Órdenes de servicio.
+            edit: Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible.
       inicio:
         label: Inicio
         kind: DateTime
         required: true
+        options:
+          description:
+            view: Fecha y hora de inicio para este registro de Órdenes de servicio, interpretada en America/Bogota.
+            edit: Indique inicio usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo.
       fin:
         label: Fin
         kind: DateTime
+        options:
+          description:
+            view: Fecha y hora de fin para este registro de Órdenes de servicio, interpretada en America/Bogota.
+            edit: Indique fin usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.
+      kilometrajeIngreso:
+        label: Kilometraje de ingreso
+        kind: Number
+        options: {format: "0", precision: 0, suffix: " km", description: {view: Valor numérico de kilometraje de ingreso para este registro de Órdenes de servicio., edit: Ingrese kilometraje de ingreso como número. Es opcional; complételo cuando la información esté disponible.}}
+      inicioReal: {label: Inicio real, kind: DateTime, options: {description: {view: 'Fecha y hora de inicio real para este registro de Órdenes de servicio, interpretada en America/Bogota.', edit: Indique inicio real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
+      finReal: {label: Fin real, kind: DateTime, options: {description: {view: 'Fecha y hora de fin real para este registro de Órdenes de servicio, interpretada en America/Bogota.', edit: Indique fin real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       tipoServicio:
         label: Tipo de servicio
         kind: Select
         required: true
         options:
           options:
-            - { text: Mantenimiento preventivo, value: Mantenimiento preventivo }
-            - { text: Reparación, value: Reparación }
-            - { text: Garantía, value: Garantía }
-            - { text: Inspección, value: Inspección }
-            - { text: Alistamiento, value: Alistamiento }
+            - {text: Mantenimiento preventivo, value: Mantenimiento preventivo}
+            - {text: Reparación, value: Reparación}
+            - {text: Garantía, value: Garantía}
+            - {text: Inspección, value: Inspección}
+            - {text: Alistamiento, value: Alistamiento}
           selectType: default
+          description:
+            view: Clasificación de tipo de servicio para este registro de Órdenes de servicio.
+            edit: 'Seleccione un valor para tipo de servicio entre: Mantenimiento preventivo, Reparación, Garantía, Inspección, Alistamiento. Es obligatorio para guardar un registro completo.'
       estado:
         label: Estado
         kind: Select
@@ -391,38 +702,57 @@ modules:
         default: Programada
         options:
           options:
-            - { text: Programada, value: Programada }
-            - { text: Recibida, value: Recibida }
-            - { text: En diagnóstico, value: En diagnóstico }
-            - { text: En ejecución, value: En ejecución }
-            - { text: Completada, value: Completada }
-            - { text: Entregada, value: Entregada }
-            - { text: Cancelada, value: Cancelada }
+            - {text: Programada, value: Programada}
+            - {text: Recibida, value: Recibida}
+            - {text: En diagnóstico, value: En diagnóstico}
+            - {text: En ejecución, value: En ejecución}
+            - {text: Completada, value: Completada}
+            - {text: Entregada, value: Entregada}
+            - {text: Cancelada, value: Cancelada}
           selectType: default
+          description:
+            view: Clasificación de estado para este registro de Órdenes de servicio.
+            edit: 'Seleccione un valor para estado entre: Programada, Recibida, En diagnóstico, En ejecución, Completada, Entregada, Cancelada. Es obligatorio para guardar un registro completo.'
       solicitud:
         label: Solicitud del cliente
         kind: String
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Solicitud del cliente» conserva información operativa del registro en Órdenes de servicio., edit: 'Ingrese solicitud del cliente con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
       diagnostico:
         label: Diagnóstico
         kind: String
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Diagnóstico» conserva información operativa del registro en Órdenes de servicio., edit: 'Ingrese diagnóstico con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
       valorEstimado:
         label: Valor estimado
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor estimado expresado en pesos colombianos (COP) para este registro de Órdenes de servicio., edit: 'Ingrese valor estimado en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       valorFinal:
         label: Valor final
         kind: Number
-        options: { format: "0", precision: 0, prefix: "$ " }
+        options: {format: "0", precision: 0, prefix: "$ ", description: {view: Valor final expresado en pesos colombianos (COP) para este registro de Órdenes de servicio., edit: 'Ingrese valor final en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible.'}}
       proximoMantenimiento:
         label: Próximo mantenimiento
         kind: DateTime
-        options: { onlyDate: true }
+        options: {onlyDate: true, description: {view: Fecha de próximo mantenimiento para este registro de Órdenes de servicio., edit: Indique próximo mantenimiento en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible.}}
+      evidencias:
+        label: Evidencias
+        kind: File
+        multi: true
+        options: {allowDocuments: true, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con evidencias en este registro de Órdenes de servicio., edit: Adjunte uno o varios archivos pertinentes para evidencias. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
+      firmaEntrega:
+        label: Firma o acta de entrega
+        kind: File
+        options: {allowDocuments: true, allowImages: true, maxSize: 0, mode: list, description: {view: Archivos asociados con firma o acta de entrega en este registro de Órdenes de servicio., edit: Adjunte el archivo pertinente para firma o acta de entrega. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible.}}
+      fechaEntrega: {label: Fecha de entrega, kind: DateTime, options: {description: {view: 'Fecha y hora de fecha de entrega para este registro de Órdenes de servicio, interpretada en America/Bogota.', edit: Indique fecha de entrega usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible.}}}
       observaciones:
         label: Observaciones
         kind: String
-        options: { multiLine: true }
+        options: {multiLine: true, description: {view: El campo «Observaciones» conserva información operativa del registro en Órdenes de servicio., edit: 'Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible.'}}
       externalID:
         label: Identificador externo
         kind: String
+        options:
+          description:
+            view: El campo «Identificador externo» conserva información operativa del registro en Órdenes de servicio.
+            edit: No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo.
+    meta:
+      description: Citas y trabajos de taller asociados con un cliente y su vehículo. Registra programación, diagnóstico, ejecución, evidencias, valores y próximo mantenimiento.

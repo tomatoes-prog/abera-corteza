@@ -1,140 +1,140 @@
 chart:
   configurator:
-    begin-axis-at-zero: Always begin axis scale at zero
-    chart-title: Chart title
-    color-scheme: Color scheme
-    data: Data
-    data-columns: Data columns
-    default: Default
-    default-value: Default value
+    begin-axis-at-zero: Iniciar siempre la escala del eje en cero
+    chart-title: Título del gráfico
+    color-scheme: Esquema de colores
+    data: Datos
+    data-columns: Columnas de datos
+    default: Predeterminado
+    default-value: Valor predeterminado
     general: General
-    label-column: Label column
-    logarithmic-scale: Logarithmic scale
-    position-description: Values can be set as pixels (20) or as percentages (20%)
-    none: None
-    place-axis-on-right-side: Place axis on the right side
-    skip-missing-values: Skip missing values
-    step-size: Step size
+    label-column: Columna de etiquetas
+    logarithmic-scale: Escala logarítmica
+    position-description: Los valores pueden indicarse en píxeles (20) o como porcentajes (20%).
+    none: Ninguno
+    place-axis-on-right-side: Colocar el eje a la derecha
+    skip-missing-values: Omitir valores ausentes
+    step-size: Tamaño del intervalo
     animation:
-      enabled: Animation enabled
+      enabled: Animación habilitada
     metrics:
-      label: Metrics
-      field: Field
+      label: Indicadores
+      field: Campo
       stack:
-        label: Stack
-        description: Metrics with same value will be stacked
+        label: Apilar
+        description: Los indicadores con el mismo valor se mostrarán apilados.
       label-field:
-        label: Label
+        label: Etiqueta
     time:
-      label: Time
+      label: Tiempo
       unit:
-        label: Time unit
+        label: Unidad de tiempo
         types:
-          date: Date
-          month: Month
-          quarter: Quarter
-          week: Week
-          year: Year
-    type: Type
+          date: Fecha
+          month: Mes
+          quarter: Trimestre
+          week: Semana
+          year: Año
+    type: Tipo
     types:
-      bar: Bar
-      doughnut: Doughnut
-      funnel: Funnel
-      line: Line
-      pie: Pie
+      bar: Barras
+      doughnut: Dona
+      funnel: Embudo
+      line: Líneas
+      pie: Circular
     value:
-      max: Max value
-      min: Min value
+      max: Valor máximo
+      min: Valor mínimo
     x-axis:
-      name: X-Axis
-      label: Axis label
-      type: Axis type
+      name: Eje X
+      label: Etiqueta del eje
+      type: Tipo de eje
       labelRotation:
-        label: Rotate labels
+        label: Rotar etiquetas
     y-axis:
-      name: Y-Axis
-      label: Axis label
+      name: Eje Y
+      label: Etiqueta del eje
       labelPosition:
-        label: Label position
-        top: Top
-        center: Center
-        bottom: Bottom
+        label: Posición de la etiqueta
+        top: Arriba
+        center: Centro
+        bottom: Abajo
       labelRotation:
-        label: Rotate labels
+        label: Rotar etiquetas
     legend:
-      name: Legend
-      hide: Hide legend
-      scrollable: Scrollable
+      name: Leyenda
+      hide: Ocultar leyenda
+      scrollable: Desplazable
       orientation:
-        label: Orientation
+        label: Orientación
         horizontal: Horizontal
         vertical: Vertical
       align:
-        label: Align
-        left: Left
-        right: Right
-        center: Center
+        label: Alineación
+        left: Izquierda
+        right: Derecha
+        center: Centro
       position:
-        description: Values c
-        default: Default position
-        top: Top
-        right: Right
-        bottom: Bottom
-        left: Left
+        description: Los valores pueden indicarse en píxeles o porcentajes.
+        default: Posición predeterminada
+        top: Arriba
+        right: Derecha
+        bottom: Abajo
+        left: Izquierda
     tooltips:
-      name: Tooltips
+      name: Información emergente
       show:
-        always: Always show labels
+        always: Mostrar siempre las etiquetas
     offset:
-      name: Offset
-      default: Default offset
-      top: Top
-      right: Right
-      bottom: Bottom
-      left: Left
+      name: Margen
+      default: Margen predeterminado
+      top: Arriba
+      right: Derecha
+      bottom: Abajo
+      left: Izquierda
 metric:
   configurator:
     color:
-      background: Background color
-      text: Text color
-      picker: Choose a color
-    format: Format
-    label-column: Label column
-    none: None
-    prefix: Prefix
-    suffix: Suffix
+      background: Color de fondo
+      text: Color del texto
+      picker: Selecciona un color
+    format: Formato
+    label-column: Columna de etiquetas
+    none: Ninguno
+    prefix: Prefijo
+    suffix: Sufijo
 table:
   configurator:
     general: General
-    data: Data
-    columns: Columns
-    dark: Dark
-    head-variant: Head Variant
-    joined-datasource-handling: Joined datasource handling
-    light: Light
-    none: None
+    data: Datos
+    columns: Columnas
+    dark: Oscuro
+    head-variant: Variante del encabezado
+    joined-datasource-handling: Tratamiento de fuentes combinadas
+    light: Claro
+    none: Ninguno
     table:
       options:
-        bordered: Bordered
-        borderless: Borderless
-        dark: Dark
-        fixed: Fixed
-        hover: Hover
-        label: Table Options
-        no-collapse: No border collapse
-        responsive: Responsive
-        small: Small
-        striped: Striped
-      variant: Table Variant
+        bordered: Con bordes
+        borderless: Sin bordes
+        dark: Oscura
+        fixed: Fija
+        hover: Resaltar al pasar el cursor
+        label: Opciones de tabla
+        no-collapse: No contraer bordes
+        responsive: Adaptable
+        small: Compacta
+        striped: Con filas alternadas
+      variant: Variante de tabla
       variants:
-        danger: Danger
-        dark: Dark
-        info: Info
-        light: Light
-        primary: Primary
-        secondary: Secondary
-        success: Success
-        warning: Warning
+        danger: Peligro
+        dark: Oscura
+        info: Información
+        light: Clara
+        primary: Principal
+        secondary: Secundaria
+        success: Correcta
+        warning: Advertencia
   view:
-    next: Next
-    previous: Previous
+    next: Siguiente
+    previous: Anterior

@@ -69,7 +69,12 @@ func TestCommercialTemplatesDecode(t *testing.T) {
 					workflow := node.Resource.(*types.Workflow)
 					decodedWorkflows++
 					req.NotEmpty(workflow.Handle)
-					req.True(workflow.Enabled, workflow.Handle)
+					if strings.HasPrefix(workflow.Handle, "ejemplo-") {
+						req.False(workflow.Enabled, workflow.Handle)
+						req.Contains(workflow.Meta.Name, "EJEMPLO - DESACTIVADO", workflow.Handle)
+					} else {
+						req.True(workflow.Enabled, workflow.Handle)
+					}
 					req.NotEmpty(workflow.Steps, workflow.Handle)
 					ensureWorkflowVisuals(workflow)
 					assertWorkflowVisuals(t, workflow)

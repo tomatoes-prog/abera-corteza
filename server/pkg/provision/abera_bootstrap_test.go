@@ -219,6 +219,11 @@ func TestAberaBootstrapRecoversPendingDelivery(t *testing.T) {
 	state, err = loadAberaBootstrapState(ctx, s)
 	require.NoError(t, err)
 	require.Equal(t, "complete", state.Status)
+	require.NoError(t, os.Remove(cfg.OutputFile))
+	require.NoError(t, provisionAberaBootstrap(ctx, zap.NewNop(), s, cfg))
+	restored, err := os.ReadFile(cfg.OutputFile)
+	require.NoError(t, err)
+	require.Equal(t, initial, restored)
 }
 
 func TestAberaBootstrapRejectsChangedKeyAndManipulatedDelivery(t *testing.T) {

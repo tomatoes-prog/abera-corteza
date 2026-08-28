@@ -71,3 +71,27 @@ record_sources:
     ID:
       column: ID
       skip: true
+- source: servicios-tecnicos-co-items-cotizacion.csv
+  key: ID
+  references:
+    namespace: servicios-tecnicos-co
+    module: items-cotizacion
+    cotizacion.module: cotizaciones
+    cotizacion.datasource: cotizaciones
+  defaultable: true
+  map:
+    ID:
+      column: ID
+      skip: true
+- source: servicios-tecnicos-co-tareas-orden.csv
+  key: ID
+  references:
+    namespace: servicios-tecnicos-co
+    module: tareas-orden
+    orden.module: ordenes-trabajo
+    orden.datasource: ordenes-trabajo
+  defaultable: true
+  map:
+    ID:
+      column: ID
+      skip: true

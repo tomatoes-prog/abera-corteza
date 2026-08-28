@@ -1,0 +1,101 @@
+ID,orden,secuencia,tarea,obligatoria,tecnico,estado,inicioReal,resultado,finReal
+tarea-orden-001,orden-trabajo-001,1,"Diagnóstico, ejecución y validación de la orden #1",1,tecnica-demo,En ejecución,2026-07-31T11:00:00Z,Punto de control técnico documentado.,
+tarea-orden-002,orden-trabajo-002,1,"Diagnóstico, ejecución y validación de la orden #2",1,tecnica-demo,Completada,2026-07-31T10:00:00Z,Punto de control técnico documentado.,2026-07-31T10:55:00Z
+tarea-orden-003,orden-trabajo-003,1,"Diagnóstico, ejecución y validación de la orden #3",1,tecnica-demo,No aplica,2026-07-31T09:00:00Z,Punto de control técnico documentado.,
+tarea-orden-004,orden-trabajo-004,1,"Diagnóstico, ejecución y validación de la orden #4",1,tecnica-demo,Pendiente,2026-07-31T08:00:00Z,Punto de control técnico documentado.,
+tarea-orden-005,orden-trabajo-005,1,"Diagnóstico, ejecución y validación de la orden #5",1,tecnica-demo,En ejecución,2026-07-31T07:00:00Z,Punto de control técnico documentado.,
+tarea-orden-006,orden-trabajo-006,1,"Diagnóstico, ejecución y validación de la orden #6",1,tecnica-demo,Completada,2026-07-31T06:00:00Z,Punto de control técnico documentado.,2026-07-31T06:55:00Z
+tarea-orden-007,orden-trabajo-007,1,"Diagnóstico, ejecución y validación de la orden #7",1,tecnica-demo,No aplica,2026-07-31T05:00:00Z,Punto de control técnico documentado.,
+tarea-orden-008,orden-trabajo-008,1,"Diagnóstico, ejecución y validación de la orden #8",1,tecnica-demo,Pendiente,2026-07-31T04:00:00Z,Punto de control técnico documentado.,
+tarea-orden-009,orden-trabajo-009,1,"Diagnóstico, ejecución y validación de la orden #9",1,tecnica-demo,En ejecución,2026-07-31T03:00:00Z,Punto de control técnico documentado.,
+tarea-orden-010,orden-trabajo-010,1,"Diagnóstico, ejecución y validación de la orden #10",1,tecnica-demo,Completada,2026-07-31T02:00:00Z,Punto de control técnico documentado.,2026-07-31T02:55:00Z
+tarea-orden-011,orden-trabajo-011,1,"Diagnóstico, ejecución y validación de la orden #11",1,tecnica-demo,No aplica,2026-07-31T01:00:00Z,Punto de control técnico documentado.,
+tarea-orden-012,orden-trabajo-012,1,"Diagnóstico, ejecución y validación de la orden #12",1,tecnica-demo,Pendiente,2026-07-31T00:00:00Z,Punto de control técnico documentado.,
+tarea-orden-013,orden-trabajo-013,1,"Diagnóstico, ejecución y validación de la orden #13",1,tecnica-demo,En ejecución,2026-07-30T23:00:00Z,Punto de control técnico documentado.,
+tarea-orden-014,orden-trabajo-014,1,"Diagnóstico, ejecución y validación de la orden #14",1,tecnica-demo,Completada,2026-07-30T22:00:00Z,Punto de control técnico documentado.,2026-07-30T22:55:00Z
+tarea-orden-015,orden-trabajo-015,1,"Diagnóstico, ejecución y validación de la orden #15",1,tecnica-demo,No aplica,2026-07-30T21:00:00Z,Punto de control técnico documentado.,
+tarea-orden-016,orden-trabajo-016,1,"Diagnóstico, ejecución y validación de la orden #16",1,tecnica-demo,Pendiente,2026-07-30T20:00:00Z,Punto de control técnico documentado.,
+tarea-orden-017,orden-trabajo-017,1,"Diagnóstico, ejecución y validación de la orden #17",1,tecnica-demo,En ejecución,2026-07-30T19:00:00Z,Punto de control técnico documentado.,
+tarea-orden-018,orden-trabajo-018,1,"Diagnóstico, ejecución y validación de la orden #18",1,tecnica-demo,Completada,2026-07-30T18:00:00Z,Punto de control técnico documentado.,2026-07-30T18:55:00Z
+tarea-orden-019,orden-trabajo-019,1,"Diagnóstico, ejecución y validación de la orden #19",1,tecnica-demo,No aplica,2026-07-30T17:00:00Z,Punto de control técnico documentado.,
+tarea-orden-020,orden-trabajo-020,1,"Diagnóstico, ejecución y validación de la orden #20",1,tecnica-demo,Pendiente,2026-07-30T16:00:00Z,Punto de control técnico documentado.,
+tarea-orden-021,orden-trabajo-021,1,"Diagnóstico, ejecución y validación de la orden #21",1,tecnica-demo,En ejecución,2026-07-30T15:00:00Z,Punto de control técnico documentado.,
+tarea-orden-022,orden-trabajo-022,1,"Diagnóstico, ejecución y validación de la orden #22",1,tecnica-demo,Completada,2026-07-30T14:00:00Z,Punto de control técnico documentado.,2026-07-30T14:55:00Z
+tarea-orden-023,orden-trabajo-023,1,"Diagnóstico, ejecución y validación de la orden #23",1,tecnica-demo,No aplica,2026-07-30T13:00:00Z,Punto de control técnico documentado.,
+tarea-orden-024,orden-trabajo-024,1,"Diagnóstico, ejecución y validación de la orden #24",1,tecnica-demo,Pendiente,2026-07-30T12:00:00Z,Punto de control técnico documentado.,
+tarea-orden-025,orden-trabajo-025,1,"Diagnóstico, ejecución y validación de la orden #25",1,tecnica-demo,En ejecución,2026-07-30T11:00:00Z,Punto de control técnico documentado.,
+tarea-orden-026,orden-trabajo-026,1,"Diagnóstico, ejecución y validación de la orden #26",1,tecnica-demo,Completada,2026-07-30T10:00:00Z,Punto de control técnico documentado.,2026-07-30T10:55:00Z
+tarea-orden-027,orden-trabajo-027,1,"Diagnóstico, ejecución y validación de la orden #27",1,tecnica-demo,No aplica,2026-07-30T09:00:00Z,Punto de control técnico documentado.,
+tarea-orden-028,orden-trabajo-028,1,"Diagnóstico, ejecución y validación de la orden #28",1,tecnica-demo,Pendiente,2026-07-30T08:00:00Z,Punto de control técnico documentado.,
+tarea-orden-029,orden-trabajo-029,1,"Diagnóstico, ejecución y validación de la orden #29",1,tecnica-demo,En ejecución,2026-07-30T07:00:00Z,Punto de control técnico documentado.,
+tarea-orden-030,orden-trabajo-030,1,"Diagnóstico, ejecución y validación de la orden #30",1,tecnica-demo,Completada,2026-07-30T06:00:00Z,Punto de control técnico documentado.,2026-07-30T06:55:00Z
+tarea-orden-031,orden-trabajo-031,1,"Diagnóstico, ejecución y validación de la orden #31",1,tecnica-demo,No aplica,2026-07-30T05:00:00Z,Punto de control técnico documentado.,
+tarea-orden-032,orden-trabajo-032,1,"Diagnóstico, ejecución y validación de la orden #32",1,tecnica-demo,Pendiente,2026-07-30T04:00:00Z,Punto de control técnico documentado.,
+tarea-orden-033,orden-trabajo-033,1,"Diagnóstico, ejecución y validación de la orden #33",1,tecnica-demo,En ejecución,2026-07-30T03:00:00Z,Punto de control técnico documentado.,
+tarea-orden-034,orden-trabajo-034,1,"Diagnóstico, ejecución y validación de la orden #34",1,tecnica-demo,Completada,2026-07-30T02:00:00Z,Punto de control técnico documentado.,2026-07-30T02:55:00Z
+tarea-orden-035,orden-trabajo-035,1,"Diagnóstico, ejecución y validación de la orden #35",1,tecnica-demo,No aplica,2026-07-30T01:00:00Z,Punto de control técnico documentado.,
+tarea-orden-036,orden-trabajo-036,1,"Diagnóstico, ejecución y validación de la orden #36",1,tecnica-demo,Pendiente,2026-07-30T00:00:00Z,Punto de control técnico documentado.,
+tarea-orden-037,orden-trabajo-037,1,"Diagnóstico, ejecución y validación de la orden #37",1,tecnica-demo,En ejecución,2026-07-29T23:00:00Z,Punto de control técnico documentado.,
+tarea-orden-038,orden-trabajo-038,1,"Diagnóstico, ejecución y validación de la orden #38",1,tecnica-demo,Completada,2026-07-29T22:00:00Z,Punto de control técnico documentado.,2026-07-29T22:55:00Z
+tarea-orden-039,orden-trabajo-039,1,"Diagnóstico, ejecución y validación de la orden #39",1,tecnica-demo,No aplica,2026-07-29T21:00:00Z,Punto de control técnico documentado.,
+tarea-orden-040,orden-trabajo-040,1,"Diagnóstico, ejecución y validación de la orden #40",1,tecnica-demo,Pendiente,2026-07-29T20:00:00Z,Punto de control técnico documentado.,
+tarea-orden-041,orden-trabajo-041,1,"Diagnóstico, ejecución y validación de la orden #41",1,tecnica-demo,En ejecución,2026-07-29T19:00:00Z,Punto de control técnico documentado.,
+tarea-orden-042,orden-trabajo-042,1,"Diagnóstico, ejecución y validación de la orden #42",1,tecnica-demo,Completada,2026-07-29T18:00:00Z,Punto de control técnico documentado.,2026-07-29T18:55:00Z
+tarea-orden-043,orden-trabajo-043,1,"Diagnóstico, ejecución y validación de la orden #43",1,tecnica-demo,No aplica,2026-07-29T17:00:00Z,Punto de control técnico documentado.,
+tarea-orden-044,orden-trabajo-044,1,"Diagnóstico, ejecución y validación de la orden #44",1,tecnica-demo,Pendiente,2026-07-29T16:00:00Z,Punto de control técnico documentado.,
+tarea-orden-045,orden-trabajo-045,1,"Diagnóstico, ejecución y validación de la orden #45",1,tecnica-demo,En ejecución,2026-07-29T15:00:00Z,Punto de control técnico documentado.,
+tarea-orden-046,orden-trabajo-046,1,"Diagnóstico, ejecución y validación de la orden #46",1,tecnica-demo,Completada,2026-07-29T14:00:00Z,Punto de control técnico documentado.,2026-07-29T14:55:00Z
+tarea-orden-047,orden-trabajo-047,1,"Diagnóstico, ejecución y validación de la orden #47",1,tecnica-demo,No aplica,2026-07-29T13:00:00Z,Punto de control técnico documentado.,
+tarea-orden-048,orden-trabajo-048,1,"Diagnóstico, ejecución y validación de la orden #48",1,tecnica-demo,Pendiente,2026-07-31T12:00:00Z,Punto de control técnico documentado.,
+tarea-orden-049,orden-trabajo-049,1,"Diagnóstico, ejecución y validación de la orden #49",1,tecnica-demo,En ejecución,2026-07-31T11:00:00Z,Punto de control técnico documentado.,
+tarea-orden-050,orden-trabajo-050,1,"Diagnóstico, ejecución y validación de la orden #50",1,tecnica-demo,Completada,2026-07-31T10:00:00Z,Punto de control técnico documentado.,2026-07-31T10:55:00Z
+tarea-orden-051,orden-trabajo-051,1,"Diagnóstico, ejecución y validación de la orden #51",1,tecnica-demo,No aplica,2026-07-31T09:00:00Z,Punto de control técnico documentado.,
+tarea-orden-052,orden-trabajo-052,1,"Diagnóstico, ejecución y validación de la orden #52",1,tecnica-demo,Pendiente,2026-07-31T08:00:00Z,Punto de control técnico documentado.,
+tarea-orden-053,orden-trabajo-053,1,"Diagnóstico, ejecución y validación de la orden #53",1,tecnica-demo,En ejecución,2026-07-31T07:00:00Z,Punto de control técnico documentado.,
+tarea-orden-054,orden-trabajo-054,1,"Diagnóstico, ejecución y validación de la orden #54",1,tecnica-demo,Completada,2026-07-31T06:00:00Z,Punto de control técnico documentado.,2026-07-31T06:55:00Z
+tarea-orden-055,orden-trabajo-055,1,"Diagnóstico, ejecución y validación de la orden #55",1,tecnica-demo,No aplica,2026-07-31T05:00:00Z,Punto de control técnico documentado.,
+tarea-orden-056,orden-trabajo-056,1,"Diagnóstico, ejecución y validación de la orden #56",1,tecnica-demo,Pendiente,2026-07-31T04:00:00Z,Punto de control técnico documentado.,
+tarea-orden-057,orden-trabajo-057,1,"Diagnóstico, ejecución y validación de la orden #57",1,tecnica-demo,En ejecución,2026-07-31T03:00:00Z,Punto de control técnico documentado.,
+tarea-orden-058,orden-trabajo-058,1,"Diagnóstico, ejecución y validación de la orden #58",1,tecnica-demo,Completada,2026-07-31T02:00:00Z,Punto de control técnico documentado.,2026-07-31T02:55:00Z
+tarea-orden-059,orden-trabajo-059,1,"Diagnóstico, ejecución y validación de la orden #59",1,tecnica-demo,No aplica,2026-07-31T01:00:00Z,Punto de control técnico documentado.,
+tarea-orden-060,orden-trabajo-060,1,"Diagnóstico, ejecución y validación de la orden #60",1,tecnica-demo,Pendiente,2026-07-31T00:00:00Z,Punto de control técnico documentado.,
+tarea-orden-061,orden-trabajo-061,1,"Diagnóstico, ejecución y validación de la orden #61",1,tecnica-demo,En ejecución,2026-07-30T23:00:00Z,Punto de control técnico documentado.,
+tarea-orden-062,orden-trabajo-062,1,"Diagnóstico, ejecución y validación de la orden #62",1,tecnica-demo,Completada,2026-07-30T22:00:00Z,Punto de control técnico documentado.,2026-07-30T22:55:00Z
+tarea-orden-063,orden-trabajo-063,1,"Diagnóstico, ejecución y validación de la orden #63",1,tecnica-demo,No aplica,2026-07-30T21:00:00Z,Punto de control técnico documentado.,
+tarea-orden-064,orden-trabajo-064,1,"Diagnóstico, ejecución y validación de la orden #64",1,tecnica-demo,Pendiente,2026-07-30T20:00:00Z,Punto de control técnico documentado.,
+tarea-orden-065,orden-trabajo-065,1,"Diagnóstico, ejecución y validación de la orden #65",1,tecnica-demo,En ejecución,2026-07-30T19:00:00Z,Punto de control técnico documentado.,
+tarea-orden-066,orden-trabajo-066,1,"Diagnóstico, ejecución y validación de la orden #66",1,tecnica-demo,Completada,2026-07-30T18:00:00Z,Punto de control técnico documentado.,2026-07-30T18:55:00Z
+tarea-orden-067,orden-trabajo-067,1,"Diagnóstico, ejecución y validación de la orden #67",1,tecnica-demo,No aplica,2026-07-30T17:00:00Z,Punto de control técnico documentado.,
+tarea-orden-068,orden-trabajo-068,1,"Diagnóstico, ejecución y validación de la orden #68",1,tecnica-demo,Pendiente,2026-07-30T16:00:00Z,Punto de control técnico documentado.,
+tarea-orden-069,orden-trabajo-069,1,"Diagnóstico, ejecución y validación de la orden #69",1,tecnica-demo,En ejecución,2026-07-30T15:00:00Z,Punto de control técnico documentado.,
+tarea-orden-070,orden-trabajo-070,1,"Diagnóstico, ejecución y validación de la orden #70",1,tecnica-demo,Completada,2026-07-30T14:00:00Z,Punto de control técnico documentado.,2026-07-30T14:55:00Z
+tarea-orden-071,orden-trabajo-071,1,"Diagnóstico, ejecución y validación de la orden #71",1,tecnica-demo,No aplica,2026-07-30T13:00:00Z,Punto de control técnico documentado.,
+tarea-orden-072,orden-trabajo-072,1,"Diagnóstico, ejecución y validación de la orden #72",1,tecnica-demo,Pendiente,2026-07-30T12:00:00Z,Punto de control técnico documentado.,
+tarea-orden-073,orden-trabajo-073,1,"Diagnóstico, ejecución y validación de la orden #73",1,tecnica-demo,En ejecución,2026-07-30T11:00:00Z,Punto de control técnico documentado.,
+tarea-orden-074,orden-trabajo-074,1,"Diagnóstico, ejecución y validación de la orden #74",1,tecnica-demo,Completada,2026-07-30T10:00:00Z,Punto de control técnico documentado.,2026-07-30T10:55:00Z
+tarea-orden-075,orden-trabajo-075,1,"Diagnóstico, ejecución y validación de la orden #75",1,tecnica-demo,No aplica,2026-07-30T09:00:00Z,Punto de control técnico documentado.,
+tarea-orden-076,orden-trabajo-076,1,"Diagnóstico, ejecución y validación de la orden #76",1,tecnica-demo,Pendiente,2026-07-30T08:00:00Z,Punto de control técnico documentado.,
+tarea-orden-077,orden-trabajo-077,1,"Diagnóstico, ejecución y validación de la orden #77",1,tecnica-demo,En ejecución,2026-07-30T07:00:00Z,Punto de control técnico documentado.,
+tarea-orden-078,orden-trabajo-078,1,"Diagnóstico, ejecución y validación de la orden #78",1,tecnica-demo,Completada,2026-07-30T06:00:00Z,Punto de control técnico documentado.,2026-07-30T06:55:00Z
+tarea-orden-079,orden-trabajo-079,1,"Diagnóstico, ejecución y validación de la orden #79",1,tecnica-demo,No aplica,2026-07-30T05:00:00Z,Punto de control técnico documentado.,
+tarea-orden-080,orden-trabajo-080,1,"Diagnóstico, ejecución y validación de la orden #80",1,tecnica-demo,Pendiente,2026-07-30T04:00:00Z,Punto de control técnico documentado.,
+tarea-orden-081,orden-trabajo-081,1,"Diagnóstico, ejecución y validación de la orden #81",1,tecnica-demo,En ejecución,2026-07-30T03:00:00Z,Punto de control técnico documentado.,
+tarea-orden-082,orden-trabajo-082,1,"Diagnóstico, ejecución y validación de la orden #82",1,tecnica-demo,Completada,2026-07-30T02:00:00Z,Punto de control técnico documentado.,2026-07-30T02:55:00Z
+tarea-orden-083,orden-trabajo-083,1,"Diagnóstico, ejecución y validación de la orden #83",1,tecnica-demo,No aplica,2026-07-30T01:00:00Z,Punto de control técnico documentado.,
+tarea-orden-084,orden-trabajo-084,1,"Diagnóstico, ejecución y validación de la orden #84",1,tecnica-demo,Pendiente,2026-07-30T00:00:00Z,Punto de control técnico documentado.,
+tarea-orden-085,orden-trabajo-085,1,"Diagnóstico, ejecución y validación de la orden #85",1,tecnica-demo,En ejecución,2026-07-29T23:00:00Z,Punto de control técnico documentado.,
+tarea-orden-086,orden-trabajo-086,1,"Diagnóstico, ejecución y validación de la orden #86",1,tecnica-demo,Completada,2026-07-29T22:00:00Z,Punto de control técnico documentado.,2026-07-29T22:55:00Z
+tarea-orden-087,orden-trabajo-087,1,"Diagnóstico, ejecución y validación de la orden #87",1,tecnica-demo,No aplica,2026-07-29T21:00:00Z,Punto de control técnico documentado.,
+tarea-orden-088,orden-trabajo-088,1,"Diagnóstico, ejecución y validación de la orden #88",1,tecnica-demo,Pendiente,2026-07-29T20:00:00Z,Punto de control técnico documentado.,
+tarea-orden-089,orden-trabajo-089,1,"Diagnóstico, ejecución y validación de la orden #89",1,tecnica-demo,En ejecución,2026-07-29T19:00:00Z,Punto de control técnico documentado.,
+tarea-orden-090,orden-trabajo-090,1,"Diagnóstico, ejecución y validación de la orden #90",1,tecnica-demo,Completada,2026-07-29T18:00:00Z,Punto de control técnico documentado.,2026-07-29T18:55:00Z
+tarea-orden-091,orden-trabajo-091,1,"Diagnóstico, ejecución y validación de la orden #91",1,tecnica-demo,No aplica,2026-07-29T17:00:00Z,Punto de control técnico documentado.,
+tarea-orden-092,orden-trabajo-092,1,"Diagnóstico, ejecución y validación de la orden #92",1,tecnica-demo,Pendiente,2026-07-29T16:00:00Z,Punto de control técnico documentado.,
+tarea-orden-093,orden-trabajo-093,1,"Diagnóstico, ejecución y validación de la orden #93",1,tecnica-demo,En ejecución,2026-07-29T15:00:00Z,Punto de control técnico documentado.,
+tarea-orden-094,orden-trabajo-094,1,"Diagnóstico, ejecución y validación de la orden #94",1,tecnica-demo,Completada,2026-07-29T14:00:00Z,Punto de control técnico documentado.,2026-07-29T14:55:00Z
+tarea-orden-095,orden-trabajo-095,1,"Diagnóstico, ejecución y validación de la orden #95",1,tecnica-demo,No aplica,2026-07-29T13:00:00Z,Punto de control técnico documentado.,
+tarea-orden-096,orden-trabajo-096,1,"Diagnóstico, ejecución y validación de la orden #96",1,tecnica-demo,Pendiente,2026-07-31T12:00:00Z,Punto de control técnico documentado.,
+tarea-orden-097,orden-trabajo-097,1,"Diagnóstico, ejecución y validación de la orden #97",1,tecnica-demo,En ejecución,2026-07-31T11:00:00Z,Punto de control técnico documentado.,
+tarea-orden-098,orden-trabajo-098,1,"Diagnóstico, ejecución y validación de la orden #98",1,tecnica-demo,Completada,2026-07-31T10:00:00Z,Punto de control técnico documentado.,2026-07-31T10:55:00Z
+tarea-orden-099,orden-trabajo-099,1,"Diagnóstico, ejecución y validación de la orden #99",1,tecnica-demo,No aplica,2026-07-31T09:00:00Z,Punto de control técnico documentado.,
+tarea-orden-100,orden-trabajo-100,1,"Diagnóstico, ejecución y validación de la orden #100",1,tecnica-demo,Pendiente,2026-07-31T08:00:00Z,Punto de control técnico documentado.,

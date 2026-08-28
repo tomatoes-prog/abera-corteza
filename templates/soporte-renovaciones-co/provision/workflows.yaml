@@ -6,7 +6,9 @@ workflows:
     enabled: true
     trace: false
     runAs: automatizacion-soporte
-    meta: { name: Calcular SLA y asignar caso }
+    meta:
+      name: Calcular SLA y asignar caso
+      description: Antes de crear un caso, calcula vencimientos y umbrales de SLA y asigna al agente activo con menor carga. Respeta asignación manual y continúa sin agente cuando no hay candidatos.
     triggers:
       - enabled: true
         stepID: 10
@@ -80,7 +82,9 @@ workflows:
   registrar-primera-respuesta:
     enabled: true
     trace: false
-    meta: { name: Registrar primera respuesta del agente }
+    meta:
+      name: Registrar primera respuesta del agente
+      description: Después de crear la primera interacción marcada como respuesta del agente, registra la fecha de primera respuesta en el caso. No sobrescribe una fecha existente y reporta relaciones inválidas.
     triggers:
       - enabled: true
         stepID: 100
@@ -123,7 +127,9 @@ workflows:
     enabled: true
     trace: false
     runAs: automatizacion-soporte
-    meta: { name: Preparar renovaciones próximas a vencer }
+    meta:
+      name: Preparar renovaciones próximas a vencer
+      description: En la ejecución programada, encuentra contratos próximos a vencer y crea su gestión de renovación cuando corresponde. Conserva relaciones con cliente y contrato y reporta errores de creación.
     triggers:
       - enabled: true
         stepID: 200
@@ -191,7 +197,9 @@ workflows:
     enabled: true
     trace: false
     runAs: automatizacion-soporte
-    meta: { name: Actualizar riesgo e incumplimiento de SLA }
+    meta:
+      name: Actualizar riesgo e incumplimiento de SLA
+      description: En la ejecución programada, compara los casos abiertos con sus umbrales y vencimientos para marcar En riesgo o Incumplido. Actualiza únicamente campos de SLA calculados.
     triggers:
       - enabled: true
         stepID: 500
@@ -242,7 +250,9 @@ workflows:
   marcar-renovacion-riesgo:
     enabled: true
     trace: false
-    meta: { name: Marcar renovación en riesgo desde soporte }
+    meta:
+      name: Marcar renovación en riesgo desde soporte
+      description: Después de actualizar un caso crítico, con SLA incumplido o CSAT bajo, marca la renovación abierta del cliente como riesgo Alto. Termina sin cambios cuando no existe una renovación aplicable.
     triggers:
       - enabled: true
         stepID: 300
@@ -284,7 +294,9 @@ workflows:
   confirmar-renovacion:
     enabled: true
     trace: false
-    meta: { name: Actualizar contrato al renovar }
+    meta:
+      name: Actualizar contrato al renovar
+      description: Después de confirmar una renovación, actualiza fechas y valor del contrato relacionado. Solo actúa en la primera transición a Renovada y reporta si el contrato no puede resolverse.
     triggers:
       - enabled: true
         stepID: 400

@@ -1,11 +1,101 @@
-ID,codigo,nombre,nivel,modalidad,sede,duracion,valor,periodo,cupos,metaMatriculas,estado,descripcion,externalID
-programa-001,EDU-PROG-01,Ingeniería de Sistemas 1,Tecnólogo,Virtual,Medellín,5 semestres,3260000,2026-2,39,28,Activo,Programa académico sintético.,LMS-PROG-01
-programa-002,EDU-PROG-02,Mercadeo 2,Pregrado,Híbrida,Cali,6 semestres,3720000,2026-2,43,31,Activo,Programa académico sintético.,LMS-PROG-02
-programa-003,EDU-PROG-03,Diseño 3,Especialización,Presencial,Barranquilla,7 semestres,4180000,2026-2,47,34,Activo,Programa académico sintético.,LMS-PROG-03
-programa-004,EDU-PROG-04,Contaduría 4,Maestría,Virtual,Cartagena,8 semestres,4640000,2026-2,51,37,Activo,Programa académico sintético.,LMS-PROG-04
-programa-005,EDU-PROG-05,Administración 5,Educación continua,Híbrida,Bucaramanga,9 semestres,5100000,2026-2,55,40,Activo,Programa académico sintético.,LMS-PROG-05
-programa-006,EDU-PROG-06,Ingeniería de Sistemas 6,Técnico,Presencial,Bogotá,10 semestres,5560000,2026-2,59,43,Activo,Programa académico sintético.,LMS-PROG-06
-programa-007,EDU-PROG-07,Mercadeo 7,Tecnólogo,Virtual,Medellín,4 semestres,6020000,2026-2,63,46,Activo,Programa académico sintético.,LMS-PROG-07
-programa-008,EDU-PROG-08,Diseño 8,Pregrado,Híbrida,Cali,5 semestres,6480000,2026-2,67,49,Activo,Programa académico sintético.,LMS-PROG-08
-programa-009,EDU-PROG-09,Contaduría 9,Especialización,Presencial,Barranquilla,6 semestres,6940000,2026-2,71,52,Activo,Programa académico sintético.,LMS-PROG-09
-programa-010,EDU-PROG-10,Administración 10,Maestría,Virtual,Cartagena,7 semestres,7400000,2026-2,75,55,Activo,Programa académico sintético.,LMS-PROG-10
+ID,codigo,nombre,nivel,modalidad,sede,jornada,duracion,valor,periodo,fechaInicio,cupos,metaMatriculas,estado,descripcion,externalID
+programa-001,EDU-PROG-001,Ingeniería de Sistemas · Cohorte 1,Tecnólogo,Virtual,Medellín,Nocturna,5 semestres,3260000,2026-2,2026-09-15,39,28,Activo,Programa académico sintético.,LMS-PROG-001
+programa-002,EDU-PROG-002,Mercadeo · Cohorte 1,Pregrado,Híbrida,Cali,Fines de semana,6 semestres,3720000,2026-2,2026-09-16,43,31,Activo,Programa académico sintético.,LMS-PROG-002
+programa-003,EDU-PROG-003,Diseño · Cohorte 1,Especialización,Presencial,Barranquilla,Flexible,7 semestres,4180000,2026-2,2026-09-17,47,34,Activo,Programa académico sintético.,LMS-PROG-003
+programa-004,EDU-PROG-004,Contaduría · Cohorte 1,Maestría,Virtual,Cartagena,Diurna,8 semestres,4640000,2026-2,2026-09-18,51,37,Activo,Programa académico sintético.,LMS-PROG-004
+programa-005,EDU-PROG-005,Administración · Cohorte 1,Educación continua,Híbrida,Bucaramanga,Nocturna,9 semestres,5100000,2026-2,2026-09-19,55,40,Activo,Programa académico sintético.,LMS-PROG-005
+programa-006,EDU-PROG-006,Ingeniería de Sistemas · Cohorte 2,Técnico,Presencial,Pereira,Fines de semana,10 semestres,5560000,2026-2,2026-09-20,59,43,Activo,Programa académico sintético.,LMS-PROG-006
+programa-007,EDU-PROG-007,Mercadeo · Cohorte 2,Tecnólogo,Virtual,Manizales,Flexible,4 semestres,6020000,2026-2,2026-09-21,63,46,Activo,Programa académico sintético.,LMS-PROG-007
+programa-008,EDU-PROG-008,Diseño · Cohorte 2,Pregrado,Híbrida,Ibagué,Diurna,5 semestres,6480000,2026-2,2026-09-22,67,49,Activo,Programa académico sintético.,LMS-PROG-008
+programa-009,EDU-PROG-009,Contaduría · Cohorte 2,Especialización,Presencial,Villavicencio,Nocturna,6 semestres,6940000,2026-2,2026-09-23,71,52,Activo,Programa académico sintético.,LMS-PROG-009
+programa-010,EDU-PROG-010,Administración · Cohorte 2,Maestría,Virtual,Bogotá,Fines de semana,7 semestres,7400000,2026-2,2026-09-24,75,55,Activo,Programa académico sintético.,LMS-PROG-010
+programa-011,EDU-PROG-011,Ingeniería de Sistemas · Cohorte 3,Educación continua,Híbrida,Medellín,Flexible,8 semestres,7860000,2026-2,2026-09-25,79,58,Activo,Programa académico sintético.,LMS-PROG-011
+programa-012,EDU-PROG-012,Mercadeo · Cohorte 3,Técnico,Presencial,Cali,Diurna,9 semestres,8320000,2026-2,2026-09-26,83,61,Activo,Programa académico sintético.,LMS-PROG-012
+programa-013,EDU-PROG-013,Diseño · Cohorte 3,Tecnólogo,Virtual,Barranquilla,Nocturna,10 semestres,8780000,2026-2,2026-09-27,87,64,Activo,Programa académico sintético.,LMS-PROG-013
+programa-014,EDU-PROG-014,Contaduría · Cohorte 3,Pregrado,Híbrida,Cartagena,Fines de semana,4 semestres,9240000,2026-2,2026-09-28,91,67,Activo,Programa académico sintético.,LMS-PROG-014
+programa-015,EDU-PROG-015,Administración · Cohorte 3,Especialización,Presencial,Bucaramanga,Flexible,5 semestres,9700000,2026-2,2026-09-29,95,70,Activo,Programa académico sintético.,LMS-PROG-015
+programa-016,EDU-PROG-016,Ingeniería de Sistemas · Cohorte 4,Maestría,Virtual,Pereira,Diurna,6 semestres,10160000,2026-2,2026-09-30,99,73,Activo,Programa académico sintético.,LMS-PROG-016
+programa-017,EDU-PROG-017,Mercadeo · Cohorte 4,Educación continua,Híbrida,Manizales,Nocturna,7 semestres,10620000,2026-2,2026-10-01,103,76,Activo,Programa académico sintético.,LMS-PROG-017
+programa-018,EDU-PROG-018,Diseño · Cohorte 4,Técnico,Presencial,Ibagué,Fines de semana,8 semestres,11080000,2026-2,2026-10-02,107,79,Activo,Programa académico sintético.,LMS-PROG-018
+programa-019,EDU-PROG-019,Contaduría · Cohorte 4,Tecnólogo,Virtual,Villavicencio,Flexible,9 semestres,11540000,2026-2,2026-10-03,111,82,Activo,Programa académico sintético.,LMS-PROG-019
+programa-020,EDU-PROG-020,Administración · Cohorte 4,Pregrado,Híbrida,Bogotá,Diurna,10 semestres,12000000,2026-2,2026-10-04,115,85,Activo,Programa académico sintético.,LMS-PROG-020
+programa-021,EDU-PROG-021,Ingeniería de Sistemas · Cohorte 5,Especialización,Presencial,Medellín,Nocturna,4 semestres,12460000,2026-2,2026-10-05,119,88,Activo,Programa académico sintético.,LMS-PROG-021
+programa-022,EDU-PROG-022,Mercadeo · Cohorte 5,Maestría,Virtual,Cali,Fines de semana,5 semestres,12920000,2026-2,2026-10-06,123,91,Activo,Programa académico sintético.,LMS-PROG-022
+programa-023,EDU-PROG-023,Diseño · Cohorte 5,Educación continua,Híbrida,Barranquilla,Flexible,6 semestres,13380000,2026-2,2026-10-07,127,94,Activo,Programa académico sintético.,LMS-PROG-023
+programa-024,EDU-PROG-024,Contaduría · Cohorte 5,Técnico,Presencial,Cartagena,Diurna,7 semestres,13840000,2026-2,2026-10-08,131,97,Activo,Programa académico sintético.,LMS-PROG-024
+programa-025,EDU-PROG-025,Administración · Cohorte 5,Tecnólogo,Virtual,Bucaramanga,Nocturna,8 semestres,14300000,2026-2,2026-10-09,135,100,Activo,Programa académico sintético.,LMS-PROG-025
+programa-026,EDU-PROG-026,Ingeniería de Sistemas · Cohorte 6,Pregrado,Híbrida,Pereira,Fines de semana,9 semestres,14760000,2026-2,2026-10-10,139,103,Activo,Programa académico sintético.,LMS-PROG-026
+programa-027,EDU-PROG-027,Mercadeo · Cohorte 6,Especialización,Presencial,Manizales,Flexible,10 semestres,15220000,2026-2,2026-10-11,143,106,Activo,Programa académico sintético.,LMS-PROG-027
+programa-028,EDU-PROG-028,Diseño · Cohorte 6,Maestría,Virtual,Ibagué,Diurna,4 semestres,15680000,2026-2,2026-10-12,147,109,Activo,Programa académico sintético.,LMS-PROG-028
+programa-029,EDU-PROG-029,Contaduría · Cohorte 6,Educación continua,Híbrida,Villavicencio,Nocturna,5 semestres,16140000,2026-2,2026-10-13,151,112,Activo,Programa académico sintético.,LMS-PROG-029
+programa-030,EDU-PROG-030,Administración · Cohorte 6,Técnico,Presencial,Bogotá,Fines de semana,6 semestres,16600000,2026-2,2026-09-14,155,115,Activo,Programa académico sintético.,LMS-PROG-030
+programa-031,EDU-PROG-031,Ingeniería de Sistemas · Cohorte 7,Tecnólogo,Virtual,Medellín,Flexible,7 semestres,17060000,2026-2,2026-09-15,159,118,Activo,Programa académico sintético.,LMS-PROG-031
+programa-032,EDU-PROG-032,Mercadeo · Cohorte 7,Pregrado,Híbrida,Cali,Diurna,8 semestres,17520000,2026-2,2026-09-16,163,121,Activo,Programa académico sintético.,LMS-PROG-032
+programa-033,EDU-PROG-033,Diseño · Cohorte 7,Especialización,Presencial,Barranquilla,Nocturna,9 semestres,17980000,2026-2,2026-09-17,167,124,Activo,Programa académico sintético.,LMS-PROG-033
+programa-034,EDU-PROG-034,Contaduría · Cohorte 7,Maestría,Virtual,Cartagena,Fines de semana,10 semestres,18440000,2026-2,2026-09-18,171,127,Activo,Programa académico sintético.,LMS-PROG-034
+programa-035,EDU-PROG-035,Administración · Cohorte 7,Educación continua,Híbrida,Bucaramanga,Flexible,4 semestres,18900000,2026-2,2026-09-19,175,130,Activo,Programa académico sintético.,LMS-PROG-035
+programa-036,EDU-PROG-036,Ingeniería de Sistemas · Cohorte 8,Técnico,Presencial,Pereira,Diurna,5 semestres,19360000,2026-2,2026-09-20,179,133,Activo,Programa académico sintético.,LMS-PROG-036
+programa-037,EDU-PROG-037,Mercadeo · Cohorte 8,Tecnólogo,Virtual,Manizales,Nocturna,6 semestres,19820000,2026-2,2026-09-21,183,136,Activo,Programa académico sintético.,LMS-PROG-037
+programa-038,EDU-PROG-038,Diseño · Cohorte 8,Pregrado,Híbrida,Ibagué,Fines de semana,7 semestres,20280000,2026-2,2026-09-22,187,139,Activo,Programa académico sintético.,LMS-PROG-038
+programa-039,EDU-PROG-039,Contaduría · Cohorte 8,Especialización,Presencial,Villavicencio,Flexible,8 semestres,20740000,2026-2,2026-09-23,191,142,Activo,Programa académico sintético.,LMS-PROG-039
+programa-040,EDU-PROG-040,Administración · Cohorte 8,Maestría,Virtual,Bogotá,Diurna,9 semestres,21200000,2026-2,2026-09-24,195,145,Activo,Programa académico sintético.,LMS-PROG-040
+programa-041,EDU-PROG-041,Ingeniería de Sistemas · Cohorte 9,Educación continua,Híbrida,Medellín,Nocturna,10 semestres,21660000,2026-2,2026-09-25,199,148,Activo,Programa académico sintético.,LMS-PROG-041
+programa-042,EDU-PROG-042,Mercadeo · Cohorte 9,Técnico,Presencial,Cali,Fines de semana,4 semestres,22120000,2026-2,2026-09-26,203,151,Activo,Programa académico sintético.,LMS-PROG-042
+programa-043,EDU-PROG-043,Diseño · Cohorte 9,Tecnólogo,Virtual,Barranquilla,Flexible,5 semestres,22580000,2026-2,2026-09-27,207,154,Activo,Programa académico sintético.,LMS-PROG-043
+programa-044,EDU-PROG-044,Contaduría · Cohorte 9,Pregrado,Híbrida,Cartagena,Diurna,6 semestres,23040000,2026-2,2026-09-28,211,157,Activo,Programa académico sintético.,LMS-PROG-044
+programa-045,EDU-PROG-045,Administración · Cohorte 9,Especialización,Presencial,Bucaramanga,Nocturna,7 semestres,23500000,2026-2,2026-09-29,215,160,Activo,Programa académico sintético.,LMS-PROG-045
+programa-046,EDU-PROG-046,Ingeniería de Sistemas · Cohorte 10,Maestría,Virtual,Pereira,Fines de semana,8 semestres,23960000,2026-2,2026-09-30,219,163,Activo,Programa académico sintético.,LMS-PROG-046
+programa-047,EDU-PROG-047,Mercadeo · Cohorte 10,Educación continua,Híbrida,Manizales,Flexible,9 semestres,24420000,2026-2,2026-10-01,223,166,Activo,Programa académico sintético.,LMS-PROG-047
+programa-048,EDU-PROG-048,Diseño · Cohorte 10,Técnico,Presencial,Ibagué,Diurna,10 semestres,24880000,2026-2,2026-10-02,227,169,Activo,Programa académico sintético.,LMS-PROG-048
+programa-049,EDU-PROG-049,Contaduría · Cohorte 10,Tecnólogo,Virtual,Villavicencio,Nocturna,4 semestres,25340000,2026-2,2026-10-03,231,172,Activo,Programa académico sintético.,LMS-PROG-049
+programa-050,EDU-PROG-050,Administración · Cohorte 10,Pregrado,Híbrida,Bogotá,Fines de semana,5 semestres,25800000,2026-2,2026-10-04,235,175,Activo,Programa académico sintético.,LMS-PROG-050
+programa-051,EDU-PROG-051,Ingeniería de Sistemas · Cohorte 11,Especialización,Presencial,Medellín,Flexible,6 semestres,26260000,2026-2,2026-10-05,239,178,Activo,Programa académico sintético.,LMS-PROG-051
+programa-052,EDU-PROG-052,Mercadeo · Cohorte 11,Maestría,Virtual,Cali,Diurna,7 semestres,26720000,2026-2,2026-10-06,243,181,Activo,Programa académico sintético.,LMS-PROG-052
+programa-053,EDU-PROG-053,Diseño · Cohorte 11,Educación continua,Híbrida,Barranquilla,Nocturna,8 semestres,27180000,2026-2,2026-10-07,247,184,Activo,Programa académico sintético.,LMS-PROG-053
+programa-054,EDU-PROG-054,Contaduría · Cohorte 11,Técnico,Presencial,Cartagena,Fines de semana,9 semestres,27640000,2026-2,2026-10-08,251,187,Activo,Programa académico sintético.,LMS-PROG-054
+programa-055,EDU-PROG-055,Administración · Cohorte 11,Tecnólogo,Virtual,Bucaramanga,Flexible,10 semestres,28100000,2026-2,2026-10-09,255,190,Activo,Programa académico sintético.,LMS-PROG-055
+programa-056,EDU-PROG-056,Ingeniería de Sistemas · Cohorte 12,Pregrado,Híbrida,Pereira,Diurna,4 semestres,28560000,2026-2,2026-10-10,259,193,Activo,Programa académico sintético.,LMS-PROG-056
+programa-057,EDU-PROG-057,Mercadeo · Cohorte 12,Especialización,Presencial,Manizales,Nocturna,5 semestres,29020000,2026-2,2026-10-11,263,196,Activo,Programa académico sintético.,LMS-PROG-057
+programa-058,EDU-PROG-058,Diseño · Cohorte 12,Maestría,Virtual,Ibagué,Fines de semana,6 semestres,29480000,2026-2,2026-10-12,267,199,Activo,Programa académico sintético.,LMS-PROG-058
+programa-059,EDU-PROG-059,Contaduría · Cohorte 12,Educación continua,Híbrida,Villavicencio,Flexible,7 semestres,29940000,2026-2,2026-10-13,271,202,Activo,Programa académico sintético.,LMS-PROG-059
+programa-060,EDU-PROG-060,Administración · Cohorte 12,Técnico,Presencial,Bogotá,Diurna,8 semestres,30400000,2026-2,2026-09-14,275,205,Activo,Programa académico sintético.,LMS-PROG-060
+programa-061,EDU-PROG-061,Ingeniería de Sistemas · Cohorte 13,Tecnólogo,Virtual,Medellín,Nocturna,9 semestres,30860000,2026-2,2026-09-15,279,208,Activo,Programa académico sintético.,LMS-PROG-061
+programa-062,EDU-PROG-062,Mercadeo · Cohorte 13,Pregrado,Híbrida,Cali,Fines de semana,10 semestres,31320000,2026-2,2026-09-16,283,211,Activo,Programa académico sintético.,LMS-PROG-062
+programa-063,EDU-PROG-063,Diseño · Cohorte 13,Especialización,Presencial,Barranquilla,Flexible,4 semestres,31780000,2026-2,2026-09-17,287,214,Activo,Programa académico sintético.,LMS-PROG-063
+programa-064,EDU-PROG-064,Contaduría · Cohorte 13,Maestría,Virtual,Cartagena,Diurna,5 semestres,32240000,2026-2,2026-09-18,291,217,Activo,Programa académico sintético.,LMS-PROG-064
+programa-065,EDU-PROG-065,Administración · Cohorte 13,Educación continua,Híbrida,Bucaramanga,Nocturna,6 semestres,32700000,2026-2,2026-09-19,295,220,Activo,Programa académico sintético.,LMS-PROG-065
+programa-066,EDU-PROG-066,Ingeniería de Sistemas · Cohorte 14,Técnico,Presencial,Pereira,Fines de semana,7 semestres,33160000,2026-2,2026-09-20,299,223,Activo,Programa académico sintético.,LMS-PROG-066
+programa-067,EDU-PROG-067,Mercadeo · Cohorte 14,Tecnólogo,Virtual,Manizales,Flexible,8 semestres,33620000,2026-2,2026-09-21,303,226,Activo,Programa académico sintético.,LMS-PROG-067
+programa-068,EDU-PROG-068,Diseño · Cohorte 14,Pregrado,Híbrida,Ibagué,Diurna,9 semestres,34080000,2026-2,2026-09-22,307,229,Activo,Programa académico sintético.,LMS-PROG-068
+programa-069,EDU-PROG-069,Contaduría · Cohorte 14,Especialización,Presencial,Villavicencio,Nocturna,10 semestres,34540000,2026-2,2026-09-23,311,232,Activo,Programa académico sintético.,LMS-PROG-069
+programa-070,EDU-PROG-070,Administración · Cohorte 14,Maestría,Virtual,Bogotá,Fines de semana,4 semestres,35000000,2026-2,2026-09-24,315,235,Activo,Programa académico sintético.,LMS-PROG-070
+programa-071,EDU-PROG-071,Ingeniería de Sistemas · Cohorte 15,Educación continua,Híbrida,Medellín,Flexible,5 semestres,35460000,2026-2,2026-09-25,319,238,Activo,Programa académico sintético.,LMS-PROG-071
+programa-072,EDU-PROG-072,Mercadeo · Cohorte 15,Técnico,Presencial,Cali,Diurna,6 semestres,35920000,2026-2,2026-09-26,323,241,Activo,Programa académico sintético.,LMS-PROG-072
+programa-073,EDU-PROG-073,Diseño · Cohorte 15,Tecnólogo,Virtual,Barranquilla,Nocturna,7 semestres,36380000,2026-2,2026-09-27,327,244,Activo,Programa académico sintético.,LMS-PROG-073
+programa-074,EDU-PROG-074,Contaduría · Cohorte 15,Pregrado,Híbrida,Cartagena,Fines de semana,8 semestres,36840000,2026-2,2026-09-28,331,247,Activo,Programa académico sintético.,LMS-PROG-074
+programa-075,EDU-PROG-075,Administración · Cohorte 15,Especialización,Presencial,Bucaramanga,Flexible,9 semestres,37300000,2026-2,2026-09-29,335,250,Activo,Programa académico sintético.,LMS-PROG-075
+programa-076,EDU-PROG-076,Ingeniería de Sistemas · Cohorte 16,Maestría,Virtual,Pereira,Diurna,10 semestres,37760000,2026-2,2026-09-30,339,253,Activo,Programa académico sintético.,LMS-PROG-076
+programa-077,EDU-PROG-077,Mercadeo · Cohorte 16,Educación continua,Híbrida,Manizales,Nocturna,4 semestres,38220000,2026-2,2026-10-01,343,256,Activo,Programa académico sintético.,LMS-PROG-077
+programa-078,EDU-PROG-078,Diseño · Cohorte 16,Técnico,Presencial,Ibagué,Fines de semana,5 semestres,38680000,2026-2,2026-10-02,347,259,Activo,Programa académico sintético.,LMS-PROG-078
+programa-079,EDU-PROG-079,Contaduría · Cohorte 16,Tecnólogo,Virtual,Villavicencio,Flexible,6 semestres,39140000,2026-2,2026-10-03,351,262,Activo,Programa académico sintético.,LMS-PROG-079
+programa-080,EDU-PROG-080,Administración · Cohorte 16,Pregrado,Híbrida,Bogotá,Diurna,7 semestres,39600000,2026-2,2026-10-04,355,265,Activo,Programa académico sintético.,LMS-PROG-080
+programa-081,EDU-PROG-081,Ingeniería de Sistemas · Cohorte 17,Especialización,Presencial,Medellín,Nocturna,8 semestres,40060000,2026-2,2026-10-05,359,268,Activo,Programa académico sintético.,LMS-PROG-081
+programa-082,EDU-PROG-082,Mercadeo · Cohorte 17,Maestría,Virtual,Cali,Fines de semana,9 semestres,40520000,2026-2,2026-10-06,363,271,Activo,Programa académico sintético.,LMS-PROG-082
+programa-083,EDU-PROG-083,Diseño · Cohorte 17,Educación continua,Híbrida,Barranquilla,Flexible,10 semestres,40980000,2026-2,2026-10-07,367,274,Activo,Programa académico sintético.,LMS-PROG-083
+programa-084,EDU-PROG-084,Contaduría · Cohorte 17,Técnico,Presencial,Cartagena,Diurna,4 semestres,41440000,2026-2,2026-10-08,371,277,Activo,Programa académico sintético.,LMS-PROG-084
+programa-085,EDU-PROG-085,Administración · Cohorte 17,Tecnólogo,Virtual,Bucaramanga,Nocturna,5 semestres,41900000,2026-2,2026-10-09,375,280,Activo,Programa académico sintético.,LMS-PROG-085
+programa-086,EDU-PROG-086,Ingeniería de Sistemas · Cohorte 18,Pregrado,Híbrida,Pereira,Fines de semana,6 semestres,42360000,2026-2,2026-10-10,379,283,Activo,Programa académico sintético.,LMS-PROG-086
+programa-087,EDU-PROG-087,Mercadeo · Cohorte 18,Especialización,Presencial,Manizales,Flexible,7 semestres,42820000,2026-2,2026-10-11,383,286,Activo,Programa académico sintético.,LMS-PROG-087
+programa-088,EDU-PROG-088,Diseño · Cohorte 18,Maestría,Virtual,Ibagué,Diurna,8 semestres,43280000,2026-2,2026-10-12,387,289,Activo,Programa académico sintético.,LMS-PROG-088
+programa-089,EDU-PROG-089,Contaduría · Cohorte 18,Educación continua,Híbrida,Villavicencio,Nocturna,9 semestres,43740000,2026-2,2026-10-13,391,292,Activo,Programa académico sintético.,LMS-PROG-089
+programa-090,EDU-PROG-090,Administración · Cohorte 18,Técnico,Presencial,Bogotá,Fines de semana,10 semestres,44200000,2026-2,2026-09-14,395,295,Activo,Programa académico sintético.,LMS-PROG-090
+programa-091,EDU-PROG-091,Ingeniería de Sistemas · Cohorte 19,Tecnólogo,Virtual,Medellín,Flexible,4 semestres,44660000,2026-2,2026-09-15,399,298,Activo,Programa académico sintético.,LMS-PROG-091
+programa-092,EDU-PROG-092,Mercadeo · Cohorte 19,Pregrado,Híbrida,Cali,Diurna,5 semestres,45120000,2026-2,2026-09-16,403,301,Activo,Programa académico sintético.,LMS-PROG-092
+programa-093,EDU-PROG-093,Diseño · Cohorte 19,Especialización,Presencial,Barranquilla,Nocturna,6 semestres,45580000,2026-2,2026-09-17,407,304,Activo,Programa académico sintético.,LMS-PROG-093
+programa-094,EDU-PROG-094,Contaduría · Cohorte 19,Maestría,Virtual,Cartagena,Fines de semana,7 semestres,46040000,2026-2,2026-09-18,411,307,Activo,Programa académico sintético.,LMS-PROG-094
+programa-095,EDU-PROG-095,Administración · Cohorte 19,Educación continua,Híbrida,Bucaramanga,Flexible,8 semestres,46500000,2026-2,2026-09-19,415,310,Activo,Programa académico sintético.,LMS-PROG-095
+programa-096,EDU-PROG-096,Ingeniería de Sistemas · Cohorte 20,Técnico,Presencial,Pereira,Diurna,9 semestres,46960000,2026-2,2026-09-20,419,313,Activo,Programa académico sintético.,LMS-PROG-096
+programa-097,EDU-PROG-097,Mercadeo · Cohorte 20,Tecnólogo,Virtual,Manizales,Nocturna,10 semestres,47420000,2026-2,2026-09-21,423,316,Activo,Programa académico sintético.,LMS-PROG-097
+programa-098,EDU-PROG-098,Diseño · Cohorte 20,Pregrado,Híbrida,Ibagué,Fines de semana,4 semestres,47880000,2026-2,2026-09-22,427,319,Activo,Programa académico sintético.,LMS-PROG-098
+programa-099,EDU-PROG-099,Contaduría · Cohorte 20,Especialización,Presencial,Villavicencio,Flexible,5 semestres,48340000,2026-2,2026-09-23,431,322,Activo,Programa académico sintético.,LMS-PROG-099
+programa-100,EDU-PROG-100,Administración · Cohorte 20,Maestría,Virtual,Bogotá,Diurna,6 semestres,48800000,2026-2,2026-09-24,435,325,Activo,Programa académico sintético.,LMS-PROG-100

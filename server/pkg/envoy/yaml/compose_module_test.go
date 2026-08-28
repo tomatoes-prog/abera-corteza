@@ -1,6 +1,7 @@
 package yaml
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/cortezaproject/corteza/server/pkg/rbac"
@@ -33,6 +34,23 @@ func TestComposeModule_UnmarshalYAML(t *testing.T) {
 		req.NotNil(w)
 		req.NotNil(w.res)
 		req.NotEmpty(w.res.Name)
+	})
+
+	t.Run("module metadata", func(t *testing.T) {
+		req := require.New(t)
+
+		w, err := parseString(`{ name: Test, meta: { description: "Descripción operativa" } }`)
+		req.NoError(err)
+		req.NotNil(w)
+		req.NotNil(w.res)
+
+		meta := make(map[string]any)
+		req.NoError(json.Unmarshal(w.res.Meta, &meta))
+		req.Equal("Descripción operativa", meta["description"])
+
+		encoded, err := yaml.Marshal(w)
+		req.NoError(err)
+		req.Contains(string(encoded), "description: Descripción operativa")
 	})
 
 	t.Run("field with default value", func(t *testing.T) {

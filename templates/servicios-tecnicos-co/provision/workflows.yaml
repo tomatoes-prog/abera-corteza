@@ -6,7 +6,9 @@ workflows:
     enabled: true
     trace: false
     runAs: automatizacion-servicios
-    meta: { name: Calcular SLA y asignar solicitud }
+    meta:
+      name: Calcular SLA y asignar solicitud
+      description: Antes de crear una solicitud, calcula el vencimiento según prioridad y asigna un coordinador con menor carga. Respeta selección manual y deja la solicitud sin responsable cuando no hay candidatos activos.
     triggers:
       - enabled: true
         stepID: 10
@@ -81,7 +83,9 @@ workflows:
   crear-orden-desde-cotizacion:
     enabled: true
     trace: false
-    meta: { name: Crear orden al aceptar cotización }
+    meta:
+      name: Crear orden al aceptar cotización
+      description: Después de aceptar una cotización, crea una orden relacionada con solicitud, cliente y activo. Solo actúa en la primera transición a Aceptada y reporta errores al consultar o crear registros.
     triggers:
       - enabled: true
         stepID: 100
@@ -135,7 +139,9 @@ workflows:
     enabled: true
     trace: false
     runAs: automatizacion-servicios
-    meta: { name: Asignar técnico por menor carga }
+    meta:
+      name: Asignar técnico por menor carga
+      description: Antes de crear una orden sin técnico, selecciona al técnico activo con menor número de órdenes abiertas. Conserva asignaciones manuales y permite continuar sin técnico si no hay candidatos.
     triggers:
       - enabled: true
         stepID: 200
@@ -196,7 +202,9 @@ workflows:
   validar-agenda-tecnico:
     enabled: true
     trace: false
-    meta: { name: Validar agenda del técnico }
+    meta:
+      name: Validar agenda del técnico
+      description: Antes de guardar una orden programada, busca cruces de horario para el mismo técnico. Detiene la operación con un error comprensible cuando existe una reserva superpuesta.
     triggers:
       - enabled: true
         stepID: 300
@@ -229,7 +237,9 @@ workflows:
   completar-orden-servicio:
     enabled: true
     trace: false
-    meta: { name: Actualizar activo al completar trabajo }
+    meta:
+      name: Actualizar activo al completar trabajo
+      description: Después de completar una orden, actualiza la última intervención y el próximo mantenimiento del activo relacionado. Termina sin cambios en otros estados y reporta relaciones inválidas.
     triggers:
       - enabled: true
         stepID: 400

@@ -3,7 +3,7 @@
 
 id: showroom-co
 name: Showroom comercial Abera
-version: 1.0.0
+version: 2.0.0
 defaultLocale: es
 license: Apache-2.0
 description: Demo autoinicializada con todas las soluciones comerciales y datos sintéticos colombianos.

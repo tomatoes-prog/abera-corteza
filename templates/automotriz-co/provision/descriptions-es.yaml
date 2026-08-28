@@ -1,0 +1,367 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    "corteza::compose:module/automotriz-co/vehiculos":
+      meta.description: "Inventario de vehículos nuevos o usados. Reúne identificación, características, precio, sede, disponibilidad, cliente final y trazabilidad de pruebas, oportunidades y posventa."
+    "corteza::compose:module-field/automotriz-co/vehiculos/codigo":
+      meta.description.edit: "Ingrese código de inventario con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código de inventario» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/vin":
+      meta.description.edit: "Ingrese vin con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «VIN» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/placa":
+      meta.description.edit: "Ingrese placa con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Placa» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/marca":
+      meta.description.edit: "Ingrese marca con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Marca» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/modelo":
+      meta.description.edit: "Ingrese modelo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Modelo» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/version":
+      meta.description.edit: "Ingrese versión con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Versión» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/anio":
+      meta.description.edit: "Ingrese año como número. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Valor numérico de año para este registro de Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/condicion":
+      meta.description.edit: "Seleccione un valor para condición entre: Nuevo, Usado. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de condición para este registro de Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/kilometraje":
+      meta.description.edit: "Ingrese kilometraje como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de kilometraje para este registro de Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/color":
+      meta.description.edit: "Ingrese color con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Color» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/precio":
+      meta.description.edit: "Ingrese precio en COP, sin símbolos ni separadores manuales. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Precio expresado en pesos colombianos (COP) para este registro de Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/sede":
+      meta.description.edit: "Ingrese sede con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Sede» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/fechaIngreso":
+      meta.description.edit: "Indique fecha de ingreso en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de fecha de ingreso para este registro de Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Disponible, Reservado, Vendido, En demostración, En taller, Inactivo. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/clienteFinal":
+      meta.description.edit: "Seleccione cliente final dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con prospectos. Permite consultar un registro vinculado en este registro de Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/proximoMantenimiento":
+      meta.description.edit: "Indique próximo mantenimiento en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de próximo mantenimiento para este registro de Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/fotografias":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para fotografías. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con fotografías en este registro de Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/proveedorExterno":
+      meta.description.edit: "Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Proveedor externo» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/estadoIntegracion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Clasificación de estado de integración para este registro de Vehículos."
+    "corteza::compose:module-field/automotriz-co/vehiculos/ultimoErrorIntegracion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "El campo «Último error de integración» conserva información operativa del registro en Vehículos."
+    "corteza::compose:module/automotriz-co/actividades-comerciales":
+      meta.description: "Seguimientos comerciales relacionados con un prospecto y, opcionalmente, un vehículo u oportunidad. Conserva responsable, fecha, resultado y próxima acción."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/asunto":
+      meta.description.edit: "Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Asunto» conserva información operativa del registro en Actividades comerciales."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/prospecto":
+      meta.description.edit: "Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con prospectos. Permite consultar un registro vinculado en este registro de Actividades comerciales."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/vehiculo":
+      meta.description.edit: "Seleccione vehículo dentro del módulo vehiculos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con vehiculos. Permite consultar un registro vinculado en este registro de Actividades comerciales."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/oportunidad":
+      meta.description.edit: "Seleccione oportunidad dentro del módulo oportunidades. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con oportunidades. Permite consultar un registro vinculado en este registro de Actividades comerciales."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/asesor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Usuario de Corteza responsable de asesor en este registro de Actividades comerciales."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/tipo":
+      meta.description.edit: "Seleccione un valor para tipo entre: Llamada, WhatsApp, Correo, Reunión, Seguimiento. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo para este registro de Actividades comerciales."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Pendiente, Completada, Cancelada. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Actividades comerciales."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/fecha":
+      meta.description.edit: "Indique fecha usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de fecha para este registro de Actividades comerciales, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/resultado":
+      meta.description.edit: "Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Resultado» conserva información operativa del registro en Actividades comerciales."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/proximaAccion":
+      meta.description.edit: "Indique próxima acción usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de próxima acción para este registro de Actividades comerciales, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/actividades-comerciales/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Actividades comerciales."
+    "corteza::compose:module/automotriz-co/tareas-servicio":
+      meta.description: "Checklist operativo de una orden de servicio. Cada tarea identifica responsable, obligatoriedad, estado, resultado y evidencia antes del cierre de la orden."
+    "corteza::compose:module-field/automotriz-co/tareas-servicio/orden":
+      meta.description.edit: "Seleccione orden de servicio dentro del módulo ordenes servicio. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con ordenes servicio. Permite consultar un registro vinculado en este registro de Tareas de servicio."
+    "corteza::compose:module-field/automotriz-co/tareas-servicio/secuencia":
+      meta.description.edit: "Ingrese secuencia como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de secuencia para este registro de Tareas de servicio."
+    "corteza::compose:module-field/automotriz-co/tareas-servicio/tarea":
+      meta.description.edit: "Ingrese tarea con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Tarea» conserva información operativa del registro en Tareas de servicio."
+    "corteza::compose:module-field/automotriz-co/tareas-servicio/obligatoria":
+      meta.description.edit: "Marque Sí únicamente cuando obligatoria esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si obligatoria aplica a este registro de Tareas de servicio."
+    "corteza::compose:module-field/automotriz-co/tareas-servicio/tecnico":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de técnico responsable en este registro de Tareas de servicio."
+    "corteza::compose:module-field/automotriz-co/tareas-servicio/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Pendiente, En ejecución, Completada, No aplica. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Tareas de servicio."
+    "corteza::compose:module-field/automotriz-co/tareas-servicio/resultado":
+      meta.description.edit: "Ingrese resultado con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Resultado» conserva información operativa del registro en Tareas de servicio."
+    "corteza::compose:module-field/automotriz-co/tareas-servicio/evidencia":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para evidencia. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con evidencia en este registro de Tareas de servicio."
+    "corteza::compose:module-field/automotriz-co/tareas-servicio/inicioReal":
+      meta.description.edit: "Indique inicio real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de inicio real para este registro de Tareas de servicio, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/tareas-servicio/finReal":
+      meta.description.edit: "Indique fin real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fin real para este registro de Tareas de servicio, interpretada en America/Bogota."
+    "corteza::compose:module/automotriz-co/prospectos":
+      meta.description: "Personas interesadas en adquirir un vehículo. Centraliza consentimiento, presupuesto, financiación, vehículos de interés, responsable y estado del proceso comercial."
+    "corteza::compose:module-field/automotriz-co/prospectos/nombres":
+      meta.description.edit: "Ingrese nombres con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Nombres» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/apellidos":
+      meta.description.edit: "Ingrese apellidos con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Apellidos» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/telefono":
+      meta.description.edit: "Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Teléfono» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/correo":
+      meta.description.edit: "Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Correo electrónico» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/autorizaTratamientoDatos":
+      meta.description.edit: "Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/automotriz-co/prospectos/fechaAutorizacion":
+      meta.description.edit: "Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/automotriz-co/prospectos/origenAutorizacion":
+      meta.description.edit: "Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/automotriz-co/prospectos/ciudad":
+      meta.description.edit: "Ingrese ciudad con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Ciudad» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/presupuestoMinimo":
+      meta.description.edit: "Ingrese presupuesto mínimo en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Presupuesto mínimo expresado en pesos colombianos (COP) para este registro de Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/presupuestoMaximo":
+      meta.description.edit: "Ingrese presupuesto máximo en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Presupuesto máximo expresado en pesos colombianos (COP) para este registro de Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/plazoCompra":
+      meta.description.edit: "Seleccione un valor para plazo estimado de compra entre: Inmediato, Menos de 30 días, Entre 1 y 3 meses, Más de 3 meses. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de plazo estimado de compra para este registro de Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/vehiculoActual":
+      meta.description.edit: "Ingrese vehículo actual con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Vehículo actual» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/requiereFinanciacion":
+      meta.description.edit: "Marque Sí únicamente cuando requiere financiación esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si requiere financiación aplica a este registro de Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/vehiculosInteres":
+      meta.description.edit: "Seleccione vehículos de interés dentro del módulo vehiculos. La relación admite varios registros; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con vehiculos. Permite consultar varios registros vinculados en este registro de Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/origen":
+      meta.description.edit: "Seleccione un valor para origen entre: Sitio web, Sala de ventas, Referido, Redes sociales, Llamada, Otro. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de origen para este registro de Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/estado":
+      meta.description.edit: "Seleccione un valor para estado comercial entre: Nuevo, Contactado, Calificado, Prueba de manejo, Cotización, Negociación, Vendido, Perdido. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado comercial para este registro de Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/asesor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de asesor responsable en este registro de Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/prioridad":
+      meta.description.edit: "Seleccione un valor para prioridad comercial entre: Baja, Media, Alta, Urgente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de prioridad comercial para este registro de Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/fechaAsignacion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de fecha de asignación para este registro de Prospectos, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/prospectos/proximoContacto":
+      meta.description.edit: "Indique próximo contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de próximo contacto para este registro de Prospectos, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/prospectos/ultimoContacto":
+      meta.description.edit: "Indique último contacto usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de último contacto para este registro de Prospectos, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/prospectos/motivoCierre":
+      meta.description.edit: "Ingrese motivo de cierre o pérdida con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Motivo de cierre o pérdida» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/notas":
+      meta.description.edit: "Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Notas» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module-field/automotriz-co/prospectos/proveedorExterno":
+      meta.description.edit: "Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Proveedor externo» conserva información operativa del registro en Prospectos."
+    "corteza::compose:module/automotriz-co/pruebas-manejo":
+      meta.description: "Reservas de vehículos para pruebas de manejo. Relaciona prospecto, vehículo y asesor, evita cruces de horario y registra el resultado y la siguiente acción."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/asunto":
+      meta.description.edit: "Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Asunto» conserva información operativa del registro en Pruebas de manejo."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/prospecto":
+      meta.description.edit: "Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con prospectos. Permite consultar un registro vinculado en este registro de Pruebas de manejo."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/vehiculo":
+      meta.description.edit: "Seleccione vehículo dentro del módulo vehiculos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con vehiculos. Permite consultar un registro vinculado en este registro de Pruebas de manejo."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/asesor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Usuario de Corteza responsable de asesor en este registro de Pruebas de manejo."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/inicio":
+      meta.description.edit: "Indique inicio usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de inicio para este registro de Pruebas de manejo, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/fin":
+      meta.description.edit: "Indique fin usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de fin para este registro de Pruebas de manejo, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/sede":
+      meta.description.edit: "Ingrese sede con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Sede» conserva información operativa del registro en Pruebas de manejo."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Pendiente, Confirmada, Completada, Cancelada, No asistió. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Pruebas de manejo."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/resultado":
+      meta.description.edit: "Seleccione un valor para resultado entre: Interesado, Requiere otra opción, Sin interés. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de resultado para este registro de Pruebas de manejo."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/siguienteAccion":
+      meta.description.edit: "Ingrese siguiente acción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Siguiente acción» conserva información operativa del registro en Pruebas de manejo."
+    "corteza::compose:module-field/automotriz-co/pruebas-manejo/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Pruebas de manejo."
+    "corteza::compose:module/automotriz-co/oportunidades":
+      meta.description: "Negociaciones de venta de un vehículo a un prospecto. Contiene oferta, financiación, retoma, probabilidad, etapa y fecha estimada de cierre."
+    "corteza::compose:module-field/automotriz-co/oportunidades/prospecto":
+      meta.description.edit: "Seleccione prospecto dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con prospectos. Permite consultar un registro vinculado en este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/vehiculo":
+      meta.description.edit: "Seleccione vehículo dentro del módulo vehiculos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con vehiculos. Permite consultar un registro vinculado en este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/asesor":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de asesor en este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/etapa":
+      meta.description.edit: "Seleccione un valor para etapa entre: Cotización, Financiación, Negociación, Documentación, Vendido, Perdido. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de etapa para este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/valorPublicado":
+      meta.description.edit: "Ingrese valor publicado en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor publicado expresado en pesos colombianos (COP) para este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/valorOfertado":
+      meta.description.edit: "Ingrese valor ofertado en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor ofertado expresado en pesos colombianos (COP) para este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/requiereFinanciacion":
+      meta.description.edit: "Marque Sí únicamente cuando requiere financiación esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si requiere financiación aplica a este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/valorFinanciado":
+      meta.description.edit: "Ingrese valor financiado en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor financiado expresado en pesos colombianos (COP) para este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/recibeRetoma":
+      meta.description.edit: "Marque Sí únicamente cuando incluye retoma esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si incluye retoma aplica a este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/descripcionRetoma":
+      meta.description.edit: "Ingrese descripción de retoma con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Descripción de retoma» conserva información operativa del registro en Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/probabilidad":
+      meta.description.edit: "Ingrese probabilidad como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de probabilidad para este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/fechaEstimadaCierre":
+      meta.description.edit: "Indique fecha estimada de cierre en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de fecha estimada de cierre para este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/proximoPaso":
+      meta.description.edit: "Ingrese próximo paso con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Próximo paso» conserva información operativa del registro en Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/fechaCierreReal":
+      meta.description.edit: "Indique fecha real de cierre en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de fecha real de cierre para este registro de Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/motivoPerdida":
+      meta.description.edit: "Ingrese motivo de pérdida con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Motivo de pérdida» conserva información operativa del registro en Oportunidades."
+    "corteza::compose:module-field/automotriz-co/oportunidades/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Oportunidades."
+    "corteza::compose:module/automotriz-co/ordenes-servicio":
+      meta.description: "Citas y trabajos de taller asociados con un cliente y su vehículo. Registra programación, diagnóstico, ejecución, evidencias, valores y próximo mantenimiento."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/cliente":
+      meta.description.edit: "Seleccione cliente dentro del módulo prospectos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con prospectos. Permite consultar un registro vinculado en este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/vehiculo":
+      meta.description.edit: "Seleccione vehículo dentro del módulo vehiculos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con vehiculos. Permite consultar un registro vinculado en este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/coordinador":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de coordinador en este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/tecnico":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de técnico en este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/inicio":
+      meta.description.edit: "Indique inicio usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de inicio para este registro de Órdenes de servicio, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/fin":
+      meta.description.edit: "Indique fin usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fin para este registro de Órdenes de servicio, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/kilometrajeIngreso":
+      meta.description.edit: "Ingrese kilometraje de ingreso como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de kilometraje de ingreso para este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/inicioReal":
+      meta.description.edit: "Indique inicio real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de inicio real para este registro de Órdenes de servicio, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/finReal":
+      meta.description.edit: "Indique fin real usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fin real para este registro de Órdenes de servicio, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/tipoServicio":
+      meta.description.edit: "Seleccione un valor para tipo de servicio entre: Mantenimiento preventivo, Reparación, Garantía, Inspección, Alistamiento. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo de servicio para este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Programada, Recibida, En diagnóstico, En ejecución, Completada, Entregada, Cancelada. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/solicitud":
+      meta.description.edit: "Ingrese solicitud del cliente con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Solicitud del cliente» conserva información operativa del registro en Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/diagnostico":
+      meta.description.edit: "Ingrese diagnóstico con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Diagnóstico» conserva información operativa del registro en Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/valorEstimado":
+      meta.description.edit: "Ingrese valor estimado en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor estimado expresado en pesos colombianos (COP) para este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/valorFinal":
+      meta.description.edit: "Ingrese valor final en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor final expresado en pesos colombianos (COP) para este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/proximoMantenimiento":
+      meta.description.edit: "Indique próximo mantenimiento en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de próximo mantenimiento para este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/evidencias":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para evidencias. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con evidencias en este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/firmaEntrega":
+      meta.description.edit: "Adjunte el archivo pertinente para firma o acta de entrega. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con firma o acta de entrega en este registro de Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/fechaEntrega":
+      meta.description.edit: "Indique fecha de entrega usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fecha de entrega para este registro de Órdenes de servicio, interpretada en America/Bogota."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Órdenes de servicio."
+    "corteza::compose:module-field/automotriz-co/ordenes-servicio/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Órdenes de servicio."

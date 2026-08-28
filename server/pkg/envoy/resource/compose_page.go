@@ -87,7 +87,7 @@ func NewComposePage(pg *types.Page, nsRef, modRef, parentRef *Ref) *ComposePage 
 				r.RefCharts = append(r.RefCharts, ref)
 			}
 
-		case "Calendar":
+		case "Calendar", "Geometry":
 			ff, _ := b.Options["feeds"].([]interface{})
 			for _, f := range ff {
 				feed, _ := f.(map[string]interface{})

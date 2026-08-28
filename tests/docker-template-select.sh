@@ -20,9 +20,9 @@ assert_eq() {
 test_root=$(mktemp -d)
 trap 'rm -rf "$test_root"' EXIT
 
-template_root="${test_root}/templates"
-demo_root="${test_root}/demos"
-data_root="${test_root}/data"
+fixture_template_root="${test_root}/templates"
+fixture_demo_root="${test_root}/demos"
+fixture_data_root="${test_root}/data"
 template_ids="
 inmobiliaria-co
 automotriz-co
@@ -32,34 +32,48 @@ centro-contacto-co
 soporte-renovaciones-co
 "
 for template_id in $template_ids; do
-	mkdir -p "${template_root}/${template_id}/provision"
-	mkdir -p "${template_root}/${template_id}/demo/provision"
-	: > "${template_root}/${template_id}/manifest.yaml"
+	mkdir -p "${fixture_template_root}/${template_id}/provision"
+	mkdir -p "${fixture_template_root}/${template_id}/demo/provision"
+	: > "${fixture_template_root}/${template_id}/manifest.yaml"
 done
-mkdir -p "${demo_root}/showroom-co/provision"
-: > "${demo_root}/showroom-co/manifest.yaml"
-printf '%s\n' $template_ids > "${demo_root}/showroom-co/templates.list"
-mkdir -p "${demo_root}/cliente-co/provision"
-: > "${demo_root}/cliente-co/manifest.yaml"
-printf '%s\n' inmobiliaria-co > "${demo_root}/cliente-co/templates.list"
-mkdir -p "$data_root"
+mkdir -p "${fixture_demo_root}/showroom-co/provision"
+: > "${fixture_demo_root}/showroom-co/manifest.yaml"
+printf '%s\n' $template_ids > "${fixture_demo_root}/showroom-co/templates.list"
+mkdir -p "${fixture_demo_root}/cliente-co/provision"
+: > "${fixture_demo_root}/cliente-co/manifest.yaml"
+printf '%s\n' inmobiliaria-co > "${fixture_demo_root}/cliente-co/templates.list"
+mkdir -p "$fixture_data_root"
 
-ABERA_TEMPLATE_ROOT=$template_root
-ABERA_DEMO_ROOT=$demo_root
-STORAGE_PATH=$data_root
+# With no mode and no template, Corteza stays clean: only the base provision
+# path remains and no deployment marker is created. This is the supported
+# starting point for customers who want to build their own solution.
+STORAGE_PATH="${test_root}/data-clean"
+ABERA_MODE=
+ABERA_TEMPLATE=
+ABERA_DEMO_BUNDLE=
+PROVISION_PATH="/corteza/provision/*"
+export STORAGE_PATH ABERA_MODE ABERA_TEMPLATE ABERA_DEMO_BUNDLE PROVISION_PATH
+configure_abera_deployment
+assert_eq "$PROVISION_PATH" "/corteza/provision/*"
+[ ! -e "${STORAGE_PATH}/.abera-deployment" ] || fail "clean mode created a deployment marker"
+[ ! -e "${STORAGE_PATH}/.abera-template" ] || fail "clean mode selected a template"
+
+ABERA_TEMPLATE_ROOT=$fixture_template_root
+ABERA_DEMO_ROOT=$fixture_demo_root
+STORAGE_PATH=$fixture_data_root
 ABERA_TEMPLATE=inmobiliaria-co
 PROVISION_PATH="/corteza/provision/*"
 export ABERA_TEMPLATE_ROOT ABERA_DEMO_ROOT STORAGE_PATH ABERA_TEMPLATE PROVISION_PATH
 
 configure_abera_template
 assert_eq "$ABERA_TEMPLATE" "inmobiliaria-co"
-assert_eq "$PROVISION_PATH" "/corteza/provision/*:${template_root}/inmobiliaria-co/provision"
-assert_eq "$(sed -n '1p' "${data_root}/.abera-template")" "inmobiliaria-co"
-assert_eq "$(sed -n '1p' "${data_root}/.abera-deployment")" "template:inmobiliaria-co"
+assert_eq "$PROVISION_PATH" "/corteza/provision/*:${fixture_template_root}/inmobiliaria-co/provision"
+assert_eq "$(sed -n '1p' "${fixture_data_root}/.abera-template")" "inmobiliaria-co"
+assert_eq "$(sed -n '1p' "${fixture_data_root}/.abera-deployment")" "template:inmobiliaria-co"
 
 # Repeated configuration must not duplicate the provision path.
 configure_abera_template
-assert_eq "$PROVISION_PATH" "/corteza/provision/*:${template_root}/inmobiliaria-co/provision"
+assert_eq "$PROVISION_PATH" "/corteza/provision/*:${fixture_template_root}/inmobiliaria-co/provision"
 
 # A restart may recover the selected template from the persistent marker.
 ABERA_TEMPLATE=
@@ -75,7 +89,7 @@ for template_id in $template_ids; do
 	export STORAGE_PATH ABERA_TEMPLATE PROVISION_PATH
 	configure_abera_template
 	assert_eq "$ABERA_TEMPLATE" "$template_id"
-	assert_eq "$PROVISION_PATH" "/corteza/provision/*:${template_root}/${template_id}/provision"
+	assert_eq "$PROVISION_PATH" "/corteza/provision/*:${fixture_template_root}/${template_id}/provision"
 	assert_eq "$(sed -n '1p' "${STORAGE_PATH}/.abera-template")" "$template_id"
 done
 
@@ -90,16 +104,16 @@ configure_abera_deployment
 assert_eq "$(sed -n '1p' "${STORAGE_PATH}/.abera-deployment")" "demo:showroom-co"
 for template_id in $template_ids; do
 	case ":${PROVISION_PATH}:" in
-		*":${template_root}/${template_id}/provision:"*) ;;
+		*":${fixture_template_root}/${template_id}/provision:"*) ;;
 		*) fail "demo missing template provision path for ${template_id}" ;;
 	esac
 	case ":${PROVISION_PATH}:" in
-		*":${template_root}/${template_id}/demo/provision:"*) ;;
+		*":${fixture_template_root}/${template_id}/demo/provision:"*) ;;
 		*) fail "demo missing data provision path for ${template_id}" ;;
 	esac
 done
 case ":${PROVISION_PATH}:" in
-	*":${demo_root}/showroom-co/provision:"*) ;;
+	*":${fixture_demo_root}/showroom-co/provision:"*) ;;
 	*) fail "demo missing bundle provision path" ;;
 esac
 
@@ -131,7 +145,7 @@ assert_eq "$ABERA_MODE" "demo"
 assert_eq "$ABERA_DEMO_BUNDLE" "cliente-co"
 
 # Invalid identifiers, missing templates and volume mismatches must fail.
-STORAGE_PATH=$data_root
+STORAGE_PATH=$fixture_data_root
 ABERA_MODE=template
 ABERA_TEMPLATE="../inmobiliaria-co"
 export STORAGE_PATH ABERA_TEMPLATE

@@ -9,11 +9,11 @@ editor:
     openBuilder: Abrir editor
     title: Información básica
     undelete: Restaurar
-  new: Nuevo workflow
+  new: 'Nuevo flujo de trabajo'
   permissions: Permisos
   title:
-    create: Crear workflow
-    edit: Editar workflow
+    create: 'Crear flujo de trabajo'
+    edit: 'Editar flujo de trabajo'
   triggers:
     and: y
     columns:
@@ -37,7 +37,7 @@ list:
       deleted: Eliminados
   filterForm:
     deleted:
-      label: workflows eliminados
+      label: flujos de trabajo eliminados
     excluded:
       label: Sin
     exclusive:
@@ -45,10 +45,10 @@ list:
     inclusive:
       label: Incluyendo
     query:
-      label: Filtrar lista de workflows
-      placeholder: Filtrar workflows por nombre
-  loading: Cargando workflows
-  new: Nuevo workflow
+      label: Filtrar la lista de flujos de trabajo
+      placeholder: Filtrar flujos de trabajo por nombre
+  loading: Cargando flujos de trabajo
+  new: 'Nuevo flujo de trabajo'
   permissions: Permisos
-  title: Workflows
+  title: Flujos de trabajo
   yaml: YAML

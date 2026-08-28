@@ -477,7 +477,8 @@ func resumeAberaBootstrap(
 		return nil
 	}
 
-	if err = verifyAberaEnvelopeIfPresent(cfg.OutputFile, envelopeBytes); err != nil {
+	envelopeExists, err := verifyAberaEnvelopeIfPresent(cfg.OutputFile, envelopeBytes)
+	if err != nil {
 		return err
 	}
 
@@ -502,10 +503,20 @@ func resumeAberaBootstrap(
 		if err != nil {
 			return fmt.Errorf("no se pudo aplicar atómicamente el cambio de modo OAuth: %w", err)
 		}
+		if !envelopeExists {
+			if err = writeAberaEnvelopeAtomic(cfg.OutputFile, envelopeBytes); err != nil {
+				return fmt.Errorf("no se pudo recuperar el archivo de entrega OAuth: %w", err)
+			}
+		}
 		log.Info("modo OAuth de Abera actualizado", zap.String("oldMode", string(oldMode)), zap.String("mode", string(cfg.Mode)))
 		return nil
 	}
 
+	if !envelopeExists {
+		if err = writeAberaEnvelopeAtomic(cfg.OutputFile, envelopeBytes); err != nil {
+			return fmt.Errorf("no se pudo recuperar el archivo de entrega OAuth: %w", err)
+		}
+	}
 	return syncAberaMode(ctx, s, user, client, cfg.Mode, roles)
 }
 
@@ -751,9 +762,22 @@ func aberaRulesForRole(roleID uint64, roleHandle string, consultaRoleID uint64) 
 
 	if roleHandle != "abera-consulta" {
 		rules = append(rules, allow(
+			systemTypes.ComponentRbacResource(),
+			"reports.search",
+		)...)
+		rules = append(rules, allow(
 			automationTypes.ComponentRbacResource(),
 			"workflow.create",
 			"workflows.search",
+		)...)
+		rules = append(rules, allow(
+			automationTypes.WorkflowRbacResource(0),
+			"read",
+		)...)
+		rules = append(rules, allow(
+			systemTypes.ReportRbacResource(0),
+			"read",
+			"run",
 		)...)
 	}
 
@@ -971,32 +995,32 @@ func writeAberaEnvelopeAtomic(filename string, expected []byte) error {
 	return syncAberaDirectory(filepath.Dir(filename))
 }
 
-func verifyAberaEnvelopeIfPresent(filename string, expected []byte) error {
+func verifyAberaEnvelopeIfPresent(filename string, expected []byte) (bool, error) {
 	if err := rejectSymlinkPath(filepath.Dir(filename), false); err != nil {
-		return fmt.Errorf("el directorio de salida no es seguro: %w", err)
+		return false, fmt.Errorf("el directorio de salida no es seguro: %w", err)
 	}
 	info, err := os.Lstat(filename)
 	if os.IsNotExist(err) {
-		return nil
+		return false, nil
 	}
 	if err != nil {
-		return fmt.Errorf("no se pudo comprobar el archivo de salida: %w", err)
+		return false, fmt.Errorf("no se pudo comprobar el archivo de salida: %w", err)
 	}
 	if info.Mode()&os.ModeSymlink != 0 || !info.Mode().IsRegular() {
-		return fmt.Errorf("el archivo de salida existente no es un archivo regular")
+		return false, fmt.Errorf("el archivo de salida existente no es un archivo regular")
 	}
 	current, err := os.ReadFile(filename)
 	if err != nil {
-		return fmt.Errorf("no se pudo verificar el archivo de salida existente: %w", err)
+		return false, fmt.Errorf("no se pudo verificar el archivo de salida existente: %w", err)
 	}
 	defer zeroBytes(current)
 	if !bytes.Equal(current, expected) {
-		return fmt.Errorf("el archivo de salida existente fue manipulado o pertenece a otro bootstrap")
+		return false, fmt.Errorf("el archivo de salida existente fue manipulado o pertenece a otro bootstrap")
 	}
 	if err = os.Chmod(filename, 0o600); err != nil {
-		return fmt.Errorf("no se pudieron restringir los permisos del archivo de salida: %w", err)
+		return false, fmt.Errorf("no se pudieron restringir los permisos del archivo de salida: %w", err)
 	}
-	return nil
+	return true, nil
 }
 
 func rejectSymlinkPath(path string, allowMissingLeaf bool) error {

@@ -1,7 +1,7 @@
-pick-scenario: Pick a scenario
+pick-scenario: Selecciona un escenario
 report:
-  builder: Report Builder
-  view: Report View
+  builder: Constructor de informes
+  view: Vista del informe
 tooltip:
   edit:
-    report: Edit report
+    report: Editar informe

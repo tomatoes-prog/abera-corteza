@@ -3,11 +3,11 @@
 
 id: inmobiliaria-co
 name: CRM Inmobiliario Colombia
-version: 1.0.1
+version: 2.0.0
 minimumCortezaVersion: 2024.9.9
 defaultLocale: es
 license: Apache-2.0
-description: CRM simplificado para venta y arrendamiento de inmuebles en Colombia.
+description: CRM inmobiliario productivo con inventario geográfico, historial 360°, visitas, seguimientos y pipeline comercial.
 resources:
   namespace: inmobiliaria-co
   roles:
@@ -29,11 +29,21 @@ resources:
     - agenda
     - actividades
     - negociaciones
+    - reportes
   charts:
     - leads-por-estado
     - inmuebles-por-estado
     - negociaciones-por-etapa
   workflows:
     - asignar-lead-menor-carga
+    - crear-seguimiento-inicial-inmobiliario
+    - crear-negociacion-desde-visita
+    - cerrar-negociacion-inmobiliaria
+    - avisar-asignacion-inmobiliaria-co
+    - ejemplo-correo-responsable-inmobiliaria-co
+    - ejemplo-slack-hito-inmobiliaria-co
+  reports:
+    - inmobiliaria-co-ejecutivo
+    - inmobiliaria-co-operativo
   scripts:
     - scripts/seed-demo.ps1

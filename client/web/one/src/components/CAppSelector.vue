@@ -51,12 +51,12 @@
                   <b-card-img
                     class="rounded-bottom thumbnail"
                     :src="logoUrl(app)"
-                    :alt="app.unify.name || app.name"
+                    :alt="displayName(app)"
                   />
                 </div>
 
                 <h6 class="text-center my-4">
-                  {{ app.unify.name || app.name }}
+                  {{ displayName(app) }}
                 </h6>
 
                 <b-link
@@ -140,7 +140,8 @@ export default {
     filteredApps () {
       const query = (this.query || '').toUpperCase()
       return this.query
-        ? this.appList.filter(({ name }) => (name.toUpperCase()).includes(query))
+        ? this.appList.filter(app => [this.displayName(app), app.name]
+          .some(label => (label || '').toUpperCase().includes(query)))
         : this.appList
     },
   },
@@ -187,6 +188,41 @@ export default {
     async onDrop () {
       const applicationIDs = this.appList.map(({ applicationID }) => applicationID)
       await this.reorderApp(applicationIDs)
+    },
+
+    applicationRoute (app) {
+      const route = app && app.unify && app.unify.url
+      if (!route) {
+        return ''
+      }
+
+      try {
+        return new URL(route, window.location.origin).pathname
+          .replace(/^\/+|\/+$/g, '')
+          .toLowerCase()
+      } catch (e) {
+        return String(route)
+          .split(/[?#]/, 1)[0]
+          .replace(/^\/+|\/+$/g, '')
+          .toLowerCase()
+      }
+    },
+
+    displayName (app) {
+      if (app && app.unify && app.unify.name) {
+        return app.unify.name
+      }
+
+      const translationKey = {
+        compose: 'applications.compose',
+        admin: 'applications.admin',
+        workflow: 'applications.workflow',
+        'bridge/jitsi': 'applications.jitsi',
+        reporter: 'applications.reporter',
+        privacy: 'applications.privacy',
+      }[this.applicationRoute(app)]
+
+      return translationKey ? this.$t(translationKey) : (app && app.name) || ''
     },
 
     logoUrl (app) {

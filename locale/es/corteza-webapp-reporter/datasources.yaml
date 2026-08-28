@@ -1,23 +1,23 @@
-add: Add
-aggregate: Aggregate
-compose-records: Compose records
-datasource-name: 'Datasource Name...'
-expression: Expression
-group-by: Group by
-label: Label
-module: Module
-name-required: Name *
-name: Name
-namespace: Namespace
+add: Añadir
+aggregate: Agregar
+compose-records: Registros de Compose
+datasource-name: 'Nombre de la fuente de datos...'
+expression: Expresión
+group-by: Agrupar por
+label: Etiqueta
+module: Módulo
+name-required: Nombre *
+name: Nombre
+namespace: Espacio de trabajo
 new:
-  label: New label
-  name: New name
-none: None
-prefilter: Prefilter
+  label: Nueva etiqueta
+  name: Nuevo nombre
+none: Ninguno
+prefilter: Prefiltro
 primary:
-  column: Primary Column
-  source: Primary Source
+  column: Columna principal
+  source: Fuente principal
 secondary:
-  column: Secondary Column
-  source: Secondary Source
-source: Source
+  column: Columna secundaria
+  source: Fuente secundaria
+source: Fuente

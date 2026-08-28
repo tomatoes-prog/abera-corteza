@@ -8,3 +8,7 @@ server/go.sum linguist-vendored=true
 server/docs/*.yaml linguist-documentation=true
 server/docs/README.adoc linguist-documentation=true
 server/docs/index.html linguist-documentation=true
+
+# Shell entrypoints and tests run inside Linux containers/CI even when the
+# repository is edited on Windows.
+*.sh text eol=lf

@@ -13,6 +13,9 @@ ignore
 
 # Local runtime artifacts
 *.log
+.tmp-*/
+*.pem
+*.enc.json
 
 # Locally built binaries
 extra/server-discovery/server-discovery

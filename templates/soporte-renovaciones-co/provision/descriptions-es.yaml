@@ -1,0 +1,350 @@
+# Copyright 2026 Abera/Corteza contributors
+# Licensed under the Apache License, Version 2.0.
+
+locale:
+  es:
+    "corteza::compose:module/soporte-renovaciones-co/clientes":
+      meta.description: "Personas o empresas atendidas por soporte. Consolida responsable, plan, valor recurrente, salud, satisfacción, riesgo, contratos, casos y renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/tipo":
+      meta.description.edit: "Seleccione un valor para tipo entre: Persona, Empresa. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de tipo para este registro de Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/nombre":
+      meta.description.edit: "Ingrese nombre o razón social con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Nombre o razón social» conserva información operativa del registro en Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/identificacion":
+      meta.description.edit: "Ingrese identificación o nit con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Identificación o NIT» conserva información operativa del registro en Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/contactoPrincipal":
+      meta.description.edit: "Ingrese contacto principal con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Contacto principal» conserva información operativa del registro en Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/telefono":
+      meta.description.edit: "Ingrese el número de contacto en formato internacional, preferiblemente +57 seguido de diez dígitos para Colombia. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Teléfono» conserva información operativa del registro en Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/correo":
+      meta.description.edit: "Ingrese una dirección de correo válida, por ejemplo nombre@empresa.com. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Correo electrónico» conserva información operativa del registro en Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/autorizaTratamientoDatos":
+      meta.description.edit: "Marque Sí únicamente después de obtener una autorización previa, informada y verificable; registre también su fecha y origen cuando estén disponibles."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/fechaAutorizacion":
+      meta.description.edit: "Registre la fecha y hora en que se obtuvo la autorización verificable, usando America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Evidencia de que la persona autorizó el tratamiento o contacto conforme a la finalidad informada."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/segmento":
+      meta.description.edit: "Seleccione un valor para segmento entre: Emprendimiento, Pyme, Corporativo. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de segmento para este registro de Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/planActual":
+      meta.description.edit: "Ingrese plan actual con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Plan actual» conserva información operativa del registro en Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/responsable":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de responsable de cuenta en este registro de Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/valorRecurrente":
+      meta.description.edit: "Ingrese valor recurrente en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor recurrente expresado en pesos colombianos (COP) para este registro de Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/salud":
+      meta.description.edit: "Seleccione un valor para salud del cliente entre: Saludable, Atención, En riesgo, Perdido. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de salud del cliente para este registro de Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/satisfaccion":
+      meta.description.edit: "Ingrese satisfacción como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de satisfacción para este registro de Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/riesgo":
+      meta.description.edit: "Seleccione un valor para riesgo entre: Bajo, Medio, Alto. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de riesgo para este registro de Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/notas":
+      meta.description.edit: "Ingrese notas con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Notas» conserva información operativa del registro en Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Clientes."
+    "corteza::compose:module-field/soporte-renovaciones-co/clientes/proveedorExterno":
+      meta.description.edit: "Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Proveedor externo» conserva información operativa del registro en Clientes."
+    "corteza::compose:module/soporte-renovaciones-co/contratos":
+      meta.description: "Acuerdos de servicio vigentes para un cliente y producto. Define cobertura, fechas, valor y objetivos de respuesta y resolución que gobiernan los casos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/cliente":
+      meta.description.edit: "Seleccione cliente dentro del módulo clientes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con clientes. Permite consultar un registro vinculado en este registro de Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/producto":
+      meta.description.edit: "Ingrese producto o servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Producto o servicio» conserva información operativa del registro en Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/nivelSoporte":
+      meta.description.edit: "Seleccione un valor para nivel de soporte entre: Básico, Estándar, Premium. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de nivel de soporte para este registro de Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/fechaInicio":
+      meta.description.edit: "Indique fecha de inicio en formato de fecha; no agregue una hora. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha de fecha de inicio para este registro de Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/fechaFin":
+      meta.description.edit: "Indique fecha de vencimiento en formato de fecha; no agregue una hora. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha de fecha de vencimiento para este registro de Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/renovacionAutomatica":
+      meta.description.edit: "Marque Sí únicamente cuando renovación automática esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si renovación automática aplica a este registro de Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/diasAvisoRenovacion":
+      meta.description.edit: "Ingrese días de aviso para renovación como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de días de aviso para renovación para este registro de Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/valor":
+      meta.description.edit: "Ingrese valor recurrente en COP, sin símbolos ni separadores manuales. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Valor recurrente expresado en pesos colombianos (COP) para este registro de Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/slaRespuestaHoras":
+      meta.description.edit: "Ingrese sla primera respuesta como número. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Valor numérico de sla primera respuesta para este registro de Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/slaResolucionHoras":
+      meta.description.edit: "Ingrese sla resolución como número. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Valor numérico de sla resolución para este registro de Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Pendiente, Activo, Suspendido, Vencido, Cancelado. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Contratos."
+    "corteza::compose:module-field/soporte-renovaciones-co/contratos/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Contratos."
+    "corteza::compose:module/soporte-renovaciones-co/casos":
+      meta.description: "Solicitudes o incidentes reportados por clientes. Controla clasificación, responsable, prioridad, SLA, escalamiento, interacciones, causa y resolución."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/cliente":
+      meta.description.edit: "Seleccione cliente dentro del módulo clientes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con clientes. Permite consultar un registro vinculado en este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/contrato":
+      meta.description.edit: "Seleccione contrato dentro del módulo contratos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con contratos. Permite consultar un registro vinculado en este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/casoPadre":
+      meta.description.edit: "Seleccione caso padre dentro del módulo casos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con casos. Permite consultar un registro vinculado en este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/problemaConocido":
+      meta.description.edit: "Seleccione problema conocido dentro del módulo problemas conocidos. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con problemas conocidos. Permite consultar un registro vinculado en este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/contacto":
+      meta.description.edit: "Ingrese contacto solicitante con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Contacto solicitante» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/producto":
+      meta.description.edit: "Ingrese producto o servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Producto o servicio» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/canal":
+      meta.description.edit: "Seleccione un valor para canal entre: Correo, Teléfono, Chat, WhatsApp, Portal. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de canal para este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/categoria":
+      meta.description.edit: "Ingrese categoría con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Categoría» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/asunto":
+      meta.description.edit: "Ingrese asunto con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Asunto» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/descripcion":
+      meta.description.edit: "Ingrese descripción con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Descripción» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/prioridad":
+      meta.description.edit: "Seleccione un valor para prioridad entre: Baja, Media, Alta, Crítica. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de prioridad para este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/impacto":
+      meta.description.edit: "Seleccione un valor para impacto entre: Bajo, Moderado, Alto, Generalizado. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de impacto para este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/urgencia":
+      meta.description.edit: "Seleccione un valor para urgencia entre: Baja, Normal, Alta, Inmediata. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de urgencia para este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/nivelEscalamiento":
+      meta.description.edit: "Seleccione un valor para nivel de escalamiento entre: Nivel 1, Nivel 2, Nivel 3, Proveedor. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de nivel de escalamiento para este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/motivoEscalamiento":
+      meta.description.edit: "Ingrese motivo de escalamiento con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Motivo de escalamiento» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: Nuevo, Asignado, En progreso, Esperando cliente, Resuelto, Cerrado, Cancelado. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/agente":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de agente responsable en este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/primeraRespuesta":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de primera respuesta para este registro de Casos de soporte, interpretada en America/Bogota."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/fechaResolucion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de fecha de resolución para este registro de Casos de soporte, interpretada en America/Bogota."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/vencimientoRespuesta":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de vencimiento primera respuesta para este registro de Casos de soporte, interpretada en America/Bogota."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/vencimientoResolucion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de vencimiento resolución para este registro de Casos de soporte, interpretada en America/Bogota."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/umbralRespuestaSLA":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de umbral 75% primera respuesta para este registro de Casos de soporte, interpretada en America/Bogota."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/umbralResolucionSLA":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de umbral 75% resolución para este registro de Casos de soporte, interpretada en America/Bogota."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/estadoSLA":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Clasificación de estado de sla para este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/slaIncumplido":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Indica si sla incumplido aplica a este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/resolucion":
+      meta.description.edit: "Ingrese resolución con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Resolución» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/causaRaiz":
+      meta.description.edit: "Ingrese causa raíz con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Causa raíz» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/categoriaResolucion":
+      meta.description.edit: "Seleccione un valor para categoría de resolución entre: Configuración, Capacitación, Corrección, Solución temporal, No reproducible, Duplicado. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de categoría de resolución para este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/evidencias":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para evidencias de resolución. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con evidencias de resolución en este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/resolucionPrimerContacto":
+      meta.description.edit: "Marque Sí únicamente cuando resuelto en primer contacto esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si resuelto en primer contacto aplica a este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/csat":
+      meta.description.edit: "Ingrese satisfacción como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de satisfacción para este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/proveedorExterno":
+      meta.description.edit: "Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Proveedor externo» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/estadoIntegracion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Clasificación de estado de integración para este registro de Casos de soporte."
+    "corteza::compose:module-field/soporte-renovaciones-co/casos/ultimoErrorIntegracion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "El campo «Último error de integración» conserva información operativa del registro en Casos de soporte."
+    "corteza::compose:module/soporte-renovaciones-co/interacciones":
+      meta.description: "Historial cronológico de comunicaciones y acciones sobre un caso o renovación. Permite distinguir respuestas del agente y conservar archivos."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/caso":
+      meta.description.edit: "Seleccione caso dentro del módulo casos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con casos. Permite consultar un registro vinculado en este registro de Interacciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/renovacion":
+      meta.description.edit: "Seleccione renovación relacionada dentro del módulo renovaciones. La relación admite un registro; no escriba identificadores manualmente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Relación con renovaciones. Permite consultar un registro vinculado en este registro de Interacciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/cliente":
+      meta.description.edit: "Seleccione cliente dentro del módulo clientes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con clientes. Permite consultar un registro vinculado en este registro de Interacciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/canal":
+      meta.description.edit: "Seleccione un valor para canal entre: Correo, Teléfono, Chat, WhatsApp, Nota interna. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de canal para este registro de Interacciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/agente":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Usuario de Corteza responsable de agente en este registro de Interacciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/fecha":
+      meta.description.edit: "Indique fecha usando la zona horaria America/Bogota. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha y hora de fecha para este registro de Interacciones, interpretada en America/Bogota."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/tipo":
+      meta.description.edit: "Seleccione un valor para tipo entre: Respuesta al cliente, Mensaje del cliente, Nota interna. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de tipo para este registro de Interacciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/esRespuestaAgente":
+      meta.description.edit: "Marque Sí únicamente cuando es respuesta del agente esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si es respuesta del agente aplica a este registro de Interacciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/resumen":
+      meta.description.edit: "Ingrese resumen con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Resumen» conserva información operativa del registro en Interacciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/archivos":
+      meta.description.edit: "Adjunte uno o varios archivos pertinentes para archivos. No cargue credenciales ni información innecesaria. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Archivos asociados con archivos en este registro de Interacciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/externalID":
+      meta.description.edit: "No editar manualmente salvo durante una integración controlada. Debe contener el identificador estable del registro en el sistema externo."
+      meta.description.view: "El campo «Identificador externo» conserva información operativa del registro en Interacciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/interacciones/proveedorExterno":
+      meta.description.edit: "Ingrese proveedor externo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Proveedor externo» conserva información operativa del registro en Interacciones."
+    "corteza::compose:module/soporte-renovaciones-co/renovaciones":
+      meta.description: "Proceso comercial previo al vencimiento de un contrato. Registra responsable, etapa, valor, probabilidad, riesgo, expansión, próxima gestión y resultado."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/cliente":
+      meta.description.edit: "Seleccione cliente dentro del módulo clientes. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con clientes. Permite consultar un registro vinculado en este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/contrato":
+      meta.description.edit: "Seleccione contrato dentro del módulo contratos. La relación admite un registro; no escriba identificadores manualmente. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Relación con contratos. Permite consultar un registro vinculado en este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/responsable":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de gestor responsable en este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/fechaGestion":
+      meta.description.edit: "Indique fecha de inicio de gestión en formato de fecha; no agregue una hora. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha de fecha de inicio de gestión para este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/fechaVencimiento":
+      meta.description.edit: "Indique fecha de vencimiento en formato de fecha; no agregue una hora. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Fecha de fecha de vencimiento para este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/etapa":
+      meta.description.edit: "Seleccione un valor para etapa entre: Próxima a vencer, Contactada, Propuesta, Comprometida, Renovada, Perdida. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de etapa para este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/valorActual":
+      meta.description.edit: "Ingrese valor actual en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor actual expresado en pesos colombianos (COP) para este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/nuevoValor":
+      meta.description.edit: "Ingrese nuevo valor en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Nuevo valor expresado en pesos colombianos (COP) para este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/probabilidad":
+      meta.description.edit: "Ingrese probabilidad como número. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor numérico de probabilidad para este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/riesgo":
+      meta.description.edit: "Seleccione un valor para riesgo entre: Bajo, Medio, Alto. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de riesgo para este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/motivoRiesgo":
+      meta.description.edit: "Ingrese motivo de riesgo con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Motivo de riesgo» conserva información operativa del registro en Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/proximoPaso":
+      meta.description.edit: "Ingrese próximo paso con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Próximo paso» conserva información operativa del registro en Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/fechaProximaGestion":
+      meta.description.edit: "Indique próxima gestión usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de próxima gestión para este registro de Renovaciones, interpretada en America/Bogota."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/ventaAdicional":
+      meta.description.edit: "Marque Sí únicamente cuando venta adicional esté confirmado; en caso contrario seleccione No. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Indica si venta adicional aplica a este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/valorExpansion":
+      meta.description.edit: "Ingrese valor de expansión en COP, sin símbolos ni separadores manuales. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Valor de expansión expresado en pesos colombianos (COP) para este registro de Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/motivoPerdida":
+      meta.description.edit: "Ingrese motivo de pérdida con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Motivo de pérdida» conserva información operativa del registro en Renovaciones."
+    "corteza::compose:module-field/soporte-renovaciones-co/renovaciones/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Renovaciones."
+    "corteza::compose:module/soporte-renovaciones-co/problemas-conocidos":
+      meta.description: "Problemas recurrentes que agrupan varios casos bajo una causa, impacto, solución temporal y solución definitiva comunes."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/codigo":
+      meta.description.edit: "Ingrese código con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Código» conserva información operativa del registro en Problemas conocidos."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/titulo":
+      meta.description.edit: "Ingrese título con información clara, concreta y verificable; evite abreviaturas ambiguas. Es obligatorio para guardar un registro completo."
+      meta.description.view: "El campo «Título» conserva información operativa del registro en Problemas conocidos."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/producto":
+      meta.description.edit: "Ingrese producto o servicio con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Producto o servicio» conserva información operativa del registro en Problemas conocidos."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/estado":
+      meta.description.edit: "Seleccione un valor para estado entre: En investigación, Solución temporal, Resuelto, Cerrado. Es obligatorio para guardar un registro completo."
+      meta.description.view: "Clasificación de estado para este registro de Problemas conocidos."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/impacto":
+      meta.description.edit: "Seleccione un valor para impacto entre: Bajo, Moderado, Alto, Generalizado. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Clasificación de impacto para este registro de Problemas conocidos."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/causaRaiz":
+      meta.description.edit: "Ingrese causa raíz con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Causa raíz» conserva información operativa del registro en Problemas conocidos."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/solucionTemporal":
+      meta.description.edit: "Ingrese solución temporal con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Solución temporal» conserva información operativa del registro en Problemas conocidos."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/solucionDefinitiva":
+      meta.description.edit: "Ingrese solución definitiva con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Solución definitiva» conserva información operativa del registro en Problemas conocidos."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/responsable":
+      meta.description.edit: "Seleccione un usuario activo con el rol operativo correspondiente. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Usuario de Corteza responsable de responsable en este registro de Problemas conocidos."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/fechaDeteccion":
+      meta.description.edit: "Indique fecha de detección usando la zona horaria America/Bogota. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "Fecha y hora de fecha de detección para este registro de Problemas conocidos, interpretada en America/Bogota."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/fechaResolucion":
+      meta.description.edit: "No editar manualmente. Este valor es administrado por workflows o integraciones de la plantilla."
+      meta.description.view: "Fecha y hora de fecha de resolución para este registro de Problemas conocidos, interpretada en America/Bogota."
+    "corteza::compose:module-field/soporte-renovaciones-co/problemas-conocidos/observaciones":
+      meta.description.edit: "Ingrese observaciones con información clara, concreta y verificable; evite abreviaturas ambiguas. Es opcional; complételo cuando la información esté disponible."
+      meta.description.view: "El campo «Observaciones» conserva información operativa del registro en Problemas conocidos."

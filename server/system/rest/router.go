@@ -3,6 +3,7 @@ package rest
 import (
 	"github.com/go-chi/chi/v5"
 
+	"github.com/cortezaproject/corteza/server/abera/assistant"
 	"github.com/cortezaproject/corteza/server/pkg/auth"
 	"github.com/cortezaproject/corteza/server/system/rest/handlers"
 	"github.com/cortezaproject/corteza/server/system/service"
@@ -28,6 +29,7 @@ func MountRoutes() func(r chi.Router) {
 		r.Group(func(r chi.Router) {
 			r.Use(auth.HttpTokenValidator("api"))
 
+			r.Route("/assistant", assistant.MountRoutes())
 			handlers.NewAuthClient(AuthClient{}.New()).MountRoutes(r)
 			handlers.NewAutomation(Automation{}.New()).MountRoutes(r)
 			handlers.NewUser(User{}.New()).MountRoutes(r)

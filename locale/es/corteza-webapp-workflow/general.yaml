@@ -39,12 +39,12 @@ filter:
   title: Filtrar flujos de trabajo
   apply: Aplicar filtro
   namespace:
-    label: Espacio de nombres
+    label: Espacio de trabajo
     placeholder: Seleccionar espacio(s) de nombres
   module:
     label: Módulo
     placeholder: Seleccionar módulo(s)
-    template: "{{namespace}} - Módulos"
+    template: '{{namespace}} - Módulos'
 workflow-list: Lista de flujos de trabajo
 workflow:
   single: Flujo de trabajo

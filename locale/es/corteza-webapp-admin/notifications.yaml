@@ -22,6 +22,6 @@ unmuted: Notificaciones activadas
 markAllAsReadError: Error al marcar todas como leídas
 markAllAsUnreadError: Error al marcar todas como no leídas
 notificationDeletedError: Error al eliminar la notificación
-namespaceNotFound: No se encontró el espacio de nombres
+namespaceNotFound: No se encontró el espacio de trabajo
 pageNotFound: No se encontró la página
 recordNotFound: No se encontró el registro

@@ -59,8 +59,11 @@ Quick references:
 ### Plantillas de solución
 
 Esta distribución puede aprovisionar aplicaciones low-code predefinidas desde
-la imagen Docker. Para una instalación de cliente defina
-`ABERA_MODE=template` y `ABERA_TEMPLATE` al crear un volumen nuevo. Se
+la imagen Docker. Una instancia nueva sin `ABERA_MODE` ni `ABERA_TEMPLATE`
+arranca como Corteza limpio en español, sin crear ningún espacio de negocio;
+es la opción para clientes que construirán su solución desde cero. Para una
+instalación con una solución inicial defina `ABERA_MODE=template` y
+`ABERA_TEMPLATE` al crear un volumen nuevo. Se
 incluyen soluciones para inmobiliarias, automoción, admisiones educativas,
 servicios técnicos, centros de contacto y soporte con renovaciones. Consulte
 [`TEMPLATES.md`](TEMPLATES.md) para conocer la estructura, selección,
@@ -68,6 +71,8 @@ datos de demostración, versionado y condiciones de actualización.
 
 `ABERA_MODE=demo` instala las seis soluciones con usuarios y registros
 sintéticos relacionados para todos sus módulos durante el primer arranque.
+Las plantillas no comparten un diseño genérico: mapas, colas personales,
+checklists, agenda, fichas 360° y pipelines se usan solo donde aportan valor.
 
 ### Bootstrap OAuth cifrado
 
@@ -78,6 +83,15 @@ agnóstica de infraestructura, admite los modos `basic`, `pro` y `admin`, y no
 requiere iniciar sesión manualmente. Consulte
 [`BOOTSTRAP_OAUTH.md`](BOOTSTRAP_OAUTH.md) para conocer las variables, el
 contrato criptográfico, la matriz RBAC y el procedimiento de recuperación.
+
+### Asistente de IA opcional
+
+La distribución incluye un widget transversal y un puente Go de lista cerrada
+para conectar una sesión de Corteza con un agente externo sin entregar secretos
+al navegador. Está desactivado por defecto, usa el rol `abera-ai-user` y admite
+IAM SigV4 con API Gateway o un token exclusivo para desarrollo local. Consulte
+[`AI_ASSISTANT.md`](AI_ASSISTANT.md) para conocer el modelo de confianza,
+variables, rutas y separación entre repositorios.
 
 ## Creating With Corteza
 

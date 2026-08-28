@@ -90,9 +90,9 @@ resources:
         grant:
           title: Conceder permisos sobre el componente de Compose
         namespace.create:
-          title: Crear espacios de nombres
+          title: Crear espacios de trabajo
         namespaces.search:
-          title: Listar y buscar espacios de nombres
+          title: Listar y buscar espacios de trabajo
         settings.manage:
           title: Gestionar todos los ajustes
         settings.read:
@@ -131,34 +131,34 @@ resources:
         record.value.update:
           title: Actualizar cualquier campo de módulo
     namespace:
-      label: Espacios de nombres
+      label: Espacios de trabajo
       operations:
         chart.create:
-          title: Crear gráficos en cualquier espacio de nombres
+          title: Crear gráficos en cualquier espacio de trabajo
         charts.search:
-          title: Listar y buscar gráficos en cualquier espacio de nombres
+          title: Listar y buscar gráficos en cualquier espacio de trabajo
         charts.export:
-          title: Exportar gráficos de cualquier espacio de nombres
+          title: Exportar gráficos de cualquier espacio de trabajo
         delete:
-          title: Eliminar cualquier espacio de nombres
+          title: Eliminar cualquier espacio de trabajo
         manage:
-          title: Gestionar cualquier espacio de nombres
+          title: Gestionar cualquier espacio de trabajo
         module.create:
-          title: Crear módulos en cualquier espacio de nombres
+          title: Crear módulos en cualquier espacio de trabajo
         modules.search:
-          title: Listar y buscar módulos en cualquier espacio de nombres
+          title: Listar y buscar módulos en cualquier espacio de trabajo
         modules.export:
-          title: Exportar módulos de cualquier espacio de nombres
+          title: Exportar módulos de cualquier espacio de trabajo
         page.create:
-          title: Crear páginas en cualquier espacio de nombres
+          title: Crear páginas en cualquier espacio de trabajo
         pages.search:
-          title: Listar y buscar páginas en cualquier espacio de nombres
+          title: Listar y buscar páginas en cualquier espacio de trabajo
         read:
-          title: Acceder a cualquier espacio de nombres
+          title: Acceder a cualquier espacio de trabajo
         update:
-          title: Actualizar cualquier espacio de nombres
+          title: Actualizar cualquier espacio de trabajo
         export:
-          title: Exportar cualquier espacio de nombres
+          title: Exportar cualquier espacio de trabajo
     page:
       label: Páginas
       operations:
@@ -207,9 +207,9 @@ resources:
         triggers.search:
           title: Buscar activadores
         workflow.create:
-          title: Crear workflow nuevo
+          title: Crear un flujo de trabajo
         workflows.search:
-          title: Buscar workflows
+          title: Buscar flujos de trabajo
         resource-translations.manage:
           title: Gestionar traducciones de recursos
     auth-client-extra-1:
@@ -655,38 +655,38 @@ resources:
           specific: Actualizar {{target}}
           title: Actualizar cualquier informe
     workflow:
-      label: Workflows
-      all: todos los workflows
-      specific: workflow "{{target}}"
+      label: Flujos de trabajo
+      all: todos los flujos de trabajo
+      specific: flujo de trabajo "{{target}}"
       operations:
         delete:
           description: 'Predeterminado: denegar'
-          specific: Eliminar este workflow
-          title: Eliminar cualquier workflow
+          specific: 'Eliminar este flujo de trabajo'
+          title: 'Eliminar cualquier flujo de trabajo'
         execute:
           description: 'Predeterminado: denegar'
-          specific: Ejecutar este workflow
-          title: Ejecutar cualquier workflow
+          specific: 'Ejecutar este flujo de trabajo'
+          title: 'Ejecutar cualquier flujo de trabajo'
         read:
           description: 'Predeterminado: denegar'
-          specific: Leer este workflow
-          title: Leer cualquier workflow
+          specific: 'Leer este flujo de trabajo'
+          title: 'Leer cualquier flujo de trabajo'
         sessions.manage:
           description: 'Predeterminado: denegar'
-          specific: Gestionar las sesiones de este workflow
+          specific: 'Gestionar las sesiones de este flujo de trabajo'
           title: Gestionar todas las sesiones
         triggers.manage:
           description: 'Predeterminado: denegar'
-          specific: Gestionar los activadores de este workflow
+          specific: 'Gestionar los activadores de este flujo de trabajo'
           title: Gestionar todos los activadores
         undelete:
           description: 'Predeterminado: denegar'
-          specific: Restaurar este workflow
-          title: Restaurar cualquier workflow
+          specific: 'Restaurar este flujo de trabajo'
+          title: 'Restaurar cualquier flujo de trabajo'
         update:
           description: 'Predeterminado: denegar'
-          specific: Actualizar este workflow
-          title: Actualizar cualquier workflow
+          specific: 'Actualizar este flujo de trabajo'
+          title: 'Actualizar cualquier flujo de trabajo'
   system:
     user:
       label: Usuarios
