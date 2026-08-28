@@ -1,6 +1,7 @@
 package envoy
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"strings"
@@ -21,19 +22,40 @@ const (
 // generic yaml.v3 decoder cannot populate raw JSON fields and silently leaves
 // module metadata empty during provisioning.
 func (d *auxYamlDoc) unmarshalModuleMetaNode(r *types.Module, n *yaml.Node) (refs map[string]envoyx.Ref, idents envoyx.Identifiers, err error) {
-	if !y7s.IsMapping(n) {
-		return nil, envoyx.Identifiers{}, fmt.Errorf("module meta must be a mapping")
+	// Template YAML commonly uses a mapping, while Corteza's generated
+	// export encoder represents JSONText as a !!binary scalar. Accept both
+	// forms so importing an export remains backwards compatible.
+	if n == nil || n.Tag == "!!null" || n.Value == "" && len(n.Content) == 0 {
+		return nil, envoyx.Identifiers{}, nil
 	}
 
-	var meta map[string]any
-	if err = n.Decode(&meta); err != nil {
-		return nil, envoyx.Identifiers{}, fmt.Errorf("decode module meta: %w", err)
+	if y7s.IsMapping(n) || y7s.IsSeq(n) {
+		var meta any
+		if err = n.Decode(&meta); err != nil {
+			return nil, envoyx.Identifiers{}, fmt.Errorf("decode module meta: %w", err)
+		}
+
+		r.Meta, err = json.Marshal(meta)
+		if err != nil {
+			return nil, envoyx.Identifiers{}, fmt.Errorf("encode module meta: %w", err)
+		}
+		return nil, envoyx.Identifiers{}, nil
 	}
 
-	r.Meta, err = json.Marshal(meta)
-	if err != nil {
-		return nil, envoyx.Identifiers{}, fmt.Errorf("encode module meta: %w", err)
+	var raw []byte
+	if n.Tag == "!!binary" {
+		raw, err = base64.StdEncoding.DecodeString(strings.Join(strings.Fields(n.Value), ""))
+		if err != nil {
+			return nil, envoyx.Identifiers{}, fmt.Errorf("decode module meta: %w", err)
+		}
+	} else {
+		raw = []byte(n.Value)
 	}
+
+	if !json.Valid(raw) {
+		return nil, envoyx.Identifiers{}, fmt.Errorf("module meta must be a mapping or valid JSON")
+	}
+	r.Meta = append(r.Meta[:0], raw...)
 
 	return nil, envoyx.Identifiers{}, nil
 }

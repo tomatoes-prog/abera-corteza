@@ -1,8 +1,10 @@
 package yaml
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/cortezaproject/corteza/server/compose/types"
 	"github.com/cortezaproject/corteza/server/pkg/envoy"
@@ -74,15 +76,32 @@ func (wrap *composeModule) UnmarshalYAML(n *yaml.Node) (err error) {
 			return y7s.DecodeScalar(v, "module handle", &wrap.res.Handle)
 
 		case "meta":
-			var meta any
-			if err = v.Decode(&meta); err != nil {
+			if v == nil || v.Tag == "!!null" || v.Value == "" && len(v.Content) == 0 {
+				return nil
+			}
+
+			if y7s.IsMapping(v) || y7s.IsSeq(v) {
+				var meta any
+				if err = v.Decode(&meta); err != nil {
+					return err
+				}
+				wrap.res.Meta, err = json.Marshal(meta)
 				return err
 			}
-			encoded, encodeErr := json.Marshal(meta)
-			if encodeErr != nil {
-				return encodeErr
+
+			var raw []byte
+			if v.Tag == "!!binary" {
+				raw, err = base64.StdEncoding.DecodeString(strings.Join(strings.Fields(v.Value), ""))
+				if err != nil {
+					return err
+				}
+			} else {
+				raw = []byte(v.Value)
 			}
-			wrap.res.Meta = encoded
+			if !json.Valid(raw) {
+				return fmt.Errorf("module meta must be a mapping or valid JSON")
+			}
+			wrap.res.Meta = append(wrap.res.Meta[:0], raw...)
 			return nil
 
 		case "fields":

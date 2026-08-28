@@ -6,6 +6,7 @@ package envoy
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"os"
 	"path/filepath"
@@ -14,6 +15,7 @@ import (
 	"github.com/cortezaproject/corteza/server/compose/types"
 	"github.com/cortezaproject/corteza/server/pkg/envoyx"
 	"github.com/stretchr/testify/require"
+	"gopkg.in/yaml.v3"
 )
 
 func TestModuleFieldsStayAttachedToTheirModule(t *testing.T) {
@@ -101,4 +103,18 @@ func TestModuleMetadataSurvivesYamlDecode(t *testing.T) {
 	}
 
 	t.Fatal("module leads not found")
+}
+
+func TestModuleMetadataAcceptsExportedJSONText(t *testing.T) {
+	req := require.New(t)
+	r := &types.Module{}
+	n := &yaml.Node{
+		Kind:  yaml.ScalarNode,
+		Tag:   "!!binary",
+		Value: base64.StdEncoding.EncodeToString([]byte(`{"description":"Exported metadata"}`)),
+	}
+
+	_, _, err := (&auxYamlDoc{}).unmarshalModuleMetaNode(r, n)
+	req.NoError(err)
+	req.JSONEq(`{"description":"Exported metadata"}`, string(r.Meta))
 }

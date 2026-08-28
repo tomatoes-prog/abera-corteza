@@ -120,7 +120,23 @@ application_port=$(docker port "$application" 80/tcp | sed -n 's/.*:\([0-9][0-9]
 	exit 1
 }
 verify_private_key=$private_key_host
-verify_envelope=$envelope_host
+verify_envelope_host=${runtime_dir}/bootstrap.verify.enc.json
+verify_envelope_destination=$verify_envelope_host
+
+if "$windows_docker" && command -v cygpath >/dev/null 2>&1; then
+	verify_envelope_destination=$(cygpath -w "$verify_envelope_host")
+fi
+
+# The application deliberately writes the bootstrap envelope as 0600. The
+# container user may not match the host CI user on Linux, so copy the
+# encrypted (never plaintext) envelope out through Docker before PowerShell
+# reads it. This keeps the product permissions strict while making the
+# verification independent of UID mapping.
+docker cp "$application:/run/abera/bootstrap.enc.json" "$verify_envelope_destination" >/dev/null
+if ! "$windows_docker"; then
+	chmod 600 "$verify_envelope_destination"
+fi
+verify_envelope=$verify_envelope_host
 
 windows_path_from_posix() {
 	case "$1" in
@@ -146,16 +162,16 @@ case "$pwsh_bin" in
 	*pwsh.exe)
 		if [ "$windows_docker" = true ] && command -v cygpath >/dev/null 2>&1; then
 			verify_private_key=$(cygpath -w "$private_key_host")
-			verify_envelope=$(cygpath -w "$envelope_host")
+			verify_envelope=$(cygpath -w "$verify_envelope_host")
 		elif command -v wslpath >/dev/null 2>&1; then
 			verify_private_key=$(wslpath -w "$private_key_host" 2>/dev/null || windows_path_from_posix "$private_key_host")
-			verify_envelope=$(wslpath -w "$envelope_host" 2>/dev/null || windows_path_from_posix "$envelope_host")
+			verify_envelope=$(wslpath -w "$verify_envelope_host" 2>/dev/null || windows_path_from_posix "$verify_envelope_host")
 		elif command -v cygpath >/dev/null 2>&1; then
 			verify_private_key=$(cygpath -w "$private_key_host")
-			verify_envelope=$(cygpath -w "$envelope_host")
+			verify_envelope=$(cygpath -w "$verify_envelope_host")
 		else
 			verify_private_key=$(windows_path_from_posix "$private_key_host")
-			verify_envelope=$(windows_path_from_posix "$envelope_host")
+			verify_envelope=$(windows_path_from_posix "$verify_envelope_host")
 		fi
 		;;
 esac
