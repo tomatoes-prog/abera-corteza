@@ -10,7 +10,7 @@ jobs:
     name: SonarQube
     # The upstream project has a SonarCloud project, but this fork may not.
     # Do not turn every pull request red when the fork has no token configured.
-    if: ${{ github.repository == 'cortezaproject/corteza' && secrets.SONAR_TOKEN != '' }}
+    if: ${{ github.repository == 'cortezaproject/corteza' }}
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
