@@ -24,6 +24,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
       - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff
         with:
           go-version: ${{ env.GO_VERSION }}
@@ -36,6 +38,8 @@ jobs:
         run: python3 tests/validate-spanish-locale.py
       - name: Validate template selection and restart invariants
         run: bash tests/docker-template-select.sh
+      - name: Validate source release contract
+        run: python3 -m unittest tests/test_source_release_contract.py
       - name: Test Abera provisioning and OAuth bootstrap
         working-directory: server
         run: go test -mod=vendor ./pkg/provision ./automation/envoy ./auth/oauth2
@@ -45,6 +49,7 @@ jobs:
     needs: validate-source
     outputs:
       digest: ${{ steps.publish.outputs.digest }}
+      tag: ${{ steps.publish.outputs.tag }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
@@ -55,7 +60,7 @@ jobs:
           if [[ "$GITHUB_REF" == refs/tags/* ]]; then
             version="$GITHUB_REF_NAME"
           else
-            version="sha-${GITHUB_SHA:0:12}"
+            version="sha-${GITHUB_SHA}"
           fi
           printf 'BUILD_VERSION=%s\n' "$version" >> "$GITHUB_ENV"
           printf 'TEST_IMAGE=abera-corteza-ci:%s\n' "$version" >> "$GITHUB_ENV"
@@ -75,61 +80,61 @@ jobs:
           set -euo pipefail
           test "$(docker image inspect --format '{{.Os}}/{{.Architecture}}' "$TEST_IMAGE")" = linux/amd64
           test "$(docker image inspect --format '{{index .Config.Labels "org.opencontainers.image.version"}}' "$TEST_IMAGE")" = "$BUILD_VERSION"
-      - name: Scan critical vulnerabilities
-        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25
-        with:
-          image-ref: ${{ env.TEST_IMAGE }}
-          severity: CRITICAL
-          ignore-unfixed: true
-          exit-code: "1"
-          format: table
-      - name: Generate SBOM
-        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610
-        with:
-          image: ${{ env.TEST_IMAGE }}
-          format: spdx-json
-          output-file: abera-corteza.spdx.json
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: abera-corteza-sbom-${{ env.BUILD_VERSION }}
-          path: abera-corteza.spdx.json
-          if-no-files-found: error
       - name: Test PostgreSQL 15, 1 GiB memory and restart idempotency
         run: bash tests/docker-postgres-smoke.sh "$TEST_IMAGE"
       - name: Authenticate to Docker Hub
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.event_name == 'push'
         uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Publish the already-tested image
         id: publish
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.event_name == 'push'
         shell: bash
         run: |
           set -euo pipefail
-          [[ "$BUILD_VERSION" =~ ^2024\.9\.[0-9]+-abera\.[0-9]+$ ]]
+          [[ "$BUILD_VERSION" =~ ^(2024\.9\.[0-9]+-abera\.[0-9]+|sha-[0-9a-f]{40})$ ]]
           [[ "$DOCKERHUB_REPOSITORY" =~ ^[a-z0-9]+([._-][a-z0-9]+)*/[a-z0-9]+([._-][a-z0-9]+)*$ ]]
           publish_image="${DOCKERHUB_REPOSITORY}:${BUILD_VERSION}"
-          docker tag "$TEST_IMAGE" "$publish_image"
-          docker push "$publish_image"
-          docker buildx imagetools inspect "$publish_image"
-          digest=$(docker buildx imagetools inspect "$publish_image" --format '{{.Manifest.Digest}}')
+          if digest="$(
+            docker buildx imagetools inspect "$publish_image" \
+              --format '{{.Manifest.Digest}}' 2>/dev/null
+          )"; then
+            [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]]
+            docker pull --platform linux/amd64 "$publish_image"
+            local_image_id="$(docker image inspect --format '{{.Id}}' "$TEST_IMAGE")"
+            published_image_id="$(docker image inspect --format '{{.Id}}' "$publish_image")"
+            test "$local_image_id" = "$published_image_id" || {
+              echo "Refusing to overwrite immutable image $publish_image with different bytes." >&2
+              exit 1
+            }
+          else
+            docker tag "$TEST_IMAGE" "$publish_image"
+            docker push "$publish_image"
+            docker buildx imagetools inspect "$publish_image"
+            digest=$(docker buildx imagetools inspect "$publish_image" --format '{{.Manifest.Digest}}')
+          fi
           [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]]
           printf 'digest=%s\n' "$digest" >> "$GITHUB_OUTPUT"
+          printf 'tag=%s\n' "$BUILD_VERSION" >> "$GITHUB_OUTPUT"
           printf '{"repository":"%s","tag":"%s","digest":"%s","platform":"linux/amd64"}\n' \
             "$DOCKERHUB_REPOSITORY" "$BUILD_VERSION" "$digest" > abera-image-release.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.event_name == 'push'
         with:
           name: abera-corteza-release-${{ env.BUILD_VERSION }}
           path: abera-image-release.json
           if-no-files-found: error
 
   attest-image:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.event_name == 'push'
     runs-on: ubuntu-24.04
     needs: build-and-test-image
+    outputs:
+      provenance-url: ${{ steps.provenance.outputs.attestation-url }}
+      sbom-url: ${{ steps.sbom-attestation.outputs.attestation-url }}
+      sbom-artifact-url: ${{ steps.sbom-file-attestation.outputs.attestation-url }}
     permissions:
       attestations: write
       contents: read
@@ -139,28 +144,168 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          printf 'BUILD_VERSION=%s\n' "$GITHUB_REF_NAME" >> "$GITHUB_ENV"
+          printf 'BUILD_VERSION=%s\n' "${{ needs.build-and-test-image.outputs.tag }}" >> "$GITHUB_ENV"
       - name: Authenticate to Docker Hub
         uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Scan the exact published digest
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25
+        with:
+          image-ref: docker.io/${{ env.DOCKERHUB_REPOSITORY }}@${{ needs.build-and-test-image.outputs.digest }}
+          severity: CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+          format: table
       - name: Generate SBOM for the published digest
         uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610
         with:
-          image: docker.io/${{ env.DOCKERHUB_REPOSITORY }}:${{ env.BUILD_VERSION }}
+          image: docker.io/${{ env.DOCKERHUB_REPOSITORY }}@${{ needs.build-and-test-image.outputs.digest }}
           format: spdx-json
-          output-file: abera-corteza-attested.spdx.json
+          output-file: abera-corteza.spdx.json
       - name: Attest build provenance
-        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8
+        id: provenance
+        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6 # v4.2.0
         with:
           subject-name: docker.io/${{ env.DOCKERHUB_REPOSITORY }}
           subject-digest: ${{ needs.build-and-test-image.outputs.digest }}
           push-to-registry: true
+          create-storage-record: false
       - name: Attest the generated SBOM
-        uses: actions/attest-sbom@c604332985a26aa8cf1bdc465b92731239ec6b9e
+        id: sbom-attestation
+        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6 # v4.2.0
         with:
           subject-name: docker.io/${{ env.DOCKERHUB_REPOSITORY }}
           subject-digest: ${{ needs.build-and-test-image.outputs.digest }}
-          sbom-path: abera-corteza-attested.spdx.json
+          sbom-path: abera-corteza.spdx.json
           push-to-registry: true
+          create-storage-record: false
+      - name: Attest the exact downloaded SBOM file
+        id: sbom-file-attestation
+        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6 # v4.2.0
+        with:
+          subject-path: abera-corteza.spdx.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: abera-corteza-attested-sbom-${{ env.BUILD_VERSION }}
+          path: abera-corteza.spdx.json
+          if-no-files-found: error
+          retention-days: 30
+
+  publish-source-release:
+    if: github.ref == 'refs/heads/2024.9.x'
+    runs-on: ubuntu-24.04
+    needs: [build-and-test-image, attest-image]
+    permissions:
+      attestations: write
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: abera-corteza-attested-sbom-${{ needs.build-and-test-image.outputs.tag }}
+          path: dist/source-release
+      - name: Build the data-only source release manifest
+        env:
+          BASE_COMMIT: ${{ github.event.before }}
+          IMAGE_DIGEST: ${{ needs.build-and-test-image.outputs.digest }}
+          IMAGE_TAG: ${{ needs.build-and-test-image.outputs.tag }}
+          PROVENANCE_URL: ${{ needs.attest-image.outputs.provenance-url }}
+          SBOM_ATTESTATION_URL: ${{ needs.attest-image.outputs.sbom-url }}
+          SBOM_ARTIFACT_ATTESTATION_URL: ${{ needs.attest-image.outputs.sbom-artifact-url }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .abera/derive_source_evidence.py \
+            --base "$BASE_COMMIT" --head "$GITHUB_SHA" \
+            --output dist/source-release/change-evidence.json
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          contract = json.loads(
+              Path(".abera/source-contract.json").read_text(encoding="utf-8")
+          )
+          change_evidence = json.loads(
+              Path("dist/source-release/change-evidence.json").read_text(encoding="utf-8")
+          )
+          sbom = Path("dist/source-release/abera-corteza.spdx.json")
+          manifest = {
+              "schemaVersion": 1,
+              "productId": contract["productId"],
+              "sourceRepository": os.environ["GITHUB_REPOSITORY"],
+              "sourceRef": os.environ["GITHUB_REF"],
+              "sourceCommit": os.environ["GITHUB_SHA"],
+              "sourceVersion": os.environ["IMAGE_TAG"],
+              "image": {
+                  "repository": f"docker.io/{os.environ['DOCKERHUB_REPOSITORY']}",
+                  "tag": os.environ["IMAGE_TAG"],
+                  "digest": os.environ["IMAGE_DIGEST"],
+                  "platform": "linux/amd64",
+              },
+              "sbom": {
+                  "artifactName": sbom.name,
+                  "format": "spdx-json",
+                  "sha256": hashlib.sha256(sbom.read_bytes()).hexdigest(),
+              },
+              "provenance": {
+                  "type": "github-attestations",
+                  "workflow": "abera-image.yml",
+                  "runId": int(os.environ["GITHUB_RUN_ID"]),
+                  "subjectDigest": os.environ["IMAGE_DIGEST"],
+                  "predicateType": "https://slsa.dev/provenance/v1",
+                  "url": os.environ["PROVENANCE_URL"],
+                  "sbomUrl": os.environ["SBOM_ATTESTATION_URL"],
+                  "sbomArtifactUrl": os.environ["SBOM_ARTIFACT_ATTESTATION_URL"],
+              },
+              "environmentContract": contract["environmentContract"],
+              "runtimeEnvironment": contract["runtimeEnvironment"],
+              "changeClassification": change_evidence["changeClassification"],
+              "changeEvidence": change_evidence,
+              "generatedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+          }
+          Path("dist/source-release/source-release.json").write_text(
+              json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+          )
+          PY
+      - name: Attest the exact source release manifest
+        id: source-release-file-attestation
+        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6 # v4.2.0
+        with:
+          subject-path: dist/source-release/source-release.json
+      - name: Record the non-authoritative source release attestation receipt
+        env:
+          SOURCE_RELEASE_ATTESTATION_URL: ${{ steps.source-release-file-attestation.outputs.attestation-url }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          manifest = Path("dist/source-release/source-release.json")
+          receipt = {
+              "schemaVersion": 1,
+              "artifactName": manifest.name,
+              "sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+              "url": os.environ["SOURCE_RELEASE_ATTESTATION_URL"],
+          }
+          Path("dist/source-release/source-release-attestation.json").write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+          )
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: abera-corteza-source-release-${{ github.sha }}
+          path: dist/source-release
+          if-no-files-found: error
+          retention-days: 30

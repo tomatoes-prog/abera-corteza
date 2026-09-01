@@ -77,6 +77,7 @@ docker run --detach --name "$application" --network "$network" \
 	--env 'DB_DSN=postgres://corteza:corteza-ci-password@'"${database}"':5432/corteza?sslmode=disable' \
 	--env 'AUTH_JWT_SECRET=ci-only-jwt-secret-with-at-least-thirty-two-characters' \
 	--env ABERA_MODE=demo \
+	--env ABERA_AI_ENABLED=false \
 	--env ABERA_DEMO_BUNDLE=showroom-co \
 	--env ABERA_INITIAL_ADMIN_EMAIL=admin-ci@abera.invalid \
 	--env 'ABERA_INITIAL_ADMIN_NAME=Administrador CI' \
