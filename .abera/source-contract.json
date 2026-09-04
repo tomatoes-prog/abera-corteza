@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "productId": "abera-corteza-essential",
+  "environmentContract": {
+    "schemaVersion": 1,
+    "variables": [
+      {
+        "name": "ABERA_AI_AGENT_URL",
+        "required": false,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_AI_API_KEY_FILE",
+        "required": false,
+        "sensitive": true,
+        "valueSource": "secret"
+      },
+      {
+        "name": "ABERA_AI_AUTH_MODE",
+        "required": false,
+        "sensitive": false,
+        "valueSource": "image-default"
+      },
+      {
+        "name": "ABERA_AI_AWS_REGION",
+        "required": false,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_AI_ENABLED",
+        "required": false,
+        "sensitive": false,
+        "valueSource": "image-default"
+      },
+      {
+        "name": "ABERA_AI_LOCAL_TOKEN_FILE",
+        "required": false,
+        "sensitive": true,
+        "valueSource": "secret"
+      },
+      {
+        "name": "ABERA_AI_REQUIRED_ROLE",
+        "required": false,
+        "sensitive": false,
+        "valueSource": "image-default"
+      },
+      {
+        "name": "ABERA_AI_TENANT_ID",
+        "required": false,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_AI_TIMEOUT",
+        "required": false,
+        "sensitive": false,
+        "valueSource": "image-default"
+      },
+      {
+        "name": "ABERA_BOOTSTRAP_OUTPUT_FILE",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_BOOTSTRAP_PUBLIC_KEY_FILE",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_DEMO_BUNDLE",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_INITIAL_ADMIN_EMAIL",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_INITIAL_ADMIN_HANDLE",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_INITIAL_ADMIN_NAME",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_MCP_MODE",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_MODE",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ABERA_TEMPLATE",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ACTIONLOG_DEBUG",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "ACTIONLOG_ENABLED",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "AUTH_BASE_URL",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "AUTH_JWT_SECRET",
+        "required": true,
+        "sensitive": true,
+        "valueSource": "secret"
+      },
+      {
+        "name": "DB_DSN",
+        "required": true,
+        "sensitive": true,
+        "valueSource": "secret"
+      },
+      {
+        "name": "DOMAIN",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "DOMAIN_WEBAPP",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "HTTP_ADDR",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "HTTP_SSL_TERMINATED",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "HTTP_WEBAPP_ENABLED",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      },
+      {
+        "name": "STORAGE_PATH",
+        "required": true,
+        "sensitive": false,
+        "valueSource": "platform"
+      }
+    ]
+  },
+  "runtimeEnvironment": {
+    "schemaVersion": 1,
+    "internalVariables": [
+      "ABERA_ADMIN_EMAIL",
+      "ABERA_ADMIN_PASSWORD",
+      "ABERA_CLIENT_SECRET",
+      "ABERA_DEMO_ROOT",
+      "ABERA_TEMPLATE_ROOT",
+      "API_BASE",
+      "API_BASEURL",
+      "API_FULL_URL",
+      "API_HOST",
+      "AUTH_DEFAULT_USER_GROUP",
+      "AUTH_JWT_EXPIRY",
+      "AWS_ACCESS_KEY_ID",
+      "AWS_CONTAINER_AUTHORIZATION_TOKEN",
+      "AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE",
+      "AWS_CONTAINER_CREDENTIALS_FULL_URI",
+      "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI",
+      "AWS_DEFAULT_REGION",
+      "AWS_EC2_METADATA_DISABLED",
+      "AWS_REGION",
+      "AWS_SECRET_ACCESS_KEY",
+      "AWS_SESSION_TOKEN",
+      "BASE_PATH",
+      "BRANCH",
+      "BUILD_TIME",
+      "BUILD_VERSION",
+      "CONFIGJS",
+      "CORTEZA_DEFAULT_LOCALE",
+      "DEBUG_DUMP_STACK_IN_RESPONSE",
+      "DEFAULT_LOCALE",
+      "DIR",
+      "DISCOVERY_BASEURL",
+      "DISCOVERY_BASE_URL",
+      "DRAFT_STORAGE_PREFIX",
+      "ENVIRONMENT",
+      "ES_ADDRESS",
+      "ES_CERT_FILE",
+      "ES_ENABLE_RETRY_ON_TIMEOUT",
+      "ES_INDEX_BACKFILL_MONTHS",
+      "ES_INDEX_INTERVAL",
+      "ES_MAX_RETRIES",
+      "ES_PASSWORD",
+      "ES_SECURE",
+      "ES_USERNAME",
+      "HOST",
+      "HOSTNAME",
+      "HTTP_API_BASE_URL",
+      "HTTP_BASE_URL",
+      "HTTP_ENABLE_HEALTHCHECK_ROUTE",
+      "HTTP_ENABLE_VERSION_ROUTE",
+      "HTTP_WEBAPP_BASE_DIR",
+      "LETSENCRYPT_HOST",
+      "LOG_DEBUG",
+      "MINIO_BUCKET_SEP",
+      "NODE_ENV",
+      "PORT",
+      "PROVISION_PATH",
+      "SMTP_HOST",
+      "UPGRADE_MIGRATE_OLD_COMPOSE_RECORD_VALUES_BATCH_SIZE",
+      "URL",
+      "VERSION",
+      "VIRTUAL_HOST",
+      "WAIT_FOR",
+      "WAIT_FOR_STATUS_PAGE",
+      "WEBAPP_DIR",
+      "ZIP"
+    ]
+  }
+}
