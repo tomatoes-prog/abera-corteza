@@ -2,8 +2,6 @@ package handlers
 
 import (
 	"net/http"
-	"os"
-	"strings"
 
 	"github.com/cortezaproject/corteza/server/pkg/actionlog"
 	"github.com/cortezaproject/corteza/server/pkg/auth"
@@ -12,15 +10,6 @@ import (
 	"github.com/go-chi/httprate"
 	"github.com/gorilla/csrf"
 )
-
-// markPlaintextHTTP tells the CSRF middleware when authentication is served
-// over plain HTTP (for example, a local Docker deployment). CSRF token
-// validation remains enabled; only the HTTPS-only origin check is adjusted.
-func markPlaintextHTTP(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		next.ServeHTTP(w, csrf.PlaintextHTTPRequest(r))
-	})
-}
 
 func (h *AuthHandlers) MountHttpRoutes(r chi.Router) {
 	var (
@@ -34,20 +23,7 @@ func (h *AuthHandlers) MountHttpRoutes(r chi.Router) {
 
 	r.Handle("/auth/", http.RedirectHandler("/auth", http.StatusSeeOther))
 	r.Group(func(r chi.Router) {
-		// Authentication pages are rendered before the webapp can apply its
-		// runtime locale. Honour the deployment-wide Docker default for
-		// anonymous auth requests; authenticated users can still override this
-		// with their preferred language in the handler context.
-		r.Use(func(next http.Handler) http.Handler {
-			return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				if lang := strings.TrimSpace(os.Getenv("CORTEZA_DEFAULT_LOCALE")); lang != "" &&
-					r.URL.Query().Get("lng") == "" {
-					r.Header.Set(locale.AcceptLanguageHeader, lang)
-				}
-
-				next.ServeHTTP(w, r)
-			})
-		})
+		r.Use(aberaDefaultLocale)
 
 		r.Use(locale.DetectLanguage(locale.Global()))
 
@@ -68,7 +44,7 @@ func (h *AuthHandlers) MountHttpRoutes(r chi.Router) {
 			// all routes protected with CSRF:
 			if h.Opt.CsrfEnabled {
 				if !h.Opt.SessionCookieSecure {
-					r.Use(markPlaintextHTTP)
+					r.Use(aberaPlaintextHTTP)
 				}
 
 				r.Use(csrf.Protect(
@@ -132,8 +108,11 @@ func (h *AuthHandlers) MountHttpRoutes(r chi.Router) {
 			r.Post(tbp(l.OAuth2AuthorizeClient), h.handle(authOnly(h.oauth2AuthorizeClientProc)))
 			r.Get(tbp(l.OAuth2DefaultClient), h.handle(h.oauth2authorizeDefaultClient))
 			r.Post(tbp(l.OAuth2DefaultClient), h.handle(h.oauth2authorizeDefaultClientProc))
-			r.Get(tbp(l.OAuth2UserInfo), h.handle(h.oauth2authorizeDefaultClientProc))
 		})
+
+		// userinfo is authorized with an access token, not with a session; CSRF does not apply
+		r.Get(tbp(l.OAuth2UserInfo), h.oauth2Userinfo)
+		r.Post(tbp(l.OAuth2UserInfo), h.oauth2Userinfo)
 
 		// Wrapping SAML structs so we assure that fresh ones are always used in case
 		// of settings changes.
