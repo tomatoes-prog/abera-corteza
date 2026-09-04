@@ -76,6 +76,23 @@ func TestContextOnlyReturnsActorWhenAllowed(t *testing.T) {
 	}
 }
 
+func TestDisabledContextCanExposePreviewWithoutAccess(t *testing.T) {
+	handler, err := NewHandler(Config{WidgetVisible: true}, nil, nil, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	recorder := httptest.NewRecorder()
+	request := httptest.NewRequest(http.MethodGet, "/assistant/auth/context", nil)
+	router := chi.NewRouter()
+	router.Route("/assistant", handler.Routes())
+	router.ServeHTTP(recorder, request)
+
+	payload := decodeJSON(t, recorder.Body)
+	if recorder.Code != http.StatusOK || payload["enabled"] != false || payload["allowed"] != false || payload["visible"] != true {
+		t.Fatalf("unexpected preview response: %d %#v", recorder.Code, payload)
+	}
+}
+
 func TestContainerCredentialURLIsRestricted(t *testing.T) {
 	for _, raw := range []string{
 		"http://127.0.0.1:9911/credentials",

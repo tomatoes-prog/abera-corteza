@@ -59,6 +59,12 @@
         "valueSource": "image-default"
       },
       {
+        "name": "ABERA_AI_WIDGET_VISIBLE",
+        "required": false,
+        "sensitive": false,
+        "valueSource": "image-default"
+      },
+      {
         "name": "ABERA_BOOTSTRAP_OUTPUT_FILE",
         "required": true,
         "sensitive": false,

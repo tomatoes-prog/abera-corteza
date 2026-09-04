@@ -27,6 +27,7 @@ var tenantPattern = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$`)
 
 type Config struct {
 	Enabled          bool
+	WidgetVisible    bool
 	AgentURL         *url.URL
 	TenantID         string
 	RequiredRole     string
@@ -56,6 +57,13 @@ func ConfigFromEnvironment() (Config, error) {
 			return cfg, fmt.Errorf("ABERA_AI_ENABLED must be true or false: %w", err)
 		}
 		cfg.Enabled = enabled
+	}
+	if raw := strings.TrimSpace(os.Getenv("ABERA_AI_WIDGET_VISIBLE")); raw != "" {
+		visible, err := strconv.ParseBool(raw)
+		if err != nil {
+			return cfg, fmt.Errorf("ABERA_AI_WIDGET_VISIBLE must be true or false: %w", err)
+		}
+		cfg.WidgetVisible = visible
 	}
 	if !cfg.Enabled {
 		return cfg, nil
