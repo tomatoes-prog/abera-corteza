@@ -70,24 +70,24 @@ jobs:
           echo ${RELEASE_CRUST_SFTP_KEY} | base64 -d > ${RELEASE_CRUST_KEY_FILE} && \
           echo ${RELEASE_CRUST_SFTP_KEY} > /tmp/foo
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v6
         with: { node-version: '${{ env.NODE_VERSION }}' }
 
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v7
         with: { go-version: '${{ env.GO_VERSION }}' }
 
       - name: Setup YARN
         run: npm install -g yarn @vue/cli-service
 
       - name: Checkout corteza repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           path: corteza
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.ref_name }}
 
       - name: Clone CY repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           repository: cortezaproject/corteza-e2e-cypress
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -95,7 +95,7 @@ jobs:
           path: corteza-e2e-cypress
 
       - name: Cache lib dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: |
             corteza/lib/vue/node_modules
