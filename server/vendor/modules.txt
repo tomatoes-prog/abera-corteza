@@ -167,6 +167,9 @@ github.com/go-chi/cors
 # github.com/go-chi/httprate v0.5.3
 ## explicit; go 1.14
 github.com/go-chi/httprate
+# github.com/go-chi/jwtauth v1.2.0
+## explicit; go 1.15
+github.com/go-chi/jwtauth
 # github.com/go-oauth2/oauth2/v4 v4.5.4
 ## explicit; go 1.21
 github.com/go-oauth2/oauth2/v4

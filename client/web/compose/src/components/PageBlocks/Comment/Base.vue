@@ -266,7 +266,6 @@
 <script>
 import { NoID, compose, fmt } from '@cortezaproject/corteza-js'
 import { components } from '@cortezaproject/corteza-vue'
-import axios from 'axios'
 import { evaluatePrefilter, getFieldFilter, isFieldInFilter } from 'corteza-webapp-compose/src/lib/record-filter'
 import records from 'corteza-webapp-compose/src/mixins/records'
 import users from 'corteza-webapp-compose/src/mixins/users'
@@ -820,9 +819,7 @@ export default {
               })
             }
           })
-          .catch(e => {
-            console.error(e)
-          })
+          .catch(() => undefined)
           .finally(() => {
             setTimeout(() => {
               this.processing = false
@@ -1154,12 +1151,7 @@ export default {
 
           return Object.values(groups)
         })
-      }).catch(e => {
-        if (!axios.isCancel(e)) {
-          console.error(e)
-        }
-        return []
-      })
+      }).catch(() => [])
     },
 
     fetchReplyRecords (records) {
@@ -1211,7 +1203,7 @@ export default {
       this.replyModal.show = true
       this.replyModal.comment = null
 
-      let comment = this.findRecordByID(recordID)
+      let comment = this.findRecordByID(recordID, moduleID)
 
       if (!comment) {
         return
@@ -1255,7 +1247,7 @@ export default {
         return null
       }
 
-      let replyRecord = this.findRecordByID(comment.values[this.replyField.name])
+      let replyRecord = this.findRecordByID(comment.values[this.replyField.name], (this.roModule || {}).moduleID)
 
       if (!replyRecord) {
         return null

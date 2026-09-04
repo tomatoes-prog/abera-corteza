@@ -7,6 +7,7 @@ import (
 	"github.com/cortezaproject/corteza/server/pkg/actionlog"
 	intAuth "github.com/cortezaproject/corteza/server/pkg/auth"
 	"github.com/cortezaproject/corteza/server/pkg/filter"
+	"github.com/cortezaproject/corteza/server/pkg/xss"
 	"github.com/cortezaproject/corteza/server/store"
 	"github.com/cortezaproject/corteza/server/system/types"
 	"go.uber.org/zap"
@@ -75,6 +76,10 @@ func (svc notification) Find(ctx context.Context, filter types.NotificationFilte
 			nn = make(types.NotificationSet, 0)
 		}
 
+		for _, n := range nn {
+			sanitizeNotification(n)
+		}
+
 		return nil
 	}()
 
@@ -102,6 +107,7 @@ func (svc notification) FindByID(ctx context.Context, ID uint64) (n *types.Notif
 			return NotificationErrNotFound()
 		}
 
+		sanitizeNotification(n)
 		raProps.setNotification(n)
 
 		return nil
@@ -124,6 +130,7 @@ func (svc notification) Create(ctx context.Context, new *types.Notification) (n 
 		n = new
 		n.ID = nextID()
 		n.CreatedAt = *now()
+		sanitizeNotificationConfig(&n.Config)
 
 		// Set creator
 		currentUserID := intAuth.GetIdentityFromContext(ctx).Identity()
@@ -184,6 +191,7 @@ func (svc notification) Update(ctx context.Context, upd *types.Notification) (n 
 		// Assign changed values
 		n.Kind = upd.Kind
 		n.Config = upd.Config
+		sanitizeNotificationConfig(&n.Config)
 		n.UpdatedAt = now()
 
 		if err = store.UpdateNotification(ctx, svc.store, n); err != nil {
@@ -451,6 +459,24 @@ func (svc notification) MarkAllAsUnread(ctx context.Context) (err error) {
 	}()
 
 	return svc.recordAction(ctx, raProps, NotificationActionMarkAllAsUnread, err)
+}
+
+// sanitizeNotificationConfig keeps notification descriptions safe for the
+// clients that render them as HTML. Do this before persistence so every
+// delivery path (HTTP, automation and websocket) observes the same value.
+func sanitizeNotificationConfig(cfg *types.NotificationConfig) {
+	if cfg == nil {
+		return
+	}
+
+	cfg.Simple.Description = xss.RichText(cfg.Simple.Description)
+	cfg.Record.Description = xss.RichText(cfg.Record.Description)
+}
+
+func sanitizeNotification(n *types.Notification) {
+	if n != nil {
+		sanitizeNotificationConfig(&n.Config)
+	}
 }
 
 func (svc notification) checkAssignee(ctx context.Context, n *types.Notification) (err error) {

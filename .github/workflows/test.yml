@@ -17,7 +17,7 @@ env:
   BUILD_OS: linux
   BUILD_ARCH: amd64
 
-  GO_VERSION: 1.24.1
+  GO_VERSION: 1.25.12
   GOFLAGS: -mod=readonly
   WORKFLOW_STACK_TRACE_FULL: true
 
@@ -31,10 +31,10 @@ jobs:
       matrix:
         lib: [ "js", "vue" ]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
         with: { node-version: "${{ env.NODE_VERSION }}" }
-      - uses: actions/cache@v3
+      - uses: actions/cache@v5
         if: ${{ !env.ACT }}
         with:
           path: ~/.npm
@@ -55,14 +55,14 @@ jobs:
     strategy:
       matrix: { app: [ admin, compose, discovery, privacy, reporter, one, workflow ] }
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
         with: { node-version: "${{ env.NODE_VERSION }}" }
       - name: "Setup YARN"
         working-directory: client/web/${{ matrix.app }}
         run: npm install -g yarn @vue/cli-service
       - name: "Cache"
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         if: ${{ !env.ACT }}
         with:
           path: ~/.npm
@@ -81,8 +81,8 @@ jobs:
     env:
       GOFLAGS: -mod=readonly
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v7
         with: { go-version: "${{ env.GO_VERSION }}" }
       - name: "Copy language files"
         working-directory: server/pkg/locale

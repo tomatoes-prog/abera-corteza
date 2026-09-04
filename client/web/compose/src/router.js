@@ -7,9 +7,6 @@ const router = new Router({
 })
 
 // Add global error handler for navigation errors
-router.onError((error) => {
-  console.warn('Navigation error occurred:', error)
-  // Silently handle the error without crashing
-})
+router.onError(() => undefined)
 
 export default router

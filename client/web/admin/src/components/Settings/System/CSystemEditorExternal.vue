@@ -387,9 +387,6 @@ export default {
        */
       const mapKeys = (prefix, wc, org, keys) => {
         for (const k of keys) {
-          if (wc[k] === undefined) {
-            console.error(`potential issue - unknown key "${prefix}.${k}" used`, wc)
-          }
 
           if (_.isEqual(wc[k], org[k])) {
             continue

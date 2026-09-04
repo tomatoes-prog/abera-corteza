@@ -57,10 +57,10 @@ func TestRecordMakerPreservesMultipleRecordReferences(t *testing.T) {
 		},
 	}
 	getters := map[string]*recordGetter{
-		"inmuebles": {relDatasource: related},
+		"inmuebles": {relDatasource: related, cache: make(map[string]uint64)},
 	}
 
-	makeRecord := (StoreEncoder{}).recordMaker(nil, nil, getters, nil)
+	makeRecord := (StoreEncoder{}).recordMaker(nil, nil, getters, nil, nil)
 	record, err := makeRecord(context.Background(), datasource.RawRecord{
 		"inmuebles": {
 			Name:   "inmuebles",

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/cortezaproject/corteza/server/pkg/auth/jwtauth"
+	"github.com/go-chi/jwtauth"
 	"github.com/cortezaproject/corteza/server/pkg/errors"
 	"github.com/lestrrat-go/jwx/jwa"
 	"github.com/lestrrat-go/jwx/jwk"

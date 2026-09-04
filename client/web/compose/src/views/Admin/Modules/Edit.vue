@@ -514,7 +514,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { isEqual } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
 import draggable from 'vuedraggable'
@@ -933,11 +932,7 @@ export default {
 
           return response().then(({ set = [] }) => {
             this.hasRecords = set.length > 0
-          }).catch(e => {
-            if (!axios.isCancel(e)) {
-              console.error(e)
-            }
-          })
+          }).catch(() => undefined)
         }).catch(e => {
           this.toastErrorHandler(this.$t('notification:module.loadFailed'))(e)
           this.$router.push({ name: 'admin.modules' })

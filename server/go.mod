@@ -94,6 +94,7 @@ require (
 	github.com/crewjam/httperr v0.2.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 // indirect
 	github.com/dlclark/regexp2 v1.8.1 // indirect
+	github.com/go-chi/jwtauth v1.2.0
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
 	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/golang-jwt/jwt/v5 v5.3.0 // indirect

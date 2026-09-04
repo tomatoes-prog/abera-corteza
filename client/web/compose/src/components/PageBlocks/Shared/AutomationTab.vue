@@ -314,14 +314,10 @@ export default {
           // Map triggers, join them with workflows and extract information
           // pieces needed to construct automation buttons
           this.triggerButtons = aux.map(trigger => {
-            const { triggerID, workflowID, stepID, resourceType } = trigger
+            const { workflowID, stepID, resourceType } = trigger
             const workflow = set.find(wf => wf.workflowID === workflowID)
             if (!workflow) {
               // Can not link to workflow (might be disabled or missing)
-              console.warn(
-                'trigger referencing an non existing workflow',
-                { triggerID, workflowID: trigger.workflowID },
-              )
               return null
             }
 
@@ -332,10 +328,6 @@ export default {
             const step = workflow.steps.find(s => s.stepID === stepID)
             if (!step) {
               // Can not link to step
-              console.warn(
-                'trigger referencing an non existing step',
-                { triggerID, workflowID, stepID },
-              )
               return null
             } else if (step.meta && step.meta.label) {
               // There might be more than
@@ -357,9 +349,7 @@ export default {
             }
           }).filter(t => !!t)
         })
-        .catch(err => {
-          console.error(err)
-        })
+        .catch(() => undefined)
         .finally(() => {
           this.loading = false
         })

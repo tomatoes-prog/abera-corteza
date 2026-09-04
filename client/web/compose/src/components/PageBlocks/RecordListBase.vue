@@ -29,41 +29,37 @@
           class="d-flex align-items-center justify-content-between gap-1"
         >
           <div class="d-flex align-items-center flex-grow-1 flex-wrap flex-fill-child gap-1">
-            <template v-if="recordListModule.canCreateRecord">
-              <template v-if="inlineEditing">
-                <b-button
-                  v-if="!options.hideAddButton"
-                  data-test-id="button-add-record"
-                  variant="primary"
-                  size="lg"
-                  @click="addInlineRecord()"
-                >
-                  + {{ $t('recordList.addRecord') }}
-                </b-button>
-              </template>
+            <template v-if="recordListModule.canCreateRecord && !options.hideAddButton">
+              <b-button
+                v-if="inlineEditing"
+                data-test-id="button-add-record"
+                variant="primary"
+                size="lg"
+                @click="addInlineRecord()"
+              >
+                + {{ $t('recordList.addRecord') }}
+              </b-button>
 
-              <template v-else-if="!inlineEditing && (recordPageID || options.allRecords)">
-                <b-button
-                  v-if="!options.hideAddButton"
-                  data-test-id="button-add-record"
-                  variant="primary"
-                  size="lg"
-                  @click="handleAddRecord()"
-                >
-                  + {{ $t('recordList.addRecord') }}
-                </b-button>
-
-                <importer-modal
-                  v-if="!options.hideImportButton"
-                  :module="recordListModule"
-                  :namespace="namespace"
-                  @importSuccessful="onImportSuccessful"
-                />
-              </template>
+              <b-button
+                v-else-if="recordPageID || options.allRecords"
+                data-test-id="button-add-record"
+                variant="primary"
+                size="lg"
+                @click="handleAddRecord()"
+              >
+                + {{ $t('recordList.addRecord') }}
+              </b-button>
             </template>
 
+            <importer-modal
+              v-if="recordListModule.canCreateRecord && !options.hideImportButton"
+              :module="recordListModule"
+              :namespace="namespace"
+              @importSuccessful="onImportSuccessful"
+            />
+
             <exporter-modal
-              v-if="options.allowExport && !inlineEditing"
+              v-if="options.allowExport"
               :module="recordListModule"
               :filter="filter.query"
               :selection="selected"
@@ -1606,18 +1602,15 @@ export default {
       try {
         // Get record list configured fields from localStorage
         setItem(`record-list-configured-columns-${this.uniqueID}`, this.customConfiguredFields)
-      } catch (e) {
-        console.warn(this.$t('notification:record-list.corrupted-configured-fields'))
-      }
+      } catch { /* Local storage is optional. */ }
     },
 
     getStorageRecordListConfiguredFields () {
       try {
         // Get record list configured fields from localStorage
         this.customConfiguredFields = getItem(`record-list-configured-columns-${this.uniqueID}`)
-      } catch (e) {
+      } catch {
         // Land here if the configured fields is corrupted
-        console.warn(this.$t('notification:record-list.corrupted-configured-fields'))
         // Remove filter from the local storage
         removeItem(`record-list-configured-columns-${this.uniqueID}`)
       }
@@ -2508,15 +2501,13 @@ export default {
 
         // Check type of filter value
         if (!Array.isArray(currentFilters)) {
-          console.warn(this.$t('notification:record-list.incorrect-filter-structure', { filterID: this.uniqueID }))
           // Remove the filter from the local storage if the type doesn't match
           removeItem(`record-list-filters-${this.uniqueID}`)
         } else {
           this.recordListFilter = currentFilters
         }
-      } catch (e) {
+      } catch {
         // Land here if the filter is corrupted
-        console.warn(this.$t('notification:record-list.corrupted-filter'))
         // Remove filter from the local storage
         removeItem(`record-list-filters-${this.uniqueID}`)
       }
@@ -2525,9 +2516,7 @@ export default {
     getCustomSummaries () {
       try {
         this.customSummaries = getItem(`record-list-custom-summaries-${this.uniqueID}`)
-      } catch (e) {
-        console.warn(this.$t('notification:record-list.corrupted-summaries'))
-      }
+      } catch { /* Local storage is optional. */ }
     },
 
     getStorageRecordListFilterPreset () {
@@ -2537,9 +2526,8 @@ export default {
 
         // Set the custom preset filters
         this.customPresetFilters = currentFilterPresets
-      } catch (e) {
+      } catch {
         // Land here if the filter is corrupted
-        console.warn(this.$t('notification:record-list.corrupted-filter'))
         // Remove filter from the local storage
         removeItem(`record-list-filters-${this.uniqueID}`)
       }
@@ -2552,17 +2540,13 @@ export default {
         // Get record list filters from localStorage
         currentListFilters = this.recordListFilter
         setItem(`record-list-filters-${this.uniqueID}`, currentListFilters)
-      } catch (e) {
-        console.warn(this.$t('notification:record-list.corrupted-filter'))
-      }
+      } catch { /* Local storage is optional. */ }
     },
 
     setStorageCustomSummaries () {
       try {
         setItem(`record-list-custom-summaries-${this.uniqueID}`, this.customSummaries)
-      } catch (e) {
-        console.warn(this.$t('notification:record-list.corrupted-summaries'))
-      }
+      } catch { /* Local storage is optional. */ }
     },
 
     setStorageRecordListFilterPreset ({ name } = {}) {
@@ -2578,9 +2562,7 @@ export default {
 
       try {
         setItem(`record-list-preset-${this.uniqueID}`, currentListFilters)
-      } catch (e) {
-        console.warn(this.$t('notification:record-list.corrupted-filter'))
-      }
+      } catch { /* Local storage is optional. */ }
     },
 
     removeRecordListFilterPreset (name) {

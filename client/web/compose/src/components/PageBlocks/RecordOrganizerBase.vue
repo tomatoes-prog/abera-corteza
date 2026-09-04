@@ -110,7 +110,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import axios from 'axios'
 import base from './base'
 import draggable from 'vuedraggable'
 import FieldViewer from 'corteza-webapp-compose/src/components/ModuleFields/Viewer'
@@ -515,11 +514,7 @@ export default {
           this.fetchUsers(fields, this.records),
           this.fetchRecords(namespaceID, fields, this.records),
         ])
-      }).catch(e => {
-        if (!axios.isCancel(e)) {
-          console.error(e)
-        }
-      }).finally(() => {
+      }).catch(() => undefined).finally(() => {
         setTimeout(() => {
           this.processing = false
         }, 300)

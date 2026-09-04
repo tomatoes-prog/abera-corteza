@@ -3,4 +3,5 @@ errors:
   notAllowedToAssign: no se permite asignar recordatorios
   notAllowedToDismiss: no se permite descartar recordatorios
   notAllowedToRead: no se permite leer recordatorios
+  notAllowedToSnooze: no se permite posponer recordatorios de otros usuarios
   notFound: recordatorio no encontrado

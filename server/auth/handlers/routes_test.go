@@ -14,7 +14,7 @@ import (
 func TestMarkPlaintextHTTPAllowsMatchingHTTPOrigin(t *testing.T) {
 	var token string
 
-	protected := markPlaintextHTTP(csrf.Protect(
+	protected := aberaPlaintextHTTP(csrf.Protect(
 		[]byte(strings.Repeat("x", 32)),
 		csrf.Secure(false),
 	)(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
