@@ -201,3 +201,20 @@ func TestSession_disconnected(t *testing.T) {
 
 	req.Zero(logs.FilterMessageSnippet("recovering from websocket").Len(), "expected no recovered panics")
 }
+
+func TestSession_readLoopAfterDisconnect(t *testing.T) {
+	s := session{
+		logger: zap.NewNop(),
+		config: options.WebsocketOpt{},
+		send:   make(chan []byte, 1),
+		stop:   make(chan []byte, 1),
+	}
+	s.ctx, s.ctxCancel = context.WithCancel(context.Background())
+
+	s.disconnect()
+
+	err := s.readLoop()
+	if err != net.ErrClosed {
+		t.Fatalf("expected net.ErrClosed, got %v", err)
+	}
+}

@@ -188,6 +188,7 @@ edit:
       none: Ninguno
       addNewConstraint: Añadir nueva restricción
       uniqueValueConstraint: 'Restricción de valor único #{{index}}'
+      allFieldsMustMatch: Un registro se considera duplicado solo cuando todos los campos siguientes coinciden con un registro existente
       tooltip:
         performance: Usar la detección de duplicados afectará al rendimiento
     dal:

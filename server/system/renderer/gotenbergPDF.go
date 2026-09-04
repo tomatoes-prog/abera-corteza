@@ -83,13 +83,33 @@ func (d *gotenbergPDFDriver) Render(ctx context.Context, pl *driverPayload) (io.
 	// HTTP request body stuff
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
+	var partials map[string][]byte
+	var err error
+	if pl.Header != nil || pl.Footer != nil {
+		partials, err = bufferTemplatePartials(pl.Partials)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	prepare := func(w io.Writer, template io.Reader) error {
+		if partials == nil {
+			return d.prepareContent(w, pl)
+		}
+
+		aux := *pl
+		aux.Template = template
+		aux.Partials = cloneTemplatePartials(partials)
+		return d.prepareContent(w, &aux)
+	}
+
 	// index.html is required by the rendering container; Gotenberg 7+ requires
 	// the "files" form field name, v6 accepts any name
 	part, err := writer.CreateFormFile("files", "index.html")
 	if err != nil {
 		return nil, err
 	}
-	err = d.prepareContent(part, pl)
+	err = prepare(part, pl.Template)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +121,7 @@ func (d *gotenbergPDFDriver) Render(ctx context.Context, pl *driverPayload) (io.
 			return nil, err
 		}
 
-		if err = d.prepareAux(hPart, pl, pl.Header); err != nil {
+		if err = prepare(hPart, pl.Header); err != nil {
 			return nil, err
 		}
 	}
@@ -112,7 +132,7 @@ func (d *gotenbergPDFDriver) Render(ctx context.Context, pl *driverPayload) (io.
 			return nil, err
 		}
 
-		if err = d.prepareAux(fPart, pl, pl.Footer); err != nil {
+		if err = prepare(fPart, pl.Footer); err != nil {
 			return nil, err
 		}
 	}
@@ -191,11 +211,24 @@ func (d *gotenbergPDFDriver) prepareContent(w io.Writer, pl *driverPayload) erro
 	return t.Execute(w, pl.Variables)
 }
 
-// prepareAux renders an auxiliary document (header/footer) with pl's variables
-func (d *gotenbergPDFDriver) prepareAux(w io.Writer, pl *driverPayload, src io.Reader) error {
-	aux := *pl
-	aux.Template = src
-	return d.prepareContent(w, &aux)
+func bufferTemplatePartials(partials map[string]io.Reader) (map[string][]byte, error) {
+	buffered := make(map[string][]byte, len(partials))
+	for handle, partial := range partials {
+		content, err := io.ReadAll(partial)
+		if err != nil {
+			return nil, err
+		}
+		buffered[handle] = content
+	}
+	return buffered, nil
+}
+
+func cloneTemplatePartials(partials map[string][]byte) map[string]io.Reader {
+	cloned := make(map[string]io.Reader, len(partials))
+	for handle, content := range partials {
+		cloned[handle] = bytes.NewReader(content)
+	}
+	return cloned
 }
 
 func (d *gotenbergPDFDriver) applyOptions(mw *multipart.Writer, opts map[string]string) (err error) {

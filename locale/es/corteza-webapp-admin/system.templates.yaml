@@ -2,6 +2,10 @@ editor:
   content:
     editor:
       unsupported: Editor no compatible
+    footerTemplate: Plantilla de pie de página
+    footerTemplateDescription: Plantilla parcial que se muestra debajo del contenido principal al renderizar esta plantilla.
+    headerTemplate: Plantilla de encabezado
+    headerTemplateDescription: Plantilla parcial que se muestra encima del contenido principal al renderizar esta plantilla.
     partial: Plantilla parcial
     preview:
       html: Vista previa HTML

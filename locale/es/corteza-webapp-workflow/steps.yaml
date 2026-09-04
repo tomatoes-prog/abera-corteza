@@ -53,6 +53,8 @@ function:
     select-function: Seleccionar función
     type: Tipo
     type*: Tipo*
+    ok: Aceptar
+    urlPlaceholder: https://ejemplo.tld
   label: Función
   short: Función
   tooltip: Ejecuta la función predefinida seleccionada

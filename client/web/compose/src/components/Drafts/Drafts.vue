@@ -179,9 +179,7 @@ export default {
             }
           }
         }
-      } catch (e) {
-        console.error('Failed to fetch metadata:', e)
-      }
+      } catch {}
     },
 
     async onDraftClick (draft, view = false) {
@@ -203,8 +201,8 @@ export default {
         if (recordPage) {
           pageID = recordPage.pageID
         }
-      } catch (e) {
-        console.error('Failed to fetch page metadata:', e)
+      } catch {
+        pageID = undefined
       }
 
       if (!pageID) {
@@ -247,9 +245,7 @@ export default {
             },
       }
 
-      this.$router.push(route).catch(err => {
-        console.error('Draft navigation failed:', err)
-      })
+      this.$router.push(route).catch(() => undefined)
     },
 
     onDeleteDraft ({ revision }) {

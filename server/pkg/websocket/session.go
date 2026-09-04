@@ -104,7 +104,9 @@ func (s *session) disconnect() {
 	s.logger.Info("disconnected")
 
 	// Close connection
-	_ = s.conn.Close()
+	if s.conn != nil {
+		_ = s.conn.Close()
+	}
 
 	// send & stop are deliberately left open. Closing them races with
 	// Write() and panics on "send on closed channel"; they are garbage
@@ -157,15 +159,31 @@ func (s *session) Close() {
 }
 
 func (s *session) readLoop() (err error) {
-	if err = s.conn.SetReadDeadline(time.Now().Add(s.config.PingTimeout)); err != nil {
+	s.l.RLock()
+	conn := s.conn
+	if conn == nil {
+		s.l.RUnlock()
+		return net.ErrClosed
+	}
+
+	if err = conn.SetReadDeadline(time.Now().Add(s.config.PingTimeout)); err != nil {
+		s.l.RUnlock()
 		return
 	}
 
-	s.conn.SetPongHandler(func(string) error {
-		return s.conn.SetReadDeadline(time.Now().Add(s.config.PingTimeout))
+	// Keep the connection reference local. disconnect() may clear s.conn while
+	// the reader is starting, but the underlying connection remains safe to
+	// close and use for the duration of this setup.
+	conn.SetPongHandler(func(string) error {
+		return conn.SetReadDeadline(time.Now().Add(s.config.PingTimeout))
 	})
 
-	s.remoteAddr = s.conn.RemoteAddr().String()
+	remoteAddr := conn.RemoteAddr()
+	s.l.RUnlock()
+
+	if remoteAddr != nil {
+		s.remoteAddr = remoteAddr.String()
+	}
 
 	var (
 		raw []byte
