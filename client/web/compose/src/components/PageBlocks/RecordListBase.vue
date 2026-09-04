@@ -1602,7 +1602,7 @@ export default {
       try {
         // Get record list configured fields from localStorage
         setItem(`record-list-configured-columns-${this.uniqueID}`, this.customConfiguredFields)
-      } catch {}
+      } catch { /* Local storage is optional. */ }
     },
 
     getStorageRecordListConfiguredFields () {
@@ -2516,7 +2516,7 @@ export default {
     getCustomSummaries () {
       try {
         this.customSummaries = getItem(`record-list-custom-summaries-${this.uniqueID}`)
-      } catch {}
+      } catch { /* Local storage is optional. */ }
     },
 
     getStorageRecordListFilterPreset () {
@@ -2540,13 +2540,13 @@ export default {
         // Get record list filters from localStorage
         currentListFilters = this.recordListFilter
         setItem(`record-list-filters-${this.uniqueID}`, currentListFilters)
-      } catch {}
+      } catch { /* Local storage is optional. */ }
     },
 
     setStorageCustomSummaries () {
       try {
         setItem(`record-list-custom-summaries-${this.uniqueID}`, this.customSummaries)
-      } catch {}
+      } catch { /* Local storage is optional. */ }
     },
 
     setStorageRecordListFilterPreset ({ name } = {}) {
@@ -2562,7 +2562,7 @@ export default {
 
       try {
         setItem(`record-list-preset-${this.uniqueID}`, currentListFilters)
-      } catch {}
+      } catch { /* Local storage is optional. */ }
     },
 
     removeRecordListFilterPreset (name) {

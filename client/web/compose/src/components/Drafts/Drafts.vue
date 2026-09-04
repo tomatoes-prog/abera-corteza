@@ -179,7 +179,7 @@ export default {
             }
           }
         }
-      } catch {}
+      } catch { /* Draft metadata is best effort. */ }
     },
 
     async onDraftClick (draft, view = false) {
