@@ -874,7 +874,7 @@ func (svc record) BulkModifyByFilter(ctx context.Context, f types.RecordFilter, 
 				break
 			}
 
-			f.NextPage = recordFilter.NextPage
+			f.PageCursor = recordFilter.NextPage
 		}
 
 		return nil
