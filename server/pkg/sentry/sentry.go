@@ -1,6 +1,8 @@
 package sentry
 
 import (
+	"fmt"
+
 	"github.com/getsentry/sentry-go"
 
 	"github.com/cortezaproject/corteza/server/pkg/logger"
@@ -43,4 +45,19 @@ func Recover() {
 		hub := sentry.CurrentHub()
 		hub.Recover(err)
 	}
+}
+
+// Report sends a recovered panic to Sentry without changing the caller's
+// recovery behavior. Panic values are not guaranteed to implement error.
+func Report(reason any) {
+	if reason == nil || sentry.CurrentHub().Client() == nil {
+		return
+	}
+
+	if err, ok := reason.(error); ok {
+		sentry.CaptureException(err)
+		return
+	}
+
+	sentry.CaptureMessage(fmt.Sprint(reason))
 }

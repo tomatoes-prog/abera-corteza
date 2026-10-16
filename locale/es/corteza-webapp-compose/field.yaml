@@ -202,6 +202,9 @@ kind:
     label: Texto
     multiLine: Varias líneas
     richText: Texto enriquecido
+    sanitizeXSS:
+      label: Sanitización XSS
+      warning: Desactivar la sanitización XSS es peligroso y puede exponer la aplicación a vulnerabilidades de seguridad. El valor se almacena tal como se introduce y no es seguro cuando se muestra como HTML, por ejemplo en bloques de contenido, cuerpos de correo de workflows o instrucciones. Desactívala solo si confías plenamente en el origen de los datos y entiendes los riesgos. Los campos de texto enriquecido siempre se sanitizan.
     minLength: Longitud mínima
     maxLength: Longitud máxima
   url:

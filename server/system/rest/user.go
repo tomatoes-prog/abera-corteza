@@ -294,11 +294,6 @@ func (ctrl User) MembershipList(ctx context.Context, r *request.UserMembershipLi
 		return nil, err
 	}
 
-	mm, err := ctrl.role.Membership(ctx, r.UserID)
-	if err != nil {
-		return nil, err
-	}
-
 	rval := make([]string, 0, len(mm))
 	for i := range mm {
 		// skip roles that can not be read
