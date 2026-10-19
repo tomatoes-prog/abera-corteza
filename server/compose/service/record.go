@@ -2708,12 +2708,6 @@ func (svc record) validateFilterFieldPermissions(ctx context.Context, ac recordV
 		return nil
 	}
 
-	// Build a set of module field names for quick lookup
-	moduleFieldNames := make(map[string]bool)
-	for _, f := range m.Fields {
-		moduleFieldNames[f.Name] = true
-	}
-
 	// System fields that are always filterable (not module-specific fields)
 	systemFields := svc.systemExprFields()
 
@@ -2724,13 +2718,10 @@ func (svc record) validateFilterFieldPermissions(ctx context.Context, ac recordV
 			continue
 		}
 
-		// Skip symbols that aren't module fields (could be functions, operators, etc.)
-		if !moduleFieldNames[symbol] {
-			continue
-		}
-
-		// Find the field and check permission
-		field := m.Fields.FindByName(symbol)
+		// Find the field and check permission. Identifiers resolve
+		// case-insensitively in the DAL, so this must too; otherwise a
+		// differently cased name skips the check yet still filters.
+		field := findModuleFieldByIdent(m, symbol)
 		if field == nil {
 			continue
 		}
@@ -2743,16 +2734,27 @@ func (svc record) validateFilterFieldPermissions(ctx context.Context, ac recordV
 	return nil
 }
 
+// findModuleFieldByIdent resolves a filter or sort identifier to a module field
+// the way the DAL does: case-insensitively, and by the first segment of a
+// reference path (account.industry -> account).
+func findModuleFieldByIdent(m *types.Module, ident string) *types.ModuleField {
+	if i := strings.Index(ident, "."); i > 0 {
+		ident = ident[:i]
+	}
+
+	for _, f := range m.Fields {
+		if strings.EqualFold(f.Name, ident) {
+			return f
+		}
+	}
+
+	return nil
+}
+
 // validateFilterFieldPermissions checks if the user is allowed to sort requested fields
 func (svc record) validateSortFieldPermissions(ctx context.Context, ac recordValueAccessController, m *types.Module, sort filter.SortExprSet) error {
 	if len(sort) == 0 {
 		return nil
-	}
-
-	// Build a set of module field names for quick lookup
-	moduleFieldNames := make(map[string]bool)
-	for _, f := range m.Fields {
-		moduleFieldNames[f.Name] = true
 	}
 
 	// System fields that are always sortable
@@ -2766,13 +2768,10 @@ func (svc record) validateSortFieldPermissions(ctx context.Context, ac recordVal
 			continue
 		}
 
-		// Skip non-module fields
-		if !moduleFieldNames[fieldName] {
-			continue
-		}
-
-		// Find the field and check permission
-		field := m.Fields.FindByName(fieldName)
+		// Find the field and check permission. Identifiers resolve
+		// case-insensitively in the DAL, so this must too; otherwise a
+		// differently cased name skips the check yet still orders the result.
+		field := findModuleFieldByIdent(m, fieldName)
 		if field == nil {
 			continue
 		}
@@ -2789,7 +2788,8 @@ func (svc record) validateSortFieldPermissions(ctx context.Context, ac recordVal
 // values the user may not read
 func (svc record) validateSummaryFieldPermissions(ctx context.Context, ac recordValueAccessController, m *types.Module, ss []types.RecordSummaryReq) error {
 	for _, s := range ss {
-		field := m.Fields.FindByName(s.Field)
+		// resolve case-insensitively, the way the DAL does
+		field := findModuleFieldByIdent(m, s.Field)
 		if field == nil {
 			continue
 		}
