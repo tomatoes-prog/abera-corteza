@@ -1,10 +1,12 @@
 # Copyright 2026 Abera/Corteza contributors
 # Licensed under the Apache License, Version 2.0.
+# Modified by Abera: exercise blocked signup and bootstrap administrator login.
 
 param(
     [string]$BaseUrl = 'http://localhost:8080',
     [Parameter(Mandatory = $true)][string]$PrivateKeyFile,
-    [Parameter(Mandatory = $true)][string]$EnvelopeFile
+    [Parameter(Mandatory = $true)][string]$EnvelopeFile,
+    [switch]$AuthOnly
 )
 
 Set-StrictMode -Version Latest
@@ -80,6 +82,7 @@ function Invoke-AberaApi {
         Method = $Method
         Uri = "$BaseUrl$Path"
         Headers = $script:Headers
+        TimeoutSec = 30
     }
     if ($PSBoundParameters.ContainsKey('Body')) {
         $parameters.ContentType = 'application/json'
@@ -108,11 +111,88 @@ function Assert-Abera {
     if (-not $Condition) { throw $Message }
 }
 
+function Get-AberaCsrfToken {
+    param([string]$Html)
+
+    $match = [regex]::Match($Html, 'name="same-site-authenticity-token"\s+value="([^"]+)"')
+    Assert-Abera $match.Success 'El formulario de acceso no contiene un token CSRF.'
+    return [Net.WebUtility]::HtmlDecode($match.Groups[1].Value)
+}
+
+function New-AberaFormContent {
+    param([hashtable]$Values)
+
+    $fields = [Collections.Generic.Dictionary[string, string]]::new()
+    foreach ($key in $Values.Keys) { $fields.Add([string]$key, [string]$Values[$key]) }
+    return [Net.Http.FormUrlEncodedContent]::new($fields)
+}
+
+function Assert-AberaSignupDisabled {
+    param($Admin)
+
+    $handler = [Net.Http.HttpClientHandler]::new()
+    $handler.AllowAutoRedirect = $false
+    $client = [Net.Http.HttpClient]::new($handler)
+    $client.Timeout = [TimeSpan]::FromSeconds(30)
+    try {
+        $login = $client.GetAsync("$BaseUrl/auth/login").GetAwaiter().GetResult()
+        $loginHtml = $login.Content.ReadAsStringAsync().GetAwaiter().GetResult()
+        Assert-Abera ([int]$login.StatusCode -eq 200) 'No se pudo cargar el formulario de acceso.'
+        Assert-Abera (-not $loginHtml.Contains('data-test-id="link-signup"')) 'El enlace de registro público está visible.'
+        $csrf = Get-AberaCsrfToken $loginHtml
+
+        $signup = $client.GetAsync("$BaseUrl/auth/signup").GetAwaiter().GetResult()
+        Assert-Abera ([int]$signup.StatusCode -eq 303 -and [string]$signup.Headers.Location -match '/auth/login$') `
+            'El formulario de registro público no fue bloqueado.'
+
+        $email = "blocked-$([Guid]::NewGuid().ToString('N'))@abera.invalid"
+        $signupForm = New-AberaFormContent @{
+            'same-site-authenticity-token' = $csrf
+            email = $email
+            name = 'Registro bloqueado'
+            password = 'Ci-only-password-123!'
+        }
+        try {
+            $posted = $client.PostAsync("$BaseUrl/auth/signup", $signupForm).GetAwaiter().GetResult()
+        } finally {
+            $signupForm.Dispose()
+        }
+        Assert-Abera ([int]$posted.StatusCode -eq 303 -and [string]$posted.Headers.Location -match '/auth/login$') `
+            'El servidor aceptó o no rechazó correctamente el intento de registro.'
+        $escapedEmail = [Uri]::EscapeDataString($email)
+        $matchingUsers = @((Invoke-AberaApi -Path "/api/system/users/?email=$escapedEmail&limit=10").set |
+            Where-Object { $null -ne $_ -and $_.email -eq $email })
+        Assert-Abera ($matchingUsers.Count -eq 0) 'Se creó una cuenta mediante el registro público.'
+
+        $login = $client.GetAsync("$BaseUrl/auth/login").GetAwaiter().GetResult()
+        $csrf = Get-AberaCsrfToken ($login.Content.ReadAsStringAsync().GetAwaiter().GetResult())
+        $loginForm = New-AberaFormContent @{
+            'same-site-authenticity-token' = $csrf
+            email = [string]$Admin.email
+            password = [string]$Admin.password
+        }
+        try {
+            $loggedIn = $client.PostAsync("$BaseUrl/auth/login", $loginForm).GetAwaiter().GetResult()
+        } finally {
+            $loginForm.Dispose()
+        }
+        Assert-Abera ([int]$loggedIn.StatusCode -eq 303 -and [string]$loggedIn.Headers.Location -match '/auth/?$') `
+            'El administrador creado por bootstrap no pudo iniciar sesión.'
+        $profile = $client.GetAsync("$BaseUrl/auth").GetAwaiter().GetResult()
+        $profileHtml = $profile.Content.ReadAsStringAsync().GetAwaiter().GetResult()
+        Assert-Abera ([int]$profile.StatusCode -eq 200 -and $profileHtml.Contains([string]$Admin.email)) `
+            'La sesión del administrador no permite abrir su perfil.'
+    } finally {
+        $client.Dispose()
+        $handler.Dispose()
+    }
+}
+
 $bootstrap = Get-AberaBootstrapPayload -KeyPath $PrivateKeyFile -EncryptedPath $EnvelopeFile
 $token = $null
 try {
     $tokenResponse = Invoke-RestMethod -Method Post -Uri "$BaseUrl/auth/oauth2/token" `
-        -ContentType 'application/x-www-form-urlencoded' -Body @{
+        -ContentType 'application/x-www-form-urlencoded' -TimeoutSec 30 -Body @{
             grant_type = 'client_credentials'
             scope = 'api'
             client_id = [string]$bootstrap.oauth.clientID
@@ -121,6 +201,12 @@ try {
     $token = [string]$tokenResponse.access_token
     Assert-Abera (-not [string]::IsNullOrWhiteSpace($token)) 'OAuth no devolvió access_token.'
     $script:Headers = @{ Authorization = "Bearer $token" }
+
+    Assert-AberaSignupDisabled -Admin $bootstrap.admin
+    if ($AuthOnly) {
+        Write-Output 'auth: OK (registro público bloqueado, administrador y OAuth accesibles)'
+        return
+    }
 
     $users = @((Invoke-AberaApi -Path '/api/system/users/?limit=1').set)
     Assert-Abera ($users.Count -eq 1) 'El modo admin no pudo consultar usuarios.'
@@ -247,11 +333,14 @@ try {
         }
     }
 
-    Write-Output "demo-api: OK (6 espacios, $moduleTotal módulos, $recordTotal registros, $($workflows.Count) workflows, 12 reportes, CRUD temporal)"
+    Write-Output "demo-api: OK (registro bloqueado, administrador y OAuth accesibles; 6 espacios, $moduleTotal módulos, $recordTotal registros, $($workflows.Count) workflows, 12 reportes, CRUD temporal)"
 } finally {
     $token = $null
     if ($null -ne $bootstrap -and $null -ne $bootstrap.oauth) {
         $bootstrap.oauth.clientSecret = $null
+    }
+    if ($null -ne $bootstrap -and $null -ne $bootstrap.admin) {
+        $bootstrap.admin.password = $null
     }
     $bootstrap = $null
     [GC]::Collect()

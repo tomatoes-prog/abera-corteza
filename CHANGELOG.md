@@ -50,6 +50,11 @@ proyecto de origen.
 
 ### Security
 
+- Se desactiva por defecto el registro público interno en instalaciones
+  nuevas; el bootstrap del administrador sigue disponible y las instancias
+  existentes conservan su configuración. Las pruebas cubren el rechazo del
+  formulario y del envío directo, el acceso del administrador y OAuth, también
+  después de reiniciar.
 - El navegador no recibe secretos del agente, MCP, API Gateway ni AWS; el
   puente elimina el Bearer de usuario antes de construir la solicitud interna.
 - Las rutas de secretos rechazan valores relativos y enlaces simbólicos; las
