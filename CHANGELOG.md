@@ -50,6 +50,10 @@ proyecto de origen.
 
 ### Security
 
+- Se incorporan correcciones oficiales de Corteza para permisos de campos,
+  operaciones RBAC y workflows; se conserva la lógica de reportes del fork.
+- Se integran correcciones oficiales de concurrencia del API Gateway, ejecución
+  de workflows, notificaciones y fechas de recursos importados.
 - Se desactiva por defecto el registro público interno en instalaciones
   nuevas; el bootstrap del administrador sigue disponible y las instancias
   existentes conservan su configuración. Las pruebas cubren el rechazo del

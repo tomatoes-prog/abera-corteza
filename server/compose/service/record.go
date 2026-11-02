@@ -1,3 +1,4 @@
+// Modified by Abera: integrate upstream field-access checks with fork report handling.
 package service
 
 import (
