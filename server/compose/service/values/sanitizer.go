@@ -279,6 +279,9 @@ func sanitize(f *types.ModuleField, v interface{}) string {
 	case "datetime":
 		v = sDatetime(v, f.Options.Bool("onlyDate"), f.Options.Bool("onlyTime"))
 	case "number":
+		if v == nil || strings.TrimSpace(fmt.Sprint(v)) == "" {
+			return ""
+		}
 		// @todo !! This is temporary; precision and scale require a rework
 		v = sNumber(v, maxPrecision, f.Options.Precision())
 	case "string":

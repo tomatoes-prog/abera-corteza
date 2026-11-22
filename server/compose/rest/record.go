@@ -900,6 +900,7 @@ func (ctrl *Record) exportRecords(ctx context.Context, s *service.RecordExportSe
 			FieldMapping: mapping,
 		}, gg)
 		if err != nil {
+			w.Header().Del("Content-Disposition")
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}

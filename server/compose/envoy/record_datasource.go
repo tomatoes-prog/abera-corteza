@@ -449,6 +449,11 @@ func (ip *iteratorProvider) resolveReferences(ctx context.Context, ds dal.FullSe
 	for i, cacheRecord := range ip.rows {
 
 		for refField, refWrap := range ip.relMods {
+			// A missing/deleted target module leaves reference values unresolved.
+			if refWrap.modLvl1 == nil {
+				continue
+			}
+
 			value := cacheRecord[refField]
 			if len(value.Values) == 0 {
 				continue
