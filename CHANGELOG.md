@@ -50,6 +50,11 @@ proyecto de origen.
 
 ### Security
 
+- Se incorpora el backport de la protección de Corteza contra SSRF en destinos
+  HTTP controlados por workflows, OAuth2 y el proxy del API Gateway. La política
+  predeterminada bloquea redes link-local y metadatos conocidos; la opción
+  HTTP_CLIENT_RESTRICTED_NETWORKS=private también bloquea loopback y redes
+  privadas cuando las integraciones no requieren acceso a ellas.
 - Se incorporan correcciones oficiales de Corteza para permisos de campos,
   operaciones RBAC y workflows; se conserva la lógica de reportes del fork.
 - Se integran correcciones oficiales de concurrencia del API Gateway, ejecución
