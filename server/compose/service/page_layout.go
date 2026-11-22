@@ -203,9 +203,11 @@ func (svc pageLayout) Create(ctx context.Context, new *types.PageLayout) (*types
 
 		// Allow users to manage their personal layouts regardless of RBAC (when enabled)
 		if !svc.ac.CanCreatePageLayoutOnPage(ctx, pg) {
-			if new.OwnedBy == 0 || new.OwnedBy != auth.GetIdentityFromContext(ctx).Identity() || !pg.Meta.AllowPersonalLayouts {
+			ownerID := auth.GetIdentityFromContext(ctx).Identity()
+			if ownerID == 0 || !pg.Meta.AllowPersonalLayouts || (new.OwnedBy != 0 && new.OwnedBy != ownerID) {
 				return PageLayoutErrNotAllowedToCreate()
 			}
+			new.OwnedBy = ownerID
 		}
 
 		aProps.setNamespace(ns)
