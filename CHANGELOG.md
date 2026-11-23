@@ -48,6 +48,12 @@ proyecto de origen.
 - El sembrador inmobiliario usa `http://localhost:8080` de forma
   predeterminada.
 
+### Fixed
+
+- Los flujos deshabilitados, eliminados o inválidos dejan de disparar automatizaciones; la ejecución directa devuelve un error claro.
+- Envoy aprovisiona también el modelo de revisiones cuando un módulo tiene historial habilitado.
+- El generador de documentación RBAC omite recursos sin operaciones de autorización.
+
 ### Security
 
 - Se incorporan correcciones oficiales de Corteza para permisos de campos,
