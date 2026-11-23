@@ -1,0 +1,103 @@
+package http
+
+import (
+	"net"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
+
+func TestBlockedIP(t *testing.T) {
+	cases := []struct {
+		ip        string
+		linkLocal bool
+		private   bool
+	}{
+		{ip: "93.184.216.34"},
+		{ip: "2606:2800:220:1:248:1893:25c8:1946"},
+		{ip: "169.254.169.254", linkLocal: true, private: true},
+		{ip: "169.254.170.2", linkLocal: true, private: true},
+		{ip: "100.100.100.200", linkLocal: true, private: true},
+		{ip: "fd00:ec2::254", linkLocal: true, private: true},
+		{ip: "fe80::1", linkLocal: true, private: true},
+		{ip: "::ffff:169.254.169.254", linkLocal: true, private: true},
+		{ip: "64:ff9b::a9fe:a9fe", linkLocal: true, private: true},
+		{ip: "2002:a9fe:a9fe::1", linkLocal: true, private: true},
+		{ip: "127.0.0.1", private: true},
+		{ip: "::1", private: true},
+		{ip: "10.0.0.5", private: true},
+		{ip: "172.16.10.1", private: true},
+		{ip: "192.168.1.1", private: true},
+		{ip: "100.64.0.1", private: true},
+		{ip: "fc00::1", private: true},
+		{ip: "0.0.0.0", private: true},
+		{ip: "::", private: true},
+		{ip: "224.0.0.1", linkLocal: true, private: true},
+		{ip: "239.1.1.1", private: true},
+		{ip: "::ffff:10.0.0.5", private: true},
+		{ip: "64:ff9b::a00:5", private: true},
+	}
+	for _, tc := range cases {
+		t.Run(tc.ip, func(t *testing.T) {
+			ip := net.ParseIP(tc.ip)
+			require.NotNil(t, ip)
+			require.False(t, blockedIP(RestrictNone, ip))
+			require.Equal(t, tc.linkLocal, blockedIP(RestrictLinkLocal, ip), "link-local policy")
+			require.Equal(t, tc.private, blockedIP(RestrictPrivate, ip), "private policy")
+		})
+	}
+}
+
+func TestParseNetworkRestriction(t *testing.T) {
+	for input, expected := range map[string]NetworkRestriction{
+		"":           RestrictLinkLocal,
+		"link-local": RestrictLinkLocal,
+		"LINK-LOCAL": RestrictLinkLocal,
+		" private ":  RestrictPrivate,
+		"none":       RestrictNone,
+	} {
+		got, err := ParseNetworkRestriction(input)
+		require.NoError(t, err, input)
+		require.Equal(t, expected, got, input)
+	}
+	got, err := ParseNetworkRestriction("nope")
+	require.Error(t, err)
+	require.Equal(t, RestrictLinkLocal, got)
+}
+
+func TestRestrictedClient(t *testing.T) {
+	t.Run("redirects to restricted addresses are blocked", func(t *testing.T) {
+		SetupRestricted(0, false, RestrictLinkLocal)
+		t.Cleanup(func() { SetupRestricted(0, false, RestrictLinkLocal) })
+
+		redir := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			http.Redirect(w, r, "http://169.254.169.254/latest/meta-data/", http.StatusFound)
+		}))
+		defer redir.Close()
+
+		_, err := RestrictedClient().Get(redir.URL)
+		require.ErrorIs(t, err, ErrRestrictedNetwork)
+	})
+
+	t.Run("redirects to allowed addresses are followed", func(t *testing.T) {
+		SetupRestricted(0, false, RestrictLinkLocal)
+		t.Cleanup(func() { SetupRestricted(0, false, RestrictLinkLocal) })
+
+		target := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.WriteHeader(http.StatusTeapot)
+		}))
+		defer target.Close()
+
+		redir := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			http.Redirect(w, r, target.URL, http.StatusFound)
+		}))
+		defer redir.Close()
+
+		rsp, err := RestrictedClient().Get(redir.URL)
+		require.NoError(t, err)
+		require.Equal(t, http.StatusTeapot, rsp.StatusCode)
+		_ = rsp.Body.Close()
+	})
+}

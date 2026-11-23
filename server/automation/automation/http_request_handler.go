@@ -10,6 +10,7 @@ import (
 	"net/url"
 	"strings"
 
+	pkgHttp "github.com/cortezaproject/corteza/server/pkg/http"
 	"github.com/cortezaproject/corteza/server/pkg/version"
 )
 
@@ -48,7 +49,8 @@ func (h httpRequestHandler) send(ctx context.Context, args *httpRequestSendArgs)
 		defer tfn()
 	}
 
-	rsp, err = http.DefaultClient.Do(req)
+	// The destination is controlled by the workflow; restrict outbound network access.
+	rsp, err = pkgHttp.RestrictedClient().Do(req)
 	if err != nil {
 		return
 	}
