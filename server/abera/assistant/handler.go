@@ -202,7 +202,11 @@ func (handler *Handler) withUUIDs(parameters []string, path func(*http.Request) 
 func (handler *Handler) authContext(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Set("Cache-Control", "no-store")
 	if !handler.config.Enabled {
-		writeJSON(writer, http.StatusOK, map[string]any{"enabled": false, "allowed": false})
+		writeJSON(writer, http.StatusOK, map[string]any{
+			"enabled": false,
+			"allowed": false,
+			"visible": handler.config.WidgetVisible,
+		})
 		return
 	}
 	actor, allowed, err := handler.resolveActor(request)
@@ -214,6 +218,7 @@ func (handler *Handler) authContext(writer http.ResponseWriter, request *http.Re
 	payload := map[string]any{
 		"enabled":  true,
 		"allowed":  allowed,
+		"visible":  allowed,
 		"tenantID": handler.config.TenantID,
 	}
 	if allowed {

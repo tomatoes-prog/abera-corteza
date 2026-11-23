@@ -78,8 +78,12 @@ type (
 
 	// recordValueAccessController interface for checking field-level read permissions
 	recordValueAccessController interface {
+		CanReadRecord(context.Context, *types.Record) bool
 		CanReadRecordValueOnModuleField(context.Context, *types.ModuleField) bool
 	}
+
+	// teeValueSetter sets every scanned value on both setters
+	teeValueSetter struct{ a, b dal.ValueSetter }
 )
 
 const (
@@ -291,16 +295,79 @@ func (ip *iteratorProvider) Next(ctx context.Context, out datasource.RawRecord) 
 	return ip.next(ctx, out)
 }
 
-func (ip *iteratorProvider) next(ctx context.Context, out datasource.RawRecord) (more bool, err error) {
-	rowCache := make(datasource.RawRecord)
-
-	if !ip.iter.Next(ctx) {
-		return false, ip.iter.Err()
+func (t teeValueSetter) SetValue(name string, pos uint, v any) error {
+	if err := t.a.SetValue(name, pos, v); err != nil {
+		return err
 	}
 
-	err = ip.iter.Scan(rowCache)
-	if err != nil {
-		return
+	return t.b.SetValue(name, pos, v)
+}
+
+// scanReadable scans the current row and reports whether the user may read it
+func (ip *iteratorProvider) scanReadable(ctx context.Context, row datasource.RawRecord) (bool, error) {
+	if reflect2.IsNil(ip.ac) {
+		return true, ip.iter.Scan(row)
+	}
+
+	rec := &types.Record{ModuleID: ip.mod.ID, NamespaceID: ip.mod.NamespaceID}
+	rec.SetModule(ip.mod)
+	if err := ip.iter.Scan(teeValueSetter{row, rec}); err != nil {
+		return false, err
+	}
+
+	return ip.ac.CanReadRecord(ctx, rec), nil
+}
+
+// readableRecords keeps the records the user may read
+func (ip *iteratorProvider) readableRecords(ctx context.Context, mod *types.Module, rr types.RecordSet) types.RecordSet {
+	if reflect2.IsNil(ip.ac) {
+		return rr
+	}
+
+	out := make(types.RecordSet, 0, len(rr))
+	for _, r := range rr {
+		r.SetModule(mod)
+		if ip.ac.CanReadRecord(ctx, r) {
+			out = append(out, r)
+		}
+	}
+
+	return out
+}
+
+// canReadValue reports whether the user may read the module field's values
+func (ip *iteratorProvider) canReadValue(ctx context.Context, mod *types.Module, name string) bool {
+	if reflect2.IsNil(ip.ac) {
+		return true
+	}
+
+	f := mod.Fields.FindByName(name)
+	if f == nil {
+		return true
+	}
+
+	if f.NamespaceID == 0 {
+		f.NamespaceID = mod.NamespaceID
+	}
+
+	return ip.ac.CanReadRecordValueOnModuleField(ctx, f)
+}
+
+func (ip *iteratorProvider) next(ctx context.Context, out datasource.RawRecord) (more bool, err error) {
+	var (
+		rowCache datasource.RawRecord
+		readable bool
+	)
+
+	for !readable {
+		if !ip.iter.Next(ctx) {
+			return false, ip.iter.Err()
+		}
+
+		rowCache = make(datasource.RawRecord)
+		if readable, err = ip.scanReadable(ctx, rowCache); err != nil {
+			return
+		}
 	}
 
 	// Apply field-level access control filtering
@@ -324,7 +391,7 @@ func (ip *iteratorProvider) nextResolved(ctx context.Context, out datasource.Raw
 		ip.rows = make([]datasource.RawRecord, 0)
 		ip.buffIndex = 0
 
-		for i := 0; i < bufferPullChunkSize; i++ {
+		for len(ip.rows) < bufferPullChunkSize {
 			rowCache := make(datasource.RawRecord)
 			if !ip.iter.Next(ctx) {
 				ip.done = true
@@ -337,12 +404,14 @@ func (ip *iteratorProvider) nextResolved(ctx context.Context, out datasource.Raw
 				break
 			}
 
-			err = ip.iter.Scan(rowCache)
+			readable, err := ip.scanReadable(ctx, rowCache)
 			if err != nil {
-				return
+				return false, err
 			}
 
-			ip.rows = append(ip.rows, rowCache)
+			if readable {
+				ip.rows = append(ip.rows, rowCache)
+			}
 		}
 
 		if len(ip.rows) == 0 {
@@ -380,6 +449,11 @@ func (ip *iteratorProvider) resolveReferences(ctx context.Context, ds dal.FullSe
 	for i, cacheRecord := range ip.rows {
 
 		for refField, refWrap := range ip.relMods {
+			// A missing/deleted target module leaves reference values unresolved.
+			if refWrap.modLvl1 == nil {
+				continue
+			}
+
 			value := cacheRecord[refField]
 			if len(value.Values) == 0 {
 				continue
@@ -405,6 +479,8 @@ func (ip *iteratorProvider) resolveReferences(ctx context.Context, ds dal.FullSe
 				return err
 			}
 
+			relRecords = ip.readableRecords(ctx, refWrap.modLvl1, relRecords)
+
 			// lvl 2 nesting; current max lvl
 			if refWrap.modLvl2 != nil {
 				resLab = refWrap.labelLvl2
@@ -417,17 +493,35 @@ func (ip *iteratorProvider) resolveReferences(ctx context.Context, ds dal.FullSe
 					}
 				}
 
-				qq := fmt.Sprintf("(%s)", strings.Join(aux, " OR "))
-				relRecords, _, err = dalutils.ComposeRecordsList(ctx, ds, refWrap.modLvl2, types.RecordFilter{
-					Query: qq,
-					Paging: filter.Paging{
-						Limit: uint(len(aux)),
-					},
-				})
+				if len(aux) == 0 {
+					relRecords = nil
+				} else {
+					qq := fmt.Sprintf("(%s)", strings.Join(aux, " OR "))
+					relRecords, _, err = dalutils.ComposeRecordsList(ctx, ds, refWrap.modLvl2, types.RecordFilter{
+						Query: qq,
+						Paging: filter.Paging{
+							Limit: uint(len(aux)),
+						},
+					})
 
-				if err != nil {
-					return err
+					if err != nil {
+						return err
+					}
+
+					relRecords = ip.readableRecords(ctx, refWrap.modLvl2, relRecords)
 				}
+			}
+
+			labelMod := refWrap.modLvl1
+			if refWrap.modLvl2 != nil {
+				labelMod = refWrap.modLvl2
+				if !ip.canReadValue(ctx, refWrap.modLvl1, refWrap.labelLvl1) {
+					relRecords = nil
+				}
+			}
+
+			if !ip.canReadValue(ctx, labelMod, resLab) {
+				relRecords = nil
 			}
 
 			// Build a map from recordID to resolved label for ordered assignment

@@ -91,6 +91,77 @@ func TestSession_TwoStepWorkflow(t *testing.T) {
 	req.Equal("/s1/s2", expr.Must(expr.Select(ses.Result(), "path")).Get())
 }
 
+// A finished run wakes whoever waits for it instead of leaving them to their
+// next poll; every synchronous workflow run used to wait for one
+func TestSession_WaitWakesOnCompletion(t *testing.T) {
+	var (
+		req = require.New(t)
+		wf  = NewGraph()
+		ses = NewSession(context.Background(), wf, SetWorkerIntervalWaiter(time.Hour))
+
+		s1 = &sesTestStep{name: "s1"}
+		s2 = &sesTestStep{name: "s2"}
+
+		ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
+	)
+
+	defer cancel()
+
+	wf.AddStep(s1, s2)
+	req.NoError(ses.Exec(ctx, s1, &expr.Vars{}))
+	req.NoError(ses.Wait(ctx))
+	req.NoError(ctx.Err(), "the wait returned when the run completed, not on a poll or the timeout")
+	req.Equal(SessionCompleted, ses.Status())
+}
+
+func TestSession_WaitReturnsAfterTheFailureIsHandled(t *testing.T) {
+	var (
+		req     = require.New(t)
+		handled = atomic.NewBool(false)
+		wf      = NewGraph()
+		ses     = NewSession(context.Background(), wf, SetHandler(func(status SessionStatus, _ *State, _ *Session) error {
+			if status == SessionFailed {
+				time.Sleep(50 * time.Millisecond)
+				handled.Store(true)
+			}
+			return nil
+		}))
+
+		s1 = &sesTestStep{name: "s1", exec: func(context.Context, *ExecRequest) (ExecResponse, error) {
+			return nil, fmt.Errorf("failed")
+		}}
+	)
+
+	wf.AddStep(s1)
+	req.NoError(ses.Exec(context.Background(), s1, &expr.Vars{}))
+	req.Error(ses.Wait(context.Background()))
+	req.True(handled.Load(), "the waiter got the session before the failure was recorded")
+}
+
+func TestSession_StepsWithoutStatusChangeDoNotWakeWaiters(t *testing.T) {
+	var (
+		req = require.New(t)
+		ses = NewSession(context.Background(), NewGraph())
+	)
+
+	changed := ses.statusChanged()
+	ses.notifyStatusChanged()
+	req.Equal(changed, ses.statusChanged(), "the status is still active")
+
+	ses.mux.Lock()
+	ses.result = &expr.Vars{}
+	ses.mux.Unlock()
+
+	ses.notifyStatusChanged()
+	req.NotEqual(changed, ses.statusChanged(), "the status changed to completed")
+
+	select {
+	case <-changed:
+	default:
+		req.Fail("waiters were not woken")
+	}
+}
+
 func TestSession_SplitAndMerge(t *testing.T) {
 	var (
 		ctx = context.Background()
@@ -310,3 +381,28 @@ func BenchmarkSessionSimple1000StepSequence(b *testing.B)    { bmSessionSimpleSt
 func BenchmarkSessionSimple10000StepSequence(b *testing.B)   { bmSessionSimpleStepSequence(10000, b) }
 func BenchmarkSessionSimple100000StepSequence(b *testing.B)  { bmSessionSimpleStepSequence(100000, b) }
 func BenchmarkSessionSimple1000000StepSequence(b *testing.B) { bmSessionSimpleStepSequence(1000000, b) }
+
+// States are numbered without drawing an ID from the ID generator for each:
+// a long loop drew it down and held back every other ID the server needed
+func TestStateIDsDoNotDrawGeneratorIDs(t *testing.T) {
+	var (
+		req   = require.New(t)
+		calls = 0
+		orig  = nextID
+	)
+
+	defer func() { nextID = orig }()
+	nextID = func() uint64 { calls++; return orig() }
+
+	seen := make(map[uint64]bool)
+	prev := uint64(0)
+	for i := 0; i < 1000; i++ {
+		id := nextStateID()
+		req.False(seen[id], "state IDs are unique")
+		req.Greater(id, prev, "state IDs increase")
+		seen[id] = true
+		prev = id
+	}
+
+	req.LessOrEqual(calls, 1, "at most the first state draws a generator ID")
+}

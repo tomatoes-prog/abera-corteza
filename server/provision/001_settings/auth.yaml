@@ -1,9 +1,10 @@
+# Modified by Abera: disable public internal signup by default on new installations.
 settings:
   auth.external.enabled: true
   auth.mail.from-address: info@example.tld
   auth.mail.from-name: Corteza
   auth.internal.enabled: true
-  auth.internal.signup.enabled: true
+  auth.internal.signup.enabled: false
   auth.internal.profile-avatar.enabled: true
 
   # We add this through provision procedures

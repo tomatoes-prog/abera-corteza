@@ -9,6 +9,7 @@ import (
 	"github.com/cortezaproject/corteza/server/automation/types"
 	"github.com/cortezaproject/corteza/server/pkg/actionlog"
 	"github.com/cortezaproject/corteza/server/pkg/auth"
+	"github.com/cortezaproject/corteza/server/pkg/ctxcache"
 	"github.com/cortezaproject/corteza/server/pkg/errors"
 	"github.com/cortezaproject/corteza/server/pkg/expr"
 	"github.com/cortezaproject/corteza/server/pkg/logger"
@@ -45,6 +46,9 @@ type (
 		runner     auth.Identifiable
 		trace      bool
 		callStack  []uint64
+
+		// lookups the run shares with the run that started it
+		cache *ctxcache.Cache
 	}
 
 	sessionAccessController interface {
@@ -63,6 +67,12 @@ const (
 	// We use the size of the stacktrace and for every F (see the value of the constant)
 	// we flush the session info to the store.
 	sessionStateFlushFrequency = 1000
+
+	// how long a run reuses the namespaces and modules it looked up
+	//
+	// Record steps look them up for every record they touch; a short expiry
+	// keeps long-running and resumed runs close to the changes made meanwhile.
+	sessionLookupCacheTTL = 10 * time.Second
 )
 
 func Session(log *zap.Logger, opt options.WorkflowOpt, ps promptSender) *session {
@@ -218,9 +228,17 @@ func (svc *session) Start(ctx context.Context, g *wfexec.Graph, ssp types.Sessio
 		return nil, 0, errors.InvalidData("cannot start workflow on a step with parents")
 	}
 
-	var (
-		ses = svc.spawn(g, ssp.WorkflowID, ssp.Trace, ssp.CallStack, ssp.Runner, ssp.Invoker)
-	)
+	// A workflow started from another run's step (a subworkflow, or a trigger
+	// of a record the step saved) shares that run's lookups
+	cache := ctxcache.From(ctx)
+	if cache == nil {
+		cache = ctxcache.New(sessionLookupCacheTTL)
+	}
+
+	ses, err := svc.spawn(g, ssp.WorkflowID, ssp.Trace, ssp.CallStack, ssp.Runner, ssp.Invoker, cache)
+	if err != nil {
+		return
+	}
 
 	ses.CreatedAt = *now()
 	ses.CreatedBy = ssp.Invoker.Identity()
@@ -307,7 +325,7 @@ func (svc *session) Cancel(ctx context.Context, sessionID uint64) (err error) {
 //
 // We need initial context for the session because we want to catch all cancellations or timeouts from there
 // and not from any potential HTTP requests or similar temporary context that can prematurely destroy a workflow session
-func (svc *session) spawn(g *wfexec.Graph, workflowID uint64, trace bool, callStack []uint64, runner, invoker auth.Identifiable) (ses *types.Session) {
+func (svc *session) spawn(g *wfexec.Graph, workflowID uint64, trace bool, callStack []uint64, runner, invoker auth.Identifiable, cache *ctxcache.Cache) (ses *types.Session, err error) {
 	s := &spawn{
 		workflowID: workflowID,
 		session:    make(chan *wfexec.Session, 1),
@@ -316,13 +334,19 @@ func (svc *session) spawn(g *wfexec.Graph, workflowID uint64, trace bool, callSt
 		callStack:  callStack,
 		invoker:    invoker,
 		runner:     runner,
+		cache:      cache,
 	}
 
 	// Send new-session request
 	svc.spawnQueue <- s
 
 	// blocks until session is set
-	ses = types.NewSession(<-s.session)
+	ws := <-s.session
+	if ws == nil {
+		return nil, fmt.Errorf("could not start workflow %d session", workflowID)
+	}
+
+	ses = types.NewSession(ws)
 	if !svc.opt.StackTraceEnabled {
 		ses.DisableStacktrace()
 	}
@@ -338,7 +362,7 @@ func (svc *session) spawn(g *wfexec.Graph, workflowID uint64, trace bool, callSt
 	svc.mux.Lock()
 	svc.pool[ses.ID] = ses
 	svc.mux.Unlock()
-	return ses
+	return ses, nil
 }
 
 // Watch looks over session's spawn queue
@@ -356,45 +380,15 @@ func (svc *session) Watch(ctx context.Context) {
 			case <-ctx.Done():
 				return
 			case s := <-svc.spawnQueue:
-				var execCtx = context.Background()
-
-				opts := []wfexec.SessionOpt{
-					wfexec.SetWorkflowID(s.workflowID),
-					wfexec.SetCallStack(s.callStack...),
-					wfexec.SetHandler(svc.stateChangeHandler(ctx)),
-				}
-
-				if svc.opt.ExecDebug {
-					log := svc.log.
-						Named("exec").
-						With(logger.Uint64("workflowID", s.workflowID)).
-						With(logger.Uint64("runnerID", s.runner.Identity())).
-						With(logger.Uint64s("runnerRoles", s.runner.Roles()))
-
-					opts = append(
-						opts,
-						wfexec.SetLogger(log),
-						wfexec.SetDumpStacktraceOnPanic(true),
-					)
-				}
-
-				// Encode runner into execution context
-				// runner is used as identity and for access control
-				execCtx = auth.SetIdentityToContext(execCtx, s.runner)
-
-				// Encode invoker into execution context
-				// invoker is used
-				execCtx = context.WithValue(execCtx, workflowInvokerCtxKey{}, s.invoker)
-
-				s.session <- wfexec.NewSession(execCtx, s.graph, opts...)
-				// case time for a pool cleanup
-				// @todo cleanup pool when sessions are complete
+				var ws *wfexec.Session
+				svc.survive("spawn", func() { ws = svc.newExecSession(ctx, s) })
+				s.session <- ws
 
 			case <-gcTicker.C:
-				svc.gc()
+				svc.survive("gc", svc.gc)
 
 			case <-lpTicker.C:
-				svc.logPending()
+				svc.survive("logPending", svc.logPending)
 			}
 		}
 
@@ -403,6 +397,64 @@ func (svc *session) Watch(ctx context.Context) {
 	}()
 
 	svc.log.Debug("watcher initialized")
+}
+
+// Builds the execution session a spawn request asks for
+func (svc *session) newExecSession(ctx context.Context, s *spawn) *wfexec.Session {
+	var execCtx = context.Background()
+
+	opts := []wfexec.SessionOpt{
+		wfexec.SetWorkflowID(s.workflowID),
+		wfexec.SetCallStack(s.callStack...),
+		wfexec.SetHandler(svc.stateChangeHandler(ctx)),
+	}
+
+	if svc.opt.ExecDebug {
+		log := svc.log.
+			Named("exec").
+			With(logger.Uint64("workflowID", s.workflowID)).
+			With(logger.Uint64("runnerID", s.runner.Identity())).
+			With(logger.Uint64s("runnerRoles", s.runner.Roles()))
+
+		opts = append(
+			opts,
+			wfexec.SetLogger(log),
+			wfexec.SetDumpStacktraceOnPanic(true),
+		)
+	}
+
+	// Encode runner into execution context
+	// runner is used as identity and for access control
+	execCtx = auth.SetIdentityToContext(execCtx, s.runner)
+
+	// Encode invoker into execution context
+	// invoker is used
+	execCtx = context.WithValue(execCtx, workflowInvokerCtxKey{}, s.invoker)
+
+	if s.cache != nil {
+		execCtx = ctxcache.With(execCtx, s.cache)
+	}
+
+	return wfexec.NewSession(execCtx, s.graph, opts...)
+}
+
+// Runs one watcher task; a panic is logged instead of ending the watcher
+func (svc *session) survive(task string, fn func()) {
+	defer func() {
+		reason := recover()
+		if reason == nil {
+			return
+		}
+
+		sentry.Report(reason)
+		svc.log.Error("workflow session watcher task panicked",
+			zap.String("task", task),
+			zap.Any("panic", reason),
+			zap.Stack("stack"),
+		)
+	}()
+
+	fn()
 }
 
 // garbage collection for stale sessions

@@ -27,6 +27,12 @@ func Test_sanitizer_Run(t *testing.T) {
 			output: "42",
 		},
 		{
+			name:   "empty number should stay empty",
+			kind:   "Number",
+			input:  "",
+			output: "",
+		},
+		{
 			name:   "object reference should be processed",
 			kind:   "Record",
 			input:  " 133569629112020995 ",
@@ -321,6 +327,27 @@ func Test_sanitizer_Run(t *testing.T) {
 			options: map[string]interface{}{},
 			input:   `<tag1>cor<tag2></tag2>teza</tag1><tag1>server</tag1><tag2>123</tag2>`,
 			output:  "cortezaserver123",
+		},
+		{
+			name:    "string sanitization off keeps angle brackets",
+			kind:    "String",
+			options: map[string]interface{}{"sanitizeXSS": false},
+			input:   `Application No-Reply <noreply@example.com>`,
+			output:  `Application No-Reply <noreply@example.com>`,
+		},
+		{
+			name:    "string sanitization off keeps markup as entered",
+			kind:    "String",
+			options: map[string]interface{}{"sanitizeXSS": false},
+			input:   `<span onerror=alert()>Title here</span>`,
+			output:  `<span onerror=alert()>Title here</span>`,
+		},
+		{
+			name:    "rich text is sanitized even with sanitization off",
+			kind:    "String",
+			options: map[string]interface{}{"sanitizeXSS": false, "useRichTextEditor": true},
+			input:   `<span onerror=alert()>Title here</span>`,
+			output:  `<span>Title here</span>`,
 		},
 		{
 			name:    "string escaping; preserve necessary chars",

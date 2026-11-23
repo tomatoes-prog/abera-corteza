@@ -1,3 +1,4 @@
+<!-- Modified by Abera: fork features and secure registration defaults are documented below. -->
 <h1 align="center">
   <img width="300px" src=".github/assets/corteza_logo.svg" />
   <br />
@@ -74,6 +75,21 @@ sintéticos relacionados para todos sus módulos durante el primer arranque.
 Las plantillas no comparten un diseño genérico: mapas, colas personales,
 checklists, agenda, fichas 360° y pipelines se usan solo donde aportan valor.
 
+### Acceso a instalaciones nuevas
+
+El registro público con correo y contraseña está desactivado por defecto, tanto
+en la demo como en instalaciones con o sin plantilla. Configure el bootstrap
+descrito abajo para crear el primer administrador antes de exponer la instancia;
+después, el administrador puede crear usuarios desde Corteza. Sin bootstrap ni
+otro mecanismo de aprovisionamiento no se podrá crear el primer usuario desde
+el formulario público. Un administrador puede habilitar expresamente el registro
+en **Sistema → Configuración de autenticación → Interna → Registro activado**.
+
+Las instalaciones existentes conservan su configuración guardada: actualizar
+la imagen no desactiva automáticamente el registro abierto anteriormente. Los
+proveedores de identidad externos tienen políticas de acceso independientes y
+deben revisarse si están habilitados.
+
 ### Bootstrap OAuth cifrado
 
 Para instalaciones nuevas, Corteza puede generar un administrador y un cliente
@@ -120,3 +136,7 @@ Reach out to us on [our forum](https://forum.cortezaproject.org/).
 
 Corteza is released under the Apache-2.0 license.
 Refer to the [LICENSE](LICENSE) file for additional information.
+
+Esta distribución es un fork de Corteza con modificaciones de Abera. Las
+atribuciones y un resumen de los cambios se encuentran en [NOTICE](NOTICE), y
+el historial detallado de esta distribución está en [CHANGELOG.md](CHANGELOG.md).

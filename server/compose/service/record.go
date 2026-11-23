@@ -1,3 +1,4 @@
+// Modified by Abera: integrate upstream field-access checks with fork report handling.
 package service
 
 import (
@@ -125,6 +126,7 @@ type (
 		SearchSensitive(ctx context.Context) (set []types.SensitiveRecordSet, err error)
 		SearchRevisions(ctx context.Context, namespaceID, moduleID, recordID uint64, sorting filter.Sorting) (dal.Iterator, error)
 		RecordExport(context.Context, types.RecordFilter) error
+		CanExport(context.Context, types.RecordFilter) error
 		RecordImport(context.Context, error) error
 
 		Create(ctx context.Context, record *types.Record) (*types.Record, *types.RecordValueErrorSet, error)
@@ -244,24 +246,9 @@ func defaultValidator(svc RecordService) recordValuesValidator {
 		panic("implement me")
 	})
 
-	validator.RecordRefChecker(func(ctx context.Context, s store.Storer, v *types.RecordValue, f *types.ModuleField, m *types.Module) (bool, error) {
-		if svc == nil && v.Ref == 0 {
-			return false, nil
-		}
-
-		var (
-			referencedModuleID = f.Options.Uint64("moduleID")
-
-			r, _, err = svc.FindByID(ctx, f.NamespaceID, referencedModuleID, v.Ref)
-		)
-
-		return r != nil, err
-	})
-
-	validator.UserRefChecker(func(ctx context.Context, s store.Storer, v *types.RecordValue, f *types.ModuleField, m *types.Module) (bool, error) {
-		r, err := store.LookupUserByID(ctx, s, v.Ref)
-		return r != nil, err
-	})
+	// Record and user references are not looked up: a lookup per value on
+	// every save (twice, around the before-handlers) multiplied the queries
+	// a record save costs
 
 	validator.FileRefChecker(func(ctx context.Context, s store.Storer, v *types.RecordValue, f *types.ModuleField, m *types.Module) (bool, error) {
 		if v.Ref == 0 {
@@ -452,6 +439,10 @@ func (svc record) FindN(ctx context.Context, filter types.RecordFilter) (set typ
 			return err
 		}
 
+		if err = svc.validateSummaryFieldPermissions(ctx, svc.ac, m, filter.Summaries); err != nil {
+			return err
+		}
+
 		filter.Check = ComposeRecordFilterChecker(ctx, svc.ac, m)
 
 		if set, stats, f, err = dalutils.ComposeRecordsListN(ctx, svc.dal, m, filter); err != nil {
@@ -602,6 +593,14 @@ func (svc record) SearchRevisions(ctx context.Context, namespaceID, moduleID, re
 		}
 
 		iter, err = svc.revisions.search(ctx, rec, sorting)
+		if err != nil {
+			return
+		}
+
+		iter = readableRevisions{Iterator: iter, readable: func(name string) bool {
+			f := mod.Fields.FindByName(name)
+			return f == nil || svc.ac.CanReadRecordValueOnModuleField(ctx, f)
+		}}
 		return
 	}()
 
@@ -613,6 +612,21 @@ func (svc record) RecordImport(ctx context.Context, err error) error {
 }
 
 // RecordExport records that the export has occurred
+// CanExport checks the user may search the module's records and filter them by
+// the fields the query uses
+func (svc record) CanExport(ctx context.Context, f types.RecordFilter) error {
+	m, err := loadModule(ctx, svc.store, f.NamespaceID, f.ModuleID)
+	if err != nil {
+		return err
+	}
+
+	if !svc.ac.CanSearchRecordsOnModule(ctx, m) {
+		return RecordErrNotAllowedToSearch()
+	}
+
+	return svc.validateFilterFieldPermissions(ctx, svc.ac, m, f.Query)
+}
+
 func (svc record) RecordExport(ctx context.Context, f types.RecordFilter) (err error) {
 	return svc.recordAction(ctx, &recordActionProps{filter: &f}, RecordActionExport, err)
 }
@@ -861,7 +875,7 @@ func (svc record) BulkModifyByFilter(ctx context.Context, f types.RecordFilter, 
 				break
 			}
 
-			f.NextPage = recordFilter.NextPage
+			f.PageCursor = recordFilter.NextPage
 		}
 
 		return nil
@@ -901,7 +915,8 @@ func (svc record) create(ctx context.Context, new *types.Record) (rec *types.Rec
 	}
 
 	var (
-		rve *types.RecordValueErrorSet
+		rve           *types.RecordValueErrorSet
+		invokerFields map[string]bool
 	)
 
 	// ensure module ref is set before running through records workflows and scripts
@@ -912,7 +927,7 @@ func (svc record) create(ctx context.Context, new *types.Record) (rec *types.Rec
 		dd, err = svc.DupDetection(ctx, m, new)
 
 		// handle input payload errors
-		if rve = svc.procCreate(ctx, invokerID, m, new); !rve.IsValid() {
+		if rve = svc.procCreate(ctx, invokerID, m, new, nil); !rve.IsValid() {
 			return nil, dd, RecordErrValueInput().Wrap(rve)
 		}
 
@@ -920,6 +935,12 @@ func (svc record) create(ctx context.Context, new *types.Record) (rec *types.Rec
 		if err != nil {
 			return
 		}
+
+		// fields the invoker is changing are checked against the invoker's
+		// permissions; what before-handlers (workflows, scripts) change on
+		// top of that is their own action and is not re-checked as the
+		// invoker's
+		invokerFields = updatedFieldNames(new.Values)
 
 		if err = svc.eventbus.WaitFor(ctx, event.RecordBeforeCreate(new, nil, m, ns, rve, nil)); err != nil {
 			return
@@ -931,7 +952,7 @@ func (svc record) create(ctx context.Context, new *types.Record) (rec *types.Rec
 	new.Values = RecordValueDefaults(m, new.Values)
 
 	// Handle payload from automation scripts
-	if rve = svc.procCreate(ctx, invokerID, m, new); !rve.IsValid() {
+	if rve = svc.procCreate(ctx, invokerID, m, new, invokerFields); !rve.IsValid() {
 		return nil, dd, RecordErrValueInput().Wrap(rve)
 	}
 
@@ -1225,7 +1246,8 @@ func (svc record) update(ctx context.Context, upd *types.Record) (rec *types.Rec
 	}
 
 	var (
-		rve *types.RecordValueErrorSet
+		rve           *types.RecordValueErrorSet
+		invokerFields map[string]bool
 	)
 
 	// ensure module ref is set before running through records workflows and scripts
@@ -1237,7 +1259,7 @@ func (svc record) update(ctx context.Context, upd *types.Record) (rec *types.Rec
 		dd, err = svc.DupDetection(ctx, m, upd)
 
 		// handle input payload errors
-		if rve = svc.procUpdate(ctx, invokerID, m, upd, old); !rve.IsValid() {
+		if rve = svc.procUpdate(ctx, invokerID, m, upd, old, nil); !rve.IsValid() {
 			return nil, dd, RecordErrValueInput().Wrap(rve)
 		}
 
@@ -1245,6 +1267,12 @@ func (svc record) update(ctx context.Context, upd *types.Record) (rec *types.Rec
 		if err != nil {
 			return
 		}
+
+		// fields the invoker is changing are checked against the invoker's
+		// permissions; what before-handlers (workflows, scripts) change on
+		// top of that is their own action and is not re-checked as the
+		// invoker's
+		invokerFields = updatedFieldNames(upd.Values)
 
 		// Scripts can (besides simple error value) return complex record value error set
 		// that is passed back to the UI or any other API consumer
@@ -1259,7 +1287,7 @@ func (svc record) update(ctx context.Context, upd *types.Record) (rec *types.Rec
 	}
 
 	// Handle payload from automation scripts
-	if rve = svc.procUpdate(ctx, invokerID, m, upd, old); !rve.IsValid() {
+	if rve = svc.procUpdate(ctx, invokerID, m, upd, old, invokerFields); !rve.IsValid() {
 		return nil, dd, RecordErrValueInput().Wrap(rve)
 	}
 
@@ -1382,7 +1410,11 @@ func (svc record) Create(ctx context.Context, new *types.Record) (rec *types.Rec
 // of the creation procedure and after results are back from the automation scripts
 //
 // Both these points introduce external data that need to be checked fully in the same manner
-func (svc record) procCreate(ctx context.Context, invokerID uint64, m *types.Module, new *types.Record) (rve *types.RecordValueErrorSet) {
+// procCreate prepares the new record for storing
+//
+// checkFields limits the field permission check to the given fields; nil
+// checks every updated value
+func (svc record) procCreate(ctx context.Context, invokerID uint64, m *types.Module, new *types.Record, checkFields map[string]bool) (rve *types.RecordValueErrorSet) {
 	new.Values.SetUpdatedFlag(true)
 
 	new.Values.Walk(func(v *types.RecordValue) error {
@@ -1420,12 +1452,35 @@ func (svc record) procCreate(ctx context.Context, invokerID uint64, m *types.Mod
 		return err
 	}
 
-	if rve = RecordValueUpdateOpCheck(ctx, svc.ac, m, new.Values); !rve.IsValid() {
+	if rve = RecordValueUpdateOpCheck(ctx, svc.ac, m, checkedValues(new.Values, checkFields)); !rve.IsValid() {
 		return
 	}
 
 	rve = RecordPreparer(ctx, svc.store, svc.sanitizer, svc.validator, svc.formatter, m, new)
 	return rve
+}
+
+// updatedFieldNames collects names of the fields with updated values
+func updatedFieldNames(vv types.RecordValueSet) map[string]bool {
+	out := make(map[string]bool)
+	for _, v := range vv.GetUpdated() {
+		out[v.Name] = true
+	}
+
+	return out
+}
+
+// checkedValues narrows the value set to the given fields; nil keeps all
+func checkedValues(vv types.RecordValueSet, fields map[string]bool) types.RecordValueSet {
+	if fields == nil {
+		return vv
+	}
+
+	out, _ := vv.Filter(func(v *types.RecordValue) (bool, error) {
+		return fields[v.Name], nil
+	})
+
+	return out
 }
 
 func (svc record) Update(ctx context.Context, upd *types.Record) (rec *types.Record, dd *types.RecordValueErrorSet, err error) {
@@ -1449,7 +1504,11 @@ func (svc record) Update(ctx context.Context, upd *types.Record) (rec *types.Rec
 // of the update procedure and after results are back from the automation scripts
 //
 // Both these points introduce external data that need to be checked fully in the same manner
-func (svc record) procUpdate(ctx context.Context, invokerID uint64, m *types.Module, upd *types.Record, old *types.Record) (rve *types.RecordValueErrorSet) {
+// procUpdate prepares the updated record for storing
+//
+// checkFields limits the field permission check to the given fields; nil
+// checks every updated value
+func (svc record) procUpdate(ctx context.Context, invokerID uint64, m *types.Module, upd *types.Record, old *types.Record, checkFields map[string]bool) (rve *types.RecordValueErrorSet) {
 	upd.Revision = old.Revision + 1
 
 	// Mark all values as updated (new)
@@ -1484,7 +1543,7 @@ func (svc record) procUpdate(ctx context.Context, invokerID uint64, m *types.Mod
 		return svc.ac.CanUpdateRecordValueOnModuleField(ctx, m.Fields.FindByName(f.Name))
 	})
 
-	if rve = RecordValueUpdateOpCheck(ctx, svc.ac, m, upd.Values); !rve.IsValid() {
+	if rve = RecordValueUpdateOpCheck(ctx, svc.ac, m, checkedValues(upd.Values, checkFields)); !rve.IsValid() {
 		return
 	}
 
@@ -2071,7 +2130,7 @@ func (svc record) Iterator(ctx context.Context, f types.RecordFilter, fn eventbu
 					rec.Values = RecordValueDefaults(m, rec.Values)
 
 					// Handle payload from automation scripts
-					if rve := svc.procCreate(ctx, invokerID, m, rec); !rve.IsValid() {
+					if rve := svc.procCreate(ctx, invokerID, m, rec, nil); !rve.IsValid() {
 						return RecordErrValueInput().Wrap(rve)
 					}
 
@@ -2082,7 +2141,7 @@ func (svc record) Iterator(ctx context.Context, f types.RecordFilter, fn eventbu
 					recordableAction = RecordActionIteratorUpdate
 
 					// Handle input payload
-					if rve := svc.procUpdate(ctx, invokerID, m, rec, rec); !rve.IsValid() {
+					if rve := svc.procUpdate(ctx, invokerID, m, rec, rec, nil); !rve.IsValid() {
 						return RecordErrValueInput().Wrap(rve)
 					}
 
@@ -2650,12 +2709,6 @@ func (svc record) validateFilterFieldPermissions(ctx context.Context, ac recordV
 		return nil
 	}
 
-	// Build a set of module field names for quick lookup
-	moduleFieldNames := make(map[string]bool)
-	for _, f := range m.Fields {
-		moduleFieldNames[f.Name] = true
-	}
-
 	// System fields that are always filterable (not module-specific fields)
 	systemFields := svc.systemExprFields()
 
@@ -2666,13 +2719,10 @@ func (svc record) validateFilterFieldPermissions(ctx context.Context, ac recordV
 			continue
 		}
 
-		// Skip symbols that aren't module fields (could be functions, operators, etc.)
-		if !moduleFieldNames[symbol] {
-			continue
-		}
-
-		// Find the field and check permission
-		field := m.Fields.FindByName(symbol)
+		// Find the field and check permission. Identifiers resolve
+		// case-insensitively in the DAL, so this must too; otherwise a
+		// differently cased name skips the check yet still filters.
+		field := findModuleFieldByIdent(m, symbol)
 		if field == nil {
 			continue
 		}
@@ -2685,16 +2735,27 @@ func (svc record) validateFilterFieldPermissions(ctx context.Context, ac recordV
 	return nil
 }
 
+// findModuleFieldByIdent resolves a filter or sort identifier to a module field
+// the way the DAL does: case-insensitively, and by the first segment of a
+// reference path (account.industry -> account).
+func findModuleFieldByIdent(m *types.Module, ident string) *types.ModuleField {
+	if i := strings.Index(ident, "."); i > 0 {
+		ident = ident[:i]
+	}
+
+	for _, f := range m.Fields {
+		if strings.EqualFold(f.Name, ident) {
+			return f
+		}
+	}
+
+	return nil
+}
+
 // validateFilterFieldPermissions checks if the user is allowed to sort requested fields
 func (svc record) validateSortFieldPermissions(ctx context.Context, ac recordValueAccessController, m *types.Module, sort filter.SortExprSet) error {
 	if len(sort) == 0 {
 		return nil
-	}
-
-	// Build a set of module field names for quick lookup
-	moduleFieldNames := make(map[string]bool)
-	for _, f := range m.Fields {
-		moduleFieldNames[f.Name] = true
 	}
 
 	// System fields that are always sortable
@@ -2708,19 +2769,34 @@ func (svc record) validateSortFieldPermissions(ctx context.Context, ac recordVal
 			continue
 		}
 
-		// Skip non-module fields
-		if !moduleFieldNames[fieldName] {
-			continue
-		}
-
-		// Find the field and check permission
-		field := m.Fields.FindByName(fieldName)
+		// Find the field and check permission. Identifiers resolve
+		// case-insensitively in the DAL, so this must too; otherwise a
+		// differently cased name skips the check yet still orders the result.
+		field := findModuleFieldByIdent(m, fieldName)
 		if field == nil {
 			continue
 		}
 
 		if !ac.CanReadRecordValueOnModuleField(ctx, field) {
 			return RecordErrNotAllowedToSortByField(&recordActionProps{field: fieldName})
+		}
+	}
+
+	return nil
+}
+
+// validateSummaryFieldPermissions rejects summaries over module fields whose
+// values the user may not read
+func (svc record) validateSummaryFieldPermissions(ctx context.Context, ac recordValueAccessController, m *types.Module, ss []types.RecordSummaryReq) error {
+	for _, s := range ss {
+		// resolve case-insensitively, the way the DAL does
+		field := findModuleFieldByIdent(m, s.Field)
+		if field == nil {
+			continue
+		}
+
+		if !ac.CanReadRecordValueOnModuleField(ctx, field) {
+			return RecordErrNotAllowedToSummarizeField(&recordActionProps{field: s.Field})
 		}
 	}
 

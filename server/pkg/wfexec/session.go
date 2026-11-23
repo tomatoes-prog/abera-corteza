@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"runtime/debug"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/cortezaproject/corteza/server/pkg/auth"
@@ -53,6 +54,15 @@ type (
 		err    error
 
 		mux sync.RWMutex
+
+		// closed and replaced when the status differs after a step or when
+		// the worker stops, so WaitUntil looks at the status then instead of
+		// on its next tick
+		changed    chan struct{}
+		changedMux sync.Mutex
+
+		// status the waiters were last woken for
+		notified SessionStatus
 
 		// debug logger
 		log *zap.Logger
@@ -138,6 +148,16 @@ var (
 		return id.Next()
 	}
 
+	// States are numbered by a counter that starts at an ID from nextID
+	//
+	// Every step of a run is a state, a loop takes a few per iteration, and the
+	// ID generator issues a limited number of IDs per 10 ms: a long loop drew
+	// them down and held back every other ID the server needed. A state is only
+	// looked up within its session; starting from a fresh ID keeps the numbers
+	// unique after a restart too.
+	stateIDs     atomic.Uint64
+	stateIDsInit sync.Once
+
 	// wrapper around time.Now() that will aid service testing
 	now = func() *time.Time {
 		c := time.Now()
@@ -146,6 +166,11 @@ var (
 
 	errCanceled = fmt.Errorf("canceled")
 )
+
+func nextStateID() uint64 {
+	stateIDsInit.Do(func() { stateIDs.Store(nextID()) })
+	return stateIDs.Add(1)
+}
 
 func (s SessionStatus) String() string {
 	switch s {
@@ -183,6 +208,8 @@ func NewSession(ctx context.Context, g *Graph, oo ...SessionOpt) *Session {
 		workerIntervalWaiter: time.Millisecond,
 
 		workerLock: make(chan struct{}, 1),
+
+		changed: make(chan struct{}),
 
 		log: zap.NewNop(),
 
@@ -392,7 +419,7 @@ func (s *Session) enqueue(ctx context.Context, st *State) error {
 	}
 
 	if st.stateId == 0 {
-		st.stateId = nextID()
+		st.stateId = nextStateID()
 	}
 
 	select {
@@ -435,14 +462,20 @@ func (s *Session) WaitUntil(ctx context.Context, expected ...SessionStatus) erro
 	defer waitCheck.Stop()
 
 	for {
+		// Taken before the status is read, so a change made in between
+		// still wakes this loop; the tick is the fallback for anything else
+		changed := s.statusChanged()
+
+		status := s.Status()
+		if indexed[status] {
+			s.log.Debug("waiting complete", zap.Stringer("status", status))
+			// nothing in the pipeline
+			return s.err
+		}
+
 		select {
+		case <-changed:
 		case <-waitCheck.C:
-			status := s.Status()
-			if indexed[status] {
-				s.log.Debug("waiting complete", zap.Stringer("status", status))
-				// nothing in the pipeline
-				return s.err
-			}
 
 		case <-ctx.Done():
 			s.log.Debug("wait context canceled", zap.Error(ctx.Err()))
@@ -452,8 +485,35 @@ func (s *Session) WaitUntil(ctx context.Context, expected ...SessionStatus) erro
 	}
 }
 
+// statusChanged returns the channel closed at the next possible status change
+func (s *Session) statusChanged() <-chan struct{} {
+	s.changedMux.Lock()
+	defer s.changedMux.Unlock()
+	return s.changed
+}
+
+// notifyStatusChanged wakes everybody waiting in WaitUntil when the status
+// differs from the one they were last woken for
+//
+// A loop finishes a step every few microseconds; waking the waiters after
+// each one cost more than the step itself.
+func (s *Session) notifyStatusChanged() {
+	s.changedMux.Lock()
+	defer s.changedMux.Unlock()
+
+	status := s.Status()
+	if status == s.notified {
+		return
+	}
+
+	s.notified = status
+	close(s.changed)
+	s.changed = make(chan struct{})
+}
+
 func (s *Session) worker(ctx context.Context) {
 	defer s.Stop()
+	defer s.notifyStatusChanged()
 
 	// making sure
 	defer close(s.workerLock)
@@ -525,6 +585,8 @@ func (s *Session) worker(ctx context.Context) {
 					<-s.execLock
 				}()
 
+				defer s.notifyStatusChanged()
+
 				var (
 					err error
 					log = s.log.With(logger.Uint64("stateID", st.stateId))
@@ -539,6 +601,7 @@ func (s *Session) worker(ctx context.Context) {
 				st.completed = now()
 
 				status := s.Status()
+				failed := false
 				if st.err != nil {
 					st.err = fmt.Errorf(
 						"workflow %d step %d execution failed: %w",
@@ -547,20 +610,13 @@ func (s *Session) worker(ctx context.Context) {
 						st.err,
 					)
 
-					s.mux.Lock()
-
 					// when the err handler is defined, the error was handled and should not kill the workflow
 					if !st.errHandled {
 						// We need to force failed session status
 						// because it's not set early enough to pick it up with s.Status()
 						status = SessionFailed
-
-						// pushing step execution error into error queue
-						// to break worker loop
-						s.qErr <- st.err
+						failed = true
 					}
-
-					s.mux.Unlock()
 				}
 
 				s.log.Debug(
@@ -571,6 +627,20 @@ func (s *Session) worker(ctx context.Context) {
 				)
 
 				err = s.eventHandler(status, st, s)
+
+				if failed {
+					// pushing step execution error into error queue
+					// to break worker loop
+					//
+					// This has to run after the event handler, for the same
+					// reason as with the completed status above: the worker
+					// marks the session failed when it gets the error, and a
+					// waiter collects the session as soon as it sees that.
+					s.mux.Lock()
+					s.qErr <- st.err
+					s.mux.Unlock()
+				}
+
 				if err != nil {
 					err = fmt.Errorf(
 						"workflow %d state change handler failed: %w",

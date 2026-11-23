@@ -2,6 +2,7 @@
 
 # Copyright 2026 Abera/Corteza contributors
 # Licensed under the Apache License, Version 2.0.
+# Modified by Abera: verify registration defaults and access after restart.
 
 set -eu
 
@@ -85,8 +86,8 @@ docker run --detach --name "$application" --network "$network" \
 	--env ABERA_MCP_MODE=admin \
 	--env ABERA_BOOTSTRAP_PUBLIC_KEY_FILE=/run/abera/public-key.pem \
 	--env ABERA_BOOTSTRAP_OUTPUT_FILE=/run/abera/bootstrap.enc.json \
-	--env DOMAIN=localhost \
-	--env DOMAIN_WEBAPP=localhost \
+	--env DOMAIN=127.0.0.1 \
+	--env DOMAIN_WEBAPP=127.0.0.1 \
 	--env HTTP_SSL_TERMINATED=false \
 	"$image" >/dev/null
 
@@ -115,11 +116,25 @@ command -v "$pwsh_bin" >/dev/null 2>&1 || {
 	echo "docker-postgres-smoke: pwsh is required for the API verification" >&2
 	exit 1
 }
-application_port=$(docker port "$application" 80/tcp | sed -n 's/.*:\([0-9][0-9]*\)$/\1/p' | head -n 1)
-[ -n "$application_port" ] || {
-	echo "docker-postgres-smoke: application port was not published" >&2
-	exit 1
+resolve_application_port() {
+	application_port=$(docker port "$application" 80/tcp | sed -n 's/.*:\([0-9][0-9]*\)$/\1/p' | head -n 1)
+	[ -n "$application_port" ] || {
+		echo "docker-postgres-smoke: application port was not published" >&2
+		return 1
+	}
 }
+resolve_application_port
+wait_for_published_endpoint() {
+	deadline=$(( $(date +%s) + 60 ))
+	until curl --silent --fail --max-time 2 "http://127.0.0.1:${application_port}/healthcheck" >/dev/null 2>&1; do
+		[ "$(date +%s)" -lt "$deadline" ] || {
+			echo "docker-postgres-smoke: published endpoint did not become ready" >&2
+			return 1
+		}
+		sleep 1
+	done
+}
+wait_for_published_endpoint
 verify_private_key=$private_key_host
 verify_envelope_host=${runtime_dir}/bootstrap.verify.enc.json
 verify_envelope_destination=$verify_envelope_host
@@ -138,6 +153,11 @@ if ! "$windows_docker"; then
 	chmod 600 "$verify_envelope_destination"
 fi
 verify_envelope=$verify_envelope_host
+if [ "$windows_docker" = true ]; then
+	# Git Bash may resolve the Windows executable as "pwsh" rather than
+	# "pwsh.exe"; it still needs a native path when path conversion is disabled.
+	verify_envelope=$(cygpath -w "$verify_envelope_host")
+fi
 
 windows_path_from_posix() {
 	case "$1" in
@@ -185,11 +205,19 @@ before=$(docker exec "$application" sha256sum \
 	/run/abera/bootstrap.enc.json | cut -d ' ' -f 1)
 docker restart "$application" >/dev/null
 wait_for_health
+# A dynamically allocated host port may change on container restart.
+resolve_application_port
+wait_for_published_endpoint
 after=$(docker exec "$application" sha256sum \
 	/run/abera/bootstrap.enc.json | cut -d ' ' -f 1)
 
 test "$before" = "$after"
 test "$(docker inspect --format '{{.State.OOMKilled}}' "$application")" = false
 docker exec "$application" sh -c 'test "$(cat /data/.abera-deployment)" = demo:showroom-co'
+"$pwsh_bin" -NoLogo -NoProfile -NonInteractive -File tests/verify-demo-api.ps1 \
+	-BaseUrl "http://127.0.0.1:${application_port}" \
+	-PrivateKeyFile "$verify_private_key" \
+	-EnvelopeFile "$verify_envelope" \
+	-AuthOnly
 
 echo "docker-postgres-smoke: OK"

@@ -108,6 +108,7 @@ function installStyles () {
     .abera-ai-header h2 { overflow: hidden; margin: 0; font-size: 15px; font-weight: 700; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
     .abera-ai-status { display: flex; align-items: center; gap: 6px; margin-top: 3px; color: var(--abera-ai-text-muted); font-size: 11px; }
     .abera-ai-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--abera-ai-success); }
+    .abera-ai-status-dot.is-disabled { background: var(--abera-ai-text-muted); }
     .abera-ai-icon-button { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 8px; color: var(--abera-ai-text-muted); background: transparent; cursor: pointer; }
     .abera-ai-icon-button:hover { color: var(--abera-ai-text); background: var(--abera-ai-surface-muted); }
     .abera-ai-menu { display: none; }
@@ -120,6 +121,7 @@ function installStyles () {
     .abera-ai-suggestions { display: grid; gap: 8px; margin-top: 20px; }
     .abera-ai-suggestion { min-height: 42px; padding: 9px 12px; border: 1px solid var(--abera-ai-border); border-radius: 8px; color: var(--abera-ai-text); background: var(--abera-ai-surface); cursor: pointer; font-size: 12px; text-align: left; }
     .abera-ai-suggestion:hover { border-color: var(--abera-ai-accent); background: var(--abera-ai-surface-muted); }
+    .abera-ai-suggestion:disabled { cursor: not-allowed; opacity: .65; }
     .abera-ai-message { display: flex; margin-bottom: 18px; }
     .abera-ai-message.is-user { justify-content: flex-end; }
     .abera-ai-bubble { max-width: min(82%, 560px); padding: 11px 13px; border: 1px solid var(--abera-ai-border); border-radius: 12px 12px 12px 3px; background: var(--abera-ai-surface-muted); font-size: 13px; line-height: 1.55; overflow-wrap: anywhere; white-space: pre-wrap; }
@@ -297,7 +299,8 @@ function makeComponent (api) {
       icons,
     }),
     computed: {
-      canSend () { return !this.streaming && (this.draft.trim().length > 0 || this.files.length > 0) },
+      disabled () { return !this.context || !this.context.enabled },
+      canSend () { return !this.disabled && !this.streaming && (this.draft.trim().length > 0 || this.files.length > 0) },
       title () { return this.conversation ? this.conversation.title : 'Nueva conversación' },
     },
     async created () {
@@ -316,6 +319,7 @@ function makeComponent (api) {
     },
     methods: {
       async loadConversations () {
+        if (this.disabled || !this.context.allowed) return
         const result = await api.request('/conversations?limit=50')
         this.conversations = result.items || []
       },
@@ -332,11 +336,12 @@ function makeComponent (api) {
         if (event.key === 'Escape' && this.open) this.close()
       },
       selectSuggestion (text) {
+        if (this.disabled) return
         this.draft = text
         this.$nextTick(() => this.$refs.composer && this.$refs.composer.focus())
       },
       async newConversation () {
-        if (this.streaming) return
+        if (this.disabled || this.streaming) return
         this.conversation = null
         this.messages = []
         this.files = []
@@ -376,7 +381,7 @@ function makeComponent (api) {
           this.send()
         }
       },
-      chooseFiles () { if (!this.streaming) this.$refs.fileInput.click() },
+      chooseFiles () { if (!this.disabled && !this.streaming) this.$refs.fileInput.click() },
       addFiles (event) {
         this.error = ''
         Array.from(event.target.files || []).forEach(file => {
@@ -425,7 +430,7 @@ function makeComponent (api) {
         return ids
       },
       async send () {
-        if (!this.canSend) return
+        if (this.disabled || !this.canSend) return
         const prompt = this.draft.trim() || 'Analiza los archivos adjuntos y resume la información relevante.'
         const displayFiles = this.files.map(item => item.file.name)
         this.error = ''
@@ -469,7 +474,7 @@ function makeComponent (api) {
         this.scrollToBottom()
       },
       async decideApproval (approved) {
-        if (!this.approval || this.streaming) return
+        if (this.disabled || !this.approval || this.streaming) return
         const approval = this.approval
         this.approval = null
         this.error = ''
@@ -500,18 +505,18 @@ function makeComponent (api) {
       },
     },
     template: `
-      <div v-if="context && context.enabled && context.allowed" class="abera-ai">
+      <div v-if="context && context.visible" class="abera-ai" :class="{ 'is-disabled': disabled }">
         <button v-if="!open" class="abera-ai-launcher" type="button" aria-label="Abrir asistente de IA" @click="toggle">
-          <span v-html="icons.assistant"></span><span>Asistente</span>
+          <span v-html="icons.assistant"></span><span>{{ disabled ? 'Asistente · vista previa' : 'Asistente' }}</span>
         </button>
         <section v-else class="abera-ai-panel" role="dialog" aria-label="Asistente de IA de Abera" aria-modal="false">
           <button v-if="sidebarOpen" class="abera-ai-scrim" type="button" aria-label="Cerrar historial" @click="sidebarOpen = false"></button>
           <aside class="abera-ai-sidebar" :class="{ 'is-open': sidebarOpen }" aria-label="Historial de conversaciones">
             <div class="abera-ai-brand">
               <span class="abera-ai-brand-mark" v-html="icons.assistant"></span>
-              <span><strong>Asistente Abera</strong><small>Conectado al CRM</small></span>
+              <span><strong>Asistente Abera</strong><small>{{ disabled ? 'Vista previa · conexión desactivada' : 'Conectado al CRM' }}</small></span>
             </div>
-            <button class="abera-ai-new" type="button" :disabled="streaming" @click="newConversation">
+            <button class="abera-ai-new" type="button" :disabled="disabled || streaming" @click="newConversation">
               <span v-html="icons.plus"></span>Nueva conversación
             </button>
             <div class="abera-ai-conversations">
@@ -529,17 +534,17 @@ function makeComponent (api) {
               <button class="abera-ai-icon-button abera-ai-menu" type="button" aria-label="Abrir historial" @click="sidebarOpen = true" v-html="icons.menu"></button>
               <div class="abera-ai-header-copy">
                 <h2>{{ title }}</h2>
-                <span class="abera-ai-status"><i class="abera-ai-status-dot"></i>{{ streaming ? 'Trabajando…' : 'Listo para ayudarte' }}</span>
+                <span class="abera-ai-status"><i class="abera-ai-status-dot" :class="{ 'is-disabled': disabled }"></i>{{ disabled ? 'No disponible en esta instancia' : (streaming ? 'Trabajando…' : 'Listo para ayudarte') }}</span>
               </div>
               <button class="abera-ai-icon-button" type="button" aria-label="Cerrar asistente" @click="close" v-html="icons.close"></button>
             </header>
             <div ref="messages" class="abera-ai-messages" aria-live="polite">
               <div v-if="!messages.length" class="abera-ai-welcome">
                 <span class="abera-ai-welcome-mark" v-html="icons.assistant"></span>
-                <h3>¿En qué trabajamos?</h3>
-                <p>Puedo consultar el CRM, explicar tus datos y preparar cambios. Siempre pediré confirmación antes de modificar información.</p>
+                <h3>{{ disabled ? 'Asistente no disponible' : '¿En qué trabajamos?' }}</h3>
+                <p>{{ disabled ? 'Esta es una vista previa de la interfaz. La conexión con el agente está desactivada y no se enviarán consultas.' : 'Puedo consultar el CRM, explicar tus datos y preparar cambios. Siempre pediré confirmación antes de modificar información.' }}</p>
                 <div class="abera-ai-suggestions">
-                  <button v-for="suggestion in suggestions" :key="suggestion" class="abera-ai-suggestion" type="button" @click="selectSuggestion(suggestion)">{{ suggestion }}</button>
+                  <button v-for="suggestion in suggestions" :key="suggestion" class="abera-ai-suggestion" type="button" :disabled="disabled" @click="selectSuggestion(suggestion)">{{ suggestion }}</button>
                 </div>
               </div>
               <article v-for="(message, index) in messages" :key="message.id || index" class="abera-ai-message" :class="{ 'is-user': message.role === 'user' }">
@@ -572,11 +577,11 @@ function makeComponent (api) {
               <footer class="abera-ai-composer">
                 <div class="abera-ai-composer-box">
                   <input ref="fileInput" type="file" hidden multiple accept=".pdf,.txt,.docx,.csv,.xlsx,.png,.jpg,.jpeg" @change="addFiles">
-                  <button class="abera-ai-attach" type="button" aria-label="Adjuntar archivo" :disabled="streaming" @click="chooseFiles" v-html="icons.attach"></button>
-                  <textarea ref="composer" v-model="draft" rows="1" maxlength="50000" placeholder="Escribe una pregunta o pide una acción…" :disabled="streaming" @keydown="onComposerKeydown"></textarea>
+                  <button class="abera-ai-attach" type="button" aria-label="Adjuntar archivo" :disabled="disabled || streaming" @click="chooseFiles" v-html="icons.attach"></button>
+                  <textarea ref="composer" v-model="draft" rows="1" maxlength="50000" :placeholder="disabled ? 'La conexión del agente está desactivada' : 'Escribe una pregunta o pide una acción…'" :disabled="disabled || streaming" @keydown="onComposerKeydown"></textarea>
                   <button class="abera-ai-send" type="button" aria-label="Enviar mensaje" :disabled="!canSend" @click="send" v-html="icons.send"></button>
                 </div>
-                <p class="abera-ai-composer-note">Ctrl + Enter para enviar · Las acciones requieren confirmación</p>
+                <p class="abera-ai-composer-note">{{ disabled ? 'Vista previa: activa ABERA_AI_ENABLED para habilitar consultas' : 'Ctrl + Enter para enviar · Las acciones requieren confirmación' }}</p>
               </footer>
             </div>
           </main>

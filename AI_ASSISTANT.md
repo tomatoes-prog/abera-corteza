@@ -38,6 +38,7 @@ El asistente está desactivado por defecto.
 
 ```env
 ABERA_AI_ENABLED=true
+ABERA_AI_WIDGET_VISIBLE=false
 ABERA_AI_AGENT_URL=https://api-id.execute-api.us-east-1.amazonaws.com/prod
 ABERA_AI_TENANT_ID=cliente-acme
 ABERA_AI_REQUIRED_ROLE=abera-ai-user
@@ -46,6 +47,17 @@ ABERA_AI_AWS_REGION=us-east-1
 ABERA_AI_API_KEY_FILE=/run/secrets/abera_agent_api_key
 ABERA_AI_TIMEOUT=95s
 ```
+
+Para revisar la interfaz sin conectar un agente, use esta configuración:
+
+```env
+ABERA_AI_ENABLED=false
+ABERA_AI_WIDGET_VISIBLE=true
+```
+
+El widget se mostrará como “Vista previa”, con sus controles deshabilitados.
+El backend responderá el contexto como no habilitado y rechazará cualquier
+operación; no se crearán conversaciones ni se enviarán archivos o mensajes.
 
 `ABERA_AI_AGENT_URL` es la URL base o URL de etapa; Corteza añade
 `/v1/internal`. Las rutas de secretos deben ser absolutas, apuntar a archivos

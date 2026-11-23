@@ -3,6 +3,8 @@ package apigw
 import (
 	"context"
 	"fmt"
+	"net/http/httptest"
+	"sync"
 	"testing"
 
 	"github.com/cortezaproject/corteza/server/pkg/apigw/registry"
@@ -217,13 +219,13 @@ func Test_serviceAppendRoutes(t *testing.T) {
 
 		tests = []struct {
 			name     string
-			ag       apigw
+			ag       *apigw
 			routes   []*route
 			expected []*route
 		}{
 			{
 				name: "add new",
-				ag: apigw{
+				ag: &apigw{
 					routes: routes(r1, r2, r3),
 				},
 				routes:   routes(r4),
@@ -231,7 +233,7 @@ func Test_serviceAppendRoutes(t *testing.T) {
 			},
 			{
 				name: "no duplicates",
-				ag: apigw{
+				ag: &apigw{
 					routes: routes(r1, r2, r3, r4, r5),
 				},
 				routes:   routes(r1, r5),
@@ -246,4 +248,95 @@ func Test_serviceAppendRoutes(t *testing.T) {
 			req.Equal(tt.expected, tt.ag.routes)
 		})
 	}
+}
+
+func Test_serviceNotFoundSurvivesEndpointReload(t *testing.T) {
+	var (
+		ctx = context.Background()
+		req = require.New(t)
+
+		rr = st.ApigwRouteSet{
+			{ID: 1, Endpoint: "/a", Method: "GET", Enabled: true},
+			{ID: 2, Endpoint: "/b", Method: "GET", Enabled: true},
+		}
+
+		svc = New(types.Config{Enabled: true}, zap.NewNop(), &types.MockStorer{
+			R: func(_ context.Context, f st.ApigwRouteFilter) (set st.ApigwRouteSet, _ st.ApigwRouteFilter, _ error) {
+				for _, r := range rr {
+					if f.Endpoint == "" || (r.Endpoint == f.Endpoint && r.Method == f.Method) {
+						set = append(set, r)
+					}
+				}
+				return
+			},
+			F: func(context.Context, st.ApigwFilterFilter) (set st.ApigwFilterSet, _ st.ApigwFilterFilter, _ error) {
+				return
+			},
+		})
+
+		endpoints = func() (ee []string) {
+			for _, r := range svc.routes {
+				ee = append(ee, r.endpoint)
+			}
+			return
+		}
+	)
+
+	req.NoError(svc.Reload(ctx))
+	req.ElementsMatch([]string{"/a", "/b"}, endpoints())
+
+	// route /a is deleted, then /b is changed
+	rr = rr[1:]
+	svc.NotFound(ctx, "GET", "/a")
+	req.NoError(svc.ReloadEndpoint(ctx, "GET", "/b"))
+
+	req.ElementsMatch([]string{"/b"}, endpoints())
+}
+
+func Test_serviceServesWhileReloading(t *testing.T) {
+	var (
+		ctx = context.Background()
+		req = require.New(t)
+
+		svc = New(types.Config{Enabled: true}, zap.NewNop(), &types.MockStorer{
+			R: func(_ context.Context, f st.ApigwRouteFilter) (set st.ApigwRouteSet, _ st.ApigwRouteFilter, _ error) {
+				set = st.ApigwRouteSet{{ID: 1, Endpoint: "/a", Method: "GET", Enabled: true}}
+				return
+			},
+			F: func(context.Context, st.ApigwFilterFilter) (set st.ApigwFilterSet, _ st.ApigwFilterFilter, _ error) {
+				return
+			},
+		})
+
+		wg sync.WaitGroup
+	)
+
+	req.NoError(svc.Reload(ctx))
+
+	for i := 0; i < 4; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for j := 0; j < 50; j++ {
+				svc.ServeHTTP(httptest.NewRecorder(), httptest.NewRequest("GET", "/a", nil))
+			}
+		}()
+	}
+
+	wg.Add(2)
+	go func() {
+		defer wg.Done()
+		for j := 0; j < 20; j++ {
+			svc.UpdateSettings(ctx, types.Config{Enabled: true})
+		}
+	}()
+	go func() {
+		defer wg.Done()
+		for j := 0; j < 20; j++ {
+			_ = svc.ReloadEndpoint(ctx, "GET", "/a")
+			svc.NotFound(ctx, "GET", "/b")
+		}
+	}()
+
+	wg.Wait()
 }

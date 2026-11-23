@@ -10,6 +10,12 @@ credenciales.
 El código y esta documentación se distribuyen bajo Apache License 2.0. Consulte
 [`LICENSE`](LICENSE), [`NOTICE`](NOTICE) y [`CHANGELOG.md`](CHANGELOG.md).
 
+El registro público con correo y contraseña está desactivado por defecto en
+instalaciones nuevas. El bootstrap crea el administrador independientemente de
+ese ajuste; no es necesario habilitar el registro para usarlo. Si se omite el
+bootstrap, es necesario contar con otro mecanismo seguro para crear el primer
+administrador. Las bases existentes conservan su configuración de registro.
+
 ## Configuración
 
 El bootstrap se habilita cuando se define cualquiera de sus variables. Cuando

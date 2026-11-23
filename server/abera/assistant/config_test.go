@@ -22,6 +22,28 @@ func TestConfigDisabledDoesNotRequireSecrets(t *testing.T) {
 	}
 }
 
+func TestConfigDisabledCanShowWidgetPreview(t *testing.T) {
+	t.Setenv("ABERA_AI_ENABLED", "false")
+	t.Setenv("ABERA_AI_WIDGET_VISIBLE", "true")
+
+	config, err := ConfigFromEnvironment()
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if config.Enabled || !config.WidgetVisible {
+		t.Fatalf("expected a visible disabled preview: %#v", config)
+	}
+}
+
+func TestConfigRejectsInvalidWidgetVisibility(t *testing.T) {
+	t.Setenv("ABERA_AI_ENABLED", "false")
+	t.Setenv("ABERA_AI_WIDGET_VISIBLE", "maybe")
+
+	if _, err := ConfigFromEnvironment(); err == nil || !strings.Contains(err.Error(), "ABERA_AI_WIDGET_VISIBLE") {
+		t.Fatalf("expected a widget visibility error, got %v", err)
+	}
+}
+
 func TestConfigLocalToken(t *testing.T) {
 	directory := t.TempDir()
 	tokenFile := filepath.Join(directory, "agent-token")

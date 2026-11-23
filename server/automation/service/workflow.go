@@ -20,6 +20,7 @@ import (
 	"github.com/cortezaproject/corteza/server/pkg/rbac"
 	"github.com/cortezaproject/corteza/server/pkg/wfexec"
 	"github.com/cortezaproject/corteza/server/store"
+	sysTypes "github.com/cortezaproject/corteza/server/system/types"
 	"go.uber.org/zap"
 )
 
@@ -69,6 +70,8 @@ type (
 		CanDeleteWorkflow(context.Context, *types.Workflow) bool
 		CanUndeleteWorkflow(context.Context, *types.Workflow) bool
 		CanManageSessionsOnWorkflow(context.Context, *types.Workflow) bool
+		CanImpersonateUser(context.Context, *sysTypes.User) bool
+		CanGrant(context.Context) bool
 
 		Grant(ctx context.Context, rr ...*rbac.Rule) error
 
@@ -219,6 +222,10 @@ func (svc *workflow) Create(ctx context.Context, new *types.Workflow) (wf *types
 			return err
 		}
 
+		if !svc.canRunAs(ctx, new.RunAs) {
+			return WorkflowErrNotAllowedToSetRunAs()
+		}
+
 		wf = &types.Workflow{
 			ID:           nextID(),
 			Handle:       new.Handle,
@@ -232,7 +239,6 @@ func (svc *workflow) Create(ctx context.Context, new *types.Workflow) (wf *types
 			Steps: new.Steps,
 			Paths: new.Paths,
 
-			// @todo need to check against access control if current user can modify security descriptor
 			RunAs:     new.RunAs,
 			OwnedBy:   cUser,
 			CreatedAt: *now(),
@@ -272,7 +278,7 @@ func (svc *workflow) Create(ctx context.Context, new *types.Workflow) (wf *types
 // Update modifies existing workflow resource in the store
 func (svc *workflow) Update(ctx context.Context, upd *types.Workflow) (*types.Workflow, error) {
 	return svc.updater(ctx, upd.ID, WorkflowActionUpdate, func(ctx context.Context, res *types.Workflow) (workflowChanges, error) {
-		if upd.Meta.Name == "" {
+		if upd.Meta == nil || upd.Meta.Name == "" {
 			return workflowUnchanged, WorkflowErrMissingName()
 		}
 
@@ -438,9 +444,13 @@ func (svc workflow) handleUpdate(upd *types.Workflow) workflowUpdateHandler {
 			}
 		}
 
+		// what the workflow executes: scope, steps and paths
+		logicChanged := false
+
 		if upd.Scope != nil {
 			if !reflect.DeepEqual(upd.Scope, res.Scope) {
 				changes |= workflowChanged | workflowDefChanged
+				logicChanged = true
 				res.Scope = upd.Scope
 			}
 		}
@@ -448,6 +458,7 @@ func (svc workflow) handleUpdate(upd *types.Workflow) workflowUpdateHandler {
 		if upd.Steps != nil {
 			if !reflect.DeepEqual(upd.Steps, res.Steps) {
 				changes |= workflowChanged | workflowDefChanged
+				logicChanged = true
 				res.Steps = upd.Steps
 			}
 		}
@@ -455,18 +466,33 @@ func (svc workflow) handleUpdate(upd *types.Workflow) workflowUpdateHandler {
 		if upd.Paths != nil {
 			if !reflect.DeepEqual(upd.Paths, res.Paths) {
 				changes |= workflowChanged | workflowDefChanged
+				logicChanged = true
 				res.Paths = upd.Paths
 			}
 		}
 
 		if res.RunAs != upd.RunAs {
-			// @todo need to check against access control if current user can modify security descriptor
+			if !svc.canRunAs(ctx, upd.RunAs) {
+				return workflowUnchanged, WorkflowErrNotAllowedToSetRunAs()
+			}
+
 			changes |= workflowChanged | workflowDefChanged
 			res.RunAs = upd.RunAs
 		}
 
-		if res.OwnedBy != upd.OwnedBy {
-			// @todo need to check against access control if current user can modify owner
+		// Changing what the workflow does while it runs as another user
+		// executes that change with the other user's rights, so it takes
+		// the same permission as making the workflow run as them
+		if logicChanged && !svc.canRunAs(ctx, res.RunAs) {
+			return workflowUnchanged, WorkflowErrNotAllowedToSetRunAs()
+		}
+
+		if upd.OwnedBy != 0 && res.OwnedBy != upd.OwnedBy {
+			// owner gets permissions through contextual roles
+			if !svc.ac.CanGrant(ctx) {
+				return workflowUnchanged, WorkflowErrNotAllowedToChangeOwner()
+			}
+
 			changes |= workflowChanged
 			res.OwnedBy = upd.OwnedBy
 		}
@@ -580,6 +606,12 @@ func (svc *workflow) Exec(ctx context.Context, workflowID uint64, p types.Workfl
 			return WorkflowErrNotAllowedToExecute()
 		}
 
+		if p.Trace && !svc.ac.CanUpdateWorkflow(ctx, wf) {
+			// trace skips trigger checks and returns the whole scope,
+			// it is meant for users that design the workflow
+			return WorkflowErrNotAllowedToUpdate()
+		}
+
 		if !wf.Enabled && !p.Trace {
 			return WorkflowErrDisabled()
 		}
@@ -669,6 +701,17 @@ func (svc *workflow) Exec(ctx context.Context, workflowID uint64, p types.Workfl
 }
 
 // validates workflow by trying to convert it to graph and checking assigned triggers
+// canRunAs checks if current user can make workflow run as the given user
+//
+// Workflow can always run as invoker (0) or as the current user
+func (svc *workflow) canRunAs(ctx context.Context, runAs uint64) bool {
+	if runAs == 0 || runAs == intAuth.GetIdentityFromContext(ctx).Identity() {
+		return true
+	}
+
+	return svc.ac.CanImpersonateUser(ctx, &sysTypes.User{ID: runAs})
+}
+
 func (svc *workflow) validateWorkflow(ctx context.Context, wf *types.Workflow) (g *wfexec.Graph, runAs intAuth.Identifiable, err error) {
 	var (
 		tt []*types.Trigger

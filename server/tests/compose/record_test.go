@@ -1778,3 +1778,210 @@ func TestRecordClone(t *testing.T) {
 	h.a.Equal("Modified Name", cloned.Values.Get("name", 0).Value, "Cloned record should have modified name")
 	h.a.Equal("Modified Description", cloned.Values.Get("description", 0).Value, "Cloned record should have modified description")
 }
+
+// Pages through a module where the user can read only a few records, spread
+// apart by long runs of records they cannot read; every readable record must
+// come back exactly once, in either direction, and the total must count them all
+func TestRecordListPagingOverUnreadableRuns(t *testing.T) {
+	h := newHelper(t)
+	h.clearRecords()
+
+	module := h.repoMakeRecordModuleWithFields("record testing module")
+	helpers.AllowMe(h, module.RbacResource(), "records.search")
+	helpers.DenyMe(h, types.RecordRbacResource(0, 0, 0), "read")
+
+	const items = 1300
+	readable := map[string]bool{}
+	for i := 1; i <= items; i++ {
+		name := fmt.Sprintf("%04d", i)
+		rec := h.makeRecord(module, &types.RecordValue{Name: "name", Value: name})
+
+		if i <= 5 || (i >= 130 && i < 135) || (i >= 1250 && i < 1255) {
+			readable[name] = true
+			helpers.AllowMe(h, types.RecordRbacResource(module.NamespaceID, module.ID, rec.ID), "read")
+		}
+	}
+
+	type page struct {
+		Response struct {
+			Filter struct {
+				Total    int
+				NextPage *string
+				PrevPage *string
+			}
+			Set []struct {
+				Values []struct{ Name, Value string }
+			}
+		}
+	}
+
+	list := func(sort string, cursor *string) (p page) {
+		r := h.apiInit().
+			Get(fmt.Sprintf("/namespace/%d/module/%d/record/", module.NamespaceID, module.ID)).
+			Query("limit", "5").
+			Query("sort", sort).
+			Header("Accept", "application/json")
+
+		if cursor == nil {
+			r = r.Query("incTotal", "true")
+		} else {
+			r = r.Query("pageCursor", *cursor)
+		}
+
+		r.Expect(t).Status(http.StatusOK).Assert(helpers.AssertNoErrors).End().JSON(&p)
+		return
+	}
+
+	names := func(p page) (out []string) {
+		for _, r := range p.Response.Set {
+			for _, v := range r.Values {
+				if v.Name == "name" {
+					out = append(out, v.Value)
+				}
+			}
+		}
+		return
+	}
+
+	for _, sort := range []string{"name", "name DESC"} {
+		seen := map[string]int{}
+
+		p := list(sort, nil)
+		h.a.Equal(len(readable), p.Response.Filter.Total, "%s: total", sort)
+
+		for n := 0; ; n++ {
+			h.a.Less(n, 10, "%s: pages", sort)
+			for _, name := range names(p) {
+				h.a.True(readable[name], "%s: %s is not readable", sort, name)
+				seen[name]++
+			}
+
+			if p.Response.Filter.NextPage == nil {
+				break
+			}
+			p = list(sort, p.Response.Filter.NextPage)
+		}
+
+		h.a.Len(seen, len(readable), "%s: forward", sort)
+		for name, n := range seen {
+			h.a.Equal(1, n, "%s: %s returned once", sort, name)
+		}
+
+		back := map[string]bool{}
+		for n := 0; ; n++ {
+			h.a.Less(n, 10, "%s: pages back", sort)
+			for _, name := range names(p) {
+				back[name] = true
+			}
+
+			if p.Response.Filter.PrevPage == nil {
+				break
+			}
+			p = list(sort, p.Response.Filter.PrevPage)
+		}
+
+		h.a.Len(back, len(readable), "%s: backward", sort)
+	}
+}
+
+// Summaries over a field the user may not read are refused; over a readable
+// field they cover only the records the user may read
+func TestRecordListSummariesHonourFieldAndRecordRead(t *testing.T) {
+	h := newHelper(t)
+	h.clearRecords()
+
+	module := h.repoMakeRecordModuleWithFields("record testing module",
+		&types.ModuleField{Name: "amount", Kind: "Number"},
+		&types.ModuleField{Name: "secret", Kind: "Number"},
+	)
+	helpers.AllowMe(h, module.RbacResource(), "records.search")
+	helpers.DenyMe(h, types.ModuleFieldRbacResource(module.NamespaceID, module.ID, module.Fields.FindByName("secret").ID), "record.value.read")
+
+	readable := h.makeRecord(module, &types.RecordValue{Name: "amount", Value: "10"}, &types.RecordValue{Name: "secret", Value: "1"})
+	h.makeRecord(module, &types.RecordValue{Name: "amount", Value: "100"}, &types.RecordValue{Name: "secret", Value: "1"})
+
+	helpers.DenyMe(h, types.RecordRbacResource(0, 0, 0), "read")
+	helpers.AllowMe(h, types.RecordRbacResource(module.NamespaceID, module.ID, readable.ID), "read")
+
+	list := func(summaries string) *apitest.Response {
+		return h.apiInit().
+			Get(fmt.Sprintf("/namespace/%d/module/%d/record/", module.NamespaceID, module.ID)).
+			Query("limit", "10").
+			Query("summaries", summaries).
+			Header("Accept", "application/json").
+			Expect(t).
+			Status(http.StatusOK)
+	}
+
+	list(`[{"name":"sum","field":"secret"}]`).
+		Assert(helpers.AssertError("record.errors.notAllowedToSummarizeField")).
+		End()
+
+	list(`[{"name":"sum","field":"amount"}]`).
+		Assert(helpers.AssertNoErrors).
+		Assert(jsonpath.Len(`$.response.set`, 1)).
+		Assert(jsonpath.Equal(`$.response.summaries["sum amount"].value`, "10")).
+		End()
+}
+
+// Revisions list the changes of readable fields only
+func TestRecordRevisionsHideUnreadableFields(t *testing.T) {
+	h := newHelper(t)
+	h.clearRecords()
+
+	ns := h.makeNamespace("record revisions namespace")
+	module := h.createModule(ns, &types.Module{
+		Name:        "record revisions module",
+		NamespaceID: ns.ID,
+		Fields: types.ModuleFieldSet{
+			&types.ModuleField{Name: "name", Kind: "String"},
+			&types.ModuleField{Name: "secret", Kind: "String"},
+		},
+		Config: types.ModuleConfig{RecordRevisions: types.ModuleConfigRecordRevisions{Enabled: true}},
+	})
+
+	helpers.AllowMe(h, types.NamespaceRbacResource(0), "read")
+	helpers.AllowMe(h, types.ModuleRbacResource(0, 0), "read", "record.create")
+	helpers.AllowMe(h, types.RecordRbacResource(0, 0, 0), "read", "revisions.search")
+	helpers.AllowMe(h, types.ModuleFieldRbacResource(0, 0, 0), "record.value.read", "record.value.update")
+	helpers.DenyMe(h, types.ModuleFieldRbacResource(module.NamespaceID, module.ID, module.Fields.FindByName("secret").ID), "record.value.read")
+
+	var created struct {
+		Response struct{ RecordID string }
+	}
+	h.apiInit().
+		Post(fmt.Sprintf("/namespace/%d/module/%d/record/", module.NamespaceID, module.ID)).
+		JSON(`{"values": [{"name": "name", "value": "a"}, {"name": "secret", "value": "s"}]}`).
+		Header("Accept", "application/json").
+		Expect(t).
+		Status(http.StatusOK).
+		Assert(helpers.AssertNoErrors).
+		End().
+		JSON(&created)
+
+	var revs struct {
+		Response struct {
+			Set []struct {
+				Changes []struct{ Key string }
+			}
+		}
+	}
+	h.apiInit().
+		Get(fmt.Sprintf("/namespace/%d/module/%d/record/%s/revisions", module.NamespaceID, module.ID, created.Response.RecordID)).
+		Header("Accept", "application/json").
+		Expect(t).
+		Status(http.StatusOK).
+		End().
+		JSON(&revs)
+
+	h.a.NotEmpty(revs.Response.Set)
+	keys := map[string]bool{}
+	for _, rev := range revs.Response.Set {
+		for _, c := range rev.Changes {
+			keys[c.Key] = true
+		}
+	}
+
+	h.a.True(keys["name"], "readable field change is listed")
+	h.a.False(keys["secret"], "unreadable field change is hidden")
+}
