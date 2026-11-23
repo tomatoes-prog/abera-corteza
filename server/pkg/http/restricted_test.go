@@ -3,6 +3,7 @@ package http
 import (
 	"net"
 	"net/http"
+	"net/http/httptest"
 	"testing"
 	"time"
 
@@ -68,10 +69,36 @@ func TestParseNetworkRestriction(t *testing.T) {
 }
 
 func TestRestrictedClient(t *testing.T) {
-	SetupRestricted(time.Second, false, RestrictPrivate)
-	defer SetupRestricted(0, false, RestrictLinkLocal)
+	t.Run("redirects to restricted addresses are blocked", func(t *testing.T) {
+		SetupRestricted(0, false, RestrictLinkLocal)
+		t.Cleanup(func() { SetupRestricted(0, false, RestrictLinkLocal) })
 
-	require.Equal(t, time.Second, RestrictedClient().Timeout)
-	require.NotNil(t, restrictedTransport.Load())
-	require.ErrorIs(t, RestrictedClient().CheckRedirect(&http.Request{}, nil), http.ErrUseLastResponse)
+		redir := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			http.Redirect(w, r, "http://169.254.169.254/latest/meta-data/", http.StatusFound)
+		}))
+		defer redir.Close()
+
+		_, err := RestrictedClient().Get(redir.URL)
+		require.ErrorIs(t, err, ErrRestrictedNetwork)
+	})
+
+	t.Run("redirects to allowed addresses are followed", func(t *testing.T) {
+		SetupRestricted(0, false, RestrictLinkLocal)
+		t.Cleanup(func() { SetupRestricted(0, false, RestrictLinkLocal) })
+
+		target := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.WriteHeader(http.StatusTeapot)
+		}))
+		defer target.Close()
+
+		redir := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			http.Redirect(w, r, target.URL, http.StatusFound)
+		}))
+		defer redir.Close()
+
+		rsp, err := RestrictedClient().Get(redir.URL)
+		require.NoError(t, err)
+		require.Equal(t, http.StatusTeapot, rsp.StatusCode)
+		_ = rsp.Body.Close()
+	})
 }
