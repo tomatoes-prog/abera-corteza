@@ -35,12 +35,8 @@ var (
 	ErrRestrictedNetwork = errors.New("connection to restricted network address is not allowed")
 
 	// One client for the lifetime of the process, only its transport is reconfigured.
-	restrictedClient = &http.Client{
-		Transport: restrictedRoundTripper{},
-		CheckRedirect: func(req *http.Request, via []*http.Request) error {
-			return http.ErrUseLastResponse
-		},
-	}
+	// Redirects are followed, but each hop is dialed through the restricted transport.
+	restrictedClient = &http.Client{Transport: restrictedRoundTripper{}}
 
 	restrictedTransport atomic.Pointer[http.Transport]
 
