@@ -361,10 +361,9 @@ func (svc *workflow) updater(ctx context.Context, workflowID uint64, action func
 
 		svc.updateCache(res, runAs, g)
 
-		if len(res.Issues) == 0 {
-			if err = svc.triggers.registerWorkflows(ctx, res); err != nil {
-				return err
-			}
+		// Remove stale triggers and register only enabled, valid workflows.
+		if err = svc.triggers.registerWorkflows(ctx, res); err != nil {
+			return err
 		}
 
 		if changes&workflowChanged > 0 || len(res.Issues) > 0 {
@@ -761,7 +760,7 @@ func (svc *workflow) exec(ctx context.Context, wf *types.Workflow, p types.Workf
 	svc.muxCache.Lock()
 
 	if svc.cache[wf.ID] == nil {
-		return nil, 0, WorkflowErrInvalidID()
+		return nil, 0, WorkflowErrNotExecutable()
 	}
 
 	var (

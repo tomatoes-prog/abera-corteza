@@ -206,8 +206,12 @@ func (e StoreEncoder) encodeModuleExtend(ctx context.Context, p envoyx.EncodePar
 		return err
 	}
 
-	// @note there is only one model so this is ok
-	_, err = dl.ReplaceModel(ctx, nil, models[0])
+	// A module with record revisions has both the records and revisions models.
+	for _, model := range models {
+		if _, err = dl.ReplaceModel(ctx, nil, model); err != nil {
+			return
+		}
+	}
 	return
 }
 

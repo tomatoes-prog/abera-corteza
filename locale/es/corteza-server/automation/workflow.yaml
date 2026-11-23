@@ -1,5 +1,6 @@
 errors:
   staleData: Los datos fueron modificados por otro usuario o flujo de trabajo; actualiza la página
+  notExecutable: El flujo está deshabilitado o fue eliminado y no se puede ejecutar
   disabled: deshabilitado el workflow o trigger
   handleNotUnique: el identificador del workflow no es único
   invalidHandle: identificador inválido
